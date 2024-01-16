@@ -1,13 +1,12 @@
-import './App.css'
-import Ruler from './components/Ruler';
+import "./App.css";
+import Ruler from "./components/Ruler";
 
-function App() {
+const App = () => {
   return (
-    <div >
-      <Ruler/>
+    <div>
+      <Ruler />
     </div>
   );
 };
 
-
-export default App
+export default App;
