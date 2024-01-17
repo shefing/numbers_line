@@ -9,4 +9,3 @@ const Ruler = () => {
 };
 
 export default Ruler;
-// enum
