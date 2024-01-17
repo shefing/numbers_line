@@ -1,8 +1,11 @@
-import "../App.css";
-import Axis from "./Axis"
+import XAxis from "./ruler/XAxis";
 const Ruler = () => {
-  return <div><Axis labels={["1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]} /></div>
+  const labels = Array.from({ length: 11 }, (_, index) => index);
+  return (
+    <div className="absolute w-full bottom-[20%] left-0">
+      <XAxis labels={labels} />
+    </div>
+  );
 };
 
 export default Ruler;
-
