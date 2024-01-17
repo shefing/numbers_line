@@ -1,14 +1,19 @@
-const Axis = ({ labels }) => {
-    return (
-        <div className="flex justify-between border-t-2 border-gray-200 pt-2 mx-4">
-            {labels.map((label, index) => (
-                <div key={index} className="text-sm text-gray-500 flex flex-col items-center">
-                    <div className="h-2 border-l-2 border-gray-200 w-px"></div>
-                    {label}
-                </div>
-            ))}
-        </div>
-    );
+interface IProps {
+  labels: number[];
+}
+const XAxis = ({ labels }: IProps) => {
+  return (
+    <>
+      <div className="flex justify-between border-t-2 border-gray-900 pt-0 mx-0 pl-8 pr-8">
+        {labels.map((label) => (
+          <div key={label} className={`text-xl text-color flex flex-col items-center ${label % 5 == 0 && "font-bold"}`}>
+            <div className="h-3 border-l-2 border-gray-900 w-px" />
+            {label}
+          </div>
+        ))}
+      </div>
+    </>
+  );
 };
 
-export default Axis;
+export default XAxis;
