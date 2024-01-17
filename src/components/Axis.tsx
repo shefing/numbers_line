@@ -1,4 +1,8 @@
-const Axis = ({ labels }) => {
+type Props = {
+    labels: string[];
+};
+
+const Axis: React.FC<Props> = ({ labels }) => {
     return (
         <div className="flex justify-between border-t-2 border-gray-200 pt-0 mx-4">
             {labels.map((label, index) => (
@@ -12,3 +16,4 @@ const Axis = ({ labels }) => {
 };
 
 export default Axis;
+
