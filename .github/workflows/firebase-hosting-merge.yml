@@ -10,16 +10,11 @@ jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: yarn && yarn build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_DDASSETS_69DA8 }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_NUMBERS_LINE }}'
           channelId: live
-          projectId: numbersline-90763
-      - uses: actions/upload-artifact@v3
-        with:
-          name: numbersline
-          path: |
-            dist
+          projectId: numbers-line
