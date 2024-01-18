@@ -3,7 +3,7 @@ import LineDefinition from "./toolbar/LineDefinition";
 
 const Toolbar = () => {
   return (
-    <div className="flex justify-between bg-sky-100">
+    <div className="flex justify-between bg-sky-100 absolute w-full top-0 left-0 ">
       <div className="flex-none">
         <Smile className="m-4 h-4 w-4" />
       </div>

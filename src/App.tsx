@@ -5,7 +5,7 @@ import GrassImg from "./components/GrassImg";
 const App = () => {
   return (
     <div>
-      {/* <Toolbar /> */}
+      <Toolbar />
       <Ruler />
       <GrassImg />
     </div>
