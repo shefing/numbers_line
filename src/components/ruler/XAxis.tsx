@@ -1,5 +1,6 @@
 import Arrows from "./Arrows";
 import { useState } from "react";
+import Numbers from "./Numbers";
 
 interface IProps {
   labels: number[];
@@ -41,22 +42,12 @@ const XAxis = ({ labels }: IProps) => {
             onMouseLeave={handleMouseUp}
             style={{ cursor: isDragging ? "grabbing" : "grab" }}
           >
-            {labels.slice(startIndex, startIndex + 21).map((label) => (
-              <div key={label} className={`text-xl text-color flex flex-col items-center ${label % 5 === 0 && "font-bold"}`}>
-                <div className="h-3 border-l-2 border-gray-900 w-1366 flex-shrink-0" />
-                {label}
-              </div>
-            ))}
+            <Numbers labels={labels} startIndex={startIndex} />
           </div>
         </>
       ) : (
         <div className="fixed left-0 right-0 flex justify-between border-t-2 border-gray-900 pt-0 mx-0 items-center pl-8 pr-8 ">
-          {labels.map((label) => (
-            <div key={label} className={`text-xl text-color flex flex-col items-center ${label % 5 === 0 && "font-bold"}`}>
-              <div className="h-3 border-l-2 border-gray-900 w-1366 flex-shrink-0" />
-              {label}
-            </div>
-          ))}
+          <Numbers labels={labels} startIndex={startIndex} />
         </div>
       )}
     </>
