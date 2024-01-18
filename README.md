@@ -1,4 +1,11 @@
-# React + TypeScript + Vite
+# Introduction 
+This repo contains the code to implement the numbers-line asset as Defined in requirement docs provided by Shani Assor and according to the graphic design available in https://www.figma.com/proto/kgijoBmmxgSxhmTSpwjWtO/Yeshar-Hamisparim?node-id=239-4016&scaling=min-zoom&page-id=239%3A4009. 
+
+# Getting Started
+1.	yarn && yarn build
+2.	Deploy dist directory
+
+## React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
