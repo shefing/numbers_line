@@ -1,5 +1,5 @@
-import leftArrowIcon from "../../assets/icons/Group 1299.svg";
-import rightArrowIcon from "../../assets/icons/Group 1300.svg";
+import leftArrowIcon from "../../assets/icons/arrow-left.svg";
+import rightArrowIcon from "../../assets/icons/arrow-right.svg";
 
 interface IProps {
   startIndex: number;

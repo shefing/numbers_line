@@ -1,5 +1,5 @@
 import XAxis from "./ruler/XAxis";
-import { LineRange } from "../const/Line";
+import { LineRange } from "../type/Line";
 import { useNumbersLineContext } from "../context/numbersLineContext";
 const Ruler = () => {
   const { kind } = useNumbersLineContext();

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { LineRange } from "../const/Line";
+import { LineRange } from "../type/Line";
 
 interface INumbersLineContextProps {
   kind: LineRange;
@@ -21,7 +21,7 @@ export const NumbersLineContexProvider = (props: any) => {
         setKind,
       }}
     >
-    {props.children}
+      {props.children}
     </NumbersLineContext.Provider>
   );
 };
