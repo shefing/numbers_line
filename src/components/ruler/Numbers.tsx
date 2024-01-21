@@ -19,9 +19,9 @@ const Numbers = ({ labels, startIndex, setStartIndex }: IProps) => {
       {labels.slice(startIndex, startIndex + 21).map((label) => (
         <div
           key={label}
-          className={`text-xl text-color flex flex-col items-center ${flag && label % 50 == 0 ? "font-bold" : !flag && label % 5 === 0 && "font-bold"}`}
+          className={` text-2xl text-color flex flex-col items-center ${flag && label % 50 == 0 ? "font-bold" : !flag && label % 5 === 0 && "font-bold"}`}
         >
-          <div className="h-3 border-l-2 border-gray-900 w-1366 flex-shrink-0" />
+          <div className="h-3 border-l-4 border-gray-900 w-1366 flex-shrink-0" />
           {label}
         </div>
       ))}
