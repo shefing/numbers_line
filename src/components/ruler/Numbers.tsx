@@ -1,5 +1,5 @@
-import {useNumbersLineContext} from "../../context/numbersLineContext"
-import { LineRange } from "../../const/Line";
+import { useNumbersLineContext } from "../../context/numbersLineContext";
+import { LineRange } from "../../type/Line";
 
 interface IProps {
   labels: number[];
