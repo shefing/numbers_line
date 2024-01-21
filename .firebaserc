@@ -1,16 +1,5 @@
 {
   "projects": {
-    "staging": "numbersline-90763",
-    "default": "numbersline-90763"
-  },
-  "targets": {
-    "numbersline-90763": {
-      "hosting": {
-        "ddassets": [
-          "numbersline-90763"
-        ]
-      }
-    }
-  },
-  "etags": {}
+    "default": "numbers-line"
+  }
 }

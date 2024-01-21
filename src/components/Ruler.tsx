@@ -2,11 +2,11 @@ import { useContext } from "react";
 import XAxis from "./ruler/XAxis";
 import KindLine, { LineRange } from "./context/kindNumberLine";
 const Ruler = () => {
-  const context = useContext(KindLine);
-  if (!context) {
+  const kindsline = useContext(KindLine);
+  if (!kindsline) {
     return null;
   }
-  const { kind, setKind } = context;
+  const { kind } = kindsline;
 
   var labels = [];
   if (kind == LineRange.hundredCircular) labels = Array.from({ length: 11 }, (_, index) => index * 10);

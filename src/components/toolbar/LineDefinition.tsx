@@ -5,13 +5,13 @@ import { LineRange } from "../context/kindNumberLine";
 
 const LineDefinition = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const context = useContext(KindLine);
+  const kindsline = useContext(KindLine);
 
-  if (!context) {
+  if (!kindsline) {
     return null;
   }
 
-  const { kind, setKind } = context;
+  const { setKind } = kindsline;
 
   const handleButtonClick = () => {
     setMenuOpen(!isMenuOpen);

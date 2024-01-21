@@ -6,11 +6,11 @@ interface IProps {
   startIndex: number;
 }
 const Numbers = ({ labels, startIndex }: IProps) => {
-  const context = useContext(KindLine);
-  if (!context) {
+  const kindsline = useContext(KindLine);
+  if (!kindsline) {
     return null;
   }
-  const { kind, setKind } = context;
+  const { kind } = kindsline;
   var flag = kind == LineRange.hundredCircular;
   return (
     <>
