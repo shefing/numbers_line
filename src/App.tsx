@@ -5,11 +5,11 @@ import Toolbar from "./components/Toolbar";
 
 const App = () => {
   return (
-    <div>
+    <>
       <Toolbar />
       <Ruler />
       <GrassImg />
-    </div>
+    </>
   );
 };
 

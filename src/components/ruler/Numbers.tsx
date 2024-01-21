@@ -1,16 +1,12 @@
-import { useContext } from "react";
-import KindLine, { LineRange } from "../context/kindNumberLine";
+import {useNumbersLineContext} from "../../context/numbersLineContext"
+import { LineRange } from "../../const/Line";
 
 interface IProps {
   labels: number[];
   startIndex: number;
 }
 const Numbers = ({ labels, startIndex }: IProps) => {
-  const kindsline = useContext(KindLine);
-  if (!kindsline) {
-    return null;
-  }
-  const { kind } = kindsline;
+  const { kind } = useNumbersLineContext();
   var flag = kind == LineRange.hundredCircular;
   return (
     <>

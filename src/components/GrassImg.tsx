@@ -1,4 +1,4 @@
-import urlImg from "../../src/img/image.png";
+import urlImg from "../../src/assets/icons/image.png";
 
 const GrassImg = () => {
   return (
