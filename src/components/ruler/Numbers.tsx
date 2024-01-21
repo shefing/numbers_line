@@ -1,13 +1,19 @@
+import { useEffect } from "react";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { LineRange } from "../../type/Line";
 
 interface IProps {
   labels: number[];
   startIndex: number;
+  setStartIndex: (val: number) => void;
 }
-const Numbers = ({ labels, startIndex }: IProps) => {
+const Numbers = ({ labels, startIndex, setStartIndex }: IProps) => {
   const { kind } = useNumbersLineContext();
   var flag = kind == LineRange.hundredCircular;
+
+  useEffect(() => {
+    setStartIndex(0);
+  }, []);
   return (
     <>
       {labels.slice(startIndex, startIndex + 21).map((label) => (
