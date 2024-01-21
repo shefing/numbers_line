@@ -1,17 +1,12 @@
-import { useState, useContext } from "react";
-import KindLine from "../context/kindNumberLine";
+import { useState } from "react";
 import { Button } from "../ui/button";
-import { LineRange } from "../context/kindNumberLine";
+import { LineRange } from "../../const/Line";
+import {useNumbersLineContext} from "../../context/numbersLineContext"
 
 const LineDefinition = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const kindsline = useContext(KindLine);
 
-  if (!kindsline) {
-    return null;
-  }
-
-  const { setKind } = kindsline;
+  const { setKind } = useNumbersLineContext();
 
   const handleButtonClick = () => {
     setMenuOpen(!isMenuOpen);
