@@ -5,6 +5,7 @@ import { useNumbersLineContext } from "../../context/numbersLineContext";
 import openMenu from "../../assets/icons/menuButtonOpen.svg";
 import closeMenu from "../../assets/icons/menuButtonClose.svg";
 
+
 const LineDefinition = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
