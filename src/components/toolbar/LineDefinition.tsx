@@ -1,19 +1,20 @@
 import { useState } from "react";
 import { Button } from "../ui/button";
-import { LineRange } from "../../const/Line";
-import {useNumbersLineContext} from "../../context/numbersLineContext"
+import { LineRange } from "../../type/Line";
+import { useNumbersLineContext } from "../../context/numbersLineContext";
 
 const LineDefinition = () => {
-  const [isMenuOpen, setMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const { setKind } = useNumbersLineContext();
 
   const handleButtonClick = () => {
-    setMenuOpen(!isMenuOpen);
+    setIsMenuOpen(!isMenuOpen);
   };
 
-  const closeMenu = () => {
-    setMenuOpen(false);
+  const handleMenuButtonClick = (type: LineRange) => {
+    setKind(type);
+    setIsMenuOpen(false);
   };
 
   return (
@@ -27,8 +28,7 @@ const LineDefinition = () => {
           <Button
             className="block mb-2 text-blue-600 font-bold"
             onClick={() => {
-              setKind(LineRange.ten);
-              closeMenu();
+              handleMenuButtonClick(LineRange.ten);
             }}
           >
             0 -10
@@ -36,8 +36,7 @@ const LineDefinition = () => {
           <Button
             className="block mb-2 text-blue-600 font-bold"
             onClick={() => {
-              setKind(LineRange.twenty);
-              closeMenu();
+              handleMenuButtonClick(LineRange.twenty);
             }}
           >
             0 - 20
@@ -45,8 +44,7 @@ const LineDefinition = () => {
           <Button
             className="block mb-2 text-blue-600 font-bold"
             onClick={() => {
-              setKind(LineRange.hundred);
-              closeMenu();
+              handleMenuButtonClick(LineRange.hundred);
             }}
           >
             0 - 100 (קפיצות של 1)
@@ -54,8 +52,7 @@ const LineDefinition = () => {
           <Button
             className="block text-blue-600 font-bold"
             onClick={() => {
-              setKind(LineRange.hundredCircular);
-              closeMenu();
+              handleMenuButtonClick(LineRange.hundredCircular);
             }}
           >
             O0 - 100 (קפיצות של 10)
