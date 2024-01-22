@@ -23,29 +23,23 @@ const LineDefinition = () => {
   return (
     <div className=" absolute m-2 relative  rounded-md" style={isMenuOpen ? { background: "#009FDE" } : { background: "var(--cyan-100)" }}>
       <Button
-        className={`m-4 mb-0 mr-0 w-259 text-xl font-bold ${isMenuOpen && "text-white bg-sky-100"}`}
+        className={`mt-[0.3rem]  w-259 text-xl font-bold ${isMenuOpen && "text-white bg-sky-100"}`}
         variant="ghost"
         onClick={handleButtonClick}
         style={isMenuOpen ? { background: "#009FDE" } : { background: "var(--cyan-100)" }}
       >
         <img className="m-5" src={isMenuOpen ? closeMenu : openMenu} alt="open/close" />
         <div
-          className="ml-6  text-capitalize font-Abraham text-32 font-normal "
-          style={
-            isMenuOpen
-              ? { color: "#ffffff", fontFamily: "Abraham", fontSize: "26px", fontWeight: 700 }
-              : { color: "#009FDE", fontFamily: "Abraham", fontSize: "26px", fontWeight: 700 }
-          }
+          className={`ml-6 text-capitalize font-Abraham text-32 font-normal font-Abraham text-2xl font-semibold ${isMenuOpen ? 'text-white' : 'text-[#009FDE]'}`}
         >
           הגדרת הישר
         </div>
       </Button>
 
       {isMenuOpen && (
-        <div className="flex flex-col items-end mt-0 rounded-tl-5 right-0  rounded-md p-2 m-2" style={{ background: "#009FDE" }}>
+        <div className="flex flex-col items-end mt-0 rounded-tl-5 right-0  rounded-md p-2 m-2 bg- [#009FDE]">
           <Button
-            className="bg-white text-block mb-4 mt-6 hover:bg-sky-100 transition"
-            style={{ borderRadius: "20px", fontFamily: "Abraham", fontSize: "20px", fontWeight: 800 }}
+            className="bg-white text-block mb-4 hover:bg-sky-100 transition rounded-[20px] font-[Abraham] text-[20px] font-[800] mt-6"
             onClick={() => {
               handleMenuButtonClick(LineRange.ten);
             }}
@@ -53,8 +47,7 @@ const LineDefinition = () => {
             0 - 10
           </Button>
           <Button
-            className="bg-white text-block mb-4 hover:bg-sky-100 transition"
-            style={{ borderRadius: "20px", fontFamily: "Abraham", fontSize: "20px", fontWeight: 800 }}
+            className="bg-white text-block mb-4 hover:bg-sky-100 transition rounded-[20px] font-[Abraham] text-[20px] font-[800]"
             onClick={() => {
               handleMenuButtonClick(LineRange.twenty);
             }}
@@ -62,8 +55,7 @@ const LineDefinition = () => {
             0 - 20
           </Button>
           <Button
-            className="bg-white text-block mb-4 hover:bg-sky-100 transition"
-            style={{ borderRadius: "20px", fontFamily: "Abraham", fontSize: "20px", fontWeight: 800 }}
+            className="bg-white text-block mb-4 hover:bg-sky-100 transition rounded-[20px] font-[Abraham] text-[20px] font-[800]"
             onClick={() => {
               handleMenuButtonClick(LineRange.hundred);
             }}
@@ -71,8 +63,7 @@ const LineDefinition = () => {
             (קפיצות של 1) 100 - 0
           </Button>
           <Button
-            className="bg-white text-block mb-4 hover:bg-sky-100 transition"
-            style={{ borderRadius: "20px", fontFamily: "Abraham", fontSize: "20px", fontWeight: 800 }}
+            className="bg-white text-block mb-4 hover:bg-sky-100 transition rounded-[20px] font-[Abraham] text-[20px] font-[800]"
             onClick={() => {
               handleMenuButtonClick(LineRange.hundredCircular);
             }}
