@@ -1,68 +1,71 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "../ui/button";
-import { LineRange } from "../../type/Line";
+import { LineRange, fontButtonClassName } from "../../type/Line";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
+import openMenu from "../../assets/icons/menuButtonOpen.svg";
+import closeMenu from "../../assets/icons/menuButtonClose.svg";
 
 const LineDefinition = () => {
-  const [isMenuOpen, setMenuOpen] = useState(false);
-
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { setKind } = useNumbersLineContext();
+  const wrapperRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (event: any) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [isMenuOpen]);
 
   const handleButtonClick = () => {
-    setMenuOpen(!isMenuOpen);
+    setIsMenuOpen(!isMenuOpen);
   };
 
-  const closeMenu = () => {
-    setMenuOpen(false);
+  const handleMenuButtonClick = (type: LineRange) => {
+    setKind(type);
+    setIsMenuOpen(false);
   };
 
   return (
-    <div className="relative">
-      <Button className={`m-1 text-xl font-bold ${isMenuOpen ? "text-blue-600" : "text-sky-600"}`} variant="ghost" onClick={handleButtonClick}>
-        <span className="mr-3">&#x25BC;</span> הגדרת הישר
-      </Button>
+    <button
+      ref={wrapperRef}
+      className={`flex flex-col items-end  right-0 absolute  mt-[1.5%] mr-[1.5%] rounded-md  ${isMenuOpen && "shadow-2xl bg-[#009FDE]"}`}
+    >
+      <div className={`cursor-pointer flex  w-259 text-xl font-bold rounded-md ${isMenuOpen && "bg-[#009FDE]"}`} onClick={handleButtonClick}>
+        <img className="flex-shrink-0 p-5 pr-5" src={isMenuOpen ? closeMenu : openMenu} />
+        <div
+          className={`flex-shrink-0 text-capitalize p-2 font-Abraham font-normal h-[17px] text-[32px] text-[#009FDE] font-[Abraham] font-[500] ${
+            isMenuOpen && " text-[#ffffff]"
+          }`}
+        >
+          הגדרת הישר
+        </div>
+      </div>
 
       {isMenuOpen && (
-        <div className="absolute top-8 right-0 bg-sky-100 border border-gray-300 rounded-md p-2">
-          <Button
-            className="block mb-2 text-blue-600 font-bold"
-            onClick={() => {
-              setKind(LineRange.ten);
-              closeMenu();
-            }}
-          >
-            0 -10
+        <div className="flex flex-col items-end pt-8 pb-2 rounded-tl-5 right-0 rounded-md opacity-100 bg-#009FDE">
+          <Button className={fontButtonClassName} onClick={() => handleMenuButtonClick(LineRange.ten)}>
+            10-0
           </Button>
-          <Button
-            className="block mb-2 text-blue-600 font-bold"
-            onClick={() => {
-              setKind(LineRange.twenty);
-              closeMenu();
-            }}
-          >
-            0 - 20
+          <Button className={fontButtonClassName} onClick={() => handleMenuButtonClick(LineRange.twenty)}>
+            20-0
           </Button>
-          <Button
-            className="block mb-2 text-blue-600 font-bold"
-            onClick={() => {
-              setKind(LineRange.hundred);
-              closeMenu();
-            }}
-          >
-            0 - 100 (קפיצות של 1)
+          <Button className={fontButtonClassName} onClick={() => handleMenuButtonClick(LineRange.hundredCircular)}>
+            (קפיצות של 10) 100-0
           </Button>
-          <Button
-            className="block text-blue-600 font-bold"
-            onClick={() => {
-              setKind(LineRange.hundredCircular);
-              closeMenu();
-            }}
-          >
-            O0 - 100 (קפיצות של 10)
+          <Button className={fontButtonClassName} onClick={() => handleMenuButtonClick(LineRange.hundred)}>
+            (קפיצות של 1) 100-0
           </Button>
         </div>
       )}
-    </div>
+    </button>
   );
 };
 
