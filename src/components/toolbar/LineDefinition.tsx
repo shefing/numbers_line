@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "../ui/button";
-import { LineRange } from "../../type/Line";
+import { LineRange, fontButtonClassName } from "../../type/Line";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import openMenu from "../../assets/icons/menuButtonOpen.svg";
 import closeMenu from "../../assets/icons/menuButtonClose.svg";
@@ -8,8 +8,23 @@ import closeMenu from "../../assets/icons/menuButtonClose.svg";
 
 const LineDefinition = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
   const { setKind } = useNumbersLineContext();
+  const wrapperRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (event: any) => {
+      // Close the component if the click is outside the component
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, [isMenuOpen]);
 
   const handleButtonClick = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -21,58 +36,39 @@ const LineDefinition = () => {
   };
 
   return (
-    <div className=" absolute m-2 relative  rounded-md" style={isMenuOpen ? { background: "#009FDE" } : { background: "var(--cyan-100)" }}>
-      <Button
-        className={`mt-[0.3rem]  w-259 text-xl font-bold ${isMenuOpen && "text-white bg-sky-100"}`}
-        variant="ghost"
-        onClick={handleButtonClick}
-        style={isMenuOpen ? { background: "#009FDE" } : { background: "var(--cyan-100)" }}
-      >
-        <img className="m-5" src={isMenuOpen ? closeMenu : openMenu} alt="open/close" />
+    <button
+      ref={wrapperRef}
+      className={`flex flex-col items-end  right-0 absolute  mt-[1.8%] mr-[1.8%] rounded-md  ${isMenuOpen && "shadow-2xl bg-[#009FDE]"}`}
+    >
+      <div className={`cursor-pointer flex  w-259 text-xl font-bold rounded-md ${isMenuOpen && "bg-[#009FDE]"}`} onClick={handleButtonClick}>
+        <img className="flex-shrink-0 p-5 pr-5" src={isMenuOpen ? closeMenu : openMenu} />
         <div
-          className={`ml-6 text-capitalize font-Abraham text-32 font-normal font-Abraham text-2xl font-semibold ${isMenuOpen ? 'text-white' : 'text-[#009FDE]'}`}
+          className={`flex-shrink-0 text-capitalize p-2 font-Abraham font-normal h-[17px] text-[32px] text-[#009FDE] font-[Abraham] font-[500] ${
+            isMenuOpen && " text-[#ffffff]"
+          }`}
         >
-          הגדרת הישר
+          {"הגדרת הישר"}
         </div>
-      </Button>
+      </div>
 
       {isMenuOpen && (
-        <div className="flex flex-col items-end mt-0 rounded-tl-5 right-0  rounded-md p-2 m-2 bg- [#009FDE]">
-          <Button
-            className="bg-white text-block mb-4 hover:bg-sky-100 transition rounded-[20px] font-[Abraham] text-[20px] font-[800] mt-6"
-            onClick={() => {
-              handleMenuButtonClick(LineRange.ten);
-            }}
-          >
-            0 - 10
+
+        <div className="flex flex-col items-end pt-8 pb-2 rounded-tl-5 right-0 rounded-md opacity-100 bg-#009FDE">
+          <Button className={fontButtonClassName} onClick={() => handleMenuButtonClick(LineRange.ten)}>
+            {"10-0"}
           </Button>
-          <Button
-            className="bg-white text-block mb-4 hover:bg-sky-100 transition rounded-[20px] font-[Abraham] text-[20px] font-[800]"
-            onClick={() => {
-              handleMenuButtonClick(LineRange.twenty);
-            }}
-          >
-            0 - 20
+          <Button className={fontButtonClassName} onClick={() => handleMenuButtonClick(LineRange.twenty)}>
+            {"20-0"}
           </Button>
-          <Button
-            className="bg-white text-block mb-4 hover:bg-sky-100 transition rounded-[20px] font-[Abraham] text-[20px] font-[800]"
-            onClick={() => {
-              handleMenuButtonClick(LineRange.hundred);
-            }}
-          >
-            (קפיצות של 1) 100 - 0
+          <Button className={fontButtonClassName} onClick={() => handleMenuButtonClick(LineRange.hundredCircular)}>
+            {"(קפיצות של 10) 100-0"}
           </Button>
-          <Button
-            className="bg-white text-block mb-4 hover:bg-sky-100 transition rounded-[20px] font-[Abraham] text-[20px] font-[800]"
-            onClick={() => {
-              handleMenuButtonClick(LineRange.hundredCircular);
-            }}
-          >
-            (קפיצות של 10) 100 - 0
+          <Button className={fontButtonClassName} onClick={() => handleMenuButtonClick(LineRange.hundred)}>
+            {"(קפיצות של 1) 100-0 "}
           </Button>
         </div>
       )}
-    </div>
+    </button>
   );
 };
 
