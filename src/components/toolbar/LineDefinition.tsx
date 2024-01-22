@@ -5,6 +5,7 @@ import { useNumbersLineContext } from "../../context/numbersLineContext";
 import openMenu from "../../assets/icons/menuButtonOpen.svg";
 import closeMenu from "../../assets/icons/menuButtonClose.svg";
 
+
 const LineDefinition = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { setKind } = useNumbersLineContext();
@@ -18,10 +19,8 @@ const LineDefinition = () => {
       }
     };
 
-    // Add event listener when the component mounts
     document.addEventListener("mousedown", handleOutsideClick);
 
-    // Clean up the event listener when the component unmounts
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
@@ -53,6 +52,7 @@ const LineDefinition = () => {
       </div>
 
       {isMenuOpen && (
+
         <div className="flex flex-col items-end pt-8 pb-2 rounded-tl-5 right-0 rounded-md opacity-100 bg-#009FDE">
           <Button className={fontButtonClassName} onClick={() => handleMenuButtonClick(LineRange.ten)}>
             {"10-0"}
