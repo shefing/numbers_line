@@ -5,7 +5,6 @@ import { useNumbersLineContext } from "../../context/numbersLineContext";
 import openMenu from "../../assets/icons/menuButtonOpen.svg";
 import closeMenu from "../../assets/icons/menuButtonClose.svg";
 
-
 const LineDefinition = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { setKind } = useNumbersLineContext();
@@ -13,7 +12,6 @@ const LineDefinition = () => {
 
   useEffect(() => {
     const handleOutsideClick = (event: any) => {
-      // Close the component if the click is outside the component
       if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
         setIsMenuOpen(false);
       }
@@ -38,7 +36,7 @@ const LineDefinition = () => {
   return (
     <button
       ref={wrapperRef}
-      className={`flex flex-col items-end  right-0 absolute  mt-[1.8%] mr-[1.8%] rounded-md  ${isMenuOpen && "shadow-2xl bg-[#009FDE]"}`}
+      className={`flex flex-col items-end  right-0 absolute  mt-[1.5%] mr-[1.5%] rounded-md  ${isMenuOpen && "shadow-2xl bg-[#009FDE]"}`}
     >
       <div className={`cursor-pointer flex  w-259 text-xl font-bold rounded-md ${isMenuOpen && "bg-[#009FDE]"}`} onClick={handleButtonClick}>
         <img className="flex-shrink-0 p-5 pr-5" src={isMenuOpen ? closeMenu : openMenu} />
@@ -47,24 +45,23 @@ const LineDefinition = () => {
             isMenuOpen && " text-[#ffffff]"
           }`}
         >
-          {"הגדרת הישר"}
+          הגדרת הישר
         </div>
       </div>
 
       {isMenuOpen && (
-
         <div className="flex flex-col items-end pt-8 pb-2 rounded-tl-5 right-0 rounded-md opacity-100 bg-#009FDE">
           <Button className={fontButtonClassName} onClick={() => handleMenuButtonClick(LineRange.ten)}>
-            {"10-0"}
+            10-0
           </Button>
           <Button className={fontButtonClassName} onClick={() => handleMenuButtonClick(LineRange.twenty)}>
-            {"20-0"}
+            20-0
           </Button>
           <Button className={fontButtonClassName} onClick={() => handleMenuButtonClick(LineRange.hundredCircular)}>
-            {"(קפיצות של 10) 100-0"}
+            (קפיצות של 10) 100-0
           </Button>
           <Button className={fontButtonClassName} onClick={() => handleMenuButtonClick(LineRange.hundred)}>
-            {"(קפיצות של 1) 100-0 "}
+            (קפיצות של 1) 100-0
           </Button>
         </div>
       )}
