@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "../ui/button";
-import { LineRange } from "../../const/Line";
-import {useNumbersLineContext} from "../../context/numbersLineContext"
+import { LineRange } from "../../type/Line";
+import { useNumbersLineContext } from "../../context/numbersLineContext";
 
 const LineDefinition = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
