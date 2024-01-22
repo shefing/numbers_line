@@ -5,7 +5,6 @@ import { useNumbersLineContext } from "../../context/numbersLineContext";
 import openMenu from "../../assets/icons/menuButtonOpen.svg";
 import closeMenu from "../../assets/icons/menuButtonClose.svg";
 
-
 const LineDefinition = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { setKind } = useNumbersLineContext();
@@ -13,7 +12,6 @@ const LineDefinition = () => {
 
   useEffect(() => {
     const handleOutsideClick = (event: any) => {
-      // Close the component if the click is outside the component
       if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
         setIsMenuOpen(false);
       }
@@ -52,7 +50,6 @@ const LineDefinition = () => {
       </div>
 
       {isMenuOpen && (
-
         <div className="flex flex-col items-end pt-8 pb-2 rounded-tl-5 right-0 rounded-md opacity-100 bg-#009FDE">
           <Button className={fontButtonClassName} onClick={() => handleMenuButtonClick(LineRange.ten)}>
             10-0
