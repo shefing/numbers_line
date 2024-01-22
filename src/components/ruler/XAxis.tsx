@@ -1,27 +1,19 @@
 import Arrows from "./Arrows";
 import { useState } from "react";
 import Numbers from "./Numbers";
+import { LineRange } from "@/type/Line";
+import { useNumbersLineContext } from "@/context/numbersLineContext";
 
-interface IProps {
-  labels: number[];
-}
-const XAxis = ({ labels }: IProps) => {
+const XAxis = () => {
   const [startIndex, setStartIndex] = useState(0);
+  const { kind } = useNumbersLineContext();
 
   return (
     <>
-      {labels.length == 101 ? (
-        <>
-          <Arrows startIndex={startIndex} setStartIndex={setStartIndex} />
-          <div className="stroke-3 stroke-var-black fixed left-0 right-0 flex justify-between border-t-4 border-gray-900 pt-0 mx-0 items-center pl-8 pr-8 ">
-            <Numbers labels={labels} startIndex={startIndex} setStartIndex={setStartIndex} />
-          </div>
-        </>
-      ) : (
-        <div className="fixed left-0 right-0 flex justify-between border-t-4 border-gray-900 pt-0 mx-0 items-center pl-8 pr-8 ">
-          <Numbers labels={labels} startIndex={startIndex} setStartIndex={setStartIndex} />
-        </div>
-      )}
+      {kind == LineRange.hundred && <Arrows startIndex={startIndex} setStartIndex={setStartIndex} />}
+      <div className="fixed left-0 right-0 flex justify-between border-t-4 border-gray-900 pt-0 mx-0  pl-8 pr-8 ">
+        <Numbers startIndex={startIndex} setStartIndex={setStartIndex} />
+      </div>
     </>
   );
 };
