@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { LineRange } from "../../type/Line";
 
