@@ -50,7 +50,7 @@ const LineDefinition = () => {
       </div>
 
       {isMenuOpen && (
-        <div className="flex flex-col items-end pt-8 pb-2 rounded-tl-5 right-0 rounded-md opacity-100 bg-#009FDE">
+        <div className="flex flex-col items-end pt-5 pb-2 rounded-tl-5 right-0 rounded-md opacity-100">
           <Button className={fontButtonClassName} onClick={() => handleMenuButtonClick(LineRange.ten)}>
             10-0
           </Button>

@@ -1,30 +1,38 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { LineRange } from "../../type/Line";
 
 interface IProps {
-  labels: number[];
   startIndex: number;
   setStartIndex: (val: number) => void;
 }
-const Numbers = ({ labels, startIndex, setStartIndex }: IProps) => {
+
+const Numbers = ({ startIndex, setStartIndex }: IProps) => {
   const { kind } = useNumbersLineContext();
-  var flag = kind == LineRange.hundredCircular;
+  var endIndex = kind == LineRange.hundredCircular ? 101 : 21;
+
+  var labels = [];
+  if (kind == LineRange.hundredCircular)
+    labels = Array.from({ length: kind + 1 }, (_, index) => (index % 10 == 0 ? { value: index, isMainLine: true } : { value: index, isMainLine: false }));
+  else labels = Array.from({ length: kind }, (_, index) => ({ value: index, isMainLine: true }));
 
   useEffect(() => {
     setStartIndex(0);
-  }, []);
+  }, [kind]);
   return (
     <>
-      {labels.slice(startIndex, startIndex + 21).map((label) => (
-        <div
-          key={label}
-          className={` text-2xl text-color flex flex-col items-center ${flag && label % 50 == 0 ? "font-bold" : !flag && label % 5 === 0 && "font-bold"}`}
-        >
-          <div className="h-3 border-l-4 border-gray-900 w-1366 flex-shrink-0" />
-          {label}
-        </div>
-      ))}
+      {labels.slice(startIndex, startIndex + endIndex).map(({ value, isMainLine }) =>
+        isMainLine ? (
+          <div className="flex flex-col items-center">
+            <div className="h-4 border-l-4 border-gray-900 w-1366" />
+            <div key={value} className={`text-2xl text-color absolute m-4 ${value % 5 === 0 && "font-bold"}`}>
+              {value}
+            </div>
+          </div>
+        ) : (
+          <div key={value} className="h-3 border-l-2 border-gray-900 w-1366" />
+        )
+      )}
     </>
   );
 };
