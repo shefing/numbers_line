@@ -9,7 +9,7 @@ interface IProps {
 
 const Numbers = ({ startIndex, setStartIndex }: IProps) => {
   const { kind } = useNumbersLineContext();
-  const [endIndex] = useState(kind == LineRange.hundredCircular ? 101 : 21);
+  var endIndex = kind == LineRange.hundredCircular ? 101 : 21;
 
   var labels = [];
   if (kind == LineRange.hundredCircular)
