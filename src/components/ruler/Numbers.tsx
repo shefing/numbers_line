@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { LineRange } from "../../type/Line";
 
@@ -9,16 +9,16 @@ interface IProps {
 
 const Numbers = ({ startIndex, setStartIndex }: IProps) => {
   const { kind } = useNumbersLineContext();
-  const endIndex = kind == LineRange.hundredCircular ? 101 : 21;
+  const [endIndex] = useState(kind == LineRange.hundredCircular ? 101 : 21);
 
   var labels = [];
   if (kind == LineRange.hundredCircular)
-    labels = Array.from({ length: 101 }, (_, index) => (index % 10 == 0 ? { value: index, isMainLine: true } : { value: index, isMainLine: false }));
+    labels = Array.from({ length: kind + 1 }, (_, index) => (index % 10 == 0 ? { value: index, isMainLine: true } : { value: index, isMainLine: false }));
   else labels = Array.from({ length: kind }, (_, index) => ({ value: index, isMainLine: true }));
 
   useEffect(() => {
     setStartIndex(0);
-  }, []);
+  }, [kind]);
   return (
     <>
       {labels.slice(startIndex, startIndex + endIndex).map(({ value, isMainLine }) =>
