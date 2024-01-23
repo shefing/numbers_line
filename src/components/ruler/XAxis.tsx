@@ -11,9 +11,7 @@ const XAxis = () => {
   return (
     <>
       {kind == LineRange.hundred && <Arrows startIndex={startIndex} setStartIndex={setStartIndex} />}
-      <div className="fixed left-0 right-0 flex justify-between border-t-4 border-gray-900 pt-0 mx-0 pl-8 pr-8 ">
-        <Numbers startIndex={startIndex} setStartIndex={setStartIndex} />
-      </div>
+      <Numbers startIndex={startIndex} setStartIndex={setStartIndex} />
     </>
   );
 };
