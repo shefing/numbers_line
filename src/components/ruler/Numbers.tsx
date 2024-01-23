@@ -13,7 +13,7 @@ const Numbers = ({ startIndex, setStartIndex }: IProps) => {
 
   var labels = [];
   if (kind == LineRange.hundredCircular)
-    labels = Array.from({ length: kind }, (_, index) => (index % 10 == 0 ? { value: index, isMainLine: true } : { value: index, isMainLine: false }));
+    labels = Array.from({ length: 101 }, (_, index) => (index % 10 == 0 ? { value: index, isMainLine: true } : { value: index, isMainLine: false }));
   else labels = Array.from({ length: kind }, (_, index) => ({ value: index, isMainLine: true }));
 
   useEffect(() => {
@@ -23,12 +23,14 @@ const Numbers = ({ startIndex, setStartIndex }: IProps) => {
     <>
       {labels.slice(startIndex, startIndex + endIndex).map(({ value, isMainLine }) =>
         isMainLine ? (
-          <div key={value} className={`text-2xl text-color flex flex-col items-center ${value % 5 === 0 && "font-bold"}`}>
-            <div className="h-4 border-l-4 border-gray-900 w-1366 flex-shrink-0" />
-            {value}
+          <div className="flex flex-col items-center">
+            <div className="h-4 border-l-4 border-gray-900 w-1366" />
+            <div key={value} className={`text-2xl text-color absolute m-4 ${value % 5 === 0 && "font-bold"}`}>
+              {value}
+            </div>
           </div>
         ) : (
-          <div key={value} className="h-3 border-l-2 border-gray-900 w-1366 flex-shrink-0" />
+          <div key={value} className="h-3 border-l-2 border-gray-900 w-1366" />
         )
       )}
     </>
