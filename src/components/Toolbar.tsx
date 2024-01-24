@@ -11,15 +11,15 @@ const Toolbar = () => {
   return (
     <div className="flex justify-between absolute w-full top-0 left-0 h-[80px] bg-[#ECF9FF]">
       <div className="flex-none">
-        <img className="flex-shrink-0 p-5 pr-5" src={fullscreen} alt="Fullscreen Toolbar" />
+        <img className="p-5" src={fullscreen} alt="Fullscreen Toolbar" />
       </div>
       <div className="flex ">
-        <img className="flex-shrink-0 p-3 pr-3" src={back} alt="Back Toolbar" />
-        <img className="flex-shrink-0 p-3 pr-3" src={icons} alt="Icons Toolbar" />
-        <img className="flex-shrink-0 p-3 pr-3" src={eye} alt="Eye Toolbar" />
-        <img className="flex-shrink-0 p-3 pr-3" src={writing} alt="Writing Toolbar" />
-        <img className="flex-shrink-0 p-3 pr-3" src={text} alt="Text Toolbar" />
-        <img className="flex-shrink-0 p-3 pr-3" src={jump} alt="Jump Toolbar" />
+        <img className="p-3" src={back} alt="Back Toolbar" />
+        <img className="p-3" src={icons} alt="Icons Toolbar" />
+        <img className="p-3" src={eye} alt="Eye Toolbar" />
+        <img className="p-3" src={writing} alt="Writing Toolbar" />
+        <img className="p-3" src={text} alt="Text Toolbar" />
+        <img className="p-3" src={jump} alt="Jump Toolbar" />
       </div>
       <div className="flex-none">
         <LineDefinition />
