@@ -37,7 +37,7 @@ const LineDefinition = () => {
   return (
     <div ref={wrapperRef} className={`flex flex-col items-end  right-0 absolute  mt-[1.5%] mr-[1.5%] rounded-md  ${isMenuOpen && "shadow-2xl bg-[#009FDE]"}`}>
       <div className={`cursor-pointer flex  w-259 text-xl rounded-md ${isMenuOpen && "bg-[#009FDE]"}`} onClick={handleButtonClick}>
-        <img className="flex-shrink-0 p-5 pr-5" src={isMenuOpen ? closeMenu : openMenu} />
+        <img className="flex-shrink-0 p-5 pr-5" src={isMenuOpen ? closeMenu : openMenu} alt="Menu Arrow" />
         <div className={`flex-shrink-0 text-capitalize p-2  h-[17px] text-[32px] text-[#009FDE] font-[Abraham] font-[500] ${isMenuOpen && " text-[#ffffff]"}`}>
           הגדרת הישר
         </div>

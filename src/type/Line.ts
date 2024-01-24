@@ -1,8 +1,8 @@
 export enum LineRange {
   ten = 11,
   twenty = 21,
-  hundred = 100,
-  hundredCircular = 101,
+  hundred = 101,
+  hundredCircular = 100,
 }
 
 export enum RulerLenth  {
