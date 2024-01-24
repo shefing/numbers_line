@@ -1,14 +1,9 @@
 export enum LineRange {
   ten = 11,
   twenty = 21,
-  hundred = 101,
-  hundredCircular = 100,
+  hundred = 100,
+  hundredCircular = 101,
 }
-
-export type RulerItem = {
-  value: number;
-  isMainLine: boolean;
-};
 
 export enum RulerLenth  {
   hundred = 21,
