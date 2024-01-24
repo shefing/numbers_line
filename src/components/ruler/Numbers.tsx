@@ -1,39 +1,35 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
-import { LineRange } from "../../type/Line";
-
+import { LineRange, RulerLenth } from "../../type/Line";
 interface IProps {
-  startIndex: number;
-  setStartIndex: (val: number) => void;
+  windowWidth: number;
+  leftPosition: number;
 }
-
-const Numbers = ({ startIndex, setStartIndex }: IProps) => {
+const Numbers = ({ windowWidth, leftPosition }: IProps) => {
   const { kind } = useNumbersLineContext();
-  var endIndex = kind == LineRange.hundredCircular ? 101 : 21;
-
-  var labels = [];
-  if (kind == LineRange.hundredCircular)
-    labels = Array.from({ length: kind + 1 }, (_, index) => (index % 10 == 0 ? { value: index, isMainLine: true } : { value: index, isMainLine: false }));
-  else labels = Array.from({ length: kind }, (_, index) => ({ value: index, isMainLine: true }));
+  const [labels, setLabels] = useState<number[]>([]);
 
   useEffect(() => {
-    setStartIndex(0);
+    let array = Array.from({ length: kind == LineRange.hundredCircular ? kind + 1 : kind }, (_, index) => index);
+    setLabels(array);
   }, [kind]);
+
   return (
-    <>
-      {labels.slice(startIndex, startIndex + endIndex).map(({ value, isMainLine }) =>
-        isMainLine ? (
-          <div className="flex flex-col items-center">
+    <div
+      className="fixed left-0 right-0 flex justify-between border-t-4 border-gray-900 pt-0 mx-0 pl-8 pr-8"
+      style={kind == LineRange.hundred ? { width: windowWidth * (LineRange.hundred / RulerLenth.hundred), left: `${leftPosition}px` } : {}}
+    >
+      {labels.map((label) =>
+        kind != LineRange.hundredCircular || label % 10 == 0 ? (
+          <div key={label} className="flex flex-col items-center">
             <div className="h-4 border-l-4 border-gray-900 w-1366" />
-            <div key={value} className={`text-2xl text-color absolute m-4 ${value % 5 === 0 && "font-bold"}`}>
-              {value}
-            </div>
+            <div className={`pl-10 pr-10 select-none text-2xl text-color absolute m-4 ${label % 5 === 0 && "font-bold"}`}>{label}</div>
           </div>
         ) : (
-          <div key={value} className="h-3 border-l-2 border-gray-900 w-1366" />
+          <div key={label} className="h-2 border-l-2 border-gray-900 w-1366" />
         )
       )}
-    </>
+    </div>
   );
 };
 export default Numbers;

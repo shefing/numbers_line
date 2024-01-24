@@ -1,27 +1,27 @@
+import { calculationWidthScreen } from "@/lib/utils";
 import leftArrowIcon from "../../assets/icons/arrow-left.svg";
 import rightArrowIcon from "../../assets/icons/arrow-right.svg";
+import { RulerLenth } from "@/type/Line";
 
 interface IProps {
-  startIndex: number;
-  setStartIndex: (val: number) => void;
+  windowWidth: number;
+  leftPosition: number;
+  setLeftPosition: (val: number) => void;
 }
-const Arrows = ({ startIndex, setStartIndex }: IProps) => {
+
+const Arrows = ({ windowWidth, leftPosition, setLeftPosition }: IProps) => {
   const handleArrowClick = (direction: "left" | "right") => {
-    const step = 1;
-    if (direction === "left") {
-      setStartIndex(Math.max(0, startIndex - step));
-    } else {
-      setStartIndex(Math.min(80, startIndex + step));
-    }
+    const step = windowWidth / RulerLenth.hundred;
+    setLeftPosition(direction === "left" ? Math.min(0, leftPosition + step) : Math.max(calculationWidthScreen(windowWidth), leftPosition - step));
   };
 
   return (
     <div className="flex justify-between m-3 mb-6">
-      <div className="ext-xl m-2 cursor-pointer text-blue-500" onClick={() => handleArrowClick("left")}>
+      <div className="m-2 cursor-pointer" onClick={() => handleArrowClick("left")}>
         <img src={leftArrowIcon} alt="Left Arrow" />
       </div>
-      <div className="text-xl m-2 cursor-pointer text-blue-500" onClick={() => handleArrowClick("right")}>
-        <img src={rightArrowIcon} alt="Left Arrow" />
+      <div className="m-2 cursor-pointer" onClick={() => handleArrowClick("right")}>
+        <img src={rightArrowIcon} alt="Right Arrow" />
       </div>
     </div>
   );

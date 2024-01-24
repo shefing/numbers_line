@@ -1,19 +1,43 @@
-import Arrows from "./Arrows";
 import { useState } from "react";
+import { useNumbersLineContext } from "../../context/numbersLineContext";
+import { LineRange } from "../../type/Line";
+import { calculationWidthScreen } from "@/lib/utils";
 import Numbers from "./Numbers";
-import { LineRange } from "@/type/Line";
-import { useNumbersLineContext } from "@/context/numbersLineContext";
-
-const XAxis = () => {
-  const [startIndex, setStartIndex] = useState(0);
+interface IProps {
+  windowWidth: number;
+  leftPosition: number;
+  setLeftPosition: (val: (val: number) => number) => void;
+}
+const XAxis = ({ windowWidth, leftPosition, setLeftPosition }: IProps) => {
   const { kind } = useNumbersLineContext();
+  const [startX, setStartX] = useState(0);
+  const [isDragging, setisDragging] = useState(false);
+
+  const handleStartDrag = (e: any) => {
+    setisDragging(true);
+    setStartX(e.clientX);
+  };
+
+  const handleonDrag = (e: any) => {
+    if (isDragging) {
+      const deltaX = e.clientX - startX;
+      setLeftPosition((prevLeft: number) => Math.max(calculationWidthScreen(windowWidth), Math.min(0, prevLeft + deltaX)));
+      setStartX(e.clientX);
+    }
+  };
+  const handleStopDrag = () => {
+    setisDragging(false);
+  };
 
   return (
     <>
-      {kind == LineRange.hundred && <Arrows startIndex={startIndex} setStartIndex={setStartIndex} />}
-      <div className="fixed left-0 right-0 flex justify-between border-t-4 border-gray-900 pt-0 mx-0 pl-8 pr-8 ">
-        <Numbers startIndex={startIndex} setStartIndex={setStartIndex} />
-      </div>
+      {kind == LineRange.hundred ? (
+        <div className="pt-5" onMouseDown={handleStartDrag} onMouseMove={handleonDrag} onMouseUp={handleStopDrag} onMouseLeave={handleStopDrag}>
+          <Numbers windowWidth={windowWidth} leftPosition={leftPosition} />
+        </div>
+      ) : (
+        <Numbers windowWidth={windowWidth} leftPosition={0} />
+      )}
     </>
   );
 };
