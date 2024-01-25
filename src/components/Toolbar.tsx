@@ -1,11 +1,12 @@
 import LineDefinition from "./toolbar/LineDefinition";
-import jump from "../assets/icons/jump.svg";
-import text from "../assets/icons/text.svg";
-import writing from "../assets/icons/writing.svg";
-import eye from "../assets/icons/eye.svg";
-import icons from "../assets/icons/icons.svg";
-import back from "../assets/icons/back.svg";
-import fullscreen from "../assets/icons/fullscreen.svg";
+import fullscreen from "../assets/icons/toolbar/fullscreen.svg";
+import IconsToolbar from "./toolbar/ActionIcons";
+import jump from "../assets/icons/toolbar/jump.svg";
+import text from "../assets/icons/toolbar/text.svg";
+import writing from "../assets/icons/toolbar/writing.svg";
+import eye from "../assets/icons/toolbar/eye.svg";
+import icons from "../assets/icons/toolbar/icons.svg";
+import back from "../assets/icons/toolbar/back.svg";
 
 const Toolbar = () => {
   return (
@@ -14,12 +15,12 @@ const Toolbar = () => {
         <img className="p-5" src={fullscreen} alt="Fullscreen Toolbar" />
       </div>
       <div className="flex ">
-        <img className="p-3" src={back} alt="Back Toolbar" />
-        <img className="p-3" src={icons} alt="Icons Toolbar" />
-        <img className="p-3" src={eye} alt="Eye Toolbar" />
-        <img className="p-3" src={writing} alt="Writing Toolbar" />
-        <img className="p-3" src={text} alt="Text Toolbar" />
-        <img className="p-3" src={jump} alt="Jump Toolbar" />
+        <IconsToolbar kind={back} />
+        <IconsToolbar kind={icons} />
+        <IconsToolbar kind={eye} />
+        <IconsToolbar kind={writing} />
+        <IconsToolbar kind={text} />
+        <IconsToolbar kind={jump} />
       </div>
       <div className="flex-none">
         <LineDefinition />
