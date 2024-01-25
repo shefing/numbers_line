@@ -17,7 +17,15 @@ const Numbers = ({ windowWidth, leftPosition }: IProps) => {
   return (
     <div
       className="fixed left-0 right-0 flex justify-between border-t-4 border-gray-900 pt-0 mx-0 pl-8 pr-8"
-      style={kind == LineRange.hundred ? { width: windowWidth * (LineRange.hundred / RulerLenth.hundred), left: `${leftPosition}px` } : {}}
+      style={
+        kind == LineRange.hundred
+          ? {
+              width: windowWidth * (LineRange.hundred / RulerLenth.hundred),
+              left: `${leftPosition}px`,
+              cursor: "move",
+            }
+          : {}
+      }
     >
       {labels.map((label) =>
         kind != LineRange.hundredCircular || label % 10 == 0 ? (
