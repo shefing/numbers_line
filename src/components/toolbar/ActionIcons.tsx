@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { getImageSrc } from "@/lib/utils";
+import Jump from "./Jump";
 
 interface IProps {
   kind: string;
@@ -34,6 +35,7 @@ const IconsToolbar = ({ kind }: IProps) => {
         onMouseLeave={() => setIsHovered(false)}
         onClick={() => setIsOpen(!isOpen)}
       />
+      {isOpen && <Jump />}
     </div>
   );
 };

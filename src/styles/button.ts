@@ -1,1 +1,1 @@
-export const fontButtonClassName:string = "bg-white h-[48px] text-block m-[0.5rem] ml-[1rem] mr-[1rem] hover:bg-[#E1F4FD] transition rounded-[20px] font-[Abraham] text-[24px] font-[400] border-l border-solid border-[#009FDE] "
+export const fontButtonClassName:string = "bg-white h-[48px] text-block m-[0.5rem] ml-[1rem] mr-[1rem] hover:bg-[#E1F4FD] transition rounded-[20px] font-[Abraham] text-[24px] font-[400] border border-solid border-[#009FDE] "
