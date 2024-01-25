@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "../ui/button";
 import { LineRange } from "../../type/Line";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
-import openMenu from "../../assets/icons/menuButtonOpen.svg";
-import closeMenu from "../../assets/icons/menuButtonClose.svg";
+import openMenu from "/assets/icons/menuButtonOpen.svg";
+import closeMenu from "/assets/icons/menuButtonClose.svg";
 import { fontButtonClassName } from "@/styles/button";
 
 const LineDefinition = () => {

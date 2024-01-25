@@ -1,6 +1,6 @@
 import { calculationWidthScreen } from "@/lib/utils";
-import leftArrowIcon from "../../assets/icons/arrow-left.svg";
-import rightArrowIcon from "../../assets/icons/arrow-right.svg";
+import leftArrowIcon from "/assets/icons/arrow-left.svg";
+import rightArrowIcon from "/assets/icons/arrow-right.svg";
 import { RulerLenth } from "@/type/Line";
 
 interface IProps {
