@@ -2,7 +2,7 @@ import LineDefinition from "./toolbar/LineDefinition";
 import fullscreen from "../assets/icons/toolbar/fullscreen.svg";
 import IconsToolbar from "./toolbar/ActionIcons";
 import jump from "../assets/icons/toolbar/jump.svg";
-import text from "../assets/icons/toolbar/text.svg";
+// import text from "../assets/icons/toolbar/text.svg";
 import writing from "../assets/icons/toolbar/writing.svg";
 import eye from "../assets/icons/toolbar/eye.svg";
 import icons from "../assets/icons/toolbar/icons.svg";
@@ -19,7 +19,7 @@ const Toolbar = () => {
         <IconsToolbar kind={icons} />
         <IconsToolbar kind={eye} />
         <IconsToolbar kind={writing} />
-        <IconsToolbar kind={text} />
+        {/* <IconsToolbar kind={text} /> */}
         <IconsToolbar kind={jump} />
       </div>
       <div className="flex-none">
