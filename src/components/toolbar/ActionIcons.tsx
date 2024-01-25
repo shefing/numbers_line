@@ -29,7 +29,7 @@ const IconsToolbar = ({ kind }: IProps) => {
       <img
         className="p-3"
         src={getImageSrc(kind, isHovered, isOpen)}
-        alt={kind + " Toolbar"}
+        alt={"ActionIcon Toolbar"}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={() => setIsOpen(!isOpen)}
