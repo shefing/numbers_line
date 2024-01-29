@@ -2,15 +2,15 @@ import "./App.css";
 import Ruler from "./components/Ruler";
 import GrassImg from "./components/GrassImg";
 import Toolbar from "./components/Toolbar";
-import Convexity from "./components/Convexity";
 
 const App = () => {
   return (
-    <div>
-      <Convexity />
+    <div className="flex flex-col h-full justify-between">
       <Toolbar />
-      <Ruler />
-      <GrassImg />
+      <div className="flex flex-col justify-end">
+        <Ruler />
+        <GrassImg />
+      </div>
     </div>
   );
 };

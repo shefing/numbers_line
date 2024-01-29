@@ -1,1 +1,3 @@
-export const fontButtonClassName:string = "bg-white h-[48px] text-block m-[0.5rem] ml-[1rem] mr-[1rem] hover:bg-[#E1F4FD] transition rounded-[20px] font-[Abraham] text-[24px] font-[400] border border-solid border-[#009FDE] "
+export const buttonLineDefinationClassName:string = "bg-white h-[48px] text-block m-[0.5rem] ml-[1rem] mr-[1rem] hover:bg-[#E1F4FD] transition rounded-[20px] text-[24px] font-[400] border border-solid border-[#009FDE] " //font-[Abraham]
+export const buttonEyeClassName:string = "bg-white h-[33px] text-block m-[0.5rem] ml-[1rem] mr-[1rem] hover:bg-[#E1F4FD] transition rounded-[20px] text-[26px] font-[400] border border-solid border-[#009FDE] " //font-[Abraham]
+export const buttonEyeDisabledClassName:string = "bg-white h-[33px] text-[#CACACC] m-[0.5rem] ml-[1rem] mr-[1rem] rounded-[20px] text-[26px] font-[400] border border-solid border-[#CACACC] " //font-[Abraham]
