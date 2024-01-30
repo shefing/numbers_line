@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { getImageSrc } from "@/lib/utils";
-import Eye from "./DesignLine";
+import DisplayNumbers from "./DisplayNumbers";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 
 interface IProps {
@@ -43,7 +43,7 @@ const IconsToolbar = ({ iconUrl }: IProps) => {
       />
       <DropdownMenu open={isOpen} onOpenChange={(open) => setIsOpen(open)}>
         <DropdownMenuTrigger />
-        <DropdownMenuContent>{type == "eye" && <Eye setOpen={setIsOpen} />}</DropdownMenuContent>
+        <DropdownMenuContent>{type == "eye" && <DisplayNumbers setOpen={setIsOpen} />}</DropdownMenuContent>
       </DropdownMenu>
     </div>
   );

@@ -1,11 +1,11 @@
-import { MatchButtonClassName } from "@/styles/button";
 import { Button } from "../ui/button";
-import { useNumbersLineContext } from "@/context/numbersLineContext";
-import { TypeCover } from "@/type/elements";
+import { useNumbersLineContext } from "../../context/numbersLineContext";
+import { TypeCover } from "../../type/elements";
+import { MatchButtonClassName } from "../../lib/utils";
 interface IProps {
   setOpen: (val: boolean) => void;
 }
-const Eye = ({ setOpen }: IProps) => {
+const DisplayNumbers = ({ setOpen }: IProps) => {
   const { coverSituation, setCoverSituation } = useNumbersLineContext();
 
   const onClickButtons = (type: TypeCover) => {
@@ -44,4 +44,4 @@ const Eye = ({ setOpen }: IProps) => {
   );
 };
 
-export default Eye;
+export default DisplayNumbers;
