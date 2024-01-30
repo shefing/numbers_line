@@ -35,6 +35,7 @@ const IconsToolbar = ({ iconUrl }: IProps) => {
     <div ref={wrapperRef}>
       <img
         className="p-3"
+
         src={getImageSrc(iconUrl, isHovered, isOpen)}
         alt={type + " Toolbar"}
         onMouseEnter={() => setIsHovered(true)}
