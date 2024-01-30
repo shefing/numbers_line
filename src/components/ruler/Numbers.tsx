@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { LineRange, RulerLenth } from "../../type/Line";
 import { TypeCover } from "@/type/elements";
@@ -7,10 +7,9 @@ interface IProps {
   leftPosition: number;
 }
 const Numbers = ({ windowWidth, leftPosition }: IProps) => {
-  const { type, coverSituation, setCoverSituation } = useNumbersLineContext();
+  const { type, coverSituation } = useNumbersLineContext();
   const [labels, setLabels] = useState<number[]>([]);
   const [labelsCover, setClickedLabelsCover] = useState(new Set());
-  const coverRef = useRef(false);
   useEffect(() => {
     let array = Array.from({ length: type == LineRange.hundredCircular ? type + 1 : type }, (_, index) => index);
     setLabels(array);
