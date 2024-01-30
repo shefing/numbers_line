@@ -36,10 +36,10 @@ const LineDefinition = () => {
   };
 
   return (
-    <div ref={wrapperRef} className={`flex flex-col items-end  rounded-md ${isMenuOpen && "shadow-2xl bg-[#009FDE]"}`}>
-      <div className={`cursor-pointer flex  w-259 text-xl rounded-md ${isMenuOpen && ""}`} onClick={handleButtonClick}>
-        <img className="p-6 pr-6" src={isMenuOpen ? closeMenu : openMenu} alt="Menu Arrow" />
-        <div className={`p-2 text-[#009FDE] text-[32px] font-[Abraham] ${isMenuOpen && " text-[#ffffff]"}`}>הגדרת הישר</div>
+    <div ref={wrapperRef} className={`flex flex-col items-end  rounded-md w-[300px] ${isMenuOpen && "shadow-2xl bg-[#009FDE]"}`}>
+      <div className={`cursor-pointer flex text-xl rounded-md ${isMenuOpen && ""}`} onClick={handleButtonClick}>
+        <img className="p-5 pr-6" src={isMenuOpen ? closeMenu : openMenu} alt="Menu Arrow" />
+        <div className={`p-2 pr-4 text-[#009FDE] text-[32px] font-[Abraham] ${isMenuOpen && " text-[#ffffff]"}`}>הגדרת הישר</div>
       </div>
 
       {isMenuOpen && (

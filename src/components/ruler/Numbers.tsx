@@ -1,43 +1,36 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { LineRange, RulerLenth } from "../../type/Line";
-import { TypeCover, TypeShowNumber } from "@/type/elements";
+import { TypeCover } from "@/type/elements";
 interface IProps {
   windowWidth: number;
   leftPosition: number;
 }
 const Numbers = ({ windowWidth, leftPosition }: IProps) => {
-  const { type, isCover, isCoverAll, setNumbersShow } = useNumbersLineContext();
+  const { type, coverSituation, setCoverSituation } = useNumbersLineContext();
   const [labels, setLabels] = useState<number[]>([]);
-  const [clickedLabelsCover, setClickedLabelsCover] = useState(new Set());
-
+  const [labelsCover, setClickedLabelsCover] = useState(new Set());
+  const coverRef = useRef(false);
   useEffect(() => {
     let array = Array.from({ length: type == LineRange.hundredCircular ? type + 1 : type }, (_, index) => index);
     setLabels(array);
   }, [type]);
 
   useEffect(() => {
-    if (isCoverAll == TypeCover.cover) {
+    if (coverSituation == TypeCover.allCover) {
       setClickedLabelsCover(new Set(labels));
-      setNumbersShow(TypeShowNumber.nothingSHow);
-    } else {
-      setClickedLabelsCover(new Set());
-      setNumbersShow(TypeShowNumber.allShow);
     }
-  }, [isCoverAll]);
-
-  useEffect(() => {
-    clickedLabelsCover.size == 0 && setNumbersShow(TypeShowNumber.allShow);
-    clickedLabelsCover.size != 0 && setNumbersShow(TypeShowNumber.partially);
-    clickedLabelsCover.size == labels.length && setNumbersShow(TypeShowNumber.nothingSHow);
-  }, [clickedLabelsCover]);
+    if (coverSituation == TypeCover.allDiscover) {
+      setClickedLabelsCover(new Set());
+    }
+  }, [coverSituation]);
 
   const handleLabelClick = (label: any) => {
-    const newClickedLabels = new Set(clickedLabelsCover);
-    if (isCover === TypeCover.cover) {
+    const newClickedLabels = new Set(labelsCover);
+    if (coverSituation === TypeCover.partiallyCover) {
       !newClickedLabels.has(label) && newClickedLabels.add(label);
     }
-    if (isCover === TypeCover.discover) {
+    if (coverSituation === TypeCover.partiallyDiscover) {
       newClickedLabels.has(label) && newClickedLabels.delete(label);
     }
     setClickedLabelsCover(newClickedLabels);
@@ -61,8 +54,7 @@ const Numbers = ({ windowWidth, leftPosition }: IProps) => {
           <div key={label} className="flex flex-col items-center">
             <div className="h-4 border-l-4 border-gray-900 w-1366" />
             <div
-              className={`pl-10 pr-10 select-none text-2xl absolute m-5 ${label % 5 === 0 && "font-bold"}`}
-              style={{ color: clickedLabelsCover.has(label) ? "white" : "black" }}
+              className={`pl-10 pr-10 select-none text-2xl absolute m-5 ${label % 5 === 0 && "font-bold"} ${labelsCover.has(label) && `text-[white]`}`}
               onClick={() => handleLabelClick(label)}
             >
               {label}

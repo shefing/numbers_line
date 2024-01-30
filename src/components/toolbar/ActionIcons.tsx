@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { getImageSrc } from "@/lib/utils";
-import Eye from "./Eye";
+import Eye from "./DesignLine";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 
 interface IProps {
