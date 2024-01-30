@@ -9,7 +9,7 @@ interface IProps {
   setLeftPosition: (val: (val: number) => number) => void;
 }
 const XAxis = ({ windowWidth, leftPosition, setLeftPosition }: IProps) => {
-  const { kind } = useNumbersLineContext();
+  const { type } = useNumbersLineContext();
   const [startX, setStartX] = useState(0);
   const [isDragging, setisDragging] = useState(false);
 
@@ -31,7 +31,7 @@ const XAxis = ({ windowWidth, leftPosition, setLeftPosition }: IProps) => {
 
   return (
     <>
-      {kind == LineRange.hundred ? (
+      {type == LineRange.hundred ? (
         <div className="pt-5" onMouseDown={handleStartDrag} onMouseMove={handleonDrag} onMouseUp={handleStopDrag} onMouseLeave={handleStopDrag}>
           <Numbers windowWidth={windowWidth} leftPosition={leftPosition} />
         </div>

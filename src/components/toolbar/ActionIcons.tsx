@@ -1,12 +1,15 @@
 import { useEffect, useRef, useState } from "react";
 import { getImageSrc } from "@/lib/utils";
+import DisplayNumbers from "./DisplayNumbers";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 
 interface IProps {
-  kind: string;
+  iconUrl: string;
 }
-const IconsToolbar = ({ kind }: IProps) => {
+const IconsToolbar = ({ iconUrl }: IProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [type, setType] = useState("");
 
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -16,6 +19,10 @@ const IconsToolbar = ({ kind }: IProps) => {
         setIsOpen(false);
       }
     };
+
+    const dotIndex = iconUrl.indexOf(".");
+    const slushIndex = iconUrl.lastIndexOf("/");
+    setType(iconUrl.substring(slushIndex + 1, dotIndex));
 
     document.addEventListener("mousedown", handleOutsideClick);
 
@@ -28,12 +35,16 @@ const IconsToolbar = ({ kind }: IProps) => {
     <div ref={wrapperRef}>
       <img
         className="p-3"
-        src={getImageSrc(kind, isHovered, isOpen)}
-        alt={"ActionIcon Toolbar"}
+        src={getImageSrc(iconUrl, isHovered, isOpen)}
+        alt={type + " Toolbar"}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={() => setIsOpen(!isOpen)}
       />
+      <DropdownMenu open={isOpen} onOpenChange={(open) => setIsOpen(open)}>
+        <DropdownMenuTrigger />
+        <DropdownMenuContent>{type == "eye" && <DisplayNumbers setOpen={setIsOpen} />}</DropdownMenuContent>
+      </DropdownMenu>
     </div>
   );
 };

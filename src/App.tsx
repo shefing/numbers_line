@@ -5,10 +5,12 @@ import Toolbar from "./components/Toolbar";
 
 const App = () => {
   return (
-    <div>
+    <div className="flex flex-col h-full justify-between">
       <Toolbar />
-      <Ruler />
-      <GrassImg />
+      <div className="flex flex-col justify-end">
+        <Ruler />
+        <GrassImg />
+      </div>
     </div>
   );
 };

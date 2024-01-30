@@ -4,12 +4,12 @@ import { LineRange } from "../../type/Line";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import openMenu from "/assets/icons/menuButtonOpen.svg";
 import closeMenu from "/assets/icons/menuButtonClose.svg";
-import { fontButtonClassName } from "@/styles/button";
+import { buttonLineDefinationClassName } from "@/styles/button";
 
 const LineDefinition = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { kind } = useNumbersLineContext();
-  const { setKind } = useNumbersLineContext();
+  const { type } = useNumbersLineContext();
+  const { setType } = useNumbersLineContext();
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -31,35 +31,39 @@ const LineDefinition = () => {
   };
 
   const handleMenuButtonClick = (type: LineRange) => {
-    setKind(type);
-    // setIsMenuOpen(false);
+    setType(type);
+    setIsMenuOpen(false);
   };
 
   return (
-    <div ref={wrapperRef} className={`flex flex-col items-end  right-0 absolute  mt-[1%] mr-[1%] rounded-md  ${isMenuOpen && "shadow-2xl bg-[#009FDE]"}`}>
-      <div className={`cursor-pointer flex  w-259 text-xl rounded-md ${isMenuOpen && ""}`} onClick={handleButtonClick}>
-        <img className="p-5 pr-5" src={isMenuOpen ? closeMenu : openMenu} alt="Menu Arrow" />
-        <div className={`text-capitalize p-2  h-[17px] text-[32px] text-[#009FDE] font-[Abraham] font-[500] ${isMenuOpen && " text-[#ffffff]"}`}>
-          הגדרת הישר
-        </div>
+    <div ref={wrapperRef} className={`flex flex-col items-end  rounded-md w-[300px] ${isMenuOpen && "shadow-2xl bg-[#009FDE]"}`}>
+      <div className={`cursor-pointer flex text-xl rounded-md ${isMenuOpen && ""}`} onClick={handleButtonClick}>
+        <img className="p-5 pr-6" src={isMenuOpen ? closeMenu : openMenu} alt="Menu Arrow" />
+        <div className={`p-2 pr-4 text-[#009FDE] text-[32px] font-[Abraham] ${isMenuOpen && " text-[#ffffff]"}`}>הגדרת הישר</div>
       </div>
 
       {isMenuOpen && (
-        <div className="flex flex-col items-end pt-5 pb-2 rounded-tl-5 right-0 rounded-md opacity-100">
-          <Button className={fontButtonClassName + (LineRange.ten == kind && " bg-[#7BC8EF]")} onClick={() => handleMenuButtonClick(LineRange.ten)}>
-            10-0
-          </Button>
-          <Button className={fontButtonClassName + (LineRange.twenty == kind && " bg-[#7BC8EF]")} onClick={() => handleMenuButtonClick(LineRange.twenty)}>
-            20-0
+        <div className="flex flex-col items-end pt-5 pb-2 rounded-md">
+          <Button className={buttonLineDefinationClassName + (LineRange.ten == type && " bg-[#7BC8EF]")} onClick={() => handleMenuButtonClick(LineRange.ten)}>
+            0-10
           </Button>
           <Button
-            className={fontButtonClassName + (LineRange.hundredCircular == kind && " bg-[#7BC8EF]")}
+            className={buttonLineDefinationClassName + (LineRange.twenty == type && " bg-[#7BC8EF]")}
+            onClick={() => handleMenuButtonClick(LineRange.twenty)}
+          >
+            0-20
+          </Button>
+          <Button
+            className={buttonLineDefinationClassName + (LineRange.hundredCircular == type && " bg-[#7BC8EF]")}
             onClick={() => handleMenuButtonClick(LineRange.hundredCircular)}
           >
-            (קפיצות של 10) 100-0
+            (קפיצות של 10)0-100
           </Button>
-          <Button className={fontButtonClassName + (LineRange.hundred == kind && " bg-[#7BC8EF]")} onClick={() => handleMenuButtonClick(LineRange.hundred)}>
-            (קפיצות של 1) 100-0
+          <Button
+            className={buttonLineDefinationClassName + (LineRange.hundred == type && " bg-[#7BC8EF]")}
+            onClick={() => handleMenuButtonClick(LineRange.hundred)}
+          >
+            (קפיצות של 1)0-100
           </Button>
         </div>
       )}
