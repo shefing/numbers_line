@@ -7,7 +7,7 @@ interface IProps {
   leftPosition: number;
 }
 const Numbers = ({ windowWidth, leftPosition }: IProps) => {
-  const { type, coverSituation, setCoverSituation, setDisVisitAble } = useNumbersLineContext();
+  const { type, coverSituation, setCoverSituation, setDisVisitAbleButton } = useNumbersLineContext();
   const [labels, setLabels] = useState<number[]>([]);
   const [labelsCover, setClickedLabelsCover] = useState(new Set());
   useEffect(() => {
@@ -35,10 +35,10 @@ const Numbers = ({ windowWidth, leftPosition }: IProps) => {
 
   useEffect(() => {
     labelsCover.size == 0
-      ? setDisVisitAble(TypeCover.allDiscover)
+      ? setDisVisitAbleButton(TypeCover.allDiscover)
       : labelsCover.size == labels.length
-      ? setDisVisitAble(TypeCover.allCover)
-      : setDisVisitAble(TypeCover.nothing);
+      ? setDisVisitAbleButton(TypeCover.allCover)
+      : setDisVisitAbleButton(TypeCover.nothing);
   }, [labelsCover]);
 
   const displayLabel = (label: any) => {

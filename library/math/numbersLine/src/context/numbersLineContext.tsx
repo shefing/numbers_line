@@ -9,8 +9,8 @@ interface INumbersLineContextProps {
   setDragElement: (v: IElement[]) => void;
   coverSituation: TypeCover;
   setCoverSituation: (v: TypeCover) => void;
-  disVisitAble: TypeCover;
-  setDisVisitAble: (v: TypeCover) => void;
+  disVisitAbleButton: TypeCover;
+  setDisVisitAbleButton: (v: TypeCover) => void;
 }
 
 export const NumbersLineContext = React.createContext({
@@ -20,15 +20,15 @@ export const NumbersLineContext = React.createContext({
   setDragElement: () => null,
   coverSituation: {} as TypeCover,
   setCoverSituation: () => null,
-  disVisitAble: {} as TypeCover,
-  setDisVisitAble: () => null,
+  disVisitAbleButton: {} as TypeCover,
+  setDisVisitAbleButton: () => null,
 } as INumbersLineContextProps);
 
 export const NumbersLineContexProvider = (props: any) => {
   const [type, setType] = useState(LineRange.ten);
   const [dragElement, setDragElement] = useState<IElement[]>([]);
   const [coverSituation, setCoverSituation] = useState(TypeCover.allDiscover);
-  const [disVisitAble, setDisVisitAble] = useState(TypeCover.allDiscover);
+  const [disVisitAbleButton, setDisVisitAbleButton] = useState(TypeCover.allDiscover);
   const { saveData, getData } = useLocalStorage();
 
   useEffect(() => {
@@ -48,8 +48,8 @@ export const NumbersLineContexProvider = (props: any) => {
         setDragElement,
         coverSituation,
         setCoverSituation,
-        disVisitAble,
-        setDisVisitAble,
+        disVisitAbleButton,
+        setDisVisitAbleButton,
       }}
     >
       {props.children}
