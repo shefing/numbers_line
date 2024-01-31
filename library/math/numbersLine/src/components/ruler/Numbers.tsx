@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
-import { LineRange, RulerLenth } from "../../type/Line";
+import { LineRange, Random, RulerLenth } from "../../type/Line";
 import { TypeCover } from "@/type/elements";
 interface IProps {
   windowWidth: number;
@@ -25,7 +25,7 @@ const Numbers = ({ windowWidth, leftPosition }: IProps) => {
     }
     if (coverSituation == TypeCover.randomly) {
       const middleElements = labels.slice(1, -1);
-      const numberOfElementsToSelect = Math.ceil(middleElements.length * (TypeCover.randomly / 100));
+      const numberOfElementsToSelect = Math.ceil(middleElements.length * Random.percent);
       const shuffledArray = middleElements.sort(() => Math.random() - 0.5);
       const selectedElements = shuffledArray.slice(0, numberOfElementsToSelect);
       setClickedLabelsCover(new Set(selectedElements));

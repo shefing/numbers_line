@@ -9,3 +9,7 @@ export enum RulerLenth  {
   hundred = 21,
   other = 101 
 };
+
+export enum Random {
+  percent = 0.7
+}

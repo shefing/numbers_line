@@ -13,5 +13,6 @@ export enum TypeCover {
   partiallyDiscover = "partiallyDiscover",
   allCover = "allCover",
   allDiscover = "allDiscover",
-  randomly = 70, 
+  randomly = "randomly", 
 }
+
