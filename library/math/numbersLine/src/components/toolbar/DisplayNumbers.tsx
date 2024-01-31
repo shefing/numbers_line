@@ -1,7 +1,7 @@
 import { Button } from "../ui/button";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { TypeCover } from "../../type/elements";
-import { MatchButtonClassName } from "../../lib/utils";
+import { MatchButtonClassName } from "../../lib/stylesUtils";
 import triangleToMenu from "/assets/icons/TriangleToMenu.png";
 
 interface IProps {
