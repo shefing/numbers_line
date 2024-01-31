@@ -36,10 +36,10 @@ const LineDefinition = () => {
   };
 
   return (
-    <div ref={wrapperRef} className={`flex flex-col items-end  rounded-md w-[300px] ${isMenuOpen && "shadow-2xl bg-[#009FDE]"}`}>
-      <div className={`cursor-pointer flex text-xl rounded-md ${isMenuOpen && ""}`} onClick={handleButtonClick}>
-        <img className="p-5 pr-6" src={isMenuOpen ? closeMenu : openMenu} alt="Menu Arrow" />
-        <div className={`p-2 pr-4 text-[#009FDE] text-[32px] font-[Abraham] ${isMenuOpen && " text-[#ffffff]"}`}>הגדרת הישר</div>
+    <div ref={wrapperRef} className={`flex flex-col items-end p-2 rounded-md w-[260px] ${isMenuOpen && "shadow-2xl bg-[#009FDE]"}`}>
+      <div className="cursor-pointer flex" onClick={handleButtonClick}>
+        <img className="p-3 pr-6" src={isMenuOpen ? closeMenu : openMenu} alt="Menu Arrow" />
+        <div className={`pr-3 text-[#009FDE] text-[32px] font-[500] font-[Abraham] ${isMenuOpen && " text-[#ffffff]"}`}>הגדרת הישר</div>
       </div>
 
       {isMenuOpen && (
@@ -57,13 +57,13 @@ const LineDefinition = () => {
             className={buttonLineDefinationClassName + (LineRange.hundredCircular == type && " bg-[#7BC8EF]")}
             onClick={() => handleMenuButtonClick(LineRange.hundredCircular)}
           >
-            (קפיצות של 10)0-100
+            (קפיצות של 10) 0-100
           </Button>
           <Button
             className={buttonLineDefinationClassName + (LineRange.hundred == type && " bg-[#7BC8EF]")}
             onClick={() => handleMenuButtonClick(LineRange.hundred)}
           >
-            (קפיצות של 1)0-100
+            (קפיצות של 1) 0-100
           </Button>
         </div>
       )}

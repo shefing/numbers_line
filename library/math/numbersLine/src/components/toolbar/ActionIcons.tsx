@@ -32,19 +32,21 @@ const IconsToolbar = ({ iconUrl }: IProps) => {
   }, [isOpen]);
 
   return (
-    <div ref={wrapperRef}>
+    <div className="flex flex-col items-center" ref={wrapperRef}>
       <img
-        className="p-3"
+        className="m-3 cursor-pointer"
         src={getImageSrc(iconUrl, isHovered, isOpen)}
         alt={type + " Toolbar"}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={() => setIsOpen(!isOpen)}
       />
-      <DropdownMenu open={isOpen} onOpenChange={(open) => setIsOpen(open)}>
-        <DropdownMenuTrigger />
-        <DropdownMenuContent>{type == "eye" && <DisplayNumbers setOpen={setIsOpen} />}</DropdownMenuContent>
-      </DropdownMenu>
+      <div className="relative">
+        <DropdownMenu open={isOpen} onOpenChange={(open) => setIsOpen(open)}>
+          <DropdownMenuTrigger />
+          <DropdownMenuContent>{type == "eye" && <DisplayNumbers setOpen={setIsOpen} />}</DropdownMenuContent>
+        </DropdownMenu>
+      </div>
     </div>
   );
 };

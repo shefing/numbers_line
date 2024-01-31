@@ -2,6 +2,8 @@ import { Button } from "../ui/button";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { TypeCover } from "../../type/elements";
 import { MatchButtonClassName } from "../../lib/utils";
+import triangleToMenu from "/assets/icons/TriangleToMenu.png";
+
 interface IProps {
   setOpen: (val: boolean) => void;
 }
@@ -14,9 +16,9 @@ const DisplayNumbers = ({ setOpen }: IProps) => {
   };
 
   return (
-    <>
-      {/* <img className="p-5" src={triangleMenu} alt="Fullscreen Toolbar" /> */}
-      <div className="flex flex-col shadow-2xl rounded-[6px] border border-solid border-[#009FDE] p-3 mt-2">
+    <div className="relative flex flex-col items-center justify-center">
+      <img className="absolute top-0 " src={triangleToMenu} alt="triple for menu" />
+      <div className="m-[18px] flex flex-col shadow-2xl rounded-[6px] border border-solid border-[#009FDE] p-2">
         <Button className={MatchButtonClassName(coverSituation, TypeCover.allCover, TypeCover.allCover)} onClick={() => onClickButtons(TypeCover.allCover)}>
           הסתר הכל
         </Button>
@@ -40,7 +42,7 @@ const DisplayNumbers = ({ setOpen }: IProps) => {
           הצג הכל
         </Button>
       </div>
-    </>
+    </div>
   );
 };
 

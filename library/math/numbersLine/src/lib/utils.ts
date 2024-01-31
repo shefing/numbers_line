@@ -25,3 +25,14 @@ export const MatchButtonClassName = (coverSituation :TypeCover, isDisable: TypeC
      return buttonEyeClassName+" bg-[#7BC8EF] text-white"
  return buttonEyeClassName
 };
+
+export const createClassNameToNumbersAtLine=(label:number, labelsCover:Set<unknown>, coverSituation:TypeCover):string =>{
+  let className = "pl-10 pr-10 select-none text-2xl absolute m-5";
+  if(label % 5 === 0)
+      className=className+" font-bold";
+  if(coverSituation == TypeCover.partiallyCover || coverSituation == TypeCover.partiallyDiscover)
+      className=className+" cursor-pointer";
+  if(labelsCover.has(label))
+      className=className+" text-[white]";
+  return className;
+}
