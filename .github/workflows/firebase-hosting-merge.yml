@@ -11,9 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          entrypoint: /library/math/numbersLine
-      - run: yarn && yarn build
+      - run: cd library/math/numbersLine && yarn && yarn build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           entrypoint: /library/math/numbersLine
