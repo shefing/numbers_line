@@ -7,11 +7,12 @@ interface IProps {
   leftPosition: number;
 }
 const Numbers = ({ windowWidth, leftPosition }: IProps) => {
-  const { type, coverSituation } = useNumbersLineContext();
+  const { type, coverSituation, setCoverSituation } = useNumbersLineContext();
   const [labels, setLabels] = useState<number[]>([]);
   const [labelsCover, setClickedLabelsCover] = useState(new Set());
   useEffect(() => {
     let array = Array.from({ length: type == LineRange.hundredCircular ? type + 1 : type }, (_, index) => index);
+    setCoverSituation(TypeCover.allDiscover);
     setLabels(array);
   }, [type]);
 
@@ -21,6 +22,14 @@ const Numbers = ({ windowWidth, leftPosition }: IProps) => {
     }
     if (coverSituation == TypeCover.allDiscover) {
       setClickedLabelsCover(new Set());
+    }
+    if (coverSituation == TypeCover.randomly) {
+      const middleElements = labels.slice(1, -1);
+      const numberOfElementsToSelect = Math.ceil(middleElements.length * (TypeCover.randomly / 100));
+      const shuffledArray = middleElements.sort(() => Math.random() - 0.5);
+      const selectedElements = shuffledArray.slice(0, numberOfElementsToSelect);
+      setClickedLabelsCover(new Set(selectedElements));
+      setCoverSituation(TypeCover.nothing);
     }
   }, [coverSituation]);
 

@@ -8,9 +8,10 @@
     text = 'text', 
   }
 export enum TypeCover {
-  nothing = 0,
-  partiallyCover = -1,
-  partiallyDiscover = 1,
-  allCover = -100,
-  allDiscover = 100,
+  nothing = "nothing",
+  partiallyCover = "partiallyCover",
+  partiallyDiscover = "partiallyDiscover",
+  allCover = "allCover",
+  allDiscover = "allDiscover",
+  randomly = 70, 
 }
