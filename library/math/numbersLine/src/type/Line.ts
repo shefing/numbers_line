@@ -9,3 +9,5 @@ export enum RulerLenth  {
   hundred = 21,
   other = 101 
 };
+
+export const  PartToCover = 0.7

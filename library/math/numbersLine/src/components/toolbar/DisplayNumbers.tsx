@@ -3,6 +3,7 @@ import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { TypeCover } from "../../type/elements";
 import { MatchButtonClassName } from "../../lib/stylesUtils";
 import triangleToMenu from "/assets/icons/TriangleToMenu.png";
+import { buttonEyeClassName } from "@/styles/button";
 
 interface IProps {
   setOpen: (val: boolean) => void;
@@ -16,13 +17,21 @@ const DisplayNumbers = ({ setOpen }: IProps) => {
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-center">
+    <div className="relative flex flex-col items-center">
       <img className="absolute top-0 " src={triangleToMenu} alt="triple for menu" />
-      <div className="m-[18px] flex flex-col shadow-2xl rounded-[6px] border border-solid border-[#009FDE] p-2">
+      <div className="m-[18px] flex flex-col items-end shadow-2xl rounded-[6px] border border-solid border-[#009FDE] p-2">
         <Button className={MatchButtonClassName(coverSituation, TypeCover.allCover, TypeCover.allCover)} onClick={() => onClickButtons(TypeCover.allCover)}>
           הסתר הכל
         </Button>
-        {/* <Button className={buttonEyeClassName}>הסתר חלקית</Button> */}
+        <Button
+          className={buttonEyeClassName}
+          onClick={() => {
+            setCoverSituation(TypeCover.randomly);
+            setOpen(false);
+          }}
+        >
+          הסתר חלקית
+        </Button>
         <Button
           className={MatchButtonClassName(coverSituation, TypeCover.allCover, TypeCover.partiallyCover)}
           onClick={() => onClickButtons(TypeCover.partiallyCover)}
