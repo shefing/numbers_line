@@ -17,7 +17,7 @@ jobs:
         working-directory: library/math/numbersLine
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
-          entrypoint: /library/math/numbersLine
+          entrypoint: library/math/numbersLine
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_NUMBERS_LINE }}'
           channelId: live
