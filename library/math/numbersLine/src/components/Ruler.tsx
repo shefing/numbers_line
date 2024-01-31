@@ -5,15 +5,15 @@ import XAxis from "./ruler/XAxis";
 const Ruler = () => {
   const [leftPosition, setLeftPosition] = useState(0);
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const handleResize = () => {
+  const ResizeWidth = () => {
     setWindowWidth(window.innerWidth);
   };
 
   useEffect(() => {
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", ResizeWidth);
 
     return () => {
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", ResizeWidth);
     };
   }, []);
 

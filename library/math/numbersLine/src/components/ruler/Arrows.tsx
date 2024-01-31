@@ -13,7 +13,7 @@ interface IProps {
 const Arrows = ({ windowWidth, leftPosition, setLeftPosition }: IProps) => {
   const { type } = useNumbersLineContext();
 
-  const handleArrowClick = (direction: "left" | "right") => {
+  const updatePositionOnArrowClick = (direction: "left" | "right") => {
     const step = windowWidth / RulerLenth.hundred;
     setLeftPosition(direction === "left" ? Math.min(0, leftPosition + step) : Math.max(calculationWidthScreen(windowWidth), leftPosition - step));
   };
@@ -22,10 +22,10 @@ const Arrows = ({ windowWidth, leftPosition, setLeftPosition }: IProps) => {
     <div className="flex justify-between m-3 mb-6">
       {type == LineRange.hundred && (
         <>
-          <div className="m-2 cursor-pointer" onClick={() => handleArrowClick("left")}>
+          <div className="m-2 cursor-pointer" onClick={() => updatePositionOnArrowClick("left")}>
             <img src={leftArrowIcon} alt="Left Arrow" />
           </div>
-          <div className="m-2 cursor-pointer" onClick={() => handleArrowClick("right")}>
+          <div className="m-2 cursor-pointer" onClick={() => updatePositionOnArrowClick("right")}>
             <img src={rightArrowIcon} alt="Right Arrow" />
           </div>
         </>

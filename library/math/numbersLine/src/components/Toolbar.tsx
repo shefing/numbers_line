@@ -14,7 +14,7 @@ const Toolbar = () => {
       <div className="flex-none">
         <img className="p-5" src={fullscreen} alt="Fullscreen Toolbar" />
       </div>
-      <div className="flex ml-5">
+      <div className="flex ml-[4.25rem]">
         <IconsToolbar iconUrl={back} />
         <IconsToolbar iconUrl={icons} />
         <IconsToolbar iconUrl={eye} />

@@ -24,7 +24,7 @@ const Numbers = ({ windowWidth, leftPosition }: IProps) => {
     }
   }, [coverSituation]);
 
-  const handleLabelClick = (label: any) => {
+  const displayLabel = (label: any) => {
     const newClickedLabels = new Set(labelsCover);
     if (coverSituation === TypeCover.partiallyCover) {
       !newClickedLabels.has(label) && newClickedLabels.add(label);
@@ -53,8 +53,10 @@ const Numbers = ({ windowWidth, leftPosition }: IProps) => {
           <div key={label} className="flex flex-col items-center">
             <div className="h-4 border-l-4 border-gray-900 w-1366" />
             <div
-              className={`pl-10 pr-10 select-none text-2xl absolute m-5 ${label % 5 === 0 && "font-bold"} ${labelsCover.has(label) && `text-[white]`}`}
-              onClick={() => handleLabelClick(label)}
+              className={`pl-10 pr-10 select-none text-2xl absolute m-5 ${label % 5 == 0 && " font-bold"} ${
+                (coverSituation == TypeCover.partiallyCover || coverSituation == TypeCover.partiallyDiscover) && " cursor-pointer"
+              } ${labelsCover.has(label) && " text-[white]"}`}
+              onClick={() => displayLabel(label)}
             >
               {label}
             </div>
