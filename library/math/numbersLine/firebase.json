@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "dist",
+    "public": "library/math/numbersLine/dist",
     "ignore": [
       "firebase.json",
       "**/.*",
