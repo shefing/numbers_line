@@ -10,6 +10,4 @@ export enum RulerLenth  {
   other = 101 
 };
 
-export enum Random {
-  percent = 0.7
-}
+export const  PartToCover = 0.7
