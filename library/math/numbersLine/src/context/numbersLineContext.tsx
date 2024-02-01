@@ -4,8 +4,8 @@ import { IElement, TypeCover } from "@/type/elements";
 interface INumbersLineContextProps {
   type: LineRange;
   setType: (v: LineRange) => void;
-  dragElement: IElement[];
-  setDragElement: (v: IElement[]) => void;
+  dragElements: IElement[];
+  setDragElements: (v: IElement[]) => void;
   coverSituation: TypeCover;
   setCoverSituation: (v: TypeCover) => void;
   disVisitAbleButton: TypeCover;
@@ -15,8 +15,8 @@ interface INumbersLineContextProps {
 export const NumbersLineContext = React.createContext({
   type: {} as LineRange,
   setType: () => null,
-  dragElement: {} as IElement[],
-  setDragElement: () => null,
+  dragElements: {} as IElement[],
+  setDragElements: () => null,
   coverSituation: {} as TypeCover,
   setCoverSituation: () => null,
   disVisitAbleButton: {} as TypeCover,
@@ -25,21 +25,21 @@ export const NumbersLineContext = React.createContext({
 
 export const NumbersLineContexProvider = (props: any) => {
   const [type, setType] = useState(LineRange.ten);
-  const [dragElement, setDragElement] = useState<IElement[]>([]);
+  const [dragElements, setDragElements] = useState<IElement[]>([]);
   const [coverSituation, setCoverSituation] = useState(TypeCover.allDiscover);
   const [disVisitAbleButton, setDisVisitAbleButton] = useState(TypeCover.allDiscover);
 
   useEffect(() => {
-    console.log("dragElement: ", dragElement);
-  }, [dragElement]);
+    console.log("dragElements: ", dragElements);
+  }, [dragElements]);
 
   return (
     <NumbersLineContext.Provider
       value={{
         type,
         setType,
-        dragElement,
-        setDragElement,
+        dragElements,
+        setDragElements,
         coverSituation,
         setCoverSituation,
         disVisitAbleButton,

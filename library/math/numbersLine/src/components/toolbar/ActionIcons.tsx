@@ -33,19 +33,19 @@ const IconsToolbar = ({ type, iconUrl }: IProps) => {
     };
   }, [isOpen]);
 
-  const { dragElement, setDragElement } = useNumbersLineContext();
+  const { dragElements, setDragElements } = useNumbersLineContext();
 
   const addDraggableElement = () => {
     let newText = {
-      id: dragElement.length,
+      id: dragElements.length,
       type: TypeActionIconsToolbar.jump == type ? TypesElement.jump : TypesElement.text,
       transform: "(-50%, -50%)",
       value: 1,
       hideNumber: true,
     };
 
-    let arr = [...dragElement, newText];
-    setDragElement(arr);
+    let arr = [...dragElements, newText];
+    setDragElements(arr);
   };
   const actionButtonClick = () => {
     type == TypeActionIconsToolbar.jump || type == TypeActionIconsToolbar.text ? addDraggableElement() : setIsOpen(!isOpen);

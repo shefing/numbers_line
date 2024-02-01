@@ -11,11 +11,11 @@ interface IProps {
 }
 
 const Jump = ({ idClick, element }: IProps) => {
-  const { dragElement, setDragElement } = useNumbersLineContext();
+  const { dragElements, setDragElements } = useNumbersLineContext();
   const targetRef = React.useRef<any>(null);
   const chandeHidenumbers = () => {
-    let newelements = dragElement.map((e: IElement) => (e.id === idClick ? { ...e, hideNumber: !e.hideNumber } : e));
-    setDragElement(newelements);
+    let newelements = dragElements.map((e: IElement) => (e.id === idClick ? { ...e, hideNumber: !e.hideNumber } : e));
+    setDragElements(newelements);
   };
   return (
     <>

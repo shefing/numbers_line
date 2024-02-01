@@ -1,13 +1,13 @@
 import { TypesElement } from "@/type/elements";
-import Jump from "../Jump";
+import Jump from "./Jump";
 import { useNumbersLineContext } from "@/context/numbersLineContext";
 import { useState } from "react";
 
 const ShowJumps = () => {
   const [idClick, setIdClick] = useState(-1);
-  const { dragElement } = useNumbersLineContext();
+  const { dragElements } = useNumbersLineContext();
 
-  return dragElement.map(
+  return dragElements.map(
     (element) =>
       element.type == TypesElement.jump && (
         <div key={element.id} onClick={() => setIdClick(element.id)}>
