@@ -7,6 +7,7 @@ import writing from "/assets/icons/toolbar/writing.svg";
 import eye from "/assets/icons/toolbar/eye.svg";
 import icons from "/assets/icons/toolbar/icons.svg";
 import back from "/assets/icons/toolbar/back.svg";
+import { TypeActionIconsToolbar } from "@/type/elements";
 
 const Toolbar = () => {
   return (
@@ -15,12 +16,12 @@ const Toolbar = () => {
         <img className="p-5" src={fullscreen} alt="Fullscreen Toolbar" />
       </div>
       <div className="flex ml-[4.25rem]">
-        <IconsToolbar iconUrl={back} />
-        <IconsToolbar iconUrl={icons} />
-        <IconsToolbar iconUrl={eye} />
-        <IconsToolbar iconUrl={writing} />
-        <IconsToolbar iconUrl={text} />
-        <IconsToolbar iconUrl={jump} />
+        <IconsToolbar type={TypeActionIconsToolbar.raload} iconUrl={back} />
+        <IconsToolbar type={TypeActionIconsToolbar.naviAndKani} iconUrl={icons} />
+        <IconsToolbar type={TypeActionIconsToolbar.displayNumbersLine} iconUrl={eye} />
+        <IconsToolbar type={TypeActionIconsToolbar.writing} iconUrl={writing} />
+        <IconsToolbar type={TypeActionIconsToolbar.text} iconUrl={text} />
+        <IconsToolbar type={TypeActionIconsToolbar.jump} iconUrl={jump} />
       </div>
       <div className="flex-none p-3">
         <LineDefinition />

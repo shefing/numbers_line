@@ -9,9 +9,7 @@ export function cn(...inputs: ClassValue[]) {
 export const calculationWidthScreen = (windowWidth: number)=>{
   return -1*windowWidth*((LineRange.hundred-RulerLenth.hundred)/RulerLenth.hundred)
 }
-export const calculationJumpWidth = (windowWidth: number)=>{
-  return windowWidth*RulerLenth.hundred;
-}
+
 
 
 export const getImageSrc = (url: string,isHovered:boolean , isOpen:boolean) => {

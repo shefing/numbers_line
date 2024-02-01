@@ -2,30 +2,29 @@ import { useEffect, useRef, useState } from "react";
 import { getImageSrc } from "@/lib/utils";
 import DisplayNumbers from "./DisplayNumbers";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
-import Jump from "./Jump";
+import { useNumbersLineContext } from "@/context/numbersLineContext";
+import { TypeActionIconsToolbar, TypesElement } from "@/type/elements";
 
 interface IProps {
   iconUrl: string;
+  type: TypeActionIconsToolbar;
 }
-const IconsToolbar = ({ iconUrl }: IProps) => {
+const IconsToolbar = ({ type, iconUrl }: IProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [type, setType] = useState("");
 
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    console.log("type", type);
+    console.log("type ", type);
+  }, [type]);
 
+  useEffect(() => {
     const handleOutsideClick = (event: any) => {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
         setIsOpen(false);
       }
     };
-
-    const dotIndex = iconUrl.indexOf(".");
-    const slushIndex = iconUrl.lastIndexOf("/");
-    setType(iconUrl.substring(slushIndex + 1, dotIndex));
 
     document.addEventListener("mousedown", handleOutsideClick);
 
@@ -33,6 +32,24 @@ const IconsToolbar = ({ iconUrl }: IProps) => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, [isOpen]);
+
+  const { dragElement, setDragElement } = useNumbersLineContext();
+
+  const addDraggableElement = () => {
+    let newText = {
+      id: dragElement.length,
+      type: TypeActionIconsToolbar.jump == type ? TypesElement.jump : TypesElement.text,
+      transform: "(-50%, -50%)",
+      value: 1,
+      hideNumber: true,
+    };
+
+    let arr = [...dragElement, newText];
+    setDragElement(arr);
+  };
+  const actionButtonClick = () => {
+    type == TypeActionIconsToolbar.jump || type == TypeActionIconsToolbar.text ? addDraggableElement() : setIsOpen(!isOpen);
+  };
 
   return (
     <div className="flex flex-col items-center" ref={wrapperRef}>
@@ -42,15 +59,14 @@ const IconsToolbar = ({ iconUrl }: IProps) => {
         alt={type + " Toolbar"}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        onClick={() => setIsOpen(!isOpen)}
+        onClick={() => actionButtonClick()}
       />
       <div className="relative">
         <DropdownMenu open={isOpen} onOpenChange={(open) => setIsOpen(open)}>
           <DropdownMenuTrigger />
-          <DropdownMenuContent>{type == "eye" && <DisplayNumbers setOpen={setIsOpen} />}</DropdownMenuContent>
+          <DropdownMenuContent>{type == TypeActionIconsToolbar.displayNumbersLine && <DisplayNumbers setOpen={setIsOpen} />}</DropdownMenuContent>
         </DropdownMenu>
       </div>
-      {isOpen && type == "jump" && <Jump />}
     </div>
   );
 };

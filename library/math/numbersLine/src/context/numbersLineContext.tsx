@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { LineRange } from "../type/Line";
 import { IElement, TypeCover } from "@/type/elements";
-import useLocalStorage from "@/hooks/useElement";
 interface INumbersLineContextProps {
   type: LineRange;
   setType: (v: LineRange) => void;
@@ -29,14 +28,9 @@ export const NumbersLineContexProvider = (props: any) => {
   const [dragElement, setDragElement] = useState<IElement[]>([]);
   const [coverSituation, setCoverSituation] = useState(TypeCover.allDiscover);
   const [disVisitAbleButton, setDisVisitAbleButton] = useState(TypeCover.allDiscover);
-  const { saveData, getData } = useLocalStorage();
 
   useEffect(() => {
-    setDragElement(getData("element"));
-  }, []);
-
-  useEffect(() => {
-    dragElement.length > 0 && saveData("element", dragElement);
+    console.log("dragElement: ", dragElement);
   }, [dragElement]);
 
   return (
