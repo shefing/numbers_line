@@ -29,6 +29,7 @@ export const NumbersLineContexProvider = (props: any) => {
   const [coverSituation, setCoverSituation] = useState(TypeCover.allDiscover);
   const [visitableDisplayButton, setVisitableDisplayButton] = useState(TypeCover.allDiscover);
 
+
   useEffect(() => {
     console.log("dragElements: ", dragElements);
   }, [dragElements]);
