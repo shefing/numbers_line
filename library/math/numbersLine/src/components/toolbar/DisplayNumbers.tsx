@@ -20,34 +20,22 @@ const DisplayNumbers = ({ setOpen }: IProps) => {
     <div className="relative flex flex-col items-center">
       <img className="absolute top-0 " src={triangleToMenu} alt="triple for menu" />
       <div className="m-[18px] flex flex-col items-end shadow-2xl rounded-[6px] border border-solid border-[#009FDE] p-2">
-        <Button className={MatchButtonClassName(coverSituation, TypeCover.allCover, TypeCover.allCover)} onClick={() => onClickButtons(TypeCover.allCover)}>
+        <Button className={MatchButtonClassName(TypeCover.allCover, TypeCover.allCover)} onClick={() => onClickButtons(TypeCover.allCover)}>
           הסתר הכל
         </Button>
-        <Button
-          className={buttonEyeClassName}
-          onClick={() => {
-            setCoverSituation(TypeCover.randomly);
-            setOpen(false);
-          }}
-        >
+        <Button className={buttonEyeClassName} onClick={() => onClickButtons(TypeCover.randomly)}>
           הסתר חלקית
         </Button>
-        <Button
-          className={MatchButtonClassName(coverSituation, TypeCover.allCover, TypeCover.partiallyCover)}
-          onClick={() => onClickButtons(TypeCover.partiallyCover)}
-        >
+        <Button className={MatchButtonClassName(TypeCover.allCover, TypeCover.partiallyCover)} onClick={() => onClickButtons(TypeCover.partiallyCover)}>
           הסתר ידנית
         </Button>
         <Button
-          className={MatchButtonClassName(coverSituation, TypeCover.allDiscover, TypeCover.partiallyDiscover)}
+          className={MatchButtonClassName(TypeCover.allDiscover, TypeCover.partiallyDiscover)}
           onClick={() => onClickButtons(TypeCover.partiallyDiscover)}
         >
           הצג ידנית
         </Button>
-        <Button
-          className={MatchButtonClassName(coverSituation, TypeCover.allDiscover, TypeCover.allDiscover)}
-          onClick={() => onClickButtons(TypeCover.allDiscover)}
-        >
+        <Button className={MatchButtonClassName(TypeCover.allDiscover, TypeCover.allDiscover)} onClick={() => onClickButtons(TypeCover.allDiscover)}>
           הצג הכל
         </Button>
       </div>
