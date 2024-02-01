@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { getImageSrc } from "@/lib/utils";
 import DisplayNumbers from "./DisplayNumbers";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
+import Jump from "./Jump";
 
 interface IProps {
   iconUrl: string;
@@ -14,6 +15,8 @@ const IconsToolbar = ({ iconUrl }: IProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    console.log("type", type);
+
     const handleOutsideClick = (event: any) => {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
         setIsOpen(false);
@@ -47,6 +50,7 @@ const IconsToolbar = ({ iconUrl }: IProps) => {
           <DropdownMenuContent>{type == "eye" && <DisplayNumbers setOpen={setIsOpen} />}</DropdownMenuContent>
         </DropdownMenu>
       </div>
+      {isOpen && type == "jump" && <Jump />}
     </div>
   );
 };
