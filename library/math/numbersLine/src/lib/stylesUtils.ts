@@ -4,9 +4,9 @@ import { buttonEyeClassName, buttonEyeDisabledClassName } from "../styles/button
 import { useNumbersLineContext } from "@/context/numbersLineContext";
 
 export const MatchButtonClassName = ( isVisitAble: TypeCover, isChoice: TypeCover) => {
-  const { coverSituation, disVisitAbleButton } = useNumbersLineContext();
+  const { coverSituation, visitableDisplayButton } = useNumbersLineContext();
 
-    if(disVisitAbleButton == isVisitAble)
+    if(visitableDisplayButton == isVisitAble)
        return buttonEyeClassName+ buttonEyeDisabledClassName;
    if(coverSituation == isChoice)
        return buttonEyeClassName+" bg-[#7BC8EF] text-white"
