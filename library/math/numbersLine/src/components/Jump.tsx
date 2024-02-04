@@ -1,9 +1,10 @@
 import jumpArrowPlus from "/assets/icons/jumpArrowPlus.svg";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { IElement } from "@/type/elements";
 import { baseJumpClassName } from "@/styles/jump";
 import MoveableElement from "./MoveableElement";
 import { useNumbersLineContext } from "@/context/numbersLineContext";
+import { LineRange, UnitLenth } from "@/type/Line";
 
 interface IProps {
   element: IElement;
@@ -11,15 +12,23 @@ interface IProps {
 }
 
 const Jump = ({ idClick, element }: IProps) => {
-  const { dragElements, setDragElements } = useNumbersLineContext();
+  const { windowWidth, type, dragElements, setDragElements } = useNumbersLineContext();
+  const [unit, setUnit] = useState(windowWidth / UnitLenth.eleven);
   const targetRef = React.useRef<any>(null);
+
+  useEffect(() => {
+    if (type == LineRange.ten || type == LineRange.hundredCircular) setUnit((windowWidth - 4 * 16) / UnitLenth.eleven);
+    else setUnit((windowWidth - 4 * 16) / UnitLenth.twentyOne);
+  }, [type, windowWidth]);
+
   const changeHidenumbers = () => {
     let newelements = dragElements.map((item: IElement) => (item.id === idClick ? { ...item, hideNumber: !item.hideNumber } : item));
     setDragElements(newelements);
   };
+
   return (
     <>
-      <div ref={targetRef} className="absolute top-[35%] left-[50%] w-[134px] h-[124px]">
+      <div ref={targetRef} className="absolute top-[35%] left-[50%]" style={{ width: unit }}>
         <img src={jumpArrowPlus} alt="Menu Arroa" />
         <div className={baseJumpClassName} onClick={() => changeHidenumbers()}>
           {element.hideNumber ? "?" : element.value}

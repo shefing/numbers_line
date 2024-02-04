@@ -9,5 +9,9 @@ export enum RulerLenth  {
   hundred = 21,
   other = 101 
 };
+export enum UnitLenth  {
+  twentyOne = 20,
+  eleven = 10 
+};
 
 export const  PartToCover = 0.7

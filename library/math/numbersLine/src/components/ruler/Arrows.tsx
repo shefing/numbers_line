@@ -5,17 +5,16 @@ import { LineRange, RulerLenth } from "@/type/Line";
 import { useNumbersLineContext } from "@/context/numbersLineContext";
 
 interface IProps {
-  windowWidth: number;
   leftPosition: number;
   setLeftPosition: (val: number) => void;
 }
 
-const Arrows = ({ windowWidth, leftPosition, setLeftPosition }: IProps) => {
-  const { type } = useNumbersLineContext();
+const Arrows = ({ leftPosition, setLeftPosition }: IProps) => {
+  const { type, windowWidth } = useNumbersLineContext();
 
   const updatePositionOnArrowClick = (direction: "left" | "right") => {
     const step = windowWidth / RulerLenth.hundred;
-    setLeftPosition(direction === "left" ? Math.min(0, leftPosition + step) : Math.max(calculationWidthScreen(windowWidth), leftPosition - step));
+    setLeftPosition(direction === "left" ? Math.min(0, leftPosition + step) : Math.max(calculationWidthScreen(), leftPosition - step));
   };
 
   return (
