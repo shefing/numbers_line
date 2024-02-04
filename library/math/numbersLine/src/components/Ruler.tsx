@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import Arrows from "./ruler/Arrows";
 import XAxis from "./ruler/XAxis";
-import { calculationWidthScreen } from "@/lib/utils";
-import { useNumbersLineContext } from "@/context/numbersLineContext";
+import { calculationWidthScreen } from "../lib/utils";
+import { useNumbersLineContext } from "../context/numbersLineContext";
 
 const Ruler = () => {
   const [leftPosition, setLeftPosition] = useState(0);
   const { windowWidth } = useNumbersLineContext();
 
   useEffect(() => {
-    setLeftPosition(calculationWidthScreen);
+    const screenWidth = calculationWidthScreen(windowWidth);
+    setLeftPosition(screenWidth);
   }, [windowWidth]);
 
   return (

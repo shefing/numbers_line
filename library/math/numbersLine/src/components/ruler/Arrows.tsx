@@ -1,8 +1,8 @@
-import { calculationWidthScreen } from "@/lib/utils";
+import { calculationWidthScreen } from "../../lib/utils";
 import leftArrowIcon from "/assets/icons/arrow-left.svg";
 import rightArrowIcon from "/assets/icons/arrow-right.svg";
-import { LineRange, RulerLenth } from "@/type/Line";
-import { useNumbersLineContext } from "@/context/numbersLineContext";
+import { LineRange, RulerLenth } from "../../type/Line";
+import { useNumbersLineContext } from "../../context/numbersLineContext";
 
 interface IProps {
   leftPosition: number;
@@ -14,7 +14,7 @@ const Arrows = ({ leftPosition, setLeftPosition }: IProps) => {
 
   const updatePositionOnArrowClick = (direction: "left" | "right") => {
     const step = windowWidth / RulerLenth.hundred;
-    setLeftPosition(direction === "left" ? Math.min(0, leftPosition + step) : Math.max(calculationWidthScreen(), leftPosition - step));
+    setLeftPosition(direction === "left" ? Math.min(0, leftPosition + step) : Math.max(calculationWidthScreen(windowWidth), leftPosition - step));
   };
 
   return (

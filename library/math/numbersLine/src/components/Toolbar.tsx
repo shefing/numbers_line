@@ -11,8 +11,8 @@ const Toolbar = () => {
         <img className="p-5" src={fullscreen} alt="Fullscreen Toolbar" />
       </div>
       <div className="flex ml-[4.25rem]">
-        {actionIconsDetials.map((item: IActionIcon) => (
-          <IconsToolbar key={item.type} type={item.type} iconUrl={item.url} />
+        {actionIconsDetials.map((item: IActionIcon, i: number) => (
+          <IconsToolbar key={i} type={item.type} iconUrl={item.url} />
         ))}
       </div>
       <div className="flex-none p-3">

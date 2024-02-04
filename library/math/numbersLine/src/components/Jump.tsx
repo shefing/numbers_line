@@ -8,11 +8,10 @@ import { LineRange, UnitLenth } from "@/type/Line";
 
 interface IProps {
   element: IElement;
-  idClick: number;
 }
 
-const Jump = ({ idClick, element }: IProps) => {
-  const { windowWidth, type, dragElements, setDragElements } = useNumbersLineContext();
+const Jump = ({ element }: IProps) => {
+  const { windowWidth, type, dragElements, setDragElements, idDraggElementClick } = useNumbersLineContext();
   const [unit, setUnit] = useState(windowWidth / UnitLenth.eleven);
   const targetRef = React.useRef<any>(null);
 
@@ -22,19 +21,25 @@ const Jump = ({ idClick, element }: IProps) => {
   }, [type, windowWidth]);
 
   const changeHidenumbers = () => {
-    let newelements = dragElements.map((item: IElement) => (item.id === idClick ? { ...item, hideNumber: !item.hideNumber } : item));
+    let newelements = dragElements.map((item: IElement) => (item.id === idDraggElementClick ? { ...item, hideNumber: !item.hideNumber } : item));
     setDragElements(newelements);
   };
 
   return (
     <>
-      <div ref={targetRef} className="absolute top-[35%] left-[50%]" style={{ width: unit }}>
-        <img src={jumpArrowPlus} alt="Menu Arroa" />
-        <div className={baseJumpClassName} onClick={() => changeHidenumbers()}>
-          {element.hideNumber ? "?" : element.value}
+      <div
+        ref={targetRef}
+        className={`absolute top-[35%] left-[50%] ${idDraggElementClick == element.id ? "cursor-move" : "cursor-pointer"}`}
+        style={{ width: unit }}
+      >
+        <img src={jumpArrowPlus} alt="Menu Arrow" />
+        <div className={baseJumpClassName}>
+          <p className="cursor-pointer" onClick={() => changeHidenumbers()}>
+            {element.hideNumber ? "?" : element.value}
+          </p>
         </div>
       </div>
-      {idClick == element.id && <MoveableElement targetRef={targetRef} />}
+      {idDraggElementClick == element.id && <MoveableElement targetRef={targetRef} length={element.value} />}
     </>
   );
 };

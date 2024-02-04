@@ -1,13 +1,18 @@
-import Moveable from "react-moveable";
-
+import Moveable, { OnScale } from "react-moveable";
 interface IProps {
   targetRef: any;
+  length: number;
 }
 
-const MoveableElement = ({ targetRef }: IProps) => {
+const MoveableElement = ({ targetRef, length }: IProps) => {
+  const updateTransform = (e: OnScale) => {
+    if (length == 1 && e.direction[0] * e.drag.beforeTranslate[0] > 0) {
+      e.target.style.transform = e.drag.transform;
+    }
+  };
+
   return (
     <Moveable
-      className="bg-red"
       target={targetRef}
       draggable={true}
       throttleDrag={1}
@@ -21,10 +26,11 @@ const MoveableElement = ({ targetRef }: IProps) => {
       renderDirections={["w", "e"]}
       onScale={(e) => {
         e.target.style.transform = e.drag.transform;
+        updateTransform(e);
+        console.log(e);
       }}
     />
   );
 };
 
 export default MoveableElement;
-// cursor-move
