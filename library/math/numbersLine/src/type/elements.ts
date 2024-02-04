@@ -22,12 +22,15 @@
   export enum TypeActionIconsToolbar {
     jump = "jump",
     text = "text",
-    writing = "writing",
+    writing = "displayNumbersLine",
     displayNumbersLine = "displayNumbersLine",
     naviAndKani = "naviAndKani",
     raload = "raload",
   } 
+  export interface IActionIcon {
+    type:string,
+    url:string,
+  } 
 
- 
 
 

@@ -6,8 +6,8 @@ import { useNumbersLineContext } from "@/context/numbersLineContext";
 import { TypeActionIconsToolbar, TypesElement } from "@/type/elements";
 
 interface IProps {
+  type: string;
   iconUrl: string;
-  type: TypeActionIconsToolbar;
 }
 const IconsToolbar = ({ type, iconUrl }: IProps) => {
   const [isHovered, setIsHovered] = useState(false);
