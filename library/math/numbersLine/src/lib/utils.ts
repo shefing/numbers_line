@@ -10,6 +10,8 @@ export const calculationWidthScreen = (windowWidth: number)=>{
   return -windowWidth*((LineRange.hundred-RulerLenth.hundred)/RulerLenth.hundred)
 }
 
+
+
 export const getImageSrc = (url: string,isHovered:boolean , isOpen:boolean) => {
   const dotIndex = url.indexOf('.');
   const beforeDot = url.substring(0, dotIndex);

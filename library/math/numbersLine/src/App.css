@@ -48,6 +48,6 @@
   color: #888;
 }
 
-.moveable-control-box{
-  display: none !important;
+.moveable-origin{
+  visibility: hidden !important
 }
