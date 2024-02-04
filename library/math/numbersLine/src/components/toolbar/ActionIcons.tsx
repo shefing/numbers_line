@@ -16,10 +16,6 @@ const IconsToolbar = ({ type, iconUrl }: IProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    console.log("type ", type);
-  }, [type]);
-
-  useEffect(() => {
     const handleOutsideClick = (event: any) => {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
         setIsOpen(false);

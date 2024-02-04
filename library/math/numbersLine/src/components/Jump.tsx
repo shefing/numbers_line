@@ -13,15 +13,15 @@ interface IProps {
 const Jump = ({ idClick, element }: IProps) => {
   const { dragElements, setDragElements } = useNumbersLineContext();
   const targetRef = React.useRef<any>(null);
-  const chandeHidenumbers = () => {
-    let newelements = dragElements.map((e: IElement) => (e.id === idClick ? { ...e, hideNumber: !e.hideNumber } : e));
+  const changeHidenumbers = () => {
+    let newelements = dragElements.map((item: IElement) => (item.id === idClick ? { ...item, hideNumber: !item.hideNumber } : item));
     setDragElements(newelements);
   };
   return (
     <>
       <div ref={targetRef} className="absolute top-[35%] left-[50%] w-[134px] h-[124px]">
         <img src={jumpArrowPlus} alt="Menu Arroa" />
-        <div className={baseJumpClassName} onClick={() => chandeHidenumbers()}>
+        <div className={baseJumpClassName} onClick={() => changeHidenumbers()}>
           {element.hideNumber ? "?" : element.value}
         </div>
       </div>

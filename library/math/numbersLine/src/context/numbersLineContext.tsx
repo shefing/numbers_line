@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { LineRange } from "../type/Line";
 import { IElement, TypeCover } from "@/type/elements";
 interface INumbersLineContextProps {
@@ -28,10 +28,6 @@ export const NumbersLineContexProvider = (props: any) => {
   const [dragElements, setDragElements] = useState<IElement[]>([]);
   const [coverSituation, setCoverSituation] = useState(TypeCover.allDiscover);
   const [visitableDisplayButton, setVisitableDisplayButton] = useState(TypeCover.allDiscover);
-
-  useEffect(() => {
-    console.log("dragElements: ", dragElements);
-  }, [dragElements]);
 
   return (
     <NumbersLineContext.Provider
