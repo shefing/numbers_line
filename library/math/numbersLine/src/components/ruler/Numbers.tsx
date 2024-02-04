@@ -54,7 +54,7 @@ const Numbers = ({ windowWidth, leftPosition }: IProps) => {
 
   return (
     <div
-      className="fixed left-0 right-0 flex justify-between border-t-4 border-gray-900 pt-0 mx-0 pl-8 pr-8"
+      className="fixed left-0 right-0 flex justify-between border-t-4 border-gray-900 p-10 pt-0 mx-0 pl-8 pr-8"
       style={
         type == LineRange.hundred
           ? {
@@ -70,7 +70,7 @@ const Numbers = ({ windowWidth, leftPosition }: IProps) => {
           <div key={label} className="flex flex-col items-center">
             <div className="h-4 border-l-4 border-gray-900 w-1366" />
             <div
-              className={`pl-10 pr-10 select-none text-2xl absolute m-5 ${label % 5 == 0 && " font-bold"} ${
+              className={`pl-2 pr-2 select-none text-2xl absolute m-5 ${label % 5 == 0 && " font-bold"} ${
                 (coverSituation == TypeCover.partiallyCover || coverSituation == TypeCover.partiallyDiscover) && " cursor-pointer"
               } ${labelsCover.has(label) && " text-[white]"}`}
               onClick={() => displayLabel(label)}
