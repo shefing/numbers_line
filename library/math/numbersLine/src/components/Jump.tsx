@@ -23,15 +23,15 @@ const Jump = ({ element }: IProps) => {
   }, [type, windowWidth]);
 
   const changeHidenumbers = () => {
-    let newelements = dragElements.map((item: IElement) => (item.id === idDraggElementClick ? { ...item, hideNumber: !item.hideNumber } : item));
-    setDragElements(newelements);
+    let newElements = dragElements.map((item: IElement) => (item.id === idDraggElementClick ? { ...item, hideNumber: !item.hideNumber } : item));
+    setDragElements(newElements);
   };
 
   return (
     <>
       <div
         ref={targetRef}
-        className={`absolute top-[35%] left-[50%]  ${idDraggElementClick == element.id ? "cursor-move" : "cursor-pointer"}`}
+        className={`dragElement absolute top-[35%] left-[50%]  ${idDraggElementClick == element.id ? "cursor-move" : "cursor-pointer"}`}
         style={{ width: unit * element.value }}
       >
         <img className="h-[4rem] w-full" src={jumpArrowPlus} alt="Menu Arrow" />

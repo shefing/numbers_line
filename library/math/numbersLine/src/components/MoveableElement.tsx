@@ -11,13 +11,13 @@ const MoveableElement = ({ targetRef, element, unit }: IProps) => {
   const { windowWidth, dragElements, setDragElements } = useNumbersLineContext();
 
   const hideValueElement = () => {
-    let newelements = dragElements.map((item: IElement) => (item.id === element.id ? { ...item, hideNumber: true } : item));
-    setDragElements(newelements);
+    let newElements = dragElements.map((item: IElement) => (item.id === element.id ? { ...item, hideNumber: true } : item));
+    setDragElements(newElements);
   };
   const changeElementValue = (e: OnResizeEnd) => {
     let newValue = Math.round(e.lastEvent.width / unit);
-    let newelements = dragElements.map((item: IElement) => (item.id === element.id ? { ...item, value: newValue } : item));
-    setDragElements(newelements);
+    let newElements = dragElements.map((item: IElement) => (item.id === element.id ? { ...item, value: newValue } : item));
+    setDragElements(newElements);
     e.target.style.width = `${newValue * unit}px`;
   };
 

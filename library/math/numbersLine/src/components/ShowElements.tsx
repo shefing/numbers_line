@@ -6,7 +6,7 @@ const ShowElements = () => {
   const { dragElements, setIdDraggElementClick } = useNumbersLineContext();
 
   return dragElements.map((element) => (
-    <div className="dragElement" key={element.id} onClick={() => setIdDraggElementClick(element.id)}>
+    <div key={element.id} onClick={() => setIdDraggElementClick(element.id)}>
       {element.type == TypesElement.jump && <Jump element={element} />}
     </div>
   ));
