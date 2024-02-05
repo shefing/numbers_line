@@ -30,6 +30,11 @@
     type:string,
     url:string,
   } 
+  export interface IDisplayRuller {
+    type:string,
+    visitAble: TypeCover, 
+    choice: TypeCover
+  } 
 
 
 
