@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Arrows from "./ruler/Arrows";
 import XAxis from "./ruler/XAxis";
-import { calculationWidthScreen } from "../lib/utils";
+import { calculatScreenWidth } from "../lib/utils";
 import { useNumbersLineContext } from "../context/numbersLineContext";
 
 const Ruler = () => {
@@ -9,12 +9,12 @@ const Ruler = () => {
   const { windowWidth } = useNumbersLineContext();
 
   useEffect(() => {
-    const screenWidth = calculationWidthScreen(windowWidth);
+    const screenWidth = calculatScreenWidth(windowWidth);
     setLeftPosition(screenWidth);
   }, [windowWidth]);
 
   return (
-    <div className="pb-[10%]">
+    <div className="absolute top-[70%]">
       <Arrows leftPosition={leftPosition} setLeftPosition={setLeftPosition} />
       <XAxis leftPosition={leftPosition} setLeftPosition={setLeftPosition} />
     </div>

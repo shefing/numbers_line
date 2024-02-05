@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { LineRange } from "../../type/Line";
-import { calculationWidthScreen } from "../../lib/utils";
+import { calculatScreenWidth } from "../../lib/utils";
 import Numbers from "./Numbers";
 interface IProps {
   leftPosition: number;
@@ -20,7 +20,7 @@ const XAxis = ({ leftPosition, setLeftPosition }: IProps) => {
   const handleonDrag = (e: any) => {
     if (isDragging) {
       const deltaX = e.clientX - startX;
-      setLeftPosition((prevLeft: number) => Math.max(calculationWidthScreen(windowWidth), Math.min(0, prevLeft + deltaX)));
+      setLeftPosition((prevLeft: number) => Math.max(calculatScreenWidth(windowWidth), Math.min(0, prevLeft + deltaX)));
       setStartX(e.clientX);
     }
   };

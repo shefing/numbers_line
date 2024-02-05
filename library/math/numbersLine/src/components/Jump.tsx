@@ -1,10 +1,11 @@
-import jumpArrowPlus from "/assets/icons/jumpArrowPlus.svg";
+import jumpArrowPlus from "/assets/icons/jumpArrowPlus.png";
 import React, { useEffect, useState } from "react";
 import { IElement } from "@/type/elements";
 import { baseJumpClassName } from "@/styles/jump";
 import MoveableElement from "./MoveableElement";
 import { useNumbersLineContext } from "@/context/numbersLineContext";
-import { LineRange, UnitLenth } from "@/type/Line";
+import { LineRange, UnitLenth } from "../type/Line";
+import { calculatRulerWidth } from "../lib/utils";
 
 interface IProps {
   element: IElement;
@@ -12,12 +13,13 @@ interface IProps {
 
 const Jump = ({ element }: IProps) => {
   const { windowWidth, type, dragElements, setDragElements, idDraggElementClick } = useNumbersLineContext();
-  const [unit, setUnit] = useState(windowWidth / UnitLenth.eleven);
+  const [unit, setUnit] = useState(windowWidth / UnitLenth.ten);
   const targetRef = React.useRef<any>(null);
 
   useEffect(() => {
-    if (type == LineRange.ten || type == LineRange.hundredCircular) setUnit((windowWidth - 4 * 16) / UnitLenth.eleven);
-    else setUnit((windowWidth - 4 * 16) / UnitLenth.twentyOne);
+    let rulerWidth = calculatRulerWidth(windowWidth) / UnitLenth.twenty;
+    if (type == LineRange.ten || type == LineRange.hundredCircular) rulerWidth = calculatRulerWidth(windowWidth) / UnitLenth.ten;
+    setUnit(rulerWidth);
   }, [type, windowWidth]);
 
   const changeHidenumbers = () => {
@@ -29,17 +31,17 @@ const Jump = ({ element }: IProps) => {
     <>
       <div
         ref={targetRef}
-        className={`absolute top-[35%] left-[50%] ${idDraggElementClick == element.id ? "cursor-move" : "cursor-pointer"}`}
-        style={{ width: unit }}
+        className={`absolute top-[35%] left-[50%]  ${idDraggElementClick == element.id ? "cursor-move" : "cursor-pointer"}`}
+        style={{ width: unit * element.value }}
       >
-        <img src={jumpArrowPlus} alt="Menu Arrow" />
+        <img className="h-[4rem] w-full" src={jumpArrowPlus} alt="Menu Arrow" />
         <div className={baseJumpClassName}>
-          <p className="cursor-pointer" onClick={() => changeHidenumbers()}>
+          <text className="cursor-pointer" onClick={() => changeHidenumbers()}>
             {element.hideNumber ? "?" : element.value}
-          </p>
+          </text>
         </div>
       </div>
-      {idDraggElementClick == element.id && <MoveableElement targetRef={targetRef} length={element.value} />}
+      {idDraggElementClick == element.id && <MoveableElement targetRef={targetRef} element={element} unit={unit} />}
     </>
   );
 };

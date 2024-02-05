@@ -50,6 +50,11 @@ export const NumbersLineContexProvider = (props: any) => {
     };
   }, []);
 
+  useEffect(() => {
+    setDragElements([]);
+    setCoverSituation(TypeCover.allDiscover);
+  }, [type]);
+
   return (
     <NumbersLineContext.Provider
       value={{
