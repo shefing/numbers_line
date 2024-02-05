@@ -18,18 +18,21 @@
     allDiscover = "allDiscover",
     randomly = "randomly", 
   } 
+
   export enum TypeActionIconsToolbar {
     jump = "jump",
     text = "text",
-    writing = "displayNumbersLine",
+    writing = "writing",
     displayNumbersLine = "displayNumbersLine",
     naviAndKani = "naviAndKani",
     raload = "raload",
-  } 
+  }  
+
   export interface IActionIcon {
     type:string,
     url:string,
   } 
+
   export interface IDisplayRuller {
     type:string,
     visitAble: TypeCover, 

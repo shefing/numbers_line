@@ -10,7 +10,14 @@ const App = () => {
   const { setIdDraggElementClick } = useNumbersLineContext();
 
   const handleClickOutside = (event: any) => {
-    if (!event.target.parentNode.classList.contains("dragElement")) {
+    const clickedElement = event.target;
+    if (
+      !(
+        clickedElement.classList.contains("dragElement") ||
+        (clickedElement.parentNode && clickedElement.parentNode.classList.contains("dragElement")) ||
+        (clickedElement.parentNode && clickedElement.parentNode.parentNode && clickedElement.parentNode.parentNode.classList.contains("dragElement"))
+      )
+    ) {
       setIdDraggElementClick(-1);
     }
   };
@@ -26,8 +33,8 @@ const App = () => {
     <div className="flex flex-col h-full justify-between">
       <Toolbar />
       <ShowElements />
-      <Ruler />
       <div className="flex flex-col justify-end">
+        <Ruler />
         <GrassImg />
       </div>
     </div>

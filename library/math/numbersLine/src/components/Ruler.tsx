@@ -14,7 +14,7 @@ const Ruler = () => {
   }, [windowWidth]);
 
   return (
-    <div className="absolute top-[70%]">
+    <div className="ruler pb-[10%]">
       <Arrows leftPosition={leftPosition} setLeftPosition={setLeftPosition} />
       <XAxis leftPosition={leftPosition} setLeftPosition={setLeftPosition} />
     </div>
