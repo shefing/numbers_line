@@ -51,3 +51,11 @@
 .moveable-origin{
   visibility: hidden !important
 }
+
+.moveable-line {
+  position: absolute;
+  width: 1px;
+  height: px;
+  background: #a4a3ae;
+  transform-origin: 0px 0.5px;
+}
