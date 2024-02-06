@@ -14,6 +14,7 @@ interface INumbersLineContextProps {
   setCoverSituation: (v: TypeCover) => void;
   visitableDisplayButton: TypeCover;
   setVisitableDisplayButton: (v: TypeCover) => void;
+  RulerPadding: number;
 }
 
 export const NumbersLineContext = React.createContext({
@@ -29,6 +30,7 @@ export const NumbersLineContext = React.createContext({
   setCoverSituation: () => null,
   visitableDisplayButton: {} as TypeCover,
   setVisitableDisplayButton: () => null,
+  RulerPadding: {} as number,
 } as INumbersLineContextProps);
 
 export const NumbersLineContexProvider = (props: any) => {
@@ -38,6 +40,7 @@ export const NumbersLineContexProvider = (props: any) => {
   const [idDraggElementClick, setIdDraggElementClick] = useState(-1);
   const [coverSituation, setCoverSituation] = useState(TypeCover.allDiscover);
   const [visitableDisplayButton, setVisitableDisplayButton] = useState(TypeCover.allDiscover);
+  const RulerPadding = 32;
 
   const ResizeWidth = () => {
     setWindowWidth(window.innerWidth);
@@ -70,6 +73,7 @@ export const NumbersLineContexProvider = (props: any) => {
         setCoverSituation,
         visitableDisplayButton,
         setVisitableDisplayButton,
+        RulerPadding,
       }}
     >
       {props.children}

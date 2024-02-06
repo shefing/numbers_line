@@ -9,9 +9,8 @@ export function cn(...inputs: ClassValue[]) {
 export const calculatScreenWidth = (windowWidth:number)=>{
   return -windowWidth*((LineRange.hundred-RulerLenth.hundred)/RulerLenth.hundred)
 }
-export const calculatRulerWidth = (windowWidth:number)=>{
-  const numberOfPedingRem = 4;
-  return windowWidth - numberOfPedingRem * 16;
+export const calculatRulerWidth = (windowWidth:number, RulerPadding:number)=>{
+  return windowWidth - RulerPadding*2;
 }
 
 export const getImageSrc = (url: string,isHovered:boolean , isOpen:boolean) => {

@@ -9,7 +9,7 @@ interface IProps {
 }
 
 const MoveableElement = ({ targetRef, element, unit }: IProps) => {
-  const { windowWidth, dragElements, setDragElements } = useNumbersLineContext();
+  const { windowWidth, dragElements, setDragElements, RulerPadding } = useNumbersLineContext();
 
   const hideValueElement = () => {
     let newElements = dragElements.map((item: IElement) => (item.id === element.id ? { ...item, hideNumber: true } : item));
@@ -25,7 +25,7 @@ const MoveableElement = ({ targetRef, element, unit }: IProps) => {
   const updateTransform = (e: OnResize) => {
     if (
       !(parseFloat(e.target.style.width) / unit < 1 && e.dist[0] < 0) &&
-      !(parseFloat(e.target.style.width) > calculatRulerWidth(windowWidth) && e.dist[0] > 0)
+      !(parseFloat(e.target.style.width) > calculatRulerWidth(windowWidth, RulerPadding) && e.dist[0] > 0)
     ) {
       e.target.style.width = `${e.width}px`;
       e.target.style.transform = e.drag.transform;

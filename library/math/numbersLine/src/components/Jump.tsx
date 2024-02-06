@@ -12,13 +12,13 @@ interface IProps {
 }
 
 const Jump = ({ element }: IProps) => {
-  const { windowWidth, type, dragElements, setDragElements, idDraggElementClick } = useNumbersLineContext();
+  const { windowWidth, type, dragElements, setDragElements, idDraggElementClick, RulerPadding } = useNumbersLineContext();
   const [unit, setUnit] = useState(windowWidth / UnitLenth.ten);
   const targetRef = React.useRef<any>(null);
 
   useEffect(() => {
-    let rulerWidth = calculatRulerWidth(windowWidth) / UnitLenth.twenty;
-    if (type == LineRange.ten || type == LineRange.hundredCircular) rulerWidth = calculatRulerWidth(windowWidth) / UnitLenth.ten;
+    let rulerWidth = calculatRulerWidth(windowWidth, RulerPadding) / UnitLenth.twenty;
+    if (type == LineRange.ten || type == LineRange.hundredCircular) rulerWidth = calculatRulerWidth(windowWidth, RulerPadding) / UnitLenth.ten;
     setUnit(rulerWidth);
   }, [type, windowWidth]);
 
