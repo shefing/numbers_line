@@ -1,6 +1,7 @@
 import { useNumbersLineContext } from "../context/numbersLineContext";
 import Moveable, { OnResize, OnResizeEnd } from "react-moveable";
 import { IElement } from "../type/elements";
+import { calculatRulerWidth } from "../lib/utils";
 interface IProps {
   targetRef: any;
   element: IElement;
@@ -22,7 +23,10 @@ const MoveableElement = ({ targetRef, element, unit }: IProps) => {
   };
 
   const updateTransform = (e: OnResize) => {
-    if (!(parseFloat(e.target.style.width) / unit < 1 && e.dist[0] < 0) && !(parseFloat(e.target.style.width) > windowWidth - 4 * 16 && e.dist[0] > 0)) {
+    if (
+      !(parseFloat(e.target.style.width) / unit < 1 && e.dist[0] < 0) &&
+      !(parseFloat(e.target.style.width) > calculatRulerWidth(windowWidth) && e.dist[0] > 0)
+    ) {
       e.target.style.width = `${e.width}px`;
       e.target.style.transform = e.drag.transform;
     }
@@ -40,6 +44,7 @@ const MoveableElement = ({ targetRef, element, unit }: IProps) => {
       onResizeStart={() => hideValueElement()}
       onResize={(e) => updateTransform(e)}
       onResizeEnd={(e) => changeElementValue(e)}
+      useAccuratePosition={true}
     />
   );
 };
