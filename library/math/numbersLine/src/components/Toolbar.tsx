@@ -1,8 +1,8 @@
 import LineDefinition from "./toolbar/LineDefinition";
 import fullscreen from "/assets/icons/toolbar/fullscreen.svg";
 import IconsToolbar from "./toolbar/ActionIcons";
-import { actionIconsDetials } from "@/consts/consts";
-import { IActionIcon } from "@/type/elements";
+import { actionIconsDetials } from "../consts/elementConsts";
+import { IActionIcon } from "../type/elements";
 
 const Toolbar = () => {
   return (
@@ -11,8 +11,8 @@ const Toolbar = () => {
         <img className="p-5" src={fullscreen} alt="Fullscreen Toolbar" />
       </div>
       <div className="flex ml-[4.25rem]">
-        {actionIconsDetials.map((item: IActionIcon) => (
-          <IconsToolbar key={item.type} type={item.type} iconUrl={item.url} />
+        {actionIconsDetials.map((item: IActionIcon, i: number) => (
+          <IconsToolbar key={i} type={item.type} iconUrl={item.url} />
         ))}
       </div>
       <div className="flex-none p-3">

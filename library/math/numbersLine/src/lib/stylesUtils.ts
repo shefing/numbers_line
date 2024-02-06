@@ -3,7 +3,7 @@ import { TypeCover } from "../type/elements"
 import { buttonEyeClassName, buttonEyeDisabledClassName } from "../styles/button"
 import { useNumbersLineContext } from "@/context/numbersLineContext";
 
-export const MatchButtonClassName = ( isVisitAble: TypeCover, isChoice: TypeCover) => {
+export const MatchDisplayButtonClassName = ( isVisitAble: TypeCover, isChoice: TypeCover) => {
   const { coverSituation, visitableDisplayButton } = useNumbersLineContext();
 
     if(visitableDisplayButton == isVisitAble)
@@ -12,4 +12,5 @@ export const MatchButtonClassName = ( isVisitAble: TypeCover, isChoice: TypeCove
        return buttonEyeClassName+" bg-[#7BC8EF] text-white"
    return buttonEyeClassName
   };
-  
+
+    

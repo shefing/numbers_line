@@ -1,30 +1,22 @@
 import { useEffect, useState } from "react";
 import Arrows from "./ruler/Arrows";
 import XAxis from "./ruler/XAxis";
-import { calculationWidthScreen } from "@/lib/utils";
+import { calculatScreenWidth } from "../lib/utils";
+import { useNumbersLineContext } from "../context/numbersLineContext";
 
 const Ruler = () => {
   const [leftPosition, setLeftPosition] = useState(0);
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const ResizeWidth = () => {
-    setWindowWidth(window.innerWidth);
-  };
+  const { windowWidth } = useNumbersLineContext();
 
   useEffect(() => {
-    window.addEventListener("resize", ResizeWidth);
-
-    return () => {
-      window.removeEventListener("resize", ResizeWidth);
-    };
-  }, []);
-  useEffect(() => {
-    setLeftPosition(calculationWidthScreen(windowWidth));
+    const screenWidth = calculatScreenWidth(windowWidth);
+    setLeftPosition(screenWidth);
   }, [windowWidth]);
 
   return (
-    <div className="pb-[10%]">
-      <Arrows windowWidth={windowWidth} leftPosition={leftPosition} setLeftPosition={setLeftPosition} />
-      <XAxis windowWidth={windowWidth} leftPosition={leftPosition} setLeftPosition={setLeftPosition} />
+    <div className="ruler pb-[15%]">
+      <Arrows leftPosition={leftPosition} setLeftPosition={setLeftPosition} />
+      <XAxis leftPosition={leftPosition} setLeftPosition={setLeftPosition} />
     </div>
   );
 };

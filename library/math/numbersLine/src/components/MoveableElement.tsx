@@ -1,30 +1,47 @@
-import Moveable from "react-moveable";
-
+import { useNumbersLineContext } from "../context/numbersLineContext";
+import Moveable, { OnResize, OnResizeEnd } from "react-moveable";
+import { IElement } from "../type/elements";
 interface IProps {
   targetRef: any;
+  element: IElement;
+  unit: number;
 }
 
-const MoveableElement = ({ targetRef }: IProps) => {
+const MoveableElement = ({ targetRef, element, unit }: IProps) => {
+  const { windowWidth, dragElements, setDragElements } = useNumbersLineContext();
+
+  const hideValueElement = () => {
+    let newElements = dragElements.map((item: IElement) => (item.id === element.id ? { ...item, hideNumber: true } : item));
+    setDragElements(newElements);
+  };
+  const changeElementValue = (e: OnResizeEnd) => {
+    let newValue = Math.round(e.lastEvent.width / unit);
+    let newElements = dragElements.map((item: IElement) => (item.id === element.id ? { ...item, value: newValue } : item));
+    setDragElements(newElements);
+    e.target.style.width = `${newValue * unit}px`;
+  };
+
+  const updateTransform = (e: OnResize) => {
+    if (!(parseFloat(e.target.style.width) / unit < 1 && e.dist[0] < 0) && !(parseFloat(e.target.style.width) > windowWidth - 4 * 16 && e.dist[0] > 0)) {
+      e.target.style.width = `${e.width}px`;
+      e.target.style.transform = e.drag.transform;
+    }
+  };
+
   return (
     <Moveable
-      className="bg-red"
       target={targetRef}
       draggable={true}
-      throttleDrag={1}
-      edgeDraggable={false}
-      startDragRotate={0}
-      throttleDragRotate={0}
       onDrag={(e) => {
         e.target.style.transform = e.transform;
       }}
-      scalable={true}
+      resizable={true}
       renderDirections={["w", "e"]}
-      onScale={(e) => {
-        e.target.style.transform = e.drag.transform;
-      }}
+      onResizeStart={() => hideValueElement()}
+      onResize={(e) => updateTransform(e)}
+      onResizeEnd={(e) => changeElementValue(e)}
     />
   );
 };
 
 export default MoveableElement;
-// cursor-move

@@ -3,11 +3,10 @@ import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { LineRange, PartToCover, RulerLenth } from "../../type/Line";
 import { TypeCover } from "@/type/elements";
 interface IProps {
-  windowWidth: number;
   leftPosition: number;
 }
-const Numbers = ({ windowWidth, leftPosition }: IProps) => {
-  const { type, coverSituation, setCoverSituation, setVisitableDisplayButton } = useNumbersLineContext();
+const Numbers = ({ leftPosition }: IProps) => {
+  const { windowWidth, type, coverSituation, setCoverSituation, setVisitableDisplayButton } = useNumbersLineContext();
   const [labels, setLabels] = useState<number[]>([]);
   const [labelsCover, setClickedLabelsCover] = useState(new Set());
   useEffect(() => {
