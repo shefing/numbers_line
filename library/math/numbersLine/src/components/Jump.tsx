@@ -31,12 +31,13 @@ const Jump = ({ element }: IProps) => {
     <>
       <div
         ref={targetRef}
-        className={`dragElement absolute top-[35%] left-[50%]  ${idDraggElementClick == element.id ? "cursor-move" : "cursor-pointer"}`}
+        id="dragElement-jump"
+        className={`absolute top-[35%] left-[50%]  ${idDraggElementClick == element.id ? "cursor-move" : "cursor-pointer"}`}
         style={{ width: unit * element.value }}
       >
-        <img className="h-[4rem] w-full" src={jumpArrowPlus} alt="Menu Arrow" />
-        <div className={baseJumpClassName}>
-          <text className="cursor-pointer" onClick={() => changeHidenumbers()}>
+        <img id="dragElement-jumpArrow" className="h-[4rem] w-full" src={jumpArrowPlus} alt="Menu Arrow" />
+        <div id="dragElement-jumpBase" className={baseJumpClassName}>
+          <text id="dragElement-jumpLength" className="cursor-pointer" onClick={() => changeHidenumbers()}>
             {element.hideNumber ? "?" : element.value}
           </text>
         </div>

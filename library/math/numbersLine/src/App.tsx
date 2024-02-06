@@ -10,16 +10,7 @@ const App = () => {
   const { setIdDraggElementClick } = useNumbersLineContext();
 
   const handleClickOutside = (event: any) => {
-    const clickedElement = event.target;
-    if (
-      !(
-        clickedElement.classList.contains("dragElement") ||
-        (clickedElement.parentNode && clickedElement.parentNode.classList.contains("dragElement")) ||
-        (clickedElement.parentNode && clickedElement.parentNode.parentNode && clickedElement.parentNode.parentNode.classList.contains("dragElement"))
-      )
-    ) {
-      setIdDraggElementClick(-1);
-    }
+    !event.target.id.includes("dragElement") && setIdDraggElementClick(-1);
   };
 
   useEffect(() => {

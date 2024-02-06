@@ -1,8 +1,8 @@
 import LineDefinition from "./toolbar/LineDefinition";
 import fullscreen from "/assets/icons/toolbar/fullscreen.svg";
 import IconsToolbar from "./toolbar/ActionIcons";
-import { actionIconsDetials } from "@/consts/consts";
-import { IActionIcon } from "@/type/elements";
+import { actionIconsDetials } from "../consts/elementConsts";
+import { IActionIcon } from "../type/elements";
 
 const Toolbar = () => {
   return (

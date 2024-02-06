@@ -3,7 +3,7 @@ import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { IDisplayRuller, TypeCover } from "../../type/elements";
 import { MatchDisplayButtonClassName } from "../../lib/stylesUtils";
 import triangleToMenu from "/assets/icons/TriangleToMenu.png";
-import { displayRulerButtonDetials } from "../../consts/consts";
+import { displayRulerButtonDetials } from "../../consts/elementConsts";
 
 interface IProps {
   setOpen: (val: boolean) => void;
