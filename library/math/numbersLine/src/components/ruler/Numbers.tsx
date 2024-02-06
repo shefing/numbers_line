@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { LineRange, PartToCover, RulerLenth } from "../../type/Line";
-import { TypeCover } from "@/type/elements";
+import { TypeCover } from "../../type/elements";
+import { RulerPadding } from "../../consts/elementConsts";
 interface IProps {
   leftPosition: number;
 }
@@ -53,7 +54,7 @@ const Numbers = ({ leftPosition }: IProps) => {
 
   return (
     <div
-      className="fixed left-0 right-0 flex justify-between border-t-4 border-gray-900 p-10 pt-0 mx-0 pl-8 pr-8"
+      className={`fixed left-0 right-0 flex justify-between border-t-4 border-gray-900 pt-0 mx-0 pl-[${RulerPadding}px] pr-[${RulerPadding}px]`}
       style={
         type == LineRange.hundred
           ? {

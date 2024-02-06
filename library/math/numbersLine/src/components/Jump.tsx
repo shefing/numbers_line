@@ -6,6 +6,7 @@ import MoveableElement from "./MoveableElement";
 import { useNumbersLineContext } from "@/context/numbersLineContext";
 import { LineRange, UnitLenth } from "../type/Line";
 import { calculatRulerWidth } from "../lib/utils";
+import { RulerPadding } from "../consts/elementConsts";
 
 interface IProps {
   element: IElement;
@@ -17,8 +18,8 @@ const Jump = ({ element }: IProps) => {
   const targetRef = React.useRef<any>(null);
 
   useEffect(() => {
-    let rulerWidth = calculatRulerWidth(windowWidth) / UnitLenth.twenty;
-    if (type == LineRange.ten || type == LineRange.hundredCircular) rulerWidth = calculatRulerWidth(windowWidth) / UnitLenth.ten;
+    let rulerWidth = calculatRulerWidth(windowWidth, RulerPadding) / UnitLenth.twenty;
+    if (type == LineRange.ten || type == LineRange.hundredCircular) rulerWidth = calculatRulerWidth(windowWidth, RulerPadding) / UnitLenth.ten;
     setUnit(rulerWidth);
   }, [type, windowWidth]);
 

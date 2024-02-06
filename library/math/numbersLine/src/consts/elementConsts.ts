@@ -21,3 +21,5 @@ export const actionIconsDetials: IActionIcon[] = [
     { type: "הצג ידנית", visitAble: TypeCover.allDiscover, choice: TypeCover.partiallyDiscover },
     { type: "הצג הכל", visitAble: TypeCover.allDiscover, choice: TypeCover.allDiscover },
   ];
+
+  export const RulerPadding = 32;
