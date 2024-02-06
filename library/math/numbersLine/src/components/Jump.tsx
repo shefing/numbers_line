@@ -6,13 +6,14 @@ import MoveableElement from "./MoveableElement";
 import { useNumbersLineContext } from "@/context/numbersLineContext";
 import { LineRange, UnitLenth } from "../type/Line";
 import { calculatRulerWidth } from "../lib/utils";
+import { RulerPadding } from "../consts/elementConsts";
 
 interface IProps {
   element: IElement;
 }
 
 const Jump = ({ element }: IProps) => {
-  const { windowWidth, type, dragElements, setDragElements, idDraggElementClick, RulerPadding } = useNumbersLineContext();
+  const { windowWidth, type, dragElements, setDragElements, idDraggElementClick } = useNumbersLineContext();
   const [unit, setUnit] = useState(windowWidth / UnitLenth.ten);
   const targetRef = React.useRef<any>(null);
 

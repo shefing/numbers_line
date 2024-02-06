@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { LineRange, PartToCover, RulerLenth } from "../../type/Line";
-import { TypeCover } from "@/type/elements";
+import { TypeCover } from "../../type/elements";
+import { RulerPadding } from "../../consts/elementConsts";
 interface IProps {
   leftPosition: number;
 }
 const Numbers = ({ leftPosition }: IProps) => {
-  const { windowWidth, type, coverSituation, setCoverSituation, setVisitableDisplayButton, RulerPadding } = useNumbersLineContext();
+  const { windowWidth, type, coverSituation, setCoverSituation, setVisitableDisplayButton } = useNumbersLineContext();
   const [labels, setLabels] = useState<number[]>([]);
   const [labelsCover, setClickedLabelsCover] = useState(new Set());
   useEffect(() => {

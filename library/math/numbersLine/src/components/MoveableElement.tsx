@@ -2,6 +2,7 @@ import { useNumbersLineContext } from "../context/numbersLineContext";
 import Moveable, { OnResize, OnResizeEnd } from "react-moveable";
 import { IElement } from "../type/elements";
 import { calculatRulerWidth } from "../lib/utils";
+import { RulerPadding } from "../consts/elementConsts";
 interface IProps {
   targetRef: any;
   element: IElement;
@@ -9,7 +10,7 @@ interface IProps {
 }
 
 const MoveableElement = ({ targetRef, element, unit }: IProps) => {
-  const { windowWidth, dragElements, setDragElements, RulerPadding } = useNumbersLineContext();
+  const { windowWidth, dragElements, setDragElements } = useNumbersLineContext();
 
   const hideValueElement = () => {
     let newElements = dragElements.map((item: IElement) => (item.id === element.id ? { ...item, hideNumber: true } : item));
