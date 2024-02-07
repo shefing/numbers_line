@@ -12,7 +12,7 @@ interface IProps {
 const IconsToolbar = ({ type, iconUrl }: IProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-
+  const { windowWidth, windowHeight, dragElements, setDragElements } = useNumbersLineContext();
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -29,13 +29,11 @@ const IconsToolbar = ({ type, iconUrl }: IProps) => {
     };
   }, [isOpen]);
 
-  const { dragElements, setDragElements } = useNumbersLineContext();
-
   const addDraggableElement = () => {
     let newText = {
       id: dragElements.length,
       type: TypeActionIconsToolbar.jump == type ? TypesElement.jump : TypesElement.text,
-      transform: "(-50%, -50%)",
+      transform: ` translate(${(windowWidth / 2 + dragElements.length * 5).toString()}px, ${(windowHeight / 4 + dragElements.length * 5).toString()}px) `,
       value: 1,
       hideNumber: true,
     };

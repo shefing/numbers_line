@@ -61,8 +61,10 @@ const Numbers = ({ leftPosition }: IProps) => {
               width: windowWidth * (LineRange.hundred / RulerLenth.hundred),
               left: `${leftPosition}px`,
               cursor: "move",
+              paddingLeft: `${RulerPadding}px`,
+              paddingRight: `${RulerPadding}px`,
             }
-          : {}
+          : { paddingLeft: `${RulerPadding}px`, paddingRight: `${RulerPadding}px` }
       }
     >
       {labels.map((label) =>

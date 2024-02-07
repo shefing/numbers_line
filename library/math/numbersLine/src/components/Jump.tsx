@@ -1,12 +1,12 @@
 import jumpArrowPlus from "/assets/icons/jumpArrowPlus.png";
+import jumpArrowMinus from "/assets/icons/jumpArrowMinus.png";
 import React, { useEffect, useState } from "react";
 import { IElement } from "@/type/elements";
-import { baseJumpClassName } from "@/styles/jump";
 import MoveableElement from "./MoveableElement";
 import { useNumbersLineContext } from "@/context/numbersLineContext";
-import { LineRange, UnitLenth } from "../type/Line";
-import { calculatRulerWidth } from "../lib/utils";
+import { calculatRulerWidth, calculatUnitsAmount } from "../lib/utils";
 import { RulerPadding } from "../consts/elementConsts";
+import { MatchBaseJumpClassName } from "@/lib/stylesUtils";
 
 interface IProps {
   element: IElement;
@@ -14,12 +14,12 @@ interface IProps {
 
 const Jump = ({ element }: IProps) => {
   const { windowWidth, type, dragElements, setDragElements, idDraggElementClick } = useNumbersLineContext();
-  const [unit, setUnit] = useState(windowWidth / UnitLenth.ten);
+  const [unit, setUnit] = useState(windowWidth / calculatUnitsAmount(type));
+  const [underRuler, setUnderRuler] = useState(false);
   const targetRef = React.useRef<any>(null);
 
   useEffect(() => {
-    let rulerWidth = calculatRulerWidth(windowWidth, RulerPadding) / UnitLenth.twenty;
-    if (type == LineRange.ten || type == LineRange.hundredCircular) rulerWidth = calculatRulerWidth(windowWidth, RulerPadding) / UnitLenth.ten;
+    let rulerWidth = calculatRulerWidth(windowWidth, RulerPadding) / calculatUnitsAmount(type);
     setUnit(rulerWidth);
   }, [type, windowWidth]);
 
@@ -33,17 +33,19 @@ const Jump = ({ element }: IProps) => {
       <div
         ref={targetRef}
         id="dragElement-jump"
-        className={`absolute top-[35%] left-[50%]  ${idDraggElementClick == element.id ? "cursor-move" : "cursor-pointer"}`}
-        style={{ width: unit * element.value }}
+        className={`absolute top-[0px] left-[0px] ${idDraggElementClick == element.id ? "cursor-move" : "cursor-pointer"}`}
+        style={{ width: unit * element.value, display: "flex", flexDirection: underRuler ? "column-reverse" : "column" }}
       >
-        <img id="dragElement-jumpArrow" className="h-[4rem] w-full" src={jumpArrowPlus} alt="Menu Arrow" />
-        <div id="dragElement-jumpBase" className={baseJumpClassName}>
+        <img id="dragElement-jumpArrow" className="h-[4rem] w-full" src={underRuler ? jumpArrowMinus : jumpArrowPlus} alt="Menu Arrow" />
+        <div id="dragElement-jumpBase" className={MatchBaseJumpClassName(underRuler)}>
           <text id="dragElement-jumpLength" className="cursor-pointer" onClick={() => changeHidenumbers()}>
             {element.hideNumber ? "?" : element.value}
           </text>
         </div>
       </div>
-      {idDraggElementClick == element.id && <MoveableElement targetRef={targetRef} element={element} unit={unit} />}
+      {idDraggElementClick == element.id && (
+        <MoveableElement targetRef={targetRef} element={element} unit={unit} underRuler={underRuler} setUnderRuler={setUnderRuler} />
+      )}
     </>
   );
 };

@@ -2,7 +2,8 @@
     id: number,
     type: TypesElement,
     value: number,
-        hideNumber: boolean,
+    hideNumber: boolean,
+    transform:string
   }
 
   export enum TypesElement {

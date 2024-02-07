@@ -2,14 +2,17 @@ import { useNumbersLineContext } from "../context/numbersLineContext";
 import Moveable, { OnResize, OnResizeEnd } from "react-moveable";
 import { IElement } from "../type/elements";
 import { calculatRulerWidth } from "../lib/utils";
-import { RulerPadding } from "../consts/elementConsts";
+import { RulerHeight, RulerPadding } from "../consts/elementConsts";
+
 interface IProps {
   targetRef: any;
   element: IElement;
   unit: number;
+  underRuler: boolean;
+  setUnderRuler: (v: boolean) => void;
 }
 
-const MoveableElement = ({ targetRef, element, unit }: IProps) => {
+const MoveableElement = ({ targetRef, element, unit, underRuler, setUnderRuler }: IProps) => {
   const { windowWidth, dragElements, setDragElements } = useNumbersLineContext();
 
   const hideValueElement = () => {
@@ -33,6 +36,25 @@ const MoveableElement = ({ targetRef, element, unit }: IProps) => {
     }
   };
 
+  const updateJumpByYLocation = (e: any) => {
+    const rulerLocation = window.innerHeight * ((100 - RulerHeight) / 100);
+    if (underRuler != rulerLocation < e.clientY) {
+      let originalString = e.target.style.transform;
+      let match = originalString.match(/,\s*(\d+)px\)/);
+      const bottonPX = parseFloat(match[1]);
+      let bottonPXString = match[0];
+      if (rulerLocation < e.clientY) {
+        setUnderRuler(true);
+        let newBottonPXString = ", " + Math.round(bottonPX + 80).toString() + "px)";
+        e.target.style.transform = e.target.style.transform.replace(bottonPXString, newBottonPXString);
+      } else {
+        setUnderRuler(false);
+        let newBottonPXString = ", " + Math.round(bottonPX - 80).toString() + "px)";
+        e.target.style.transform = e.target.style.transform.replace(bottonPXString, newBottonPXString);
+      }
+    }
+  };
+
   return (
     <Moveable
       target={targetRef}
@@ -40,12 +62,12 @@ const MoveableElement = ({ targetRef, element, unit }: IProps) => {
       onDrag={(e) => {
         e.target.style.transform = e.transform;
       }}
+      onDragEnd={(e) => updateJumpByYLocation(e)}
       resizable={true}
       renderDirections={["w", "e"]}
       onResizeStart={() => hideValueElement()}
       onResize={(e) => updateTransform(e)}
       onResizeEnd={(e) => changeElementValue(e)}
-      useAccuratePosition={true}
     />
   );
 };

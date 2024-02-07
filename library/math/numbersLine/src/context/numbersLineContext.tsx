@@ -4,6 +4,8 @@ import { IElement, TypeCover } from "../type/elements";
 interface INumbersLineContextProps {
   windowWidth: number;
   setWindowWidth: (v: number) => void;
+  windowHeight: number;
+  setWindowHeight: (v: number) => void;
   type: LineRange;
   setType: (v: LineRange) => void;
   dragElements: IElement[];
@@ -19,6 +21,8 @@ interface INumbersLineContextProps {
 export const NumbersLineContext = React.createContext({
   windowWidth: {} as number,
   setWindowWidth: () => null,
+  windowHeight: {} as number,
+  setWindowHeight: () => null,
   type: {} as LineRange,
   setType: () => null,
   dragElements: {} as IElement[],
@@ -33,6 +37,7 @@ export const NumbersLineContext = React.createContext({
 
 export const NumbersLineContexProvider = (props: any) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [windowHeight, setWindowHeight] = useState(window.innerHeight);
   const [type, setType] = useState(LineRange.ten);
   const [dragElements, setDragElements] = useState<IElement[]>([]);
   const [idDraggElementClick, setIdDraggElementClick] = useState(-1);
@@ -60,6 +65,8 @@ export const NumbersLineContexProvider = (props: any) => {
       value={{
         windowWidth,
         setWindowWidth,
+        windowHeight,
+        setWindowHeight,
         type,
         setType,
         dragElements,

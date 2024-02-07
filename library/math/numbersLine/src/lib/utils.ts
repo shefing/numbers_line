@@ -18,3 +18,10 @@ export const getImageSrc = (url: string,isHovered:boolean , isOpen:boolean) => {
   const beforeDot = url.substring(0, dotIndex);
   return isOpen? beforeDot+'Open.svg': isHovered ? beforeDot+'Hover.svg' : url;
 };
+
+export const calculatUnitsAmount = (type: LineRange)=>{
+  return type == LineRange.hundred || type ==  LineRange.twenty?  20: 10;
+ 
+}
+
+
