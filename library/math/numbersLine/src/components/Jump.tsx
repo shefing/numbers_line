@@ -38,9 +38,9 @@ const Jump = ({ element }: IProps) => {
       >
         <img id="dragElement-jumpArrow" className="h-[4rem] w-full" src={underRuler ? jumpArrowMinus : jumpArrowPlus} alt="Menu Arrow" />
         <div id="dragElement-jumpBase" className={MatchBaseJumpClassName(underRuler)}>
-          <text id="dragElement-jumpLength" className="cursor-pointer" onClick={() => changeHidenumbers()}>
+          <span id="dragElement-jumpLength" className="cursor-pointer" onClick={() => changeHidenumbers()}>
             {element.hideNumber ? "?" : element.value}
-          </text>
+          </span>
         </div>
       </div>
       {idDraggElementClick == element.id && (

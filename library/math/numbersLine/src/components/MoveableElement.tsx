@@ -2,7 +2,7 @@ import { useNumbersLineContext } from "../context/numbersLineContext";
 import Moveable, { OnResize, OnResizeEnd } from "react-moveable";
 import { IElement } from "../type/elements";
 import { calculatRulerWidth } from "../lib/utils";
-import { RulerHeight, RulerPadding } from "../consts/elementConsts";
+import { RulerMargin, RulerPadding } from "../consts/elementConsts";
 
 interface IProps {
   targetRef: any;
@@ -37,7 +37,7 @@ const MoveableElement = ({ targetRef, element, unit, underRuler, setUnderRuler }
   };
 
   const updateJumpByYLocation = (e: any) => {
-    const rulerLocation = window.innerHeight * ((100 - RulerHeight) / 100);
+    const rulerLocation = window.innerHeight * ((100 - RulerMargin) / 100);
     if (underRuler != rulerLocation < e.clientY) {
       let originalString = e.target.style.transform;
       let match = originalString.match(/,\s*(\d+)px\)/);

@@ -3,7 +3,7 @@ import Arrows from "./ruler/Arrows";
 import XAxis from "./ruler/XAxis";
 import { calculatScreenWidth } from "../lib/utils";
 import { useNumbersLineContext } from "../context/numbersLineContext";
-import { RulerHeight } from "../consts/elementConsts";
+import { RulerMargin } from "../consts/elementConsts";
 
 const Ruler = () => {
   const [leftPosition, setLeftPosition] = useState(0);
@@ -15,7 +15,7 @@ const Ruler = () => {
   }, [windowWidth]);
 
   return (
-    <div id="ruler" className={`pb-[${RulerHeight}%]`}>
+    <div style={{ paddingBottom: RulerMargin + "%" }}>
       <Arrows leftPosition={leftPosition} setLeftPosition={setLeftPosition} />
       <XAxis leftPosition={leftPosition} setLeftPosition={setLeftPosition} />
     </div>

@@ -23,4 +23,4 @@ export const actionIconsDetials: IActionIcon[] = [
   ];
 
   export const RulerPadding = 32;
-  export const RulerHeight = 25;
+  export const RulerMargin = 25;
