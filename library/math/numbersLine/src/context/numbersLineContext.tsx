@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { LineRange } from "../type/line";
+import { LineRange } from "../type/ruler";
 import { IWindowSize, TypeCover } from "../type/elements";
 import { IElement } from "../type/moveable";
 interface INumbersLineContextProps {

@@ -1,4 +1,4 @@
-import { LineRange, RulerLenth, unitAmount } from "../type/line"
+import { LineRange, RulerLenth, unitAmount } from "../type/ruler"
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 

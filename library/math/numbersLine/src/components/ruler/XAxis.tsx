@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
-import { LineRange } from "../../type/line";
+import { LineRange } from "../../type/ruler";
 import { calculatScreenWidth } from "../../lib/utils";
 import Numbers from "./Numbers";
 interface IProps {
