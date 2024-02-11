@@ -1,6 +1,6 @@
-import { TypesElement } from "@/type/elements";
+import { TypesElement } from "../type/moveable";
 import Jump from "./Jump";
-import { useNumbersLineContext } from "@/context/numbersLineContext";
+import { useNumbersLineContext } from "../context/numbersLineContext";
 
 const ShowElements = () => {
   const { dragElements, setIdDraggElementClick } = useNumbersLineContext();

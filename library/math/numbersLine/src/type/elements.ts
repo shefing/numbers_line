@@ -1,15 +1,3 @@
- export interface IElement {
-    id: number,
-    type: TypesElement,
-    value: number,
-        hideNumber: boolean,
-  }
-
-  export enum TypesElement {
-    text = 'text', 
-    jump = 'jump',
-  }
-
   export enum TypeCover {
     nothing = "nothing",
     partiallyCover = "partiallyCover",
@@ -25,7 +13,7 @@
     writing = "writing",
     displayNumbersLine = "displayNumbersLine",
     naviAndKani = "naviAndKani",
-    raload = "raload",
+    reload = "reload",
   }  
 
   export interface IActionIcon {
@@ -38,6 +26,13 @@
     visitAble: TypeCover, 
     choice: TypeCover
   } 
+  export interface IWindowSize {
+    height:number,
+    width:number,
+  } 
+
+
+  
 
 
 

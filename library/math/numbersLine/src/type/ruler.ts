@@ -9,7 +9,8 @@ export enum RulerLenth  {
   hundred = 21,
   other = 101 
 };
-export enum UnitLenth  {
+
+export enum unitAmount  {
   twenty = 20,
   ten = 10 
 };

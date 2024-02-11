@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { getImageSrc } from "@/lib/utils";
 import DisplayNumbers from "./DisplayNumbers";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
-import { useNumbersLineContext } from "@/context/numbersLineContext";
-import { TypeActionIconsToolbar, TypesElement } from "@/type/elements";
+import { useNumbersLineContext } from "../../context/numbersLineContext";
+import { TypeActionIconsToolbar } from "../../type/elements";
+import { TypesElement } from "../../type/moveable";
 
 interface IProps {
   type: string;
@@ -12,7 +13,7 @@ interface IProps {
 const IconsToolbar = ({ type, iconUrl }: IProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-
+  const { dragElements, setDragElements } = useNumbersLineContext();
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -29,13 +30,10 @@ const IconsToolbar = ({ type, iconUrl }: IProps) => {
     };
   }, [isOpen]);
 
-  const { dragElements, setDragElements } = useNumbersLineContext();
-
   const addDraggableElement = () => {
     let newText = {
       id: dragElements.length,
       type: TypeActionIconsToolbar.jump == type ? TypesElement.jump : TypesElement.text,
-      transform: "(-50%, -50%)",
       value: 1,
       hideNumber: true,
     };
