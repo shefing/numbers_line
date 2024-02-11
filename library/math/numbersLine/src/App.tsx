@@ -21,14 +21,16 @@ const App = () => {
   }, []);
 
   return (
-    <div className="flex flex-col h-full justify-between">
-      <Toolbar />
+    <>
       <ShowElements />
-      <div className="flex flex-col justify-end">
-        <Ruler />
-        <GrassImg />
+      <div className="flex flex-col h-full justify-between">
+        <Toolbar />
+        <div>
+          <Ruler />
+          <GrassImg />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -46,6 +46,7 @@ export const NumbersLineContexProvider = (props: any) => {
 
   const ResizeWidth = () => {
     setWindowWidth(window.innerWidth);
+    setWindowHeight(window.innerHeight);
   };
   useEffect(() => {
     window.addEventListener("resize", ResizeWidth);

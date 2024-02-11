@@ -15,7 +15,7 @@ const Ruler = () => {
   }, [windowWidth]);
 
   return (
-    <div style={{ paddingBottom: RulerMargin + "%" }}>
+    <div style={{ paddingBottom: RulerMargin + "px" }}>
       <Arrows leftPosition={leftPosition} setLeftPosition={setLeftPosition} />
       <XAxis leftPosition={leftPosition} setLeftPosition={setLeftPosition} />
     </div>

@@ -3,17 +3,18 @@ import Moveable, { OnResize, OnResizeEnd } from "react-moveable";
 import { IElement } from "../type/elements";
 import { calculatRulerWidth } from "../lib/utils";
 import { RulerMargin, RulerPadding } from "../consts/elementConsts";
+import { calculateJumpPosition } from "../lib/stylesUtils";
 
 interface IProps {
   targetRef: any;
   element: IElement;
   unit: number;
-  underRuler: boolean;
-  setUnderRuler: (v: boolean) => void;
+  isJumpUnderRuler: boolean;
+  setIsJumpUnderRuler: (v: boolean) => void;
 }
 
-const MoveableElement = ({ targetRef, element, unit, underRuler, setUnderRuler }: IProps) => {
-  const { windowWidth, dragElements, setDragElements } = useNumbersLineContext();
+const MoveableElement = ({ targetRef, element, unit, isJumpUnderRuler, setIsJumpUnderRuler }: IProps) => {
+  const { windowWidth, windowHeight, dragElements, setDragElements } = useNumbersLineContext();
 
   const hideValueElement = () => {
     let newElements = dragElements.map((item: IElement) => (item.id === element.id ? { ...item, hideNumber: true } : item));
@@ -37,21 +38,25 @@ const MoveableElement = ({ targetRef, element, unit, underRuler, setUnderRuler }
   };
 
   const updateJumpByYLocation = (e: any) => {
-    const rulerLocation = window.innerHeight * ((100 - RulerMargin) / 100);
-    if (underRuler != rulerLocation < e.clientY) {
-      let originalString = e.target.style.transform;
-      let match = originalString.match(/,\s*(\d+)px\)/);
-      const bottonPX = parseFloat(match[1]);
-      let bottonPXString = match[0];
-      if (rulerLocation < e.clientY) {
-        setUnderRuler(true);
-        let newBottonPXString = ", " + Math.round(bottonPX + 80).toString() + "px)";
-        e.target.style.transform = e.target.style.transform.replace(bottonPXString, newBottonPXString);
+    const originalTransform = e.target.style.transform;
+    const match = originalTransform.match(/,\s*(\d+)px\)/);
+    const yTransform = match[1];
+    const yTransformString = match[0];
+    const bottonElementPsition = calculateJumpPosition(yTransform, windowHeight, isJumpUnderRuler); //e.clientY
+    const grassElement = document.getElementById("grass");
+    const rulerLocation = grassElement ? windowHeight - RulerMargin - grassElement.clientHeight : windowHeight - RulerMargin;
+
+    if (isJumpUnderRuler != rulerLocation < bottonElementPsition) {
+      const newYTransform = parseFloat(yTransform && yTransform);
+      let newYTransformString = "";
+      if (rulerLocation < bottonElementPsition) {
+        setIsJumpUnderRuler(true);
+        newYTransformString = ", " + Math.round(newYTransform + 80).toString() + "px)";
       } else {
-        setUnderRuler(false);
-        let newBottonPXString = ", " + Math.round(bottonPX - 80).toString() + "px)";
-        e.target.style.transform = e.target.style.transform.replace(bottonPXString, newBottonPXString);
+        setIsJumpUnderRuler(false);
+        newYTransformString = ", " + Math.round(newYTransform - 80).toString() + "px)";
       }
+      e.target.style.transform = e.target.style.transform.replace(yTransformString, newYTransformString);
     }
   };
 
