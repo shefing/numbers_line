@@ -1,6 +1,6 @@
 import { useNumbersLineContext } from "../context/numbersLineContext";
 import Moveable, { OnResize, OnResizeEnd } from "react-moveable";
-import { IElement } from "../type/elements";
+import { IElement } from "../type/moveable";
 import { calculatRulerWidth } from "../lib/utils";
 import { RulerMargin, RulerPadding } from "../consts/elementConsts";
 import { calculateJumpPosition } from "../lib/stylesUtils";

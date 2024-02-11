@@ -1,5 +1,5 @@
 
-import { IElement } from "@/type/elements.js";
+import { IElement } from "../type/moveable";
 const useLocalStorage = () => {
   const saveData = (key: string, value: any) => {
     localStorage.setItem(key, JSON.stringify(value));

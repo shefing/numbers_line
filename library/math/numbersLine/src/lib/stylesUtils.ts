@@ -4,7 +4,7 @@ import { buttonEyeClassName, buttonEyeDisabledClassName } from "../styles/button
 import { useNumbersLineContext } from "@/context/numbersLineContext";
 import { baseJumpClassName } from "../styles/jump";
 import { calculatUnitsAmount } from "./utils";
-import { LineRange } from "../type/Line";
+import { LineRange } from "../type/line";
 import { jumpArrowHeight } from "../consts/elementConsts";
 
 export const MatchDisplayButtonClassName = ( isVisitAble: TypeCover, isChoice: TypeCover) => {

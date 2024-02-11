@@ -1,7 +1,7 @@
 import jumpArrowPlus from "/assets/icons/jumpArrowPlus.png";
 import jumpArrowMinus from "/assets/icons/jumpArrowMinus.png";
 import React, { useEffect, useState } from "react";
-import { IElement } from "@/type/elements";
+import { IElement } from "../type/moveable";
 import MoveableElement from "./MoveableElement";
 import { useNumbersLineContext } from "@/context/numbersLineContext";
 import { calculatRulerWidth, calculatUnitsAmount } from "../lib/utils";

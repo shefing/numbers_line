@@ -1,16 +1,3 @@
- export interface IElement {
-    id: number,
-    type: TypesElement,
-    value: number,
-    hideNumber: boolean,
-    transform:string
-  }
-
-  export enum TypesElement {
-    text = 'text', 
-    jump = 'jump',
-  }
-
   export enum TypeCover {
     nothing = "nothing",
     partiallyCover = "partiallyCover",

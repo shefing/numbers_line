@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
-import { LineRange, PartToCover, RulerLenth } from "../../type/Line";
+import { LineRange, PartToCover, RulerLenth } from "../../type/line";
 import { TypeCover } from "../../type/elements";
 import { RulerPadding } from "../../consts/elementConsts";
 interface IProps {

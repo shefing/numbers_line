@@ -1,7 +1,7 @@
 import { calculatScreenWidth } from "../../lib/utils";
 import leftArrowIcon from "/assets/icons/arrow-left.svg";
 import rightArrowIcon from "/assets/icons/arrow-right.svg";
-import { LineRange, RulerLenth } from "../../type/Line";
+import { LineRange, RulerLenth } from "../../type/line";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 
 interface IProps {
