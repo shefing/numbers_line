@@ -7,7 +7,7 @@ interface IProps {
   leftPosition: number;
 }
 const Numbers = ({ leftPosition }: IProps) => {
-  const { windowWidth, type, coverSituation, setCoverSituation, setVisitableDisplayButton } = useNumbersLineContext();
+  const { windowSize, type, coverSituation, setCoverSituation, setVisitableDisplayButton } = useNumbersLineContext();
   const [labels, setLabels] = useState<number[]>([]);
   const [labelsCover, setClickedLabelsCover] = useState(new Set());
   useEffect(() => {
@@ -58,7 +58,7 @@ const Numbers = ({ leftPosition }: IProps) => {
       style={
         type == LineRange.hundred
           ? {
-              width: windowWidth * (LineRange.hundred / RulerLenth.hundred),
+              width: windowSize.width * (LineRange.hundred / RulerLenth.hundred),
               left: `${leftPosition}px`,
               cursor: "move",
               paddingLeft: `${RulerPadding}px`,

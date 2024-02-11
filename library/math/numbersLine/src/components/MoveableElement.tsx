@@ -14,7 +14,7 @@ interface IProps {
 }
 
 const MoveableElement = ({ targetRef, element, unit, isJumpUnderRuler, setIsJumpUnderRuler }: IProps) => {
-  const { windowWidth, windowHeight, dragElements, setDragElements } = useNumbersLineContext();
+  const { windowSize, dragElements, setDragElements } = useNumbersLineContext();
 
   const hideValueElement = () => {
     let newElements = dragElements.map((item: IElement) => (item.id === element.id ? { ...item, hideNumber: true } : item));
@@ -30,7 +30,7 @@ const MoveableElement = ({ targetRef, element, unit, isJumpUnderRuler, setIsJump
   const updateTransform = (e: OnResize) => {
     if (
       !(parseFloat(e.target.style.width) / unit < 1 && e.dist[0] < 0) &&
-      !(parseFloat(e.target.style.width) > calculatRulerWidth(windowWidth, RulerPadding) && e.dist[0] > 0)
+      !(parseFloat(e.target.style.width) > calculatRulerWidth(windowSize.width, RulerPadding) && e.dist[0] > 0)
     ) {
       e.target.style.width = `${e.width}px`;
       e.target.style.transform = e.drag.transform;
@@ -42,9 +42,9 @@ const MoveableElement = ({ targetRef, element, unit, isJumpUnderRuler, setIsJump
     const match = originalTransform.match(/,\s*(\d+)px\)/);
     const yTransform = match[1];
     const yTransformString = match[0];
-    const bottonElementPsition = calculateJumpPosition(yTransform, windowHeight, isJumpUnderRuler); //e.clientY
+    const bottonElementPsition = calculateJumpPosition(yTransform, windowSize.height, isJumpUnderRuler); //e.clientY
     const grassElement = document.getElementById("grass");
-    const rulerLocation = grassElement ? windowHeight - RulerMargin - grassElement.clientHeight : windowHeight - RulerMargin;
+    const rulerLocation = grassElement ? windowSize.height - RulerMargin - grassElement.clientHeight : windowSize.height - RulerMargin;
 
     if (isJumpUnderRuler != rulerLocation < bottonElementPsition) {
       const newYTransform = parseFloat(yTransform && yTransform);

@@ -1,4 +1,4 @@
-import { LineRange, RulerLenth } from "../type/Line"
+import { LineRange, RulerLenth, unitAmount } from "../type/Line"
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 
@@ -9,6 +9,7 @@ export function cn(...inputs: ClassValue[]) {
 export const calculatScreenWidth = (windowWidth:number)=>{
   return -windowWidth*((LineRange.hundred-RulerLenth.hundred)/RulerLenth.hundred)
 }
+
 export const calculatRulerWidth = (windowWidth:number, RulerPadding:number)=>{
   return windowWidth - RulerPadding*2;
 }
@@ -17,11 +18,10 @@ export const getImageSrc = (url: string,isHovered:boolean , isOpen:boolean) => {
   const dotIndex = url.indexOf('.');
   const beforeDot = url.substring(0, dotIndex);
   return isOpen? beforeDot+'Open.svg': isHovered ? beforeDot+'Hover.svg' : url;
-};
+}
 
 export const calculatUnitsAmount = (type: LineRange)=>{
-  return type == LineRange.hundred || type ==  LineRange.twenty?  20: 10;
- 
+  return type == LineRange.hundred || type ==  LineRange.twenty? unitAmount.twenty: unitAmount.ten;
 }
 
 

@@ -8,7 +8,7 @@ interface IProps {
   setLeftPosition: (val: (val: number) => number) => void;
 }
 const XAxis = ({ leftPosition, setLeftPosition }: IProps) => {
-  const { windowWidth, type } = useNumbersLineContext();
+  const { windowSize, type } = useNumbersLineContext();
   const [startX, setStartX] = useState(0);
   const [isDragging, setisDragging] = useState(false);
 
@@ -20,7 +20,7 @@ const XAxis = ({ leftPosition, setLeftPosition }: IProps) => {
   const handleonDrag = (e: any) => {
     if (isDragging) {
       const deltaX = e.clientX - startX;
-      setLeftPosition((prevLeft: number) => Math.max(calculatScreenWidth(windowWidth), Math.min(0, prevLeft + deltaX)));
+      setLeftPosition((prevLeft: number) => Math.max(calculatScreenWidth(windowSize.width), Math.min(0, prevLeft + deltaX)));
       setStartX(e.clientX);
     }
   };

@@ -10,11 +10,11 @@ interface IProps {
 }
 
 const Arrows = ({ leftPosition, setLeftPosition }: IProps) => {
-  const { type, windowWidth } = useNumbersLineContext();
+  const { type, windowSize } = useNumbersLineContext();
 
   const updatePositionOnArrowClick = (direction: "left" | "right") => {
-    const step = windowWidth / RulerLenth.hundred;
-    setLeftPosition(direction === "left" ? Math.min(0, leftPosition + step) : Math.max(calculatScreenWidth(windowWidth), leftPosition - step));
+    const step = windowSize.width / RulerLenth.hundred;
+    setLeftPosition(direction === "left" ? Math.min(0, leftPosition + step) : Math.max(calculatScreenWidth(windowSize.width), leftPosition - step));
   };
 
   return (

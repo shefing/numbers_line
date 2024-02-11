@@ -39,6 +39,13 @@
     visitAble: TypeCover, 
     choice: TypeCover
   } 
+  export interface IWindowSize {
+    height:number,
+    width:number,
+  } 
+
+
+  
 
 
 

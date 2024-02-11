@@ -7,11 +7,11 @@ import { RulerMargin } from "../consts/elementConsts";
 
 const Ruler = () => {
   const [leftPosition, setLeftPosition] = useState(0);
-  const { windowWidth } = useNumbersLineContext();
+  const { windowSize } = useNumbersLineContext();
 
   useEffect(() => {
-    setLeftPosition((prevLeft: number) => Math.max(calculatScreenWidth(windowWidth), Math.min(0, prevLeft)));
-  }, [windowWidth]);
+    setLeftPosition((prevLeft: number) => Math.max(calculatScreenWidth(windowSize.width), Math.min(0, prevLeft)));
+  }, [windowSize.width]);
 
   useEffect(() => {
     console.log("leftPosition: ", leftPosition);
