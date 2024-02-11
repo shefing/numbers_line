@@ -10,9 +10,12 @@ const Ruler = () => {
   const { windowWidth } = useNumbersLineContext();
 
   useEffect(() => {
-    const screenWidth = calculatScreenWidth(windowWidth);
-    setLeftPosition(screenWidth);
+    setLeftPosition((prevLeft: number) => Math.max(calculatScreenWidth(windowWidth), Math.min(0, prevLeft)));
   }, [windowWidth]);
+
+  useEffect(() => {
+    console.log("leftPosition: ", leftPosition);
+  }, [leftPosition]);
 
   return (
     <div style={{ paddingBottom: RulerMargin + "px" }}>
