@@ -26,7 +26,7 @@
     writing = "writing",
     displayNumbersLine = "displayNumbersLine",
     naviAndKani = "naviAndKani",
-    raload = "raload",
+    reload = "reload",
   }  
 
   export interface IActionIcon {
