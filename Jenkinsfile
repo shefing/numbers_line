@@ -72,7 +72,7 @@ pipeline {
             doGenerateSubmoduleConfigurations: false,
             extensions: [], 
             submoduleCfg: [], 
-            userRemoteConfigs: [[credentialsId: '1d641054-6340-40a3-932d-8d01029eafaf', url: 'https://CET-Tech@dev.azure.com/CET-Tech/Assets/_git/AssetsApps']]])
+            userRemoteConfigs: [[credentialsId: '1d641054-6340-40a3-932d-8d01029eafaf', url: 'https://CET-Tech@dev.azure.com/CET-Tech/Assets/_git/CetAssets']]])
           }
         }
 
