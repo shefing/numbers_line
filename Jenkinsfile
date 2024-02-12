@@ -107,16 +107,17 @@ pipeline {
             }
           }
 
-        // stage ('Upload') {
-        //   steps {
-        //     script {      
-        //       global_azDevopsPublishArtifact artifactName: serviceName.toLowerCase(), 
-        //         artifactVersion: artifactVersion, 
-        //         artifactDescription: "\"{\\\"branch\\\": \\\"${PushBRANCH}\\\"}\"",
-        //         artifactPath: artifactZip          
-        //     }                        
-        //   }
-        // }
+         stage ('Upload') {
+           steps {
+             script {      
+              withCredentials([usernamePassword(credentialsId: azCredsId, usernameVariable: 'USER', passwordVariable: 'AZURE_DEVOPS_EXT_PAT')]) {
+                publishCmd = "az artifacts universal publish --organization 'https://dev.azure.com/CET-Tech/' --feed 'artifacts-feed' --name ${serviceName} --version ${artifactVersion} --description ${PushBRANCH} --path ${WORKSPACE}/library/math/numbersLine/dist"
+                println "${publishCmd}"
+              //  sh "${publishCmd}"
+              }         
+             }                        
+           }
+         }
 
         // stage ('TriggerDeploy') {
         //   steps {
