@@ -7,15 +7,12 @@ import { RulerMargin } from "../consts/elementConsts";
 
 const Ruler = () => {
   const [leftPosition, setLeftPosition] = useState(0);
-  const { windowSize } = useNumbersLineContext();
+  const { windowSize, setIdDraggElementClick } = useNumbersLineContext();
 
   useEffect(() => {
     setLeftPosition((prevLeft: number) => Math.max(calculatScreenWidth(windowSize.width), Math.min(0, prevLeft)));
+    setIdDraggElementClick("");
   }, [windowSize.width]);
-
-  useEffect(() => {
-    console.log("leftPosition: ", leftPosition);
-  }, [leftPosition]);
 
   return (
     <div style={{ paddingBottom: RulerMargin + "px" }}>

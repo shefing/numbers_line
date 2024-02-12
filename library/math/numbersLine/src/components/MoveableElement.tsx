@@ -3,17 +3,19 @@ import Moveable, { OnResize, OnResizeEnd } from "react-moveable";
 import { IElement } from "../type/moveable";
 import { calculatRulerWidth } from "../lib/utils";
 import { RulerMargin, RulerPadding } from "../consts/elementConsts";
-import { calculateJumpPosition } from "../lib/stylesUtils";
+import { calcJumpPosition } from "../lib/stylesUtils";
+import { ButtonViewable } from "@/consts/ButtonViewable";
 
 interface IProps {
-  targetRef: any;
+  ableProps?: any;
+  moveableRef: any;
   element: IElement;
   unit: number;
   isJumpUnderRuler: boolean;
   setIsJumpUnderRuler: (v: boolean) => void;
 }
 
-const MoveableElement = ({ targetRef, element, unit, isJumpUnderRuler, setIsJumpUnderRuler }: IProps) => {
+const MoveableElement = ({ ableProps, moveableRef, element, unit, isJumpUnderRuler, setIsJumpUnderRuler }: IProps) => {
   const { windowSize, dragElements, setDragElements } = useNumbersLineContext();
 
   const hideValueElement = () => {
@@ -42,7 +44,7 @@ const MoveableElement = ({ targetRef, element, unit, isJumpUnderRuler, setIsJump
     const match = originalTransform.match(/,\s*(\d+)px\)/);
     const yTransform = match[1];
     const yTransformString = match[0];
-    const bottonElementPsition = calculateJumpPosition(yTransform, windowSize.height, isJumpUnderRuler); //e.clientY
+    const bottonElementPsition = calcJumpPosition(yTransform, windowSize.height, isJumpUnderRuler); //e.clientY
     const grassElement = document.getElementById("grass");
     const rulerLocation = grassElement ? windowSize.height - RulerMargin - grassElement.clientHeight : windowSize.height - RulerMargin;
 
@@ -62,7 +64,9 @@ const MoveableElement = ({ targetRef, element, unit, isJumpUnderRuler, setIsJump
 
   return (
     <Moveable
-      target={targetRef}
+      target={moveableRef}
+      ables={[ButtonViewable]}
+      props={ableProps || false}
       draggable={true}
       onDrag={(e) => {
         e.target.style.transform = e.transform;

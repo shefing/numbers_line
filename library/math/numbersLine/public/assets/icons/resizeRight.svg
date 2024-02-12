@@ -1,11 +1,5 @@
-<svg width="13" height="18" viewBox="0 0 13 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g id="Group 1331">
-<path id="Rectangle 2910" d="M0 0H9C11.2091 0 13 1.79086 13 4V14C13 16.2091 11.2091 18 9 18H0V0Z" fill="#A4A3AE"/>
-<g id="Group 1">
-<g id="Group 11">
-<line id="Line 9" x1="3.75" y1="3.75" x2="3.75" y2="14.37" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-<line id="Line 10" x1="7.75" y1="3.75" x2="7.75" y2="14.37" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
-</g>
-</g>
-</g>
+<svg xmlns="http://www.w3.org/2000/svg" width="13" height="18" viewBox="0 0 13 18" fill="none">
+<path d="M0 0H9C11.2091 0 13 1.79086 13 4V14C13 16.2091 11.2091 18 9 18H0V0Z" fill="#A4A3AE"/>
+<line x1="3.75" y1="3.75" x2="3.75" y2="14.37" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+<line x1="7.75" y1="3.75" x2="7.75" y2="14.37" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
 </svg>

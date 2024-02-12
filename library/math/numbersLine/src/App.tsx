@@ -10,7 +10,7 @@ const App = () => {
   const { setIdDraggElementClick } = useNumbersLineContext();
 
   const handleClickOutside = (event: any) => {
-    !event.target.id.includes("dragElement") && setIdDraggElementClick(-1);
+    !event.target.id.includes("dragElement") && setIdDraggElementClick("");
   };
 
   useEffect(() => {

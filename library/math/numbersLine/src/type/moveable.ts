@@ -1,5 +1,5 @@
 export interface IElement {
-    id: number,
+    id: string,
     type: TypesElement,
     value: number,
     hideNumber: boolean,
@@ -8,4 +8,10 @@ export interface IElement {
   export enum TypesElement {
     text = 'text', 
     jump = 'jump',
+  }
+  export interface IAbleProps{
+    ButtonViewable: boolean,
+    onDeleteClick: () => void
+    onCopyClick:() => void,
+    underRuler: boolean
   }
