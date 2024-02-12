@@ -8,7 +8,6 @@ TFS_BUILD_CRED_ID = "win_super_admin"
 properties([
   parameters([
     string(name: 'PushBRANCH', value: ""),
-    string(name: 'TAG', value: ""),
   ])
 ])  
  
@@ -54,7 +53,6 @@ pipeline {
               }else{
                 PushBRANCH = params.PushBRANCH
                 nairobiservicename = params.servicename
-                nametag = params.TAG
                 developerEmail = 'Toc-Team@cet.ac.il'
                 status = 'completed'
               }
@@ -189,17 +187,11 @@ pipeline {
             powershell "az repos pr set-vote --id ${pullRequestId} --vote approve"
           }
         } else {
-          if(PushBRANCH == 'master'){
-            withCredentials([string(credentialsId: 'az_devops_personal_access_token', variable: 'TOKEN')]){
-              env.AZURE_DEVOPS_EXT_PAT = "$TOKEN"
-              powershell "az repos ref create --name \"tags/${nametag}\" --object-id ${objectid} --repository ${microservicename} --project ${projectid}"
-            }
-          }
         return
         }
       }    
     }       
-		failure {
+	failure {
       script {
         if (params.DISABLE_NOTIFICATION) {
           println "failure"
