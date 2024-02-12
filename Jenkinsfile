@@ -93,16 +93,10 @@ pipeline {
                 global_prettyPrintWithHeaderAndFooter header: "Running batch script", body: script
                 sh "${script}"
 
-                // Change all files permission to read-write
-                //script = "Get-ChildItem ${WORKSPACE} -Recurse | Where-Object {\$_.GetType().ToString() -eq \"System.IO.FileInfo\"} | Set-ItemProperty -Name IsReadOnly -Value \$false"
-                //global_prettyPrintWithHeaderAndFooter header: "Running powershell script", body: script
-                //powershell "${script}"
-                }
-              // Copy versioning dir to service
-              //powershell "Copy-Item -Path '${versioningDirPath}' -Destination ${serviceDirPath}/Artifacts/_PublishedWebsites/MyBagAPI -Recurse"
-
-              // Compress artifacts to a single zip file
-              //powershell "Compress-Archive -Path  ${serviceDirPath}/Artifacts/_PublishedWebsites/MyBagAPI/* -DestinationPath ${artifactZip}"              
+                sh "cd dist/"
+                sh "zip -r ${serviceName}.zip *"
+                sh "unzip -l ${serviceName}.zip"
+                }             
               }
             }
           }
