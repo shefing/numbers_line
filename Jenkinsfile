@@ -12,7 +12,7 @@ properties([
 ])  
  
 pipeline { 
-      agent { node { label 'devBuilds2' } }
+      agent { node { label 'devbuild-kub' } }
       options {
         buildDiscarder(logRotator(numToKeepStr: '30'))
         disableConcurrentBuilds()
@@ -82,22 +82,21 @@ pipeline {
               serviceDirPath = "${WORKSPACE}/library/math/numbersLine"
               artifactZip = "${WORKSPACE}/${serviceName}.zip"
               artifactVersion = "0.0.${env.BUILD_NUMBER}"
-              versioningDirPath = global_getGITVersionDataForComponent(changeset: env.BUILD_NUMBER, componentType: 'Assets.Apps')
               
                 dir (serviceDirPath) {
 
                 script= "npm install"
                 global_prettyPrintWithHeaderAndFooter header: "Running batch script", body: script
-                bat "${script}"
+                sh "${script}"
 
                 script= "npm run build"
                 global_prettyPrintWithHeaderAndFooter header: "Running batch script", body: script
-                bat "${script}"
+                sh "${script}"
 
                 // Change all files permission to read-write
-                script = "Get-ChildItem ${WORKSPACE} -Recurse | Where-Object {\$_.GetType().ToString() -eq \"System.IO.FileInfo\"} | Set-ItemProperty -Name IsReadOnly -Value \$false"
-                global_prettyPrintWithHeaderAndFooter header: "Running powershell script", body: script
-                powershell "${script}"
+                //script = "Get-ChildItem ${WORKSPACE} -Recurse | Where-Object {\$_.GetType().ToString() -eq \"System.IO.FileInfo\"} | Set-ItemProperty -Name IsReadOnly -Value \$false"
+                //global_prettyPrintWithHeaderAndFooter header: "Running powershell script", body: script
+                //powershell "${script}"
                 }
               // Copy versioning dir to service
               //powershell "Copy-Item -Path '${versioningDirPath}' -Destination ${serviceDirPath}/Artifacts/_PublishedWebsites/MyBagAPI -Recurse"
@@ -179,12 +178,12 @@ pipeline {
       setBuildDescription (PushBRANCH, artifactVersion)                    	
       }
 
-		success {
+    success {
       script{
         if (status == 'active') {
           withCredentials([string(credentialsId: 'az_devops_personal_access_token', variable: 'TOKEN')]){
             env.AZURE_DEVOPS_EXT_PAT = "$TOKEN"
-            powershell "az repos pr set-vote --id ${pullRequestId} --vote approve"
+            sh "az repos pr set-vote --id ${pullRequestId} --vote approve"
           }
         } else {
         return
@@ -193,14 +192,11 @@ pipeline {
     }       
 	failure {
       script {
-        if (params.DISABLE_NOTIFICATION) {
           println "failure"
-        } else {
-          global_sendEmailNotification to: developerEmail, subject: "${JOB_NAME} - Failed", body: "BUILD URL: ${BUILD_URL}"
           if (status == 'active') {
             withCredentials([string(credentialsId: 'az_devops_personal_access_token', variable: 'TOKEN')]){
               env.AZURE_DEVOPS_EXT_PAT = "$TOKEN"
-              powershell "az repos pr set-vote --id ${pullRequestId} --vote reject"
+              sh "az repos pr set-vote --id ${pullRequestId} --vote reject"
             }
           } else {
             return
