@@ -12,7 +12,7 @@ properties([
 ])  
  
 pipeline { 
-      agent { node { label 'devbuild-kub' } }
+      agent { node { label 'Ansible-IT' } }
       options {
         buildDiscarder(logRotator(numToKeepStr: '30'))
         disableConcurrentBuilds()
