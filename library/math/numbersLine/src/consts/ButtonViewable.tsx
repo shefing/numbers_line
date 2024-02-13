@@ -1,13 +1,16 @@
 import { MoveableManagerInterface } from "react-moveable";
 import deleteIcon from "/assets/icons/delete.svg";
 import duplicateIcon from "/assets/icons/duplicate.svg";
+import deleteHoverIcon from "/assets/icons/deleteHover.svg";
+import duplicateHoverIcon from "/assets/icons/duplicateHover.svg";
 import { IAbleProps } from "../type/moveable";
 
 export const ButtonViewable = {
   name: "ButtonViewable",
   props: ["ButtonViewable"],
   render(moveable: MoveableManagerInterface) {
-    const { onDeleteClick, onCopyClick, underRuler } = moveable.props as unknown as IAbleProps;
+    const { onDeleteClick, onCopyClick, underRuler, deleteHovered, setDeleteHovered, duplicateHovered, setDuplicateHovered } =
+      moveable.props as unknown as IAbleProps;
 
     const { cssWidth } = moveable.state;
 
@@ -39,10 +42,20 @@ export const ButtonViewable = {
         }}
       >
         <div style={{ width: "30px", margin: "1px" }} onClick={onDeleteClick}>
-          <img src={deleteIcon} alt="Delete Icon" />
+          <img
+            src={deleteHovered ? deleteHoverIcon : deleteIcon}
+            alt="Delete Icon"
+            onMouseEnter={() => setDeleteHovered(true)}
+            onMouseLeave={() => setDeleteHovered(false)}
+          />
         </div>
         <div style={{ width: "30px", margin: "1px" }} onClick={onCopyClick}>
-          <img src={duplicateIcon} alt="DuplicateIcon Icon" />
+          <img
+            src={duplicateHovered ? duplicateHoverIcon : duplicateIcon}
+            alt="DuplicateIcon Icon"
+            onMouseEnter={() => setDuplicateHovered(true)}
+            onMouseLeave={() => setDuplicateHovered(false)}
+          />
         </div>
       </Icons>
     );

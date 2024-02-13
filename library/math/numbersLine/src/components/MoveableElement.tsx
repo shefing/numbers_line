@@ -6,6 +6,7 @@ import { RulerMargin, RulerPadding } from "../consts/elementConsts";
 import { calcJumpPosition } from "../lib/stylesUtils";
 import { ButtonViewable } from "@/consts/ButtonViewable";
 import { useAction } from "@/hooks/useHookAction";
+import { useState } from "react";
 
 interface IProps {
   moveableRef: any;
@@ -18,6 +19,9 @@ interface IProps {
 const MoveableElement = ({ moveableRef, element, unit, isJumpUnderRuler, setIsJumpUnderRuler }: IProps) => {
   const { windowSize, dragElements, setDragElements } = useNumbersLineContext();
   const { deleteDragElement, duplicateDragElement } = useAction();
+  const [deleteHovered, setDeleteHovered] = useState(false);
+  const [duplicateHovered, setDuplicateHovered] = useState(false);
+
   const hideValueElement = () => {
     let newElements = dragElements.map((item: IElement) => (item.id === element.id ? { ...item, hideNumber: true } : item));
     setDragElements(newElements);
@@ -64,8 +68,12 @@ const MoveableElement = ({ moveableRef, element, unit, isJumpUnderRuler, setIsJu
   const ableProps: IAbleProps = {
     ButtonViewable: true,
     onDeleteClick: () => deleteDragElement(element.id),
+    deleteHovered: deleteHovered,
+    setDeleteHovered: setDeleteHovered,
     onCopyClick: () => duplicateDragElement(element),
     underRuler: isJumpUnderRuler,
+    duplicateHovered: duplicateHovered,
+    setDuplicateHovered: setDuplicateHovered,
   };
 
   return (
