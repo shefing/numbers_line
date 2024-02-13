@@ -1,19 +1,14 @@
 import { MoveableManagerInterface } from "react-moveable";
 import deleteIcon from "/assets/icons/delete.svg";
 import duplicateIcon from "/assets/icons/duplicate.svg";
-import deleteHoverIcon from "/assets/icons/deleteHover.svg";
-import duplicateHoverIcon from "/assets/icons/duplicateHover.svg";
 import { IAbleProps } from "../type/moveable";
 
 export const ButtonViewable = {
   name: "ButtonViewable",
   props: ["ButtonViewable"],
   render(moveable: MoveableManagerInterface) {
-    const { onDeleteClick, onCopyClick, underRuler, deleteHovered, setDeleteHovered, duplicateHovered, setDuplicateHovered } =
-      moveable.props as unknown as IAbleProps;
-
+    const { onDeleteClick, onCopyClick, underRuler } = moveable.props as unknown as IAbleProps;
     const { cssWidth } = moveable.state;
-
     const Icons = moveable.useCSS(
       "div",
       `
@@ -29,6 +24,17 @@ export const ButtonViewable = {
     }
     `
     );
+    const changeHover = (event: any, isdelete: boolean) => {
+      const url = isdelete ? deleteIcon : duplicateIcon;
+      const dotIndex = url.indexOf(".");
+      const beforeDot = url.substring(0, dotIndex);
+      event.target.src = beforeDot + "Hover.svg";
+    };
+
+    const backNotHover = (event: any, isdelete: boolean) => {
+      const url = isdelete ? deleteIcon : duplicateIcon;
+      event.target.src = url;
+    };
 
     return (
       <Icons
@@ -42,20 +48,10 @@ export const ButtonViewable = {
         }}
       >
         <div style={{ width: "30px", margin: "1px" }} onClick={onDeleteClick}>
-          <img
-            src={deleteHovered ? deleteHoverIcon : deleteIcon}
-            alt="Delete Icon"
-            onMouseEnter={() => setDeleteHovered(true)}
-            onMouseLeave={() => setDeleteHovered(false)}
-          />
+          <img src={deleteIcon} alt="Delete Icon" onMouseEnter={(e) => changeHover(e, true)} onMouseLeave={(e) => backNotHover(e, true)} />
         </div>
         <div style={{ width: "30px", margin: "1px" }} onClick={onCopyClick}>
-          <img
-            src={duplicateHovered ? duplicateHoverIcon : duplicateIcon}
-            alt="DuplicateIcon Icon"
-            onMouseEnter={() => setDuplicateHovered(true)}
-            onMouseLeave={() => setDuplicateHovered(false)}
-          />
+          <img src={duplicateIcon} alt="DuplicateIcon Icon" onMouseEnter={(e) => changeHover(e, false)} onMouseLeave={(e) => backNotHover(e, false)} />
         </div>
       </Icons>
     );

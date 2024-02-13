@@ -12,10 +12,6 @@ export interface IElement {
   export interface IAbleProps{
     ButtonViewable: boolean
     onDeleteClick: () => void
-    deleteHovered: boolean
-    setDeleteHovered: (v: boolean) => void
     onCopyClick: () => void
-    duplicateHovered: boolean
-    setDuplicateHovered: (v: boolean) => void
     underRuler: boolean
   }
