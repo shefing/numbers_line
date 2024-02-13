@@ -2,10 +2,10 @@ import { useNumbersLineContext } from "../context/numbersLineContext";
 import Moveable, { OnResize, OnResizeEnd } from "react-moveable";
 import { IAbleProps, IElement } from "../type/moveable";
 import { calculatRulerWidth } from "../lib/utils";
-import { RulerMargin, RulerPadding } from "../consts/elementConsts";
+import { RulerMargin, RulerPadding, ToolbarHieght } from "../consts/elementConsts";
 import { calcJumpPosition } from "../lib/stylesUtils";
 import { ButtonViewable } from "@/consts/ButtonViewable";
-import { useAction } from "@/hooks/useHookAction";
+import { useAction } from "@/hooks/useActionHook";
 
 interface IProps {
   moveableRef: any;
@@ -17,12 +17,8 @@ interface IProps {
 
 const MoveableElement = ({ moveableRef, element, unit, isJumpUnderRuler, setIsJumpUnderRuler }: IProps) => {
   const { windowSize, dragElements, setDragElements } = useNumbersLineContext();
-  const { deleteDragElement, duplicateDragElement } = useAction();
+  const { deleteDragElement, duplicateDragJump } = useAction();
 
-  const hideValueElement = () => {
-    let newElements = dragElements.map((item: IElement) => (item.id === element.id ? { ...item, hideNumber: true } : item));
-    setDragElements(newElements);
-  };
   const changeElementValue = (e: OnResizeEnd) => {
     let newValue = Math.round(e.lastEvent.width / unit);
     let newElements = dragElements.map((item: IElement) => (item.id === element.id ? { ...item, value: newValue } : item));
@@ -40,32 +36,32 @@ const MoveableElement = ({ moveableRef, element, unit, isJumpUnderRuler, setIsJu
     }
   };
 
-  const updateJumpByYLocation = (e: any) => {
-    const originalTransform = e.target.style.transform;
-    const match = originalTransform.match(/,\s*(\d+)px\)/);
-    const yTransform = match[1];
-    const yTransformString = match[0];
-    const bottonElementPsition = calcJumpPosition(yTransform, windowSize.height, isJumpUnderRuler); //e.clientY
-    const grassElement = document.getElementById("grass");
-    const rulerLocation = grassElement ? windowSize.height - RulerMargin - grassElement.clientHeight : windowSize.height - RulerMargin;
+  const updateJumpByYLocation = (e: OnResizeEnd) => {
+    const match = e.target.style.transform.match(/,\s*(\d+)px\)/);
+    if (match) {
+      const yTransform = parseFloat(match[1]);
+      const yTransformString = match[0];
+      const bottonElementPsition = calcJumpPosition(yTransform, windowSize.height, isJumpUnderRuler);
+      const grassElement = document.getElementById("grass");
+      const rulerPosition = grassElement ? windowSize.height - RulerMargin - grassElement.clientHeight : windowSize.height - RulerMargin;
 
-    if (isJumpUnderRuler != rulerLocation < bottonElementPsition) {
-      const newYTransform = parseFloat(yTransform && yTransform);
-      let newYTransformString = "";
-      if (rulerLocation < bottonElementPsition) {
-        setIsJumpUnderRuler(true);
-        newYTransformString = ", " + Math.round(newYTransform + 80).toString() + "px)";
-      } else {
-        setIsJumpUnderRuler(false);
-        newYTransformString = ", " + Math.round(newYTransform - 80).toString() + "px)";
+      if (isJumpUnderRuler != rulerPosition < bottonElementPsition) {
+        let newYTransformString = "";
+        if (rulerPosition < bottonElementPsition) {
+          setIsJumpUnderRuler(true);
+          newYTransformString = ", " + Math.round(yTransform + 80).toString() + "px)";
+        } else {
+          setIsJumpUnderRuler(false);
+          newYTransformString = ", " + Math.round(yTransform - 80).toString() + "px)";
+        }
+        e.target.style.transform = e.target.style.transform.replace(yTransformString, newYTransformString);
       }
-      e.target.style.transform = e.target.style.transform.replace(yTransformString, newYTransformString);
     }
   };
   const ableProps: IAbleProps = {
     ButtonViewable: true,
     onDeleteClick: () => deleteDragElement(element.id),
-    onCopyClick: () => duplicateDragElement(element),
+    onCopyClick: () => duplicateDragJump(element),
     underRuler: isJumpUnderRuler,
   };
 
@@ -81,9 +77,10 @@ const MoveableElement = ({ moveableRef, element, unit, isJumpUnderRuler, setIsJu
       onDragEnd={(e) => updateJumpByYLocation(e)}
       resizable={true}
       renderDirections={["w", "e"]}
-      onResizeStart={() => hideValueElement()}
       onResize={(e) => updateTransform(e)}
       onResizeEnd={(e) => changeElementValue(e)}
+      snappable={true}
+      bounds={{ left: RulerPadding, top: ToolbarHieght + 32, right: RulerPadding, bottom: 32, position: "css" }}
     />
   );
 };

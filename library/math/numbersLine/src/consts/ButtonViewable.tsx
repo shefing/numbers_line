@@ -24,14 +24,14 @@ export const ButtonViewable = {
     }
     `
     );
-    const changeHover = (event: any, isdelete: boolean) => {
+    const changeHover = (event: any, isdelete?: boolean) => {
       const url = isdelete ? deleteIcon : duplicateIcon;
       const dotIndex = url.indexOf(".");
       const beforeDot = url.substring(0, dotIndex);
       event.target.src = beforeDot + "Hover.svg";
     };
 
-    const backNotHover = (event: any, isdelete: boolean) => {
+    const backNotHover = (event: any, isdelete?: boolean) => {
       const url = isdelete ? deleteIcon : duplicateIcon;
       event.target.src = url;
     };
@@ -51,7 +51,7 @@ export const ButtonViewable = {
           <img src={deleteIcon} alt="Delete Icon" onMouseEnter={(e) => changeHover(e, true)} onMouseLeave={(e) => backNotHover(e, true)} />
         </div>
         <div style={{ width: "30px", margin: "1px" }} onClick={onCopyClick}>
-          <img src={duplicateIcon} alt="DuplicateIcon Icon" onMouseEnter={(e) => changeHover(e, false)} onMouseLeave={(e) => backNotHover(e, false)} />
+          <img src={duplicateIcon} alt="DuplicateIcon Icon" onMouseEnter={(e) => changeHover(e)} onMouseLeave={(e) => backNotHover(e)} />
         </div>
       </Icons>
     );
