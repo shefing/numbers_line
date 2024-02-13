@@ -92,11 +92,11 @@ pipeline {
                 script= "npm run build"
                 global_prettyPrintWithHeaderAndFooter header: "Running batch script", body: script
                 sh "${script}"
-
-                sh "cd dist/"
+                }
+                dir ("${WORKSPACE}/library/math/numbersLine/dist"){
                 sh "zip -r ${serviceName}.zip *"
                 sh "unzip -l ${serviceName}.zip"
-                }             
+                }                
               }
             }
           }
@@ -104,7 +104,8 @@ pipeline {
          stage ('Upload') {
            steps {
              script {      
-              withCredentials([usernamePassword(credentialsId: azCredsId, usernameVariable: 'USER', passwordVariable: 'AZURE_DEVOPS_EXT_PAT')]) {
+              withCredentials([string(credentialsId: 'az_devops_personal_access_token', variable: 'TOKEN')]) {
+                env.AZURE_DEVOPS_EXT_PAT = "$TOKEN"
                 publishCmd = "az artifacts universal publish --organization 'https://dev.azure.com/CET-Tech/' --feed 'artifacts-feed' --name ${serviceName} --version ${artifactVersion} --description ${PushBRANCH} --path ${WORKSPACE}/library/math/numbersLine/dist/${serviceName}.zip"
                 println "${publishCmd}"
                 sh "${publishCmd}"
