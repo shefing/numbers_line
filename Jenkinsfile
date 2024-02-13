@@ -114,60 +114,58 @@ pipeline {
            }
          }
 
-        // stage ('TriggerDeploy') {
-        //   steps {
-        //     script {
-        //       if(PushBRANCH == 'develop'){
-        //         machines = "btesting02"
-        //         confType = ""
-        //         envName = ""
+        stage ('TriggerDeploy') {
+          steps {
+            script {
+              if(PushBRANCH == 'develop'){
+                machines = "btesting02"
+                confType = ""
+                envName = ""
                             
-        //         build job: "Microservice-Deploy", 
-        //         parameters: [
-        //               string(name: 'SERVICE_NAME', value: serviceName),
-        //               string(name: 'ARTIFACT_VERSION', value: artifactVersion),
-        //               string(name: 'BRANCH', value: PushBRANCH),
-        //               string(name: 'SERVICE_PATH', value: servicePathOnRemoteServer),
-        //               string(name: 'MACHINES', value: machines),
-        //               string(name: 'ENVIRONMENT', value: envName),
-        //               string(name: 'CONF_TYPE', value: confType)
-        //               ]
-        //       }else if(PushBRANCH.contains('release') || PushBRANCH == 'master' || PushBRANCH.contains('hotfix')){ 
-        //         println "Skipping deployment for PREPROD enviroment.."
-        //           machines = "BPXX.azure.cet-prod,BPXX.azure.cet-prod,BPXX.azure.cet-prod,BPXX.azure.cet-prod,BPXX.azure.cet-prod,BPXX.azure.cet-prod,BPXX.azure.cet-prod,BPXX.azure.cet-prod"
-        //           global_sendEmailNotification(
-        //           subject: "RC Build ${serviceName}",
-        //           body: "SERVICE_NAME: ${serviceName}\nARTIFACT_VERSION: ${artifactVersion}\nBRANCH: ${PushBRANCH}\nSERVICE_PATH: ${servicePathOnRemoteServer}",
-        //           to: 'suhah@cet.ac.il',
-        //           )
-        //         currentBuild.result = 'SUCCESS'
-        //         return
-        //       }else{
-        //         machines = "btesting02"
-        //         confType = ""
-        //         envName = ""
+                build job: "Microservice-Deploy", 
+                parameters: [
+                      string(name: 'SERVICE_NAME', value: serviceName),
+                      string(name: 'ARTIFACT_VERSION', value: artifactVersion),
+                      string(name: 'BRANCH', value: PushBRANCH),
+                      string(name: 'SERVICE_PATH', value: servicePathOnRemoteServer),
+                      string(name: 'MACHINES', value: machines),
+                      string(name: 'ENVIRONMENT', value: envName),
+                      string(name: 'CONF_TYPE', value: confType)
+                      ]
+              }else if(PushBRANCH.contains('release') || PushBRANCH == 'master' || PushBRANCH.contains('hotfix')){ 
+                println "Skipping deployment for PREPROD enviroment.."
+                  machines = "BPXX.azure.cet-prod,BPXX.azure.cet-prod,BPXX.azure.cet-prod,BPXX.azure.cet-prod,BPXX.azure.cet-prod,BPXX.azure.cet-prod,BPXX.azure.cet-prod,BPXX.azure.cet-prod"
+                  global_sendEmailNotification(
+                  subject: "RC Build ${serviceName}",
+                  body: "SERVICE_NAME: ${serviceName}\nARTIFACT_VERSION: ${artifactVersion}\nBRANCH: ${PushBRANCH}\nSERVICE_PATH: ${servicePathOnRemoteServer}",
+                  to: 'suhah@cet.ac.il',
+                  )
+                currentBuild.result = 'SUCCESS'
+                return
+              }else{
+                machines = "btesting02"
+                confType = ""
+                envName = ""
                             
-        //         build job: "Microservice-Deploy", 
-        //         parameters: [
-        //           string(name: 'SERVICE_NAME', value: serviceName),
-        //           string(name: 'ARTIFACT_VERSION', value: artifactVersion),
-        //           string(name: 'BRANCH', value: PushBRANCH),
-        //           string(name: 'SERVICE_PATH', value: servicePathOnRemoteServer),
-        //           string(name: 'MACHINES', value: machines),
-        //           string(name: 'ENVIRONMENT', value: envName),
-        //           string(name: 'CONF_TYPE', value: confType)
-        //         ]
-        //       //  machines = ""//"ApiGW-01.azure.cet-prod,ApiGW-02.azure.cet-prod,MS-01.azure.cet-prod,MS-02.azure.cet-prod"                                          
-        //       //  confType = "appsetting"
-        //       //  envName = ""
-        //       //  break
-        //       }
-        //     }
-        //   }
-        // }  
+                build job: "Microservice-Deploy", 
+                parameters: [
+                  string(name: 'SERVICE_NAME', value: serviceName),
+                  string(name: 'ARTIFACT_VERSION', value: artifactVersion),
+                  string(name: 'BRANCH', value: PushBRANCH),
+                  string(name: 'SERVICE_PATH', value: servicePathOnRemoteServer),
+                  string(name: 'MACHINES', value: machines),
+                  string(name: 'ENVIRONMENT', value: envName),
+                  string(name: 'CONF_TYPE', value: confType)
+                ]
+              //  machines = ""//"ApiGW-01.azure.cet-prod,ApiGW-02.azure.cet-prod,MS-01.azure.cet-prod,MS-02.azure.cet-prod"                                          
+              //  confType = "appsetting"
+              //  envName = ""
+              //  break
+              }
+            }
+          }  
+        }
       }
-
-
 
   post {
 		always {
@@ -200,8 +198,7 @@ pipeline {
         }			
       }
   }
-}    
- 
+}
 def setBuildDescription (branch, version) {
   currentBuild.description = "branch: ${branch}\nversion: ${version}"            
 }
