@@ -11,7 +11,7 @@ export interface IElement {
   }
   export interface IAbleProps{
     ButtonViewable: boolean
-    onDeleteClick: () => {}
-    onCopyClick: () => {}
+    onDeleteClick: () => void
+    onCopyClick: () => void
     underRuler: boolean
   }

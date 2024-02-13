@@ -7,7 +7,6 @@ import { useNumbersLineContext } from "@/context/numbersLineContext";
 import { calculatRulerWidth, calculatUnitsAmount } from "../lib/utils";
 import { RulerPadding, jumpArrowHeight } from "../consts/elementConsts";
 import { MatchBaseJumpClassName, clacHeightStartPosition, clacWidthStartPosition } from "../lib/stylesUtils";
-import { useAction } from "@/hooks/useHookAction";
 
 interface IProps {
   element: IElement;
@@ -15,7 +14,6 @@ interface IProps {
 
 const Jump = ({ element }: IProps) => {
   const { windowSize, type, dragElements, setDragElements, idDraggElementClick } = useNumbersLineContext();
-  const { deleteDragElement, duplicateDragElement } = useAction();
   const [unit, setUnit] = useState(windowSize.width / calculatUnitsAmount(type));
   const [isJumpUnderRuler, setIsJumpUnderRuler] = useState(false);
   const moveableRef = React.useRef<any>(null);
@@ -33,13 +31,6 @@ const Jump = ({ element }: IProps) => {
   const changeHidenumbers = () => {
     let newElements = dragElements.map((item: IElement) => (item.id === idDraggElementClick ? { ...item, hideNumber: !item.hideNumber } : item));
     setDragElements(newElements);
-  };
-
-  const ableProps = {
-    ButtonViewable: true,
-    onDeleteClick: () => deleteDragElement(element.id),
-    onCopyClick: () => duplicateDragElement(element.id),
-    underRuler: isJumpUnderRuler,
   };
 
   return (
@@ -72,7 +63,6 @@ const Jump = ({ element }: IProps) => {
       {idDraggElementClick == element.id && (
         <MoveableElement
           moveableRef={moveableRef}
-          ableProps={ableProps}
           element={element}
           unit={unit}
           isJumpUnderRuler={isJumpUnderRuler}

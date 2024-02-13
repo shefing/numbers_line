@@ -10,17 +10,14 @@ export const useAction = () => {
     setDragElements(newDragElements);
   };
 
-  const duplicateDragElement = (elementId: string) => {
-    const elementToDuplicate = dragElements.find((element) => element.id === elementId);
-    if (elementToDuplicate) {
+  const duplicateDragElement = (element: IElement) => {
       const newElement = {
-        ...elementToDuplicate,
+        ...element,
         id: uuidv4(),
       };
-      const newDragElements: IElement[] = dragElements ? [...dragElements, newElement] : [];
+      const newDragElements: IElement[] = [...dragElements, newElement];
       setDragElements(newDragElements);
       setIdDraggElementClick("");
-    }
   };
 
   return {

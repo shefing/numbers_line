@@ -1,13 +1,13 @@
 import { useNumbersLineContext } from "../context/numbersLineContext";
 import Moveable, { OnResize, OnResizeEnd } from "react-moveable";
-import { IElement } from "../type/moveable";
+import { IAbleProps, IElement } from "../type/moveable";
 import { calculatRulerWidth } from "../lib/utils";
 import { RulerMargin, RulerPadding } from "../consts/elementConsts";
 import { calcJumpPosition } from "../lib/stylesUtils";
 import { ButtonViewable } from "@/consts/ButtonViewable";
+import { useAction } from "@/hooks/useHookAction";
 
 interface IProps {
-  ableProps?: any;
   moveableRef: any;
   element: IElement;
   unit: number;
@@ -15,9 +15,9 @@ interface IProps {
   setIsJumpUnderRuler: (v: boolean) => void;
 }
 
-const MoveableElement = ({ ableProps, moveableRef, element, unit, isJumpUnderRuler, setIsJumpUnderRuler }: IProps) => {
+const MoveableElement = ({ moveableRef, element, unit, isJumpUnderRuler, setIsJumpUnderRuler }: IProps) => {
   const { windowSize, dragElements, setDragElements } = useNumbersLineContext();
-
+  const { deleteDragElement, duplicateDragElement } = useAction();
   const hideValueElement = () => {
     let newElements = dragElements.map((item: IElement) => (item.id === element.id ? { ...item, hideNumber: true } : item));
     setDragElements(newElements);
@@ -60,6 +60,12 @@ const MoveableElement = ({ ableProps, moveableRef, element, unit, isJumpUnderRul
       }
       e.target.style.transform = e.target.style.transform.replace(yTransformString, newYTransformString);
     }
+  };
+  const ableProps: IAbleProps = {
+    ButtonViewable: true,
+    onDeleteClick: () => deleteDragElement(element.id),
+    onCopyClick: () => duplicateDragElement(element),
+    underRuler: isJumpUnderRuler,
   };
 
   return (
