@@ -5,6 +5,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@radix-u
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { TypeActionIconsToolbar } from "../../type/elements";
 import { TypesElement } from "../../type/moveable";
+import { v4 as uuidv4 } from "uuid";
 
 interface IProps {
   type: string;
@@ -32,7 +33,7 @@ const IconsToolbar = ({ type, iconUrl }: IProps) => {
 
   const addDraggableElement = () => {
     let newText = {
-      id: dragElements.length,
+      id: uuidv4(),
       type: TypeActionIconsToolbar.jump == type ? TypesElement.jump : TypesElement.text,
       value: 1,
       hideNumber: true,

@@ -20,14 +20,14 @@ export const MatchDisplayButtonClassName = ( isVisitAble: TypeCover, isChoice: T
   export const MatchBaseJumpClassName = (underRuler: boolean) => {
     return underRuler ? baseJumpClassName + " bg-[#F48460] mb-[1rem]" : baseJumpClassName + " bg-[#009FDE] mt-[1rem]";
   };
-  export const claculateWidthStartingPositionElement = (value: number,windowWidth: number, type: LineRange) => {
+  export const clacWidthStartPosition = (value: number,windowWidth: number, type: LineRange) => {
     return (windowWidth - (windowWidth / calculatUnitsAmount(type)))/value;
   }
-  export const claculateHeightStartingPositionElement = (value: number, windowHeight: number): number => {
+  export const clacHeightStartPosition = (value: number, windowHeight: number): number => {
     return windowHeight / value;
   }
-  export const calculateJumpPosition = (transfomPosition: number, windowHeight: number, isJumpUnderRuler: boolean): number => {
-    const base = transfomPosition* 1 + claculateHeightStartingPositionElement(4, windowHeight)* 1;    
+  export const calcJumpPosition = (transfomPosition: number, windowHeight: number, isJumpUnderRuler: boolean): number => {
+    const base = transfomPosition* 1 + clacHeightStartPosition(4, windowHeight)* 1;    
     return isJumpUnderRuler ? base : base + jumpArrowHeight;
   };
   

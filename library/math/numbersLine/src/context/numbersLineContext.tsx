@@ -8,8 +8,8 @@ interface INumbersLineContextProps {
   setType: (v: LineRange) => void;
   dragElements: IElement[];
   setDragElements: (v: IElement[]) => void;
-  idDraggElementClick: number;
-  setIdDraggElementClick: (v: number) => void;
+  idDraggElementClick: string;
+  setIdDraggElementClick: (v: string) => void;
   coverSituation: TypeCover;
   setCoverSituation: (v: TypeCover) => void;
   visitableDisplayButton: TypeCover;
@@ -22,7 +22,7 @@ export const NumbersLineContext = React.createContext({
   setType: () => null,
   dragElements: {} as IElement[],
   setDragElements: () => null,
-  idDraggElementClick: {} as number,
+  idDraggElementClick: {} as string,
   setIdDraggElementClick: () => null,
   coverSituation: {} as TypeCover,
   setCoverSituation: () => null,
@@ -34,7 +34,7 @@ export const NumbersLineContexProvider = (props: any) => {
   const [windowSize, setWindowSize] = useState<IWindowSize>({ height: window.innerHeight, width: window.innerWidth });
   const [type, setType] = useState(LineRange.ten);
   const [dragElements, setDragElements] = useState<IElement[]>([]);
-  const [idDraggElementClick, setIdDraggElementClick] = useState(-1);
+  const [idDraggElementClick, setIdDraggElementClick] = useState("");
   const [coverSituation, setCoverSituation] = useState(TypeCover.allDiscover);
   const [visitableDisplayButton, setVisitableDisplayButton] = useState(TypeCover.allDiscover);
 

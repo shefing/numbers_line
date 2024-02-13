@@ -1,20 +1,26 @@
 import { useNumbersLineContext } from "../context/numbersLineContext";
 import Moveable, { OnResize, OnResizeEnd } from "react-moveable";
-import { IElement } from "../type/moveable";
+import { IAbleProps, IElement } from "../type/moveable";
 import { calculatRulerWidth } from "../lib/utils";
 import { RulerMargin, RulerPadding } from "../consts/elementConsts";
-import { calculateJumpPosition } from "../lib/stylesUtils";
+import { calcJumpPosition } from "../lib/stylesUtils";
+import { ButtonViewable } from "@/consts/ButtonViewable";
+import { useAction } from "@/hooks/useHookAction";
+import { useState } from "react";
 
 interface IProps {
-  targetRef: any;
+  moveableRef: any;
   element: IElement;
   unit: number;
   isJumpUnderRuler: boolean;
   setIsJumpUnderRuler: (v: boolean) => void;
 }
 
-const MoveableElement = ({ targetRef, element, unit, isJumpUnderRuler, setIsJumpUnderRuler }: IProps) => {
+const MoveableElement = ({ moveableRef, element, unit, isJumpUnderRuler, setIsJumpUnderRuler }: IProps) => {
   const { windowSize, dragElements, setDragElements } = useNumbersLineContext();
+  const { deleteDragElement, duplicateDragElement } = useAction();
+  const [deleteHovered, setDeleteHovered] = useState(false);
+  const [duplicateHovered, setDuplicateHovered] = useState(false);
 
   const hideValueElement = () => {
     let newElements = dragElements.map((item: IElement) => (item.id === element.id ? { ...item, hideNumber: true } : item));
@@ -42,7 +48,7 @@ const MoveableElement = ({ targetRef, element, unit, isJumpUnderRuler, setIsJump
     const match = originalTransform.match(/,\s*(\d+)px\)/);
     const yTransform = match[1];
     const yTransformString = match[0];
-    const bottonElementPsition = calculateJumpPosition(yTransform, windowSize.height, isJumpUnderRuler); //e.clientY
+    const bottonElementPsition = calcJumpPosition(yTransform, windowSize.height, isJumpUnderRuler); //e.clientY
     const grassElement = document.getElementById("grass");
     const rulerLocation = grassElement ? windowSize.height - RulerMargin - grassElement.clientHeight : windowSize.height - RulerMargin;
 
@@ -59,10 +65,22 @@ const MoveableElement = ({ targetRef, element, unit, isJumpUnderRuler, setIsJump
       e.target.style.transform = e.target.style.transform.replace(yTransformString, newYTransformString);
     }
   };
+  const ableProps: IAbleProps = {
+    ButtonViewable: true,
+    onDeleteClick: () => deleteDragElement(element.id),
+    deleteHovered: deleteHovered,
+    setDeleteHovered: setDeleteHovered,
+    onCopyClick: () => duplicateDragElement(element),
+    underRuler: isJumpUnderRuler,
+    duplicateHovered: duplicateHovered,
+    setDuplicateHovered: setDuplicateHovered,
+  };
 
   return (
     <Moveable
-      target={targetRef}
+      target={moveableRef}
+      ables={[ButtonViewable]}
+      props={ableProps || false}
       draggable={true}
       onDrag={(e) => {
         e.target.style.transform = e.transform;
