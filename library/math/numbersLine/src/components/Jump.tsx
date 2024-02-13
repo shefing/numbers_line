@@ -16,7 +16,7 @@ const Jump = ({ element }: IProps) => {
   const { windowSize, type, dragElements, setDragElements, idDraggElementClick } = useNumbersLineContext();
   const [unit, setUnit] = useState(windowSize.width / calculatUnitsAmount(type));
   const [isJumpUnderRuler, setIsJumpUnderRuler] = useState(false);
-  const moveableRef = React.useRef<any>(null);
+  const moveableRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let rulerWidth = calculatRulerWidth(windowSize.width, RulerPadding) / calculatUnitsAmount(type);
