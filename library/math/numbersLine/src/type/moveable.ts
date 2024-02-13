@@ -10,8 +10,8 @@ export interface IElement {
     jump = 'jump',
   }
   export interface IAbleProps{
-    ButtonViewable: boolean,
-    onDeleteClick: () => void
-    onCopyClick:() => void,
+    ButtonViewable: boolean
+    onDeleteClick: () => {}
+    onCopyClick: () => {}
     underRuler: boolean
   }

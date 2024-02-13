@@ -8,6 +8,7 @@ export const ButtonViewable = {
   props: ["ButtonViewable"],
   render(moveable: MoveableManagerInterface) {
     const { onDeleteClick, onCopyClick, underRuler } = moveable.props as unknown as IAbleProps;
+
     const { cssWidth } = moveable.state;
 
     const Icons = moveable.useCSS(
