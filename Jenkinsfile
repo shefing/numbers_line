@@ -77,7 +77,7 @@ pipeline {
         stage ('Build'){
           steps {
             script { 
-              serviceName = 'numbersLine'
+              serviceName = 'numbersline'
               servicePathOnRemoteServer = 'D:/Inetpub/websites/Assets.Apps/library/math/numbersLine'
               serviceDirPath = "${WORKSPACE}/library/math/numbersLine"
               artifactZip = "${WORKSPACE}/${serviceName}.zip"
