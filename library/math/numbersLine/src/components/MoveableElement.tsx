@@ -24,7 +24,7 @@ const MoveableElement = ({ moveableRef, element, unit, isJumpUnderRuler, setIsJu
     const newElements = dragElements.map((item: IElement) => (item.id === element.id ? { ...item, value: newValue } : item));
     setDragElements(newElements);
     e.target.style.width = `${newValue * unit}px`;
-    //change transform whne left resize:
+    //change position when jump reSize on the left:
     const match = e.target.style.transform.match(/\((.*?)px/);
     if (match) {
       const XTransform = parseFloat(match[1]);
