@@ -37,14 +37,14 @@ const Jump = ({ element }: IProps) => {
     <>
       <div
         ref={moveableRef}
-        id={"dragElement-jump" + element.id.toString()}
+        id={"dragElement-jump" + element.id}
         className={`absolute ${idDraggElementClick == element.id ? "cursor-move" : "cursor-pointer"}`}
         style={{
           width: unit * element.value,
           display: "flex",
           flexDirection: isJumpUnderRuler ? "column-reverse" : "column",
-          left: clacWidthStartPosition(2, windowSize.width, type).toString() + "px",
-          top: clacHeightStartPosition(4, windowSize.height).toString() + "px",
+          left: clacWidthStartPosition(2, windowSize.width, type) + "px",
+          top: clacHeightStartPosition(4, windowSize.height) + "px",
         }}
       >
         <img

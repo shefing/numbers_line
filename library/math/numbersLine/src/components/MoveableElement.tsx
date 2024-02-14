@@ -49,10 +49,10 @@ const MoveableElement = ({ moveableRef, element, unit, isJumpUnderRuler, setIsJu
         let newYTransformString = "";
         if (rulerPosition < bottonElementPsition) {
           setIsJumpUnderRuler(true);
-          newYTransformString = ", " + Math.round(yTransform + 80).toString() + "px)";
+          newYTransformString = ", " + Math.round(yTransform + 80) + "px)";
         } else {
           setIsJumpUnderRuler(false);
-          newYTransformString = ", " + Math.round(yTransform - 80).toString() + "px)";
+          newYTransformString = ", " + Math.round(yTransform - 80) + "px)";
         }
         e.target.style.transform = e.target.style.transform.replace(yTransformString, newYTransformString);
       }

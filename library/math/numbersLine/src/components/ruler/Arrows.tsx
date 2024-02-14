@@ -19,17 +19,17 @@ const Arrows = () => {
   };
 
   useEffect(() => {
-    setLeftArrowIcon(leftPosition == 0 ? leftArrowDisable : leftArrow);
+    setLeftArrowIcon(!leftPosition ? leftArrowDisable : leftArrow);
     setRightArrowIcon(leftPosition == calculatScreenWidth(windowSize.width) ? rightArrowDisable : rightArrow);
 
     dragElements.forEach((item) => {
       if (item.id != idDraggElementClick) {
-        const element = document.getElementById("dragElement-jump" + item.id.toString());
+        const element = document.getElementById("dragElement-jump" + item.id);
         let match = element?.style.transform.match(/\((.*?)px/);
         if (match && element) {
           const xPosition = parseFloat(match[1]);
           const xPositionString = match[0];
-          const newxPosition = "(" + (xPosition + leftPosition - leftPositionRef.current).toString() + "px";
+          const newxPosition = "(" + (xPosition + leftPosition - leftPositionRef.current) + "px";
           element.style.transform = element.style.transform.replace(xPositionString, newxPosition);
         }
       }

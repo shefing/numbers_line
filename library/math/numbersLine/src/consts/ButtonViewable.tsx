@@ -47,10 +47,10 @@ export const ButtonViewable = {
           cursor: "pointer",
         }}
       >
-        <div style={{ width: "30px", margin: "1px" }} onClick={onDeleteClick}>
+        <div className="w-[30px] m-[1px]" onClick={onDeleteClick}>
           <img src={deleteIcon} alt="Delete Icon" onMouseEnter={(e) => changeHover(e, true)} onMouseLeave={(e) => backNotHover(e, true)} />
         </div>
-        <div style={{ width: "30px", margin: "1px" }} onClick={onCopyClick}>
+        <div className="w-[30px] m-[1px]" onClick={onCopyClick}>
           <img src={duplicateIcon} alt="DuplicateIcon Icon" onMouseEnter={(e) => changeHover(e)} onMouseLeave={(e) => backNotHover(e)} />
         </div>
       </Icons>
