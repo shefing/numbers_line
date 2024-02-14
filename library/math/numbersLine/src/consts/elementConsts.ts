@@ -26,5 +26,6 @@ export const actionIconsDetials: IActionIcon[] = [
   export const RulerMargin = window.innerHeight * 0.25;
   export const jumpBaseHeight= 40;
   export const jumpArrowHeight= 64;
+  export const ToolbarHieght = 80;
 
 

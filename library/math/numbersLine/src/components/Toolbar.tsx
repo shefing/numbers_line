@@ -1,12 +1,12 @@
 import LineDefinition from "./toolbar/LineDefinition";
 import fullscreen from "/assets/icons/toolbar/fullscreen.svg";
 import IconsToolbar from "./toolbar/ActionIcons";
-import { actionIconsDetials } from "../consts/elementConsts";
+import { ToolbarHieght, actionIconsDetials } from "../consts/elementConsts";
 import { IActionIcon } from "../type/elements";
 
 const Toolbar = () => {
   return (
-    <div className="flex justify-between w-full top-0 left-0 h-[80px] bg-[#ECF9FF]">
+    <div className={`flex justify-between w-full top-0 left-0 bg-[#ECF9FF]`} style={{ height: ToolbarHieght + "px" }}>
       <div className="flex-none">
         <img className="p-5" src={fullscreen} alt="Fullscreen Toolbar" />
       </div>

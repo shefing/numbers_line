@@ -10,10 +10,11 @@ export const useAction = () => {
     setDragElements(newDragElements);
   };
 
-  const duplicateDragElement = (element: IElement) => {
+  const duplicateDragJump = (element: IElement) => {
+    const id = uuidv4()
       const newElement = {
         ...element,
-        id: uuidv4(),
+        id,
       };
       const newDragElements: IElement[] = [...dragElements, newElement];
       setDragElements(newDragElements);
@@ -22,6 +23,6 @@ export const useAction = () => {
 
   return {
     deleteDragElement,
-    duplicateDragElement,
+    duplicateDragJump,
   };
 };

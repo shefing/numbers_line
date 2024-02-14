@@ -5,7 +5,7 @@ import { useNumbersLineContext } from "@/context/numbersLineContext";
 import { baseJumpClassName } from "../styles/jump";
 import { calculatUnitsAmount } from "./utils";
 import { LineRange } from "../type/ruler";
-import { jumpArrowHeight } from "../consts/elementConsts";
+import { jumpArrowHeight, jumpBaseHeight } from "../consts/elementConsts";
 
 export const MatchDisplayButtonClassName = ( isVisitAble: TypeCover, isChoice: TypeCover) => {
   const { coverSituation, visitableDisplayButton } = useNumbersLineContext();
@@ -27,8 +27,8 @@ export const MatchDisplayButtonClassName = ( isVisitAble: TypeCover, isChoice: T
     return windowHeight / value;
   }
   export const calcJumpPosition = (transfomPosition: number, windowHeight: number, isJumpUnderRuler: boolean): number => {
-    const base = transfomPosition* 1 + clacHeightStartPosition(4, windowHeight)* 1;    
-    return isJumpUnderRuler ? base : base + jumpArrowHeight;
+    const base = transfomPosition + clacHeightStartPosition(4, windowHeight);    
+    return isJumpUnderRuler ? base + jumpBaseHeight/3 : base + jumpArrowHeight + jumpBaseHeight/(3/2)
   };
   
 
