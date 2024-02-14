@@ -6,7 +6,6 @@ import { RulerMargin, RulerPadding, ToolbarHieght } from "../consts/elementConst
 import { calcJumpPosition } from "../lib/stylesUtils";
 import { ButtonViewable } from "@/consts/ButtonViewable";
 import { useAction } from "@/hooks/useActionHook";
-import { LucideBarChartHorizontalBig } from "lucide-react";
 
 interface IProps {
   moveableRef: any;
