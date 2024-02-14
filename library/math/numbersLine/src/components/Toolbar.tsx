@@ -6,7 +6,7 @@ import { IActionIcon } from "../type/elements";
 
 const Toolbar = () => {
   return (
-    <div className={`flex justify-between w-full top-0 left-0 h-[${ToolbarHieght}px] bg-[#ECF9FF]`}>
+    <div className={`flex justify-between w-full top-0 left-0 bg-[#ECF9FF]`} style={{ height: ToolbarHieght + "px" }}>
       <div className="flex-none">
         <img className="p-5" src={fullscreen} alt="Fullscreen Toolbar" />
       </div>

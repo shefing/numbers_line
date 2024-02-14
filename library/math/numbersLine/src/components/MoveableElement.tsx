@@ -16,7 +16,7 @@ interface IProps {
 }
 
 const MoveableElement = ({ moveableRef, element, unit, isJumpUnderRuler, setIsJumpUnderRuler }: IProps) => {
-  const { windowSize, dragElements, setDragElements } = useNumbersLineContext();
+  const { windowSize, setLeftPositionValid, dragElements, setDragElements } = useNumbersLineContext();
   const { deleteDragElement, duplicateDragJump } = useAction();
 
   const changeElementValue = (e: OnResizeEnd) => {
@@ -81,6 +81,12 @@ const MoveableElement = ({ moveableRef, element, unit, isJumpUnderRuler, setIsJu
       onResizeEnd={(e) => changeElementValue(e)}
       snappable={true}
       bounds={{ left: RulerPadding, top: ToolbarHieght + 32, right: RulerPadding, bottom: 32, position: "css" }}
+      onBound={(e) => {
+        const range = e.bounds.right ? -1 : e.bounds.left ? 1 : 0;
+        setLeftPositionValid(range);
+        e.bounds.right = false;
+        e.bounds.left = false;
+      }}
     />
   );
 };

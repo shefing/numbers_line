@@ -37,7 +37,7 @@ const Jump = ({ element }: IProps) => {
     <>
       <div
         ref={moveableRef}
-        id="dragElement-jump"
+        id={"dragElement-jump" + element.id.toString()}
         className={`absolute ${idDraggElementClick == element.id ? "cursor-move" : "cursor-pointer"}`}
         style={{
           width: unit * element.value,

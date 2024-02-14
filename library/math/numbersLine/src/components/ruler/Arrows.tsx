@@ -5,17 +5,13 @@ import rightArrow from "/assets/icons/arrowRight.svg";
 import rightArrowDisable from "/assets/icons/arrowRightDisable.svg";
 import { LineRange, RulerLenth } from "../../type/ruler";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-interface IProps {
-  leftPosition: number;
-  setLeftPosition: (val: number) => void;
-}
-
-const Arrows = ({ leftPosition, setLeftPosition }: IProps) => {
-  const { type, windowSize } = useNumbersLineContext();
+const Arrows = () => {
+  const { type, windowSize, leftPosition, setLeftPosition, dragElements, idDraggElementClick } = useNumbersLineContext();
   const [leftArrowIcon, setLeftArrowIcon] = useState(leftArrow);
   const [rightArrowIcon, setRightArrowIcon] = useState(rightArrow);
+  const leftPositionRef = useRef(leftPosition);
 
   const updatePositionOnArrowClick = (direction: "left" | "right") => {
     const step = windowSize.width / RulerLenth.hundred;
@@ -23,10 +19,22 @@ const Arrows = ({ leftPosition, setLeftPosition }: IProps) => {
   };
 
   useEffect(() => {
-    const urlLeft = leftPosition == 0 ? leftArrowDisable : leftArrow;
-    setLeftArrowIcon(urlLeft);
-    const urlRight = leftPosition == calculatScreenWidth(windowSize.width) ? rightArrowDisable : rightArrow;
-    setRightArrowIcon(urlRight);
+    setLeftArrowIcon(leftPosition == 0 ? leftArrowDisable : leftArrow);
+    setRightArrowIcon(leftPosition == calculatScreenWidth(windowSize.width) ? rightArrowDisable : rightArrow);
+
+    dragElements.forEach((item) => {
+      if (item.id != idDraggElementClick) {
+        const element = document.getElementById("dragElement-jump" + item.id.toString());
+        let match = element?.style.transform.match(/\((.*?)px/);
+        if (match && element) {
+          const xPosition = parseFloat(match[1]);
+          const xPositionString = match[0];
+          const newxPosition = "(" + (xPosition + leftPosition - leftPositionRef.current).toString() + "px";
+          element.style.transform = element.style.transform.replace(xPositionString, newxPosition);
+        }
+      }
+    });
+    leftPositionRef.current = leftPosition;
   }, [leftPosition]);
 
   return (
