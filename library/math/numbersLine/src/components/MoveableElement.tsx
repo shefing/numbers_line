@@ -20,10 +20,22 @@ const MoveableElement = ({ moveableRef, element, unit, isJumpUnderRuler, setIsJu
   const { deleteDragElement, duplicateDragJump } = useAction();
 
   const changeElementValue = (e: OnResizeEnd) => {
-    let newValue = Math.round(e.lastEvent.width / unit);
-    let newElements = dragElements.map((item: IElement) => (item.id === element.id ? { ...item, value: newValue } : item));
+    const newValue = Math.round(e.lastEvent.width / unit);
+    const newElements = dragElements.map((item: IElement) => (item.id === element.id ? { ...item, value: newValue } : item));
     setDragElements(newElements);
     e.target.style.width = `${newValue * unit}px`;
+    //change position when jump reSize on the left:
+    const match = e.target.style.transform.match(/\((.*?)px/);
+    if (match) {
+      const XTransform = parseFloat(match[1]);
+      const xPosition = (windowSize.width + unit) / 2 + XTransform;
+      const xXTransformString = match[0];
+      if (e.clientX < xPosition) {
+        const range = e.lastEvent.width - newValue * unit;
+        const newXTransform = "(" + (XTransform + range) + "px";
+        e.target.style.transform = e.target.style.transform.replace(xXTransformString, newXTransform);
+      }
+    }
   };
 
   const updateTransform = (e: OnResize) => {
