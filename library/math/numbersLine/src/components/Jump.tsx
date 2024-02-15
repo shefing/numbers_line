@@ -6,7 +6,7 @@ import MoveableElement from "./MoveableElement";
 import { useNumbersLineContext } from "@/context/numbersLineContext";
 import { calculatRulerWidth, calculatUnitsAmount } from "../lib/utils";
 import { RulerPadding, jumpArrowHeight } from "../consts/elementConsts";
-import { MatchBaseJumpClassName, clacHeightStartPosition, clacWidthStartPosition } from "../lib/stylesUtils";
+import { MatchBaseJumpClassName, calcHeightStartPosition, calcWidthStartPosition } from "../lib/stylesUtils";
 
 interface IProps {
   element: IElement;
@@ -43,8 +43,8 @@ const Jump = ({ element }: IProps) => {
           width: unit * element.value,
           display: "flex",
           flexDirection: isJumpUnderRuler ? "column-reverse" : "column",
-          left: clacWidthStartPosition(2, windowSize.width, type) + "px",
-          top: clacHeightStartPosition(4, windowSize.height) + "px",
+          left: calcWidthStartPosition(2, windowSize.width, type) + "px",
+          top: calcHeightStartPosition(4, windowSize.height) + "px",
         }}
       >
         <img
