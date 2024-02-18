@@ -28,20 +28,13 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
   });
 
   const ChangeCopyDisable = (e: any) => {
-    debugger;
     const matchX = e.target.style.transform.match(/\((.*?)px/);
     if (matchX) {
       const xPosition = matchX[1];
-      const endYPosition = parseFloat(xPosition) + parseFloat(e.target.style.width) * 2;
-      if (endYPosition > windowSize.width - RulerPadding)
-        setAbleProps((prevState) => ({
-          ...prevState,
-          copyApproval: false,
-        }));
-      setAbleProps((prevState) => ({
-        ...prevState,
-        copyApproval: true,
-      }));
+      const endXPosition = parseFloat(xPosition) + parseFloat(e.target.style.width) * 2;
+      if (endXPosition > windowSize.width - RulerPadding && typeRuler != LineRange.hundred)
+        setAbleProps((prevState) => ({ ...prevState, copyApproval: false }));
+      else setAbleProps((prevState) => ({ ...prevState, copyApproval: true }));
     }
   };
   const onDragEnd = (e: OnResizeEnd) => {
