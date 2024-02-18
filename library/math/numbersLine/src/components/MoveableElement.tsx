@@ -1,7 +1,7 @@
 import { useNumbersLineContext } from "../context/numbersLineContext";
 import Moveable, { OnResize, OnResizeEnd } from "react-moveable";
 import { IAbleProps, IElement } from "../type/moveable";
-import { calculatRulerWidth } from "../lib/utils";
+import { calculatRulerWidth, calculatUnitsAmount } from "../lib/utils";
 import { RulerMargin, RulerPadding, ToolbarHieght, jumpArrowHeight, jumpBaseHeight } from "../consts/elementConsts";
 import { calcJumpPosition } from "../lib/stylesUtils";
 import { ButtonViewable } from "@/consts/ButtonViewable";
@@ -27,6 +27,21 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
     underRuler: element.underRuler,
   });
 
+  const updateXLocation = (e: any) => {
+    debugger;
+    const originalString = e.target.style.transform;
+    const matchX = originalString.match(/\((.*?)px/);
+    if (matchX) {
+      const xPosition = parseFloat(matchX[1]);
+      const xPositionString = matchX[0];
+      const unitsAmount = calculatUnitsAmount(typeRuler);
+      const sidesPixels = ((unitsAmount / 2 - Math.round(xPosition - RulerPadding) / unit) / unitsAmount) * 4;
+      const newXPosition = Math.round((xPosition - RulerPadding) / unit) * unit + RulerPadding + sidesPixels;
+      const newXPositionString = "(" + newXPosition + "px";
+
+      e.target.style.transform = e.target.style.transform.replace(xPositionString, newXPositionString);
+    }
+  };
   const ChangeCopyDisable = (e: any) => {
     const matchX = e.target.style.transform.match(/\((.*?)px/);
     if (matchX) {
@@ -44,12 +59,15 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
     if (matchY) {
       const yTransform = parseFloat(matchY[1]);
       const yTransformString = matchY[0];
-      const bottonElementPsition = calcJumpPosition(yTransform, element.underRuler);
+      const elementPsition = calcJumpPosition(yTransform, element.underRuler);
       const grassElement = document.getElementById("grass");
       const rulerPosition = grassElement ? windowSize.height - RulerMargin - grassElement.clientHeight : windowSize.height - RulerMargin;
-      if (element.underRuler != rulerPosition < bottonElementPsition) {
+      if (Math.abs(rulerPosition - elementPsition) < 50) {
+        updateXLocation(e);
+      }
+      if (element.underRuler != rulerPosition < elementPsition) {
         let newYPositionString = "";
-        if (rulerPosition < bottonElementPsition) {
+        if (rulerPosition < elementPsition) {
           isUnderRuler = true;
           newYPositionString = ", " + Math.round(yTransform + 80) + "px)";
         } else {
