@@ -57,7 +57,7 @@
 }
 
 :root {
-  --margin-value: -28px;
+  --margin-value:28px;
 }
 
 .moveable-direction.moveable-e, .moveable-direction.moveable-w {
@@ -81,7 +81,7 @@
 
 .moveable-direction.moveable-w{
   background-image: url('../public/assets/icons/resizeLeft.svg')  !important;
-  margin-inline:-13px !important;
+  margin-inline:-14px !important;
   border-bottom-right-radius: 0px !important;
   border-top-right-radius: 0px !important;
 }

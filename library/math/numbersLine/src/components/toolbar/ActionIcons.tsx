@@ -6,15 +6,16 @@ import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { TypeActionIconsToolbar } from "../../type/elements";
 import { TypesElement } from "../../type/moveable";
 import { v4 as uuidv4 } from "uuid";
+import { calcHeightStartPosition, calcWidthStartPosition } from "@/lib/stylesUtils";
 
 interface IProps {
-  type: string;
+  typeAction: string;
   iconUrl: string;
 }
-const IconsToolbar = ({ type, iconUrl }: IProps) => {
+const IconsToolbar = ({ typeAction, iconUrl }: IProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const { dragElements, setDragElements } = useNumbersLineContext();
+  const { windowSize, typeRuler, dragElements, setDragElements } = useNumbersLineContext();
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -34,16 +35,17 @@ const IconsToolbar = ({ type, iconUrl }: IProps) => {
   const addDraggableElement = () => {
     let newText = {
       id: uuidv4(),
-      type: TypeActionIconsToolbar.jump == type ? TypesElement.jump : TypesElement.text,
+      type: TypeActionIconsToolbar.jump == typeAction ? TypesElement.jump : TypesElement.text,
       value: 1,
       hideNumber: true,
+      transform: `translate(${calcWidthStartPosition(2, windowSize.width, typeRuler)}px, ${calcHeightStartPosition(4, windowSize.height)}px)`,
+      underRuler: false,
     };
-
     let arr = [...dragElements, newText];
     setDragElements(arr);
   };
   const actionButtonClick = () => {
-    type == TypeActionIconsToolbar.jump || type == TypeActionIconsToolbar.text ? addDraggableElement() : setIsOpen(!isOpen);
+    typeAction == TypeActionIconsToolbar.jump || typeAction == TypeActionIconsToolbar.text ? addDraggableElement() : setIsOpen(!isOpen);
   };
 
   return (
@@ -51,7 +53,7 @@ const IconsToolbar = ({ type, iconUrl }: IProps) => {
       <img
         className="m-3 cursor-pointer"
         src={getImageSrc(iconUrl, isHovered, isOpen)}
-        alt={type + " Toolbar"}
+        alt={typeAction + " Toolbar"}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={() => actionButtonClick()}
@@ -59,7 +61,7 @@ const IconsToolbar = ({ type, iconUrl }: IProps) => {
       <div className="relative">
         <DropdownMenu open={isOpen} onOpenChange={(open) => setIsOpen(open)}>
           <DropdownMenuTrigger />
-          <DropdownMenuContent>{type == TypeActionIconsToolbar.displayNumbersLine && <DisplayNumbers setOpen={setIsOpen} />}</DropdownMenuContent>
+          <DropdownMenuContent>{typeAction == TypeActionIconsToolbar.displayNumbersLine && <DisplayNumbers setOpen={setIsOpen} />}</DropdownMenuContent>
         </DropdownMenu>
       </div>
     </div>

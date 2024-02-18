@@ -4,7 +4,7 @@ import { LineRange } from "../../type/ruler";
 import Numbers from "./Numbers";
 
 const XAxis = () => {
-  const { type, setLeftPositionValid } = useNumbersLineContext();
+  const { typeRuler, setLeftPositionValid } = useNumbersLineContext();
   const [startX, setStartX] = useState(0);
   const [isDragging, setisDragging] = useState(false);
 
@@ -26,7 +26,7 @@ const XAxis = () => {
 
   return (
     <>
-      {type == LineRange.hundred ? (
+      {typeRuler == LineRange.hundred ? (
         <div className="pt-5" onMouseDown={handleStartDrag} onMouseMove={handleonDrag} onMouseUp={handleStopDrag} onMouseLeave={handleStopDrag}>
           <Numbers />
         </div>

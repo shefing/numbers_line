@@ -8,7 +8,7 @@ import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { useEffect, useRef, useState } from "react";
 
 const Arrows = () => {
-  const { type, windowSize, leftPosition, setLeftPosition, dragElements, idDraggElementClick } = useNumbersLineContext();
+  const { typeRuler, windowSize, leftPosition, setLeftPosition, dragElements, idDraggElementClick } = useNumbersLineContext();
   const [leftArrowIcon, setLeftArrowIcon] = useState(leftArrow);
   const [rightArrowIcon, setRightArrowIcon] = useState(rightArrow);
   const leftPositionRef = useRef(leftPosition);
@@ -29,8 +29,9 @@ const Arrows = () => {
         if (match && element) {
           const xPosition = parseFloat(match[1]);
           const xPositionString = match[0];
-          const newxPosition = "(" + (xPosition + leftPosition - leftPositionRef.current) + "px";
-          element.style.transform = element.style.transform.replace(xPositionString, newxPosition);
+          const newXPosition = "(" + (xPosition + leftPosition - leftPositionRef.current) + "px";
+          element.style.transform = element.style.transform.replace(xPositionString, newXPosition);
+          item.transform = element.style.transform;
         }
       }
     });
@@ -39,7 +40,7 @@ const Arrows = () => {
 
   return (
     <div className="flex justify-between m-3 mb-6">
-      {type == LineRange.hundred && (
+      {typeRuler == LineRange.hundred && (
         <>
           <div className="m-2 cursor-pointer" onClick={() => updatePositionOnArrowClick("left")}>
             <img src={leftArrowIcon} alt="Left Arrow" />

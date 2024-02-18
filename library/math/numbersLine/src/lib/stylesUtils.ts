@@ -26,10 +26,9 @@ export const MatchDisplayButtonClassName = ( isVisitAble: TypeCover, isChoice: T
   export const calcHeightStartPosition = (value: number, windowHeight: number): number => {
     return windowHeight / value;
   }
-  export const calcJumpPosition = (transfomPosition: number, windowHeight: number, isJumpUnderRuler: boolean): number => {
-    const startPosition = calcHeightStartPosition(4, windowHeight);    
-    const base = transfomPosition + startPosition;
-    return isJumpUnderRuler ? base + jumpBaseHeight/3 : base + jumpArrowHeight + jumpBaseHeight/(3/2)
+  export const calcJumpPosition = (transfomPosition: number, isJumpUnderRuler: boolean): number => {
+    const base = transfomPosition + jumpBaseHeight/3;
+    return isJumpUnderRuler ? base  : base+jumpArrowHeight +  + jumpBaseHeight/3; 
   };
   
 

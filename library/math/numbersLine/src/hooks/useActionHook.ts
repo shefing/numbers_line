@@ -9,20 +9,34 @@ export const useAction = () => {
     const newDragElements = dragElements.filter((element) => element.id !== elementId);
     setDragElements(newDragElements);
   };
-
-  const duplicateDragJump = (element: IElement) => {
-    const id = uuidv4()
-      const newElement = {
-        ...element,
-        id,
-      };
-      const newDragElements: IElement[] = [...dragElements, newElement];
-      setDragElements(newDragElements);
-      setIdDraggElementClick("");
+  const duplicateDragJump = async (element: IElement) => {
+    const id = uuidv4();
+    let transform = "";
+    const baseJump = document.getElementById("dragElement-jump" + element.id);
+    let match = baseJump?.style.transform.match(/\((.*?)px/s);
+    if (match && baseJump) {
+      const xPosition = parseFloat(match[1]);
+      const xPositionString = match[0];
+      const newXPosition = "(" + (xPosition + baseJump.clientWidth) + "px";
+      transform = baseJump.style.transform.replace(xPositionString, newXPosition);
+    }
+    const newElement = {
+      ...element,
+      id,
+      transform: transform,
+    };
+    const newDragElements: IElement[] = [...dragElements, newElement];
+    setDragElements(newDragElements);
+    setIdDraggElementClick(id);
+  };
+  const updateDragElements = (elementId: string, newElement: IElement) => {
+    const newElements = dragElements.map((item: IElement) => (item.id === elementId ? newElement : item));
+    setDragElements(newElements);
   };
 
   return {
     deleteDragElement,
     duplicateDragJump,
+    updateDragElements,
   };
 };
