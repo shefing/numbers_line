@@ -14,8 +14,9 @@ interface IProps {
 }
 
 const Jump = ({ element }: IProps) => {
-  const { windowSize, typeRuler, dragElements, setDragElements, idDraggElementClick } = useNumbersLineContext();
+  const { windowSize, typeRuler, dragElements, idDraggElementClick } = useNumbersLineContext();
   const [unit, setUnit] = useState(windowSize.width / calculatUnitsAmount(typeRuler));
+  const [hideNumber, setHideNumber] = useState(true);
   const moveableRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -34,11 +35,6 @@ const Jump = ({ element }: IProps) => {
       root.style.setProperty("--margin-value", `${item.underRuler ? -50 : 28}px`);
     });
   }, [dragElements]);
-
-  const changeHidenumbers = () => {
-    let newElements = dragElements.map((item: IElement) => (item.id === idDraggElementClick ? { ...item, hideNumber: !item.hideNumber } : item));
-    setDragElements(newElements);
-  };
 
   return (
     <>
@@ -60,8 +56,8 @@ const Jump = ({ element }: IProps) => {
           alt="Menu Arrow"
         />
         <div id="dragElement-jumpBase" className={MatchBaseJumpClassName(element.underRuler)}>
-          <span id="dragElement-jumpLength" className="cursor-pointer" onClick={() => changeHidenumbers()}>
-            {element.hideNumber ? "?" : typeRuler != LineRange.hundredCircular ? element.value : element.value * 10}
+          <span id="dragElement-jumpLength" className="cursor-pointer" onClick={() => setHideNumber(!hideNumber)}>
+            {hideNumber ? "?" : typeRuler != LineRange.hundredCircular ? element.value : element.value * 10}
           </span>
         </div>
       </div>

@@ -2,7 +2,6 @@ export interface IElement {
     id: string
     type: TypesElement
     value: number
-    hideNumber: boolean
     transform:string
     underRuler:boolean
   }

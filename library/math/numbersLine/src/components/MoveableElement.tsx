@@ -71,7 +71,6 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
 
     updateDragElements(element.id, { ...element, transform: e.target.style.transform, underRuler: isUnderRuler });
     setIdDraggElementClick("");
-    setIdDraggElementClick(element.id);
   };
   const onResize = (e: OnResize) => {
     if (
@@ -103,7 +102,6 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
     //change copy to disable if have no space
     ChangeCopyDisable(e);
     setIdDraggElementClick("");
-    setIdDraggElementClick(element.id);
   };
   const onBound = (e: { bounds: { right: boolean; left: boolean } }) => {
     if (typeRuler == LineRange.hundred) {

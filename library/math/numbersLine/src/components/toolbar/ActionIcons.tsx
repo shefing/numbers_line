@@ -37,7 +37,6 @@ const IconsToolbar = ({ typeAction, iconUrl }: IProps) => {
       id: uuidv4(),
       type: TypeActionIconsToolbar.jump == typeAction ? TypesElement.jump : TypesElement.text,
       value: 1,
-      hideNumber: true,
       transform: `translate(${calcWidthStartPosition(2, windowSize.width, typeRuler)}px, ${calcHeightStartPosition(4, windowSize.height)}px)`,
       underRuler: false,
     };
