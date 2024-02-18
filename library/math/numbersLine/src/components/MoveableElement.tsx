@@ -16,7 +16,7 @@ interface IProps {
 }
 
 const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
-  const { windowSize, typeRuler, setLeftPositionValid, setIdDraggElementClick } = useNumbersLineContext();
+  const { windowSize, typeRuler, setIdDraggElementClick } = useNumbersLineContext();
   const { deleteDragElement, duplicateDragJump, updateDragElements } = useAction();
   const [ableProps, setAbleProps] = useState<IAbleProps>({
     ButtonViewable: true,
@@ -96,14 +96,6 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
     ChangeCopyDisable(e);
     setIdDraggElementClick("");
   };
-  const onBound = (e: { bounds: { right: boolean; left: boolean } }) => {
-    if (typeRuler == LineRange.hundred) {
-      const range = e.bounds.right ? -1 : e.bounds.left ? 1 : 0;
-      setLeftPositionValid(range);
-      e.bounds.right = false;
-      e.bounds.left = false;
-    }
-  };
 
   return (
     <Moveable
@@ -127,7 +119,6 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
         bottom: element.underRuler ? 0 : jumpArrowHeight + jumpBaseHeight,
         position: "css",
       }}
-      onBound={(e) => onBound(e)}
     />
   );
 };
