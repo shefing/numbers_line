@@ -3,10 +3,11 @@ import jumpArrowMinus from "/assets/icons/jumpArrowMinus.png";
 import React, { useEffect, useState } from "react";
 import { IElement } from "../type/moveable";
 import MoveableElement from "./MoveableElement";
-import { useNumbersLineContext } from "@/context/numbersLineContext";
+import { useNumbersLineContext } from "../context/numbersLineContext";
 import { calculatRulerWidth, calculatUnitsAmount } from "../lib/utils";
 import { RulerPadding, jumpArrowHeight } from "../consts/elementConsts";
 import { MatchBaseJumpClassName } from "../lib/stylesUtils";
+import { LineRange } from "@/type/ruler";
 
 interface IProps {
   element: IElement;
@@ -60,7 +61,7 @@ const Jump = ({ element }: IProps) => {
         />
         <div id="dragElement-jumpBase" className={MatchBaseJumpClassName(element.underRuler)}>
           <span id="dragElement-jumpLength" className="cursor-pointer" onClick={() => changeHidenumbers()}>
-            {element.hideNumber ? "?" : element.value}
+            {element.hideNumber ? "?" : typeRuler != LineRange.hundredCircular ? element.value : element.value * 10}
           </span>
         </div>
       </div>

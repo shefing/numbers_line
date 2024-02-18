@@ -26,23 +26,24 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
     copyApproval: true,
     underRuler: element.underRuler,
   });
+
   const ChangeCopyDisable = (e: any) => {
+    debugger;
     const matchX = e.target.style.transform.match(/\((.*?)px/);
     if (matchX) {
       const xPosition = matchX[1];
       const endYPosition = parseFloat(xPosition) + parseFloat(e.target.style.width) * 2;
-      endYPosition > windowSize.width - RulerPadding
-        ? setAbleProps((prevState) => ({
-            ...prevState,
-            copyApproval: false,
-          }))
-        : setAbleProps((prevState) => ({
-            ...prevState,
-            copyApproval: true,
-          }));
+      if (endYPosition > windowSize.width - RulerPadding)
+        setAbleProps((prevState) => ({
+          ...prevState,
+          copyApproval: false,
+        }));
+      setAbleProps((prevState) => ({
+        ...prevState,
+        copyApproval: true,
+      }));
     }
   };
-
   const onDragEnd = (e: OnResizeEnd) => {
     //Change the color of the jump if dragged under the ruler
     let isUnderRuler = element.underRuler;
@@ -70,6 +71,7 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
 
     updateDragElements(element.id, { ...element, transform: e.target.style.transform, underRuler: isUnderRuler });
     setIdDraggElementClick("");
+    setIdDraggElementClick(element.id);
   };
   const onResize = (e: OnResize) => {
     if (
@@ -101,6 +103,7 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
     //change copy to disable if have no space
     ChangeCopyDisable(e);
     setIdDraggElementClick("");
+    setIdDraggElementClick(element.id);
   };
   const onBound = (e: { bounds: { right: boolean; left: boolean } }) => {
     if (typeRuler == LineRange.hundred) {
