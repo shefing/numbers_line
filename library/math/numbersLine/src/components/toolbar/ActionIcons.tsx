@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { getImageSrc } from "@/lib/utils";
+import { calculatUnitsAmount, getImageSrc } from "@/lib/utils";
 import DisplayNumbers from "./DisplayNumbers";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
@@ -15,7 +15,8 @@ interface IProps {
 const IconsToolbar = ({ typeAction, iconUrl }: IProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const { windowSize, typeRuler, dragElements, setDragElements } = useNumbersLineContext();
+  const [newJumpPixels, setNewJumpPixels] = useState(0);
+  const { windowSize, typeRuler, dragElements, setDragElements, idDraggElementClick } = useNumbersLineContext();
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -24,25 +25,32 @@ const IconsToolbar = ({ typeAction, iconUrl }: IProps) => {
         setIsOpen(false);
       }
     };
-
     document.addEventListener("mousedown", handleOutsideClick);
-
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, [isOpen]);
 
+  useEffect(() => {
+    setNewJumpPixels(0);
+  }, [idDraggElementClick]);
+
   const addDraggableElement = () => {
+    const xTranslate = calcWidthStartPosition(2, windowSize.width, typeRuler) + newJumpPixels;
+    const yTranslate = calcHeightStartPosition(4, windowSize.height) + newJumpPixels;
     let newText = {
       id: uuidv4(),
       type: TypeActionIconsToolbar.jump == typeAction ? TypesElement.jump : TypesElement.text,
       value: 1,
-      transform: `translate(${calcWidthStartPosition(2, windowSize.width, typeRuler)}px, ${calcHeightStartPosition(4, windowSize.height)}px)`,
+      transform: `translate(${xTranslate}px, ${yTranslate}px)`,
       underRuler: false,
     };
     let arr = [...dragElements, newText];
     setDragElements(arr);
+    setNewJumpPixels((prevPixels) => prevPixels + 10);
+    if (xTranslate > windowSize.width - windowSize.width / calculatUnitsAmount(typeRuler) - 50 || yTranslate > windowSize.height - 50) setNewJumpPixels(0);
   };
+
   const actionButtonClick = () => {
     typeAction == TypeActionIconsToolbar.jump || typeAction == TypeActionIconsToolbar.text ? addDraggableElement() : setIsOpen(!isOpen);
   };
@@ -60,7 +68,7 @@ const IconsToolbar = ({ typeAction, iconUrl }: IProps) => {
       <div className="relative">
         <DropdownMenu open={isOpen} onOpenChange={(open) => setIsOpen(open)}>
           <DropdownMenuTrigger />
-          <DropdownMenuContent>{typeAction == TypeActionIconsToolbar.displayNumbersLine && <DisplayNumbers setOpen={setIsOpen} />}</DropdownMenuContent>
+          <DropdownMenuContent>{typeAction === TypeActionIconsToolbar.displayNumbersLine && <DisplayNumbers setOpen={setIsOpen} />}</DropdownMenuContent>
         </DropdownMenu>
       </div>
     </div>
