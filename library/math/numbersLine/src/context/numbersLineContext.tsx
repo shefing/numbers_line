@@ -5,8 +5,8 @@ import { IElement } from "../type/moveable";
 import { calculatScreenWidth } from "@/lib/utils";
 interface INumbersLineContextProps {
   windowSize: IWindowSize;
-  type: LineRange;
-  setType: (v: LineRange) => void;
+  typeRuler: LineRange;
+  setTypeRuler: (v: LineRange) => void;
   leftPosition: number;
   setLeftPosition: (v: number) => void;
   setLeftPositionValid: (v: number) => void;
@@ -22,8 +22,8 @@ interface INumbersLineContextProps {
 
 export const NumbersLineContext = React.createContext({
   windowSize: {} as IWindowSize,
-  type: {} as LineRange,
-  setType: () => null,
+  typeRuler: {} as LineRange,
+  setTypeRuler: () => null,
   leftPosition: {} as number,
   setLeftPosition: () => null,
   setLeftPositionValid: () => null,
@@ -39,7 +39,7 @@ export const NumbersLineContext = React.createContext({
 
 export const NumbersLineContexProvider = (props: any) => {
   const [windowSize, setWindowSize] = useState<IWindowSize>({ height: window.innerHeight, width: window.innerWidth });
-  const [type, setType] = useState(LineRange.ten);
+  const [typeRuler, setTypeRuler] = useState(LineRange.ten);
   const [leftPosition, setLeftPosition] = useState(0);
   const setLeftPositionValid = (v: number) => setLeftPosition((prevLeft: number) => Math.max(calculatScreenWidth(windowSize.width), Math.min(0, prevLeft + v)));
   const [dragElements, setDragElements] = useState<IElement[]>([]);
@@ -62,14 +62,14 @@ export const NumbersLineContexProvider = (props: any) => {
     setDragElements([]);
     setCoverSituation(TypeCover.allDiscover);
     setLeftPosition(0);
-  }, [type]);
+  }, [typeRuler]);
 
   return (
     <NumbersLineContext.Provider
       value={{
         windowSize,
-        type,
-        setType,
+        typeRuler,
+        setTypeRuler,
         leftPosition,
         setLeftPosition,
         setLeftPositionValid,

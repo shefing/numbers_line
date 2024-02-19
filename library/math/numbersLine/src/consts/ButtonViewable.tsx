@@ -1,14 +1,28 @@
 import { MoveableManagerInterface } from "react-moveable";
 import deleteIcon from "/assets/icons/delete.svg";
 import duplicateIcon from "/assets/icons/duplicate.svg";
+import duplicateDisable from "/assets/icons/duplicateDisable.svg";
 import { IAbleProps } from "../type/moveable";
+import { LineRange } from "@/type/ruler";
+import { RulerPadding } from "./elementConsts";
+import { calculatScreenWidth } from "@/lib/utils";
 
 export const ButtonViewable = {
   name: "ButtonViewable",
   props: ["ButtonViewable"],
   render(moveable: MoveableManagerInterface) {
-    const { onDeleteClick, onCopyClick, underRuler } = moveable.props as unknown as IAbleProps;
-    const { cssWidth } = moveable.state;
+    const { onDeleteClick, copyViewAble, onCopyClick, underRuler, typeRuler, leftPosition } = moveable.props as unknown as IAbleProps;
+    const { cssWidth, inlineTransform } = moveable.state;
+    const matchX = inlineTransform.match(/\((.*?)px/);
+    let copyApproval = true;
+    if (matchX) {
+      const xPosition = matchX[1];
+      const endXPosition = parseFloat(xPosition) + cssWidth * 2;
+      const outOfRange = endXPosition - window.innerWidth + RulerPadding - 10;
+      if (outOfRange > 0 && (typeRuler != LineRange.hundred || leftPosition - outOfRange < calculatScreenWidth(window.innerWidth))) {
+        copyApproval = false;
+      }
+    }
     const Icons = moveable.useCSS(
       "div",
       `
@@ -25,15 +39,19 @@ export const ButtonViewable = {
     `
     );
     const changeHover = (event: any, isdelete?: boolean) => {
-      const url = isdelete ? deleteIcon : duplicateIcon;
-      const dotIndex = url.indexOf(".");
-      const beforeDot = url.substring(0, dotIndex);
-      event.target.src = beforeDot + "Hover.svg";
+      if (copyApproval || isdelete) {
+        const url = isdelete ? deleteIcon : duplicateIcon;
+        const dotIndex = url.indexOf(".");
+        const beforeDot = url.substring(0, dotIndex);
+        event.target.src = beforeDot + "Hover.svg";
+      }
     };
 
     const backNotHover = (event: any, isdelete?: boolean) => {
-      const url = isdelete ? deleteIcon : duplicateIcon;
-      event.target.src = url;
+      if (copyApproval || isdelete) {
+        const url = isdelete ? deleteIcon : duplicateIcon;
+        event.target.src = url;
+      }
     };
 
     return (
@@ -50,9 +68,17 @@ export const ButtonViewable = {
         <div className="w-[30px] m-[1px]" onClick={onDeleteClick}>
           <img src={deleteIcon} alt="Delete Icon" onMouseEnter={(e) => changeHover(e, true)} onMouseLeave={(e) => backNotHover(e, true)} />
         </div>
-        <div className="w-[30px] m-[1px]" onClick={onCopyClick}>
-          <img src={duplicateIcon} alt="DuplicateIcon Icon" onMouseEnter={(e) => changeHover(e)} onMouseLeave={(e) => backNotHover(e)} />
-        </div>
+        {copyViewAble && (
+          <div className="w-[30px] m-[1px]" onClick={copyApproval ? onCopyClick : () => {}}>
+            <img
+              id="jump-copy"
+              src={copyApproval ? duplicateIcon : duplicateDisable}
+              alt="DuplicateIcon Icon"
+              onMouseEnter={(e) => changeHover(e)}
+              onMouseLeave={(e) => backNotHover(e)}
+            />
+          </div>
+        )}
       </Icons>
     );
   },

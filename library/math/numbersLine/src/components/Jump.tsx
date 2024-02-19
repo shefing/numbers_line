@@ -3,72 +3,54 @@ import jumpArrowMinus from "/assets/icons/jumpArrowMinus.png";
 import React, { useEffect, useState } from "react";
 import { IElement } from "../type/moveable";
 import MoveableElement from "./MoveableElement";
-import { useNumbersLineContext } from "@/context/numbersLineContext";
+import { useNumbersLineContext } from "../context/numbersLineContext";
 import { calculatRulerWidth, calculatUnitsAmount } from "../lib/utils";
 import { RulerPadding, jumpArrowHeight } from "../consts/elementConsts";
-import { MatchBaseJumpClassName, calcHeightStartPosition, calcWidthStartPosition } from "../lib/stylesUtils";
+import { MatchBaseJumpClassName } from "../lib/stylesUtils";
+import { LineRange } from "@/type/ruler";
 
 interface IProps {
   element: IElement;
 }
 
 const Jump = ({ element }: IProps) => {
-  const { windowSize, type, dragElements, setDragElements, idDraggElementClick } = useNumbersLineContext();
-  const [unit, setUnit] = useState(windowSize.width / calculatUnitsAmount(type));
-  const [isJumpUnderRuler, setIsJumpUnderRuler] = useState(false);
+  const { windowSize, typeRuler, idDraggElementClick } = useNumbersLineContext();
+  const [unit, setUnit] = useState(windowSize.width / calculatUnitsAmount(typeRuler));
+  const [hideNumber, setHideNumber] = useState(true);
   const moveableRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let rulerWidth = calculatRulerWidth(windowSize.width, RulerPadding) / calculatUnitsAmount(type);
+    let rulerWidth = calculatRulerWidth(windowSize.width, RulerPadding) / calculatUnitsAmount(typeRuler);
     setUnit(rulerWidth);
-  }, [type, windowSize.width]);
-
-  useEffect(() => {
-    const root = document.documentElement;
-    root.style.setProperty("--margin-value", `${isJumpUnderRuler ? -50 : 28}px`);
-  }, [isJumpUnderRuler]);
-
-  const changeHidenumbers = () => {
-    let newElements = dragElements.map((item: IElement) => (item.id === idDraggElementClick ? { ...item, hideNumber: !item.hideNumber } : item));
-    setDragElements(newElements);
-  };
+  }, [typeRuler, windowSize.width]);
 
   return (
     <>
       <div
         ref={moveableRef}
         id={"dragElement-jump" + element.id}
-        className={`absolute ${idDraggElementClick == element.id ? "cursor-move" : "cursor-pointer"}`}
+        className={`absolute t-0 l-0 ${idDraggElementClick == element.id ? "cursor-move" : "cursor-pointer"}`}
         style={{
           width: unit * element.value,
           display: "flex",
-          flexDirection: isJumpUnderRuler ? "column-reverse" : "column",
-          left: calcWidthStartPosition(2, windowSize.width, type) + "px",
-          top: calcHeightStartPosition(4, windowSize.height) + "px",
+          flexDirection: element.underRuler ? "column-reverse" : "column",
+          transform: element.transform,
         }}
       >
         <img
           id="dragElement-jumpArrow"
           style={{ height: jumpArrowHeight + "px" }}
           className="w-full"
-          src={isJumpUnderRuler ? jumpArrowMinus : jumpArrowPlus}
+          src={element.underRuler ? jumpArrowMinus : jumpArrowPlus}
           alt="Menu Arrow"
         />
-        <div id="dragElement-jumpBase" className={MatchBaseJumpClassName(isJumpUnderRuler)}>
-          <span id="dragElement-jumpLength" className="cursor-pointer" onClick={() => changeHidenumbers()}>
-            {element.hideNumber ? "?" : element.value}
+        <div id="dragElement-jumpBase" className={MatchBaseJumpClassName(element.underRuler)}>
+          <span id="dragElement-jumpLength" className="cursor-pointer" onClick={() => setHideNumber(!hideNumber)}>
+            {hideNumber ? "?" : typeRuler != LineRange.hundredCircular ? element.value : element.value * 10}
           </span>
         </div>
       </div>
-      {idDraggElementClick == element.id && (
-        <MoveableElement
-          moveableRef={moveableRef}
-          element={element}
-          unit={unit}
-          isJumpUnderRuler={isJumpUnderRuler}
-          setIsJumpUnderRuler={setIsJumpUnderRuler}
-        />
-      )}
+      {idDraggElementClick === element.id && <MoveableElement moveableRef={moveableRef} element={element} unit={unit} />}
     </>
   );
 };

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
-import { LineRange } from "../../type/ruler";
+import { LineRange, RulerLenth } from "../../type/ruler";
 import Numbers from "./Numbers";
 
 const XAxis = () => {
-  const { type, setLeftPositionValid } = useNumbersLineContext();
+  const { windowSize, typeRuler, leftPosition, setLeftPosition, setLeftPositionValid } = useNumbersLineContext();
   const [startX, setStartX] = useState(0);
   const [isDragging, setisDragging] = useState(false);
 
@@ -22,11 +22,14 @@ const XAxis = () => {
   };
   const handleStopDrag = () => {
     setisDragging(false);
+    const unit = windowSize.width / RulerLenth.hundred;
+    const rulerPosition = Math.round(leftPosition / unit) * unit;
+    setLeftPosition(rulerPosition);
   };
 
   return (
     <>
-      {type == LineRange.hundred ? (
+      {typeRuler == LineRange.hundred ? (
         <div className="pt-5" onMouseDown={handleStartDrag} onMouseMove={handleonDrag} onMouseUp={handleStopDrag} onMouseLeave={handleStopDrag}>
           <Numbers />
         </div>
