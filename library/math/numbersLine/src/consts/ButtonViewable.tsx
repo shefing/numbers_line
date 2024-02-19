@@ -3,13 +3,26 @@ import deleteIcon from "/assets/icons/delete.svg";
 import duplicateIcon from "/assets/icons/duplicate.svg";
 import duplicateDisable from "/assets/icons/duplicateDisable.svg";
 import { IAbleProps } from "../type/moveable";
+import { LineRange } from "@/type/ruler";
+import { RulerPadding } from "./elementConsts";
+import { calculatScreenWidth } from "@/lib/utils";
 
 export const ButtonViewable = {
   name: "ButtonViewable",
   props: ["ButtonViewable"],
   render(moveable: MoveableManagerInterface) {
-    const { onDeleteClick, copyViewAble, onCopyClick, copyApproval, underRuler } = moveable.props as unknown as IAbleProps;
-    const { cssWidth } = moveable.state;
+    const { onDeleteClick, copyViewAble, onCopyClick, underRuler, typeRuler, leftPosition } = moveable.props as unknown as IAbleProps;
+    const { cssWidth, inlineTransform } = moveable.state;
+    const matchX = inlineTransform.match(/\((.*?)px/);
+    let copyApproval = true;
+    if (matchX) {
+      const xPosition = matchX[1];
+      const endXPosition = parseFloat(xPosition) + cssWidth * 2;
+      const outOfRange = endXPosition - window.innerWidth + RulerPadding - 10;
+      if (outOfRange > 0 && (typeRuler != LineRange.hundred || leftPosition - outOfRange < calculatScreenWidth(window.innerWidth))) {
+        copyApproval = false;
+      }
+    }
     const Icons = moveable.useCSS(
       "div",
       `

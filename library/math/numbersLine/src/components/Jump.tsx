@@ -14,7 +14,7 @@ interface IProps {
 }
 
 const Jump = ({ element }: IProps) => {
-  const { windowSize, typeRuler, dragElements, idDraggElementClick } = useNumbersLineContext();
+  const { windowSize, typeRuler, idDraggElementClick } = useNumbersLineContext();
   const [unit, setUnit] = useState(windowSize.width / calculatUnitsAmount(typeRuler));
   const [hideNumber, setHideNumber] = useState(true);
   const moveableRef = React.useRef<HTMLDivElement>(null);
@@ -23,18 +23,6 @@ const Jump = ({ element }: IProps) => {
     let rulerWidth = calculatRulerWidth(windowSize.width, RulerPadding) / calculatUnitsAmount(typeRuler);
     setUnit(rulerWidth);
   }, [typeRuler, windowSize.width]);
-
-  useEffect(() => {
-    dragElements.forEach((item) => {
-      const element = document.getElementById("dragElement-jump" + item.id);
-      if (element && item.transform != element.style.transform) {
-        element.style.transform = item.transform;
-        element.style.width = `${item.value * unit}px`;
-      }
-      const root = document.documentElement;
-      root.style.setProperty("--margin-value", `${item.underRuler ? -50 : 28}px`);
-    });
-  }, [dragElements]);
 
   return (
     <>
@@ -46,6 +34,7 @@ const Jump = ({ element }: IProps) => {
           width: unit * element.value,
           display: "flex",
           flexDirection: element.underRuler ? "column-reverse" : "column",
+          transform: element.transform,
         }}
       >
         <img
@@ -61,7 +50,7 @@ const Jump = ({ element }: IProps) => {
           </span>
         </div>
       </div>
-      {idDraggElementClick == element.id && <MoveableElement moveableRef={moveableRef} element={element} unit={unit} />}
+      {idDraggElementClick === element.id && <MoveableElement moveableRef={moveableRef} element={element} unit={unit} />}
     </>
   );
 };

@@ -5,13 +5,10 @@ import { useNumbersLineContext } from "../context/numbersLineContext";
 const ShowElements = () => {
   const { dragElements, setIdDraggElementClick } = useNumbersLineContext();
 
-  return (
-    dragElements &&
-    dragElements.map((element: IElement) => (
-      <div key={element.id} onClick={() => setIdDraggElementClick(element.id)}>
-        {element.type == TypesElement.jump && <Jump element={element} />}
-      </div>
-    ))
-  );
+  return dragElements.map((element: IElement) => (
+    <div key={element.id} onClick={() => setIdDraggElementClick(element.id)}>
+      {element.type == TypesElement.jump && <Jump element={element} />}
+    </div>
+  ));
 };
 export default ShowElements;

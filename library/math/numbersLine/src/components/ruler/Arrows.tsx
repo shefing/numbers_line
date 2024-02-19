@@ -8,12 +8,13 @@ import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { useEffect, useRef, useState } from "react";
 
 const Arrows = () => {
-  const { typeRuler, windowSize, leftPosition, setLeftPosition, dragElements, idDraggElementClick } = useNumbersLineContext();
+  const { typeRuler, windowSize, leftPosition, setLeftPosition, dragElements, idDraggElementClick, setIdDraggElementClick } = useNumbersLineContext();
   const [leftArrowIcon, setLeftArrowIcon] = useState(leftArrow);
   const [rightArrowIcon, setRightArrowIcon] = useState(rightArrow);
   const leftPositionRef = useRef(leftPosition);
 
   const updatePositionOnArrowClick = (direction: "left" | "right") => {
+    setIdDraggElementClick("");
     const step = windowSize.width / RulerLenth.hundred;
     setLeftPosition(direction === "left" ? Math.min(0, leftPosition + step) : Math.max(calculatScreenWidth(windowSize.width), leftPosition - step));
   };
