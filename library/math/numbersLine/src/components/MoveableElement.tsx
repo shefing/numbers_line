@@ -14,7 +14,7 @@ interface IProps {
 }
 
 const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
-  const { windowSize, typeRuler, leftPosition, setIdDraggElementClick } = useNumbersLineContext();
+  const { windowSize, typeRuler, leftPosition } = useNumbersLineContext();
   const { deleteDragElement, duplicateDragJump, updateDragElements } = useAction();
   const ableProps = {
     ButtonViewable: true,
@@ -67,7 +67,6 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
     }
 
     updateDragElements(element.id, { ...element, transform: e.target.style.transform, underRuler: isUnderRuler });
-    setIdDraggElementClick("");
   };
   const onResize = (e: OnResize) => {
     if (
@@ -105,7 +104,6 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
         updateDragElements(element.id, { ...element, transform: e.target.style.transform });
       }
     }
-    setIdDraggElementClick("");
   };
 
   return (
