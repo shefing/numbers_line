@@ -40,13 +40,13 @@ const Arrows = () => {
   }, [leftPosition]);
 
   return (
-    <div className="flex justify-between m-3 mb-6">
+    <div className="flex justify-between m-3 mb-6 ">
       {typeRuler == LineRange.hundred && (
         <>
-          <div className="m-2 cursor-pointer" onClick={() => updatePositionOnArrowClick("left")}>
+          <div className="m-2 cursor-pointer relative" onClick={() => updatePositionOnArrowClick("left")}>
             <img src={leftArrowIcon} alt="Left Arrow" />
           </div>
-          <div className="m-2 cursor-pointer" onClick={() => updatePositionOnArrowClick("right")}>
+          <div className="m-2 cursor-pointer relative" onClick={() => updatePositionOnArrowClick("right")}>
             <img src={rightArrowIcon} alt="Right Arrow" />
           </div>
         </>
