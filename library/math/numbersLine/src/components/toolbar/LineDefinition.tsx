@@ -5,11 +5,11 @@ import { useNumbersLineContext } from "../../context/numbersLineContext";
 import openMenu from "/assets/icons/menuButtonOpen.svg";
 import closeMenu from "/assets/icons/menuButtonClose.svg";
 import { rulerDefinitionButtonDetials } from "../../consts/elementConsts";
-import { IRulerDefinition } from "../../type/elements";
+import { IRulerDefinition, TypeCover } from "../../type/elements";
 
 const LineDefinition = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { typeRuler, setTypeRuler } = useNumbersLineContext();
+  const { typeRuler, setTypeRuler, dragElements, coverSituation, initializationRuler, setInitializationDialog } = useNumbersLineContext();
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -30,8 +30,11 @@ const LineDefinition = () => {
   };
 
   const handleMenuButtonClick = (type: LineRange) => {
-    setTypeRuler(type);
-    setIsMenuOpen(false);
+    if (dragElements.length > 0 || coverSituation != TypeCover.allDiscover) setInitializationDialog(true);
+    if (initializationRuler) {
+      setTypeRuler(type);
+      setIsMenuOpen(false);
+    }
   };
 
   return (

@@ -18,6 +18,11 @@ interface INumbersLineContextProps {
   setCoverSituation: (v: TypeCover) => void;
   visitableDisplayButton: TypeCover;
   setVisitableDisplayButton: (v: TypeCover) => void;
+  initializationDialog: boolean;
+  setInitializationDialog: (v: boolean) => void;
+  initializationRuler: boolean;
+  setInitializationRuler: (v: boolean) => void;
+  initialization: () => void;
 }
 
 export const NumbersLineContext = React.createContext({
@@ -35,6 +40,11 @@ export const NumbersLineContext = React.createContext({
   setCoverSituation: () => null,
   visitableDisplayButton: {} as TypeCover,
   setVisitableDisplayButton: () => null,
+  initializationDialog: {} as boolean,
+  setInitializationDialog: () => null,
+  initializationRuler: {} as boolean,
+  setInitializationRuler: () => null,
+  initialization: () => null,
 } as INumbersLineContextProps);
 
 export const NumbersLineContexProvider = (props: any) => {
@@ -46,6 +56,14 @@ export const NumbersLineContexProvider = (props: any) => {
   const [idDraggElementClick, setIdDraggElementClick] = useState("");
   const [coverSituation, setCoverSituation] = useState(TypeCover.allDiscover);
   const [visitableDisplayButton, setVisitableDisplayButton] = useState(TypeCover.allDiscover);
+
+  const [initializationDialog, setInitializationDialog] = useState(false);
+  const [initializationRuler, setInitializationRuler] = useState(false);
+  const initialization = () => {
+    setDragElements([]);
+    setCoverSituation(TypeCover.allDiscover);
+    setLeftPosition(0);
+  };
 
   const Resize = () => {
     setWindowSize({ height: window.innerHeight, width: window.innerWidth });
@@ -59,9 +77,7 @@ export const NumbersLineContexProvider = (props: any) => {
   }, []);
 
   useEffect(() => {
-    setDragElements([]);
-    setCoverSituation(TypeCover.allDiscover);
-    setLeftPosition(0);
+    initialization();
   }, [typeRuler]);
 
   return (
@@ -81,6 +97,11 @@ export const NumbersLineContexProvider = (props: any) => {
         setCoverSituation,
         visitableDisplayButton,
         setVisitableDisplayButton,
+        initializationDialog,
+        setInitializationDialog,
+        initializationRuler,
+        setInitializationRuler,
+        initialization,
       }}
     >
       {props.children}

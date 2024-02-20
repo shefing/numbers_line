@@ -15,6 +15,9 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        icon: "w-12 h-12 m-3 cursor-pointer rounded-full ",
+        action: `h-[25px] w-[100px] px-4 py-4 ml-[2rem] mr-[2rem] bg-[#009FDE] hover:bg-[#7BC8EF] transition rounded-[20px] text-white text-[22px] font-[400] font-[Abraham] `,
+        cancel: `h-[25px] w-[100px] px-4 py-4 ml-[2rem] mr-[2rem] bg-[#E1F4FD] hover:bg-[#7BC8EF] transition rounded-[20px] text-[#009FDE] text-[22px] font-[400] font-[Abraham] `,
         linedefinition: `h-[48px] px-4 py-2 m-[0.5rem] bg-white hover:bg-[#E1F4FD] transition rounded-[20px] text-[24px] font-[400] font-[Abraham] border border-solid border-[#009FDE]`,
         displayRulerNumber:
           "h-[33px] px-4 py-2 m-[0.5rem] ml-[1rem] mr-[1rem] hover:bg-[#E1F4FD] transition rounded-[20px] text-[26px] font-[400] font-[Abraham] border border-solid border-[#009FDE] ",
