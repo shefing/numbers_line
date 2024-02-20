@@ -20,8 +20,8 @@ interface INumbersLineContextProps {
   setVisitableDisplayButton: (v: TypeCover) => void;
   initializationDialog: boolean;
   setInitializationDialog: (v: boolean) => void;
-  initializationRuler: boolean;
-  setInitializationRuler: (v: boolean) => void;
+  initializationTypeRuler: LineRange;
+  setInitializationTypeRuler: (v: LineRange) => void;
   initialization: () => void;
 }
 
@@ -42,8 +42,8 @@ export const NumbersLineContext = React.createContext({
   setVisitableDisplayButton: () => null,
   initializationDialog: {} as boolean,
   setInitializationDialog: () => null,
-  initializationRuler: {} as boolean,
-  setInitializationRuler: () => null,
+  initializationTypeRuler: {} as LineRange,
+  setInitializationTypeRuler: () => null,
   initialization: () => null,
 } as INumbersLineContextProps);
 
@@ -58,10 +58,12 @@ export const NumbersLineContexProvider = (props: any) => {
   const [visitableDisplayButton, setVisitableDisplayButton] = useState(TypeCover.allDiscover);
 
   const [initializationDialog, setInitializationDialog] = useState(false);
-  const [initializationRuler, setInitializationRuler] = useState(false);
+  const [initializationTypeRuler, setInitializationTypeRuler] = useState(LineRange.ten);
   const initialization = () => {
+    setTypeRuler(initializationTypeRuler);
     setDragElements([]);
     setCoverSituation(TypeCover.allDiscover);
+    setVisitableDisplayButton(TypeCover.allDiscover);
     setLeftPosition(0);
   };
 
@@ -75,10 +77,6 @@ export const NumbersLineContexProvider = (props: any) => {
       window.removeEventListener("resize", Resize);
     };
   }, []);
-
-  useEffect(() => {
-    initialization();
-  }, [typeRuler]);
 
   return (
     <NumbersLineContext.Provider
@@ -99,8 +97,8 @@ export const NumbersLineContexProvider = (props: any) => {
         setVisitableDisplayButton,
         initializationDialog,
         setInitializationDialog,
-        initializationRuler,
-        setInitializationRuler,
+        initializationTypeRuler,
+        setInitializationTypeRuler,
         initialization,
       }}
     >

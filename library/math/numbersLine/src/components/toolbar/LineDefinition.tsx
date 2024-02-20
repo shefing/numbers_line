@@ -9,7 +9,7 @@ import { IRulerDefinition, TypeCover } from "../../type/elements";
 
 const LineDefinition = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { typeRuler, setTypeRuler, dragElements, coverSituation, initializationRuler, setInitializationDialog } = useNumbersLineContext();
+  const { typeRuler, setTypeRuler, dragElements, visitableDisplayButton, setInitializationDialog, setInitializationTypeRuler } = useNumbersLineContext();
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -30,10 +30,13 @@ const LineDefinition = () => {
   };
 
   const handleMenuButtonClick = (type: LineRange) => {
-    if (dragElements.length > 0 || coverSituation != TypeCover.allDiscover) setInitializationDialog(true);
-    if (initializationRuler) {
+    if (type == typeRuler) return;
+    setIsMenuOpen(false);
+    if (dragElements.length == 0 && visitableDisplayButton == TypeCover.allDiscover) {
       setTypeRuler(type);
-      setIsMenuOpen(false);
+    } else {
+      setInitializationTypeRuler(type);
+      setInitializationDialog(true);
     }
   };
 

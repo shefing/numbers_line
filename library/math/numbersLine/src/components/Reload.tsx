@@ -10,13 +10,8 @@ import {
 import { useNumbersLineContext } from "@/context/numbersLineContext";
 
 const Reload = () => {
-  const { initializationDialog, setInitializationDialog, setInitializationRuler, initialization } = useNumbersLineContext();
-  const cancle = () => setInitializationRuler(false);
+  const { initializationDialog, setInitializationDialog, initialization } = useNumbersLineContext();
 
-  const confirm = () => {
-    initialization();
-    setInitializationRuler(true);
-  };
   return (
     <>
       <AlertDialog open={initializationDialog} onOpenChange={setInitializationDialog}>
@@ -25,8 +20,8 @@ const Reload = () => {
             <AlertDialogTitle>?אתם רוצים להתחיל מחדש</AlertDialogTitle>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel onClick={cancle}>הישארו</AlertDialogCancel>
-            <AlertDialogAction onClick={confirm}>מחק הכל</AlertDialogAction>
+            <AlertDialogCancel>הישארו</AlertDialogCancel>
+            <AlertDialogAction onClick={initialization}>מחק הכל</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
