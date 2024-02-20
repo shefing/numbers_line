@@ -4,7 +4,8 @@ import { LineRange } from "../../type/ruler";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import openMenu from "/assets/icons/menuButtonOpen.svg";
 import closeMenu from "/assets/icons/menuButtonClose.svg";
-import { buttonLineDefinationClassName } from "../../styles/button";
+import { rulerDefinitionButtonDetials } from "../../consts/elementConsts";
+import { IRulerDefinition } from "../../type/elements";
 
 const LineDefinition = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -17,7 +18,6 @@ const LineDefinition = () => {
         setIsMenuOpen(false);
       }
     };
-
     document.addEventListener("mousedown", handleOutsideClick);
 
     return () => {
@@ -43,30 +43,11 @@ const LineDefinition = () => {
 
       {isMenuOpen && (
         <div className="flex flex-col items-end pt-5 pb-2 rounded-md">
-          <Button
-            className={buttonLineDefinationClassName + (LineRange.ten == typeRuler && " bg-[#7BC8EF]")}
-            onClick={() => handleMenuButtonClick(LineRange.ten)}
-          >
-            0-10
-          </Button>
-          <Button
-            className={buttonLineDefinationClassName + (LineRange.twenty == typeRuler && " bg-[#7BC8EF]")}
-            onClick={() => handleMenuButtonClick(LineRange.twenty)}
-          >
-            0-20
-          </Button>
-          <Button
-            className={buttonLineDefinationClassName + (LineRange.hundredCircular == typeRuler && " bg-[#7BC8EF]")}
-            onClick={() => handleMenuButtonClick(LineRange.hundredCircular)}
-          >
-            (קפיצות של 10) 0-100
-          </Button>
-          <Button
-            className={buttonLineDefinationClassName + (LineRange.hundred == typeRuler && " bg-[#7BC8EF]")}
-            onClick={() => handleMenuButtonClick(LineRange.hundred)}
-          >
-            (קפיצות של 1) 0-100
-          </Button>
+          {rulerDefinitionButtonDetials.map((item: IRulerDefinition, i: number) => (
+            <Button key={i} variant="linedefinition" isChoice={item.choice == typeRuler} onClick={() => handleMenuButtonClick(item.choice)}>
+              {item.type}
+            </Button>
+          ))}
         </div>
       )}
     </div>

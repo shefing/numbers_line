@@ -15,17 +15,21 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        linedefinition: `h-[48px] px-4 py-2 m-[0.5rem] bg-white hover:bg-[#E1F4FD] transition rounded-[20px] text-[24px] font-[400] font-[Abraham] border border-solid border-[#009FDE]`,
+        displayRulerNumber:
+          "h-[33px] px-4 py-2 m-[0.5rem] ml-[1rem] mr-[1rem] hover:bg-[#E1F4FD] transition rounded-[20px] text-[26px] font-[400] font-[Abraham] border border-solid border-[#009FDE] ",
       },
-      size: {
-        default: "h-10 px-4 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-11 rounded-md px-8",
-        icon: "h-10 w-10",
+      isChoice: {
+        true: " bg-[#7BC8EF]  text-white",
+      },
+      isVisitDisable: {
+        true: " bg-write text-block hover:bg-white text-[#CACACC] border-[#CACACC] pointer-events-none",
       },
     },
     defaultVariants: {
       variant: "default",
-      size: "default",
+      isChoice: false,
+      isVisitDisable: false,
     },
   }
 );
@@ -34,9 +38,9 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   asChild?: boolean;
 }
 
-const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ className, variant, size, asChild = false, ...props }, ref) => {
+const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(({ className, variant, asChild = false, isChoice, isVisitDisable, ...props }, ref) => {
   const Comp = asChild ? Slot : "button";
-  return <Comp className={cn(buttonVariants({ variant, size, className }))} ref={ref} {...props} />;
+  return <Comp className={cn(buttonVariants({ variant, isChoice, isVisitDisable, className }))} ref={ref} {...props} />;
 });
 Button.displayName = "Button";
 
