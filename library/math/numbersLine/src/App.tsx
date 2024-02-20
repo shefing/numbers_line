@@ -5,6 +5,7 @@ import Toolbar from "./components/Toolbar";
 import ShowElements from "./components/ShowElements";
 import { useNumbersLineContext } from "./context/numbersLineContext";
 import { useEffect } from "react";
+import Reload from "./components/Reload";
 
 const App = () => {
   const { setIdDraggElementClick } = useNumbersLineContext();
@@ -23,6 +24,7 @@ const App = () => {
   return (
     <>
       <ShowElements />
+      <Reload />
       <div className="flex flex-col h-full justify-between">
         <Toolbar />
         <div>

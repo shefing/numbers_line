@@ -3,7 +3,7 @@ import { calculatUnitsAmount, getImageSrc } from "@/lib/utils";
 import DisplayNumbers from "./DisplayNumbers";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
-import { TypeActionIconsToolbar } from "../../type/elements";
+import { TypeActionIconsToolbar, TypeCover } from "../../type/elements";
 import { TypesElement } from "../../type/moveable";
 import { v4 as uuidv4 } from "uuid";
 import { calcHeightStartPosition, calcWidthStartPosition } from "@/lib/stylesUtils";
@@ -16,7 +16,8 @@ const IconsToolbar = ({ typeAction, iconUrl }: IProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [newJumpPixels, setNewJumpPixels] = useState(0);
-  const { windowSize, typeRuler, dragElements, setDragElements, idDraggElementClick } = useNumbersLineContext();
+  const { windowSize, typeRuler, dragElements, setDragElements, idDraggElementClick, initializationDialog, setInitializationDialog, visitableDisplayButton } =
+    useNumbersLineContext();
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -52,21 +53,31 @@ const IconsToolbar = ({ typeAction, iconUrl }: IProps) => {
   };
 
   const actionButtonClick = () => {
-    typeAction == TypeActionIconsToolbar.jump || typeAction == TypeActionIconsToolbar.text ? addDraggableElement() : setIsOpen(!isOpen);
+    if (typeAction == TypeActionIconsToolbar.jump || typeAction == TypeActionIconsToolbar.text) addDraggableElement();
+    else {
+      if (typeAction == TypeActionIconsToolbar.reload) {
+        setInitializationDialog(true);
+      } else setIsOpen(!isOpen);
+    }
   };
 
   return (
     <div className="flex flex-col items-center" ref={wrapperRef}>
       <img
         className="m-3 cursor-pointer"
-        src={getImageSrc(iconUrl, isHovered, isOpen)}
+        src={getImageSrc(
+          iconUrl,
+          isHovered,
+          typeAction === TypeActionIconsToolbar.reload ? initializationDialog : isOpen,
+          typeAction === TypeActionIconsToolbar.reload && dragElements.length == 0 && visitableDisplayButton == TypeCover.allDiscover
+        )}
         alt={typeAction + " Toolbar"}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={() => actionButtonClick()}
       />
       <div className="relative">
-        <DropdownMenu open={isOpen} onOpenChange={(open) => setIsOpen(open)}>
+        <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
           <DropdownMenuTrigger />
           <DropdownMenuContent>{typeAction === TypeActionIconsToolbar.displayNumbersLine && <DisplayNumbers setOpen={setIsOpen} />}</DropdownMenuContent>
         </DropdownMenu>

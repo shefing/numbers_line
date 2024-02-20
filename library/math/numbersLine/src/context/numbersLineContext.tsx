@@ -18,6 +18,11 @@ interface INumbersLineContextProps {
   setCoverSituation: (v: TypeCover) => void;
   visitableDisplayButton: TypeCover;
   setVisitableDisplayButton: (v: TypeCover) => void;
+  initializationDialog: boolean;
+  setInitializationDialog: (v: boolean) => void;
+  initializationTypeRuler: LineRange;
+  setInitializationTypeRuler: (v: LineRange) => void;
+  initialization: () => void;
 }
 
 export const NumbersLineContext = React.createContext({
@@ -35,6 +40,11 @@ export const NumbersLineContext = React.createContext({
   setCoverSituation: () => null,
   visitableDisplayButton: {} as TypeCover,
   setVisitableDisplayButton: () => null,
+  initializationDialog: {} as boolean,
+  setInitializationDialog: () => null,
+  initializationTypeRuler: {} as LineRange,
+  setInitializationTypeRuler: () => null,
+  initialization: () => null,
 } as INumbersLineContextProps);
 
 export const NumbersLineContexProvider = (props: any) => {
@@ -47,6 +57,16 @@ export const NumbersLineContexProvider = (props: any) => {
   const [coverSituation, setCoverSituation] = useState(TypeCover.allDiscover);
   const [visitableDisplayButton, setVisitableDisplayButton] = useState(TypeCover.allDiscover);
 
+  const [initializationDialog, setInitializationDialog] = useState(false);
+  const [initializationTypeRuler, setInitializationTypeRuler] = useState(LineRange.ten);
+  const initialization = () => {
+    setTypeRuler(initializationTypeRuler);
+    setDragElements([]);
+    setCoverSituation(TypeCover.allDiscover);
+    setVisitableDisplayButton(TypeCover.allDiscover);
+    setLeftPosition(0);
+  };
+
   const Resize = () => {
     setWindowSize({ height: window.innerHeight, width: window.innerWidth });
   };
@@ -57,12 +77,6 @@ export const NumbersLineContexProvider = (props: any) => {
       window.removeEventListener("resize", Resize);
     };
   }, []);
-
-  useEffect(() => {
-    setDragElements([]);
-    setCoverSituation(TypeCover.allDiscover);
-    setLeftPosition(0);
-  }, [typeRuler]);
 
   return (
     <NumbersLineContext.Provider
@@ -81,6 +95,11 @@ export const NumbersLineContexProvider = (props: any) => {
         setCoverSituation,
         visitableDisplayButton,
         setVisitableDisplayButton,
+        initializationDialog,
+        setInitializationDialog,
+        initializationTypeRuler,
+        setInitializationTypeRuler,
+        initialization,
       }}
     >
       {props.children}

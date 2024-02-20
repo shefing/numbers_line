@@ -16,7 +16,7 @@ const DisplayNumbers = ({ setOpen }: IProps) => {
   };
 
   return (
-    <div className="relative flex flex-col items-center">
+    <div className="relative flex flex-col items-center bg-white relative">
       <img className="absolute top-0 " src={triangleToMenu} alt="triple for menu" />
       <div className="m-[18px] flex flex-col items-end shadow-2xl rounded-[6px] border border-solid border-[#009FDE] p-2">
         {displayRulerButtonDetials.map((item: IDisplayRuller, i: number) => (

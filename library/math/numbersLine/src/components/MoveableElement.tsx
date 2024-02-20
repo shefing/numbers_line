@@ -89,14 +89,14 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
     if (matchX) {
       const xPosition = parseFloat(matchX[1]);
       const xXPositionString = matchX[0];
-      //change position when jump out of bounds:
+      //Change position when jump out of bounds:
       if (xPosition + newWidth > windowSize.width - RulerPadding) {
         const range = xPosition + newWidth - windowSize.width + RulerPadding;
         const newXTransform = "(" + (xPosition - range) + "px";
         e.target.style.transform = e.target.style.transform.replace(xXPositionString, newXTransform);
         updateDragElements(element.id, { ...element, transform: e.target.style.transform });
       }
-      //change position when jump reSize on the left:
+      //Change position when jump reSize on the left:
       if (e.clientX < xPosition) {
         const range = e.lastEvent.width - newWidth;
         const newXTransform = "(" + (xPosition + range) + "px";
