@@ -6,7 +6,7 @@ import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { TypeActionIconsToolbar, TypeCover } from "../../type/elements";
 import { TypesElement } from "../../type/moveable";
 import { v4 as uuidv4 } from "uuid";
-import { calcHeightStartPosition, calcWidthStartPosition } from "@/lib/stylesUtils";
+import { calcHeightStartPosition, calcWidthStartPosition } from "../../lib/stylesUtils";
 
 interface IProps {
   typeAction: string;
@@ -16,7 +16,7 @@ const IconsToolbar = ({ typeAction, iconUrl }: IProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [newJumpPixels, setNewJumpPixels] = useState(0);
-  const { windowSize, typeRuler, dragElements, setDragElements, idDraggElementClick, initializationDialog, setInitializationDialog, visitableDisplayButton } =
+  const { windowSize, typeRuler, dragElements, setDragElements, idDraggElementClick, isOpenDialog, setIsOpenDialog, visitableDisplayButton } =
     useNumbersLineContext();
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -35,6 +35,15 @@ const IconsToolbar = ({ typeAction, iconUrl }: IProps) => {
   useEffect(() => {
     setNewJumpPixels(0);
   }, [idDraggElementClick]);
+
+  const getSrc = () => {
+    return getImageSrc(
+      iconUrl,
+      isHovered,
+      typeAction === TypeActionIconsToolbar.reload ? isOpenDialog : isOpen,
+      typeAction === TypeActionIconsToolbar.reload && dragElements.length == 0 && visitableDisplayButton == TypeCover.allDiscover
+    );
+  };
 
   const addDraggableElement = () => {
     const xTranslate = calcWidthStartPosition(2, windowSize.width, typeRuler) + newJumpPixels;
@@ -56,8 +65,8 @@ const IconsToolbar = ({ typeAction, iconUrl }: IProps) => {
     if (typeAction == TypeActionIconsToolbar.jump || typeAction == TypeActionIconsToolbar.text) addDraggableElement();
     else {
       if (typeAction == TypeActionIconsToolbar.reload) {
-        setInitializationDialog(true);
-      } else setIsOpen(!isOpen);
+        setIsOpenDialog(true);
+      } else setIsOpen((prevOpen) => !prevOpen);
     }
   };
 
@@ -65,12 +74,7 @@ const IconsToolbar = ({ typeAction, iconUrl }: IProps) => {
     <div className="flex flex-col items-center" ref={wrapperRef}>
       <img
         className="m-3 cursor-pointer"
-        src={getImageSrc(
-          iconUrl,
-          isHovered,
-          typeAction === TypeActionIconsToolbar.reload ? initializationDialog : isOpen,
-          typeAction === TypeActionIconsToolbar.reload && dragElements.length == 0 && visitableDisplayButton == TypeCover.allDiscover
-        )}
+        src={getSrc()}
         alt={typeAction + " Toolbar"}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}

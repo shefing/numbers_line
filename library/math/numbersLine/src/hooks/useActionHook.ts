@@ -3,9 +3,22 @@ import { IElement } from "../type/moveable";
 import { v4 as uuidv4 } from "uuid";
 import { RulerPadding } from "../consts/elementConsts";
 import { LineRange } from "../type/ruler";
+import { TypeCover } from "@/type/elements";
 
 export const useAction = () => {
-  const { windowSize, typeRuler, leftPosition, setLeftPosition, dragElements, setDragElements, setIdDraggElementClick } = useNumbersLineContext();
+  const {
+    windowSize,
+    typeRuler,
+    setTypeRuler,
+    typeRulerChange,
+    leftPosition,
+    setLeftPosition,
+    dragElements,
+    setDragElements,
+    setCoverSituation,
+    setVisitableDisplayButton,
+    setIdDraggElementClick,
+  } = useNumbersLineContext();
 
   const deleteDragElement = (elementId: string) => {
     const newDragElements = dragElements.filter((element) => element.id !== elementId);
@@ -36,7 +49,7 @@ export const useAction = () => {
       };
       const newDragElements: IElement[] = [...dragElements, newElement];
       setDragElements(newDragElements);
-      setIdDraggElementClick(id);
+      setIdDraggElementClick("");
     }
   };
 
@@ -45,9 +58,18 @@ export const useAction = () => {
     setDragElements(newElements);
   };
 
+  const initialization = () => {
+    setTypeRuler(typeRulerChange);
+    setDragElements([]);
+    setCoverSituation(TypeCover.allDiscover);
+    setVisitableDisplayButton(TypeCover.allDiscover);
+    setLeftPosition(0);
+  };
+
   return {
     deleteDragElement,
     duplicateDragJump,
     updateDragElements,
+    initialization,
   };
 };

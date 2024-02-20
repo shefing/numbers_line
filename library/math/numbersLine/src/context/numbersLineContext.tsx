@@ -7,6 +7,8 @@ interface INumbersLineContextProps {
   windowSize: IWindowSize;
   typeRuler: LineRange;
   setTypeRuler: (v: LineRange) => void;
+  typeRulerChange: LineRange;
+  setTypeRulerChange: (v: LineRange) => void;
   leftPosition: number;
   setLeftPosition: (v: number) => void;
   setLeftPositionValid: (v: number) => void;
@@ -18,17 +20,16 @@ interface INumbersLineContextProps {
   setCoverSituation: (v: TypeCover) => void;
   visitableDisplayButton: TypeCover;
   setVisitableDisplayButton: (v: TypeCover) => void;
-  initializationDialog: boolean;
-  setInitializationDialog: (v: boolean) => void;
-  initializationTypeRuler: LineRange;
-  setInitializationTypeRuler: (v: LineRange) => void;
-  initialization: () => void;
+  isOpenDialog: boolean;
+  setIsOpenDialog: (v: boolean) => void;
 }
 
 export const NumbersLineContext = React.createContext({
   windowSize: {} as IWindowSize,
   typeRuler: {} as LineRange,
   setTypeRuler: () => null,
+  typeRulerChange: {} as LineRange,
+  setTypeRulerChange: () => null,
   leftPosition: {} as number,
   setLeftPosition: () => null,
   setLeftPositionValid: () => null,
@@ -40,36 +41,26 @@ export const NumbersLineContext = React.createContext({
   setCoverSituation: () => null,
   visitableDisplayButton: {} as TypeCover,
   setVisitableDisplayButton: () => null,
-  initializationDialog: {} as boolean,
-  setInitializationDialog: () => null,
-  initializationTypeRuler: {} as LineRange,
-  setInitializationTypeRuler: () => null,
-  initialization: () => null,
+  isOpenDialog: {} as boolean,
+  setIsOpenDialog: () => null,
 } as INumbersLineContextProps);
 
 export const NumbersLineContexProvider = (props: any) => {
   const [windowSize, setWindowSize] = useState<IWindowSize>({ height: window.innerHeight, width: window.innerWidth });
   const [typeRuler, setTypeRuler] = useState(LineRange.ten);
+  const [typeRulerChange, setTypeRulerChange] = useState(LineRange.ten);
   const [leftPosition, setLeftPosition] = useState(0);
   const setLeftPositionValid = (v: number) => setLeftPosition((prevLeft: number) => Math.max(calculatScreenWidth(windowSize.width), Math.min(0, prevLeft + v)));
   const [dragElements, setDragElements] = useState<IElement[]>([]);
   const [idDraggElementClick, setIdDraggElementClick] = useState("");
   const [coverSituation, setCoverSituation] = useState(TypeCover.allDiscover);
   const [visitableDisplayButton, setVisitableDisplayButton] = useState(TypeCover.allDiscover);
-
-  const [initializationDialog, setInitializationDialog] = useState(false);
-  const [initializationTypeRuler, setInitializationTypeRuler] = useState(LineRange.ten);
-  const initialization = () => {
-    setTypeRuler(initializationTypeRuler);
-    setDragElements([]);
-    setCoverSituation(TypeCover.allDiscover);
-    setVisitableDisplayButton(TypeCover.allDiscover);
-    setLeftPosition(0);
-  };
+  const [isOpenDialog, setIsOpenDialog] = useState(false);
 
   const Resize = () => {
     setWindowSize({ height: window.innerHeight, width: window.innerWidth });
   };
+
   useEffect(() => {
     window.addEventListener("resize", Resize);
 
@@ -84,6 +75,8 @@ export const NumbersLineContexProvider = (props: any) => {
         windowSize,
         typeRuler,
         setTypeRuler,
+        typeRulerChange,
+        setTypeRulerChange,
         leftPosition,
         setLeftPosition,
         setLeftPositionValid,
@@ -95,11 +88,8 @@ export const NumbersLineContexProvider = (props: any) => {
         setCoverSituation,
         visitableDisplayButton,
         setVisitableDisplayButton,
-        initializationDialog,
-        setInitializationDialog,
-        initializationTypeRuler,
-        setInitializationTypeRuler,
-        initialization,
+        isOpenDialog,
+        setIsOpenDialog,
       }}
     >
       {props.children}

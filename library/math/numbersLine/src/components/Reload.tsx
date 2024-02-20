@@ -6,15 +6,17 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import { useNumbersLineContext } from "@/context/numbersLineContext";
+} from "../components/ui/alert-dialog";
+import { useNumbersLineContext } from "../context/numbersLineContext";
+import { useAction } from "../hooks/useActionHook";
 
 const Reload = () => {
-  const { initializationDialog, setInitializationDialog, initialization } = useNumbersLineContext();
+  const { isOpenDialog, setIsOpenDialog } = useNumbersLineContext();
+  const { initialization } = useAction();
 
   return (
     <>
-      <AlertDialog open={initializationDialog} onOpenChange={setInitializationDialog}>
+      <AlertDialog open={isOpenDialog} onOpenChange={setIsOpenDialog}>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>?אתם רוצים להתחיל מחדש</AlertDialogTitle>
