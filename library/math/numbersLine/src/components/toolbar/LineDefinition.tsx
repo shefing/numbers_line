@@ -9,7 +9,7 @@ import { IRulerDefinition, TypeCover } from "../../type/elements";
 
 const LineDefinition = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { typeRuler, setTypeRuler, dragElements, visitableDisplayButton, setIsOpenDialog, setTypeRulerChange } = useNumbersLineContext();
+  const { typeRuler, setTypeRuler, dragElements, visitableDisplayButton, setOpenReloadDialog, setTypeRulerChange } = useNumbersLineContext();
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const LineDefinition = () => {
       setTypeRuler(type);
     } else {
       setTypeRulerChange(type);
-      setIsOpenDialog(true);
+      setOpenReloadDialog(true);
     }
   };
 

@@ -11,12 +11,12 @@ import { useNumbersLineContext } from "../context/numbersLineContext";
 import { useAction } from "../hooks/useActionHook";
 
 const Reload = () => {
-  const { isOpenDialog, setIsOpenDialog } = useNumbersLineContext();
+  const { openReloadDialog, setOpenReloadDialog } = useNumbersLineContext();
   const { initialization } = useAction();
 
   return (
     <>
-      <AlertDialog open={isOpenDialog} onOpenChange={setIsOpenDialog}>
+      <AlertDialog open={openReloadDialog} onOpenChange={setOpenReloadDialog}>
         <AlertDialogContent>
           <AlertDialogHeader>
             <AlertDialogTitle>?אתם רוצים להתחיל מחדש</AlertDialogTitle>
