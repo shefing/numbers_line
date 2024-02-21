@@ -16,7 +16,7 @@ const IconsToolbar = ({ typeAction, iconUrl }: IProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [newJumpPixels, setNewJumpPixels] = useState(0);
-  const { windowSize, typeRuler, dragElements, setDragElements, idDraggElementClick, isOpenDialog, setIsOpenDialog, visitableDisplayButton } =
+  const { windowSize, typeRuler, dragElements, setDragElements, idDraggElementClick, openReloadDialog, setOpenReloadDialog, visitableDisplayButton } =
     useNumbersLineContext();
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -40,7 +40,7 @@ const IconsToolbar = ({ typeAction, iconUrl }: IProps) => {
     return getImageSrc(
       iconUrl,
       isHovered,
-      typeAction === TypeActionIconsToolbar.reload ? isOpenDialog : isOpen,
+      typeAction === TypeActionIconsToolbar.reload ? openReloadDialog : isOpen,
       typeAction === TypeActionIconsToolbar.reload && dragElements.length == 0 && visitableDisplayButton == TypeCover.allDiscover
     );
   };
@@ -65,7 +65,7 @@ const IconsToolbar = ({ typeAction, iconUrl }: IProps) => {
     if (typeAction == TypeActionIconsToolbar.jump || typeAction == TypeActionIconsToolbar.text) addDraggableElement();
     else {
       if (typeAction == TypeActionIconsToolbar.reload) {
-        setIsOpenDialog(true);
+        setOpenReloadDialog(true);
       } else setIsOpen((prevOpen) => !prevOpen);
     }
   };
