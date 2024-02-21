@@ -35,10 +35,3 @@ export const RulerMargin = window.innerHeight * 0.25;
 export const jumpBaseHeight = 40;
 export const jumpArrowHeight = 64;
 export const ToolbarHieght = 80;
-
-export const blue1 = "#009FDE";
-export const blue2 = "#7BC8EF"; //onHover
-export const lightBlye = "#E1F4FD";
-export const red = "#F48460";
-export const gray1 = "#CACACC"; //disable
-export const gray2 = "#A4A3AE"; //border

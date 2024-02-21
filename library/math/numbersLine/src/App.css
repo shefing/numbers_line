@@ -68,21 +68,20 @@
 
   margin: var(--margin-value)  !important;
   height: 18px !important;
-  border: 0px !important;  border-bottom-left-radius: 0px !important;
-  border-top-left-radius: 0px !important;
-  border-bottom-right-radius: 0px !important;
-  border-top-right-radius: 0px !important;
+  border: 0px !important;
 }
 
 
 .moveable-direction.moveable-e{
   background-image: url('../public/assets/icons/resizeRight.svg')  !important;
-  margin-inline: -1px !important;
-
+  margin-inline: 0px !important;
+  border-bottom-left-radius: 0px !important;
+  border-top-left-radius: 0px !important;
 }
 
 .moveable-direction.moveable-w{
   background-image: url('../public/assets/icons/resizeLeft.svg')  !important;
   margin-inline:-14px !important;
-
+  border-bottom-right-radius: 0px !important;
+  border-top-right-radius: 0px !important;
 }
