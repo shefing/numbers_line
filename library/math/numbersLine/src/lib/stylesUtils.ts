@@ -1,10 +1,10 @@
 import { baseJumpClassName } from "../styles/jump";
 import { calculatUnitsAmount } from "./utils";
 import { LineRange } from "../type/ruler";
-import { jumpArrowHeight, jumpBaseHeight } from "../consts/elementConsts";
+import { blue1, jumpArrowHeight, jumpBaseHeight, red } from "../consts/elementConsts";
 
 export const MatchBaseJumpClassName = (underRuler: boolean) => {
-  return underRuler ? baseJumpClassName + " bg-[#F48460] mb-[1rem]" : baseJumpClassName + " bg-[#009FDE] mt-[1rem]";
+  return underRuler ? baseJumpClassName + ` bg-[${red}] mb-[1rem]` : baseJumpClassName + ` bg-[${blue1}] mt-[1rem]`;
 };
 export const calcWidthStartPosition = (value: number, windowWidth: number, type: LineRange) => {
   return (windowWidth - windowWidth / calculatUnitsAmount(type)) / value;

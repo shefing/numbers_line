@@ -4,7 +4,7 @@ import { LineRange } from "../../type/ruler";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import openMenu from "/assets/icons/menuButtonOpen.svg";
 import closeMenu from "/assets/icons/menuButtonClose.svg";
-import { rulerDefinitionButtonDetials } from "../../consts/elementConsts";
+import { blue1, rulerDefinitionButtonDetials } from "../../consts/elementConsts";
 import { IRulerDefinition, TypeCover } from "../../type/elements";
 
 const LineDefinition = () => {
@@ -41,10 +41,10 @@ const LineDefinition = () => {
   };
 
   return (
-    <div ref={wrapperRef} className={`flex flex-col items-end p-2 rounded-md w-[16rem] ${isMenuOpen && "shadow-2xl bg-[#009FDE]"} relative`}>
+    <div ref={wrapperRef} className={`flex flex-col items-end p-2 rounded-md w-[16rem] ${isMenuOpen && "shadow-2xl bg-[" + blue1 + "]"} relative`}>
       <div className="cursor-pointer flex" onClick={handleButtonClick}>
         <img className="p-3 pr-6" src={isMenuOpen ? closeMenu : openMenu} alt="Menu Arrow" />
-        <div className={`pr-3 text-[#009FDE] text-[32px] font-[500] font-[Abraham] ${isMenuOpen && " text-[#ffffff]"}`}>הגדרת הישר</div>
+        <div className={`pr-3 text-[${blue1}] text-[32px] font-[500] font-[Abraham] ${isMenuOpen && " text-[#ffffff]"}`}>הגדרת הישר</div>
       </div>
 
       {isMenuOpen && (
