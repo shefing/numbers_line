@@ -13,13 +13,13 @@ interface IProps {
 
 const Jump = ({ element }: IProps) => {
   const { windowSize, typeRuler, idDraggElementClick } = useNumbersLineContext();
-  const [unit, setUnit] = useState(calculatRulerWidth(windowSize.width, typeRuler) / calculatUnitsAmount(typeRuler));
+  const [unit, setUnit] = useState(calculatRulerWidth(windowSize.width) / calculatUnitsAmount(typeRuler));
   const [hideNumber, setHideNumber] = useState(true);
   const [jumpWidth, setJumpWidth] = useState(unit * element.value);
   const moveableRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let rulerWidth = calculatRulerWidth(windowSize.width, typeRuler) / calculatUnitsAmount(typeRuler);
+    let rulerWidth = calculatRulerWidth(windowSize.width) / calculatUnitsAmount(typeRuler);
     setUnit(rulerWidth);
     setJumpWidth(rulerWidth * element.value);
   }, [typeRuler, windowSize]);
