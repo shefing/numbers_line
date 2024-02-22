@@ -1,9 +1,9 @@
 import { useNumbersLineContext } from "@/context/numbersLineContext";
 import { IElement } from "../type/moveable";
 import { v4 as uuidv4 } from "uuid";
-import { RulerPadding } from "../consts/elementConsts";
 import { LineRange } from "../type/ruler";
-import { TypeCover } from "@/type/elements";
+import { TypeCover } from "../type/elements";
+import { RulerPaddingSides } from "@/consts/elementConsts";
 
 export const useAction = () => {
   const {
@@ -33,7 +33,7 @@ export const useAction = () => {
     if (matchX && baseJump) {
       const xPosition = parseFloat(matchX[1]);
       const endXPosition = xPosition + parseFloat(baseJump.style.width) * 2;
-      const outOfRange = endXPosition - windowSize.width + RulerPadding - 10;
+      const outOfRange = endXPosition - windowSize.width + RulerPaddingSides - 10;
       let newXPosition = xPosition + baseJump.clientWidth;
       const xPositionString = matchX[0];
       if (typeRuler == LineRange.hundred && outOfRange > 0) {
@@ -49,7 +49,7 @@ export const useAction = () => {
       };
       const newDragElements: IElement[] = [...dragElements, newElement];
       setDragElements(newDragElements);
-      setIdDraggElementClick("");
+      setIdDraggElementClick(id);
     }
   };
 

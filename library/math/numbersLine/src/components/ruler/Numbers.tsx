@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { LineRange, PartToCover, RulerLenth } from "../../type/ruler";
 import { TypeCover } from "../../type/elements";
-import { RulerPadding } from "../../consts/elementConsts";
+import { RulerPaddingSides } from "../../consts/elementConsts";
 
 const Numbers = () => {
   const { windowSize, typeRuler, leftPosition, coverSituation, setCoverSituation, setVisitableDisplayButton } = useNumbersLineContext();
   const [labels, setLabels] = useState<number[]>([]);
   const [labelsCover, setClickedLabelsCover] = useState(new Set());
+
   useEffect(() => {
     let array = Array.from({ length: typeRuler == LineRange.hundredCircular ? typeRuler + 1 : typeRuler }, (_, index) => index);
     setCoverSituation(TypeCover.allDiscover);
@@ -52,17 +53,16 @@ const Numbers = () => {
 
   return (
     <div
-      className={`fixed left-0 right-0 flex justify-between border-t-4 border-gray-900 pt-0 mx-0 pl-[${RulerPadding}px] pr-[${RulerPadding}px]`}
+      className={`fixed left-0 right-0 flex justify-between border-t-4 border-gray-900 pt-0 mx-0`}
       style={
         typeRuler == LineRange.hundred
           ? {
               width: windowSize.width * (LineRange.hundred / RulerLenth.hundred),
               left: `${leftPosition}px`,
-              cursor: "move",
-              paddingLeft: `${RulerPadding}px`,
-              paddingRight: `${RulerPadding}px`,
+              paddingLeft: `${RulerPaddingSides}px`,
+              paddingRight: `${RulerPaddingSides}px`,
             }
-          : { paddingLeft: `${RulerPadding}px`, paddingRight: `${RulerPadding}px` }
+          : { paddingLeft: `${RulerPaddingSides}px`, paddingRight: `${RulerPaddingSides}px` }
       }
     >
       {labels.map((label) =>

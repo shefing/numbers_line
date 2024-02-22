@@ -30,7 +30,8 @@ export const displayRulerButtonDetials: IDisplayRuller[] = [
   { type: "הצג הכל", visitDisable: TypeCover.allDiscover, choice: TypeCover.allDiscover },
 ];
 
-export const RulerPadding = 32;
+export const RulerPaddingSides = 32;
+export const RulerPadding = 50;
 export const RulerMargin = window.innerHeight * 0.25;
 export const jumpBaseHeight = 40;
 export const jumpArrowHeight = 64;

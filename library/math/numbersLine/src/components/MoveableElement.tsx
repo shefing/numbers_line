@@ -2,18 +2,19 @@ import { useNumbersLineContext } from "../context/numbersLineContext";
 import Moveable, { OnResize, OnResizeEnd } from "react-moveable";
 import { IElement, TypesElement } from "../type/moveable";
 import { calculatRulerWidth, calculatUnitsAmount } from "../lib/utils";
-import { RulerMargin, RulerPadding, ToolbarHieght, jumpArrowHeight, jumpBaseHeight } from "../consts/elementConsts";
+import { RulerMargin, RulerPaddingSides, ToolbarHieght, jumpArrowHeight, jumpBaseHeight } from "../consts/elementConsts";
 import { calcJumpPosition } from "../lib/stylesUtils";
 import { ButtonViewable } from "../consts/ButtonViewable";
-import { useAction } from "../hooks/useActionHook";
+import { useAction } from "../hooks/useAction";
 
 interface IProps {
   moveableRef: any;
   element: IElement;
   unit: number;
+  setJumpWidth: (v: number) => void;
 }
 
-const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
+const MoveableElement = ({ moveableRef, element, unit, setJumpWidth }: IProps) => {
   const { windowSize, typeRuler, leftPosition } = useNumbersLineContext();
   const { deleteDragElement, duplicateDragJump, updateDragElements } = useAction();
   const ableProps = {
@@ -33,8 +34,8 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
     const xPosition = parseFloat(matchX[1]);
     const xPositionString = matchX[0];
     const unitsAmount = calculatUnitsAmount(typeRuler);
-    const sidesPixels = (unitsAmount / 2 - Math.round(xPosition - RulerPadding) / unit) / unitsAmount;
-    const newXPosition = Math.round((xPosition - RulerPadding) / unit) * unit + RulerPadding + sidesPixels;
+    const sidesPixels = (unitsAmount / 2 - Math.round(xPosition - RulerPaddingSides) / unit) / unitsAmount;
+    const newXPosition = Math.round((xPosition - RulerPaddingSides) / unit) * unit + RulerPaddingSides + sidesPixels;
     const newXPositionString = "(" + newXPosition + "px";
     e.target.style.transform = e.target.style.transform.replace(xPositionString, newXPositionString);
   };
@@ -71,12 +72,11 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
   const onResize = (e: OnResize) => {
     if (
       !(parseFloat(e.target.style.width) / unit < 1 && e.dist[0] < 0) &&
-      !(parseFloat(e.target.style.width) > calculatRulerWidth(windowSize.width, RulerPadding) && e.dist[0] > 0)
+      !(parseFloat(e.target.style.width) > calculatRulerWidth(windowSize.width) && e.dist[0] > 0)
     ) {
       e.target.style.width = `${e.width}px`;
+      setJumpWidth(e.width);
       e.target.style.transform = e.drag.transform;
-      const newValue = Math.round(parseFloat(e.target.style.width) / unit);
-      newValue > element.value && updateDragElements(element.id, { ...element, value: newValue });
     }
   };
   const onResizeEnd = (e: OnResizeEnd) => {
@@ -84,14 +84,15 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
     updateDragElements(element.id, { ...element, value: newValue });
     const newWidth = newValue * unit;
     e.target.style.width = `${newWidth}px`;
+    setJumpWidth(newWidth);
 
     const matchX = e.target.style.transform.match(/\((.*?)px/);
     if (matchX) {
       const xPosition = parseFloat(matchX[1]);
       const xXPositionString = matchX[0];
       //Change position when jump out of bounds:
-      if (xPosition + newWidth > windowSize.width - RulerPadding) {
-        const range = xPosition + newWidth - windowSize.width + RulerPadding;
+      if (xPosition + newWidth > windowSize.width - RulerPaddingSides) {
+        const range = xPosition + newWidth - windowSize.width + RulerPaddingSides;
         const newXTransform = "(" + (xPosition - range) + "px";
         e.target.style.transform = e.target.style.transform.replace(xXPositionString, newXTransform);
         updateDragElements(element.id, { ...element, transform: e.target.style.transform });
@@ -120,9 +121,9 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
       onResizeEnd={(e) => onResizeEnd(e)}
       snappable={true}
       bounds={{
-        left: RulerPadding,
+        left: RulerPaddingSides,
         top: ToolbarHieght + 32,
-        right: RulerPadding,
+        right: RulerPaddingSides,
         bottom: element.underRuler ? 0 : jumpArrowHeight + jumpBaseHeight,
         position: "css",
       }}

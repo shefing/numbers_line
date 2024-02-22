@@ -40,7 +40,7 @@ const Arrows = () => {
   }, [leftPosition]);
 
   return (
-    <div className="flex justify-between m-3 mb-6 ">
+    <div className="flex justify-between m-3 mb-0 ">
       {typeRuler == LineRange.hundred && (
         <>
           <div className="m-2 cursor-pointer relative" onClick={() => updatePositionOnArrowClick("left")}>

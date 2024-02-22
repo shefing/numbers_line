@@ -8,7 +8,7 @@ import {
   AlertDialogTitle,
 } from "../components/ui/alert-dialog";
 import { useNumbersLineContext } from "../context/numbersLineContext";
-import { useAction } from "../hooks/useActionHook";
+import { useAction } from "../hooks/useAction";
 
 const Reload = () => {
   const { openReloadDialog, setOpenReloadDialog } = useNumbersLineContext();

@@ -5,14 +5,14 @@ export enum LineRange {
   hundredCircular = 100,
 }
 
-export enum RulerLenth  {
+export enum RulerLenth {
   hundred = 21,
-  other = 101 
-};
+  other = 101,
+}
 
-export enum unitAmount  {
+export enum unitAmount {
   twenty = 20,
-  ten = 10 
-};
+  ten = 10,
+}
 
-export const  PartToCover = 0.7
+export const PartToCover = 0.7;
