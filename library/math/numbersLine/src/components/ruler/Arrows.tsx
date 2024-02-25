@@ -25,7 +25,7 @@ const Arrows = () => {
 
     dragElements.forEach((item) => {
       if (item.id != idDraggElementClick) {
-        const element = document.getElementById("dragElement-jump" + item.id);
+        const element = document.getElementById(`dragElement-jump${item.id}`);
         const match = element?.style.transform.match(/\((.*?)px/);
         if (match && element) {
           const xPosition = parseFloat(match[1]);

@@ -12,6 +12,10 @@
   font-display: swap;
 }
 
+body{
+  overflow: hidden;
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
@@ -56,17 +60,12 @@
 
 }
 
-:root {
-  --margin-value:28px;
-}
-
 .moveable-direction.moveable-e, .moveable-direction.moveable-w {
   background-size: contain !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
   background-color: #ffffff00 !important;
 
-  margin: var(--margin-value)  !important;
   height: 18px !important;
   border: 0px !important;
   border-bottom-right-radius: 0px !important;
@@ -75,6 +74,15 @@
   border-top-left-radius: 0px !important;
 }
 
+#dragElement-jumpBase-on .moveable-direction.moveable-e,
+#dragElement-jumpBase-on .moveable-direction.moveable-w {
+  margin-top: 30px !important;
+}
+
+#dragElement-jumpBase-under .moveable-direction.moveable-e,
+#dragElement-jumpBase-under .moveable-direction.moveable-w {
+  margin-top: -50px !important;
+}
 
 .moveable-direction.moveable-e{
   background-image: url('../public/assets/icons/resizeRight.svg')  !important;

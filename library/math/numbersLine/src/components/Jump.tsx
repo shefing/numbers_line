@@ -44,7 +44,11 @@ const Jump = ({ element }: IProps) => {
           </span>
         </div>
       </div>
-      {idDraggElementClick === element.id && <MoveableElement moveableRef={moveableRef} element={element} unit={unit} setJumpWidth={setJumpWidth} />}
+      {idDraggElementClick === element.id && (
+        <div id={`dragElement-jumpBase-${element.underRuler ? "under" : "on"}`}>
+          <MoveableElement moveableRef={moveableRef} element={element} unit={unit} setJumpWidth={setJumpWidth} />
+        </div>
+      )}
     </>
   );
 };
