@@ -14,12 +14,12 @@ const JumpArrow = ({ underRuler, jumpWidth }: IProps) => {
   }, [jumpWidth, windowSize]);
 
   return (
-    <svg id="dragElement-jumpArrow" className="w-full" style={{ height: jumpArrowHeight + "px" }}>
+    <svg id="dragElement-jumpArrow" className="w-full" style={{ height: jumpArrowHeight + "px", position: "relative" }}>
       <path
         d={
           underRuler
-            ? `M0,5 Q${jumpWidth * 0.5},${jumpArrowHeight + 55} ${jumpWidth},0`
-            : `M0,${jumpArrowHeight} Q${jumpWidth * 0.5},-55 ${jumpWidth},${jumpArrowHeight - 5}`
+            ? `M6,${20 - matchingPixels / 3} Q${jumpWidth * 0.5},${jumpArrowHeight * 2 - 10} ${jumpWidth},0`
+            : `M0,${jumpArrowHeight} Q${jumpWidth * 0.5},-${jumpArrowHeight - 10} ${jumpWidth - 6},${jumpArrowHeight - 20 + matchingPixels / 3}`
         }
         fill="none"
         stroke={underRuler ? "#F48460" : "#009FDE"}
@@ -30,10 +30,15 @@ const JumpArrow = ({ underRuler, jumpWidth }: IProps) => {
       <svg style={{ overflow: "visible" }} x={`${underRuler ? -6 : jumpWidth + 6}`} y={`${underRuler ? 10 : 90}%`}>
         <polygon
           points="-20,0 0,10 -20,20 "
-          transform={`rotate(${underRuler ? -105 - matchingPixels : 75 - matchingPixels})`}
+          transform={`rotate(${underRuler ? -100 - matchingPixels : 80 - matchingPixels})`}
           fill={underRuler ? "#F48460" : "#009FDE"}
-          stroke={underRuler ? "#F48460" : "#009FDE"}
-          stroke-width="1"
+          // stroke={underRuler ? "red0" : "white"}
+          // stroke-width="3"
+          // style={{
+          //   vectorEffect: "non-scaling-stroke",
+          //   strokeDasharray: "30, 0,40", // Adjust based on your requirement
+          //   strokeDashoffset: "30", // Adjust based on your requirement
+          // }}
         />
       </svg>
     </svg>
