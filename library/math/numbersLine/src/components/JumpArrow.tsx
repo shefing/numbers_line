@@ -23,22 +23,15 @@ const JumpArrow = ({ underRuler, jumpWidth }: IProps) => {
         }
         fill="none"
         stroke={underRuler ? "#F48460" : "#009FDE"}
-        stroke-width="4"
-        stroke-linecap="round"
-        stroke-dasharray="15 15"
+        strokeWidth="4"
+        strokeLinecap="round"
+        strokeDasharray="15 15"
       />
       <svg style={{ overflow: "visible" }} x={`${underRuler ? -6 : jumpWidth + 6}`} y={`${underRuler ? 10 : 90}%`}>
         <polygon
           points="-20,0 0,10 -20,20 "
           transform={`rotate(${underRuler ? -100 - matchingPixels : 80 - matchingPixels})`}
           fill={underRuler ? "#F48460" : "#009FDE"}
-          // stroke={underRuler ? "red0" : "white"}
-          // stroke-width="3"
-          // style={{
-          //   vectorEffect: "non-scaling-stroke",
-          //   strokeDasharray: "30, 0,40", // Adjust based on your requirement
-          //   strokeDashoffset: "30", // Adjust based on your requirement
-          // }}
         />
       </svg>
     </svg>
