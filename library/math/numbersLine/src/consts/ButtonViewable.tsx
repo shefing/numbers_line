@@ -4,8 +4,8 @@ import duplicateIcon from "/assets/icons/duplicate.svg";
 import duplicateDisable from "/assets/icons/duplicateDisable.svg";
 import { IAbleProps } from "../type/moveable";
 import { LineRange } from "@/type/ruler";
-import { RulerPadding } from "./elementConsts";
 import { calculatScreenWidth } from "@/lib/utils";
+import { RulerPaddingSides } from "./elementConsts";
 
 export const ButtonViewable = {
   name: "ButtonViewable",
@@ -18,7 +18,7 @@ export const ButtonViewable = {
     if (matchX) {
       const xPosition = matchX[1];
       const endXPosition = parseFloat(xPosition) + cssWidth * 2;
-      const outOfRange = endXPosition - window.innerWidth + RulerPadding - 10;
+      const outOfRange = endXPosition - window.innerWidth + RulerPaddingSides - 10;
       if (outOfRange > 0 && (typeRuler != LineRange.hundred || leftPosition - outOfRange < calculatScreenWidth(window.innerWidth))) {
         copyApproval = false;
       }

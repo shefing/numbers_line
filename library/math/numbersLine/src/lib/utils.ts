@@ -1,3 +1,4 @@
+import { RulerPaddingSides } from "@/consts/elementConsts";
 import { LineRange, RulerLenth, unitAmount } from "../type/ruler";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
@@ -10,8 +11,8 @@ export const calculatScreenWidth = (windowWidth: number) => {
   return -windowWidth * ((LineRange.hundred - RulerLenth.hundred) / RulerLenth.hundred);
 };
 
-export const calculatRulerWidth = (windowWidth: number, RulerPadding: number) => {
-  return windowWidth - RulerPadding * 2;
+export const calculatRulerWidth = (windowWidth: number) => {
+  return windowWidth - RulerPaddingSides * 2;
 };
 
 export const getImageSrc = (url: string, isHovered: boolean, isOpen: boolean, isDisable?: boolean) => {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { LineRange } from "../type/ruler";
 import { IWindowSize, TypeCover } from "../type/elements";
 import { IElement } from "../type/moveable";
-import { calculatScreenWidth } from "@/lib/utils";
+import { calculatScreenWidth } from "../lib/utils";
 interface INumbersLineContextProps {
   windowSize: IWindowSize;
   typeRuler: LineRange;
@@ -59,6 +59,7 @@ export const NumbersLineContexProvider = (props: any) => {
 
   const Resize = () => {
     setWindowSize({ height: window.innerHeight, width: window.innerWidth });
+    setIdDraggElementClick("");
   };
 
   useEffect(() => {
