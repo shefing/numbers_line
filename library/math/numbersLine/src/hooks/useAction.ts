@@ -28,7 +28,7 @@ export const useAction = () => {
   const duplicateDragJump = async (element: IElement) => {
     const id = uuidv4();
     let transform = "";
-    const baseJump = document.getElementById("dragElement-jump" + element.id);
+    const baseJump = document.getElementById(`dragElement-jump${element.id}`);
     let matchX = baseJump?.style.transform.match(/\((.*?)px/);
     if (matchX && baseJump) {
       const xPosition = parseFloat(matchX[1]);

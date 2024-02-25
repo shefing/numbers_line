@@ -63,8 +63,6 @@ const MoveableElement = ({ moveableRef, element, unit, setJumpWidth }: IProps) =
         newYPositionString = ", " + Math.round(yTransform - 80) + "px)";
       }
       e.target.style.transform = e.target.style.transform.replace(yTransformString, newYPositionString);
-      const root = document.documentElement;
-      root.style.setProperty("--margin-value", `${element.underRuler ? 30 : -50}px`);
     }
 
     updateDragElements(element.id, { ...element, transform: e.target.style.transform, underRuler: isUnderRuler });
