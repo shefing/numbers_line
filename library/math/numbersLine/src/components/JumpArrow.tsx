@@ -18,8 +18,8 @@ const JumpArrow = ({ underRuler, jumpWidth }: IProps) => {
       <path
         d={
           underRuler
-            ? `M6,${20 - matchingPixels / 3} Q${jumpWidth * 0.5},${jumpArrowHeight * 2 - 10} ${jumpWidth},0`
-            : `M0,${jumpArrowHeight} Q${jumpWidth * 0.5},-${jumpArrowHeight - 10} ${jumpWidth - 6},${jumpArrowHeight - 20 + matchingPixels / 3}`
+            ? `M6,${20 - matchingPixels / 3} Q${jumpWidth * 0.5},${jumpArrowHeight * 2 - 15} ${jumpWidth},0`
+            : `M0,${jumpArrowHeight} Q${jumpWidth * 0.5},-${jumpArrowHeight - 15} ${jumpWidth - 6},${jumpArrowHeight - 20 + matchingPixels / 3}`
         }
         fill="none"
         stroke={underRuler ? "#F48460" : "#009FDE"}
