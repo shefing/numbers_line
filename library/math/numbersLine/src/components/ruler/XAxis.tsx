@@ -15,7 +15,7 @@ const XAxis = () => {
 
   useEffect(() => {
     const newLeftPosition = (windowSize.width / prevWindowSize) * leftPosition;
-    setLeftPosition((prevLeft: number) => Math.max(calculatScreenWidth(), Math.min(0, prevLeft + newLeftPosition)));
+    setLeftPosition(newLeftPosition);
     setPrevWindowSize(windowSize.width);
   }, [windowSize]);
 
