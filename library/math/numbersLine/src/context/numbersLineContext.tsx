@@ -21,8 +21,8 @@ interface INumbersLineContextProps {
   setCoverSituation: (v: TypeCover) => void;
   visitableDisplayButton: TypeCover;
   setVisitableDisplayButton: (v: TypeCover) => void;
-  openReloadDialog: boolean;
-  setOpenReloadDialog: (v: boolean) => void;
+  openRestartDialog: boolean;
+  setOpenRestartDialog: (v: boolean) => void;
 }
 
 export const NumbersLineContext = React.createContext({
@@ -43,8 +43,8 @@ export const NumbersLineContext = React.createContext({
   setCoverSituation: () => null,
   visitableDisplayButton: {} as TypeCover,
   setVisitableDisplayButton: () => null,
-  openReloadDialog: {} as boolean,
-  setOpenReloadDialog: () => null,
+  openRestartDialog: {} as boolean,
+  setOpenRestartDialog: () => null,
 } as INumbersLineContextProps);
 
 export const NumbersLineContexProvider = (props: any) => {
@@ -56,7 +56,7 @@ export const NumbersLineContexProvider = (props: any) => {
   const [idDraggElementClick, setIdDraggElementClick] = useState("");
   const [coverSituation, setCoverSituation] = useState(TypeCover.allDiscover);
   const [visitableDisplayButton, setVisitableDisplayButton] = useState(TypeCover.allDiscover);
-  const [openReloadDialog, setOpenReloadDialog] = useState(false);
+  const [openRestartDialog, setOpenRestartDialog] = useState(false);
   const [rulerPaddingSides, setRulerPaddingSides] = useState(RulerPaddingSides);
 
   const Resize = () => {
@@ -91,8 +91,8 @@ export const NumbersLineContexProvider = (props: any) => {
         setCoverSituation,
         visitableDisplayButton,
         setVisitableDisplayButton,
-        openReloadDialog,
-        setOpenReloadDialog,
+        openRestartDialog,
+        setOpenRestartDialog,
       }}
     >
       {props.children}

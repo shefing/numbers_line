@@ -15,7 +15,7 @@ export enum ActionTypes {
   writing = "writing",
   displayNumbersLine = "displayNumbersLine",
   naviAndKani = "naviAndKani",
-  reload = "reload",
+  restart = "restart",
 }
 
 export interface IActionIcon {

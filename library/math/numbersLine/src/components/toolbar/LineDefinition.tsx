@@ -17,7 +17,7 @@ const LineDefinition = () => {
     setLeftPosition,
     dragElements,
     visitableDisplayButton,
-    setOpenReloadDialog,
+    setOpenRestartDialog,
     setTypeRulerChange,
   } = useNumbersLineContext();
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -48,7 +48,7 @@ const LineDefinition = () => {
       setLeftPosition(0);
     } else {
       setTypeRulerChange(type);
-      setOpenReloadDialog(true);
+      setOpenRestartDialog(true);
     }
   };
 

@@ -23,8 +23,8 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged }: IProps) => {
     dragElements,
     setDragElements,
     idDraggElementClick,
-    openReloadDialog,
-    setOpenReloadDialog,
+    openRestartDialog,
+    setOpenRestartDialog,
     visitableDisplayButton,
   } = useNumbersLineContext();
   const wrapperRef = useRef<HTMLDivElement>(null);
@@ -45,8 +45,8 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged }: IProps) => {
   }, [idDraggElementClick]);
 
   const getSrc = () => {
-    const isClicked = typeAction === ActionTypes.reload ? openReloadDialog : isOpen;
-    const isDisabled = typeAction === ActionTypes.reload && dragElements.length == 0 && visitableDisplayButton == TypeCover.allDiscover;
+    const isClicked = typeAction === ActionTypes.restart ? openRestartDialog : isOpen;
+    const isDisabled = typeAction === ActionTypes.restart && dragElements.length == 0 && visitableDisplayButton == TypeCover.allDiscover;
     const dotIndex = iconUrl.indexOf(".");
     const beforeDot = iconUrl.substring(0, dotIndex);
     return isClicked ? beforeDot + "Open.svg" : isHovered ? beforeDot + "Hover.svg" : isDisabled ? beforeDot + "Disable.svg" : iconUrl;
@@ -80,7 +80,7 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged }: IProps) => {
       addDraggableElement();
       return;
     }
-    typeAction == ActionTypes.reload ? setOpenReloadDialog(true) : setIsOpen((prevOpen) => !prevOpen);
+    typeAction == ActionTypes.restart ? setOpenRestartDialog(true) : setIsOpen((prevOpen) => !prevOpen);
   };
 
   return (

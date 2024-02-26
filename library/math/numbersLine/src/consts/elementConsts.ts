@@ -4,13 +4,13 @@ import text from "/assets/icons/toolbar/text.svg";
 import writing from "/assets/icons/toolbar/writing.svg";
 import eye from "/assets/icons/toolbar/eye.svg";
 import naviAndKani from "/assets/icons/toolbar/naviAndKani.svg";
-import reload from "/assets/icons/toolbar/reload.svg";
+import restart from "/assets/icons/toolbar/restart.svg";
 import { LineRange } from "@/type/ruler";
 
 export const actionIconsDetials: IActionIcon[] = [
   { type: ActionTypes.naviAndKani, url: naviAndKani, isDragged: true },
   { type: ActionTypes.displayNumbersLine, url: eye },
-  { type: ActionTypes.reload, url: reload },
+  { type: ActionTypes.restart, url: restart },
   { type: ActionTypes.writing, url: writing },
   { type: ActionTypes.text, url: text, isDragged: true },
   { type: ActionTypes.jump, url: jump, isDragged: true },
