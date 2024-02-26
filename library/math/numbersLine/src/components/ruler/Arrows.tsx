@@ -6,11 +6,11 @@ import { LineRange, RulerLenth } from "../../type/ruler";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { useEffect, useRef, useState } from "react";
 import { RulerMargin } from "../../consts/elementConsts";
-import { useWindowSize } from "../../hooks/useWindowSize";
+import { useHelpers } from "../../hooks/useHelpers";
 
 const Arrows = () => {
   const { typeRuler, windowSize, leftPosition, setLeftPosition, dragElements, idDraggElementClick, setIdDraggElementClick } = useNumbersLineContext();
-  const { calculatScreenWidth } = useWindowSize();
+  const { calculatScreenWidth } = useHelpers();
   const [leftArrowIcon, setLeftArrowIcon] = useState(leftArrow);
   const [rightArrowIcon, setRightArrowIcon] = useState(rightArrow);
   const leftPositionRef = useRef(leftPosition);

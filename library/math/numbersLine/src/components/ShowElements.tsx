@@ -67,8 +67,16 @@ const ShowElements = () => {
 
   return dragElements.map((element: IElement) => (
     <div key={element.id} id={element.id} onClick={() => setIdDraggElementClick(element.id)}>
-      {element.type == ActionTypes.jump && <Jump element={element} />}
-      {element.type == ActionTypes.text && <Text element={element} />}
+      {(() => {
+        switch (element.type) {
+          case ActionTypes.jump:
+            return <Jump element={element} />;
+          case ActionTypes.text:
+            return <Text element={element} />;
+          default:
+            return null;
+        }
+      })()}
     </div>
   ));
 };

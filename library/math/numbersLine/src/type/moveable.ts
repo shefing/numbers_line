@@ -6,6 +6,7 @@ export interface IElement {
   type: ActionTypes;
   jump?: IJump;
   transform: string;
+  width: number;
 }
 
 export interface IJump {

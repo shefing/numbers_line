@@ -6,6 +6,7 @@ import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { ActionTypes, TypeCover } from "../../type/elements";
 import { v4 as uuidv4 } from "uuid";
 import { IElement } from "@/type/moveable";
+import { useHelpers } from "@/hooks/useHelpers";
 
 interface IProps {
   typeAction: ActionTypes;
@@ -27,6 +28,7 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged }: IProps) => {
     setOpenRestartDialog,
     visitableDisplayButton,
   } = useNumbersLineContext();
+  const { calculatRulerWidth } = useHelpers();
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -60,6 +62,7 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged }: IProps) => {
       id: uuidv4(),
       type: typeAction,
       transform: `translate(${xTranslate}px, ${yTranslate}px)`,
+      width: calculatRulerWidth() / calculatUnitsAmount(typeRuler),
     };
 
     if (typeAction === ActionTypes.jump) {

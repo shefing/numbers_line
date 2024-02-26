@@ -30,13 +30,12 @@ export const useAction = () => {
   const duplicateDragJump = async (element: IElement) => {
     const id = uuidv4();
     let newTransform = "";
-    const baseJump = document.getElementById(`dragElement-${element.id}`);
     let transform = element.transform.match(/\((.*?)px/);
-    if (!transform || !baseJump) return;
+    if (!transform) return;
     const startPosition = parseFloat(transform[1]);
-    const endNewJumpPosition = startPosition + parseFloat(baseJump.style.width) * 2;
+    const endNewJumpPosition = startPosition + element.width * 2;
     const outOfRange = endNewJumpPosition - windowSize.width + rulerPaddingSides - 10;
-    let newPosition = startPosition + baseJump.clientWidth;
+    let newPosition = startPosition + element.width;
     const startPositionString = transform[0];
     if (typeRuler == LineRange.hundred && outOfRange > 0) {
       setLeftPosition(leftPosition - outOfRange);
@@ -58,7 +57,7 @@ export const useAction = () => {
     setDragElements(newElements);
   };
 
-  const initialization = () => {
+  const restart = () => {
     setTypeRuler(typeRulerChange);
     typeRulerChange == LineRange.hundred ? setRulerPaddingSides(windowSize.width / RulerLenth.hundred / 2) : RulerPaddingSides;
     setDragElements([]);
@@ -71,6 +70,6 @@ export const useAction = () => {
     deleteDragElement,
     duplicateDragJump,
     updateDragElements,
-    initialization,
+    restart,
   };
 };

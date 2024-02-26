@@ -6,20 +6,19 @@ import { RulerMargin, RulerPadding, ToolbarHieght, jumpArrowHeight, jumpBaseHeig
 import { calcJumpPosition } from "../lib/utils";
 import { ButtonViewable } from "../consts/ButtonViewable";
 import { useAction } from "../hooks/useAction";
-import { useWindowSize } from "../hooks/useWindowSize";
+import { useHelpers } from "../hooks/useHelpers";
 import { ActionTypes } from "@/type/elements";
 
 interface IProps {
   moveableRef: any;
   element: IElement;
   unit?: number;
-  setJumpWidth?: (v: number) => void;
 }
 
-const MoveableElement = ({ moveableRef, element, unit, setJumpWidth }: IProps) => {
+const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
   const { windowSize, typeRuler, rulerPaddingSides, leftPosition } = useNumbersLineContext();
   const { deleteDragElement, duplicateDragJump, updateDragElements } = useAction();
-  const { calculatRulerWidth, calculatScreenWidth } = useWindowSize();
+  const { calculatRulerWidth, calculatScreenWidth } = useHelpers();
 
   const ableProps = {
     ButtonViewable: true,
@@ -83,7 +82,7 @@ const MoveableElement = ({ moveableRef, element, unit, setJumpWidth }: IProps) =
   const onResize = (e: OnResize) => {
     if (!(parseFloat(e.target.style.width) / unit! < 1 && e.dist[0] < 0) && !(parseFloat(e.target.style.width) > calculatRulerWidth() && e.dist[0] > 0)) {
       e.target.style.width = `${e.width}px`;
-      setJumpWidth!(e.width);
+      updateDragElements(element.id, { ...element, width: e.width });
       e.target.style.transform = e.drag.transform;
     }
   };
@@ -91,10 +90,9 @@ const MoveableElement = ({ moveableRef, element, unit, setJumpWidth }: IProps) =
   const onResizeEnd = (e: OnResizeEnd) => {
     if (!element.jump) return;
     const newValue = Math.round(e.lastEvent.width / unit!);
-    updateDragElements(element.id, { ...element, jump: { ...element.jump, value: newValue } });
     const newWidth = newValue * unit!;
     e.target.style.width = `${newWidth}px`;
-    setJumpWidth!(newWidth);
+    updateDragElements(element.id, { ...element, width: newWidth, jump: { ...element.jump, value: newValue } });
 
     const matchX = e.target.style.transform.match(/\((.*?)px/);
     if (matchX) {
