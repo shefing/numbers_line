@@ -12,14 +12,15 @@ import { ActionTypes } from "@/type/elements";
 interface IProps {
   moveableRef: any;
   element: IElement;
-  unit: number;
-  setJumpWidth: (v: number) => void;
+  unit?: number;
+  setJumpWidth?: (v: number) => void;
 }
 
 const MoveableElement = ({ moveableRef, element, unit, setJumpWidth }: IProps) => {
   const { windowSize, typeRuler, rulerPaddingSides, leftPosition } = useNumbersLineContext();
   const { deleteDragElement, duplicateDragJump, updateDragElements } = useAction();
   const { calculatRulerWidth, calculatScreenWidth } = useWindowSize();
+
   const ableProps = {
     ButtonViewable: true,
     onDeleteClick: () => deleteDragElement(element.id),
@@ -41,8 +42,8 @@ const MoveableElement = ({ moveableRef, element, unit, setJumpWidth }: IProps) =
     const xPositionString = matchX[0];
     const unitsAmount = calculatUnitsAmount(typeRuler);
     //explanation
-    const sidesPixels = (unitsAmount / 2 - Math.round(xPosition - rulerPaddingSides) / unit) / unitsAmount;
-    const newXPosition = Math.round((xPosition - rulerPaddingSides) / unit) * unit + rulerPaddingSides + sidesPixels;
+    const sidesPixels = (unitsAmount / 2 - Math.round(xPosition - rulerPaddingSides) / unit!) / unitsAmount;
+    const newXPosition = Math.round((xPosition - rulerPaddingSides) / unit!) * unit! + rulerPaddingSides + sidesPixels;
     const newXPositionString = "(" + newXPosition + "px";
     e.target.style.transform = e.target.style.transform.replace(xPositionString, newXPositionString);
   };
@@ -80,20 +81,20 @@ const MoveableElement = ({ moveableRef, element, unit, setJumpWidth }: IProps) =
   };
 
   const onResize = (e: OnResize) => {
-    if (!(parseFloat(e.target.style.width) / unit < 1 && e.dist[0] < 0) && !(parseFloat(e.target.style.width) > calculatRulerWidth() && e.dist[0] > 0)) {
+    if (!(parseFloat(e.target.style.width) / unit! < 1 && e.dist[0] < 0) && !(parseFloat(e.target.style.width) > calculatRulerWidth() && e.dist[0] > 0)) {
       e.target.style.width = `${e.width}px`;
-      setJumpWidth(e.width);
+      setJumpWidth!(e.width);
       e.target.style.transform = e.drag.transform;
     }
   };
 
   const onResizeEnd = (e: OnResizeEnd) => {
     if (!element.jump) return;
-    const newValue = Math.round(e.lastEvent.width / unit);
+    const newValue = Math.round(e.lastEvent.width / unit!);
     updateDragElements(element.id, { ...element, jump: { ...element.jump, value: newValue } });
-    const newWidth = newValue * unit;
+    const newWidth = newValue * unit!;
     e.target.style.width = `${newWidth}px`;
-    setJumpWidth(newWidth);
+    setJumpWidth!(newWidth);
 
     const matchX = e.target.style.transform.match(/\((.*?)px/);
     if (matchX) {

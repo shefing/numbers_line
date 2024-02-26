@@ -3,6 +3,7 @@ import Jump from "./Jump";
 import { useNumbersLineContext } from "../context/numbersLineContext";
 import { useEffect, useState } from "react";
 import { ActionTypes, IWindowSize } from "../type/elements";
+import { Text } from "./Text";
 
 const ShowElements = () => {
   const { windowSize, dragElements, setIdDraggElementClick } = useNumbersLineContext();
@@ -67,6 +68,7 @@ const ShowElements = () => {
   return dragElements.map((element: IElement) => (
     <div key={element.id} id={element.id} onClick={() => setIdDraggElementClick(element.id)}>
       {element.type == ActionTypes.jump && <Jump element={element} />}
+      {element.type == ActionTypes.text && <Text element={element} />}
     </div>
   ));
 };
