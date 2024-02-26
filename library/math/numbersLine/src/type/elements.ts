@@ -9,7 +9,7 @@ export enum TypeCover {
   randomly = "randomly",
 }
 
-export enum TypeActionIconsToolbar {
+export enum ActionTypes {
   jump = "jump",
   text = "text",
   writing = "writing",
@@ -19,8 +19,9 @@ export enum TypeActionIconsToolbar {
 }
 
 export interface IActionIcon {
-  type: string;
+  type: ActionTypes;
   url: string;
+  isDragged?: boolean;
 }
 
 export interface IDisplayRuller {

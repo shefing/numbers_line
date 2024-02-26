@@ -1,12 +1,13 @@
 import { useNumbersLineContext } from "../context/numbersLineContext";
 import Moveable, { OnResize, OnResizeEnd } from "react-moveable";
-import { IElement, TypesElement } from "../type/moveable";
+import { IElement } from "../type/moveable";
 import { calculatUnitsAmount } from "../lib/utils";
 import { RulerMargin, RulerPadding, ToolbarHieght, jumpArrowHeight, jumpBaseHeight } from "../consts/elementConsts";
-import { calcJumpPosition } from "../lib/stylesUtils";
+import { calcJumpPosition } from "../lib/utils";
 import { ButtonViewable } from "../consts/ButtonViewable";
 import { useAction } from "../hooks/useAction";
 import { useWindowSize } from "../hooks/useWindowSize";
+import { ActionTypes } from "@/type/elements";
 
 interface IProps {
   moveableRef: any;
@@ -22,9 +23,9 @@ const MoveableElement = ({ moveableRef, element, unit, setJumpWidth }: IProps) =
   const ableProps = {
     ButtonViewable: true,
     onDeleteClick: () => deleteDragElement(element.id),
-    copyViewAble: element.type === TypesElement.jump,
+    copyViewAble: element.type === ActionTypes.jump,
     onCopyClick: () => duplicateDragJump(element),
-    underRuler: element.underRuler,
+    underRuler: element.jump?.underRuler,
     typeRuler: typeRuler,
     leftPosition: leftPosition,
     rulerPaddingSides: rulerPaddingSides,
@@ -32,12 +33,14 @@ const MoveableElement = ({ moveableRef, element, unit, setJumpWidth }: IProps) =
   };
 
   const updateXLocation = (e: any) => {
+    //locate the element exactly on the ruler lines
     const originalString = e.target.style.transform;
     const matchX = originalString.match(/\((.*?)px/);
     if (!matchX) return;
     const xPosition = parseFloat(matchX[1]);
     const xPositionString = matchX[0];
     const unitsAmount = calculatUnitsAmount(typeRuler);
+    //explanation
     const sidesPixels = (unitsAmount / 2 - Math.round(xPosition - rulerPaddingSides) / unit) / unitsAmount;
     const newXPosition = Math.round((xPosition - rulerPaddingSides) / unit) * unit + rulerPaddingSides + sidesPixels;
     const newXPositionString = "(" + newXPosition + "px";
@@ -45,18 +48,23 @@ const MoveableElement = ({ moveableRef, element, unit, setJumpWidth }: IProps) =
   };
 
   const onDragEnd = (e: OnResizeEnd) => {
-    //Change the color of the jump if dragged under the ruler
-    let isUnderRuler = element.underRuler;
+    if (!element?.jump) return;
+
+    //find jump positiom if dragged under the ruler
+    let isUnderRuler = element.jump?.underRuler;
     const matchY = e.target.style.transform.match(/,\s*(-?\d+\.?\d*)px\)/);
     if (!matchY) return;
     const yTransform = parseFloat(matchY[1]);
     const yTransformString = matchY[0];
-    const elementPsition = calcJumpPosition(yTransform, element.underRuler);
+    const elementPsition = calcJumpPosition(yTransform, element.jump.underRuler);
     const rulerPosition = windowSize.height * (1 - RulerMargin) - RulerPadding;
-    if (Math.abs(rulerPosition - elementPsition) < 50) {
-      updateXLocation(e);
-    }
-    if (element.underRuler != rulerPosition < elementPsition) {
+
+    //check if element close to the ruler
+    if (Math.abs(rulerPosition - elementPsition) < 50) updateXLocation(e);
+
+    //checked if jump type changed (from under ruler to or not)
+    if (element.jump.underRuler != rulerPosition < elementPsition) {
+      //TODO: change it to const (80)
       let newYPositionString = "";
       if (rulerPosition < elementPsition) {
         isUnderRuler = true;
@@ -68,7 +76,7 @@ const MoveableElement = ({ moveableRef, element, unit, setJumpWidth }: IProps) =
       e.target.style.transform = e.target.style.transform.replace(yTransformString, newYPositionString);
     }
 
-    updateDragElements(element.id, { ...element, transform: e.target.style.transform, underRuler: isUnderRuler });
+    updateDragElements(element.id, { ...element, transform: e.target.style.transform, jump: { ...element.jump, underRuler: isUnderRuler } });
   };
 
   const onResize = (e: OnResize) => {
@@ -80,8 +88,9 @@ const MoveableElement = ({ moveableRef, element, unit, setJumpWidth }: IProps) =
   };
 
   const onResizeEnd = (e: OnResizeEnd) => {
+    if (!element.jump) return;
     const newValue = Math.round(e.lastEvent.width / unit);
-    updateDragElements(element.id, { ...element, value: newValue });
+    updateDragElements(element.id, { ...element, jump: { ...element.jump, value: newValue } });
     const newWidth = newValue * unit;
     e.target.style.width = `${newWidth}px`;
     setJumpWidth(newWidth);
@@ -115,7 +124,7 @@ const MoveableElement = ({ moveableRef, element, unit, setJumpWidth }: IProps) =
       draggable={true}
       onDrag={(e) => (e.target.style.transform = e.transform)}
       onDragEnd={(e) => onDragEnd(e)}
-      resizable={true}
+      resizable={element.jump}
       renderDirections={["w", "e"]}
       onResize={(e) => onResize(e)}
       onResizeEnd={(e) => onResizeEnd(e)}
@@ -124,7 +133,7 @@ const MoveableElement = ({ moveableRef, element, unit, setJumpWidth }: IProps) =
         left: rulerPaddingSides,
         top: ToolbarHieght + 32,
         right: rulerPaddingSides,
-        bottom: element.underRuler ? 0 : jumpArrowHeight + jumpBaseHeight,
+        bottom: !element.jump || element.jump.underRuler ? 0 : jumpArrowHeight + jumpBaseHeight,
         position: "css",
       }}
     />

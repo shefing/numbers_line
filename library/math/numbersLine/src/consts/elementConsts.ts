@@ -1,4 +1,4 @@
-import { IActionIcon, IDisplayRuller, IRulerDefinition, TypeActionIconsToolbar, TypeCover } from "../type/elements";
+import { IActionIcon, IDisplayRuller, IRulerDefinition, ActionTypes, TypeCover } from "../type/elements";
 import jump from "/assets/icons/toolbar/jump.svg";
 import text from "/assets/icons/toolbar/text.svg";
 import writing from "/assets/icons/toolbar/writing.svg";
@@ -8,12 +8,12 @@ import reload from "/assets/icons/toolbar/reload.svg";
 import { LineRange } from "@/type/ruler";
 
 export const actionIconsDetials: IActionIcon[] = [
-  { type: TypeActionIconsToolbar.naviAndKani, url: naviAndKani },
-  { type: TypeActionIconsToolbar.displayNumbersLine, url: eye },
-  { type: TypeActionIconsToolbar.reload, url: reload },
-  { type: TypeActionIconsToolbar.writing, url: writing },
-  { type: TypeActionIconsToolbar.text, url: text },
-  { type: TypeActionIconsToolbar.jump, url: jump },
+  { type: ActionTypes.naviAndKani, url: naviAndKani, isDragged: true },
+  { type: ActionTypes.displayNumbersLine, url: eye },
+  { type: ActionTypes.reload, url: reload },
+  { type: ActionTypes.writing, url: writing },
+  { type: ActionTypes.text, url: text, isDragged: true },
+  { type: ActionTypes.jump, url: jump, isDragged: true },
 ];
 export const rulerDefinitionButtonDetials: IRulerDefinition[] = [
   { type: "0-10", choice: LineRange.ten },

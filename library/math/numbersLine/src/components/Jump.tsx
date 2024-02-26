@@ -3,10 +3,10 @@ import { IElement } from "../type/moveable";
 import MoveableElement from "./MoveableElement";
 import { useNumbersLineContext } from "../context/numbersLineContext";
 import { calculatUnitsAmount } from "../lib/utils";
-import { MatchBaseJumpClassName } from "../lib/stylesUtils";
 import { LineRange, RulerLenth } from "../type/ruler";
 import JumpArrow from "./JumpArrow";
 import { useWindowSize } from "../hooks/useWindowSize";
+import { baseJumpClassName } from "@/styles/jump";
 
 interface IProps {
   element: IElement;
@@ -15,15 +15,16 @@ interface IProps {
 const Jump = ({ element }: IProps) => {
   const { windowSize, typeRuler, idDraggElementClick } = useNumbersLineContext();
   const { calculatRulerWidth } = useWindowSize();
+  const jump = element.jump!;
   const [unit, setUnit] = useState(calculatRulerWidth() / calculatUnitsAmount(typeRuler));
   const [hideNumber, setHideNumber] = useState(true);
-  const [jumpWidth, setJumpWidth] = useState(unit * element.value);
+  const [jumpWidth, setJumpWidth] = useState(unit * jump.value);
   const moveableRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     let rulerWidth = calculatRulerWidth() / calculatUnitsAmount(typeRuler);
     setUnit(rulerWidth);
-    setJumpWidth(rulerWidth * element.value);
+    setJumpWidth(rulerWidth * jump.value);
     typeRuler == LineRange.hundred && setUnit(windowSize.width / RulerLenth.hundred);
   }, [typeRuler, windowSize]);
 
@@ -32,23 +33,22 @@ const Jump = ({ element }: IProps) => {
       <div
         ref={moveableRef}
         id={"dragElement-" + element.id}
-        className={`absolute t-0 l-0 ${idDraggElementClick == element.id ? "cursor-move" : "cursor-pointer"}`}
+        className={`flex absolute t-0 l-0 ${idDraggElementClick == element.id ? "cursor-move" : "cursor-pointer"}`}
         style={{
-          width: unit * element.value,
-          display: "flex",
-          flexDirection: element.underRuler ? "column-reverse" : "column",
+          width: unit * jump.value,
+          flexDirection: jump.underRuler ? "column-reverse" : "column",
           transform: element.transform,
         }}
       >
-        <JumpArrow underRuler={element.underRuler} jumpWidth={jumpWidth} />
-        <div id="dragElement-jumpBase" className={MatchBaseJumpClassName(element.underRuler)}>
+        <JumpArrow underRuler={jump.underRuler} jumpWidth={jumpWidth} />
+        <div id="dragElement-jumpBase" className={`${baseJumpClassName} ${jump.underRuler ? " bg-[#F48460] mb-[1rem]" : " bg-[#009FDE] mt-[1rem]"}`}>
           <span id="dragElement-jumpLength" className="cursor-pointer" onClick={() => setHideNumber(!hideNumber)}>
-            {hideNumber ? "?" : typeRuler != LineRange.hundredCircular ? element.value : element.value * 10}
+            {hideNumber ? "?" : typeRuler != LineRange.hundredCircular ? jump.value : jump.value * 10}
           </span>
         </div>
       </div>
       {idDraggElementClick === element.id && (
-        <div id={`dragElement-jumpBase-${element.underRuler ? "under" : "on"}`}>
+        <div id={`dragElement-jumpBase-${jump.underRuler ? "under" : "on"}`}>
           <MoveableElement moveableRef={moveableRef} element={element} unit={unit} setJumpWidth={setJumpWidth} />
         </div>
       )}

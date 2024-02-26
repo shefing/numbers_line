@@ -1,17 +1,18 @@
+import { ActionTypes } from "./elements";
 import { LineRange } from "./ruler";
 
 export interface IElement {
   id: string;
-  type: TypesElement;
-  value: number;
+  type: ActionTypes;
+  jump?: IJump;
   transform: string;
+}
+
+export interface IJump {
+  value: number;
   underRuler: boolean;
 }
 
-export enum TypesElement {
-  text = "text",
-  jump = "jump",
-}
 export interface IAbleProps {
   ButtonViewable: boolean;
   onDeleteClick: () => void;

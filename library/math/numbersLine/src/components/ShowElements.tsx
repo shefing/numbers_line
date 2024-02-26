@@ -1,8 +1,8 @@
-import { IElement, TypesElement } from "../type/moveable";
+import { IElement } from "../type/moveable";
 import Jump from "./Jump";
 import { useNumbersLineContext } from "../context/numbersLineContext";
 import { useEffect, useState } from "react";
-import { IWindowSize } from "../type/elements";
+import { ActionTypes, IWindowSize } from "../type/elements";
 
 const ShowElements = () => {
   const { windowSize, dragElements, setIdDraggElementClick } = useNumbersLineContext();
@@ -66,7 +66,7 @@ const ShowElements = () => {
 
   return dragElements.map((element: IElement) => (
     <div key={element.id} id={element.id} onClick={() => setIdDraggElementClick(element.id)}>
-      {element.type == TypesElement.jump && <Jump element={element} />}
+      {element.type == ActionTypes.jump && <Jump element={element} />}
     </div>
   ));
 };

@@ -29,30 +29,28 @@ export const useAction = () => {
 
   const duplicateDragJump = async (element: IElement) => {
     const id = uuidv4();
-    let transform = "";
+    let newTransform = "";
     const baseJump = document.getElementById(`dragElement-${element.id}`);
-    let matchX = baseJump?.style.transform.match(/\((.*?)px/);
-    if (matchX && baseJump) {
-      const xPosition = parseFloat(matchX[1]);
-      const endXPosition = xPosition + parseFloat(baseJump.style.width) * 2;
-      const outOfRange = endXPosition - windowSize.width + rulerPaddingSides - 10;
-      let newXPosition = xPosition + baseJump.clientWidth;
-      const xPositionString = matchX[0];
-      if (typeRuler == LineRange.hundred && outOfRange > 0) {
-        setLeftPosition(leftPosition - outOfRange);
-        newXPosition -= outOfRange;
-      }
-      const newXPositionString = "(" + newXPosition + "px";
-      transform = baseJump.style.transform.replace(xPositionString, newXPositionString);
-      const newElement = {
-        ...element,
-        id,
-        transform: transform,
-      };
-      const newDragElements: IElement[] = [...dragElements, newElement];
-      setDragElements(newDragElements);
-      setIdDraggElementClick(id);
+    let transform = element.transform.match(/\((.*?)px/);
+    if (!transform || !baseJump) return;
+    const startPosition = parseFloat(transform[1]);
+    const endNewJumpPosition = startPosition + parseFloat(baseJump.style.width) * 2;
+    const outOfRange = endNewJumpPosition - windowSize.width + rulerPaddingSides - 10;
+    let newPosition = startPosition + baseJump.clientWidth;
+    const startPositionString = transform[0];
+    if (typeRuler == LineRange.hundred && outOfRange > 0) {
+      setLeftPosition(leftPosition - outOfRange);
+      newPosition -= outOfRange;
     }
+    const newXPositionString = "(" + newPosition + "px";
+    newTransform = element.transform.replace(startPositionString, newXPositionString);
+    const newElement = {
+      ...element,
+      id,
+      transform: newTransform,
+    };
+    setDragElements([...dragElements, newElement]);
+    setIdDraggElementClick(id);
   };
 
   const updateDragElements = (elementId: string, newElement: IElement) => {
@@ -63,7 +61,6 @@ export const useAction = () => {
   const initialization = () => {
     setTypeRuler(typeRulerChange);
     typeRulerChange == LineRange.hundred ? setRulerPaddingSides(windowSize.width / RulerLenth.hundred / 2) : RulerPaddingSides;
-
     setDragElements([]);
     setCoverSituation(TypeCover.allDiscover);
     setVisitableDisplayButton(TypeCover.allDiscover);
