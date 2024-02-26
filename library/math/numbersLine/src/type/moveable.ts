@@ -20,4 +20,6 @@ export interface IAbleProps {
   underRuler: boolean;
   typeRuler: LineRange;
   leftPosition: number;
+  rulerPaddingSides: number;
+  calculatScreenWidth: () => number;
 }

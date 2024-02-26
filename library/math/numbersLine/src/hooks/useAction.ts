@@ -1,9 +1,9 @@
 import { useNumbersLineContext } from "@/context/numbersLineContext";
 import { IElement } from "../type/moveable";
 import { v4 as uuidv4 } from "uuid";
-import { LineRange } from "../type/ruler";
+import { LineRange, RulerLenth } from "../type/ruler";
 import { TypeCover } from "../type/elements";
-import { RulerPaddingSides } from "@/consts/elementConsts";
+import { RulerPaddingSides } from "../consts/elementConsts";
 
 export const useAction = () => {
   const {
@@ -11,6 +11,8 @@ export const useAction = () => {
     typeRuler,
     setTypeRuler,
     typeRulerChange,
+    rulerPaddingSides,
+    setRulerPaddingSides,
     leftPosition,
     setLeftPosition,
     dragElements,
@@ -28,12 +30,12 @@ export const useAction = () => {
   const duplicateDragJump = async (element: IElement) => {
     const id = uuidv4();
     let transform = "";
-    const baseJump = document.getElementById(`dragElement-jump${element.id}`);
+    const baseJump = document.getElementById(`dragElement-${element.id}`);
     let matchX = baseJump?.style.transform.match(/\((.*?)px/);
     if (matchX && baseJump) {
       const xPosition = parseFloat(matchX[1]);
       const endXPosition = xPosition + parseFloat(baseJump.style.width) * 2;
-      const outOfRange = endXPosition - windowSize.width + RulerPaddingSides - 10;
+      const outOfRange = endXPosition - windowSize.width + rulerPaddingSides - 10;
       let newXPosition = xPosition + baseJump.clientWidth;
       const xPositionString = matchX[0];
       if (typeRuler == LineRange.hundred && outOfRange > 0) {
@@ -60,6 +62,8 @@ export const useAction = () => {
 
   const initialization = () => {
     setTypeRuler(typeRulerChange);
+    typeRulerChange == LineRange.hundred ? setRulerPaddingSides(windowSize.width / RulerLenth.hundred / 2) : RulerPaddingSides;
+
     setDragElements([]);
     setCoverSituation(TypeCover.allDiscover);
     setVisitableDisplayButton(TypeCover.allDiscover);

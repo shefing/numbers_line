@@ -1,4 +1,3 @@
-import { calculatScreenWidth } from "../../lib/utils";
 import leftArrow from "/assets/icons/arrowLeft.svg";
 import leftArrowDisable from "/assets/icons/arrowLeftDisable.svg";
 import rightArrow from "/assets/icons/arrowRight.svg";
@@ -6,9 +5,12 @@ import rightArrowDisable from "/assets/icons/arrowRightDisable.svg";
 import { LineRange, RulerLenth } from "../../type/ruler";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { useEffect, useRef, useState } from "react";
+import { RulerMargin } from "../../consts/elementConsts";
+import { useWindowSize } from "../../hooks/useWindowSize";
 
 const Arrows = () => {
   const { typeRuler, windowSize, leftPosition, setLeftPosition, dragElements, idDraggElementClick, setIdDraggElementClick } = useNumbersLineContext();
+  const { calculatScreenWidth } = useWindowSize();
   const [leftArrowIcon, setLeftArrowIcon] = useState(leftArrow);
   const [rightArrowIcon, setRightArrowIcon] = useState(rightArrow);
   const leftPositionRef = useRef(leftPosition);
@@ -16,16 +18,16 @@ const Arrows = () => {
   const updatePositionOnArrowClick = (direction: "left" | "right") => {
     setIdDraggElementClick("");
     const step = windowSize.width / RulerLenth.hundred;
-    setLeftPosition(direction === "left" ? Math.min(0, leftPosition + step) : Math.max(calculatScreenWidth(windowSize.width), leftPosition - step));
+    setLeftPosition(direction === "left" ? Math.min(0, leftPosition + step) : Math.max(calculatScreenWidth(), leftPosition - step));
   };
 
   useEffect(() => {
     setLeftArrowIcon(!leftPosition ? leftArrowDisable : leftArrow);
-    setRightArrowIcon(leftPosition == calculatScreenWidth(windowSize.width) ? rightArrowDisable : rightArrow);
+    setRightArrowIcon(leftPosition == calculatScreenWidth() ? rightArrowDisable : rightArrow);
 
     dragElements.forEach((item) => {
       if (item.id != idDraggElementClick) {
-        const element = document.getElementById(`dragElement-jump${item.id}`);
+        const element = document.getElementById(`dragElement-${item.id}`);
         const match = element?.style.transform.match(/\((.*?)px/);
         if (match && element) {
           const xPosition = parseFloat(match[1]);
@@ -40,13 +42,13 @@ const Arrows = () => {
   }, [leftPosition]);
 
   return (
-    <div className="flex justify-between m-3 mb-0 ">
+    <div className="flex justify-between w-full " style={{ marginBottom: windowSize.height * RulerMargin + "px" }}>
       {typeRuler == LineRange.hundred && (
         <>
-          <div className="m-2 cursor-pointer relative" onClick={() => updatePositionOnArrowClick("left")}>
+          <div className="m-3 cursor-pointer relative " onClick={() => updatePositionOnArrowClick("left")}>
             <img src={leftArrowIcon} alt="Left Arrow" />
           </div>
-          <div className="m-2 cursor-pointer relative" onClick={() => updatePositionOnArrowClick("right")}>
+          <div className="m-3  cursor-pointer relative " onClick={() => updatePositionOnArrowClick("right")}>
             <img src={rightArrowIcon} alt="Right Arrow" />
           </div>
         </>
