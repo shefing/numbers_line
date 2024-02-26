@@ -22,6 +22,7 @@ const Jump = ({ element }: IProps) => {
     let rulerWidth = calculatRulerWidth(windowSize.width) / calculatUnitsAmount(typeRuler);
     setUnit(rulerWidth);
     setJumpWidth(rulerWidth * element.value);
+    typeRuler == LineRange.hundred && setUnit(windowSize.width / 21);
   }, [typeRuler, windowSize]);
 
   return (

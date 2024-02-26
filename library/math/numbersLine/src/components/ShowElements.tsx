@@ -56,8 +56,6 @@ const ShowElements = () => {
   useEffect(() => {
     if (windowResizing) return;
     setPrevWindowSize({ height: windowSize.height, width: windowSize.width });
-    console.log("prevWindowSize.width", prevWindowSize.width);
-    console.log("now.width", windowSize.width);
 
     const heightRelativeChange = windowSize.height / prevWindowSize.height;
     const widthRelativeChange = windowSize.width / prevWindowSize.width;

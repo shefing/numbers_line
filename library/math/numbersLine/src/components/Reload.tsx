@@ -11,7 +11,7 @@ import { useNumbersLineContext } from "../context/numbersLineContext";
 import { useAction } from "../hooks/useAction";
 
 const Reload = () => {
-  const { openReloadDialog, setOpenReloadDialog } = useNumbersLineContext();
+  const { typeRuler, openReloadDialog, setOpenReloadDialog, setTypeRulerChange } = useNumbersLineContext();
   const { initialization } = useAction();
 
   return (
@@ -22,7 +22,7 @@ const Reload = () => {
             <AlertDialogTitle>?אתם רוצים להתחיל מחדש</AlertDialogTitle>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>הישארו</AlertDialogCancel>
+            <AlertDialogCancel onClick={() => setTypeRulerChange(typeRuler)}>הישארו</AlertDialogCancel>
             <AlertDialogAction onClick={initialization}>מחק הכל</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

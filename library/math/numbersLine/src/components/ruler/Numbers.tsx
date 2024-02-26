@@ -2,10 +2,9 @@ import { useEffect, useState } from "react";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { LineRange, PartToCover, RulerLenth } from "../../type/ruler";
 import { TypeCover } from "../../type/elements";
-import { RulerPaddingSides } from "../../consts/elementConsts";
 
 const Numbers = () => {
-  const { windowSize, typeRuler, leftPosition, coverSituation, setCoverSituation, setVisitableDisplayButton } = useNumbersLineContext();
+  const { windowSize, typeRuler, rulerPaddingSides, leftPosition, coverSituation, setCoverSituation, setVisitableDisplayButton } = useNumbersLineContext();
   const [labels, setLabels] = useState<number[]>([]);
   const [labelsCover, setClickedLabelsCover] = useState(new Set());
 
@@ -59,10 +58,10 @@ const Numbers = () => {
           ? {
               width: windowSize.width * (LineRange.hundred / RulerLenth.hundred),
               left: `${leftPosition}px`,
-              paddingLeft: `${RulerPaddingSides}px`,
-              paddingRight: `${RulerPaddingSides}px`,
+              paddingLeft: `${rulerPaddingSides}px`,
+              paddingRight: `${rulerPaddingSides}px`,
             }
-          : { paddingLeft: `${RulerPaddingSides}px`, paddingRight: `${RulerPaddingSides}px` }
+          : { paddingLeft: `${rulerPaddingSides}px`, paddingRight: `${rulerPaddingSides}px` }
       }
     >
       {labels.map((label) =>
@@ -72,7 +71,7 @@ const Numbers = () => {
             <div
               className={`pl-2 pr-2 select-none text-2xl absolute m-5 ${label % 5 == 0 && " font-bold"} ${
                 (coverSituation == TypeCover.partiallyCover || coverSituation == TypeCover.partiallyDiscover) && " cursor-pointer"
-              } ${labelsCover.has(label) && " text-[white]"}`}
+              } ${labelsCover.has(label) && " text-[transparent]"}`}
               onClick={() => displayLabel(label)}
             >
               {label}

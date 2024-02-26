@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import { LineRange } from "../type/ruler";
 import { IWindowSize, TypeCover } from "../type/elements";
 import { IElement } from "../type/moveable";
-import { calculatScreenWidth } from "../lib/utils";
+import { RulerPaddingSides } from "@/consts/elementConsts";
 interface INumbersLineContextProps {
   windowSize: IWindowSize;
   typeRuler: LineRange;
   setTypeRuler: (v: LineRange) => void;
   typeRulerChange: LineRange;
   setTypeRulerChange: (v: LineRange) => void;
+  rulerPaddingSides: number;
+  setRulerPaddingSides: (v: number) => void;
   leftPosition: number;
-  setLeftPosition: (v: number) => void;
-  setLeftPositionValid: (v: number) => void;
+  setLeftPosition: React.Dispatch<React.SetStateAction<number>>;
   dragElements: IElement[];
   setDragElements: (v: IElement[]) => void;
   idDraggElementClick: string;
@@ -30,9 +31,10 @@ export const NumbersLineContext = React.createContext({
   setTypeRuler: () => null,
   typeRulerChange: {} as LineRange,
   setTypeRulerChange: () => null,
+  rulerPaddingSides: {} as number,
+  setRulerPaddingSides: () => null,
   leftPosition: {} as number,
   setLeftPosition: () => null,
-  setLeftPositionValid: () => null,
   dragElements: {} as IElement[],
   setDragElements: () => null,
   idDraggElementClick: {} as string,
@@ -50,12 +52,12 @@ export const NumbersLineContexProvider = (props: any) => {
   const [typeRuler, setTypeRuler] = useState(LineRange.ten);
   const [typeRulerChange, setTypeRulerChange] = useState(LineRange.ten);
   const [leftPosition, setLeftPosition] = useState(0);
-  const setLeftPositionValid = (v: number) => setLeftPosition((prevLeft: number) => Math.max(calculatScreenWidth(windowSize.width), Math.min(0, prevLeft + v)));
   const [dragElements, setDragElements] = useState<IElement[]>([]);
   const [idDraggElementClick, setIdDraggElementClick] = useState("");
   const [coverSituation, setCoverSituation] = useState(TypeCover.allDiscover);
   const [visitableDisplayButton, setVisitableDisplayButton] = useState(TypeCover.allDiscover);
   const [openReloadDialog, setOpenReloadDialog] = useState(false);
+  const [rulerPaddingSides, setRulerPaddingSides] = useState(RulerPaddingSides);
 
   const Resize = () => {
     setWindowSize({ height: window.innerHeight, width: window.innerWidth });
@@ -64,7 +66,6 @@ export const NumbersLineContexProvider = (props: any) => {
 
   useEffect(() => {
     window.addEventListener("resize", Resize);
-
     return () => {
       window.removeEventListener("resize", Resize);
     };
@@ -78,9 +79,10 @@ export const NumbersLineContexProvider = (props: any) => {
         setTypeRuler,
         typeRulerChange,
         setTypeRulerChange,
+        rulerPaddingSides,
+        setRulerPaddingSides,
         leftPosition,
         setLeftPosition,
-        setLeftPositionValid,
         dragElements,
         setDragElements,
         idDraggElementClick,
