@@ -3,17 +3,19 @@ import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { LineRange, RulerLenth } from "../../type/ruler";
 import Numbers from "./Numbers";
 import { RulerPadding } from "../../consts/elementConsts";
-import { calculatScreenWidth } from "@/lib/utils";
+import { useWindowSize } from "../../hooks/useWindowSize";
 
 const XAxis = () => {
   const { windowSize, typeRuler, leftPosition, setLeftPosition, setIdDraggElementClick } = useNumbersLineContext();
+  const { calculatScreenWidth } = useWindowSize();
+
   const [startX, setStartX] = useState(0);
   const [isDragging, setisDragging] = useState(false);
   const [prevWindowSize, setPrevWindowSize] = useState(windowSize.width);
 
   useEffect(() => {
     const newLeftPosition = (windowSize.width / prevWindowSize) * leftPosition;
-    setLeftPosition((prevLeft: number) => Math.max(calculatScreenWidth(windowSize.width), Math.min(0, prevLeft + newLeftPosition)));
+    setLeftPosition((prevLeft: number) => Math.max(calculatScreenWidth(), Math.min(0, prevLeft + newLeftPosition)));
     setPrevWindowSize(windowSize.width);
   }, [windowSize]);
 
@@ -26,7 +28,7 @@ const XAxis = () => {
   const handleonDrag = (e: any) => {
     if (isDragging) {
       const deltaX = e.clientX - startX;
-      setLeftPosition((prevLeft: number) => Math.max(calculatScreenWidth(windowSize.width), Math.min(0, prevLeft + deltaX)));
+      setLeftPosition((prevLeft: number) => Math.max(calculatScreenWidth(), Math.min(0, prevLeft + deltaX)));
       setStartX(e.clientX);
     }
   };

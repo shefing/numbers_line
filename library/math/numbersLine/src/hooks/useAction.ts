@@ -1,7 +1,7 @@
 import { useNumbersLineContext } from "@/context/numbersLineContext";
 import { IElement } from "../type/moveable";
 import { v4 as uuidv4 } from "uuid";
-import { LineRange } from "../type/ruler";
+import { LineRange, RulerLenth } from "../type/ruler";
 import { TypeCover } from "../type/elements";
 import { RulerPaddingSides } from "../consts/elementConsts";
 
@@ -62,7 +62,7 @@ export const useAction = () => {
 
   const initialization = () => {
     setTypeRuler(typeRulerChange);
-    typeRulerChange == LineRange.hundred ? setRulerPaddingSides(windowSize.width / 42) : RulerPaddingSides;
+    typeRulerChange == LineRange.hundred ? setRulerPaddingSides(windowSize.width / RulerLenth.hundred / 2) : RulerPaddingSides;
 
     setDragElements([]);
     setCoverSituation(TypeCover.allDiscover);

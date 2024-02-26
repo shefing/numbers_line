@@ -1,11 +1,12 @@
 import { useNumbersLineContext } from "../context/numbersLineContext";
 import Moveable, { OnResize, OnResizeEnd } from "react-moveable";
 import { IElement, TypesElement } from "../type/moveable";
-import { calculatRulerWidth, calculatUnitsAmount } from "../lib/utils";
+import { calculatUnitsAmount } from "../lib/utils";
 import { RulerMargin, RulerPadding, ToolbarHieght, jumpArrowHeight, jumpBaseHeight } from "../consts/elementConsts";
 import { calcJumpPosition } from "../lib/stylesUtils";
 import { ButtonViewable } from "../consts/ButtonViewable";
 import { useAction } from "../hooks/useAction";
+import { useWindowSize } from "../hooks/useWindowSize";
 
 interface IProps {
   moveableRef: any;
@@ -17,6 +18,7 @@ interface IProps {
 const MoveableElement = ({ moveableRef, element, unit, setJumpWidth }: IProps) => {
   const { windowSize, typeRuler, rulerPaddingSides, leftPosition } = useNumbersLineContext();
   const { deleteDragElement, duplicateDragJump, updateDragElements } = useAction();
+  const { calculatRulerWidth, calculatScreenWidth } = useWindowSize();
   const ableProps = {
     ButtonViewable: true,
     onDeleteClick: () => deleteDragElement(element.id),
@@ -26,6 +28,7 @@ const MoveableElement = ({ moveableRef, element, unit, setJumpWidth }: IProps) =
     typeRuler: typeRuler,
     leftPosition: leftPosition,
     rulerPaddingSides: rulerPaddingSides,
+    calculatScreenWidth: () => calculatScreenWidth(),
   };
 
   const updateXLocation = (e: any) => {
@@ -69,10 +72,7 @@ const MoveableElement = ({ moveableRef, element, unit, setJumpWidth }: IProps) =
   };
 
   const onResize = (e: OnResize) => {
-    if (
-      !(parseFloat(e.target.style.width) / unit < 1 && e.dist[0] < 0) &&
-      !(parseFloat(e.target.style.width) > calculatRulerWidth(windowSize.width) && e.dist[0] > 0)
-    ) {
+    if (!(parseFloat(e.target.style.width) / unit < 1 && e.dist[0] < 0) && !(parseFloat(e.target.style.width) > calculatRulerWidth() && e.dist[0] > 0)) {
       e.target.style.width = `${e.width}px`;
       setJumpWidth(e.width);
       e.target.style.transform = e.drag.transform;

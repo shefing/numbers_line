@@ -4,13 +4,13 @@ import duplicateIcon from "/assets/icons/duplicate.svg";
 import duplicateDisable from "/assets/icons/duplicateDisable.svg";
 import { IAbleProps } from "../type/moveable";
 import { LineRange } from "@/type/ruler";
-import { calculatScreenWidth } from "@/lib/utils";
 
 export const ButtonViewable = {
   name: "ButtonViewable",
   props: ["ButtonViewable"],
   render(moveable: MoveableManagerInterface) {
-    const { onDeleteClick, copyViewAble, onCopyClick, underRuler, typeRuler, leftPosition, rulerPaddingSides } = moveable.props as unknown as IAbleProps;
+    const { onDeleteClick, copyViewAble, onCopyClick, underRuler, typeRuler, leftPosition, rulerPaddingSides, calculatScreenWidth } =
+      moveable.props as unknown as IAbleProps;
     const { cssWidth, inlineTransform } = moveable.state;
     const matchX = inlineTransform.match(/\((.*?)px/);
     let copyApproval = true;
@@ -18,7 +18,7 @@ export const ButtonViewable = {
       const xPosition = matchX[1];
       const endXPosition = parseFloat(xPosition) + cssWidth * 2;
       const outOfRange = endXPosition - window.innerWidth + rulerPaddingSides - 10;
-      if (outOfRange > 0 && (typeRuler != LineRange.hundred || leftPosition - outOfRange < calculatScreenWidth(window.innerWidth))) {
+      if (outOfRange > 0 && (typeRuler != LineRange.hundred || leftPosition - outOfRange < calculatScreenWidth())) {
         copyApproval = false;
       }
     }

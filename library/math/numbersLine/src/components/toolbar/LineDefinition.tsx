@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Button } from "../ui/button";
-import { LineRange } from "../../type/ruler";
+import { LineRange, RulerLenth } from "../../type/ruler";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import openMenu from "/assets/icons/menuButtonOpen.svg";
 import closeMenu from "/assets/icons/menuButtonClose.svg";
@@ -44,7 +44,7 @@ const LineDefinition = () => {
     setIsMenuOpen(false);
     if (dragElements.length == 0 && visitableDisplayButton == TypeCover.allDiscover) {
       setTypeRuler(type);
-      typeRuler == LineRange.hundred ? setRulerPaddingSides(windowSize.width / 42) : RulerPaddingSides;
+      typeRuler == LineRange.hundred ? setRulerPaddingSides(windowSize.width / RulerLenth.hundred / 2) : RulerPaddingSides;
       setLeftPosition(0);
     } else {
       setTypeRulerChange(type);

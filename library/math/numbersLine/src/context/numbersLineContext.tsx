@@ -49,8 +49,8 @@ export const NumbersLineContext = React.createContext({
 
 export const NumbersLineContexProvider = (props: any) => {
   const [windowSize, setWindowSize] = useState<IWindowSize>({ height: window.innerHeight, width: window.innerWidth });
-  const [typeRuler, setTypeRuler] = useState(LineRange.ten);
-  const [typeRulerChange, setTypeRulerChange] = useState(LineRange.ten);
+  const [rulerType, setRulerType] = useState(LineRange.ten);
+  const [rulerTypeShould, setRulerTypeShould] = useState(LineRange.ten);
   const [leftPosition, setLeftPosition] = useState(0);
   const [dragElements, setDragElements] = useState<IElement[]>([]);
   const [idDraggElementClick, setIdDraggElementClick] = useState("");
@@ -75,10 +75,10 @@ export const NumbersLineContexProvider = (props: any) => {
     <NumbersLineContext.Provider
       value={{
         windowSize,
-        typeRuler,
-        setTypeRuler,
-        typeRulerChange,
-        setTypeRulerChange,
+        typeRuler: rulerType,
+        setTypeRuler: setRulerType,
+        typeRulerChange: rulerTypeShould,
+        setTypeRulerChange: setRulerTypeShould,
         rulerPaddingSides,
         setRulerPaddingSides,
         leftPosition,

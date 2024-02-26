@@ -21,4 +21,5 @@ export interface IAbleProps {
   typeRuler: LineRange;
   leftPosition: number;
   rulerPaddingSides: number;
+  calculatScreenWidth: () => number;
 }
