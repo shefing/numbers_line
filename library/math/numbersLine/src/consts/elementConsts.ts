@@ -32,7 +32,7 @@ export const displayRulerButtonDetials: IDisplayRuller[] = [
 
 export const RulerPaddingSides = 32;
 export const RulerPadding = 50;
-export const RulerMargin = window.innerHeight * 0.25;
+export const RulerMargin = 0.3;
 export const jumpBaseHeight = 40;
 export const jumpArrowHeight = 64;
 export const ToolbarHieght = 80;

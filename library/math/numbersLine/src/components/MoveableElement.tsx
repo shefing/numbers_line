@@ -2,7 +2,7 @@ import { useNumbersLineContext } from "../context/numbersLineContext";
 import Moveable, { OnResize, OnResizeEnd } from "react-moveable";
 import { IElement, TypesElement } from "../type/moveable";
 import { calculatRulerWidth, calculatUnitsAmount } from "../lib/utils";
-import { ToolbarHieght, jumpArrowHeight, jumpBaseHeight } from "../consts/elementConsts";
+import { RulerMargin, RulerPadding, ToolbarHieght, jumpArrowHeight, jumpBaseHeight } from "../consts/elementConsts";
 import { calcJumpPosition } from "../lib/stylesUtils";
 import { ButtonViewable } from "../consts/ButtonViewable";
 import { useAction } from "../hooks/useAction";
@@ -49,8 +49,7 @@ const MoveableElement = ({ moveableRef, element, unit, setJumpWidth }: IProps) =
     const yTransform = parseFloat(matchY[1]);
     const yTransformString = matchY[0];
     const elementPsition = calcJumpPosition(yTransform, element.underRuler);
-    const grassElement = document.getElementById("grass");
-    const rulerPosition = grassElement ? windowSize.height * 0.75 - grassElement.clientHeight : windowSize.height * 0.75;
+    const rulerPosition = windowSize.height * (1 - RulerMargin) - RulerPadding;
     if (Math.abs(rulerPosition - elementPsition) < 50) {
       updateXLocation(e);
     }
