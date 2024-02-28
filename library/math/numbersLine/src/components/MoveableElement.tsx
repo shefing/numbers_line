@@ -33,14 +33,14 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
   };
 
   const updateXLocation = (e: any) => {
-    //locate the element exactly on the ruler lines
+    // The position of the element next to the whole numbers or halves for integers and halves.
     const originalString = e.target.style.transform;
     const matchX = originalString.match(/\((.*?)px/);
     if (!matchX) return;
     const xPosition = parseFloat(matchX[1]);
     const xPositionString = matchX[0];
     const unitsAmount = calculatUnitsAmount(typeRuler);
-    //explanation
+    // few pixels for the precise position of the element, the calculation is done relative to the position on the axis.
     const sidesPixels = (unitsAmount / 2 - Math.round(xPosition - rulerPaddingSides) / unit!) / unitsAmount;
     const newXPosition = Math.round((xPosition - rulerPaddingSides) / unit!) * unit! + rulerPaddingSides + sidesPixels;
     const newXPositionString = "(" + newXPosition + "px";
