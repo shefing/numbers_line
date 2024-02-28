@@ -21,3 +21,13 @@ export const calcJumpPosition = (transfomPosition: number, isJumpUnderRuler: boo
   const base = transfomPosition + jumpBaseHeight / 3;
   return isJumpUnderRuler ? base : base + jumpHeight - jumpBaseHeight;
 };
+
+export const calcXTransform = (transfom: string): number => {
+  const match = transfom.match(/\((.*?)px/);
+  return match ? parseFloat(match[1]) : 0;
+};
+
+export const calcYTransform = (transfom: string): number => {
+  const match = transfom.match(/,\s*(-?\d+\.?\d*)px\)/);
+  return match ? parseFloat(match[1]) : 0;
+};

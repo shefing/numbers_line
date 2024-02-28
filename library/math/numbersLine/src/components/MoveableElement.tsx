@@ -1,7 +1,7 @@
 import { useNumbersLineContext } from "../context/numbersLineContext";
 import Moveable, { OnResize, OnResizeEnd } from "react-moveable";
 import { IElement } from "../type/moveable";
-import { calculatUnitsAmount } from "../lib/utils";
+import { calcXTransform, calcYTransform, calculatUnitsAmount } from "../lib/utils";
 import { RulerMargin, RulerPadding, ToolbarHieght, buttonsWidth, jumpBaseHeight, jumpHeight } from "../consts/elementConsts";
 import { calcJumpPosition } from "../lib/utils";
 import { ButtonViewable } from "../consts/ButtonViewable";
@@ -33,31 +33,20 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
   };
 
   const updateXLocation = (e: any) => {
-    // The position of the element next to the whole numbers or halves for integers and halves.
-    const originalString = e.target.style.transform;
-    const matchX = originalString.match(/\((.*?)px/);
-    if (!matchX) return;
-    const xPosition = parseFloat(matchX[1]);
-    const xPositionString = matchX[0];
+    const xPosition = calcXTransform(e.target.style.transform);
     const unitsAmount = calculatUnitsAmount(typeRuler);
     // few pixels for the precise position of the element, the calculation is done relative to the position on the axis.
     const sidesPixels = (unitsAmount / 2 - Math.round(xPosition - rulerPaddingSides) / unit!) / unitsAmount;
     const newXPosition = Math.round((xPosition - rulerPaddingSides) / unit!) * unit! + rulerPaddingSides + sidesPixels;
-    const newXPositionString = "(" + newXPosition + "px";
-    e.target.style.transform = e.target.style.transform.replace(xPositionString, newXPositionString);
+    e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + newXPosition);
   };
 
   const onDragEnd = (e: OnResizeEnd) => {
     if (!element?.jump) return;
-
-    let isUnderRuler = element.jump?.underRuler;
-    const matchY = e.target.style.transform.match(/,\s*(-?\d+\.?\d*)px\)/);
-    if (!matchY) return;
-    const yTransform = parseFloat(matchY[1]);
-    const yTransformString = matchY[0];
+    let isUnderRuler = element.jump.underRuler;
+    const yTransform = calcYTransform(e.target.style.transform);
     const elementPsition = calcJumpPosition(yTransform, element.jump.underRuler);
     const rulerPosition = windowSize.height * (1 - RulerMargin) - RulerPadding;
-
     // Change the position of the element relative to the integers, provided that the position is close to the axis.
     if (Math.abs(rulerPosition - elementPsition) < 50) updateXLocation(e);
 
@@ -66,13 +55,14 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
       let newYPositionString = "";
       if (rulerPosition < elementPsition) {
         isUnderRuler = true;
-        newYPositionString = ", " + Math.round(yTransform + jumpHeight - jumpBaseHeight) + "px)";
+        newYPositionString = Math.round(yTransform + jumpHeight - jumpBaseHeight) + "px)";
       } else {
         isUnderRuler = false;
-        newYPositionString = ", " + Math.round(yTransform - jumpHeight + jumpBaseHeight) + "px)";
+        newYPositionString = Math.round(yTransform - jumpHeight + jumpBaseHeight) + "px)";
       }
-      e.target.style.transform = e.target.style.transform.replace(yTransformString, newYPositionString);
+      e.target.style.transform = e.target.style.transform.replace(yTransform + "px)", newYPositionString);
     }
+
     updateDragElements(element.id, { ...element, transform: e.target.style.transform, jump: { ...element.jump, underRuler: isUnderRuler } });
   };
 
@@ -86,30 +76,28 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
 
   const onResizeEnd = (e: OnResizeEnd) => {
     if (!element.jump) return;
+    // Changes the width of the jump according to the axis.
     const newValue = Math.round(e.lastEvent.width / unit!);
     const newWidth = newValue * unit!;
     e.target.style.width = `${newWidth}px`;
-    updateDragElements(element.id, { ...element, width: newWidth, jump: { ...element.jump, value: newValue } });
 
-    const matchX = e.target.style.transform.match(/\((.*?)px/);
-    if (matchX) {
-      const xPosition = parseFloat(matchX[1]);
-      const xXPositionString = matchX[0];
-      //Change position when jump out of range.
-      if (xPosition + newWidth > windowSize.width - rulerPaddingSides) {
-        const range = xPosition + newWidth - windowSize.width + rulerPaddingSides;
-        const newXTransform = "(" + (xPosition - range) + "px";
-        e.target.style.transform = e.target.style.transform.replace(xXPositionString, newXTransform);
-        updateDragElements(element.id, { ...element, transform: e.target.style.transform });
-      }
-      //Change position when jump reSize on the left.
-      if (e.clientX < xPosition) {
-        const range = e.lastEvent.width - newWidth;
-        const newXTransform = "(" + (xPosition + range) + "px";
-        e.target.style.transform = e.target.style.transform.replace(xXPositionString, newXTransform);
-        updateDragElements(element.id, { ...element, transform: e.target.style.transform });
-      }
+    const xPosition = calcXTransform(e.target.style.transform);
+    //Change position when jump out of range.
+    if (xPosition + newWidth > windowSize.width - rulerPaddingSides) {
+      const range = xPosition + newWidth - windowSize.width + rulerPaddingSides;
+      const newXPosition = "(" + (xPosition - range);
+      e.target.style.transform = e.target.style.transform.replace("(" + xPosition, newXPosition);
     }
+    //Change position when jump reSize on the left.
+    let newTransform = e.target.style.transform;
+    if (e.clientX < xPosition) {
+      const range = e.lastEvent.width - newWidth;
+      const newXPosition = "(" + (xPosition + range);
+      newTransform = e.target.style.transform.replace("(" + xPosition, newXPosition);
+      e.target.style.transform = newTransform;
+    }
+
+    updateDragElements(element.id, { ...element, width: newWidth, transform: newTransform, jump: { ...element.jump, value: newValue } });
   };
 
   return (
