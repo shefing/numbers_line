@@ -3,11 +3,10 @@ import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { LineRange, RulerLenth } from "../../type/ruler";
 import Numbers from "./Numbers";
 import { RulerPadding } from "../../consts/elementConsts";
-import { useWindowSize } from "../../hooks/useWindowSize";
-
+import { useHelpers } from "../../hooks/useHelpers";
 const XAxis = () => {
   const { windowSize, typeRuler, leftPosition, setLeftPosition, setIdDraggElementClick } = useNumbersLineContext();
-  const { calculatScreenWidth } = useWindowSize();
+  const { calculatScreenWidth } = useHelpers();
 
   const [startX, setStartX] = useState(0);
   const [isDragging, setisDragging] = useState(false);

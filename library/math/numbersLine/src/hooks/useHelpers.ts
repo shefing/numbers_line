@@ -2,7 +2,7 @@ import { useNumbersLineContext } from "../context/numbersLineContext";
 import { LineRange, RulerLenth } from "../type/ruler";
 import { RulerPaddingSides } from "../consts/elementConsts";
 
-export const useWindowSize = () => {
+export const useHelpers = () => {
   const { windowSize } = useNumbersLineContext();
 
   const calculatScreenWidth = () => {

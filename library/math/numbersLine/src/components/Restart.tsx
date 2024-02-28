@@ -12,7 +12,7 @@ import { useAction } from "../hooks/useAction";
 
 const Restart = () => {
   const { typeRuler, openRestartDialog, setOpenRestartDialog, setTypeRulerChange } = useNumbersLineContext();
-  const { initialization } = useAction();
+  const { restart } = useAction();
 
   return (
     <AlertDialog open={openRestartDialog} onOpenChange={setOpenRestartDialog}>
@@ -22,7 +22,7 @@ const Restart = () => {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel onClick={() => setTypeRulerChange(typeRuler)}>הישארו</AlertDialogCancel>
-          <AlertDialogAction onClick={initialization}>מחק הכל</AlertDialogAction>
+          <AlertDialogAction onClick={restart}>מחק הכל</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

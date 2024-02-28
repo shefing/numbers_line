@@ -4,29 +4,27 @@ import { useNumbersLineContext } from "../context/numbersLineContext";
 import { useEffect, useState } from "react";
 import { ActionTypes, IWindowSize } from "../type/elements";
 import { Text } from "./Text";
+import { calcXTransform, calcYTransform } from "../lib/utils";
+import { useAction } from "../hooks/useAction";
 
 const ShowElements = () => {
   const { windowSize, dragElements, setIdDraggElementClick } = useNumbersLineContext();
+  const { updateDragElements } = useAction();
   const [windowResizing, setWindowResizing] = useState(false);
   const [prevWindowSize, setPrevWindowSize] = useState<IWindowSize>({ height: windowSize.height, width: windowSize.width });
 
   const updateTransform = (element: IElement, heightRelative: number, widthRelative: number) => {
-    const originalString = element.transform;
-    const matchX = originalString.match(/\((.*?)px/);
-    const matchY = originalString.match(/,\s*(-?\d+\.?\d*)px\)/);
-    if (!matchX || !matchY) return;
-    const xPosition = parseFloat(matchX[1]);
-    const xPositionString = matchX[0];
+    const xPosition = calcXTransform(element.transform);
     const newXPosition = xPosition * widthRelative;
-    const yPosition = parseFloat(matchY[1]);
-    const yPositionString = matchY[0];
+    const yPosition = calcYTransform(element.transform);
     const newYPosition = yPosition * heightRelative;
     const newXYPositionString = "(" + newXPosition.toFixed(2) + "px, " + newYPosition.toFixed(2) + "px)";
-    const newTransform = element.transform.replace(xPositionString + yPositionString, newXYPositionString);
-    element.transform = newTransform;
+    const newTransform = element.transform.replace("(" + xPosition + "px, " + yPosition + "px)", newXYPositionString);
     const documentElement = document.getElementById(`dragElement-${element.id}`);
     if (!documentElement) return;
     documentElement.style.transform = newTransform;
+
+    updateDragElements(element.id, { ...element, transform: newTransform });
   };
 
   useEffect(() => {
@@ -67,8 +65,16 @@ const ShowElements = () => {
 
   return dragElements.map((element: IElement) => (
     <div key={element.id} id={element.id} onClick={() => setIdDraggElementClick(element.id)}>
-      {element.type == ActionTypes.jump && <Jump element={element} />}
-      {element.type == ActionTypes.text && <Text element={element} />}
+      {(() => {
+        switch (element.type) {
+          case ActionTypes.jump:
+            return <Jump element={element} />;
+          case ActionTypes.text:
+            return <Text element={element} />;
+          default:
+            return null;
+        }
+      })()}
     </div>
   ));
 };
