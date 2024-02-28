@@ -35,4 +35,6 @@ export const RulerPadding = 50;
 export const RulerMargin = 0.3;
 export const jumpBaseHeight = 40;
 export const jumpArrowHeight = 64;
+export const jumpHeight = 120;
 export const ToolbarHieght = 80;
+export const buttonsWidth = 30;

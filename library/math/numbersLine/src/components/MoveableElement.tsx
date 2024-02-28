@@ -2,12 +2,12 @@ import { useNumbersLineContext } from "../context/numbersLineContext";
 import Moveable, { OnResize, OnResizeEnd } from "react-moveable";
 import { IElement } from "../type/moveable";
 import { calculatUnitsAmount } from "../lib/utils";
-import { RulerMargin, RulerPadding, ToolbarHieght, jumpArrowHeight, jumpBaseHeight } from "../consts/elementConsts";
+import { RulerMargin, RulerPadding, ToolbarHieght, buttonsWidth, jumpBaseHeight, jumpHeight } from "../consts/elementConsts";
 import { calcJumpPosition } from "../lib/utils";
 import { ButtonViewable } from "../consts/ButtonViewable";
 import { useAction } from "../hooks/useAction";
 import { useHelpers } from "../hooks/useHelpers";
-import { ActionTypes } from "@/type/elements";
+import { ActionTypes } from "../type/elements";
 
 interface IProps {
   moveableRef: any;
@@ -50,7 +50,6 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
   const onDragEnd = (e: OnResizeEnd) => {
     if (!element?.jump) return;
 
-    //find jump positiom if dragged under the ruler
     let isUnderRuler = element.jump?.underRuler;
     const matchY = e.target.style.transform.match(/,\s*(-?\d+\.?\d*)px\)/);
     if (!matchY) return;
@@ -59,23 +58,21 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
     const elementPsition = calcJumpPosition(yTransform, element.jump.underRuler);
     const rulerPosition = windowSize.height * (1 - RulerMargin) - RulerPadding;
 
-    //check if element close to the ruler
+    // Change the position of the element relative to the integers, provided that the position is close to the axis.
     if (Math.abs(rulerPosition - elementPsition) < 50) updateXLocation(e);
 
-    //checked if jump type changed (from under ruler to or not)
+    // Change the type of jump if its position has changed relative to the ruler.
     if (element.jump.underRuler != rulerPosition < elementPsition) {
-      //TODO: change it to const (80)
       let newYPositionString = "";
       if (rulerPosition < elementPsition) {
         isUnderRuler = true;
-        newYPositionString = ", " + Math.round(yTransform + 80) + "px)";
+        newYPositionString = ", " + Math.round(yTransform + jumpHeight - jumpBaseHeight) + "px)";
       } else {
         isUnderRuler = false;
-        newYPositionString = ", " + Math.round(yTransform - 80) + "px)";
+        newYPositionString = ", " + Math.round(yTransform - jumpHeight + jumpBaseHeight) + "px)";
       }
       e.target.style.transform = e.target.style.transform.replace(yTransformString, newYPositionString);
     }
-
     updateDragElements(element.id, { ...element, transform: e.target.style.transform, jump: { ...element.jump, underRuler: isUnderRuler } });
   };
 
@@ -98,14 +95,14 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
     if (matchX) {
       const xPosition = parseFloat(matchX[1]);
       const xXPositionString = matchX[0];
-      //Change position when jump out of bounds:
+      //Change position when jump out of range.
       if (xPosition + newWidth > windowSize.width - rulerPaddingSides) {
         const range = xPosition + newWidth - windowSize.width + rulerPaddingSides;
         const newXTransform = "(" + (xPosition - range) + "px";
         e.target.style.transform = e.target.style.transform.replace(xXPositionString, newXTransform);
         updateDragElements(element.id, { ...element, transform: e.target.style.transform });
       }
-      //Change position when jump reSize on the left:
+      //Change position when jump reSize on the left.
       if (e.clientX < xPosition) {
         const range = e.lastEvent.width - newWidth;
         const newXTransform = "(" + (xPosition + range) + "px";
@@ -132,7 +129,7 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
         left: rulerPaddingSides,
         top: ToolbarHieght + 32,
         right: rulerPaddingSides,
-        bottom: !element.jump || element.jump.underRuler ? 0 : jumpArrowHeight + jumpBaseHeight,
+        bottom: !element.jump || element.jump.underRuler ? buttonsWidth : jumpHeight - jumpBaseHeight + buttonsWidth,
         position: "css",
       }}
     />
