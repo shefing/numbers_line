@@ -16,7 +16,7 @@ interface IProps {
 const IconsToolbar = ({ typeAction, iconUrl, isDragged }: IProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [newJumpPixels, setNewJumpPixels] = useState(0);
+  const [duplicateElementPlace, setDuplicateElementPlace] = useState(0);
   const {
     windowSize,
     rulerPaddingSides,
@@ -43,7 +43,7 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged }: IProps) => {
   }, [isOpen]);
 
   useEffect(() => {
-    setNewJumpPixels(0);
+    setDuplicateElementPlace(0);
   }, [idDraggElementClick]);
 
   const getSrc = () => {
@@ -55,8 +55,8 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged }: IProps) => {
   };
 
   const addDraggableElement = () => {
-    const xTranslate = calcWidthStartPosition(2, windowSize.width, typeRuler) + newJumpPixels;
-    const yTranslate = calcHeightStartPosition(4, windowSize.height) + newJumpPixels;
+    const xTranslate = calcWidthStartPosition(2, windowSize.width, typeRuler) + duplicateElementPlace;
+    const yTranslate = calcHeightStartPosition(4, windowSize.height) + duplicateElementPlace;
 
     let newElement: IElement = {
       id: uuidv4(),
@@ -70,12 +70,12 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged }: IProps) => {
     }
 
     setDragElements([...dragElements, newElement]);
-    setNewJumpPixels((prevPixels) => prevPixels + 10);
+    setDuplicateElementPlace((prevPixels) => prevPixels + 10);
     const outOfRange =
       xTranslate > windowSize.width - windowSize.width / calculatUnitsAmount(typeRuler) - rulerPaddingSides ||
       yTranslate > windowSize.height - rulerPaddingSides;
 
-    outOfRange && setNewJumpPixels(0);
+    outOfRange && setDuplicateElementPlace(0);
   };
 
   const actionButtonClick = () => {
@@ -89,7 +89,9 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged }: IProps) => {
   return (
     <div className="flex flex-col items-center" ref={wrapperRef}>
       <img
-        className="m-3 cursor-pointer"
+        className={`m-3 cursor-pointer ${
+          typeAction === ActionTypes.restart && dragElements.length == 0 && visitableDisplayButton == TypeCover.allDiscover && "pointer-events-none"
+        }`}
         src={getSrc()}
         alt={typeAction + " Toolbar"}
         onMouseEnter={() => setIsHovered(true)}
