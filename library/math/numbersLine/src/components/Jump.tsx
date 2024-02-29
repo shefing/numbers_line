@@ -34,10 +34,11 @@ const Jump = ({ element }: IProps) => {
       <div
         ref={moveableRef}
         id={"dragElement-" + element.id}
-        className={`flex absolute t-0 l-0 ${idDraggElementClick == element.id ? "cursor-move" : "cursor-pointer"}`}
+        className={`flex absolute t-0 l-0 ${idDraggElementClick == element.id ? "cursor-move" : "cursor-pointer"} ${
+          jump.underRuler ? "flex-col-reverse" : "flex-col"
+        } `}
         style={{
           width: unit * jump.value,
-          flexDirection: jump.underRuler ? "column-reverse" : "column",
           transform: element.transform,
         }}
       >
@@ -49,7 +50,7 @@ const Jump = ({ element }: IProps) => {
         </div>
       </div>
       {idDraggElementClick === element.id && (
-        <div id={`dragElement-jumpBase-${jump.underRuler ? "under" : "on"}`}>
+        <div id={`dragElement-jump-${jump.underRuler ? "under" : "on"}`}>
           <MoveableElement moveableRef={moveableRef} element={element} unit={unit} />
         </div>
       )}

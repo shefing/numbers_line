@@ -9,12 +9,13 @@ interface IProps {
 const JumpArrow = ({ underRuler, jumpWidth }: IProps) => {
   const [matchingPixels, setMatchingPixels] = useState(0);
   const { windowSize } = useNumbersLineContext();
+
   useEffect(() => {
     setMatchingPixels(Math.min((jumpWidth / (windowSize.width / 2)) * 35, 45));
   }, [jumpWidth, windowSize]);
 
   return (
-    <svg id="dragElement-jumpArrow" className="w-full" style={{ height: jumpArrowHeight + "px", position: "relative" }}>
+    <svg id="dragElement-jumpArrow" className="relative w-full " style={{ height: jumpArrowHeight + "px" }}>
       <path
         d={
           underRuler
@@ -27,7 +28,7 @@ const JumpArrow = ({ underRuler, jumpWidth }: IProps) => {
         strokeLinecap="round"
         strokeDasharray="15 15"
       />
-      <svg style={{ overflow: "visible" }} x={`${underRuler ? -6 : jumpWidth + 6}`} y={`${underRuler ? 10 : 90}%`}>
+      <svg className="overflow-visible" x={`${underRuler ? -6 : jumpWidth + 6}`} y={`${underRuler ? 10 : 90}%`}>
         <polygon
           points="-20,0 0,10 -20,20 "
           transform={`rotate(${underRuler ? -100 - matchingPixels : 80 - matchingPixels})`}

@@ -37,4 +37,5 @@ export const jumpBaseHeight = 40;
 export const jumpArrowHeight = 64;
 export const jumpHeight = 120;
 export const ToolbarHieght = 80;
-export const buttonsWidth = 30;
+export const buttonsDraggElementWidth = 30;
+export const textWidth = 315;

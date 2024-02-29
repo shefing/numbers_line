@@ -11,12 +11,6 @@ export const calculatUnitsAmount = (type: LineRange) => {
   return type == LineRange.hundred || type == LineRange.twenty ? unitAmount.twenty : unitAmount.ten;
 };
 
-export const calcWidthStartPosition = (value: number, windowWidth: number, type: LineRange) => {
-  return (windowWidth - windowWidth / calculatUnitsAmount(type)) / value;
-};
-export const calcHeightStartPosition = (value: number, windowHeight: number): number => {
-  return windowHeight / value;
-};
 export const calcJumpPosition = (transfomPosition: number, isJumpUnderRuler: boolean): number => {
   const base = transfomPosition + jumpBaseHeight / 3;
   return isJumpUnderRuler ? base : base + jumpHeight - jumpBaseHeight;

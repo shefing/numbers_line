@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { calcHeightStartPosition, calcWidthStartPosition, calculatUnitsAmount } from "../../lib/utils";
+import { calculatUnitsAmount } from "../../lib/utils";
 import DisplayNumbers from "./DisplayNumbers";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
@@ -7,6 +7,7 @@ import { ActionTypes, TypeCover } from "../../type/elements";
 import { v4 as uuidv4 } from "uuid";
 import { IElement } from "@/type/moveable";
 import { useHelpers } from "@/hooks/useHelpers";
+import { textWidth } from "@/consts/elementConsts";
 
 interface IProps {
   typeAction: ActionTypes;
@@ -24,6 +25,7 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged }: IProps) => {
     dragElements,
     setDragElements,
     idDraggElementClick,
+    setIdDraggElementClick,
     openRestartDialog,
     setOpenRestartDialog,
     visitableDisplayButton,
@@ -55,20 +57,24 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged }: IProps) => {
   };
 
   const addDraggableElement = () => {
-    const xTranslate = calcWidthStartPosition(2, windowSize.width, typeRuler) + duplicateElementPlace;
-    const yTranslate = calcHeightStartPosition(4, windowSize.height) + duplicateElementPlace;
+    const elementWidth =
+      typeAction == ActionTypes.jump ? calculatRulerWidth() / calculatUnitsAmount(typeRuler) : typeAction == ActionTypes.text ? textWidth : 50;
+    const xTranslate = (windowSize.width - elementWidth) / 2 + duplicateElementPlace;
+    const yTranslate = windowSize.height / 4 + duplicateElementPlace;
 
     let newElement: IElement = {
       id: uuidv4(),
       type: typeAction,
       transform: `translate(${xTranslate}px, ${yTranslate}px)`,
-      width: calculatRulerWidth() / calculatUnitsAmount(typeRuler),
+      width: elementWidth,
     };
 
     if (typeAction === ActionTypes.jump) {
       newElement.jump = { value: 1, underRuler: false };
     }
-
+    if (typeAction === ActionTypes.text) {
+      newElement.text = { data: "" };
+    }
     setDragElements([...dragElements, newElement]);
     setDuplicateElementPlace((prevPixels) => prevPixels + 10);
     const outOfRange =
@@ -83,7 +89,7 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged }: IProps) => {
       addDraggableElement();
       return;
     }
-    typeAction == ActionTypes.restart ? setOpenRestartDialog(true) : setIsOpen((prevOpen) => !prevOpen);
+    typeAction == ActionTypes.restart ? (setOpenRestartDialog(true), setIdDraggElementClick("")) : setIsOpen((prevOpen) => !prevOpen);
   };
 
   return (
