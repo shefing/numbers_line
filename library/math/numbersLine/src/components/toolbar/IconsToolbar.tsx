@@ -13,8 +13,9 @@ interface IProps {
   typeAction: ActionTypes;
   iconUrl: string;
   isDragged?: boolean;
+  isMenu?: boolean;
 }
-const IconsToolbar = ({ typeAction, iconUrl, isDragged }: IProps) => {
+const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [duplicateElementPlace, setDuplicateElementPlace] = useState(0);
@@ -85,11 +86,9 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged }: IProps) => {
   };
 
   const actionButtonClick = () => {
-    if (isDragged) {
-      addDraggableElement();
-      return;
-    }
-    typeAction == ActionTypes.restart ? (setOpenRestartDialog(true), setIdDraggElementClick("")) : setIsOpen((prevOpen) => !prevOpen);
+    isDragged && addDraggableElement();
+    isMenu && setIsOpen((prevOpen) => !prevOpen);
+    typeAction == ActionTypes.restart && (setOpenRestartDialog(true), setIdDraggElementClick(""));
   };
 
   return (

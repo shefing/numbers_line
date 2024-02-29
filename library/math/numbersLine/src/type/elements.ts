@@ -21,6 +21,7 @@ export enum ActionTypes {
 export interface IActionIcon {
   type: ActionTypes;
   url: string;
+  isMenu?: boolean;
   isDragged?: boolean;
 }
 

@@ -8,10 +8,10 @@ import restart from "/assets/icons/toolbar/restart.svg";
 import { LineRange } from "@/type/ruler";
 
 export const actionIconsDetials: IActionIcon[] = [
-  { type: ActionTypes.naviAndKani, url: naviAndKani, isDragged: true },
-  { type: ActionTypes.displayNumbersLine, url: eye },
+  { type: ActionTypes.naviAndKani, url: naviAndKani, isMenu: true },
+  { type: ActionTypes.displayNumbersLine, url: eye, isMenu: true },
   { type: ActionTypes.restart, url: restart },
-  { type: ActionTypes.writing, url: writing },
+  { type: ActionTypes.writing, url: writing, isMenu: true },
   { type: ActionTypes.text, url: text, isDragged: true },
   { type: ActionTypes.jump, url: jump, isDragged: true },
 ];
