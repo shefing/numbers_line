@@ -15,18 +15,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(({ className, type,
 
   const updateValueAndSize = (e: any) => {
     setSize(e.target.value.length > 25 ? (e.target.value.length > 50 ? 50 : e.target.value.length) : 25);
-    console.log(e.target.width);
+    console.log(e.target.style.width);
 
     updateDragElements(element.id, { ...element, text: { ...element.text, data: e.target.value } });
   };
 
   const deleteIfEmpty = (e: { target: { value: string } }) => {
-    console.log("here");
-
-    if (e.target.value == "") {
-      deleteDragElement(element.id);
-      console.log("delete");
-    }
+    e.target.value == "" && deleteDragElement(element.id);
   };
 
   return (

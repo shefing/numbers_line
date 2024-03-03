@@ -22,13 +22,13 @@ export const Text = ({ element }: IProps) => {
           transform: element.transform,
         }}
       >
-        <Input id={"inputText"} element={element} />
+        <Input id={"dragElement-inputText"} element={element} />
       </div>
-      {/* {idDraggElementClick === element.id && ( */}
-      <div id="dragElement-text">
-        <MoveableElement moveableRef={moveableRef} element={element} />
-      </div>
-      {/* )} */}
+      {idDraggElementClick === element.id && (
+        <div id="dragElement-text">
+          <MoveableElement moveableRef={moveableRef} element={element} />
+        </div>
+      )}
     </>
   );
 };
