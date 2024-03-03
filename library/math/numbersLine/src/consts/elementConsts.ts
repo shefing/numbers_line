@@ -1,16 +1,19 @@
-import { IActionIcon, IDisplayRuller, IRulerDefinition, ActionTypes, TypeCover } from "../type/elements";
+import { IActionIcon, IDisplayRuller, IRulerDefinition, ActionTypes, TypeCover, IconsNaviKaniTypes, IIconsNaviKani } from "../type/elements";
 import jump from "/assets/icons/toolbar/jump.svg";
 import text from "/assets/icons/toolbar/text.svg";
 import writing from "/assets/icons/toolbar/writing.svg";
 import eye from "/assets/icons/toolbar/eye.svg";
 import naviAndKani from "/assets/icons/toolbar/naviAndKani.svg";
 import restart from "/assets/icons/toolbar/restart.svg";
+import navi from "/assets/icons/navi.svg";
+import kani from "/assets/icons/kani.svg";
+
 import { LineRange } from "@/type/ruler";
 
 export const actionIconsDetials: IActionIcon[] = [
+  { type: ActionTypes.restart, url: restart },
   { type: ActionTypes.naviAndKani, url: naviAndKani, isMenu: true },
   { type: ActionTypes.displayNumbersLine, url: eye, isMenu: true },
-  { type: ActionTypes.restart, url: restart },
   { type: ActionTypes.writing, url: writing, isMenu: true },
   { type: ActionTypes.text, url: text, isDragged: true },
   { type: ActionTypes.jump, url: jump, isDragged: true },
@@ -28,6 +31,11 @@ export const displayRulerButtonDetials: IDisplayRuller[] = [
   { type: "הסתר ידנית", visitDisable: TypeCover.allCover, choice: TypeCover.partiallyCover },
   { type: "הצג ידנית", visitDisable: TypeCover.allDiscover, choice: TypeCover.partiallyDiscover },
   { type: "הצג הכל", visitDisable: TypeCover.allDiscover, choice: TypeCover.allDiscover },
+];
+
+export const iconsNaviKani: IIconsNaviKani[] = [
+  { type: IconsNaviKaniTypes.navi, url: navi },
+  { type: IconsNaviKaniTypes.kani, url: kani },
 ];
 
 export const RulerPaddingSides = 32;

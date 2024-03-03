@@ -2,7 +2,7 @@ import { useNumbersLineContext } from "../context/numbersLineContext";
 import Moveable, { OnResize, OnResizeEnd } from "react-moveable";
 import { IElement } from "../type/moveable";
 import { calcXTransform, calcYTransform, calculatUnitsAmount } from "../lib/utils";
-import { RulerMargin, RulerPadding, ToolbarHieght, buttonsDraggElementWidth, jumpBaseHeight, jumpHeight } from "../consts/elementConsts";
+import { RulerMargin, RulerPadding, ToolbarHeight, buttonsDraggElementWidth, jumpBaseHeight, jumpHeight } from "../consts/elementConsts";
 import { calcJumpPosition } from "../lib/utils";
 import { ButtonViewable } from "../consts/ButtonViewable";
 import { useAction } from "../hooks/useAction";
@@ -108,7 +108,8 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
       target={moveableRef}
       ables={[ButtonViewable]}
       props={ableProps || false}
-      draggable={true}
+      draggable={element.jump ? true : false}
+      edgeDraggable={element.text ? true : false}
       onDrag={(e) => (e.target.style.transform = e.transform)}
       onDragEnd={(e) => onDragEnd(e)}
       resizable={element.jump}
@@ -118,7 +119,7 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
       snappable={true}
       bounds={{
         left: element.jump ? rulerPaddingSides : 0,
-        top: ToolbarHieght + 32,
+        top: ToolbarHeight + 32,
         right: element.jump ? rulerPaddingSides : 0,
         bottom: element.jump ? (element.jump.underRuler ? buttonsDraggElementWidth : jumpHeight - jumpBaseHeight + buttonsDraggElementWidth) : 0,
         position: "css",

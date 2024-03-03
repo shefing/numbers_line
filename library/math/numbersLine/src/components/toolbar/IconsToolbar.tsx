@@ -5,9 +5,10 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@radix-u
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { ActionTypes, TypeCover } from "../../type/elements";
 import { v4 as uuidv4 } from "uuid";
-import { IElement } from "@/type/moveable";
-import { useHelpers } from "@/hooks/useHelpers";
-import { textWidth } from "@/consts/elementConsts";
+import { IElement } from "../../type/moveable";
+import { useHelpers } from "../../hooks/useHelpers";
+import { textWidth } from "../../consts/elementConsts";
+import NaviKanyMenu from "./NaviKaniMenu";
 
 interface IProps {
   typeAction: ActionTypes;
@@ -48,6 +49,9 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
   useEffect(() => {
     setDuplicateElementPlace(0);
   }, [idDraggElementClick]);
+  useEffect(() => {
+    setIdDraggElementClick("");
+  }, [isOpen]);
 
   const getSrc = () => {
     const isClicked = typeAction === ActionTypes.restart ? openRestartDialog : isOpen;
@@ -103,16 +107,20 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
         onMouseLeave={() => setIsHovered(false)}
         onClick={() => actionButtonClick()}
       />
-      {typeAction === ActionTypes.displayNumbersLine && (
-        <div className="relative">
-          <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
-            <DropdownMenuTrigger />
-            <DropdownMenuContent>
+      <div className="relative">
+        <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+          <DropdownMenuTrigger />
+          <DropdownMenuContent>
+            {typeAction === ActionTypes.displayNumbersLine ? (
               <DisplayNumbers setOpen={setIsOpen} />
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      )}
+            ) : typeAction === ActionTypes.naviAndKani ? (
+              <NaviKanyMenu />
+            ) : (
+              <></>
+            )}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
     </div>
   );
 };

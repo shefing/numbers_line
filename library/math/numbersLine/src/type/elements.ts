@@ -18,6 +18,11 @@ export enum ActionTypes {
   restart = "restart",
 }
 
+export enum IconsNaviKaniTypes {
+  navi = "Navi",
+  kani = "kani",
+}
+
 export interface IActionIcon {
   type: ActionTypes;
   url: string;
@@ -33,6 +38,10 @@ export interface IDisplayRuller {
 export interface IRulerDefinition {
   type: string;
   choice: LineRange;
+}
+export interface IIconsNaviKani {
+  type: IconsNaviKaniTypes;
+  url: string;
 }
 export interface IWindowSize {
   height: number;

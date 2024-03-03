@@ -1,8 +1,8 @@
-import { IElement } from "@/type/moveable";
+import { IElement } from "../type/moveable";
 import { useRef } from "react";
-import { Input } from "@/components/ui/input";
 import MoveableElement from "./MoveableElement";
 import { useNumbersLineContext } from "../context/numbersLineContext";
+import { Input } from "./ui/input";
 
 interface IProps {
   element: IElement;
@@ -11,25 +11,24 @@ interface IProps {
 export const Text = ({ element }: IProps) => {
   const { idDraggElementClick } = useNumbersLineContext();
   const moveableRef = useRef<HTMLDivElement>(null);
-  const renderElement = <Input id={"dragElement-inputText"} element={element} />;
 
   return (
     <>
       <div
         ref={moveableRef}
         id={"dragElement-" + element.id}
-        className={`flex absolute t-0 l-0 ${idDraggElementClick == element.id ? "cursor-move" : "cursor-pointer"}`}
+        className={`flex items-center justify-center absolute t-0 l-0 ${idDraggElementClick == element.id ? "cursor-move" : "cursor-pointer"}`}
         style={{
           transform: element.transform,
         }}
       >
-        {renderElement}
+        <Input id={"inputText"} element={element} />
       </div>
-      {idDraggElementClick === element.id && (
-        <div id="dragElement-text">
-          <MoveableElement moveableRef={moveableRef} element={element} />
-        </div>
-      )}
+      {/* {idDraggElementClick === element.id && ( */}
+      <div id="dragElement-text">
+        <MoveableElement moveableRef={moveableRef} element={element} />
+      </div>
+      {/* )} */}
     </>
   );
 };
