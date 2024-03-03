@@ -55,9 +55,13 @@ body{
 .moveable-origin{
   visibility: hidden !important
 }
-.moveable-line{
-  background: #A4A3AE !important;
 
+#dragElement-text .moveable-line{
+  background: #009FDE !important;
+}
+
+#dragElement-jump-under .moveable-line, #dragElement-jump-on .moveable-line{
+  background: #A4A3AE !important;
 }
 
 .moveable-direction.moveable-e, .moveable-direction.moveable-w {
@@ -74,13 +78,13 @@ body{
   border-top-left-radius: 0px !important;
 }
 
-#dragElement-jumpBase-on .moveable-direction.moveable-e,
-#dragElement-jumpBase-on .moveable-direction.moveable-w {
+#dragElement-jump-on .moveable-direction.moveable-e,
+#dragElement-jump-on .moveable-direction.moveable-w {
   margin-top: 30px !important;
 }
 
-#dragElement-jumpBase-under .moveable-direction.moveable-e,
-#dragElement-jumpBase-under .moveable-direction.moveable-w {
+#dragElement-jump-under .moveable-direction.moveable-e,
+#dragElement-jump-under .moveable-direction.moveable-w {
   margin-top: -50px !important;
 }
 

@@ -13,10 +13,10 @@ import { useAction } from "../hooks/useAction";
 const Restart = () => {
   const { typeRuler, openRestartDialog, setOpenRestartDialog, setTypeRulerChange } = useNumbersLineContext();
   const { restart } = useAction();
-
+  //e.preventDefault() - to prevent auto focous in AlertDialogCancel
   return (
     <AlertDialog open={openRestartDialog} onOpenChange={setOpenRestartDialog}>
-      <AlertDialogContent>
+      <AlertDialogContent onOpenAutoFocus={(e) => e.preventDefault()}>
         <AlertDialogHeader>
           <AlertDialogTitle>?אתם רוצים להתחיל מחדש</AlertDialogTitle>
         </AlertDialogHeader>

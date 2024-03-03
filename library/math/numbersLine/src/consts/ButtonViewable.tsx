@@ -4,7 +4,7 @@ import duplicateIcon from "/assets/icons/duplicate.svg";
 import duplicateDisable from "/assets/icons/duplicateDisable.svg";
 import { IAbleProps } from "../type/moveable";
 import { LineRange } from "@/type/ruler";
-import { buttonsWidth } from "./elementConsts";
+import { buttonsDraggElementWidth } from "./elementConsts";
 
 export const ButtonViewable = {
   name: "ButtonViewable",
@@ -65,11 +65,11 @@ export const ButtonViewable = {
           cursor: "pointer",
         }}
       >
-        <div className="m-[1px]" style={{ width: buttonsWidth + "px" }} onClick={onDeleteClick}>
+        <div className="m-[1px]" style={{ width: buttonsDraggElementWidth + "px" }} onClick={onDeleteClick}>
           <img src={deleteIcon} alt="Delete Icon" onMouseEnter={(e) => changeHover(e, true)} onMouseLeave={(e) => backNotHover(e, true)} />
         </div>
         {copyViewAble && (
-          <div className="m-[1px]" style={{ width: buttonsWidth + "px" }} onClick={copyApproval ? onCopyClick : () => {}}>
+          <div className="m-[1px]" style={{ width: buttonsDraggElementWidth + "px" }} onClick={copyApproval ? onCopyClick : () => {}}>
             <img
               id="jump-copy"
               src={copyApproval ? duplicateIcon : duplicateDisable}

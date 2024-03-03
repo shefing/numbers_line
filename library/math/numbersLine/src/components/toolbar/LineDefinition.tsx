@@ -19,6 +19,7 @@ const LineDefinition = () => {
     visitableDisplayButton,
     setOpenRestartDialog,
     setTypeRulerChange,
+    setIdDraggElementClick,
   } = useNumbersLineContext();
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -41,6 +42,7 @@ const LineDefinition = () => {
 
   const handleMenuButtonClick = (type: LineRange) => {
     if (type == typeRuler) return;
+    setIdDraggElementClick("");
     setIsMenuOpen(false);
     if (dragElements.length == 0 && visitableDisplayButton == TypeCover.allDiscover) {
       setTypeRuler(type);
