@@ -1,4 +1,5 @@
 import { IActionIcon, IDisplayRuller, IRulerDefinition, ActionTypes, TypeCover, IconsNaviKaniTypes, IIconsNaviKani } from "../type/elements";
+import { LineRange } from "../type/ruler";
 import jump from "/assets/icons/toolbar/jump.svg";
 import text from "/assets/icons/toolbar/text.svg";
 import writing from "/assets/icons/toolbar/writing.svg";
@@ -7,8 +8,6 @@ import naviAndKani from "/assets/icons/toolbar/naviAndKani.svg";
 import restart from "/assets/icons/toolbar/restart.svg";
 import navi from "/assets/icons/navi.svg";
 import kani from "/assets/icons/kani.svg";
-
-import { LineRange } from "@/type/ruler";
 
 export const actionIconsDetials: IActionIcon[] = [
   { type: ActionTypes.restart, url: restart },
@@ -44,6 +43,7 @@ export const RulerMargin = 0.3;
 export const jumpBaseHeight = 40;
 export const jumpArrowHeight = 64;
 export const jumpHeight = 120;
-export const ToolbarHieght = 80;
+export const ToolbarHeight = 80;
 export const buttonsDraggElementWidth = 30;
 export const textWidth = 315;
+export const textHeight = 50;
