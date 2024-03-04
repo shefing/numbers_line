@@ -28,7 +28,6 @@ export const Text = ({ element }: IProps) => {
       const newTransform = element.transform.replace("(" + startPosition, "(" + newStartPosition);
       updateDragElements(element.id, { ...element, transform: newTransform });
       e.target.style.transform = newTransform;
-      debugger;
     }
   };
 
