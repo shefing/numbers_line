@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { LineRange, RulerLenth } from "../type/ruler";
 import { TypeCover } from "../type/elements";
 import { RulerPaddingSides } from "../consts/elementConsts";
+import { calcXTransform } from "@/lib/utils";
 
 export const useAction = () => {
   const {
@@ -30,19 +31,15 @@ export const useAction = () => {
   const duplicateDragJump = async (element: IElement) => {
     const id = uuidv4();
     let newTransform = "";
-    let transform = element.transform.match(/\((.*?)px/);
-    if (!transform) return;
-    const startPosition = parseFloat(transform[1]);
+    const startPosition = calcXTransform(element.transform);
     const endNewJumpPosition = startPosition + element.width * 2;
     const outOfRange = endNewJumpPosition - windowSize.width + rulerPaddingSides - 10;
     let newPosition = startPosition + element.width;
-    const startPositionString = transform[0];
     if (typeRuler == LineRange.hundred && outOfRange > 0) {
       setLeftPosition(leftPosition - outOfRange);
       newPosition -= outOfRange;
     }
-    const newXPositionString = "(" + newPosition + "px";
-    newTransform = element.transform.replace(startPositionString, newXPositionString);
+    newTransform = element.transform.replace("(" + startPosition, "(" + newPosition);
     const newElement = {
       ...element,
       id,

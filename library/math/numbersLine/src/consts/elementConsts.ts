@@ -1,16 +1,18 @@
-import { IActionIcon, IDisplayRuller, IRulerDefinition, ActionTypes, TypeCover } from "../type/elements";
+import { IActionIcon, IDisplayRuller, IRulerDefinition, ActionTypes, TypeCover, IconsNaviKaniTypes, IIconsNaviKani } from "../type/elements";
+import { LineRange } from "../type/ruler";
 import jump from "/assets/icons/toolbar/jump.svg";
 import text from "/assets/icons/toolbar/text.svg";
 import writing from "/assets/icons/toolbar/writing.svg";
 import eye from "/assets/icons/toolbar/eye.svg";
 import naviAndKani from "/assets/icons/toolbar/naviAndKani.svg";
 import restart from "/assets/icons/toolbar/restart.svg";
-import { LineRange } from "@/type/ruler";
+import navi from "/assets/icons/navi.svg";
+import kani from "/assets/icons/kani.svg";
 
 export const actionIconsDetials: IActionIcon[] = [
+  { type: ActionTypes.restart, url: restart },
   { type: ActionTypes.naviAndKani, url: naviAndKani, isMenu: true },
   { type: ActionTypes.displayNumbersLine, url: eye, isMenu: true },
-  { type: ActionTypes.restart, url: restart },
   { type: ActionTypes.writing, url: writing, isMenu: true },
   { type: ActionTypes.text, url: text, isDragged: true },
   { type: ActionTypes.jump, url: jump, isDragged: true },
@@ -30,12 +32,19 @@ export const displayRulerButtonDetials: IDisplayRuller[] = [
   { type: "הצג הכל", visitDisable: TypeCover.allDiscover, choice: TypeCover.allDiscover },
 ];
 
+export const iconsNaviKani: IIconsNaviKani[] = [
+  { type: IconsNaviKaniTypes.navi, url: navi },
+  { type: IconsNaviKaniTypes.kani, url: kani },
+];
+
 export const RulerPaddingSides = 32;
 export const RulerPadding = 50;
 export const RulerMargin = 0.3;
 export const jumpBaseHeight = 40;
 export const jumpArrowHeight = 64;
 export const jumpHeight = 120;
-export const ToolbarHieght = 80;
+export const ToolbarHeight = 80;
 export const buttonsDraggElementWidth = 30;
 export const textWidth = 315;
+export const textBoxSize = 22;
+export const maxTextBoxSize = textBoxSize * 2;

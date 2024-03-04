@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from "react";
-import { calculatUnitsAmount } from "../../lib/utils";
+import { calculatUnitsAmount, getSrc } from "../../lib/utils";
 import DisplayNumbers from "./DisplayNumbers";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { ActionTypes, TypeCover } from "../../type/elements";
 import { v4 as uuidv4 } from "uuid";
-import { IElement } from "@/type/moveable";
-import { useHelpers } from "@/hooks/useHelpers";
-import { textWidth } from "@/consts/elementConsts";
+import { IElement } from "../../type/moveable";
+import { useHelpers } from "../../hooks/useHelpers";
+import { textWidth } from "../../consts/elementConsts";
+import NaviKanyMenu from "./NaviKaniMenu";
 
 interface IProps {
   typeAction: ActionTypes;
@@ -38,7 +39,6 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
     const handleOutsideClick = (event: any) => {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target)) setIsOpen(false);
     };
-
     document.addEventListener("mousedown", handleOutsideClick);
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
@@ -48,13 +48,14 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
   useEffect(() => {
     setDuplicateElementPlace(0);
   }, [idDraggElementClick]);
+  useEffect(() => {
+    setIdDraggElementClick("");
+  }, [isOpen]);
 
-  const getSrc = () => {
+  const getSrcLocal = () => {
     const isClicked = typeAction === ActionTypes.restart ? openRestartDialog : isOpen;
     const isDisabled = typeAction === ActionTypes.restart && dragElements.length == 0 && visitableDisplayButton == TypeCover.allDiscover;
-    const dotIndex = iconUrl.indexOf(".");
-    const beforeDot = iconUrl.substring(0, dotIndex);
-    return isClicked ? beforeDot + "Open.svg" : isHovered ? beforeDot + "Hover.svg" : isDisabled ? beforeDot + "Disable.svg" : iconUrl;
+    return getSrc(iconUrl, isHovered, isClicked, isDisabled);
   };
 
   const addDraggableElement = () => {
@@ -72,9 +73,6 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
 
     if (typeAction === ActionTypes.jump) {
       newElement.jump = { value: 1, underRuler: false };
-    }
-    if (typeAction === ActionTypes.text) {
-      newElement.text = { data: "" };
     }
     setDragElements([...dragElements, newElement]);
     setDuplicateElementPlace((prevPixels) => prevPixels + 10);
@@ -97,22 +95,26 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
         className={`m-3 cursor-pointer ${
           typeAction === ActionTypes.restart && dragElements.length == 0 && visitableDisplayButton == TypeCover.allDiscover && "pointer-events-none"
         }`}
-        src={getSrc()}
+        src={getSrcLocal()}
         alt={typeAction + " Toolbar"}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={() => actionButtonClick()}
       />
-      {typeAction === ActionTypes.displayNumbersLine && (
-        <div className="relative">
-          <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
-            <DropdownMenuTrigger />
-            <DropdownMenuContent>
+      <div className="relative">
+        <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+          <DropdownMenuTrigger />
+          <DropdownMenuContent>
+            {typeAction === ActionTypes.displayNumbersLine ? (
               <DisplayNumbers setOpen={setIsOpen} />
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      )}
+            ) : typeAction === ActionTypes.naviAndKani ? (
+              false && <NaviKanyMenu />
+            ) : (
+              <></>
+            )}
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
     </div>
   );
 };

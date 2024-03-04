@@ -64,7 +64,8 @@ body{
   background: #A4A3AE !important;
 }
 
-.moveable-direction.moveable-e, .moveable-direction.moveable-w {
+#dragElement-jump-under .moveable-direction.moveable-e, #dragElement-jump-under .moveable-direction.moveable-w,
+#dragElement-jump-on .moveable-direction.moveable-e, #dragElement-jump-on .moveable-direction.moveable-w {
   background-size: contain !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
@@ -78,22 +79,20 @@ body{
   border-top-left-radius: 0px !important;
 }
 
-#dragElement-jump-on .moveable-direction.moveable-e,
-#dragElement-jump-on .moveable-direction.moveable-w {
+#dragElement-jump-on .moveable-direction.moveable-e, #dragElement-jump-on .moveable-direction.moveable-w {
   margin-top: 30px !important;
 }
 
-#dragElement-jump-under .moveable-direction.moveable-e,
-#dragElement-jump-under .moveable-direction.moveable-w {
+#dragElement-jump-under .moveable-direction.moveable-e, #dragElement-jump-under .moveable-direction.moveable-w {
   margin-top: -50px !important;
 }
 
-.moveable-direction.moveable-e{
+#dragElement-jump-under .moveable-direction.moveable-e, #dragElement-jump-on .moveable-direction.moveable-e {
   background-image: url('../public/assets/icons/resizeRight.svg')  !important;
   margin-inline: -1px !important;
 }
 
-.moveable-direction.moveable-w{
+#dragElement-jump-under .moveable-direction.moveable-w, #dragElement-jump-on .moveable-direction.moveable-w{
   background-image: url('../public/assets/icons/resizeLeft.svg')  !important;
   margin-inline:-14px !important;
 }
