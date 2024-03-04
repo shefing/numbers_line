@@ -5,11 +5,11 @@ import { useEffect, useState } from "react";
 import { ActionTypes, IWindowSize } from "../type/elements";
 import { Text } from "./Text";
 import { calcXTransform, calcYTransform } from "../lib/utils";
-import { useAction } from "../hooks/useAction";
+import { useDraggableElementAction } from "../hooks/useDraggableElementAction";
 
 const ShowElements = () => {
   const { windowSize, dragElements, setIdDraggElementClick } = useNumbersLineContext();
-  const { updateDragElements } = useAction();
+  const { updateDragElements } = useDraggableElementAction();
   const [windowResizing, setWindowResizing] = useState(false);
   const [prevWindowSize, setPrevWindowSize] = useState<IWindowSize>({ height: windowSize.height, width: windowSize.width });
 

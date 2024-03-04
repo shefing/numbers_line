@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "../ui/button";
 import { LineRange, RulerLenth } from "../../type/ruler";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
-import openMenu from "/assets/icons/menuButtonOpen.svg";
-import closeMenu from "/assets/icons/menuButtonClose.svg";
 import { RulerPaddingSides, rulerDefinitionButtonDetials } from "../../consts/elementConsts";
 import { IRulerDefinition, TypeCover } from "../../type/elements";
+import openMenu from "/assets/icons/menuButtonOpen.svg";
+import closeMenu from "/assets/icons/menuButtonClose.svg";
 
 const LineDefinition = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

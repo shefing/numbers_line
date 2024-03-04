@@ -7,7 +7,7 @@ import { LineRange, RulerLenth } from "../type/ruler";
 import JumpArrow from "./JumpArrow";
 import { useHelpers } from "../hooks/useHelpers";
 import { baseJumpClassName } from "../styles/jump";
-import { useAction } from "../hooks/useAction";
+import { useDraggableElementAction } from "../hooks/useDraggableElementAction";
 
 interface IProps {
   element: IElement;
@@ -15,7 +15,7 @@ interface IProps {
 const Jump = ({ element }: IProps) => {
   const { windowSize, typeRuler, idDraggElementClick } = useNumbersLineContext();
   const { calculatRulerWidth } = useHelpers();
-  const { updateDragElements } = useAction();
+  const { updateDragElements } = useDraggableElementAction();
 
   const jump = element.jump!;
   const [unit, setUnit] = useState(calculatRulerWidth() / calculatUnitsAmount(typeRuler));

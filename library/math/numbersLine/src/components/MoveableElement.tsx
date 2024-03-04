@@ -5,7 +5,7 @@ import { calcXTransform, calcYTransform, calculatUnitsAmount } from "../lib/util
 import { RulerMargin, RulerPadding, ToolbarHeight, buttonsDraggElementWidth, jumpBaseHeight, jumpHeight } from "../consts/elementConsts";
 import { calcJumpPosition } from "../lib/utils";
 import { ButtonViewable } from "../consts/ButtonViewable";
-import { useAction } from "../hooks/useAction";
+import { useDraggableElementAction } from "../hooks/useDraggableElementAction";
 import { useHelpers } from "../hooks/useHelpers";
 import { ActionTypes } from "../type/elements";
 
@@ -17,7 +17,7 @@ interface IProps {
 
 const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
   const { windowSize, typeRuler, rulerPaddingSides, leftPosition } = useNumbersLineContext();
-  const { deleteDragElement, duplicateDragJump, updateDragElements } = useAction();
+  const { deleteDragElement, duplicateDragJump, updateDragElements } = useDraggableElementAction();
   const { calculatRulerWidth, calculatScreenWidth } = useHelpers();
 
   const ableProps = {

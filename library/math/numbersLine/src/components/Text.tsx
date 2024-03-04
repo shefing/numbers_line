@@ -2,7 +2,7 @@ import { IElement } from "../type/moveable";
 import { useRef, useState } from "react";
 import MoveableElement from "./MoveableElement";
 import { useNumbersLineContext } from "../context/numbersLineContext";
-import { useAction } from "../hooks/useAction";
+import { useDraggableElementAction } from "../hooks/useDraggableElementAction";
 import { maxTextBoxSize, textBoxSize } from "../consts/elementConsts";
 import { calcXTransform } from "../lib/utils";
 
@@ -14,7 +14,7 @@ export const Text = ({ element }: IProps) => {
   const { windowSize, idDraggElementClick, setIdDraggElementClick } = useNumbersLineContext();
   const moveableRef = useRef<any>(null);
   const [size, setSize] = useState(textBoxSize);
-  const { deleteDragElement, updateDragElements } = useAction();
+  const { deleteDragElement, updateDragElements } = useDraggableElementAction();
 
   const updateValueAndSize = (e: any) => {
     setSize(e.target.value.length > textBoxSize ? (e.target.value.length > maxTextBoxSize ? maxTextBoxSize : e.target.value.length) : textBoxSize);
