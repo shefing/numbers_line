@@ -1,5 +1,5 @@
 import { useNumbersLineContext } from "../context/numbersLineContext";
-import Moveable, { OnResize, OnResizeEnd } from "react-moveable";
+import Moveable, { OnDragEnd, OnResize, OnResizeEnd } from "react-moveable";
 import { IElement } from "../type/moveable";
 import { calcXTransform, calcYTransform, calculatUnitsAmount } from "../lib/utils";
 import { RulerMargin, RulerPadding, ToolbarHeight, buttonsDraggElementWidth, jumpBaseHeight, jumpHeight } from "../consts/elementConsts";
@@ -41,7 +41,7 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
     e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + newXPosition);
   };
 
-  const onDragEnd = (e: OnResizeEnd) => {
+  const onDragEnd = (e: OnDragEnd) => {
     if (!element?.jump) {
       updateDragElements(element.id, { ...element, transform: e.target.style.transform });
       return;

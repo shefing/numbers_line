@@ -23,7 +23,6 @@ const ShowElements = () => {
     const documentElement = document.getElementById(`dragElement-${element.id}`);
     if (!documentElement) return;
     documentElement.style.transform = newTransform;
-
     updateDragElements(element.id, { ...element, transform: newTransform });
   };
 

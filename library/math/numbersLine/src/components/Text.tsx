@@ -38,7 +38,7 @@ export const Text = ({ element }: IProps) => {
     <>
       <input
         ref={moveableRef}
-        id={"dragElement-inputText"}
+        id={`dragElement-${element.id}`}
         type="text"
         size={size}
         onChange={updateValueAndSize}
