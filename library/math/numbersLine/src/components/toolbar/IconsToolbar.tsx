@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { calculatUnitsAmount } from "../../lib/utils";
+import { calculatUnitsAmount, getSrc } from "../../lib/utils";
 import DisplayNumbers from "./DisplayNumbers";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from "@radix-ui/react-dropdown-menu";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
@@ -39,7 +39,6 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
     const handleOutsideClick = (event: any) => {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target)) setIsOpen(false);
     };
-
     document.addEventListener("mousedown", handleOutsideClick);
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
@@ -53,12 +52,10 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
     setIdDraggElementClick("");
   }, [isOpen]);
 
-  const getSrc = () => {
+  const getSrcLocal = () => {
     const isClicked = typeAction === ActionTypes.restart ? openRestartDialog : isOpen;
     const isDisabled = typeAction === ActionTypes.restart && dragElements.length == 0 && visitableDisplayButton == TypeCover.allDiscover;
-    const dotIndex = iconUrl.indexOf(".");
-    const beforeDot = iconUrl.substring(0, dotIndex);
-    return isClicked ? beforeDot + "Open.svg" : isHovered ? beforeDot + "Hover.svg" : isDisabled ? beforeDot + "Disable.svg" : iconUrl;
+    return getSrc(iconUrl, isHovered, isClicked, isDisabled);
   };
 
   const addDraggableElement = () => {
@@ -76,9 +73,6 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
 
     if (typeAction === ActionTypes.jump) {
       newElement.jump = { value: 1, underRuler: false };
-    }
-    if (typeAction === ActionTypes.text) {
-      newElement.text = { data: "" };
     }
     setDragElements([...dragElements, newElement]);
     setDuplicateElementPlace((prevPixels) => prevPixels + 10);
@@ -101,7 +95,7 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
         className={`m-3 cursor-pointer ${
           typeAction === ActionTypes.restart && dragElements.length == 0 && visitableDisplayButton == TypeCover.allDiscover && "pointer-events-none"
         }`}
-        src={getSrc()}
+        src={getSrcLocal()}
         alt={typeAction + " Toolbar"}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -114,7 +108,7 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
             {typeAction === ActionTypes.displayNumbersLine ? (
               <DisplayNumbers setOpen={setIsOpen} />
             ) : typeAction === ActionTypes.naviAndKani ? (
-              <NaviKanyMenu />
+              false && <NaviKanyMenu />
             ) : (
               <></>
             )}

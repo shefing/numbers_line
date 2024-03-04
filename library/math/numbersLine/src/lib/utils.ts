@@ -25,3 +25,9 @@ export const calcYTransform = (transfom: string): number => {
   const match = transfom.match(/,\s*(-?\d+\.?\d*)px\)/);
   return match ? parseFloat(match[1]) : 0;
 };
+
+export const getSrc = (url: string, isHovered: boolean, isClicked?: boolean, isDisabled?: boolean) => {
+  const dotIndex = url.indexOf(".");
+  const beforeDot = url.substring(0, dotIndex);
+  return isClicked ? beforeDot + "Open.svg" : isHovered ? beforeDot + "Hover.svg" : isDisabled ? beforeDot + "Disable.svg" : url;
+};

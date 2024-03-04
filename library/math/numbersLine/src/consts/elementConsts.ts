@@ -46,4 +46,5 @@ export const jumpHeight = 120;
 export const ToolbarHeight = 80;
 export const buttonsDraggElementWidth = 30;
 export const textWidth = 315;
-export const textHeight = 50;
+export const textBoxSize = 22;
+export const maxTextBoxSize = textBoxSize * 2;

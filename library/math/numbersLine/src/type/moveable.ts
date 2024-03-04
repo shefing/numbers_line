@@ -5,7 +5,6 @@ export interface IElement {
   id: string;
   type: ActionTypes;
   jump?: IJump;
-  text?: IText;
   transform: string;
   width: number;
 }
@@ -13,9 +12,6 @@ export interface IElement {
 export interface IJump {
   value: number;
   underRuler: boolean;
-}
-export interface IText {
-  data: string;
 }
 
 export interface IAbleProps {
