@@ -53,4 +53,4 @@ export const naviWidth = 81;
 export const keniHeight = 108;
 export const naviHeight = 73;
 export const keniFoot = 40;
-export const naviFoot = 20;
+export const naviFoot = -21;

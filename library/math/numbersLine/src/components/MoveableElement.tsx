@@ -2,12 +2,23 @@ import { useNumbersLineContext } from "../context/numbersLineContext";
 import Moveable, { OnDragEnd, OnResize, OnResizeEnd } from "react-moveable";
 import { IElement } from "../type/moveable";
 import { calcXTransform, calcYTransform, calculatUnitsAmount } from "../lib/utils";
-import { RulerMargin, RulerPadding, ToolbarHeight, buttonsDraggElementWidth, jumpBaseHeight, jumpHeight } from "../consts/elementConsts";
-import { calcJumpPosition } from "../lib/utils";
+import {
+  RulerMargin,
+  RulerPadding,
+  ToolbarHeight,
+  buttonsDraggElementWidth,
+  jumpBaseHeight,
+  jumpHeight,
+  naviFoot,
+  keniFoot,
+  keniWidth,
+  naviWidth,
+} from "../consts/elementConsts";
+import { calcPosition } from "../lib/utils";
 import { ButtonViewable } from "../consts/ButtonViewable";
 import { useDraggableElementAction } from "../hooks/useDraggableElementAction";
 import { useHelpers } from "../hooks/useHelpers";
-import { ActionTypes } from "../type/elements";
+import { ActionTypes, NaviKeniIconsTypes } from "../type/elements";
 
 interface IProps {
   moveableRef: any;
@@ -34,26 +45,35 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
 
   const updateXLocation = (e: any) => {
     const xPosition = calcXTransform(e.target.style.transform);
+    const IconsFootlength = element.icons ? (element.icons?.type == NaviKeniIconsTypes.navi ? naviFoot : keniFoot) : 0;
     const unitsAmount = calculatUnitsAmount(typeRuler);
+    const unitPresent = element.type == ActionTypes.jump ? unit! : unit! / 2;
     // few pixels for the precise position of the element, the calculation is done relative to the position on the axis.
-    const sidesPixels = (unitsAmount / 2 - Math.round(xPosition - rulerPaddingSides) / unit!) / unitsAmount;
-    const newXPosition = Math.round((xPosition - rulerPaddingSides) / unit!) * unit! + rulerPaddingSides + sidesPixels;
+    const sidesPixels = element.type == ActionTypes.jump ? (unitsAmount / 2 - Math.round(xPosition - rulerPaddingSides) / unitPresent) / unitsAmount : 0;
+    let newXPosition =
+      Math.round((xPosition - IconsFootlength - rulerPaddingSides) / unitPresent) * unitPresent + rulerPaddingSides + IconsFootlength + sidesPixels;
+    if (newXPosition + (element.icons?.type == NaviKeniIconsTypes.navi ? naviWidth : keniWidth) > windowSize.width) newXPosition -= unitPresent;
     e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + newXPosition);
   };
 
   const onDragEnd = (e: OnDragEnd) => {
+    if (element.type == ActionTypes.text) {
+      updateDragElements(element.id, { ...element, transform: e.target.style.transform });
+      return;
+    }
+
+    const yTransform = calcYTransform(e.target.style.transform);
+    const rulerPosition = windowSize.height * (1 - RulerMargin) - RulerPadding;
+    let elementPsition = calcPosition(yTransform, element);
+    // Change the position of the element relative to the integers, provided that the position is close to the axis.
+    if (Math.abs(rulerPosition - elementPsition) < 50) updateXLocation(e);
+
+    // Change the type of jump if its position has changed relative to the ruler.
     if (!element?.jump) {
       updateDragElements(element.id, { ...element, transform: e.target.style.transform });
       return;
     }
     let isUnderRuler = element.jump.underRuler;
-    const yTransform = calcYTransform(e.target.style.transform);
-    const elementPsition = calcJumpPosition(yTransform, element.jump.underRuler);
-    const rulerPosition = windowSize.height * (1 - RulerMargin) - RulerPadding;
-    // Change the position of the element relative to the integers, provided that the position is close to the axis.
-    if (Math.abs(rulerPosition - elementPsition) < 50) updateXLocation(e);
-
-    // Change the type of jump if its position has changed relative to the ruler.
     if (element.jump.underRuler != rulerPosition < elementPsition) {
       let newYPositionString = "";
       if (rulerPosition < elementPsition) {

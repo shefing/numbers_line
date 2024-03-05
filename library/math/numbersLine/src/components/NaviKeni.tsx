@@ -33,7 +33,7 @@ const NaviKany = ({ element, unit, setUnit }: IProps) => {
         ref={moveableRef}
         id={`dragElement-${element.id}`}
         src={element.icons?.type == NaviKeniIconsTypes.navi ? navi : keni}
-        className="flex absolute t-0 l-0"
+        className={`flex absolute t-0 l-0 ${idDraggElementClick == element.id ? "cursor-move" : "cursor-pointer"}`}
         style={{
           transform: element.transform,
           width: element.icons?.type == NaviKeniIconsTypes.navi ? naviWidth : keniWidth,
