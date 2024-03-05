@@ -8,7 +8,6 @@ import keni from "/assets/icons/keniOnScreen.svg";
 import { NaviKeniIconsTypes } from "../type/elements";
 import { LineRange, RulerLenth } from "../type/ruler";
 import { useHelpers } from "../hooks/useHelpers";
-import { calculatUnitsAmount } from "../lib/utils";
 
 interface IProps {
   element: IElement;
@@ -18,11 +17,11 @@ interface IProps {
 
 const NaviKany = ({ element, unit, setUnit }: IProps) => {
   const { windowSize, typeRuler, idDraggElementClick } = useNumbersLineContext();
-  const { calculatRulerWidth } = useHelpers();
+  const { calculatRulerWidth, calculatUnitsAmount } = useHelpers();
   const moveableRef = useRef<any>(null);
 
   useEffect(() => {
-    let unitWidth = calculatRulerWidth() / calculatUnitsAmount(typeRuler);
+    let unitWidth = calculatRulerWidth() / calculatUnitsAmount();
     setUnit(unitWidth);
     typeRuler == LineRange.hundred && setUnit(windowSize.width / RulerLenth.hundred);
   }, [typeRuler, windowSize]);

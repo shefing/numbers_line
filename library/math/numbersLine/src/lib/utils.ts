@@ -1,4 +1,3 @@
-import { LineRange, unitAmount } from "../type/ruler";
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { jumpBaseHeight, jumpHeight, keniHeight, naviHeight } from "../consts/elementConsts";
@@ -8,10 +7,6 @@ import { NaviKeniIconsTypes } from "@/type/elements";
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
-
-export const calculatUnitsAmount = (type: LineRange) => {
-  return type == LineRange.hundred || type == LineRange.twenty ? unitAmount.twenty : unitAmount.ten;
-};
 
 export const calcPosition = (transfomPosition: number, element: IElement): number => {
   if (element.jump) {

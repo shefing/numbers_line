@@ -38,8 +38,8 @@ export const iconsNaviKeni: IIconsNaviKeni[] = [
 ];
 
 export const RulerPaddingSides = 32;
-export const RulerPadding = 50;
-export const RulerMargin = 0.3;
+// export const RulerPadding = 50;
+export const RulerMargin = 0.35;
 export const jumpBaseHeight = 40;
 export const jumpArrowHeight = 64;
 export const jumpHeight = 120;
@@ -52,5 +52,5 @@ export const keniWidth = 105;
 export const naviWidth = 81;
 export const keniHeight = 108;
 export const naviHeight = 73;
-export const keniFoot = 40;
+export const keniFoot = 25;
 export const naviFoot = -21;

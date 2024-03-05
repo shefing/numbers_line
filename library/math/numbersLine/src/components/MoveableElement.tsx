@@ -1,10 +1,9 @@
 import { useNumbersLineContext } from "../context/numbersLineContext";
 import Moveable, { OnDragEnd, OnResize, OnResizeEnd } from "react-moveable";
 import { IElement } from "../type/moveable";
-import { calcXTransform, calcYTransform, calculatUnitsAmount } from "../lib/utils";
+import { calcXTransform, calcYTransform } from "../lib/utils";
 import {
   RulerMargin,
-  RulerPadding,
   ToolbarHeight,
   buttonsDraggElementWidth,
   jumpBaseHeight,
@@ -29,7 +28,7 @@ interface IProps {
 const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
   const { windowSize, typeRuler, rulerPaddingSides, leftPosition } = useNumbersLineContext();
   const { deleteDragElement, duplicateDragJump, updateDragElements } = useDraggableElementAction();
-  const { calculatRulerWidth, calculatScreenWidth } = useHelpers();
+  const { calculatRulerWidth, calculatScreenWidth, calculatUnitsAmount } = useHelpers();
 
   const ableProps = {
     ButtonViewable: true,
@@ -46,7 +45,7 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
   const updateXLocation = (e: any) => {
     const xPosition = calcXTransform(e.target.style.transform);
     const IconsFootlength = element.icons ? (element.icons?.type == NaviKeniIconsTypes.navi ? naviFoot : keniFoot) : 0;
-    const unitsAmount = calculatUnitsAmount(typeRuler);
+    const unitsAmount = calculatUnitsAmount();
     const unitPresent = element.type == ActionTypes.jump ? unit! : unit! / 2;
     // few pixels for the precise position of the element, the calculation is done relative to the position on the axis.
     const sidesPixels = element.type == ActionTypes.jump ? (unitsAmount / 2 - Math.round(xPosition - rulerPaddingSides) / unitPresent) / unitsAmount : 0;
@@ -63,7 +62,7 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
     }
 
     const yTransform = calcYTransform(e.target.style.transform);
-    const rulerPosition = windowSize.height * (1 - RulerMargin) - RulerPadding;
+    const rulerPosition = windowSize.height * (1 - RulerMargin);
     let elementPsition = calcPosition(yTransform, element);
     // Change the position of the element relative to the integers, provided that the position is close to the axis.
     if (Math.abs(rulerPosition - elementPsition) < 50) updateXLocation(e);
