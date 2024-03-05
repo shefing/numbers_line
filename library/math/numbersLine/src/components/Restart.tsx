@@ -8,11 +8,11 @@ import {
   AlertDialogTitle,
 } from "./ui/alert-dialog";
 import { useNumbersLineContext } from "../context/numbersLineContext";
-import { useAction } from "../hooks/useAction";
+import { useHelpers } from "@/hooks/useHelpers";
 
 const Restart = () => {
   const { typeRuler, openRestartDialog, setOpenRestartDialog, setTypeRulerChange } = useNumbersLineContext();
-  const { restart } = useAction();
+  const { restart } = useHelpers();
   //e.preventDefault() - to prevent auto focous in AlertDialogCancel
   return (
     <AlertDialog open={openRestartDialog} onOpenChange={setOpenRestartDialog}>

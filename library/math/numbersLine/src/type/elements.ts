@@ -18,7 +18,7 @@ export enum ActionTypes {
   restart = "restart",
 }
 
-export enum IconsNaviKaniTypes {
+export enum NaviKaniIconsTypes {
   navi = "Navi",
   kani = "kani",
 }
@@ -40,7 +40,7 @@ export interface IRulerDefinition {
   choice: LineRange;
 }
 export interface IIconsNaviKani {
-  type: IconsNaviKaniTypes;
+  type: NaviKaniIconsTypes;
   url: string;
 }
 export interface IWindowSize {

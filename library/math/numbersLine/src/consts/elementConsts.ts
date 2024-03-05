@@ -1,4 +1,4 @@
-import { IActionIcon, IDisplayRuller, IRulerDefinition, ActionTypes, TypeCover, IconsNaviKaniTypes, IIconsNaviKani } from "../type/elements";
+import { IActionIcon, IDisplayRuller, IRulerDefinition, ActionTypes, TypeCover, NaviKaniIconsTypes, IIconsNaviKani } from "../type/elements";
 import { LineRange } from "../type/ruler";
 import jump from "/assets/icons/toolbar/jump.svg";
 import text from "/assets/icons/toolbar/text.svg";
@@ -33,8 +33,8 @@ export const displayRulerButtonDetials: IDisplayRuller[] = [
 ];
 
 export const iconsNaviKani: IIconsNaviKani[] = [
-  { type: IconsNaviKaniTypes.navi, url: navi },
-  { type: IconsNaviKaniTypes.kani, url: kani },
+  { type: NaviKaniIconsTypes.navi, url: navi },
+  { type: NaviKaniIconsTypes.kani, url: kani },
 ];
 
 export const RulerPaddingSides = 32;
@@ -45,6 +45,6 @@ export const jumpArrowHeight = 64;
 export const jumpHeight = 120;
 export const ToolbarHeight = 80;
 export const buttonsDraggElementWidth = 30;
-export const textWidth = 315;
+export const textBoxWidth = 315;
 export const textBoxSize = 22;
 export const maxTextBoxSize = textBoxSize * 2;

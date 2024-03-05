@@ -1,10 +1,11 @@
-import { ActionTypes } from "./elements";
+import { ActionTypes, NaviKaniIconsTypes } from "./elements";
 import { LineRange } from "./ruler";
 
 export interface IElement {
   id: string;
   type: ActionTypes;
   jump?: IJump;
+  icons?: IIcons;
   transform: string;
   width: number;
 }
@@ -13,7 +14,9 @@ export interface IJump {
   value: number;
   underRuler: boolean;
 }
-
+export interface IIcons {
+  type: NaviKaniIconsTypes;
+}
 export interface IAbleProps {
   ButtonViewable: boolean;
   onDeleteClick: () => void;

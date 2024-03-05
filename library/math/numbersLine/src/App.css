@@ -58,6 +58,7 @@ body{
 
 #dragElement-text .moveable-line{
   background: #009FDE !important;
+  padding: 1px;
 }
 
 #dragElement-jump-under .moveable-line, #dragElement-jump-on .moveable-line{
