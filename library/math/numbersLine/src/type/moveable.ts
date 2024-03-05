@@ -1,4 +1,4 @@
-import { ActionTypes, NaviKaniIconsTypes } from "./elements";
+import { ActionTypes, NaviKeniIconsTypes } from "./elements";
 import { LineRange } from "./ruler";
 
 export interface IElement {
@@ -15,7 +15,7 @@ export interface IJump {
   underRuler: boolean;
 }
 export interface IIcons {
-  type: NaviKaniIconsTypes;
+  type: NaviKeniIconsTypes;
 }
 export interface IAbleProps {
   ButtonViewable: boolean;

@@ -14,13 +14,13 @@ export enum ActionTypes {
   text = "text",
   writing = "writing",
   displayNumbersLine = "displayNumbersLine",
-  naviAndKani = "naviAndKani",
+  naviAndKeni = "naviAndKeni",
   restart = "restart",
 }
 
-export enum NaviKaniIconsTypes {
+export enum NaviKeniIconsTypes {
   navi = "Navi",
-  kani = "kani",
+  keni = "keni",
 }
 
 export interface IActionIcon {
@@ -39,8 +39,8 @@ export interface IRulerDefinition {
   type: string;
   choice: LineRange;
 }
-export interface IIconsNaviKani {
-  type: NaviKaniIconsTypes;
+export interface IIconsNaviKeni {
+  type: NaviKeniIconsTypes;
   url: string;
 }
 export interface IWindowSize {

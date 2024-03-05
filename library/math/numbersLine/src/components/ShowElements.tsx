@@ -4,12 +4,16 @@ import { useNumbersLineContext } from "../context/numbersLineContext";
 import { useEffect, useState } from "react";
 import { ActionTypes, IWindowSize } from "../type/elements";
 import { Text } from "./Text";
-import { calcXTransform, calcYTransform } from "../lib/utils";
+import { calcXTransform, calcYTransform, calculatUnitsAmount } from "../lib/utils";
 import { useDraggableElementAction } from "../hooks/useDraggableElementAction";
+import NaviKeni from "./NaviKeni";
+import { useHelpers } from "../hooks/useHelpers";
 
 const ShowElements = () => {
-  const { windowSize, dragElements, setIdDraggElementClick } = useNumbersLineContext();
+  const { windowSize, typeRuler, dragElements, setIdDraggElementClick } = useNumbersLineContext();
+  const { calculatRulerWidth } = useHelpers();
   const { updateDragElements } = useDraggableElementAction();
+  const [unit, setUnit] = useState(calculatRulerWidth() / calculatUnitsAmount(typeRuler));
   const [windowResizing, setWindowResizing] = useState(false);
   const [prevWindowSize, setPrevWindowSize] = useState<IWindowSize>({ height: windowSize.height, width: windowSize.width });
 
@@ -67,9 +71,11 @@ const ShowElements = () => {
       {(() => {
         switch (element.type) {
           case ActionTypes.jump:
-            return <Jump element={element} />;
+            return <Jump element={element} unit={unit} setUnit={setUnit} />;
           case ActionTypes.text:
             return <Text element={element} />;
+          case ActionTypes.naviAndKeni:
+            return <NaviKeni element={element} unit={unit} setUnit={setUnit} />;
           default:
             return null;
         }

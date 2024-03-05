@@ -2,7 +2,7 @@ import { useNumbersLineContext } from "@/context/numbersLineContext";
 import { IElement } from "../type/moveable";
 import { v4 as uuidv4 } from "uuid";
 import { LineRange } from "../type/ruler";
-import { ActionTypes, NaviKaniIconsTypes } from "../type/elements";
+import { ActionTypes, NaviKeniIconsTypes } from "../type/elements";
 import { textBoxWidth } from "../consts/elementConsts";
 import { calcXTransform, calculatUnitsAmount } from "../lib/utils";
 import { useHelpers } from "./useHelpers";
@@ -16,7 +16,7 @@ export const useDraggableElementAction = () => {
     typeAction: ActionTypes,
     duplicateElementPlace: number,
     setDuplicateElementPlace: React.Dispatch<React.SetStateAction<number>>,
-    type?: NaviKaniIconsTypes
+    type?: NaviKeniIconsTypes
   ) => {
     const elementWidth =
       typeAction == ActionTypes.jump ? calculatRulerWidth() / calculatUnitsAmount(typeRuler) : typeAction == ActionTypes.text ? textBoxWidth : 50;
@@ -33,7 +33,7 @@ export const useDraggableElementAction = () => {
     if (typeAction === ActionTypes.jump) {
       newElement.jump = { value: 1, underRuler: false };
     }
-    if (typeAction === ActionTypes.naviAndKani) {
+    if (typeAction === ActionTypes.naviAndKeni) {
       if (type) newElement.icons = { type };
     }
     setDragElements([...dragElements, newElement]);

@@ -4,7 +4,7 @@ import DisplayNumbers from "./DisplayNumbers";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { ActionTypes, TypeCover } from "../../type/elements";
 
-import NaviKanyMenu from "./NaviKaniMenu";
+import NaviKanyMenu from "./NaviKeniMenu";
 import { useDraggableElementAction } from "@/hooks/useDraggableElementAction";
 
 interface IProps {
@@ -67,7 +67,7 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
       {isOpen &&
         (typeAction === ActionTypes.displayNumbersLine ? (
           <DisplayNumbers setOpen={setIsOpen} />
-        ) : typeAction === ActionTypes.naviAndKani ? (
+        ) : typeAction === ActionTypes.naviAndKeni ? (
           <NaviKanyMenu setOpen={setIsOpen} duplicateElementPlace={duplicateElementPlace} setDuplicateElementPlace={setDuplicateElementPlace} />
         ) : (
           <></>
