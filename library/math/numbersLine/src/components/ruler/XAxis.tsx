@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { LineRange, RulerLenth } from "../../type/ruler";
 import Numbers from "./Numbers";
-import { RulerPadding } from "../../consts/elementConsts";
 import { useHelpers } from "../../hooks/useHelpers";
 const XAxis = () => {
   const { windowSize, typeRuler, leftPosition, setLeftPosition, setIdDraggElementClick } = useNumbersLineContext();
@@ -46,7 +45,6 @@ const XAxis = () => {
       onMouseMove={typeRuler == LineRange.hundred ? handleonDrag : () => {}}
       onMouseUp={typeRuler == LineRange.hundred ? handleStopDrag : () => {}}
       onMouseLeave={typeRuler == LineRange.hundred ? handleStopDrag : () => {}}
-      style={{ padding: `${RulerPadding}px` }}
     >
       <Numbers />
     </div>

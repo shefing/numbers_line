@@ -9,7 +9,6 @@ interface IProps {
 }
 const DisplayNumbers = ({ setOpen }: IProps) => {
   const { coverSituation, visitableDisplayButton, setCoverSituation } = useNumbersLineContext();
-  const margin = `mt-[${ToolbarHeight}px]`;
 
   const onClickButtons = (type: TypeCover) => {
     coverSituation == type ? setCoverSituation(TypeCover.nothing) : setCoverSituation(type);
@@ -17,10 +16,10 @@ const DisplayNumbers = ({ setOpen }: IProps) => {
   };
 
   return (
-    <div className={`fixed ${margin}`}>
-      <div className="relative flex flex-col items-center bg-white relative">
-        <img className="absolute top-0 " src={triangleToMenu} alt="triple for menu" />
-        <div className="m-[18px] flex flex-col items-end shadow-2xl rounded-[6px] border border-solid border-[#009FDE] p-2 ">
+    <div className="fixed">
+      <div className="flex flex-col items-center" style={{ margin: ToolbarHeight - 10 + "px" }}>
+        <img className="relative mb-[-3px] " src={triangleToMenu} alt="triple for menu" />
+        <div className="bg-white flex flex-col items-end  rounded-[6px] border border-[#009FDE] p-2 ">
           {displayRulerButtonDetials.map((item: IDisplayRuller, i: number) => (
             <Button
               key={i}

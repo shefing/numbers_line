@@ -2,30 +2,29 @@ import React, { useEffect, useState } from "react";
 import { IElement } from "../type/moveable";
 import MoveableElement from "./MoveableElement";
 import { useNumbersLineContext } from "../context/numbersLineContext";
-import { calculatUnitsAmount } from "../lib/utils";
 import { LineRange, RulerLenth } from "../type/ruler";
 import JumpArrow from "./JumpArrow";
-import { useHelpers } from "../hooks/useHelpers";
 import { baseJumpClassName } from "../styles/jump";
 import { useDraggableElementAction } from "../hooks/useDraggableElementAction";
+import { useHelpers } from "../hooks/useHelpers";
 
 interface IProps {
   element: IElement;
+  unit: number;
+  setUnit: (v: number) => void;
 }
-const Jump = ({ element }: IProps) => {
+const Jump = ({ element, unit, setUnit }: IProps) => {
   const { windowSize, typeRuler, idDraggElementClick } = useNumbersLineContext();
-  const { calculatRulerWidth } = useHelpers();
+  const { calculatRulerWidth, calculatUnitsAmount } = useHelpers();
   const { updateDragElements } = useDraggableElementAction();
-
   const jump = element.jump!;
-  const [unit, setUnit] = useState(calculatRulerWidth() / calculatUnitsAmount(typeRuler));
   const [hideNumber, setHideNumber] = useState(true);
   const moveableRef = React.useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    let rulerWidth = calculatRulerWidth() / calculatUnitsAmount(typeRuler);
-    setUnit(rulerWidth);
-    updateDragElements(element.id, { ...element, width: rulerWidth * jump.value });
+    let unitWidth = calculatRulerWidth() / calculatUnitsAmount();
+    setUnit(unitWidth);
+    updateDragElements(element.id, { ...element, width: unitWidth * jump.value });
     typeRuler == LineRange.hundred && setUnit(windowSize.width / RulerLenth.hundred);
   }, [typeRuler, windowSize]);
 
