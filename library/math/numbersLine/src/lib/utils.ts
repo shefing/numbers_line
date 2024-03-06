@@ -1,8 +1,8 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { jumpBaseHeight, jumpHeight, keniHeight, naviHeight } from "../consts/elementConsts";
-import { IElement } from "@/type/moveable";
-import { NaviKeniIconsTypes } from "@/type/elements";
+import { IElement } from "../type/moveable";
+import { NaviKeniIconsTypes, WritingSituation } from "../type/elements";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -26,8 +26,16 @@ export const calcYTransform = (transfom: string): number => {
   return match ? parseFloat(match[1]) : 0;
 };
 
-export const getSrc = (url: string, isHovered: boolean, isClicked?: boolean, isDisabled?: boolean) => {
+export const getSrc = (url: string, isHovered: boolean, isClicked?: boolean, isDisabled?: boolean, writingSituation?: WritingSituation) => {
   const dotIndex = url.indexOf(".");
   const beforeDot = url.substring(0, dotIndex);
-  return isClicked ? beforeDot + "Open.svg" : isHovered ? beforeDot + "Hover.svg" : isDisabled ? beforeDot + "Disable.svg" : url;
+  return isClicked
+    ? beforeDot + "Open.svg"
+    : isHovered
+    ? beforeDot + "Hover.svg"
+    : isDisabled
+    ? beforeDot + "Disable.svg"
+    : writingSituation
+    ? beforeDot + writingSituation + ".svg"
+    : url;
 };

@@ -1,4 +1,14 @@
-import { IActionIcon, IDisplayRuller, IRulerDefinition, ActionTypes, TypeCover, NaviKeniIconsTypes, IIconsNaviKeni } from "../type/elements";
+import {
+  IActionIcon,
+  IDisplayRuller,
+  IRulerDefinition,
+  ActionTypes,
+  TypeCover,
+  NaviKeniIconsTypes,
+  IIconsNaviKeni,
+  IWritingSituation,
+  WritingSituation,
+} from "../type/elements";
 import { LineRange } from "../type/ruler";
 import jump from "/assets/icons/toolbar/jump.svg";
 import text from "/assets/icons/toolbar/text.svg";
@@ -8,6 +18,7 @@ import naviAndKeni from "/assets/icons/toolbar/naviAndKeni.svg";
 import restart from "/assets/icons/toolbar/restart.svg";
 import navi from "/assets/icons/navi.svg";
 import keni from "/assets/icons/keni.svg";
+import writingDelete from "/assets/icons/writingDeleteMenu.svg";
 
 export const actionIconsDetials: IActionIcon[] = [
   { type: ActionTypes.restart, url: restart },
@@ -35,6 +46,13 @@ export const displayRulerButtonDetials: IDisplayRuller[] = [
 export const iconsNaviKeni: IIconsNaviKeni[] = [
   { type: NaviKeniIconsTypes.navi, url: navi },
   { type: NaviKeniIconsTypes.keni, url: keni },
+];
+
+export const writingSituationList: IWritingSituation[] = [
+  { type: WritingSituation.blue, url: writingDelete },
+  { type: WritingSituation.green, url: writingDelete },
+  { type: WritingSituation.orange, url: writingDelete },
+  { type: WritingSituation.delete, url: writingDelete },
 ];
 
 export const RulerPaddingSides = 32;

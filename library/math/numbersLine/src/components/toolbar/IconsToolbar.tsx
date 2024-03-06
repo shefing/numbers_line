@@ -2,10 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import { getSrc } from "../../lib/utils";
 import DisplayNumbers from "./DisplayNumbers";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
-import { ActionTypes, TypeCover } from "../../type/elements";
+import { ActionTypes, TypeCover, WritingSituation } from "../../type/elements";
 
 import NaviKanyMenu from "./NaviKeniMenu";
 import { useDraggableElementAction } from "@/hooks/useDraggableElementAction";
+import Brush from "./Brush";
 
 interface IProps {
   typeAction: ActionTypes;
@@ -17,6 +18,9 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [duplicateElementPlace, setDuplicateElementPlace] = useState(0);
+  const [iconSrc, setIconSrc] = useState(getSrc(iconUrl, isHovered));
+  const [writingSituation, setWritingSituation] = useState(WritingSituation.nothing);
+
   const { dragElements, idDraggElementClick, setIdDraggElementClick, openRestartDialog, setOpenRestartDialog, visitableDisplayButton } =
     useNumbersLineContext();
   const { addDraggableElement } = useDraggableElementAction();
@@ -31,19 +35,19 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, [isOpen]);
-
   useEffect(() => {
     setDuplicateElementPlace(0);
   }, [idDraggElementClick]);
   useEffect(() => {
     setIdDraggElementClick("");
   }, [isOpen]);
-
-  const getSrcLocal = () => {
+  useEffect(() => {
     const isClicked = typeAction === ActionTypes.restart ? openRestartDialog : isOpen;
     const isDisabled = typeAction === ActionTypes.restart && dragElements.length == 0 && visitableDisplayButton == TypeCover.allDiscover;
-    return getSrc(iconUrl, isHovered, isClicked, isDisabled);
-  };
+    writingSituation == WritingSituation.nothing
+      ? setIconSrc(getSrc(iconUrl, isHovered, isClicked, isDisabled))
+      : setIconSrc(getSrc(iconUrl, isHovered, isClicked, isDisabled, writingSituation));
+  }, [isOpen, isHovered, openRestartDialog, dragElements, visitableDisplayButton, writingSituation]);
 
   const actionButtonClick = () => {
     isDragged && addDraggableElement(typeAction, duplicateElementPlace, setDuplicateElementPlace);
@@ -57,7 +61,7 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
         className={`m-3 cursor-pointer z-10 ${
           typeAction === ActionTypes.restart && dragElements.length == 0 && visitableDisplayButton == TypeCover.allDiscover && "pointer-events-none"
         }`}
-        src={getSrcLocal()}
+        src={iconSrc}
         alt={typeAction + " Toolbar"}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
@@ -70,7 +74,7 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
         ) : typeAction === ActionTypes.naviAndKeni ? (
           <NaviKanyMenu setOpen={setIsOpen} duplicateElementPlace={duplicateElementPlace} setDuplicateElementPlace={setDuplicateElementPlace} />
         ) : (
-          <></>
+          <Brush setOpen={setIsOpen} setWritingSituation={setWritingSituation} />
         ))}
     </div>
   );
