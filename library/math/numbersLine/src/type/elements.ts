@@ -23,6 +23,14 @@ export enum NaviKeniIconsTypes {
   keni = "keni",
 }
 
+export enum WritingSituation {
+  nothing = "Nothing",
+  blue = "Blue",
+  green = "Green",
+  orange = "Orange",
+  delete = "Delete",
+}
+
 export interface IActionIcon {
   type: ActionTypes;
   url: string;
@@ -41,6 +49,10 @@ export interface IRulerDefinition {
 }
 export interface IIconsNaviKeni {
   type: NaviKeniIconsTypes;
+  url: string;
+}
+export interface IWritingSituation {
+  type: WritingSituation;
   url: string;
 }
 export interface IWindowSize {

@@ -10,7 +10,7 @@ export const ButtonViewable = {
   name: "ButtonViewable",
   props: ["ButtonViewable"],
   render(moveable: MoveableManagerInterface) {
-    const { onDeleteClick, copyViewAble, onCopyClick, underRuler, typeRuler, leftPosition, rulerPaddingSides, calculatScreenWidth } =
+    const { deleteViewAble, onDeleteClick, copyViewAble, onCopyClick, underRuler, typeRuler, leftPosition, rulerPaddingSides, calculatScreenWidth } =
       moveable.props as unknown as IAbleProps;
     const { cssWidth, inlineTransform } = moveable.state;
     const matchX = inlineTransform.match(/\((.*?)px/);
@@ -65,9 +65,11 @@ export const ButtonViewable = {
           // cursor: "pointer",
         }}
       >
-        <div className="m-[1px] cursor-pointer" style={{ width: buttonsDraggElementWidth + "px" }} onClick={onDeleteClick}>
-          <img src={deleteIcon} alt="Delete Icon" onMouseEnter={(e) => changeHover(e, true)} onMouseLeave={(e) => backNotHover(e, true)} />
-        </div>
+        {deleteViewAble && (
+          <div className="m-[1px] cursor-pointer" style={{ width: buttonsDraggElementWidth + "px" }} onClick={onDeleteClick}>
+            <img src={deleteIcon} alt="Delete Icon" onMouseEnter={(e) => changeHover(e, true)} onMouseLeave={(e) => backNotHover(e, true)} />
+          </div>
+        )}
         {copyViewAble && (
           <div className="m-[1px] cursor-pointer" style={{ width: buttonsDraggElementWidth + "px" }} onClick={copyApproval ? onCopyClick : () => {}}>
             <img

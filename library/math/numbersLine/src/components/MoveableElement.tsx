@@ -3,7 +3,7 @@ import Moveable, { OnDragEnd, OnResize, OnResizeEnd } from "react-moveable";
 import { IElement } from "../type/moveable";
 import { calcXTransform, calcYTransform } from "../lib/utils";
 import {
-  RulerMargin,
+  rulerMargin,
   ToolbarHeight,
   buttonsDraggElementWidth,
   jumpBaseHeight,
@@ -12,6 +12,7 @@ import {
   keniFoot,
   keniWidth,
   naviWidth,
+  grassHeight,
 } from "../consts/elementConsts";
 import { calcPosition } from "../lib/utils";
 import { ButtonViewable } from "../consts/ButtonViewable";
@@ -26,12 +27,13 @@ interface IProps {
 }
 
 const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
-  const { windowSize, typeRuler, rulerPaddingSides, leftPosition } = useNumbersLineContext();
+  const { windowSize, typeRuler, rulerPaddingSides, leftPosition, idDraggElementClick } = useNumbersLineContext();
   const { deleteDragElement, duplicateDragJump, updateDragElements } = useDraggableElementAction();
   const { calculatRulerWidth, calculatScreenWidth, calculatUnitsAmount } = useHelpers();
 
   const ableProps = {
     ButtonViewable: true,
+    deleteViewAble: idDraggElementClick === element.id,
     onDeleteClick: () => deleteDragElement(element.id),
     copyViewAble: element.type === ActionTypes.jump,
     onCopyClick: () => duplicateDragJump(element),
@@ -43,15 +45,17 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
   };
 
   const updateXLocation = (e: any) => {
-    const xPosition = calcXTransform(e.target.style.transform);
-    const IconsFootlength = element.icons ? (element.icons?.type == NaviKeniIconsTypes.navi ? naviFoot : keniFoot) : 0;
     const unitsAmount = calculatUnitsAmount();
     const unitPresent = element.type == ActionTypes.jump ? unit! : unit! / 2;
+    const xPosition = calcXTransform(e.target.style.transform);
+    const IconsFootLength = element.icons ? (element.icons?.type == NaviKeniIconsTypes.navi ? naviFoot * element.width : keniFoot * element.width) : 0;
+
     // few pixels for the precise position of the element, the calculation is done relative to the position on the axis.
     const sidesPixels = element.type == ActionTypes.jump ? (unitsAmount / 2 - Math.round(xPosition - rulerPaddingSides) / unitPresent) / unitsAmount : 0;
     let newXPosition =
-      Math.round((xPosition - IconsFootlength - rulerPaddingSides) / unitPresent) * unitPresent + rulerPaddingSides + IconsFootlength + sidesPixels;
+      Math.round((xPosition - IconsFootLength - rulerPaddingSides) / unitPresent) * unitPresent + rulerPaddingSides + IconsFootLength + sidesPixels;
     if (newXPosition + (element.icons?.type == NaviKeniIconsTypes.navi ? naviWidth : keniWidth) > windowSize.width) newXPosition -= unitPresent;
+    if (newXPosition < 0) newXPosition += unitPresent;
     e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + newXPosition);
   };
 
@@ -62,7 +66,7 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
     }
 
     const yTransform = calcYTransform(e.target.style.transform);
-    const rulerPosition = windowSize.height * (1 - RulerMargin);
+    const rulerPosition = windowSize.height * (1 - rulerMargin) - grassHeight;
     let elementPsition = calcPosition(yTransform, element);
     // Change the position of the element relative to the integers, provided that the position is close to the axis.
     if (Math.abs(rulerPosition - elementPsition) < 50) updateXLocation(e);
