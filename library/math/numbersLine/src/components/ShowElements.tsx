@@ -8,9 +8,10 @@ import { calcXTransform, calcYTransform } from "../lib/utils";
 import { useDraggableElementAction } from "../hooks/useDraggableElementAction";
 import NaviKeni from "./NaviKeni";
 import { useHelpers } from "../hooks/useHelpers";
+import { LineRange, RulerLenth } from "@/type/ruler";
 
 const ShowElements = () => {
-  const { windowSize, dragElements, setIdDraggElementClick } = useNumbersLineContext();
+  const { windowSize, typeRuler, dragElements, setIdDraggElementClick } = useNumbersLineContext();
   const { calculatRulerWidth, calculatUnitsAmount } = useHelpers();
   const { updateDragElements } = useDraggableElementAction();
   const [unit, setUnit] = useState(calculatRulerWidth() / calculatUnitsAmount());
@@ -27,7 +28,9 @@ const ShowElements = () => {
     const documentElement = document.getElementById(`dragElement-${element.id}`);
     if (!documentElement) return;
     documentElement.style.transform = newTransform;
-    updateDragElements(element.id, { ...element, transform: newTransform });
+
+    const unitWidth = element.jump ? calculatRulerWidth() / calculatUnitsAmount() : element.width;
+    updateDragElements(element.id, { ...element, width: unitWidth, transform: newTransform });
   };
 
   useEffect(() => {
@@ -59,23 +62,26 @@ const ShowElements = () => {
     if (windowResizing) return;
     setPrevWindowSize({ height: windowSize.height, width: windowSize.width });
 
+    const unitWidth = calculatRulerWidth() / calculatUnitsAmount();
+    typeRuler == LineRange.hundred ? setUnit(windowSize.width / RulerLenth.hundred) : setUnit(unitWidth);
+
     const heightRelativeChange = windowSize.height / prevWindowSize.height;
     const widthRelativeChange = windowSize.width / prevWindowSize.width;
     dragElements.map((element: IElement) => {
       updateTransform(element, heightRelativeChange, widthRelativeChange);
     });
-  }, [windowResizing]);
+  }, [typeRuler, windowResizing]);
 
   return dragElements.map((element: IElement) => (
     <div key={element.id} id={element.id} onClick={() => setIdDraggElementClick(element.id)}>
       {(() => {
         switch (element.type) {
           case ActionTypes.jump:
-            return <Jump element={element} unit={unit} setUnit={setUnit} />;
+            return <Jump element={element} unit={unit} />;
           case ActionTypes.text:
             return <Text element={element} />;
           case ActionTypes.naviAndKeni:
-            return <NaviKeni element={element} unit={unit} setUnit={setUnit} />;
+            return <NaviKeni element={element} unit={unit} />;
           default:
             return null;
         }

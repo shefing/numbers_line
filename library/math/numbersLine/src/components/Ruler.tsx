@@ -1,6 +1,6 @@
 import Arrows from "./ruler/Arrows";
 import XAxis from "./ruler/XAxis";
-import { RulerMargin } from "../consts/elementConsts";
+import { ruleHeight, rulerMargin } from "../consts/elementConsts";
 import { useNumbersLineContext } from "@/context/numbersLineContext";
 import { useEffect } from "react";
 import { LineRange, RulerLenth } from "@/type/ruler";
@@ -15,7 +15,7 @@ const Ruler = () => {
   return (
     <>
       <Arrows />
-      <div style={{ bottom: windowSize.height * RulerMargin + "px", position: "absolute" }}>
+      <div style={{ paddingBottom: windowSize.height * rulerMargin - ruleHeight + "px" }}>
         <XAxis />
       </div>
     </>

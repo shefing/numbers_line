@@ -19,6 +19,7 @@ export interface IIcons {
 }
 export interface IAbleProps {
   ButtonViewable: boolean;
+  deleteViewAble: boolean;
   onDeleteClick: () => void;
   copyViewAble: boolean;
   onCopyClick: () => void;

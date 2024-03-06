@@ -38,8 +38,9 @@ export const iconsNaviKeni: IIconsNaviKeni[] = [
 ];
 
 export const RulerPaddingSides = 32;
-// export const RulerPadding = 50;
-export const RulerMargin = 0.35;
+export const rulerMargin = 0.15;
+export const ruleHeight = 50;
+export const grassHeight = 200;
 export const jumpBaseHeight = 40;
 export const jumpArrowHeight = 64;
 export const jumpHeight = 120;
@@ -48,9 +49,9 @@ export const buttonsDraggElementWidth = 30;
 export const textBoxWidth = 315;
 export const textBoxSize = 22;
 export const maxTextBoxSize = textBoxSize * 2;
-export const keniWidth = 105;
-export const naviWidth = 81;
+export const keniWidth = 0.6;
+export const naviWidth = 0.5;
 export const keniHeight = 108;
 export const naviHeight = 73;
-export const keniFoot = 25;
-export const naviFoot = -21;
+export const keniFoot = 0.65;
+export const naviFoot = -0.5;

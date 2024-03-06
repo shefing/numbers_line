@@ -5,7 +5,6 @@ import rightArrowDisable from "/assets/icons/arrowRightDisable.svg";
 import { LineRange, RulerLenth } from "../../type/ruler";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { useEffect, useRef, useState } from "react";
-import { RulerMargin } from "../../consts/elementConsts";
 import { useHelpers } from "../../hooks/useHelpers";
 
 const Arrows = () => {
@@ -42,13 +41,13 @@ const Arrows = () => {
   }, [leftPosition]);
 
   return (
-    <div className="flex justify-between w-full " style={{ marginBottom: windowSize.height * RulerMargin + "px" }}>
+    <div className="flex justify-between w-full ">
       {typeRuler == LineRange.hundred && (
         <>
-          <div className="m-3 cursor-pointer relative " onClick={() => updatePositionOnArrowClick("left")}>
+          <div className="m-5 cursor-pointer relative " onClick={() => updatePositionOnArrowClick("left")}>
             <img src={leftArrowIcon} alt="Left Arrow" />
           </div>
-          <div className="m-3  cursor-pointer relative " onClick={() => updatePositionOnArrowClick("right")}>
+          <div className="m-5  cursor-pointer relative " onClick={() => updatePositionOnArrowClick("right")}>
             <img src={rightArrowIcon} alt="Right Arrow" />
           </div>
         </>

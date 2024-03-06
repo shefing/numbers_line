@@ -55,6 +55,9 @@ body{
 .moveable-origin{
   visibility: hidden !important
 }
+#dragElement-naviKeni .moveable-line{
+  visibility: hidden !important
+}
 
 #dragElement-text .moveable-line{
   background: #009FDE !important;
