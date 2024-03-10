@@ -79,9 +79,9 @@ export const useDraggableElementAction = () => {
     let newTransform = "";
     const startPosition = calcXTransform(element.transform);
     const endNewJumpPosition = startPosition + element.width * 2;
-    const outOfRange = endNewJumpPosition - windowSize.width + rulerPaddingSides - 10;
-    let newPosition = startPosition + element.width;
-    if (typeRuler == LineRange.hundred && outOfRange > 0) {
+    const outOfRange = element.jump?.underRuler ? startPosition - element.width : endNewJumpPosition - windowSize.width + rulerPaddingSides - 10;
+    let newPosition = element.jump?.underRuler ? startPosition - element.width : startPosition + element.width;
+    if (typeRuler == LineRange.hundred && (element.jump?.underRuler ? outOfRange > 0 : outOfRange < 0)) {
       setLeftPosition(leftPosition - outOfRange);
       newPosition -= outOfRange;
     }

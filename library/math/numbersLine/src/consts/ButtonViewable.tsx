@@ -18,10 +18,10 @@ export const ButtonViewable = {
     if (matchX) {
       const xPosition = matchX[1];
       const endXPosition = parseFloat(xPosition) + cssWidth * 2;
-      const outOfRange = endXPosition - window.innerWidth + rulerPaddingSides - 10;
-      if (outOfRange > 0 && (typeRuler != LineRange.hundred || leftPosition - outOfRange < calculatScreenWidth())) {
-        copyApproval = false;
-      }
+      const outOfRange = underRuler ? parseInt(xPosition) - cssWidth : endXPosition - window.innerWidth + rulerPaddingSides - 10;
+      //Checking if there is an option to copy in terms of space on the screen for the new jump
+      if (!underRuler && outOfRange > 0 && (typeRuler != LineRange.hundred || leftPosition - outOfRange < calculatScreenWidth())) copyApproval = false;
+      if (underRuler && outOfRange < 0 && (typeRuler != LineRange.hundred || leftPosition + outOfRange > 0)) copyApproval = false;
     }
     const Icons = moveable.useCSS(
       "div",
