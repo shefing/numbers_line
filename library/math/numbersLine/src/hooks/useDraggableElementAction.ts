@@ -3,7 +3,19 @@ import { IElement } from "../type/moveable";
 import { v4 as uuidv4 } from "uuid";
 import { LineRange } from "../type/ruler";
 import { ActionTypes, NaviKeniIconsTypes } from "../type/elements";
-import { buttonsDraggElementWidth, duplicateElementStepSpace, grassHeight, jumpBaseHeight, jumpHeight, textBoxWidth } from "../consts/elementConsts";
+import {
+  buttonsDraggElementWidth,
+  duplicateElementStepSpace,
+  jumpBaseHeight,
+  jumpHeight,
+  keniFoot,
+  keniHeight,
+  keniWidth,
+  naviFoot,
+  naviHeight,
+  naviWidth,
+  textBoxWidth,
+} from "../consts/elementConsts";
 import { calcXTransform } from "../lib/utils";
 import { useHelpers } from "./useHelpers";
 
@@ -23,7 +35,7 @@ export const useDraggableElementAction = () => {
   const { calculatRulerWidth, calculatUnitsAmount } = useHelpers();
 
   const addDraggableElement = (typeAction: ActionTypes, type?: NaviKeniIconsTypes) => {
-    const elementWidth = typeAction == ActionTypes.jump ? calculatRulerWidth() / calculatUnitsAmount() : typeAction == ActionTypes.text ? textBoxWidth : 50;
+    const elementWidth = typeAction == ActionTypes.jump || ActionTypes.naviAndKeni ? calculatRulerWidth() / calculatUnitsAmount() : textBoxWidth;
     const xTranslate = (windowSize.width - elementWidth) / 2 + duplicateElementSpace;
     const yTranslate = windowSize.height / 4 + duplicateElementSpace;
 
@@ -38,7 +50,14 @@ export const useDraggableElementAction = () => {
       newElement.jump = { value: 1, underRuler: false };
     }
     if (typeAction === ActionTypes.naviAndKeni) {
-      if (type) newElement.icons = { type };
+      if (type)
+        newElement.icons = {
+          type,
+          widthRelatively: type == NaviKeniIconsTypes.navi ? naviWidth : keniWidth,
+          heightRelativelyWidth: type == NaviKeniIconsTypes.navi ? naviHeight : keniHeight,
+          footWidthRelatively: type == NaviKeniIconsTypes.navi ? naviFoot : keniFoot,
+        };
+      newElement.width = newElement.width * newElement.icons!.widthRelatively;
     }
     setDragElements([...dragElements, newElement]);
     console.log(duplicateElementSpace);

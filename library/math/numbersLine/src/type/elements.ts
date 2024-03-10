@@ -54,6 +54,7 @@ export interface IIconsNaviKeni {
 export interface IWritingSituation {
   type: WritingSituation;
   url: string;
+  color?: string;
 }
 export interface IWindowSize {
   height: number;

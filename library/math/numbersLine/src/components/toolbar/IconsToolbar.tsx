@@ -23,6 +23,7 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
     openRestartDialog,
     setOpenRestartDialog,
     visitableDisplayButton,
+    setColor,
   } = useNumbersLineContext();
   const { addDraggableElement } = useDraggableElementAction();
   const [isHovered, setIsHovered] = useState(false);
@@ -41,7 +42,6 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
     };
   }, [isOpen]);
   useEffect(() => {
-    console.log("here");
     idDraggElementClick != "" && setDuplicateElementSpace(0);
   }, [idDraggElementClick]);
   useEffect(() => {
@@ -59,6 +59,8 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
     isDragged && addDraggableElement(typeAction);
     isMenu && setIsOpen((prevOpen) => !prevOpen);
     typeAction == ActionTypes.restart && (setOpenRestartDialog(true), setIdDraggElementClick(""));
+    setColor("");
+    setWritingSituation(WritingSituation.nothing);
   };
 
   return (

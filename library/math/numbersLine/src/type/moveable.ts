@@ -16,6 +16,9 @@ export interface IJump {
 }
 export interface IIcons {
   type: NaviKeniIconsTypes;
+  widthRelatively: number;
+  heightRelativelyWidth: number;
+  footWidthRelatively: number;
 }
 export interface IAbleProps {
   ButtonViewable: boolean;

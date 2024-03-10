@@ -23,6 +23,7 @@ const App = () => {
 
   return (
     <>
+      {/* <Brush /> */}
       <ShowElements />
       <Restart />
       <div className="flex flex-col h-full justify-between">

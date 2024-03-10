@@ -25,6 +25,8 @@ interface INumbersLineContextProps {
   setVisitableDisplayButton: (v: TypeCover) => void;
   openRestartDialog: boolean;
   setOpenRestartDialog: (v: boolean) => void;
+  color: string;
+  setColor: (v: string) => void;
 }
 
 export const NumbersLineContext = React.createContext({
@@ -49,6 +51,8 @@ export const NumbersLineContext = React.createContext({
   setVisitableDisplayButton: () => null,
   openRestartDialog: {} as boolean,
   setOpenRestartDialog: () => null,
+  color: {} as string,
+  setColor: () => null,
 } as INumbersLineContextProps);
 
 export const NumbersLineContexProvider = (props: any) => {
@@ -63,6 +67,7 @@ export const NumbersLineContexProvider = (props: any) => {
   const [visitableDisplayButton, setVisitableDisplayButton] = useState(TypeCover.allDiscover);
   const [openRestartDialog, setOpenRestartDialog] = useState(false);
   const [rulerPaddingSides, setRulerPaddingSides] = useState(RulerPaddingSides);
+  const [color, setColor] = useState("");
 
   const Resize = () => {
     setWindowSize({ height: window.innerHeight, width: window.innerWidth });
@@ -100,6 +105,8 @@ export const NumbersLineContexProvider = (props: any) => {
         setVisitableDisplayButton,
         openRestartDialog,
         setOpenRestartDialog,
+        color,
+        setColor,
       }}
     >
       {props.children}
