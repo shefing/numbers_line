@@ -12,6 +12,7 @@ export const useHelpers = () => {
     setRulerPaddingSides,
     setLeftPosition,
     setDragElements,
+    setDuplicateElementSpace,
     setCoverSituation,
     setVisitableDisplayButton,
   } = useNumbersLineContext();
@@ -34,6 +35,7 @@ export const useHelpers = () => {
     setCoverSituation(TypeCover.allDiscover);
     setVisitableDisplayButton(TypeCover.allDiscover);
     setLeftPosition(0);
+    setDuplicateElementSpace(0);
   };
 
   return {

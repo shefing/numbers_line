@@ -3,24 +3,29 @@ import { IElement } from "../type/moveable";
 import { v4 as uuidv4 } from "uuid";
 import { LineRange } from "../type/ruler";
 import { ActionTypes, NaviKeniIconsTypes } from "../type/elements";
-import { textBoxWidth } from "../consts/elementConsts";
+import { buttonsDraggElementWidth, duplicateElementStepSpace, grassHeight, jumpBaseHeight, jumpHeight, textBoxWidth } from "../consts/elementConsts";
 import { calcXTransform } from "../lib/utils";
 import { useHelpers } from "./useHelpers";
 
 export const useDraggableElementAction = () => {
-  const { windowSize, typeRuler, rulerPaddingSides, leftPosition, setLeftPosition, dragElements, setDragElements, setIdDraggElementClick } =
-    useNumbersLineContext();
+  const {
+    windowSize,
+    typeRuler,
+    rulerPaddingSides,
+    leftPosition,
+    setLeftPosition,
+    dragElements,
+    setDragElements,
+    setIdDraggElementClick,
+    duplicateElementSpace,
+    setDuplicateElementSpace,
+  } = useNumbersLineContext();
   const { calculatRulerWidth, calculatUnitsAmount } = useHelpers();
 
-  const addDraggableElement = (
-    typeAction: ActionTypes,
-    duplicateElementPlace: number,
-    setDuplicateElementPlace: React.Dispatch<React.SetStateAction<number>>,
-    type?: NaviKeniIconsTypes
-  ) => {
+  const addDraggableElement = (typeAction: ActionTypes, type?: NaviKeniIconsTypes) => {
     const elementWidth = typeAction == ActionTypes.jump ? calculatRulerWidth() / calculatUnitsAmount() : typeAction == ActionTypes.text ? textBoxWidth : 50;
-    const xTranslate = (windowSize.width - elementWidth) / 2 + duplicateElementPlace;
-    const yTranslate = windowSize.height / 4 + duplicateElementPlace;
+    const xTranslate = (windowSize.width - elementWidth) / 2 + duplicateElementSpace;
+    const yTranslate = windowSize.height / 4 + duplicateElementSpace;
 
     let newElement: IElement = {
       id: uuidv4(),
@@ -36,11 +41,13 @@ export const useDraggableElementAction = () => {
       if (type) newElement.icons = { type };
     }
     setDragElements([...dragElements, newElement]);
-    setDuplicateElementPlace((prevPixels) => prevPixels + 10);
+    console.log(duplicateElementSpace);
+    setDuplicateElementSpace((prevPixels) => prevPixels + duplicateElementStepSpace);
     const outOfRange =
-      xTranslate > windowSize.width - windowSize.width / calculatUnitsAmount() - rulerPaddingSides || yTranslate > windowSize.height - rulerPaddingSides;
+      xTranslate > windowSize.width - windowSize.width / calculatUnitsAmount() - rulerPaddingSides ||
+      yTranslate > windowSize.height - (jumpHeight + jumpBaseHeight + buttonsDraggElementWidth + duplicateElementStepSpace);
 
-    outOfRange && setDuplicateElementPlace(0);
+    outOfRange && setDuplicateElementSpace(0);
   };
 
   const deleteDragElement = (elementId: string) => {

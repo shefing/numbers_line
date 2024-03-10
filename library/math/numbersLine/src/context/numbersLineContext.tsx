@@ -17,6 +17,8 @@ interface INumbersLineContextProps {
   setDragElements: (v: IElement[]) => void;
   idDraggElementClick: string;
   setIdDraggElementClick: (v: string) => void;
+  duplicateElementSpace: number;
+  setDuplicateElementSpace: React.Dispatch<React.SetStateAction<number>>;
   coverSituation: TypeCover;
   setCoverSituation: (v: TypeCover) => void;
   visitableDisplayButton: TypeCover;
@@ -39,6 +41,8 @@ export const NumbersLineContext = React.createContext({
   setDragElements: () => null,
   idDraggElementClick: {} as string,
   setIdDraggElementClick: () => null,
+  duplicateElementSpace: {} as number,
+  setDuplicateElementSpace: () => null,
   coverSituation: {} as TypeCover,
   setCoverSituation: () => null,
   visitableDisplayButton: {} as TypeCover,
@@ -54,6 +58,7 @@ export const NumbersLineContexProvider = (props: any) => {
   const [leftPosition, setLeftPosition] = useState(0);
   const [dragElements, setDragElements] = useState<IElement[]>([]);
   const [idDraggElementClick, setIdDraggElementClick] = useState("");
+  const [duplicateElementSpace, setDuplicateElementSpace] = useState(0);
   const [coverSituation, setCoverSituation] = useState(TypeCover.allDiscover);
   const [visitableDisplayButton, setVisitableDisplayButton] = useState(TypeCover.allDiscover);
   const [openRestartDialog, setOpenRestartDialog] = useState(false);
@@ -87,6 +92,8 @@ export const NumbersLineContexProvider = (props: any) => {
         setDragElements,
         idDraggElementClick,
         setIdDraggElementClick,
+        duplicateElementSpace,
+        setDuplicateElementSpace,
         coverSituation,
         setCoverSituation,
         visitableDisplayButton,
