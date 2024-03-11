@@ -64,12 +64,15 @@ body{
   padding: 1px;
 }
 
-#dragElement-jump-under .moveable-line, #dragElement-jump-on .moveable-line{
+#dragElement-jump-under-click .moveable-line, #dragElement-jump-on-click .moveable-line{
   background: #A4A3AE !important;
 }
+#dragElement-jump-under-notclick .moveable-line, #dragElement-jump-on-notclick .moveable-line{
+  visibility: hidden !important
+}
 
-#dragElement-jump-under .moveable-direction.moveable-e, #dragElement-jump-under .moveable-direction.moveable-w,
-#dragElement-jump-on .moveable-direction.moveable-e, #dragElement-jump-on .moveable-direction.moveable-w {
+#dragElement-jump-under-click .moveable-direction.moveable-e, #dragElement-jump-under-click .moveable-direction.moveable-w,
+#dragElement-jump-on-click .moveable-direction.moveable-e, #dragElement-jump-on-click .moveable-direction.moveable-w {
   background-size: contain !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
@@ -83,20 +86,35 @@ body{
   border-top-left-radius: 0px !important;
 }
 
-#dragElement-jump-on .moveable-direction.moveable-e, #dragElement-jump-on .moveable-direction.moveable-w {
+#dragElement-jump-under-notclick .moveable-direction.moveable-e, #dragElement-jump-under-notclick .moveable-direction.moveable-w,
+#dragElement-jump-on-notclick .moveable-direction.moveable-e, #dragElement-jump-on-notclick .moveable-direction.moveable-w {
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  background-color: #ffffff00 !important;
+
+  height: 18px !important;
+  border: 0px !important;
+  border-bottom-right-radius: 0px !important;
+  border-top-right-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
+  border-top-left-radius: 0px !important;
+}
+
+#dragElement-jump-on-click .moveable-direction.moveable-e, #dragElement-jump-on-click .moveable-direction.moveable-w {
   margin-top: 30px !important;
 }
 
-#dragElement-jump-under .moveable-direction.moveable-e, #dragElement-jump-under .moveable-direction.moveable-w {
+#dragElement-jump-under-click .moveable-direction.moveable-e, #dragElement-jump-under-click .moveable-direction.moveable-w {
   margin-top: -50px !important;
 }
 
-#dragElement-jump-under .moveable-direction.moveable-e, #dragElement-jump-on .moveable-direction.moveable-e {
+#dragElement-jump-under-click .moveable-direction.moveable-e, #dragElement-jump-on-click .moveable-direction.moveable-e {
   background-image: url('../public/assets/icons/resizeRight.svg')  !important;
   margin-inline: -1px !important;
 }
 
-#dragElement-jump-under .moveable-direction.moveable-w, #dragElement-jump-on .moveable-direction.moveable-w{
+#dragElement-jump-under-click .moveable-direction.moveable-w, #dragElement-jump-on-click .moveable-direction.moveable-w{
   background-image: url('../public/assets/icons/resizeLeft.svg')  !important;
   margin-inline:-14px !important;
 }

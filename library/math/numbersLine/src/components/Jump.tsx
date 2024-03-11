@@ -14,8 +14,11 @@ const Jump = ({ element, unit }: IProps) => {
   const { typeRuler, idDraggElementClick } = useNumbersLineContext();
   const jump = element.jump!;
   const [hideNumber, setHideNumber] = useState(true);
+  const [click, setClick] = useState(false);
   const moveableRef = React.useRef<HTMLDivElement>(null);
-  useEffect(() => {}, [unit]);
+  useEffect(() => {
+    setClick(idDraggElementClick === element.id);
+  }, [idDraggElementClick]);
 
   return (
     <>
@@ -37,11 +40,9 @@ const Jump = ({ element, unit }: IProps) => {
           </span>
         </div>
       </div>
-      {idDraggElementClick === element.id && (
-        <div id={`dragElement-jump-${jump.underRuler ? "under" : "on"}`}>
-          <MoveableElement moveableRef={moveableRef} element={element} unit={unit} />
-        </div>
-      )}
+      <div id={`dragElement-jump-${jump.underRuler ? "under" : "on"}${click ? "-click" : "-notclick"}`}>
+        <MoveableElement moveableRef={moveableRef} element={element} unit={unit} />
+      </div>
     </>
   );
 };

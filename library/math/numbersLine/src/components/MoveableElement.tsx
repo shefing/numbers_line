@@ -24,7 +24,7 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
     ButtonViewable: true,
     deleteViewAble: idDraggElementClick === element.id,
     onDeleteClick: () => deleteDragElement(element.id),
-    copyViewAble: element.type === ActionTypes.jump,
+    copyViewAble: element.type === ActionTypes.jump && idDraggElementClick === element.id,
     onCopyClick: () => duplicateDragJump(element),
     underRuler: element.jump?.underRuler,
     typeRuler: typeRuler,
