@@ -6,7 +6,6 @@ const Brush = () => {
   const { windowSize, color } = useNumbersLineContext();
   const canvasRef = useRef(null);
   let isDrawing = false;
-  let brush: any;
 
   useEffect(() => {
     const canvas = new fabric.Canvas(canvasRef.current, {
@@ -14,7 +13,6 @@ const Brush = () => {
     });
     canvas.freeDrawingBrush.width = 10;
     canvas.freeDrawingBrush.color = color;
-    brush = canvas.freeDrawingBrush;
     return () => {
       canvas.dispose(); // Clean up Fabric.js canvas when component unmounts
     };

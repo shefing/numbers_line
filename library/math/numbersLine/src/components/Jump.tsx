@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IElement } from "../type/moveable";
 import MoveableElement from "./MoveableElement";
 import { useNumbersLineContext } from "../context/numbersLineContext";
@@ -20,7 +20,6 @@ const Jump = ({ element, unit }: IProps) => {
   useEffect(() => {
     setClick(idDraggElementClick === element.id);
   }, [idDraggElementClick]);
-
 
   return (
     <>
