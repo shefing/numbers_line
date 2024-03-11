@@ -24,7 +24,6 @@ export const useDraggableElementAction = () => {
     windowSize,
     typeRuler,
     rulerPaddingSides,
-    leftPosition,
     setLeftPosition,
     dragElements,
     setDragElements,
@@ -73,15 +72,17 @@ export const useDraggableElementAction = () => {
     setDragElements(newDragElements);
   };
 
-  const duplicateDragJump = async (element: IElement) => {
+  const duplicateDragJump = (element: IElement) => {
+    debugger;
     const id = uuidv4();
     let newTransform = "";
     const startPosition = calcXTransform(element.transform);
     const endNewJumpPosition = startPosition + element.width * 2;
     const outOfRange = element.jump?.underRuler ? startPosition - element.width : endNewJumpPosition - windowSize.width + rulerPaddingSides - 10;
     let newPosition = element.jump?.underRuler ? startPosition - element.width : startPosition + element.width;
-    if (typeRuler == LineRange.hundred && (element.jump?.underRuler ? outOfRange > 0 : outOfRange < 0)) {
-      setLeftPosition(leftPosition - outOfRange);
+    if (typeRuler == LineRange.hundred && ((!element.jump?.underRuler && outOfRange > 0) || (element.jump?.underRuler && outOfRange < 0))) {
+      setLeftPosition((prevLeft: number) => prevLeft - outOfRange);
+
       newPosition -= outOfRange;
     }
     newTransform = element.transform.replace("(" + startPosition, "(" + newPosition);
