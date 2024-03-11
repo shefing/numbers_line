@@ -17,12 +17,16 @@ interface INumbersLineContextProps {
   setDragElements: (v: IElement[]) => void;
   idDraggElementClick: string;
   setIdDraggElementClick: (v: string) => void;
+  duplicateElementSpace: number;
+  setDuplicateElementSpace: React.Dispatch<React.SetStateAction<number>>;
   coverSituation: TypeCover;
   setCoverSituation: (v: TypeCover) => void;
   visitableDisplayButton: TypeCover;
   setVisitableDisplayButton: (v: TypeCover) => void;
   openRestartDialog: boolean;
   setOpenRestartDialog: (v: boolean) => void;
+  color: string;
+  setColor: (v: string) => void;
 }
 
 export const NumbersLineContext = React.createContext({
@@ -39,12 +43,16 @@ export const NumbersLineContext = React.createContext({
   setDragElements: () => null,
   idDraggElementClick: {} as string,
   setIdDraggElementClick: () => null,
+  duplicateElementSpace: {} as number,
+  setDuplicateElementSpace: () => null,
   coverSituation: {} as TypeCover,
   setCoverSituation: () => null,
   visitableDisplayButton: {} as TypeCover,
   setVisitableDisplayButton: () => null,
   openRestartDialog: {} as boolean,
   setOpenRestartDialog: () => null,
+  color: {} as string,
+  setColor: () => null,
 } as INumbersLineContextProps);
 
 export const NumbersLineContexProvider = (props: any) => {
@@ -54,10 +62,12 @@ export const NumbersLineContexProvider = (props: any) => {
   const [leftPosition, setLeftPosition] = useState(0);
   const [dragElements, setDragElements] = useState<IElement[]>([]);
   const [idDraggElementClick, setIdDraggElementClick] = useState("");
+  const [duplicateElementSpace, setDuplicateElementSpace] = useState(0);
   const [coverSituation, setCoverSituation] = useState(TypeCover.allDiscover);
   const [visitableDisplayButton, setVisitableDisplayButton] = useState(TypeCover.allDiscover);
   const [openRestartDialog, setOpenRestartDialog] = useState(false);
   const [rulerPaddingSides, setRulerPaddingSides] = useState(RulerPaddingSides);
+  const [color, setColor] = useState("");
 
   const Resize = () => {
     setWindowSize({ height: window.innerHeight, width: window.innerWidth });
@@ -87,12 +97,16 @@ export const NumbersLineContexProvider = (props: any) => {
         setDragElements,
         idDraggElementClick,
         setIdDraggElementClick,
+        duplicateElementSpace,
+        setDuplicateElementSpace,
         coverSituation,
         setCoverSituation,
         visitableDisplayButton,
         setVisitableDisplayButton,
         openRestartDialog,
         setOpenRestartDialog,
+        color,
+        setColor,
       }}
     >
       {props.children}

@@ -6,15 +6,13 @@ import { useDraggableElementAction } from "../../hooks/useDraggableElementAction
 
 interface IProps {
   setOpen: (val: boolean) => void;
-  duplicateElementPlace: number;
-  setDuplicateElementPlace: React.Dispatch<React.SetStateAction<number>>;
 }
-const NaviKanyMenu = ({ setOpen, duplicateElementPlace, setDuplicateElementPlace }: IProps) => {
+const NaviKanyMenu = ({ setOpen }: IProps) => {
   const [urlHovered, setUrlHovered] = useState("");
   const { addDraggableElement } = useDraggableElementAction();
 
   const onClickButtons = (type: NaviKeniIconsTypes) => {
-    addDraggableElement(ActionTypes.naviAndKeni, duplicateElementPlace, setDuplicateElementPlace, type);
+    addDraggableElement(ActionTypes.naviAndKeni, type);
     setOpen(false);
   };
 

@@ -29,7 +29,11 @@ const ShowElements = () => {
     if (!documentElement) return;
     documentElement.style.transform = newTransform;
 
-    const unitWidth = element.jump ? calculatRulerWidth() / calculatUnitsAmount() : element.width;
+    const unitWidth = element.jump
+      ? calculatRulerWidth() / calculatUnitsAmount()
+      : element.icons
+      ? (calculatRulerWidth() / calculatUnitsAmount()) * element.icons.widthRelatively
+      : element.width;
     updateDragElements(element.id, { ...element, width: unitWidth, transform: newTransform });
   };
 

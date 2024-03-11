@@ -1,8 +1,8 @@
 import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
-import { jumpBaseHeight, jumpHeight, keniHeight, naviHeight } from "../consts/elementConsts";
+import { jumpBaseHeight, jumpHeight } from "../consts/elementConsts";
 import { IElement } from "../type/moveable";
-import { NaviKeniIconsTypes, WritingSituation } from "../type/elements";
+import { WritingSituation } from "../type/elements";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -13,7 +13,7 @@ export const calcPosition = (transfomPosition: number, element: IElement): numbe
     const base = transfomPosition + jumpBaseHeight / 3;
     return element.jump.underRuler ? base : base + jumpHeight - jumpBaseHeight;
   }
-  return element.icons?.type == NaviKeniIconsTypes.navi ? transfomPosition + naviHeight : transfomPosition + keniHeight;
+  return element.icons ? transfomPosition + element.icons?.heightRelativelyWidth * element.width : 0;
 };
 
 export const calcXTransform = (transfom: string): number => {

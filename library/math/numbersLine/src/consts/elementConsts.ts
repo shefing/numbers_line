@@ -49,9 +49,9 @@ export const iconsNaviKeni: IIconsNaviKeni[] = [
 ];
 
 export const writingSituationList: IWritingSituation[] = [
-  { type: WritingSituation.blue, url: writingDelete },
-  { type: WritingSituation.green, url: writingDelete },
-  { type: WritingSituation.orange, url: writingDelete },
+  { type: WritingSituation.blue, url: writingDelete, color: "#0059DE" },
+  { type: WritingSituation.green, url: writingDelete, color: "#30B675" },
+  { type: WritingSituation.orange, url: writingDelete, color: "#F48460" },
   { type: WritingSituation.delete, url: writingDelete },
 ];
 
@@ -69,7 +69,8 @@ export const textBoxSize = 22;
 export const maxTextBoxSize = textBoxSize * 2;
 export const keniWidth = 0.6;
 export const naviWidth = 0.5;
-export const keniHeight = 108;
-export const naviHeight = 73;
-export const keniFoot = 0.65;
-export const naviFoot = -0.5;
+export const keniHeight = 1.05;
+export const naviHeight = 0.9;
+export const keniFoot = 0.5;
+export const naviFoot = 0.2;
+export const duplicateElementStepSpace = 30;
