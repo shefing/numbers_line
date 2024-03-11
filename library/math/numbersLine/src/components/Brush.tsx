@@ -9,8 +9,6 @@ const Brush = () => {
   let brush: any;
 
   useEffect(() => {
-    console.log("color", color);
-
     const canvas = new fabric.Canvas(canvasRef.current, {
       isDrawingMode: true,
     });
@@ -18,7 +16,7 @@ const Brush = () => {
     canvas.freeDrawingBrush.color = color;
     brush = canvas.freeDrawingBrush;
     return () => {
-      canvas.dispose(); // Clean up Fabric.js canvas when component unmounts
+      canvas.dispose();
     };
   }, [color]);
 
@@ -36,13 +34,7 @@ const Brush = () => {
     isDrawing = false;
   };
 
-  return (
-    <>
-      {color != "" && (
-        <canvas ref={canvasRef} width={windowSize.width} height={100} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} />
-      )}
-    </>
-  );
+  return <canvas ref={canvasRef} width={windowSize.width} height={100} onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} />;
 };
 
 export default Brush;

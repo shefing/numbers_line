@@ -6,6 +6,7 @@ import ShowElements from "./components/ShowElements";
 import { useNumbersLineContext } from "./context/numbersLineContext";
 import { useEffect } from "react";
 import Restart from "./components/Restart";
+import Brush from "./components/Brush";
 
 const App = () => {
   const { setIdDraggElementClick } = useNumbersLineContext();
@@ -23,7 +24,7 @@ const App = () => {
 
   return (
     <>
-      {/* <Brush /> */}
+      <Brush />
       <ShowElements />
       <Restart />
       <div className="flex flex-col h-full justify-between">

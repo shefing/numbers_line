@@ -60,7 +60,6 @@ export const useDraggableElementAction = () => {
       newElement.width = newElement.width * newElement.icons!.widthRelatively;
     }
     setDragElements([...dragElements, newElement]);
-    console.log(duplicateElementSpace);
     setDuplicateElementSpace((prevPixels) => prevPixels + duplicateElementStepSpace);
     const outOfRange =
       xTranslate > windowSize.width - windowSize.width / calculatUnitsAmount() - rulerPaddingSides ||
