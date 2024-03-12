@@ -73,7 +73,6 @@ export const useDraggableElementAction = () => {
   };
 
   const duplicateDragJump = (element: IElement) => {
-    debugger;
     const id = uuidv4();
     let newTransform = "";
     const startPosition = calcXTransform(element.transform);

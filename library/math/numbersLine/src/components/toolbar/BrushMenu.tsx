@@ -1,17 +1,16 @@
 import { writingSituationList } from "../../consts/elementConsts";
-import { IWritingSituation, WritingSituation } from "../../type/elements";
+import { IWritingSituation } from "../../type/elements";
 import { useNumbersLineContext } from "@/context/numbersLineContext";
 
 interface IProps {
   setOpen: (val: boolean) => void;
-  setWritingSituation: (val: WritingSituation) => void;
 }
-const BrushMenu = ({ setOpen, setWritingSituation }: IProps) => {
+const BrushMenu = ({ setOpen }: IProps) => {
   const { setColor } = useNumbersLineContext();
+
   const onClickButtons = (item: IWritingSituation) => {
-    setWritingSituation(item.type);
     setOpen(false);
-    item.color ? setColor(item.color) : setColor("");
+    setColor(item.type);
   };
 
   return (

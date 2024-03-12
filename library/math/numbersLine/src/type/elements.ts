@@ -24,20 +24,24 @@ export enum NaviKeniIconsTypes {
 }
 
 export enum WritingSituation {
-  nothing = "Nothing",
+  non = "",
   blue = "Blue",
   green = "Green",
   orange = "Orange",
   delete = "Delete",
 }
 
+export enum DrawSituation {
+  empty = "empty",
+  notEmpty = "notEmpty",
+  clean = "clean",
+}
 export interface IActionIcon {
   type: ActionTypes;
   url: string;
   isMenu?: boolean;
   isDragged?: boolean;
 }
-
 export interface IDisplayRuller {
   type: string;
   visitDisable: TypeCover;
@@ -54,7 +58,6 @@ export interface IIconsNaviKeni {
 export interface IWritingSituation {
   type: WritingSituation;
   url: string;
-  color?: string;
 }
 export interface IWindowSize {
   height: number;
