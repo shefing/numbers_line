@@ -6,45 +6,46 @@ import { brushWidth } from "../consts/elementConsts";
 const Brush = () => {
   const { windowSize, color, drawSituation, setDrawSituation } = useNumbersLineContext();
   const [isDrawing, setIsDrawing] = useState(false);
-
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const contextRef = useRef<CanvasRenderingContext2D | null>(null);
 
   useEffect(() => {
+    // Initialize canvas and context
     const canvas = canvasRef.current;
     if (!canvas) return;
     canvas.width = windowSize.width;
     canvas.height = windowSize.height;
-
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
     ctx.lineWidth = brushWidth;
     ctx.strokeStyle = color;
     ctx.lineCap = "round";
-
+    // Store the context reference in a ref
     contextRef.current = ctx;
   }, [windowSize]);
 
   useEffect(() => {
     if (canvasRef.current) {
       const ctx = canvasRef.current.getContext("2d");
-      if (ctx) color == WritingSituation.delete ? (ctx.globalCompositeOperation = "destination-out") : (ctx.globalCompositeOperation = "source-over");
-      if (ctx) {
-        ctx.strokeStyle = color;
-        ctx.lineWidth = brushWidth;
-        ctx.lineCap = "round";
-      }
+      if (!ctx) return;
+      ctx.strokeStyle = color;
+      ctx.lineWidth = brushWidth;
+      ctx.lineCap = "round";
+      // Set global composite operation for erasing
+      color == WritingSituation.delete ? (ctx.globalCompositeOperation = "destination-out") : (ctx.globalCompositeOperation = "source-over");
     }
   }, [color]);
 
+  // Effect to handle canvas clearing based on drawSituation
   useEffect(() => {
-    if (drawSituation != DrawSituation.clean || !contextRef.current || !canvasRef.current) return;
+    if (drawSituation !== DrawSituation.clean || !contextRef.current || !canvasRef.current) return;
     contextRef.current.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height);
     setDrawSituation(DrawSituation.empty);
   }, [drawSituation]);
 
   const startDrawing = ({ nativeEvent }: any) => {
     const { offsetX, offsetY } = nativeEvent;
+    // Check if context exists and drawing is allowed
     if (!contextRef.current || color == WritingSituation.non) return;
     contextRef.current.beginPath();
     contextRef.current.moveTo(offsetX, offsetY);
@@ -54,22 +55,17 @@ const Brush = () => {
     nativeEvent.preventDefault();
   };
 
-  const draw = ({ nativeEvent }: any) => {
-    if (!isDrawing) {
-      return;
-    }
-
+  const drawing = ({ nativeEvent }: any) => {
     const { offsetX, offsetY } = nativeEvent;
-    if (!contextRef.current) return;
-    setDrawSituation(DrawSituation.notEmpty);
+    if (!contextRef.current || !isDrawing) return;
     contextRef.current.lineTo(offsetX, offsetY);
     contextRef.current.stroke();
     nativeEvent.preventDefault();
+    setDrawSituation(DrawSituation.notEmpty);
   };
 
   const stopDrawing = () => {
     if (!contextRef.current) return;
-
     contextRef.current.closePath();
     setIsDrawing(false);
   };
@@ -79,10 +75,10 @@ const Brush = () => {
       className="canvas-container absolute"
       ref={canvasRef}
       onMouseDown={startDrawing}
-      onMouseMove={draw}
+      onMouseMove={drawing}
       onMouseUp={stopDrawing}
       onMouseLeave={stopDrawing}
-      style={color != WritingSituation.non ? { cursor: "crosshair" } : {}}
+      style={color !== WritingSituation.non ? { cursor: "crosshair" } : {}}
     />
   );
 };

@@ -7,6 +7,7 @@ interface IProps {
 }
 const BrushMenu = ({ setOpen }: IProps) => {
   const { setColor } = useNumbersLineContext();
+
   const onClickButtons = (item: IWritingSituation) => {
     setOpen(false);
     setColor(item.type);
