@@ -3,10 +3,10 @@ import Ruler from "./components/Ruler";
 import GrassImg from "./components/GrassImg";
 import Toolbar from "./components/Toolbar";
 import ShowElements from "./components/ShowElements";
+import Restart from "./components/Restart";
 import { useNumbersLineContext } from "./context/numbersLineContext";
 import { useEffect } from "react";
-import Restart from "./components/Restart";
-import { Brush } from "lucide-react";
+import Brush from "./components/Brush";
 
 const App = () => {
   const { setIdDraggElementClick } = useNumbersLineContext();
@@ -25,6 +25,7 @@ const App = () => {
   return (
     <>
       <Brush />
+
       <ShowElements />
       <Restart />
       <div className="flex flex-col h-full justify-between">

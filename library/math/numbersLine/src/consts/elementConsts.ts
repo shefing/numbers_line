@@ -6,8 +6,8 @@ import {
   TypeCover,
   NaviKeniIconsTypes,
   IIconsNaviKeni,
-  IWritingSituation,
   WritingSituation,
+  IWritingSituation,
 } from "../type/elements";
 import { LineRange } from "../type/ruler";
 import jump from "/assets/icons/toolbar/jump.svg";
@@ -49,9 +49,9 @@ export const iconsNaviKeni: IIconsNaviKeni[] = [
 ];
 
 export const writingSituationList: IWritingSituation[] = [
-  { type: WritingSituation.blue, url: writingDelete, color: "#0059DE" },
-  { type: WritingSituation.green, url: writingDelete, color: "#30B675" },
-  { type: WritingSituation.orange, url: writingDelete, color: "#F48460" },
+  { type: WritingSituation.blue, url: writingDelete },
+  { type: WritingSituation.green, url: writingDelete },
+  { type: WritingSituation.orange, url: writingDelete },
   { type: WritingSituation.delete, url: writingDelete },
 ];
 
@@ -74,3 +74,4 @@ export const naviHeight = 0.9;
 export const keniFoot = 0.5;
 export const naviFoot = 0.2;
 export const duplicateElementStepSpace = 30;
+export const brushWidth = 10;
