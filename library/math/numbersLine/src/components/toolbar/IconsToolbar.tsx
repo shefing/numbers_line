@@ -5,7 +5,7 @@ import { useDraggableElementAction } from "../../hooks/useDraggableElementAction
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { useEffect, useRef, useState } from "react";
 import { getSrc } from "../../lib/utils";
-import { ActionTypes, DrawSituation, TypeCover, WritingSituation } from "../../type/elements";
+import { ActionTypes, Colors, TypeCover, WritingSituation } from "../../type/elements";
 interface IProps {
   typeAction: ActionTypes;
   iconUrl: string;
@@ -23,7 +23,6 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
     visitableDisplayButton,
     color,
     setColor,
-    drawSituation,
   } = useNumbersLineContext();
   const { addDraggableElement } = useDraggableElementAction();
   const [isHovered, setIsHovered] = useState(false);
@@ -50,44 +49,30 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
   // Effect to update the icon source depending on various state changes:
   // isOpen: Indicates whether the toolbar menu is open or closed.
   // isHovered: Indicates whether the mouse is currently hovering over the toolbar icon.
-  // openRestartDialog: Indicates whether the restart dialog is open.
-  // dragElements: Array of draggable elements.
-  // visitableDisplayButton: Indicates the visibility status of the display button.
-  // color: The current drawing color.
-  // drawSituation: The current drawing situation (e.g., whether the canvas is empty or not).
+  // openRestartDialog: Indicates whether the restart dialog is open - for Restrt.
+  // dragElements: Array of draggable elements - for Restrt.
+  // visitableDisplayButton: Indicates the visibility status of the display button - for Restrt.
+  // color: The current drawing color - for Writing.
   useEffect(() => {
     const isClicked = typeAction === ActionTypes.restart ? openRestartDialog : isOpen;
-    let isDisabled = false;
-    if (
-      typeAction === ActionTypes.restart &&
-      dragElements.length == 0 &&
-      visitableDisplayButton == TypeCover.allDiscover &&
-      drawSituation != DrawSituation.notEmpty
-    ) {
-      isDisabled = true;
-    }
-    //Change BrushIconSrc
-    typeAction === ActionTypes.writing && color != WritingSituation.non && color != WritingSituation.delete
-      ? setIconSrc(getSrc(iconUrl, isHovered, isClicked, isDisabled, color))
+    let isDisabled = typeAction === ActionTypes.restart && dragElements.length == 0 && visitableDisplayButton == TypeCover.allDiscover;
+    typeAction === ActionTypes.writing && color.description != WritingSituation.non && color.description != WritingSituation.delete
+      ? setIconSrc(getSrc(iconUrl, isHovered, isClicked, isDisabled, color.description))
       : setIconSrc(getSrc(iconUrl, isHovered, isClicked, isDisabled));
-  }, [isOpen, isHovered, openRestartDialog, dragElements, visitableDisplayButton, color, drawSituation]);
+  }, [isOpen, isHovered, openRestartDialog, dragElements, visitableDisplayButton, color]);
 
   const actionButtonClick = () => {
     isDragged && addDraggableElement(typeAction);
     isMenu && setIsOpen((prevOpen) => !prevOpen);
     typeAction == ActionTypes.restart && (setOpenRestartDialog(true), setIdDraggElementClick(""));
-    setColor(WritingSituation.non);
+    setColor({ description: WritingSituation.non, color: Colors.non });
   };
 
   return (
     <div className="flex flex-col items-center relative" ref={wrapperRef}>
       <img
         className={`m-3 cursor-pointer z-10 ${
-          typeAction === ActionTypes.restart &&
-          dragElements.length == 0 &&
-          visitableDisplayButton == TypeCover.allDiscover &&
-          drawSituation != DrawSituation.notEmpty &&
-          "pointer-events-none"
+          typeAction === ActionTypes.restart && dragElements.length == 0 && visitableDisplayButton == TypeCover.allDiscover && "pointer-events-none"
         }`}
         src={iconSrc}
         alt={typeAction + " Toolbar"}
@@ -95,8 +80,8 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
         onMouseLeave={() => setIsHovered(false)}
         onClick={() => actionButtonClick()}
       />
-
       {isOpen &&
+        //Opening an appropriate menu depending on the type of button
         (typeAction === ActionTypes.displayNumbersLine ? (
           <DisplayNumbers setOpen={setIsOpen} />
         ) : typeAction === ActionTypes.naviAndKeni ? (

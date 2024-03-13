@@ -30,11 +30,12 @@ export enum WritingSituation {
   orange = "Orange",
   delete = "Delete",
 }
-
-export enum DrawSituation {
-  empty = "empty",
-  notEmpty = "notEmpty",
-  clean = "clean",
+export enum Colors {
+  non = "",
+  blue = "#0059DE",
+  green = "#30B675",
+  orange = "#F48460",
+  delete = "Delete",
 }
 export interface IActionIcon {
   type: ActionTypes;
@@ -55,8 +56,12 @@ export interface IIconsNaviKeni {
   type: NaviKeniIconsTypes;
   url: string;
 }
+export interface IColor {
+  description: WritingSituation;
+  color: Colors;
+}
 export interface IWritingSituation {
-  type: WritingSituation;
+  type: IColor;
   url: string;
 }
 export interface IWindowSize {

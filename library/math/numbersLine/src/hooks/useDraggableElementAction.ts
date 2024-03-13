@@ -10,10 +10,10 @@ import {
   jumpHeight,
   keniFoot,
   keniHeight,
-  keniWidth,
-  naviFoot,
-  naviHeight,
-  naviWidth,
+    keniWidth,
+    naviFoot,
+    naviHeight,
+    naviWidth,
   textBoxWidth,
 } from "../consts/elementConsts";
 import { calcXTransform } from "../lib/utils";
@@ -95,7 +95,8 @@ export const useDraggableElementAction = () => {
   };
 
   const updateDragElements = (elementId: string, newElement: IElement) => {
-    const newElements = dragElements.map((item: IElement) => (item.id === elementId ? newElement : item));
+    const dragElementsWithoutNewElement = dragElements.filter((item: IElement) => item.id != elementId);
+    const newElements = [...dragElementsWithoutNewElement, newElement];
     setDragElements(newElements);
   };
 

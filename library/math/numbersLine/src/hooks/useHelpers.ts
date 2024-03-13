@@ -1,7 +1,7 @@
 import { useNumbersLineContext } from "../context/numbersLineContext";
 import { LineRange, RulerLenth, unitAmount } from "../type/ruler";
 import { RulerPaddingSides } from "../consts/elementConsts";
-import { TypeCover, DrawSituation } from "../type/elements";
+import { TypeCover } from "../type/elements";
 
 export const useHelpers = () => {
   const {
@@ -15,7 +15,6 @@ export const useHelpers = () => {
     setDuplicateElementSpace,
     setCoverSituation,
     setVisitableDisplayButton,
-    setDrawSituation,
   } = useNumbersLineContext();
 
   const calculatScreenWidth = () => {
@@ -37,7 +36,6 @@ export const useHelpers = () => {
     setVisitableDisplayButton(TypeCover.allDiscover);
     setLeftPosition(0);
     setDuplicateElementSpace(0);
-    setDrawSituation(DrawSituation.clean);
   };
 
   return {
