@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { LineRange } from "../type/ruler";
-import { DrawSituation, IWindowSize, TypeCover, WritingSituation } from "../type/elements";
+import { Colors, IColor, IWindowSize, TypeCover, WritingSituation } from "../type/elements";
 import { IElement } from "../type/moveable";
 import { RulerPaddingSides } from "@/consts/elementConsts";
 interface INumbersLineContextProps {
@@ -25,10 +25,8 @@ interface INumbersLineContextProps {
   setVisitableDisplayButton: (v: TypeCover) => void;
   openRestartDialog: boolean;
   setOpenRestartDialog: (v: boolean) => void;
-  color: WritingSituation;
-  setColor: (v: WritingSituation) => void;
-  drawSituation: DrawSituation;
-  setDrawSituation: (v: DrawSituation) => void;
+  color: IColor;
+  setColor: (v: IColor) => void;
 }
 
 export const NumbersLineContext = React.createContext({
@@ -53,10 +51,8 @@ export const NumbersLineContext = React.createContext({
   setVisitableDisplayButton: () => null,
   openRestartDialog: {} as boolean,
   setOpenRestartDialog: () => null,
-  color: {} as WritingSituation,
+  color: {} as IColor,
   setColor: () => null,
-  drawSituation: {} as DrawSituation,
-  setDrawSituation: () => null,
 } as INumbersLineContextProps);
 
 export const NumbersLineContexProvider = (props: any) => {
@@ -71,8 +67,7 @@ export const NumbersLineContexProvider = (props: any) => {
   const [visitableDisplayButton, setVisitableDisplayButton] = useState(TypeCover.allDiscover);
   const [openRestartDialog, setOpenRestartDialog] = useState(false);
   const [rulerPaddingSides, setRulerPaddingSides] = useState(RulerPaddingSides);
-  const [color, setColor] = useState(WritingSituation.non);
-  const [drawSituation, setDrawSituation] = useState(DrawSituation.clean);
+  const [color, setColor] = useState<IColor>({ description: WritingSituation.non, color: Colors.non });
 
   const Resize = () => {
     setWindowSize({ height: window.innerHeight, width: window.innerWidth });
@@ -112,8 +107,6 @@ export const NumbersLineContexProvider = (props: any) => {
         setOpenRestartDialog,
         color,
         setColor,
-        drawSituation,
-        setDrawSituation,
       }}
     >
       {props.children}

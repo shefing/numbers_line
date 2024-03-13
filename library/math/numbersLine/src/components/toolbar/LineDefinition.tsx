@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 import { LineRange, RulerLenth } from "../../type/ruler";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { RulerPaddingSides, rulerDefinitionButtonDetials } from "../../consts/elementConsts";
-import { DrawSituation, IRulerDefinition, TypeCover } from "../../type/elements";
+import { IRulerDefinition, TypeCover } from "../../type/elements";
 import openMenu from "/assets/icons/menuButtonOpen.svg";
 import closeMenu from "/assets/icons/menuButtonClose.svg";
 
@@ -20,7 +20,6 @@ const LineDefinition = () => {
     setOpenRestartDialog,
     setTypeRulerChange,
     setIdDraggElementClick,
-    drawSituation,
   } = useNumbersLineContext();
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -45,7 +44,7 @@ const LineDefinition = () => {
     if (type == typeRuler) return;
     setIdDraggElementClick("");
     setIsMenuOpen(false);
-    if (dragElements.length == 0 && visitableDisplayButton == TypeCover.allDiscover && drawSituation != DrawSituation.notEmpty) {
+    if (dragElements.length == 0 && visitableDisplayButton == TypeCover.allDiscover) {
       setTypeRuler(type);
       typeRuler == LineRange.hundred ? setRulerPaddingSides(windowSize.width / RulerLenth.hundred / 2) : RulerPaddingSides;
       setLeftPosition(0);

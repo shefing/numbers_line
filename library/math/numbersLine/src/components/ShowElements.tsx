@@ -9,6 +9,7 @@ import { useDraggableElementAction } from "../hooks/useDraggableElementAction";
 import NaviKeni from "./NaviKeni";
 import { useHelpers } from "../hooks/useHelpers";
 import { LineRange, RulerLenth } from "@/type/ruler";
+import { Writing } from "./Writing";
 
 const ShowElements = () => {
   const { windowSize, typeRuler, dragElements, setIdDraggElementClick } = useNumbersLineContext();
@@ -76,8 +77,8 @@ const ShowElements = () => {
     });
   }, [typeRuler, windowResizing]);
 
-  return dragElements.map((element: IElement) => (
-    <div key={element.id} id={element.id} onClick={() => setIdDraggElementClick(element.id)}>
+  return dragElements.map((element: IElement, i) => (
+    <div key={element.id} id={element.id} onClick={() => setIdDraggElementClick(element.id)} style={{ zIndex: i }}>
       {(() => {
         switch (element.type) {
           case ActionTypes.jump:
@@ -86,6 +87,8 @@ const ShowElements = () => {
             return <Text element={element} />;
           case ActionTypes.naviAndKeni:
             return <NaviKeni element={element} unit={unit} />;
+          case ActionTypes.writing:
+            return <Writing element={element} />;
           default:
             return null;
         }

@@ -1,4 +1,4 @@
-import { ActionTypes, NaviKeniIconsTypes } from "./elements";
+import { ActionTypes, Colors, NaviKeniIconsTypes } from "./elements";
 import { LineRange } from "./ruler";
 
 export interface IElement {
@@ -6,6 +6,7 @@ export interface IElement {
   type: ActionTypes;
   jump?: IJump;
   icons?: IIcons;
+  writing?: ILine;
   transform: string;
   width: number;
 }
@@ -19,6 +20,10 @@ export interface IIcons {
   widthRelatively: number;
   heightRelativelyWidth: number;
   footWidthRelatively: number;
+}
+export interface ILine {
+  color: Colors;
+  points: { x: number; y: number }[];
 }
 export interface IAbleProps {
   ButtonViewable: boolean;

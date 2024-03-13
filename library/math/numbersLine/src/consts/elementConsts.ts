@@ -8,6 +8,7 @@ import {
   IIconsNaviKeni,
   WritingSituation,
   IWritingSituation,
+  Colors,
 } from "../type/elements";
 import { LineRange } from "../type/ruler";
 import jump from "/assets/icons/toolbar/jump.svg";
@@ -49,10 +50,10 @@ export const iconsNaviKeni: IIconsNaviKeni[] = [
 ];
 
 export const writingSituationList: IWritingSituation[] = [
-  { type: WritingSituation.blue, url: writingDelete },
-  { type: WritingSituation.green, url: writingDelete },
-  { type: WritingSituation.orange, url: writingDelete },
-  { type: WritingSituation.delete, url: writingDelete },
+  { type: { description: WritingSituation.blue, color: Colors.blue }, url: writingDelete },
+  { type: { description: WritingSituation.green, color: Colors.green }, url: writingDelete },
+  { type: { description: WritingSituation.orange, color: Colors.orange }, url: writingDelete },
+  { type: { description: WritingSituation.delete, color: Colors.delete }, url: writingDelete },
 ];
 
 export const RulerPaddingSides = 32;
@@ -72,6 +73,6 @@ export const naviWidth = 0.5;
 export const keniHeight = 1.05;
 export const naviHeight = 0.9;
 export const keniFoot = 0.5;
-export const naviFoot = 0.2;
+export const naviFoot = 0.25;
 export const duplicateElementStepSpace = 30;
 export const brushWidth = 10;
