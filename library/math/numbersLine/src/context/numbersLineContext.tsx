@@ -67,7 +67,7 @@ export const NumbersLineContexProvider = (props: any) => {
   const [visitableDisplayButton, setVisitableDisplayButton] = useState(TypeCover.allDiscover);
   const [openRestartDialog, setOpenRestartDialog] = useState(false);
   const [rulerPaddingSides, setRulerPaddingSides] = useState(RulerPaddingSides);
-  const [color, setColor] = useState<IColor>({ description: WritingSituation.non, color: Colors.non });
+  const [color, setColor] = useState<IColor>({ description: WritingSituation.non, url: Colors.non });
 
   const Resize = () => {
     setWindowSize({ height: window.innerHeight, width: window.innerWidth });

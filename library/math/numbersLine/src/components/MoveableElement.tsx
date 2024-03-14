@@ -125,7 +125,7 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
       onDrag={(e) => (e.target.style.transform = e.transform)}
       onDragEnd={(e) => onDragEnd(e)}
       resizable={element.jump}
-      renderDirections={["w", "e"]}
+      renderDirections={idDraggElementClick === element.id && ["w", "e"]}
       onResize={(e) => onResize(e)}
       onResizeEnd={(e) => onResizeEnd(e)}
       snappable={true}

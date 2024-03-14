@@ -3,7 +3,7 @@ import { useNumbersLineContext } from "../context/numbersLineContext";
 import { useEffect, useRef, useState } from "react";
 import { brushWidth } from "../consts/elementConsts";
 import { v4 as uuidv4 } from "uuid";
-import { IElement, ILine } from "@/type/moveable";
+import { IElement, ILine } from "../type/moveable";
 
 const Brush = () => {
   const { windowSize, dragElements, setDragElements, color } = useNumbersLineContext();
@@ -22,9 +22,9 @@ const Brush = () => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
     ctx.lineWidth = brushWidth;
-    ctx.strokeStyle = color.color;
+    ctx.strokeStyle = color.url;
     ctx.lineCap = "round";
-    color.color == Colors.delete ? (ctx.globalCompositeOperation = "destination-out") : (ctx.globalCompositeOperation = "source-over");
+    color.url == Colors.delete ? (ctx.globalCompositeOperation = "destination-out") : (ctx.globalCompositeOperation = "source-over");
     // Store the context reference in a ref
     contextRef.current = ctx;
   }, [windowSize, color]);
@@ -32,13 +32,13 @@ const Brush = () => {
   const startDrawing = ({ nativeEvent }: any) => {
     const { offsetX, offsetY } = nativeEvent;
     // Check if context exists and drawing is allowed
-    if (!contextRef.current || color.color === Colors.non) return;
+    if (!contextRef.current || color.url === Colors.non) return;
     contextRef.current.beginPath();
     contextRef.current.moveTo(offsetX, offsetY);
     contextRef.current.lineTo(offsetX, offsetY);
     contextRef.current.stroke();
     setIsDrawing(true);
-    setLine({ color: color.color, points: [{ x: offsetX, y: offsetY }] });
+    setLine({ color: color.url, points: [{ x: offsetX, y: offsetY }] });
     nativeEvent.preventDefault();
   };
 
@@ -47,7 +47,7 @@ const Brush = () => {
     if (!contextRef.current || !isDrawing) return;
     contextRef.current.lineTo(offsetX, offsetY);
     contextRef.current.stroke();
-    if (color.color === Colors.delete) {
+    if (color.url === Colors.delete) {
       const eraserPath = new Path2D();
       const eraserRadius = brushWidth; // Increase the eraser radius to cover a wider area
       contextRef.current.lineWidth = brushWidth / 2;
@@ -100,13 +100,13 @@ const Brush = () => {
     <canvas
       className="canvas-container absolute"
       ref={canvasRef}
-      onMouseDown={color.color !== Colors.non ? startDrawing : () => {}}
-      onMouseMove={color.color !== Colors.non ? drawing : () => {}}
-      onMouseUp={color.color !== Colors.non ? stopDrawing : () => {}}
-      onMouseOut={color.color !== Colors.non ? stopDrawing : () => {}}
+      onMouseDown={color.url !== Colors.non ? startDrawing : () => {}}
+      onMouseMove={color.url !== Colors.non ? drawing : () => {}}
+      onMouseUp={color.url !== Colors.non ? stopDrawing : () => {}}
+      onMouseOut={color.url !== Colors.non ? stopDrawing : () => {}}
       style={
-        color.color !== Colors.non
-          ? color.color == Colors.delete
+        color.url !== Colors.non
+          ? color.url == Colors.delete
             ? { cursor: "cell", zIndex: dragElements.length }
             : { cursor: "crosshair", zIndex: dragElements.length }
           : {}

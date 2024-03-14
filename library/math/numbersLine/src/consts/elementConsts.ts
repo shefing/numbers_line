@@ -50,10 +50,10 @@ export const iconsNaviKeni: IIconsNaviKeni[] = [
 ];
 
 export const writingSituationList: IWritingSituation[] = [
-  { type: { description: WritingSituation.blue, color: Colors.blue }, url: writingDelete },
-  { type: { description: WritingSituation.green, color: Colors.green }, url: writingDelete },
-  { type: { description: WritingSituation.orange, color: Colors.orange }, url: writingDelete },
-  { type: { description: WritingSituation.delete, color: Colors.delete }, url: writingDelete },
+  { type: { description: WritingSituation.blue, url: Colors.blue }, url: writingDelete },
+  { type: { description: WritingSituation.green, url: Colors.green }, url: writingDelete },
+  { type: { description: WritingSituation.orange, url: Colors.orange }, url: writingDelete },
+  { type: { description: WritingSituation.delete, url: Colors.delete }, url: writingDelete },
 ];
 
 export const RulerPaddingSides = 32;
