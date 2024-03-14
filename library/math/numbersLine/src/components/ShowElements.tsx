@@ -1,15 +1,15 @@
-import { IElement } from "../type/moveable";
 import Jump from "./Jump";
+import Text from "./Text";
+import NaviKeni from "./NaviKeni";
+import Writing from "./Writing";
 import { useNumbersLineContext } from "../context/numbersLineContext";
 import { useEffect, useState } from "react";
 import { ActionTypes, IWindowSize } from "../type/elements";
-import { Text } from "./Text";
 import { calcXTransform, calcYTransform } from "../lib/utils";
 import { useDraggableElementAction } from "../hooks/useDraggableElementAction";
-import NaviKeni from "./NaviKeni";
 import { useHelpers } from "../hooks/useHelpers";
 import { LineRange, RulerLenth } from "../type/ruler";
-import { Writing } from "./Writing";
+import { IElement } from "../type/moveable";
 
 const ShowElements = () => {
   const { windowSize, typeRuler, dragElements, setIdDraggElementClick } = useNumbersLineContext();
@@ -19,11 +19,11 @@ const ShowElements = () => {
   const [windowResizing, setWindowResizing] = useState(false);
   const [prevWindowSize, setPrevWindowSize] = useState<IWindowSize>({ height: windowSize.height, width: windowSize.width });
 
-  const updateTransform = (element: IElement, heightRelative: number, widthRelative: number) => {
+  const updateTransform = (element: IElement) => {
     const xPosition = calcXTransform(element.transform);
-    const newXPosition = xPosition * widthRelative;
+    const newXPosition = xPosition * (windowSize.width / prevWindowSize.width);
     const yPosition = calcYTransform(element.transform);
-    const newYPosition = yPosition * heightRelative;
+    const newYPosition = (yPosition / prevWindowSize.height) * windowSize.height;
     const newXYPositionString = "(" + newXPosition.toFixed(2) + "px, " + newYPosition.toFixed(2) + "px)";
     const newTransform = element.transform.replace("(" + xPosition + "px, " + yPosition + "px)", newXYPositionString);
     const documentElement = document.getElementById(`dragElement-${element.id}`);
@@ -45,12 +45,10 @@ const ShowElements = () => {
     };
 
     window.addEventListener("resize", handleResizeStart);
-
     window.addEventListener("resize", () => {
       clearTimeout(timeout);
       timeout = setTimeout(handleResizeEnd, 200);
     });
-
     return () => {
       window.removeEventListener("resize", handleResizeStart);
       window.removeEventListener("resize", handleResizeEnd);
@@ -60,14 +58,10 @@ const ShowElements = () => {
   useEffect(() => {
     if (windowResizing) return;
     setPrevWindowSize({ height: windowSize.height, width: windowSize.width });
-
     const unitWidth = calculatRulerWidth() / calculatUnitsAmount();
     typeRuler == LineRange.hundred ? setUnit(windowSize.width / RulerLenth.hundred) : setUnit(unitWidth);
-
-    const heightRelativeChange = windowSize.height / prevWindowSize.height;
-    const widthRelativeChange = windowSize.width / prevWindowSize.width;
     dragElements.map((element: IElement) => {
-      updateTransform(element, heightRelativeChange, widthRelativeChange);
+      updateTransform(element);
     });
   }, [typeRuler, windowResizing]);
 

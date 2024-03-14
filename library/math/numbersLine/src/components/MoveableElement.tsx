@@ -2,7 +2,7 @@ import { useNumbersLineContext } from "../context/numbersLineContext";
 import Moveable, { OnDragEnd, OnResize, OnResizeEnd } from "react-moveable";
 import { IElement } from "../type/moveable";
 import { calcXTransform, calcYTransform } from "../lib/utils";
-import { rulerMargin, ToolbarHeight, buttonsDraggElementWidth, jumpBaseHeight, jumpHeight, grassHeight } from "../consts/elementConsts";
+import { rulerMargin, ToolbarHeight, buttonsDraggElementWidth, jumpBaseHeight, jumpHeight } from "../consts/elementConsts";
 import { calcPosition } from "../lib/utils";
 import { ButtonViewable } from "../consts/ButtonViewable";
 import { useDraggableElementAction } from "../hooks/useDraggableElementAction";
@@ -13,9 +13,10 @@ interface IProps {
   moveableRef: any;
   element: IElement;
   unit: number;
+  setDragging?: (v: boolean) => void;
 }
 
-const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
+const MoveableElement = ({ moveableRef, element, unit, setDragging }: IProps) => {
   const { windowSize, typeRuler, rulerPaddingSides, leftPosition, idDraggElementClick } = useNumbersLineContext();
   const { deleteDragElement, duplicateDragJump, updateDragElements } = useDraggableElementAction();
   const { calculatRulerWidth, calculatScreenWidth, calculatUnitsAmount } = useHelpers();
@@ -32,6 +33,9 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
     rulerPaddingSides: rulerPaddingSides,
     calculatScreenWidth: () => calculatScreenWidth(),
   };
+  const onDragStart = () => {
+    if (element.type == ActionTypes.text) setDragging!(true);
+  };
 
   const updateXLocation = (e: any) => {
     const unitsAmount = calculatUnitsAmount();
@@ -41,8 +45,7 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
     const elementWidth = element.icons ? unit * element.icons.widthRelatively : unit * element.jump!.value;
     // few pixels for the precise position of the element, the calculation is done relative to the position on the axis.
     const sidesPixels = element.type == ActionTypes.jump ? (unitsAmount / 2 - Math.round(xPosition - rulerPaddingSides) / unitPresent) / unitsAmount : 0;
-    let newXPosition =
-      Math.round((xPosition + IconsFootLength - rulerPaddingSides) / unitPresent) * unitPresent + rulerPaddingSides - IconsFootLength + sidesPixels;
+    let newXPosition = Math.round((xPosition + IconsFootLength - rulerPaddingSides) / unitPresent) * unitPresent + rulerPaddingSides - IconsFootLength + sidesPixels;
     if (newXPosition + elementWidth > windowSize.width) newXPosition -= unitPresent;
     if (newXPosition < 0) newXPosition += unitPresent;
     e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + newXPosition);
@@ -51,11 +54,11 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
   const onDragEnd = (e: OnDragEnd) => {
     if (element.type == ActionTypes.text) {
       updateDragElements(element.id, { ...element, transform: e.target.style.transform });
+      setDragging!(false);
       return;
     }
-
     const yTransform = calcYTransform(e.target.style.transform);
-    const rulerPosition = windowSize.height * (1 - rulerMargin) - grassHeight;
+    const rulerPosition = windowSize.height * (1 - rulerMargin);
     let elementPsition = calcPosition(yTransform, element, unit);
 
     // Change the position of the element relative to the integers, provided that the position is close to the axis.
@@ -123,6 +126,7 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
       props={ableProps || false}
       draggable={element.type == ActionTypes.text ? false : true}
       edgeDraggable={element.type == ActionTypes.text ? true : false}
+      onDragStart={onDragStart}
       onDrag={(e) => (e.target.style.transform = e.transform)}
       onDragEnd={(e) => onDragEnd(e)}
       resizable={element.jump}

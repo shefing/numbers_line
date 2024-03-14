@@ -57,9 +57,9 @@ export const writingSituationList: IWritingSituation[] = [
 ];
 
 export const RulerPaddingSides = 32;
-export const rulerMargin = 0.15;
+export const rulerMargin = 0.35;
 export const ruleHeight = 50;
-export const grassHeight = 200;
+export const grassHeight = 150;
 export const jumpBaseHeight = 40;
 export const jumpArrowHeight = 64;
 export const jumpHeight = 120;

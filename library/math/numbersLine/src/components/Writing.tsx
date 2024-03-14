@@ -5,7 +5,7 @@ interface IProps {
   element: IElement;
 }
 
-export const Writing = ({ element }: IProps) => {
+const Writing = ({ element }: IProps) => {
   if (!element.writing) return null;
 
   const pathData = `M ${element.writing.points.map(({ x, y }) => `${x} ${y}`).join(" L ")}`;
@@ -26,3 +26,4 @@ export const Writing = ({ element }: IProps) => {
     </div>
   );
 };
+export default Writing;

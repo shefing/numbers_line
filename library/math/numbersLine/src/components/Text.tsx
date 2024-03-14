@@ -10,10 +10,11 @@ interface IProps {
   element: IElement;
 }
 
-export const Text = ({ element }: IProps) => {
-  const { windowSize, idDraggElementClick, setIdDraggElementClick } = useNumbersLineContext();
+const Text = ({ element }: IProps) => {
+  const { windowSize, setIdDraggElementClick } = useNumbersLineContext();
   const moveableRef = useRef<any>(null);
   const [size, setSize] = useState(textBoxSize);
+  const [dragging, setDragging] = useState(false);
   const { deleteDragElement, updateDragElements } = useDraggableElementAction();
 
   const updateValueAndSize = (e: any) => {
@@ -43,17 +44,18 @@ export const Text = ({ element }: IProps) => {
         size={size}
         onChange={updateValueAndSize}
         onBlur={deleteIfEmpty}
-        className="flex absolute t-0 l-0 bg-transparent px-2 text-[26px] h-[50px] font-[Arial] focus-visible:outline-none focus-visible:border-[1.5px] focus-visible:border-[#009FDE] "
+        className={`flex absolute t-0 l-0 bg-transparent px-2 text-[26px] h-[50px] font-[Arial] focus-visible:outline-none focus-visible:border-[1.5px] focus-visible:border-[#009FDE] ${
+          dragging && "outline-none border-[1.5px] border-[#009FDE]"
+        }`}
         autoFocus
         style={{
           transform: element.transform,
         }}
       />
-      {idDraggElementClick === element.id && (
-        <div id="dragElement-text">
-          <MoveableElement moveableRef={moveableRef} element={element} unit={0} />
-        </div>
-      )}
+      <div id="dragElement-text">
+        <MoveableElement moveableRef={moveableRef} element={element} unit={0} setDragging={setDragging} />
+      </div>
     </>
   );
 };
+export default Text;

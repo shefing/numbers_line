@@ -30,6 +30,26 @@ const Brush = () => {
     contextRef.current = ctx;
   }, [windowSize, color]);
 
+  const deleteLine = (offsetX: number, offsetY: number) => {
+    const eraserPath = new Path2D();
+    const eraserRadius = brushWidth; // Increase the eraser radius to cover a wider area
+    contextRef.current!.lineWidth = brushWidth;
+    contextRef.current!.stroke();
+    eraserPath.arc(offsetX, offsetY, eraserRadius, 0, 2 * Math.PI); // Center the eraser path around the cursor
+
+    // Filter out the lines intersecting with the eraser path
+    const updatedDragElements: IElement[] = dragElements.filter((element: IElement) => {
+      if (element.type === ActionTypes.writing && element.writing) {
+        for (const point of element.writing.points) {
+          // Check if any point of the line falls within the expanded eraser path
+          if (Math.sqrt((point.x - offsetX) ** 2 + (point.y - offsetY) ** 2) <= eraserRadius) return false;
+        }
+      }
+      return true;
+    });
+    setDragElements(updatedDragElements);
+  };
+
   const startDrawing = ({ nativeEvent }: any) => {
     const { offsetX, offsetY } = nativeEvent;
     // Check if context exists and drawing is allowed
@@ -42,11 +62,14 @@ const Brush = () => {
       ],
     });
     setIsDrawing(true);
-    contextRef.current.beginPath();
-    contextRef.current.moveTo(offsetX, offsetY);
-    contextRef.current.lineTo(offsetX, offsetY);
-    contextRef.current.stroke();
-    nativeEvent.preventDefault();
+    if (color.url === Colors.delete) deleteLine(offsetX, offsetY);
+    else {
+      contextRef.current.beginPath();
+      contextRef.current.moveTo(offsetX, offsetY);
+      contextRef.current.lineTo(offsetX, offsetY);
+      contextRef.current.stroke();
+      nativeEvent.preventDefault();
+    }
   };
 
   const drawing = ({ nativeEvent }: any) => {
@@ -54,27 +77,8 @@ const Brush = () => {
     if (!contextRef.current || !isDrawing) return;
     contextRef.current.lineTo(offsetX, offsetY);
     contextRef.current.stroke();
-    if (color.url === Colors.delete) {
-      const eraserPath = new Path2D();
-      const eraserRadius = brushWidth; // Increase the eraser radius to cover a wider area
-      contextRef.current.lineWidth = brushWidth;
-      contextRef.current.stroke();
-      eraserPath.arc(offsetX, offsetY, eraserRadius, 0, 2 * Math.PI); // Center the eraser path around the cursor
-
-      // Filter out the lines intersecting with the eraser path
-      const updatedDragElements: IElement[] = dragElements.filter((element: IElement) => {
-        if (element.type === ActionTypes.writing && element.writing) {
-          for (const point of element.writing.points) {
-            // Check if any point of the line falls within the expanded eraser path
-            if (Math.sqrt((point.x - offsetX) ** 2 + (point.y - offsetY) ** 2) <= eraserRadius) return false;
-          }
-        }
-        return true;
-      });
-      setDragElements(updatedDragElements);
-    } else {
-      setLine((prevLine) => (prevLine ? { ...prevLine, points: [...prevLine.points, { x: offsetX, y: offsetY }] } : null));
-    }
+    if (color.url === Colors.delete) deleteLine(offsetX, offsetY);
+    else setLine((prevLine) => (prevLine ? { ...prevLine, points: [...prevLine.points, { x: offsetX, y: offsetY }] } : null));
     nativeEvent.preventDefault();
   };
 
