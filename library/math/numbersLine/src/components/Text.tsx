@@ -10,7 +10,7 @@ interface IProps {
   element: IElement;
 }
 
-export const Text = ({ element }: IProps) => {
+const Text = ({ element }: IProps) => {
   const { windowSize, idDraggElementClick, setIdDraggElementClick } = useNumbersLineContext();
   const moveableRef = useRef<any>(null);
   const [size, setSize] = useState(textBoxSize);
@@ -57,3 +57,4 @@ export const Text = ({ element }: IProps) => {
     </>
   );
 };
+export default Text;

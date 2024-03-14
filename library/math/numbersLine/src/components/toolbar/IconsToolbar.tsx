@@ -46,10 +46,6 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
     setIdDraggElementClick("");
   }, [isOpen]);
 
-  // Effect to update the icon source depending on various state changes:
-  // isOpenת isHovered: - for all icons.
-  // openRestartDialog, dragElements, visitableDisplayButton: ןf the screen is dirty - for Restrt.
-  // color: The current drawing color - for Writing.
   useEffect(() => {
     const isClicked = typeAction === ActionTypes.restart ? openRestartDialog : isOpen;
     let isDisabled = typeAction === ActionTypes.restart && dragElements.length == 0 && visitableDisplayButton == TypeCover.allDiscover;
