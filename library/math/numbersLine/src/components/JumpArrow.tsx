@@ -15,7 +15,7 @@ const JumpArrow = ({ underRuler, jumpWidth }: IProps) => {
   }, [jumpWidth, windowSize]);
 
   return (
-    <svg id="dragElement-jumpArrow" className="relative w-full " style={{ height: jumpArrowHeight + "px" }}>
+    <svg id="dragElement-jumpArrow" className=" w-full " style={{ height: jumpArrowHeight + "px" }}>
       <path
         d={
           underRuler

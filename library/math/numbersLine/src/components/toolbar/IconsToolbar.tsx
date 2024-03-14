@@ -47,11 +47,8 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
   }, [isOpen]);
 
   // Effect to update the icon source depending on various state changes:
-  // isOpen: Indicates whether the toolbar menu is open or closed.
-  // isHovered: Indicates whether the mouse is currently hovering over the toolbar icon.
-  // openRestartDialog: Indicates whether the restart dialog is open - for Restrt.
-  // dragElements: Array of draggable elements - for Restrt.
-  // visitableDisplayButton: Indicates the visibility status of the display button - for Restrt.
+  // isOpenת isHovered: - for all icons.
+  // openRestartDialog, dragElements, visitableDisplayButton: ןf the screen is dirty - for Restrt.
   // color: The current drawing color - for Writing.
   useEffect(() => {
     const isClicked = typeAction === ActionTypes.restart ? openRestartDialog : isOpen;
@@ -61,11 +58,11 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
       : setIconSrc(getSrc(iconUrl, isHovered, isClicked, isDisabled));
   }, [isOpen, isHovered, openRestartDialog, dragElements, visitableDisplayButton, color]);
 
-  const actionButtonClick = () => {
+  const onButtonClick = () => {
     isDragged && addDraggableElement(typeAction);
     isMenu && setIsOpen((prevOpen) => !prevOpen);
     typeAction == ActionTypes.restart && (setOpenRestartDialog(true), setIdDraggElementClick(""));
-    setColor({ description: WritingSituation.non, color: Colors.non });
+    setColor({ description: WritingSituation.non, url: Colors.non });
   };
 
   return (
@@ -78,7 +75,7 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
         alt={typeAction + " Toolbar"}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        onClick={() => actionButtonClick()}
+        onClick={() => onButtonClick()}
       />
       {isOpen &&
         //Opening an appropriate menu depending on the type of button

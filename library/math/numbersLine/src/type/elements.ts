@@ -58,7 +58,7 @@ export interface IIconsNaviKeni {
 }
 export interface IColor {
   description: WritingSituation;
-  color: Colors;
+  url: Colors;
 }
 export interface IWritingSituation {
   type: IColor;
