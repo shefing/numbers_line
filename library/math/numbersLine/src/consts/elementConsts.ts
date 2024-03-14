@@ -75,4 +75,4 @@ export const naviHeight = 0.9;
 export const keniFoot = 0.5;
 export const naviFoot = 0.25;
 export const duplicateElementStepSpace = 30;
-export const brushWidth = 10;
+export const brushWidth = 15;
