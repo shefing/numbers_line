@@ -24,6 +24,7 @@ const Brush = () => {
     ctx.lineWidth = brushWidth;
     ctx.strokeStyle = color.url;
     ctx.lineCap = "round";
+    ctx.lineJoin = "round";
     color.url == Colors.delete ? (ctx.globalCompositeOperation = "destination-out") : (ctx.globalCompositeOperation = "source-over");
     // Store the context reference in a ref
     contextRef.current = ctx;
@@ -33,12 +34,18 @@ const Brush = () => {
     const { offsetX, offsetY } = nativeEvent;
     // Check if context exists and drawing is allowed
     if (!contextRef.current || color.url === Colors.non) return;
+    setLine({
+      color: color.url,
+      points: [
+        { x: offsetX, y: offsetY },
+        { x: offsetX + 0.1, y: offsetY + 0.1 },
+      ],
+    });
+    setIsDrawing(true);
     contextRef.current.beginPath();
     contextRef.current.moveTo(offsetX, offsetY);
     contextRef.current.lineTo(offsetX, offsetY);
     contextRef.current.stroke();
-    setIsDrawing(true);
-    setLine({ color: color.url, points: [{ x: offsetX, y: offsetY }] });
     nativeEvent.preventDefault();
   };
 
@@ -50,42 +57,32 @@ const Brush = () => {
     if (color.url === Colors.delete) {
       const eraserPath = new Path2D();
       const eraserRadius = brushWidth; // Increase the eraser radius to cover a wider area
-      contextRef.current.lineWidth = brushWidth / 2;
-      contextRef.current.strokeStyle = "black"; // Use a solid color for the eraser
+      contextRef.current.lineWidth = brushWidth;
       contextRef.current.stroke();
       eraserPath.arc(offsetX, offsetY, eraserRadius, 0, 2 * Math.PI); // Center the eraser path around the cursor
 
       // Filter out the lines intersecting with the eraser path
       const updatedDragElements: IElement[] = dragElements.filter((element: IElement) => {
-        if (element.type === ActionTypes.writing) {
-          for (const point of element.writing!.points) {
+        if (element.type === ActionTypes.writing && element.writing) {
+          for (const point of element.writing.points) {
             // Check if any point of the line falls within the expanded eraser path
-            if (Math.sqrt((point.x - offsetX) ** 2 + (point.y - offsetY) ** 2) <= eraserRadius) {
-              // If any point of the line is within the eraser path, exclude this line
-              return false;
-            }
+            if (Math.sqrt((point.x - offsetX) ** 2 + (point.y - offsetY) ** 2) <= eraserRadius) return false;
           }
         }
         return true;
       });
       setDragElements(updatedDragElements);
     } else {
-      setLine((prevLine) => {
-        if (!prevLine) return null;
-        return { ...prevLine, points: [...prevLine.points, { x: offsetX, y: offsetY }] };
-      });
+      setLine((prevLine) => (prevLine ? { ...prevLine, points: [...prevLine.points, { x: offsetX, y: offsetY }] } : null));
     }
-
     nativeEvent.preventDefault();
   };
 
-  const stopDrawing = () => {
+  const stopDrawing = async () => {
     if (!contextRef.current) return;
     contextRef.current.closePath();
     setIsDrawing(false);
-
     if (!line) return;
-
     let newElement: IElement = {
       id: uuidv4(),
       type: ActionTypes.writing,
@@ -97,21 +94,17 @@ const Brush = () => {
   };
 
   return (
-    <canvas
-      className="canvas-container absolute"
-      ref={canvasRef}
-      onMouseDown={color.url !== Colors.non ? startDrawing : () => {}}
-      onMouseMove={color.url !== Colors.non ? drawing : () => {}}
-      onMouseUp={color.url !== Colors.non ? stopDrawing : () => {}}
-      onMouseOut={color.url !== Colors.non ? stopDrawing : () => {}}
-      style={
-        color.url !== Colors.non
-          ? color.url == Colors.delete
-            ? { cursor: "cell", zIndex: dragElements.length }
-            : { cursor: "crosshair", zIndex: dragElements.length }
-          : {}
-      }
-    ></canvas>
+    color.url !== Colors.non && (
+      <canvas
+        className="canvas-container absolute"
+        ref={canvasRef}
+        onMouseDown={startDrawing}
+        onMouseMove={drawing}
+        onMouseUp={stopDrawing}
+        onMouseOut={stopDrawing}
+        style={color.url == Colors.delete ? { cursor: "cell", zIndex: dragElements.length } : { cursor: "crosshair", zIndex: dragElements.length }}
+      ></canvas>
+    )
   );
 };
 
