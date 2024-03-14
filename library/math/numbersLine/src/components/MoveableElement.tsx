@@ -13,9 +13,10 @@ interface IProps {
   moveableRef: any;
   element: IElement;
   unit: number;
+  setDragging?: (v: boolean) => void;
 }
 
-const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
+const MoveableElement = ({ moveableRef, element, unit, setDragging }: IProps) => {
   const { windowSize, typeRuler, rulerPaddingSides, leftPosition, idDraggElementClick } = useNumbersLineContext();
   const { deleteDragElement, duplicateDragJump, updateDragElements } = useDraggableElementAction();
   const { calculatRulerWidth, calculatScreenWidth, calculatUnitsAmount } = useHelpers();
@@ -31,6 +32,9 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
     leftPosition: leftPosition,
     rulerPaddingSides: rulerPaddingSides,
     calculatScreenWidth: () => calculatScreenWidth(),
+  };
+  const onDragStart = () => {
+    if (element.type == ActionTypes.text) setDragging!(true);
   };
 
   const updateXLocation = (e: any) => {
@@ -50,9 +54,9 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
   const onDragEnd = (e: OnDragEnd) => {
     if (element.type == ActionTypes.text) {
       updateDragElements(element.id, { ...element, transform: e.target.style.transform });
+      setDragging!(false);
       return;
     }
-
     const yTransform = calcYTransform(e.target.style.transform);
     const rulerPosition = windowSize.height * (1 - rulerMargin);
     let elementPsition = calcPosition(yTransform, element, unit);
@@ -122,6 +126,7 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
       props={ableProps || false}
       draggable={element.type == ActionTypes.text ? false : true}
       edgeDraggable={element.type == ActionTypes.text ? true : false}
+      onDragStart={onDragStart}
       onDrag={(e) => (e.target.style.transform = e.transform)}
       onDragEnd={(e) => onDragEnd(e)}
       resizable={element.jump}
