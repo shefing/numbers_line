@@ -24,7 +24,7 @@ const NaviKany = ({ element, unit }: IProps) => {
         className={`flex absolute t-0 l-0 ${idDraggElementClick == element.id ? "cursor-move" : "cursor-pointer"}`}
         style={{
           transform: element.transform,
-          width: element.width,
+          width: unit * element.icons!.widthRelatively,
         }}
       />
       <div id="dragElement-naviKeni">

@@ -51,7 +51,7 @@ export const Text = ({ element }: IProps) => {
       />
       {idDraggElementClick === element.id && (
         <div id="dragElement-text">
-          <MoveableElement moveableRef={moveableRef} element={element} />
+          <MoveableElement moveableRef={moveableRef} element={element} unit={0} />
         </div>
       )}
     </>

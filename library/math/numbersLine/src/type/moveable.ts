@@ -8,7 +8,6 @@ export interface IElement {
   icons?: IIcons;
   writing?: ILine;
   transform: string;
-  width: number;
 }
 
 export interface IJump {

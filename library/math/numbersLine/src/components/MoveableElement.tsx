@@ -12,7 +12,7 @@ import { ActionTypes } from "../type/elements";
 interface IProps {
   moveableRef: any;
   element: IElement;
-  unit?: number;
+  unit: number;
 }
 
 const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
@@ -25,7 +25,7 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
     deleteViewAble: idDraggElementClick === element.id,
     onDeleteClick: () => deleteDragElement(element.id),
     copyViewAble: element.type === ActionTypes.jump && idDraggElementClick === element.id,
-    onCopyClick: () => duplicateDragJump(element),
+    onCopyClick: () => duplicateDragJump(element, unit),
     underRuler: element.jump?.underRuler,
     typeRuler: typeRuler,
     leftPosition: leftPosition,
@@ -35,14 +35,15 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
 
   const updateXLocation = (e: any) => {
     const unitsAmount = calculatUnitsAmount();
-    const unitPresent = element.type == ActionTypes.jump ? unit! : unit! / 2;
+    const unitPresent = element.type == ActionTypes.jump ? unit : unit / 2;
     const xPosition = calcXTransform(e.target.style.transform);
-    const IconsFootLength = element.icons ? element.width * element.icons.footWidthRelatively : 0;
+    const IconsFootLength = element.icons ? unit * element.icons.widthRelatively * element.icons.footWidthRelatively : 0;
+    const elementWidth = element.icons ? unit * element.icons.widthRelatively : unit * element.jump!.value;
     // few pixels for the precise position of the element, the calculation is done relative to the position on the axis.
     const sidesPixels = element.type == ActionTypes.jump ? (unitsAmount / 2 - Math.round(xPosition - rulerPaddingSides) / unitPresent) / unitsAmount : 0;
     let newXPosition =
       Math.round((xPosition + IconsFootLength - rulerPaddingSides) / unitPresent) * unitPresent + rulerPaddingSides - IconsFootLength + sidesPixels;
-    if (newXPosition + element.width > windowSize.width) newXPosition -= unitPresent;
+    if (newXPosition + elementWidth > windowSize.width) newXPosition -= unitPresent;
     if (newXPosition < 0) newXPosition += unitPresent;
     e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + newXPosition);
   };
@@ -82,9 +83,9 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
   };
 
   const onResize = (e: OnResize) => {
-    if (!(parseFloat(e.target.style.width) / unit! < 1 && e.dist[0] < 0) && !(parseFloat(e.target.style.width) > calculatRulerWidth() && e.dist[0] > 0)) {
+    if (!(parseFloat(e.target.style.width) / unit < 1 && e.dist[0] < 0) && !(parseFloat(e.target.style.width) > calculatRulerWidth() && e.dist[0] > 0)) {
       e.target.style.width = `${e.width}px`;
-      updateDragElements(element.id, { ...element, width: e.width });
+      updateDragElements(element.id, { ...element });
       e.target.style.transform = e.drag.transform;
     }
   };
@@ -92,8 +93,8 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
   const onResizeEnd = (e: OnResizeEnd) => {
     if (!element.jump) return;
     // Changes the width of the jump according to the axis.
-    const newValue = Math.round(e.lastEvent.width / unit!);
-    const newWidth = newValue * unit!;
+    const newValue = Math.round(e.lastEvent.width / unit);
+    const newWidth = newValue * unit;
     e.target.style.width = `${newWidth}px`;
 
     const xPosition = calcXTransform(e.target.style.transform);
@@ -112,7 +113,7 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
       e.target.style.transform = newTransform;
     }
 
-    updateDragElements(element.id, { ...element, width: newWidth, transform: newTransform, jump: { ...element.jump, value: newValue } });
+    updateDragElements(element.id, { ...element, transform: newTransform, jump: { ...element.jump, value: newValue } });
   };
 
   return (

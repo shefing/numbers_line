@@ -6,13 +6,23 @@ interface IProps {
 }
 
 export const Writing = ({ element }: IProps) => {
-  if (!element.writing) return null; // Return null instead of an empty div if no writing element
+  if (!element.writing) return null;
 
   const pathData = `M ${element.writing.points.map(({ x, y }) => `${x} ${y}`).join(" L ")}`;
 
   return (
-    <svg className="absolute" style={{ left: 0, top: 0, width: "100%", height: "100%" }} viewBox={`0 0 ${window.innerWidth} ${window.innerHeight}`}>
-      <path d={pathData} strokeWidth={brushWidth} stroke={element.writing.color} fill="none" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
+    <div
+      className="absolute bg-transparent pointer-events-none"
+      style={{
+        left: 0,
+        top: 0,
+        width: "100%",
+        height: "100%",
+      }}
+    >
+      <svg style={{ position: "absolute", width: "100%", height: "100%" }}>
+        <path d={pathData} strokeWidth={brushWidth} stroke={element.writing.color} fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </div>
   );
 };

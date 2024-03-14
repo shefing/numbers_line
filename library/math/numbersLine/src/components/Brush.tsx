@@ -87,7 +87,6 @@ const Brush = () => {
       id: uuidv4(),
       type: ActionTypes.writing,
       transform: "",
-      width: 0,
       writing: line,
     };
     setDragElements([...dragElements, newElement]);

@@ -8,12 +8,12 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const calcPosition = (transfomPosition: number, element: IElement): number => {
+export const calcPosition = (transfomPosition: number, element: IElement, unit: number): number => {
   if (element.jump) {
     const base = transfomPosition + jumpBaseHeight / 3;
     return element.jump.underRuler ? base : base + jumpHeight - jumpBaseHeight;
   }
-  return element.icons ? transfomPosition + element.icons?.heightRelativelyWidth * element.width : 0;
+  return element.icons ? transfomPosition + element.icons?.heightRelativelyWidth * element.icons.widthRelatively * unit : 0;
 };
 
 export const calcXTransform = (transfom: string): number => {
