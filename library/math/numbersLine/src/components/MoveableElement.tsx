@@ -56,7 +56,7 @@ const MoveableElement = ({ moveableRef, element, unit }: IProps) => {
 
     const yTransform = calcYTransform(e.target.style.transform);
     const rulerPosition = windowSize.height * (1 - rulerMargin) - grassHeight;
-    let elementPsition = calcPosition(yTransform, element);
+    let elementPsition = calcPosition(yTransform, element, unit);
 
     // Change the position of the element relative to the integers, provided that the position is close to the axis.
     if (Math.abs(rulerPosition - elementPsition) < 50) updateXLocation(e);
