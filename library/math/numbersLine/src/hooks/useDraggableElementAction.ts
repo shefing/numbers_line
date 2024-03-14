@@ -10,10 +10,10 @@ import {
   jumpHeight,
   keniFoot,
   keniHeight,
-    keniWidth,
-    naviFoot,
-    naviHeight,
-    naviWidth,
+  keniWidth,
+  naviFoot,
+  naviHeight,
+  naviWidth,
   textBoxWidth,
 } from "../consts/elementConsts";
 import { calcXTransform } from "../lib/utils";
@@ -42,7 +42,6 @@ export const useDraggableElementAction = () => {
       id: uuidv4(),
       type: typeAction,
       transform: `translate(${xTranslate}px, ${yTranslate}px)`,
-      width: elementWidth,
     };
 
     if (typeAction === ActionTypes.jump) {
@@ -56,7 +55,6 @@ export const useDraggableElementAction = () => {
           heightRelativelyWidth: type == NaviKeniIconsTypes.navi ? naviHeight : keniHeight,
           footWidthRelatively: type == NaviKeniIconsTypes.navi ? naviFoot : keniFoot,
         };
-      newElement.width = newElement.width * newElement.icons!.widthRelatively;
     }
     setDragElements([...dragElements, newElement]);
     setDuplicateElementSpace((prevPixels) => prevPixels + duplicateElementStepSpace);
@@ -72,13 +70,14 @@ export const useDraggableElementAction = () => {
     setDragElements(newDragElements);
   };
 
-  const duplicateDragJump = (element: IElement) => {
+  const duplicateDragJump = (element: IElement, unit: number) => {
+    const elementWidth = unit * element.jump!.value;
     const id = uuidv4();
     let newTransform = "";
     const startPosition = calcXTransform(element.transform);
-    const endNewJumpPosition = startPosition + element.width * 2;
-    const outOfRange = element.jump?.underRuler ? startPosition - element.width : endNewJumpPosition - windowSize.width + rulerPaddingSides - 10;
-    let newPosition = element.jump?.underRuler ? startPosition - element.width : startPosition + element.width;
+    const endNewJumpPosition = startPosition + elementWidth * 2;
+    const outOfRange = element.jump?.underRuler ? startPosition - elementWidth : endNewJumpPosition - windowSize.width + rulerPaddingSides - 10;
+    let newPosition = element.jump?.underRuler ? startPosition - elementWidth : startPosition + elementWidth;
     if (typeRuler == LineRange.hundred && ((!element.jump?.underRuler && outOfRange > 0) || (element.jump?.underRuler && outOfRange < 0))) {
       setLeftPosition((prevLeft: number) => prevLeft - outOfRange);
 

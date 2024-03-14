@@ -34,7 +34,7 @@ const Jump = ({ element, unit }: IProps) => {
           transform: element.transform,
         }}
       >
-        <JumpArrow underRuler={jump.underRuler} jumpWidth={element.width} />
+        <JumpArrow underRuler={jump.underRuler} jumpWidth={unit * jump.value} />
         <div id="dragElement-jumpBase" className={`${baseJumpClassName} ${jump.underRuler ? " bg-[#F48460] mb-[1rem]" : " bg-[#009FDE] mt-[1rem]"}`}>
           <span id="dragElement-jumpLength" className="cursor-pointer" onClick={() => setHideNumber(!hideNumber)}>
             {hideNumber ? "?" : typeRuler != LineRange.hundredCircular ? jump.value : jump.value * 10}

@@ -8,7 +8,7 @@ import { calcXTransform, calcYTransform } from "../lib/utils";
 import { useDraggableElementAction } from "../hooks/useDraggableElementAction";
 import NaviKeni from "./NaviKeni";
 import { useHelpers } from "../hooks/useHelpers";
-import { LineRange, RulerLenth } from "@/type/ruler";
+import { LineRange, RulerLenth } from "../type/ruler";
 import { Writing } from "./Writing";
 
 const ShowElements = () => {
@@ -29,13 +29,7 @@ const ShowElements = () => {
     const documentElement = document.getElementById(`dragElement-${element.id}`);
     if (!documentElement) return;
     documentElement.style.transform = newTransform;
-
-    const unitWidth = element.jump
-      ? calculatRulerWidth() / calculatUnitsAmount()
-      : element.icons
-      ? (calculatRulerWidth() / calculatUnitsAmount()) * element.icons.widthRelatively
-      : element.width;
-    updateDragElements(element.id, { ...element, width: unitWidth, transform: newTransform });
+    updateDragElements(element.id, { ...element, transform: newTransform });
   };
 
   useEffect(() => {
