@@ -29,11 +29,7 @@ const JumpArrow = ({ underRuler, jumpWidth }: IProps) => {
         strokeDasharray="15 15"
       />
       <svg className="overflow-visible" x={`${underRuler ? -6 : jumpWidth + 6}`} y={`${underRuler ? 10 : 90}%`}>
-        <polygon
-          points="-20,0 0,10 -20,20 "
-          transform={`rotate(${underRuler ? -100 - matchingPixels : 80 - matchingPixels})`}
-          fill={underRuler ? "#F48460" : "#009FDE"}
-        />
+        <polygon points="-20,0 0,10 -20,20 " transform={`rotate(${underRuler ? -100 - matchingPixels : 80 - matchingPixels})`} fill={underRuler ? "#F48460" : "#009FDE"} />
       </svg>
     </svg>
   );

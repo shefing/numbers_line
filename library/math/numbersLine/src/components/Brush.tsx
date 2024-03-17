@@ -25,10 +25,10 @@ const Brush = () => {
     ctx.strokeStyle = color.url;
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
-    color.url == Colors.delete ? (ctx.globalCompositeOperation = "destination-out") : (ctx.globalCompositeOperation = "source-over");
+    color.url == Colors.delete && (ctx.globalCompositeOperation = "destination-out");
     // Store the context reference in a ref
     contextRef.current = ctx;
-  }, [windowSize, color]);
+  }, [windowSize, color, dragElements]);
 
   const deleteLine = (offsetX: number, offsetY: number) => {
     const eraserPath = new Path2D();
@@ -105,6 +105,10 @@ const Brush = () => {
         onMouseMove={drawing}
         onMouseUp={stopDrawing}
         onMouseOut={stopDrawing}
+        onTouchStart={startDrawing}
+        onTouchMove={drawing}
+        onTouchEnd={stopDrawing}
+        onTouchCancel={stopDrawing}
         style={color.url == Colors.delete ? { cursor: "cell", zIndex: dragElements.length } : { cursor: "crosshair", zIndex: dragElements.length }}
       ></canvas>
     )

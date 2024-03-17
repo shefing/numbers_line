@@ -11,15 +11,16 @@ interface IProps {
 }
 
 const Text = ({ element }: IProps) => {
-  const { windowSize, setIdDraggElementClick } = useNumbersLineContext();
-  const moveableRef = useRef<any>(null);
+  const { windowSize, idDraggElementClick, setIdDraggElementClick } = useNumbersLineContext();
+  const { deleteDragElement, updateDragElements, updateDragElementsLayers } = useDraggableElementAction();
   const [size, setSize] = useState(textBoxSize);
   const [dragging, setDragging] = useState(false);
-  const { deleteDragElement, updateDragElements } = useDraggableElementAction();
+  const moveableRef = useRef<any>(null);
 
   const updateValueAndSize = (e: any) => {
-    setSize(e.target.value.length > textBoxSize ? (e.target.value.length > maxTextBoxSize ? maxTextBoxSize : e.target.value.length) : textBoxSize);
+    updateDragElementsLayers(element.id, { ...element });
     setIdDraggElementClick("");
+    setSize(e.target.value.length > textBoxSize ? (e.target.value.length > maxTextBoxSize ? maxTextBoxSize : e.target.value.length) : textBoxSize);
     const inputWidth = e.target.offsetWidth;
     const startPosition = calcXTransform(element.transform);
     const endPosition = startPosition + inputWidth;
@@ -44,7 +45,7 @@ const Text = ({ element }: IProps) => {
         size={size}
         onChange={updateValueAndSize}
         onBlur={deleteIfEmpty}
-        className={`flex absolute t-0 l-0 bg-transparent px-2 text-[26px] h-[50px] font-[Arial] focus-visible:outline-none focus-visible:border-[1.5px] focus-visible:border-[#009FDE] ${
+        className={`flex absolute t-0 l-0 z-[0] bg-transparent px-2 text-[26px] h-[50px] font-[Arial] focus-visible:outline-none focus-visible:border-[1.5px] focus-visible:border-[#009FDE] ${
           dragging && "outline-none border-[1.5px] border-[#009FDE]"
         }`}
         autoFocus
@@ -52,9 +53,11 @@ const Text = ({ element }: IProps) => {
           transform: element.transform,
         }}
       />
-      <div id="dragElement-text">
-        <MoveableElement moveableRef={moveableRef} element={element} unit={0} setDragging={setDragging} />
-      </div>
+      {idDraggElementClick == element.id && (
+        <div id="dragElement-text">
+          <MoveableElement moveableRef={moveableRef} element={element} unit={0} dragging={dragging} setDragging={setDragging} />
+        </div>
+      )}
     </>
   );
 };

@@ -13,6 +13,7 @@ export interface IElement {
 export interface IJump {
   value: number;
   underRuler: boolean;
+  width: number;
 }
 export interface IIcons {
   type: NaviKeniIconsTypes;
