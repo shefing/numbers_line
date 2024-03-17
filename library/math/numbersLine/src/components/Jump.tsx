@@ -26,15 +26,13 @@ const Jump = ({ element, unit }: IProps) => {
       <div
         ref={moveableRef}
         id={"dragElement-" + element.id}
-        className={`flex absolute t-0 l-0 ${idDraggElementClick == element.id ? "cursor-move" : "cursor-pointer"} ${
-          jump.underRuler ? "flex-col-reverse" : "flex-col"
-        } `}
+        className={`flex absolute t-0 l-0 ${idDraggElementClick == element.id ? "cursor-move" : "cursor-pointer"} ${jump.underRuler ? "flex-col-reverse" : "flex-col"} `}
         style={{
           width: unit * jump.value,
           transform: element.transform,
         }}
       >
-        <JumpArrow underRuler={jump.underRuler} jumpWidth={unit * jump.value} />
+        <JumpArrow underRuler={jump.underRuler} jumpWidth={jump.width} />
         <div id="dragElement-jumpBase" className={`${baseJumpClassName} ${jump.underRuler ? " bg-[#F48460] mb-[1rem]" : " bg-[#009FDE] mt-[1rem]"}`}>
           <span id="dragElement-jumpLength" className="cursor-pointer" onClick={() => setHideNumber(!hideNumber)}>
             {hideNumber ? "?" : typeRuler != LineRange.hundredCircular ? jump.value : jump.value * 10}

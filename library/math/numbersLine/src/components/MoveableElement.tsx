@@ -7,23 +7,24 @@ import { calcPosition } from "../lib/utils";
 import { ButtonViewable } from "../consts/ButtonViewable";
 import { useDraggableElementAction } from "../hooks/useDraggableElementAction";
 import { useHelpers } from "../hooks/useHelpers";
-import { ActionTypes } from "../type/elements";
+import { ActionTypes, WritingSituation } from "../type/elements";
 
 interface IProps {
   moveableRef: any;
   element: IElement;
   unit: number;
+  dragging?: boolean;
   setDragging?: (v: boolean) => void;
 }
 
-const MoveableElement = ({ moveableRef, element, unit, setDragging }: IProps) => {
-  const { windowSize, typeRuler, rulerPaddingSides, leftPosition, idDraggElementClick } = useNumbersLineContext();
-  const { deleteDragElement, duplicateDragJump, updateDragElements } = useDraggableElementAction();
+const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: IProps) => {
+  const { windowSize, typeRuler, rulerPaddingSides, leftPosition, idDraggElementClick, setIdDraggElementClick, color } = useNumbersLineContext();
+  const { deleteDragElement, duplicateDragJump, updateDragElementsLayers } = useDraggableElementAction();
   const { calculatRulerWidth, calculatScreenWidth, calculatUnitsAmount } = useHelpers();
 
   const ableProps = {
     ButtonViewable: true,
-    deleteViewAble: idDraggElementClick === element.id,
+    deleteViewAble: idDraggElementClick === element.id && !dragging,
     onDeleteClick: () => deleteDragElement(element.id),
     copyViewAble: element.type === ActionTypes.jump && idDraggElementClick === element.id,
     onCopyClick: () => duplicateDragJump(element, unit),
@@ -53,8 +54,9 @@ const MoveableElement = ({ moveableRef, element, unit, setDragging }: IProps) =>
 
   const onDragEnd = (e: OnDragEnd) => {
     if (element.type == ActionTypes.text) {
-      updateDragElements(element.id, { ...element, transform: e.target.style.transform });
+      updateDragElementsLayers(element.id, { ...element, transform: e.target.style.transform });
       setDragging!(false);
+      setIdDraggElementClick("");
       return;
     }
     const yTransform = calcYTransform(e.target.style.transform);
@@ -66,7 +68,7 @@ const MoveableElement = ({ moveableRef, element, unit, setDragging }: IProps) =>
 
     // Change the type of jump if its position has changed relative to the ruler.
     if (!element?.jump) {
-      updateDragElements(element.id, { ...element, transform: e.target.style.transform });
+      updateDragElementsLayers(element.id, { ...element, transform: e.target.style.transform });
       return;
     }
     let isUnderRuler = element.jump.underRuler;
@@ -82,13 +84,14 @@ const MoveableElement = ({ moveableRef, element, unit, setDragging }: IProps) =>
       e.target.style.transform = e.target.style.transform.replace(yTransform + "px)", newYPositionString);
     }
 
-    updateDragElements(element.id, { ...element, transform: e.target.style.transform, jump: { ...element.jump, underRuler: isUnderRuler } });
+    updateDragElementsLayers(element.id, { ...element, transform: e.target.style.transform, jump: { ...element.jump, underRuler: isUnderRuler } });
   };
 
   const onResize = (e: OnResize) => {
     if (!(parseFloat(e.target.style.width) / unit < 1 && e.dist[0] < 0) && !(parseFloat(e.target.style.width) > calculatRulerWidth() && e.dist[0] > 0)) {
       e.target.style.width = `${e.width}px`;
-      updateDragElements(element.id, { ...element });
+      element.jump!.width = e.width;
+      updateDragElementsLayers(element.id, { ...element });
       e.target.style.transform = e.drag.transform;
     }
   };
@@ -99,6 +102,7 @@ const MoveableElement = ({ moveableRef, element, unit, setDragging }: IProps) =>
     const newValue = Math.round(e.lastEvent.width / unit);
     const newWidth = newValue * unit;
     e.target.style.width = `${newWidth}px`;
+    element.jump.width = newWidth;
 
     const xPosition = calcXTransform(e.target.style.transform);
     //Change position when jump out of range.
@@ -116,7 +120,7 @@ const MoveableElement = ({ moveableRef, element, unit, setDragging }: IProps) =>
       e.target.style.transform = newTransform;
     }
 
-    updateDragElements(element.id, { ...element, transform: newTransform, jump: { ...element.jump, value: newValue } });
+    updateDragElementsLayers(element.id, { ...element, transform: newTransform, jump: { ...element.jump, value: newValue } });
   };
 
   return (
@@ -124,8 +128,8 @@ const MoveableElement = ({ moveableRef, element, unit, setDragging }: IProps) =>
       target={moveableRef}
       ables={[ButtonViewable]}
       props={ableProps || false}
-      draggable={element.type == ActionTypes.text ? false : true}
-      edgeDraggable={element.type == ActionTypes.text ? true : false}
+      draggable={element.type != ActionTypes.text && color.description == WritingSituation.non}
+      edgeDraggable={element.type == ActionTypes.text && idDraggElementClick === element.id}
       onDragStart={onDragStart}
       onDrag={(e) => (e.target.style.transform = e.transform)}
       onDragEnd={(e) => onDragEnd(e)}
