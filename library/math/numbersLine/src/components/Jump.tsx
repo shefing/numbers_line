@@ -5,13 +5,15 @@ import { useNumbersLineContext } from "../context/numbersLineContext";
 import { LineRange } from "../type/ruler";
 import JumpArrow from "./JumpArrow";
 import { baseJumpClassName } from "../styles/jump";
+import { useDraggableElementAction } from "../hooks/useDraggableElementAction";
 
 interface IProps {
   element: IElement;
   unit: number;
 }
 const Jump = ({ element, unit }: IProps) => {
-  const { typeRuler, idDraggElementClick } = useNumbersLineContext();
+  const { typeRuler, dragElements, idDraggElementClick } = useNumbersLineContext();
+  const { updateDragElements } = useDraggableElementAction();
   const jump = element.jump!;
   const [hideNumber, setHideNumber] = useState(true);
   const [click, setClick] = useState(false);
@@ -20,6 +22,12 @@ const Jump = ({ element, unit }: IProps) => {
   useEffect(() => {
     setClick(idDraggElementClick === element.id);
   }, [idDraggElementClick]);
+
+  useEffect(() => {
+    dragElements.map((element: IElement) => {
+      element.jump && updateDragElements(element.id, { ...element, jump: { ...jump, width: unit * element.jump.value } });
+    });
+  }, [unit]);
 
   return (
     <>
