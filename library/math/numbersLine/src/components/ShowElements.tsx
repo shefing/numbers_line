@@ -12,7 +12,7 @@ import { LineRange, RulerLenth } from "../type/ruler";
 import { IElement } from "../type/moveable";
 
 const ShowElements = () => {
-  const { windowSize, typeRuler, dragElements, setIdDraggElementClick } = useNumbersLineContext();
+  const { windowSize, rulerType, dragElements, setIdDraggElementClick } = useNumbersLineContext();
   const { calculatRulerWidth, calculatUnitsAmount } = useHelpers();
   const { updateDragElements } = useDraggableElementAction();
   const [unit, setUnit] = useState(calculatRulerWidth() / calculatUnitsAmount());
@@ -59,11 +59,11 @@ const ShowElements = () => {
     if (windowResizing) return;
     setPrevWindowSize({ height: windowSize.height, width: windowSize.width });
     const unitWidth = calculatRulerWidth() / calculatUnitsAmount();
-    typeRuler == LineRange.hundred ? setUnit(windowSize.width / RulerLenth.hundred) : setUnit(unitWidth);
+    rulerType == LineRange.hundred ? setUnit(windowSize.width / RulerLenth.hundred) : setUnit(unitWidth);
     dragElements.map((element: IElement) => {
       updateTransform(element);
     });
-  }, [typeRuler, windowResizing]);
+  }, [rulerType, windowResizing]);
 
   return dragElements.map((element: IElement) => (
     <div key={element.id} id={element.id} onClick={() => setIdDraggElementClick(element.id)}>

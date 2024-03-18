@@ -12,7 +12,7 @@ interface IProps {
   unit: number;
 }
 const Jump = ({ element, unit }: IProps) => {
-  const { typeRuler, dragElements, idDraggElementClick } = useNumbersLineContext();
+  const { rulerType, dragElements, idDraggElementClick } = useNumbersLineContext();
   const { updateDragElements } = useDraggableElementAction();
   const jump = element.jump!;
   const [hideNumber, setHideNumber] = useState(true);
@@ -44,7 +44,7 @@ const Jump = ({ element, unit }: IProps) => {
         <JumpArrow underRuler={jump.underRuler} jumpWidth={jump.width} />
         <div id="dragElement-jumpBase" className={`${baseJumpClassName} ${jump.underRuler ? " bg-[#F48460] mb-[1rem]" : " bg-[#009FDE] mt-[1rem]"}`}>
           <span id="dragElement-jumpLength" className="cursor-pointer" onClick={() => setHideNumber(!hideNumber)}>
-            {hideNumber ? "?" : typeRuler != LineRange.hundredCircular ? jump.value : jump.value * 10}
+            {hideNumber ? "?" : rulerType != LineRange.hundredCircular ? jump.value : jump.value * 10}
           </span>
         </div>
       </div>

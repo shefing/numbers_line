@@ -6,9 +6,9 @@ import { TypeCover } from "../type/elements";
 export const useHelpers = () => {
   const {
     windowSize,
-    typeRuler,
-    setTypeRuler,
-    typeRulerChange,
+    rulerType,
+    setrulerType,
+    rulerTypeShould,
     setRulerPaddingSides,
     setLeftPosition,
     setDragElements,
@@ -27,11 +27,11 @@ export const useHelpers = () => {
   };
 
   const calculatUnitsAmount = () => {
-    return typeRuler == LineRange.hundred || typeRuler == LineRange.twenty ? unitAmount.twenty : unitAmount.ten;
+    return rulerType == LineRange.hundred || rulerType == LineRange.twenty ? unitAmount.twenty : unitAmount.ten;
   };
   const restart = () => {
-    setTypeRuler(typeRulerChange);
-    typeRulerChange == LineRange.hundred ? setRulerPaddingSides(windowSize.width / RulerLenth.hundred / 2) : RulerPaddingSides;
+    setrulerType(rulerTypeShould);
+    rulerTypeShould == LineRange.hundred ? setRulerPaddingSides(windowSize.width / RulerLenth.hundred / 2) : RulerPaddingSides;
     setDragElements([]);
     setCoverSituation(TypeCover.allDiscover);
     setVisitableDisplayButton(TypeCover.allDiscover);

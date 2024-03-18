@@ -9,7 +9,7 @@ import closeMenu from "/assets/icons/menuButtonClose.svg";
 
 const LineDefinition = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { windowSize, typeRuler, setTypeRuler, setRulerPaddingSides, setLeftPosition, dragElements, visitableDisplayButton, setOpenRestartDialog, setTypeRulerChange } =
+  const { windowSize, rulerType, setrulerType, setRulerPaddingSides, setLeftPosition, dragElements, visitableDisplayButton, setOpenRestartDialog, setrulerTypeShould } =
     useNumbersLineContext();
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -31,14 +31,14 @@ const LineDefinition = () => {
   };
 
   const handleMenuButtonClick = (type: LineRange) => {
-    if (type == typeRuler) return;
+    if (type == rulerType) return;
     setIsMenuOpen(false);
     if (dragElements.length == 0 && visitableDisplayButton == TypeCover.allDiscover) {
-      setTypeRuler(type);
-      typeRuler == LineRange.hundred ? setRulerPaddingSides(windowSize.width / RulerLenth.hundred / 2) : RulerPaddingSides;
+      setrulerType(type);
+      rulerType == LineRange.hundred ? setRulerPaddingSides(windowSize.width / RulerLenth.hundred / 2) : RulerPaddingSides;
       setLeftPosition(0);
     } else {
-      setTypeRulerChange(type);
+      setrulerTypeShould(type);
       setOpenRestartDialog(true);
     }
   };
@@ -53,7 +53,7 @@ const LineDefinition = () => {
       {isMenuOpen && (
         <div className="flex flex-col items-end pt-5 pb-2 rounded-md">
           {rulerDefinitionButtonDetials.map((item: IRulerDefinition, i: number) => (
-            <Button key={i} variant="linedefinition" isChoice={item.choice == typeRuler} onClick={() => handleMenuButtonClick(item.choice)}>
+            <Button key={i} variant="linedefinition" isChoice={item.choice == rulerType} onClick={() => handleMenuButtonClick(item.choice)}>
               {item.type}
             </Button>
           ))}

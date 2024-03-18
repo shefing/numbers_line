@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { useHelpers } from "../../hooks/useHelpers";
 
 const Arrows = () => {
-  const { typeRuler, windowSize, leftPosition, setLeftPosition, dragElements, idDraggElementClick, setIdDraggElementClick } = useNumbersLineContext();
+  const { rulerType, windowSize, leftPosition, setLeftPosition, dragElements, idDraggElementClick, setIdDraggElementClick } = useNumbersLineContext();
   const { calculatScreenWidth } = useHelpers();
   const [leftArrowIcon, setLeftArrowIcon] = useState(leftArrow);
   const [rightArrowIcon, setRightArrowIcon] = useState(rightArrow);
@@ -42,7 +42,7 @@ const Arrows = () => {
 
   return (
     <div className="flex justify-between w-full ">
-      {typeRuler == LineRange.hundred && (
+      {rulerType == LineRange.hundred && (
         <>
           <div className="m-5 cursor-pointer relative " onClick={() => updatePositionOnArrowClick("left")}>
             <img src={leftArrowIcon} alt="Left Arrow" />

@@ -18,7 +18,7 @@ interface IProps {
 }
 
 const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: IProps) => {
-  const { windowSize, typeRuler, rulerPaddingSides, leftPosition, idDraggElementClick, setIdDraggElementClick, color } = useNumbersLineContext();
+  const { windowSize, rulerType, rulerPaddingSides, leftPosition, idDraggElementClick, setIdDraggElementClick, color } = useNumbersLineContext();
   const { deleteDragElement, duplicateDragJump, updateDragElements, updateDragElementsLayers } = useDraggableElementAction();
   const { calculatRulerWidth, calculatScreenWidth, calculatUnitsAmount } = useHelpers();
 
@@ -29,7 +29,7 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
     copyViewAble: element.type === ActionTypes.jump && idDraggElementClick === element.id,
     onCopyClick: () => duplicateDragJump(element, unit),
     underRuler: element.jump?.underRuler,
-    typeRuler: typeRuler,
+    rulerType: rulerType,
     leftPosition: leftPosition,
     rulerPaddingSides: rulerPaddingSides,
     calculatScreenWidth: () => calculatScreenWidth(),

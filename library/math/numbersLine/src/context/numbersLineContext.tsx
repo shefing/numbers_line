@@ -5,10 +5,10 @@ import { IElement } from "../type/moveable";
 import { RulerPaddingSides } from "@/consts/elementConsts";
 interface INumbersLineContextProps {
   windowSize: IWindowSize;
-  typeRuler: LineRange;
-  setTypeRuler: (v: LineRange) => void;
-  typeRulerChange: LineRange;
-  setTypeRulerChange: (v: LineRange) => void;
+  rulerType: LineRange;
+  setrulerType: (v: LineRange) => void;
+  rulerTypeShould: LineRange;
+  setrulerTypeShould: (v: LineRange) => void;
   rulerPaddingSides: number;
   setRulerPaddingSides: (v: number) => void;
   leftPosition: number;
@@ -33,10 +33,10 @@ interface INumbersLineContextProps {
 
 export const NumbersLineContext = React.createContext({
   windowSize: {} as IWindowSize,
-  typeRuler: {} as LineRange,
-  setTypeRuler: () => null,
-  typeRulerChange: {} as LineRange,
-  setTypeRulerChange: () => null,
+  rulerType: {} as LineRange,
+  setrulerType: () => null,
+  rulerTypeShould: {} as LineRange,
+  setrulerTypeShould: () => null,
   rulerPaddingSides: {} as number,
   setRulerPaddingSides: () => null,
   leftPosition: {} as number,
@@ -90,10 +90,10 @@ export const NumbersLineContexProvider = (props: any) => {
     <NumbersLineContext.Provider
       value={{
         windowSize,
-        typeRuler: rulerType,
-        setTypeRuler: setRulerType,
-        typeRulerChange: rulerTypeShould,
-        setTypeRulerChange: setRulerTypeShould,
+        rulerType,
+        setrulerType: setRulerType,
+        rulerTypeShould,
+        setrulerTypeShould: setRulerTypeShould,
         rulerPaddingSides,
         setRulerPaddingSides,
         leftPosition,

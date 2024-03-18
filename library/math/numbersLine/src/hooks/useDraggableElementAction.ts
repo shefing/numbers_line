@@ -22,7 +22,7 @@ import { useHelpers } from "./useHelpers";
 export const useDraggableElementAction = () => {
   const {
     windowSize,
-    typeRuler,
+    rulerType,
     rulerPaddingSides,
     setLeftPosition,
     dragElements,
@@ -82,7 +82,7 @@ export const useDraggableElementAction = () => {
     const endNewJumpPosition = startPosition + elementWidth * 2;
     const outOfRange = element.jump?.underRuler ? startPosition - elementWidth : endNewJumpPosition - windowSize.width + rulerPaddingSides - 10;
     let newPosition = element.jump?.underRuler ? startPosition - elementWidth : startPosition + elementWidth;
-    if (typeRuler == LineRange.hundred && ((!element.jump?.underRuler && outOfRange > 0) || (element.jump?.underRuler && outOfRange < 0))) {
+    if (rulerType == LineRange.hundred && ((!element.jump?.underRuler && outOfRange > 0) || (element.jump?.underRuler && outOfRange < 0))) {
       setLeftPosition((prevLeft: number) => prevLeft - outOfRange);
 
       newPosition -= outOfRange;

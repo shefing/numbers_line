@@ -33,7 +33,7 @@ export interface IAbleProps {
   copyViewAble: boolean;
   onCopyClick: () => void;
   underRuler: boolean;
-  typeRuler: LineRange;
+  rulerType: LineRange;
   leftPosition: number;
   rulerPaddingSides: number;
   calculatScreenWidth: () => number;

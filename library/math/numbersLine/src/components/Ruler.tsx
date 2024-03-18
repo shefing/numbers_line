@@ -6,10 +6,10 @@ import { useEffect } from "react";
 import { LineRange, RulerLenth } from "../type/ruler";
 
 const Ruler = () => {
-  const { windowSize, typeRuler, setRulerPaddingSides } = useNumbersLineContext();
+  const { windowSize, rulerType, setRulerPaddingSides } = useNumbersLineContext();
 
   useEffect(() => {
-    typeRuler == LineRange.hundred && setRulerPaddingSides(windowSize.width / RulerLenth.hundred / 2);
+    rulerType == LineRange.hundred && setRulerPaddingSides(windowSize.width / RulerLenth.hundred / 2);
   }, [windowSize]);
 
   return (
