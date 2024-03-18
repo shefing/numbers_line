@@ -1,4 +1,4 @@
-import { jumpArrowHeight } from "../consts/elementConsts";
+import { dragElementID, jumpArrowHeight } from "../consts/elementConsts";
 import { useNumbersLineContext } from "../context/numbersLineContext";
 import { useEffect, useState } from "react";
 
@@ -20,7 +20,7 @@ const JumpArrow = ({ underRuler, jumpWidth }: IProps) => {
   }, [jumpWidth, windowSize]);
 
   return (
-    <svg id="dragElement-jumpArrow" className=" w-full " style={{ height: jumpArrowHeight + "px" }}>
+    <svg id={`${dragElementID}-jumpArrow`} className=" w-full " style={{ height: jumpArrowHeight + "px" }}>
       <path
         d={
           underRuler

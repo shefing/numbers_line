@@ -4,7 +4,10 @@
  
 @layer components{
   .text-box{
-    @apply flex absolute top-0 left-0 z-[0] bg-transparent px-2 text-[26px] h-[50px] font-[Arial] focus-visible:outline-none focus-visible:border-[1.5px] focus-visible:border-[#009FDE] 
+    @apply bg-transparent px-2 text-[26px] h-[50px] font-[Arial] focus-visible:outline-none focus-visible:border-[1.5px] focus-visible:border-[#009FDE] 
+  }
+  .drag-element{
+    @apply flex absolute top-0 left-0
   }
 }
 @layer base {

@@ -7,12 +7,13 @@ import Restart from "./components/Restart";
 import { useNumbersLineContext } from "./context/numbersLineContext";
 import { useEffect } from "react";
 import Brush from "./components/Brush";
+import { dragElementID } from "./consts/elementConsts";
 
 const App = () => {
   const { setIdDraggElementClick } = useNumbersLineContext();
 
   const handleClickOutside = (event: any) => {
-    !event.target.id.includes("dragElement") && setIdDraggElementClick("");
+    !event.target.id.includes(dragElementID) && setIdDraggElementClick("");
   };
 
   useEffect(() => {

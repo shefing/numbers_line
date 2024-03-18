@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import MoveableElement from "./MoveableElement";
 import { useNumbersLineContext } from "../context/numbersLineContext";
 import { useDraggableElementAction } from "../hooks/useDraggableElementAction";
-import { maxTextBoxSize, textBoxSize } from "../consts/elementConsts";
+import { dragElementID, maxTextBoxSize, textBoxSize } from "../consts/elementConsts";
 import { calcXTransform } from "../lib/utils";
 
 interface IProps {
@@ -45,7 +45,7 @@ const Text = ({ element }: IProps) => {
         size={size}
         onChange={updateValueAndSize}
         onBlur={deleteIfEmpty}
-        className={`text-box ${dragging && "outline-none border-[1.5px] border-[#009FDE]"}`}
+        className={`drag-element text-box ${dragging && "outline-none border-[1.5px] border-[#009FDE]"}`}
         autoFocus
         style={{
           transform: element.transform,
@@ -53,7 +53,7 @@ const Text = ({ element }: IProps) => {
         }}
       />
       {idDraggElementClick == element.id && (
-        <div id="dragElement-text">
+        <div id={`${dragElementID}-text`}>
           <MoveableElement moveableRef={moveableRef} element={element} unit={0} dragging={dragging} setDragging={setDragging} />
         </div>
       )}

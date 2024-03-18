@@ -4,6 +4,7 @@ import MoveableElement from "./MoveableElement";
 import navi from "/assets/icons/naviOnScreen.svg";
 import keni from "/assets/icons/keniOnScreen.svg";
 import { NaviKeniIconsTypes } from "../type/elements";
+import { dragElementID } from "../consts/elementConsts";
 
 interface IProps {
   element: IElement;
@@ -17,16 +18,16 @@ const NaviKany = ({ element, unit }: IProps) => {
     <>
       <img
         ref={moveableRef}
-        id={`dragElement-${element.id}`}
+        id={`${dragElementID}-${element.id}`}
         src={element.icons?.type == NaviKeniIconsTypes.navi ? navi : keni}
-        className="flex absolute t-0 l-0 cursor-move"
+        className="drag-element cursor-move"
         style={{
           transform: element.transform,
           width: unit * element.icons!.widthRelatively,
           zIndex: element.zIndex,
         }}
       />
-      <div id="dragElement-naviKeni">
+      <div id={`${dragElementID}-naviKeni`}>
         <MoveableElement moveableRef={moveableRef} element={element} unit={unit} />
       </div>
     </>
