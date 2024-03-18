@@ -65,8 +65,8 @@ const ShowElements = () => {
     });
   }, [typeRuler, windowResizing]);
 
-  return dragElements.map((element: IElement, i) => (
-    <div key={element.id} id={element.id} onClick={() => setIdDraggElementClick(element.id)} style={{ zIndex: i }}>
+  return dragElements.map((element: IElement) => (
+    <div key={element.id} id={element.id} onClick={() => setIdDraggElementClick(element.id)}>
       {(() => {
         switch (element.type) {
           case ActionTypes.jump:

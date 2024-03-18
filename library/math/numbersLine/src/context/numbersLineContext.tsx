@@ -27,6 +27,8 @@ interface INumbersLineContextProps {
   setOpenRestartDialog: (v: boolean) => void;
   color: IColor;
   setColor: (v: IColor) => void;
+  zIndexCounter: number;
+  setZIndexCounter: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const NumbersLineContext = React.createContext({
@@ -53,6 +55,8 @@ export const NumbersLineContext = React.createContext({
   setOpenRestartDialog: () => null,
   color: {} as IColor,
   setColor: () => null,
+  zIndexCounter: {} as number,
+  setZIndexCounter: () => null,
 } as INumbersLineContextProps);
 
 export const NumbersLineContexProvider = (props: any) => {
@@ -68,6 +72,7 @@ export const NumbersLineContexProvider = (props: any) => {
   const [openRestartDialog, setOpenRestartDialog] = useState(false);
   const [rulerPaddingSides, setRulerPaddingSides] = useState(RulerPaddingSides);
   const [color, setColor] = useState<IColor>({ description: WritingSituation.non, url: Colors.non });
+  const [zIndexCounter, setZIndexCounter] = useState(1);
 
   const Resize = () => {
     setWindowSize({ height: window.innerHeight, width: window.innerWidth });
@@ -107,6 +112,8 @@ export const NumbersLineContexProvider = (props: any) => {
         setOpenRestartDialog,
         color,
         setColor,
+        zIndexCounter,
+        setZIndexCounter,
       }}
     >
       {props.children}

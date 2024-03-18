@@ -9,18 +9,8 @@ import closeMenu from "/assets/icons/menuButtonClose.svg";
 
 const LineDefinition = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const {
-    windowSize,
-    typeRuler,
-    setTypeRuler,
-    setRulerPaddingSides,
-    setLeftPosition,
-    dragElements,
-    visitableDisplayButton,
-    setOpenRestartDialog,
-    setTypeRulerChange,
-    setIdDraggElementClick,
-  } = useNumbersLineContext();
+  const { windowSize, typeRuler, setTypeRuler, setRulerPaddingSides, setLeftPosition, dragElements, visitableDisplayButton, setOpenRestartDialog, setTypeRulerChange } =
+    useNumbersLineContext();
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -42,7 +32,6 @@ const LineDefinition = () => {
 
   const handleMenuButtonClick = (type: LineRange) => {
     if (type == typeRuler) return;
-    setIdDraggElementClick("");
     setIsMenuOpen(false);
     if (dragElements.length == 0 && visitableDisplayButton == TypeCover.allDiscover) {
       setTypeRuler(type);

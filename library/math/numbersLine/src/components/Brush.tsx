@@ -6,9 +6,8 @@ import { v4 as uuidv4 } from "uuid";
 import { IElement, ILine } from "../type/moveable";
 
 const Brush = () => {
-  const { windowSize, dragElements, setDragElements, color } = useNumbersLineContext();
+  const { windowSize, dragElements, setDragElements, color, zIndexCounter, setZIndexCounter } = useNumbersLineContext();
   const [isDrawing, setIsDrawing] = useState(false);
-  // State to store drawn lines
   const [line, setLine] = useState<ILine | null>();
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const contextRef = useRef<CanvasRenderingContext2D | null>(null);
@@ -26,23 +25,21 @@ const Brush = () => {
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
     color.url == Colors.delete && (ctx.globalCompositeOperation = "destination-out");
-    // Store the context reference in a ref
     contextRef.current = ctx;
   }, [windowSize, color, dragElements]);
 
   const deleteLine = (offsetX: number, offsetY: number) => {
     const eraserPath = new Path2D();
-    const eraserRadius = brushWidth; // Increase the eraser radius to cover a wider area
     contextRef.current!.lineWidth = brushWidth;
     contextRef.current!.stroke();
-    eraserPath.arc(offsetX, offsetY, eraserRadius, 0, 2 * Math.PI); // Center the eraser path around the cursor
+    eraserPath.arc(offsetX, offsetY, brushWidth, 0, 2 * Math.PI);
 
     // Filter out the lines intersecting with the eraser path
     const updatedDragElements: IElement[] = dragElements.filter((element: IElement) => {
       if (element.type === ActionTypes.writing && element.writing) {
         for (const point of element.writing.points) {
           // Check if any point of the line falls within the expanded eraser path
-          if (Math.sqrt((point.x - offsetX) ** 2 + (point.y - offsetY) ** 2) <= eraserRadius) return false;
+          if (Math.sqrt((point.x - offsetX) ** 2 + (point.y - offsetY) ** 2) <= brushWidth) return false;
         }
       }
       return true;
@@ -92,8 +89,10 @@ const Brush = () => {
       type: ActionTypes.writing,
       transform: "",
       writing: line,
+      zIndex: zIndexCounter,
     };
     setDragElements([...dragElements, newElement]);
+    setZIndexCounter((prev) => prev + 1);
   };
 
   return (
@@ -109,8 +108,8 @@ const Brush = () => {
         onTouchMove={drawing}
         onTouchEnd={stopDrawing}
         onTouchCancel={stopDrawing}
-        style={color.url == Colors.delete ? { cursor: "cell", zIndex: dragElements.length } : { cursor: "crosshair", zIndex: dragElements.length }}
-      ></canvas>
+        style={color.url == Colors.delete ? { cursor: "cell", zIndex: zIndexCounter } : { cursor: "crosshair", zIndex: zIndexCounter }}
+      />
     )
   );
 };

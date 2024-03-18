@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
  
+@layer components{
+  .text-box{
+    @apply flex absolute top-0 left-0 z-[0] bg-transparent px-2 text-[26px] h-[50px] font-[Arial] focus-visible:outline-none focus-visible:border-[1.5px] focus-visible:border-[#009FDE] 
+  }
+}
 @layer base {
   :root {
     --background: 0 0% 100%;

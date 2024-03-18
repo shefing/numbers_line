@@ -34,10 +34,11 @@ const Jump = ({ element, unit }: IProps) => {
       <div
         ref={moveableRef}
         id={"dragElement-" + element.id}
-        className={`flex absolute t-0 l-0 ${idDraggElementClick == element.id ? "cursor-move" : "cursor-pointer"} ${jump.underRuler ? "flex-col-reverse" : "flex-col"} `}
+        className={`flex absolute t-0 l-0 cursor-move ${jump.underRuler ? "flex-col-reverse" : "flex-col"} `}
         style={{
           width: unit * jump.value,
           transform: element.transform,
+          zIndex: element.zIndex,
         }}
       >
         <JumpArrow underRuler={jump.underRuler} jumpWidth={jump.width} />

@@ -1,7 +1,6 @@
 import { IElement } from "../type/moveable";
 import { useRef } from "react";
 import MoveableElement from "./MoveableElement";
-import { useNumbersLineContext } from "../context/numbersLineContext";
 import navi from "/assets/icons/naviOnScreen.svg";
 import keni from "/assets/icons/keniOnScreen.svg";
 import { NaviKeniIconsTypes } from "../type/elements";
@@ -12,7 +11,6 @@ interface IProps {
 }
 
 const NaviKany = ({ element, unit }: IProps) => {
-  const { idDraggElementClick } = useNumbersLineContext();
   const moveableRef = useRef<any>(null);
 
   return (
@@ -21,10 +19,11 @@ const NaviKany = ({ element, unit }: IProps) => {
         ref={moveableRef}
         id={`dragElement-${element.id}`}
         src={element.icons?.type == NaviKeniIconsTypes.navi ? navi : keni}
-        className={`flex absolute t-0 l-0 ${idDraggElementClick == element.id ? "cursor-move" : "cursor-pointer"}`}
+        className="flex absolute t-0 l-0 cursor-move"
         style={{
           transform: element.transform,
           width: unit * element.icons!.widthRelatively,
+          zIndex: element.zIndex,
         }}
       />
       <div id="dragElement-naviKeni">

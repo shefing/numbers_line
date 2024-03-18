@@ -15,6 +15,7 @@ export const useHelpers = () => {
     setDuplicateElementSpace,
     setCoverSituation,
     setVisitableDisplayButton,
+    setZIndexCounter,
   } = useNumbersLineContext();
 
   const calculatScreenWidth = () => {
@@ -36,6 +37,7 @@ export const useHelpers = () => {
     setVisitableDisplayButton(TypeCover.allDiscover);
     setLeftPosition(0);
     setDuplicateElementSpace(0);
+    setZIndexCounter(0);
   };
 
   return {

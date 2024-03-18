@@ -19,7 +19,7 @@ interface IProps {
 
 const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: IProps) => {
   const { windowSize, typeRuler, rulerPaddingSides, leftPosition, idDraggElementClick, setIdDraggElementClick, color } = useNumbersLineContext();
-  const { deleteDragElement, duplicateDragJump, updateDragElementsLayers } = useDraggableElementAction();
+  const { deleteDragElement, duplicateDragJump, updateDragElements, updateDragElementsLayers } = useDraggableElementAction();
   const { calculatRulerWidth, calculatScreenWidth, calculatUnitsAmount } = useHelpers();
 
   const ableProps = {
@@ -33,9 +33,6 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
     leftPosition: leftPosition,
     rulerPaddingSides: rulerPaddingSides,
     calculatScreenWidth: () => calculatScreenWidth(),
-  };
-  const onDragStart = () => {
-    if (element.type == ActionTypes.text) setDragging!(true);
   };
 
   const updateXLocation = (e: any) => {
@@ -52,9 +49,14 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
     e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + newXPosition);
   };
 
+  const onDragStart = () => {
+    updateDragElementsLayers(element);
+    if (element.type == ActionTypes.text) setDragging!(true);
+  };
+
   const onDragEnd = (e: OnDragEnd) => {
     if (element.type == ActionTypes.text) {
-      updateDragElementsLayers(element.id, { ...element, transform: e.target.style.transform });
+      updateDragElements(element.id, { ...element, transform: e.target.style.transform });
       setDragging!(false);
       setIdDraggElementClick("");
       return;
@@ -62,13 +64,11 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
     const yTransform = calcYTransform(e.target.style.transform);
     const rulerPosition = windowSize.height * (1 - rulerMargin);
     let elementPsition = calcPosition(yTransform, element, unit);
-
     // Change the position of the element relative to the integers, provided that the position is close to the axis.
     if (Math.abs(rulerPosition - elementPsition) < 50) updateXLocation(e);
-
     // Change the type of jump if its position has changed relative to the ruler.
     if (!element?.jump) {
-      updateDragElementsLayers(element.id, { ...element, transform: e.target.style.transform });
+      updateDragElements(element.id, { ...element, transform: e.target.style.transform });
       return;
     }
     let isUnderRuler = element.jump.underRuler;
@@ -83,15 +83,13 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
       }
       e.target.style.transform = e.target.style.transform.replace(yTransform + "px)", newYPositionString);
     }
-
-    updateDragElementsLayers(element.id, { ...element, transform: e.target.style.transform, jump: { ...element.jump, underRuler: isUnderRuler } });
+    updateDragElements(element.id, { ...element, transform: e.target.style.transform, jump: { ...element.jump, underRuler: isUnderRuler } });
   };
 
   const onResize = (e: OnResize) => {
     if (!(parseFloat(e.target.style.width) / unit < 1 && e.dist[0] < 0) && !(parseFloat(e.target.style.width) > calculatRulerWidth() && e.dist[0] > 0)) {
       e.target.style.width = `${e.width}px`;
-      element.jump!.width = e.width;
-      updateDragElementsLayers(element.id, { ...element });
+      updateDragElements(element.id, { ...element, jump: { ...element.jump!, width: e.width } });
       e.target.style.transform = e.drag.transform;
     }
   };
@@ -103,7 +101,6 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
     const newWidth = newValue * unit;
     e.target.style.width = `${newWidth}px`;
     element.jump.width = newWidth;
-
     const xPosition = calcXTransform(e.target.style.transform);
     //Change position when jump out of range.
     if (xPosition + newWidth > windowSize.width - rulerPaddingSides) {
@@ -119,8 +116,7 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
       newTransform = e.target.style.transform.replace("(" + xPosition, newXPosition);
       e.target.style.transform = newTransform;
     }
-
-    updateDragElementsLayers(element.id, { ...element, transform: newTransform, jump: { ...element.jump, value: newValue } });
+    updateDragElements(element.id, { ...element, transform: newTransform, jump: { ...element.jump, value: newValue } });
   };
 
   return (
