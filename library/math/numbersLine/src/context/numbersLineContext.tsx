@@ -5,10 +5,10 @@ import { IElement } from "../type/moveable";
 import { RulerPaddingSides } from "@/consts/elementConsts";
 interface INumbersLineContextProps {
   windowSize: IWindowSize;
-  typeRuler: LineRange;
-  setTypeRuler: (v: LineRange) => void;
-  typeRulerChange: LineRange;
-  setTypeRulerChange: (v: LineRange) => void;
+  rulerType: LineRange;
+  setrulerType: (v: LineRange) => void;
+  rulerTypeShould: LineRange;
+  setrulerTypeShould: (v: LineRange) => void;
   rulerPaddingSides: number;
   setRulerPaddingSides: (v: number) => void;
   leftPosition: number;
@@ -27,14 +27,16 @@ interface INumbersLineContextProps {
   setOpenRestartDialog: (v: boolean) => void;
   color: IColor;
   setColor: (v: IColor) => void;
+  zIndexCounter: number;
+  setZIndexCounter: React.Dispatch<React.SetStateAction<number>>;
 }
 
 export const NumbersLineContext = React.createContext({
   windowSize: {} as IWindowSize,
-  typeRuler: {} as LineRange,
-  setTypeRuler: () => null,
-  typeRulerChange: {} as LineRange,
-  setTypeRulerChange: () => null,
+  rulerType: {} as LineRange,
+  setrulerType: () => null,
+  rulerTypeShould: {} as LineRange,
+  setrulerTypeShould: () => null,
   rulerPaddingSides: {} as number,
   setRulerPaddingSides: () => null,
   leftPosition: {} as number,
@@ -53,6 +55,8 @@ export const NumbersLineContext = React.createContext({
   setOpenRestartDialog: () => null,
   color: {} as IColor,
   setColor: () => null,
+  zIndexCounter: {} as number,
+  setZIndexCounter: () => null,
 } as INumbersLineContextProps);
 
 export const NumbersLineContexProvider = (props: any) => {
@@ -68,6 +72,7 @@ export const NumbersLineContexProvider = (props: any) => {
   const [openRestartDialog, setOpenRestartDialog] = useState(false);
   const [rulerPaddingSides, setRulerPaddingSides] = useState(RulerPaddingSides);
   const [color, setColor] = useState<IColor>({ description: WritingSituation.non, url: Colors.non });
+  const [zIndexCounter, setZIndexCounter] = useState(1);
 
   const Resize = () => {
     setWindowSize({ height: window.innerHeight, width: window.innerWidth });
@@ -85,10 +90,10 @@ export const NumbersLineContexProvider = (props: any) => {
     <NumbersLineContext.Provider
       value={{
         windowSize,
-        typeRuler: rulerType,
-        setTypeRuler: setRulerType,
-        typeRulerChange: rulerTypeShould,
-        setTypeRulerChange: setRulerTypeShould,
+        rulerType,
+        setrulerType: setRulerType,
+        rulerTypeShould,
+        setrulerTypeShould: setRulerTypeShould,
         rulerPaddingSides,
         setRulerPaddingSides,
         leftPosition,
@@ -107,6 +112,8 @@ export const NumbersLineContexProvider = (props: any) => {
         setOpenRestartDialog,
         color,
         setColor,
+        zIndexCounter,
+        setZIndexCounter,
       }}
     >
       {props.children}

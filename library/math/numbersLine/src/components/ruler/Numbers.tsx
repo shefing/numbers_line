@@ -4,15 +4,15 @@ import { LineRange, PartToCover, RulerLenth } from "../../type/ruler";
 import { TypeCover } from "../../type/elements";
 
 const Numbers = () => {
-  const { windowSize, typeRuler, rulerPaddingSides, leftPosition, coverSituation, setCoverSituation, setVisitableDisplayButton } = useNumbersLineContext();
+  const { windowSize, rulerType, rulerPaddingSides, leftPosition, coverSituation, setCoverSituation, setVisitableDisplayButton } = useNumbersLineContext();
   const [labels, setLabels] = useState<number[]>([]);
   const [labelsCover, setClickedLabelsCover] = useState(new Set());
 
   useEffect(() => {
-    let array = Array.from({ length: typeRuler == LineRange.hundredCircular ? typeRuler + 1 : typeRuler }, (_, index) => index);
+    let array = Array.from({ length: rulerType == LineRange.hundredCircular ? rulerType + 1 : rulerType }, (_, index) => index);
     setCoverSituation(TypeCover.allDiscover);
     setLabels(array);
-  }, [typeRuler]);
+  }, [rulerType]);
 
   useEffect(() => {
     if (coverSituation == TypeCover.allCover) {
@@ -54,7 +54,7 @@ const Numbers = () => {
     <div
       className={`fixed left-0 right-0 flex justify-between border-t-4 border-gray-900 pt-0 mx-0`}
       style={
-        typeRuler == LineRange.hundred
+        rulerType == LineRange.hundred
           ? {
               width: windowSize.width * (LineRange.hundred / RulerLenth.hundred),
               left: `${leftPosition}px`,
@@ -65,7 +65,7 @@ const Numbers = () => {
       }
     >
       {labels.map((label) =>
-        typeRuler != LineRange.hundredCircular || label % 10 == 0 ? (
+        rulerType != LineRange.hundredCircular || label % 10 == 0 ? (
           <div key={label} className="flex flex-col items-center">
             <div className="h-4 border-l-4 border-gray-900 w-1366" />
             <div

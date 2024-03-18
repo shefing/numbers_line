@@ -1,4 +1,4 @@
-import DisplayNumbers from "./DisplayNumbers";
+import DisplayNumbersMenu from "./DisplayNumbersMenu";
 import BrushMenu from "./BrushMenu";
 import NaviKanyMenu from "./NaviKeniMenu";
 import { useDraggableElementAction } from "../../hooks/useDraggableElementAction";
@@ -13,17 +13,8 @@ interface IProps {
   isMenu?: boolean;
 }
 const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
-  const {
-    dragElements,
-    idDraggElementClick,
-    setIdDraggElementClick,
-    setDuplicateElementSpace,
-    openRestartDialog,
-    setOpenRestartDialog,
-    visitableDisplayButton,
-    color,
-    setColor,
-  } = useNumbersLineContext();
+  const { dragElements, idDraggElementClick, setIdDraggElementClick, setDuplicateElementSpace, openRestartDialog, setOpenRestartDialog, visitableDisplayButton, color, setColor } =
+    useNumbersLineContext();
   const { addDraggableElement } = useDraggableElementAction();
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -76,7 +67,7 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
       {isOpen &&
         //Opening an appropriate menu depending on the type of button
         (typeAction === ActionTypes.displayNumbersLine ? (
-          <DisplayNumbers setOpen={setIsOpen} />
+          <DisplayNumbersMenu setOpen={setIsOpen} />
         ) : typeAction === ActionTypes.naviAndKeni ? (
           <NaviKanyMenu setOpen={setIsOpen} />
         ) : (

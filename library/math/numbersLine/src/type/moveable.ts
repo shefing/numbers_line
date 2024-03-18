@@ -8,6 +8,7 @@ export interface IElement {
   icons?: IIcons;
   writing?: ILine;
   transform: string;
+  zIndex: number;
 }
 
 export interface IJump {
@@ -32,7 +33,7 @@ export interface IAbleProps {
   copyViewAble: boolean;
   onCopyClick: () => void;
   underRuler: boolean;
-  typeRuler: LineRange;
+  rulerType: LineRange;
   leftPosition: number;
   rulerPaddingSides: number;
   calculatScreenWidth: () => number;

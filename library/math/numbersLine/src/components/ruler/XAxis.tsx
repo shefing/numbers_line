@@ -5,7 +5,7 @@ import Numbers from "./Numbers";
 import { useHelpers } from "../../hooks/useHelpers";
 import { ruleHeight } from "../../consts/elementConsts";
 const XAxis = () => {
-  const { windowSize, typeRuler, leftPosition, setLeftPosition, setIdDraggElementClick } = useNumbersLineContext();
+  const { windowSize, rulerType, leftPosition, setLeftPosition, setIdDraggElementClick } = useNumbersLineContext();
   const { calculatScreenWidth } = useHelpers();
 
   const [startX, setStartX] = useState(0);
@@ -41,11 +41,11 @@ const XAxis = () => {
 
   return (
     <div
-      className={typeRuler == LineRange.hundred ? `cursor-move  w-full` : ""}
-      onMouseDown={typeRuler == LineRange.hundred ? handleStartDrag : () => {}}
-      onMouseMove={typeRuler == LineRange.hundred ? handleonDrag : () => {}}
-      onMouseUp={typeRuler == LineRange.hundred ? handleStopDrag : () => {}}
-      onMouseLeave={typeRuler == LineRange.hundred ? handleStopDrag : () => {}}
+      className={rulerType == LineRange.hundred ? `cursor-move  w-full` : ""}
+      onMouseDown={rulerType == LineRange.hundred ? handleStartDrag : () => {}}
+      onMouseMove={rulerType == LineRange.hundred ? handleonDrag : () => {}}
+      onMouseUp={rulerType == LineRange.hundred ? handleStopDrag : () => {}}
+      onMouseLeave={rulerType == LineRange.hundred ? handleStopDrag : () => {}}
       style={{ height: ruleHeight + "px" }}
     >
       <Numbers />

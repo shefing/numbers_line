@@ -20,8 +20,19 @@ import { calcXTransform } from "../lib/utils";
 import { useHelpers } from "./useHelpers";
 
 export const useDraggableElementAction = () => {
-  const { windowSize, typeRuler, rulerPaddingSides, setLeftPosition, dragElements, setDragElements, setIdDraggElementClick, duplicateElementSpace, setDuplicateElementSpace } =
-    useNumbersLineContext();
+  const {
+    windowSize,
+    rulerType,
+    rulerPaddingSides,
+    setLeftPosition,
+    dragElements,
+    setDragElements,
+    setIdDraggElementClick,
+    duplicateElementSpace,
+    setDuplicateElementSpace,
+    zIndexCounter,
+    setZIndexCounter,
+  } = useNumbersLineContext();
   const { calculatRulerWidth, calculatUnitsAmount } = useHelpers();
 
   const addDraggableElement = (typeAction: ActionTypes, type?: NaviKeniIconsTypes) => {
@@ -33,6 +44,7 @@ export const useDraggableElementAction = () => {
       id: uuidv4(),
       type: typeAction,
       transform: `translate(${xTranslate}px, ${yTranslate}px)`,
+      zIndex: zIndexCounter,
     };
 
     if (typeAction === ActionTypes.jump) {
@@ -48,6 +60,7 @@ export const useDraggableElementAction = () => {
         };
     }
     setDragElements([...dragElements, newElement]);
+    setZIndexCounter((prev) => prev + 1);
     setDuplicateElementSpace((prevPixels) => prevPixels + duplicateElementStepSpace);
     const outOfRange =
       xTranslate > windowSize.width - windowSize.width / calculatUnitsAmount() - rulerPaddingSides ||
@@ -69,7 +82,7 @@ export const useDraggableElementAction = () => {
     const endNewJumpPosition = startPosition + elementWidth * 2;
     const outOfRange = element.jump?.underRuler ? startPosition - elementWidth : endNewJumpPosition - windowSize.width + rulerPaddingSides - 10;
     let newPosition = element.jump?.underRuler ? startPosition - elementWidth : startPosition + elementWidth;
-    if (typeRuler == LineRange.hundred && ((!element.jump?.underRuler && outOfRange > 0) || (element.jump?.underRuler && outOfRange < 0))) {
+    if (rulerType == LineRange.hundred && ((!element.jump?.underRuler && outOfRange > 0) || (element.jump?.underRuler && outOfRange < 0))) {
       setLeftPosition((prevLeft: number) => prevLeft - outOfRange);
 
       newPosition -= outOfRange;
@@ -84,22 +97,21 @@ export const useDraggableElementAction = () => {
     setIdDraggElementClick(id);
   };
 
-  const updateDragElementsLayers = (elementId: string, newElement: IElement) => {
-    const dragElementsWithoutNewElement = dragElements.filter((item: IElement) => item.id != elementId);
-    const newElements = [...dragElementsWithoutNewElement, newElement];
-    setDragElements(newElements);
-  };
-
   const updateDragElements = (elementId: string, newElement: IElement) => {
     const newElements = dragElements.map((item: IElement) => (item.id === elementId ? newElement : item));
     setDragElements(newElements);
+  };
+
+  const updateDragElementsLayers = (element: IElement) => {
+    updateDragElements(element.id, { ...element, zIndex: zIndexCounter });
+    setZIndexCounter((prev) => prev + 1);
   };
 
   return {
     addDraggableElement,
     deleteDragElement,
     duplicateDragJump,
-    updateDragElementsLayers,
     updateDragElements,
+    updateDragElementsLayers,
   };
 };

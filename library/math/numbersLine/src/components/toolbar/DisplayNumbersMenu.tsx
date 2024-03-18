@@ -7,7 +7,7 @@ import { ToolbarHeight, displayRulerButtonDetials } from "../../consts/elementCo
 interface IProps {
   setOpen: (val: boolean) => void;
 }
-const DisplayNumbers = ({ setOpen }: IProps) => {
+const DisplayNumbersMenu = ({ setOpen }: IProps) => {
   const { coverSituation, visitableDisplayButton, setCoverSituation } = useNumbersLineContext();
 
   const onClickButtons = (type: TypeCover) => {
@@ -16,10 +16,10 @@ const DisplayNumbers = ({ setOpen }: IProps) => {
   };
 
   return (
-    <div className="fixed">
+    <div className="fixed ">
       <div className="flex flex-col items-center" style={{ margin: ToolbarHeight - 10 + "px" }}>
         <img className="relative mb-[-3px] " src={triangleToMenu} alt="triple for menu" />
-        <div className="bg-white flex flex-col items-end  rounded-[6px] border border-[#009FDE] p-2 ">
+        <div className="flex flex-col items-end bg-white rounded-[6px] border border-[#009FDE] p-2 ">
           {displayRulerButtonDetials.map((item: IDisplayRuller, i: number) => (
             <Button
               key={i}
@@ -37,4 +37,4 @@ const DisplayNumbers = ({ setOpen }: IProps) => {
   );
 };
 
-export default DisplayNumbers;
+export default DisplayNumbersMenu;

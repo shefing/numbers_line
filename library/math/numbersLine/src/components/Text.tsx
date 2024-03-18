@@ -3,7 +3,7 @@ import { useRef, useState } from "react";
 import MoveableElement from "./MoveableElement";
 import { useNumbersLineContext } from "../context/numbersLineContext";
 import { useDraggableElementAction } from "../hooks/useDraggableElementAction";
-import { maxTextBoxSize, textBoxSize } from "../consts/elementConsts";
+import { dragElementID, maxTextBoxSize, textBoxSize } from "../consts/elementConsts";
 import { calcXTransform } from "../lib/utils";
 
 interface IProps {
@@ -18,7 +18,7 @@ const Text = ({ element }: IProps) => {
   const moveableRef = useRef<any>(null);
 
   const updateValueAndSize = (e: any) => {
-    updateDragElementsLayers(element.id, { ...element });
+    updateDragElementsLayers(element);
     setIdDraggElementClick("");
     setSize(e.target.value.length > textBoxSize ? (e.target.value.length > maxTextBoxSize ? maxTextBoxSize : e.target.value.length) : textBoxSize);
     const inputWidth = e.target.offsetWidth;
@@ -45,16 +45,15 @@ const Text = ({ element }: IProps) => {
         size={size}
         onChange={updateValueAndSize}
         onBlur={deleteIfEmpty}
-        className={`flex absolute t-0 l-0 z-[0] bg-transparent px-2 text-[26px] h-[50px] font-[Arial] focus-visible:outline-none focus-visible:border-[1.5px] focus-visible:border-[#009FDE] ${
-          dragging && "outline-none border-[1.5px] border-[#009FDE]"
-        }`}
+        className={`drag-element text-box ${dragging && "outline-none border-[1.5px] border-[#009FDE]"}`}
         autoFocus
         style={{
           transform: element.transform,
+          zIndex: element.zIndex,
         }}
       />
       {idDraggElementClick == element.id && (
-        <div id="dragElement-text">
+        <div id={`${dragElementID}-text`}>
           <MoveableElement moveableRef={moveableRef} element={element} unit={0} dragging={dragging} setDragging={setDragging} />
         </div>
       )}

@@ -10,7 +10,7 @@ export const ButtonViewable = {
   name: "ButtonViewable",
   props: ["ButtonViewable"],
   render(moveable: MoveableManagerInterface) {
-    const { deleteViewAble, onDeleteClick, copyViewAble, onCopyClick, underRuler, typeRuler, leftPosition, rulerPaddingSides, calculatScreenWidth } =
+    const { deleteViewAble, onDeleteClick, copyViewAble, onCopyClick, underRuler, rulerType, leftPosition, rulerPaddingSides, calculatScreenWidth } =
       moveable.props as unknown as IAbleProps;
     const { cssWidth, inlineTransform } = moveable.state;
     const matchX = inlineTransform.match(/\((.*?)px/);
@@ -20,8 +20,8 @@ export const ButtonViewable = {
       const endXPosition = parseFloat(xPosition) + cssWidth * 2;
       const outOfRange = underRuler ? parseInt(xPosition) - cssWidth : endXPosition - window.innerWidth + rulerPaddingSides - 10;
       //Checking if there is an option to copy in terms of space on the screen for the new jump
-      if (!underRuler && outOfRange > 0 && (typeRuler != LineRange.hundred || leftPosition - outOfRange < calculatScreenWidth())) copyApproval = false;
-      if (underRuler && outOfRange < 0 && (typeRuler != LineRange.hundred || parseFloat(xPosition) + outOfRange > 0)) copyApproval = false;
+      if (!underRuler && outOfRange > 0 && (rulerType != LineRange.hundred || leftPosition - outOfRange < calculatScreenWidth())) copyApproval = false;
+      if (underRuler && outOfRange < 0 && (rulerType != LineRange.hundred || parseFloat(xPosition) + outOfRange > 0)) copyApproval = false;
     }
     const Icons = moveable.useCSS(
       "div",
