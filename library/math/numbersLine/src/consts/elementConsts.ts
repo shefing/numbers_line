@@ -19,6 +19,9 @@ import naviAndKeni from "/assets/icons/toolbar/naviAndKeni.svg";
 import restart from "/assets/icons/toolbar/restart.svg";
 import navi from "/assets/icons/navi.svg";
 import keni from "/assets/icons/keni.svg";
+import writingBlue from "/assets/icons/writingBlueMenu.svg";
+import writingGreen from "/assets/icons/writingGreenMenu.svg";
+import writingOrange from "/assets/icons/writingOrangeMenu.svg";
 import writingDelete from "/assets/icons/writingDeleteMenu.svg";
 
 export const actionIconsDetials: IActionIcon[] = [
@@ -50,11 +53,12 @@ export const iconsNaviKeni: IIconsNaviKeni[] = [
 ];
 
 export const writingSituationList: IWritingSituation[] = [
-  { type: { description: WritingSituation.blue, url: Colors.blue }, url: writingDelete },
-  { type: { description: WritingSituation.green, url: Colors.green }, url: writingDelete },
-  { type: { description: WritingSituation.orange, url: Colors.orange }, url: writingDelete },
+  { type: { description: WritingSituation.blue, url: Colors.blue }, url: writingBlue },
+  { type: { description: WritingSituation.green, url: Colors.green }, url: writingGreen },
+  { type: { description: WritingSituation.orange, url: Colors.orange }, url: writingOrange },
   { type: { description: WritingSituation.delete, url: Colors.delete }, url: writingDelete },
 ];
+export const cursorColors: Record<string, string> = { Blue: "cursor-blue", Green: "cursor-green", Orange: "cursor-orange", Delete: "cursor-delete" };
 
 export const RulerPaddingSides = 32;
 export const rulerMargin = 0.35;
@@ -76,4 +80,5 @@ export const keniFoot = 0.5;
 export const naviFoot = 0.25;
 export const duplicateElementStepSpace = 30;
 export const brushWidth = 10;
+export const drawSpace = 20;
 export const dragElementID = "dragElement";

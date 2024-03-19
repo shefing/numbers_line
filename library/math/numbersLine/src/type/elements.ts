@@ -37,6 +37,7 @@ export enum Colors {
   orange = "#F48460",
   delete = "Delete",
 }
+
 export interface IActionIcon {
   type: ActionTypes;
   url: string;

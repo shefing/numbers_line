@@ -15,10 +15,10 @@ interface IProps {
 const Jump = ({ element, unit }: IProps) => {
   const { rulerType, dragElements, idDraggElementClick } = useNumbersLineContext();
   const { updateDragElements } = useDraggableElementAction();
-  const jump = element.jump!;
   const [hideNumber, setHideNumber] = useState(true);
   const [click, setClick] = useState(false);
   const moveableRef = React.useRef<HTMLDivElement>(null);
+  const jump = element.jump!;
 
   useEffect(() => {
     setClick(idDraggElementClick === element.id);

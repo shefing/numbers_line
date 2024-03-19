@@ -1,7 +1,7 @@
 import { ActionTypes, Colors } from "../type/elements";
 import { useNumbersLineContext } from "../context/numbersLineContext";
 import { useEffect, useRef, useState } from "react";
-import { brushWidth } from "../consts/elementConsts";
+import { brushWidth, cursorColors, drawSpace } from "../consts/elementConsts";
 import { v4 as uuidv4 } from "uuid";
 import { IElement, ILine } from "../type/moveable";
 
@@ -54,16 +54,16 @@ const Brush = () => {
     setLine({
       color: color.url,
       points: [
-        { x: offsetX, y: offsetY },
-        { x: offsetX + 0.1, y: offsetY + 0.1 },
+        { x: offsetX, y: offsetY + drawSpace },
+        { x: offsetX + 0.1, y: offsetY + drawSpace + 0.1 },
       ],
     });
     setIsDrawing(true);
-    if (color.url === Colors.delete) deleteLine(offsetX, offsetY);
+    if (color.url === Colors.delete) deleteLine(offsetX, offsetY + drawSpace);
     else {
       contextRef.current.beginPath();
-      contextRef.current.moveTo(offsetX, offsetY);
-      contextRef.current.lineTo(offsetX, offsetY);
+      contextRef.current.moveTo(offsetX, offsetY + drawSpace);
+      contextRef.current.lineTo(offsetX, offsetY + drawSpace);
       contextRef.current.stroke();
       nativeEvent.preventDefault();
     }
@@ -72,10 +72,10 @@ const Brush = () => {
   const drawing = ({ nativeEvent }: any) => {
     const { offsetX, offsetY } = nativeEvent;
     if (!contextRef.current || !isDrawing) return;
-    contextRef.current.lineTo(offsetX, offsetY);
+    contextRef.current.lineTo(offsetX, offsetY + drawSpace);
     contextRef.current.stroke();
-    if (color.url === Colors.delete) deleteLine(offsetX, offsetY);
-    else setLine((prevLine) => (prevLine ? { ...prevLine, points: [...prevLine.points, { x: offsetX, y: offsetY }] } : null));
+    if (color.url === Colors.delete) deleteLine(offsetX, offsetY + drawSpace);
+    else setLine((prevLine) => (prevLine ? { ...prevLine, points: [...prevLine.points, { x: offsetX, y: offsetY + drawSpace }] } : null));
     nativeEvent.preventDefault();
   };
 
@@ -98,7 +98,7 @@ const Brush = () => {
   return (
     color.url !== Colors.non && (
       <canvas
-        className="canvas-container absolute"
+        className={`canvas-container absolute ${cursorColors[color.description]} `}
         ref={canvasRef}
         onMouseDown={startDrawing}
         onMouseMove={drawing}
@@ -108,7 +108,7 @@ const Brush = () => {
         onTouchMove={drawing}
         onTouchEnd={stopDrawing}
         onTouchCancel={stopDrawing}
-        style={color.url == Colors.delete ? { cursor: "cell", zIndex: zIndexCounter } : { cursor: "crosshair", zIndex: zIndexCounter }}
+        style={{ zIndex: zIndexCounter }}
       />
     )
   );
