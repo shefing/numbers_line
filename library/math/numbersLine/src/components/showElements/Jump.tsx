@@ -1,12 +1,12 @@
 import JumpArrow from "./JumpArrow";
 import MoveableElement from "./MoveableElement";
 import React, { useEffect, useState } from "react";
-import { IElement } from "../type/moveable";
-import { useNumbersLineContext } from "../context/numbersLineContext";
-import { LineRange } from "../type/ruler";
-import { baseJumpClassName } from "../styles/jump";
-import { useDraggableElementAction } from "../hooks/useDraggableElementAction";
-import { dragElementID } from "../consts/elementConsts";
+import { IElement } from "../../type/moveable";
+import { useNumbersLineContext } from "../../context/numbersLineContext";
+import { LineRange } from "../../type/ruler";
+import { baseJumpClassName } from "../../styles/jump";
+import { useDraggableElementAction } from "../../hooks/useDraggableElementAction";
+import { dragElementID } from "../../consts/elementConsts";
 
 interface IProps {
   element: IElement;

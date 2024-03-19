@@ -5,7 +5,7 @@ import { useDraggableElementAction } from "../../hooks/useDraggableElementAction
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { useEffect, useRef, useState } from "react";
 import { getSrc } from "../../lib/utils";
-import { ActionTypes, Colors, TypeCover, WritingSituation } from "../../type/elements";
+import { ActionTypes, Colors, TypeCover, WritingSituation } from "../../type/toolbar-menu";
 interface IProps {
   typeAction: ActionTypes;
   iconUrl: string;

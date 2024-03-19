@@ -1,10 +1,10 @@
-import { IElement } from "../type/moveable";
+import { IElement } from "../../type/moveable";
 import { useRef } from "react";
 import MoveableElement from "./MoveableElement";
 import navi from "/assets/icons/naviOnScreen.svg";
 import keni from "/assets/icons/keniOnScreen.svg";
-import { NaviKeniIconsTypes } from "../type/elements";
-import { dragElementID } from "../consts/elementConsts";
+import { NaviKeniIconsTypes } from "../../type/toolbar-menu";
+import { dragElementID } from "../../consts/elementConsts";
 
 interface IProps {
   element: IElement;

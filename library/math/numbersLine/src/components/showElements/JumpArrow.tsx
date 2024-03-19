@@ -1,5 +1,5 @@
-import { dragElementID, jumpArrowHeight } from "../consts/elementConsts";
-import { useNumbersLineContext } from "../context/numbersLineContext";
+import { dragElementID, jumpArrowHeight } from "../../consts/elementConsts";
+import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { useEffect, useState } from "react";
 
 interface IProps {

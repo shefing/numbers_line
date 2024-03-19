@@ -1,10 +1,10 @@
-import Jump from "./Jump";
-import Text from "./Text";
-import NaviKeni from "./NaviKeni";
-import Writing from "./Writing";
+import Jump from "./showElements/Jump";
+import Text from "./showElements/Text";
+import NaviKeni from "./showElements/NaviKeni";
+import Writing from "./showElements/Writing";
 import { useNumbersLineContext } from "../context/numbersLineContext";
 import { useEffect, useState } from "react";
-import { ActionTypes, IWindowSize } from "../type/elements";
+import { ActionTypes, IWindowSize } from "../type/toolbar-menu";
 import { calcXTransform, calcYTransform } from "../lib/utils";
 import { useDraggableElementAction } from "../hooks/useDraggableElementAction";
 import { useHelpers } from "../hooks/useHelpers";
