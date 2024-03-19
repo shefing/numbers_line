@@ -21,7 +21,7 @@ const ShowElements = () => {
 
   const updateTransform = (element: IElement) => {
     const xPosition = calcXTransform(element.transform);
-    const newXPosition = xPosition * (windowSize.width / prevWindowSize.width);
+    const newXPosition = (xPosition / prevWindowSize.width) * windowSize.width;
     const yPosition = calcYTransform(element.transform);
     const newYPosition = (yPosition / prevWindowSize.height) * windowSize.height;
     const newXYPositionString = "(" + newXPosition.toFixed(2) + "px, " + newYPosition.toFixed(2) + "px)";
@@ -29,7 +29,9 @@ const ShowElements = () => {
     const documentElement = document.getElementById(`dragElement-${element.id}`);
     if (!documentElement) return;
     documentElement.style.transform = newTransform;
-    updateDragElements(element.id, { ...element, transform: newTransform });
+    element.jump
+      ? updateDragElements(element.id, { ...element, transform: newTransform, jump: { ...element.jump, width: unit * element.jump.value } })
+      : updateDragElements(element.id, { ...element, transform: newTransform });
   };
 
   useEffect(() => {
@@ -59,11 +61,13 @@ const ShowElements = () => {
     if (windowResizing) return;
     setPrevWindowSize({ height: windowSize.height, width: windowSize.width });
     const unitWidth = calculatRulerWidth() / calculatUnitsAmount();
-    rulerType == LineRange.hundred ? setUnit(windowSize.width / RulerLenth.hundred) : setUnit(unitWidth);
-    dragElements.map((element: IElement) => {
-      updateTransform(element);
-    });
+    const newUnit = rulerType == LineRange.hundred ? windowSize.width / RulerLenth.hundred : unitWidth;
+    setUnit(newUnit);
   }, [rulerType, windowResizing]);
+
+  useEffect(() => {
+    dragElements.map((element: IElement) => updateTransform(element));
+  }, [unit]);
 
   return dragElements.map((element: IElement) => (
     <div key={element.id} id={element.id} onClick={() => setIdDraggElementClick(element.id)}>
