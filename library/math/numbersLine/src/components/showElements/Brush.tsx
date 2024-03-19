@@ -1,4 +1,4 @@
-import { ActionTypes, Colors } from "../../type/toolbar-menu";
+import { ActionTypes, Colors } from "../../type/toolbar";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { useEffect, useRef, useState } from "react";
 import { brushWidth, cursorColors, drawSpace } from "../../consts/elementConsts";

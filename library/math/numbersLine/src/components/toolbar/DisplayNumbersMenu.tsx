@@ -1,6 +1,6 @@
 import { Button } from "../ui/button";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
-import { IDisplayRuller, TypeCover } from "../../type/toolbar-menu";
+import { IDisplayRuller, TypeCover } from "../../type/toolbar";
 import triangleToMenu from "/assets/icons/TriangleToMenu.png";
 import { ToolbarHeight, displayRulerButtonDetials } from "../../consts/elementConsts";
 

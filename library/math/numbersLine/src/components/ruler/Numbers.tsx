@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { LineRange, PartToCover, RulerLenth } from "../../type/ruler";
-import { TypeCover } from "../../type/toolbar-menu";
+import { TypeCover } from "../../type/toolbar";
 
 const Numbers = () => {
   const { windowSize, rulerType, rulerPaddingSides, leftPosition, coverSituation, setCoverSituation, setVisitableDisplayButton } = useNumbersLineContext();
