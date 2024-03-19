@@ -4,7 +4,7 @@ import NaviKeni from "./showElements/NaviKeni";
 import Writing from "./showElements/Writing";
 import { useNumbersLineContext } from "../context/numbersLineContext";
 import { useEffect, useState } from "react";
-import { ActionTypes, IWindowSize } from "../type/toolbar-menu";
+import { ActionTypes, IWindowSize } from "../type/toolbar";
 import { calcXTransform, calcYTransform } from "../lib/utils";
 import { useDraggableElementAction } from "../hooks/useDraggableElementAction";
 import { useHelpers } from "../hooks/useHelpers";

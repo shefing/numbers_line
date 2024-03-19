@@ -1,5 +1,5 @@
 import { writingSituationList } from "../../consts/elementConsts";
-import { IWritingSituation } from "../../type/toolbar-menu";
+import { IWritingSituation } from "../../type/toolbar";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 
 interface IProps {
