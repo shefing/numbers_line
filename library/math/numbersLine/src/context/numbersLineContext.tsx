@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { LineRange } from "../type/ruler";
-import { Colors, IColor, IWindowSize, TypeCover, WritingSituation } from "../type/elements";
+import { Colors, IColor, IWindowSize, TypeCover, WritingSituation } from "../type/toolbar-Menu";
 import { IElement } from "../type/moveable";
 import { RulerPaddingSides } from "@/consts/elementConsts";
 interface INumbersLineContextProps {

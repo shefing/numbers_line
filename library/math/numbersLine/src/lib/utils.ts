@@ -2,7 +2,7 @@ import { type ClassValue, clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { jumpBaseHeight, jumpHeight } from "../consts/elementConsts";
 import { IElement } from "../type/moveable";
-import { WritingSituation } from "../type/elements";
+import { WritingSituation } from "../type/toolbar-Menu";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

@@ -1,4 +1,4 @@
-import { ActionTypes, Colors, NaviKeniIconsTypes } from "./elements";
+import { ActionTypes, Colors, NaviKeniIconsTypes } from "./toolbar-Menu";
 import { LineRange } from "./ruler";
 
 export interface IElement {

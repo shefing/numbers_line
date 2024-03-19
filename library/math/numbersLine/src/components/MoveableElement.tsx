@@ -7,7 +7,7 @@ import { calcPosition } from "../lib/utils";
 import { ButtonViewable } from "../consts/ButtonViewable";
 import { useDraggableElementAction } from "../hooks/useDraggableElementAction";
 import { useHelpers } from "../hooks/useHelpers";
-import { ActionTypes, WritingSituation } from "../type/elements";
+import { ActionTypes, WritingSituation } from "../type/toolbar-Menu";
 
 interface IProps {
   moveableRef: any;
