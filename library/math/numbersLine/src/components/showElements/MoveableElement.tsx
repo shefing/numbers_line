@@ -16,7 +16,6 @@ interface IProps {
   dragging?: boolean;
   setDragging?: (v: boolean) => void;
 }
-
 const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: IProps) => {
   const { windowSize, rulerType, rulerPaddingSides, leftPosition, idDraggElementClick, setIdDraggElementClick, color } = useNumbersLineContext();
   const { deleteDragElement, duplicateDragJump, updateDragElements, updateDragElementsLayers } = useDraggableElementAction();
@@ -95,7 +94,7 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
   };
 
   const onResizeEnd = (e: OnResizeEnd) => {
-    if (!element.jump) return;
+    if (!element.jump || !e.lastEvent.width) return;
     // Changes the width of the jump according to the axis.
     const newValue = Math.round(e.lastEvent.width / unit);
     const newWidth = newValue * unit;
