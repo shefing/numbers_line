@@ -1,10 +1,10 @@
-import { IElement } from "../type/moveable";
+import { IElement } from "../../type/moveable";
 import { useRef, useState } from "react";
 import MoveableElement from "./MoveableElement";
-import { useNumbersLineContext } from "../context/numbersLineContext";
-import { useDraggableElementAction } from "../hooks/useDraggableElementAction";
-import { dragElementID, maxTextBoxSize, textBoxSize } from "../consts/elementConsts";
-import { calcXTransform } from "../lib/utils";
+import { useNumbersLineContext } from "../../context/numbersLineContext";
+import { useDraggableElementAction } from "../../hooks/useDraggableElementAction";
+import { dragElementID, maxTextBoxSize, textBoxSize } from "../../consts/elementConsts";
+import { calcXTransform } from "../../lib/utils";
 
 interface IProps {
   element: IElement;

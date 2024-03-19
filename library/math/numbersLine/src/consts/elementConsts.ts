@@ -9,7 +9,7 @@ import {
   WritingSituation,
   IWritingSituation,
   Colors,
-} from "../type/toolbar-Menu";
+} from "../type/toolbar-menu";
 import { LineRange } from "../type/ruler";
 import jump from "/assets/icons/toolbar/jump.svg";
 import text from "/assets/icons/toolbar/text.svg";

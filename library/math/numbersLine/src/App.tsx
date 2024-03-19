@@ -6,7 +6,7 @@ import ShowElements from "./components/ShowElements";
 import Restart from "./components/Restart";
 import { useNumbersLineContext } from "./context/numbersLineContext";
 import { useEffect } from "react";
-import Brush from "./components/Brush";
+import Brush from "./components/showElements/Brush";
 import { dragElementID } from "./consts/elementConsts";
 
 const App = () => {

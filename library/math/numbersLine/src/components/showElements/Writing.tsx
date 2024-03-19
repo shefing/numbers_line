@@ -1,5 +1,5 @@
 import { brushWidth } from "@/consts/elementConsts";
-import { IElement } from "../type/moveable";
+import { IElement } from "../../type/moveable";
 
 interface IProps {
   element: IElement;

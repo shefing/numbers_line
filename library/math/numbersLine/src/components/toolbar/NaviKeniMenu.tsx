@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { iconsNaviKeni } from "../../consts/elementConsts";
-import { ActionTypes, IIconsNaviKeni, NaviKeniIconsTypes } from "../../type/toolbar-Menu";
+import { ActionTypes, IIconsNaviKeni, NaviKeniIconsTypes } from "../../type/toolbar-menu";
 import { getSrc } from "../../lib/utils";
 import { useDraggableElementAction } from "../../hooks/useDraggableElementAction";
 

@@ -1,9 +1,9 @@
-import { ActionTypes, Colors } from "../type/toolbar-Menu";
-import { useNumbersLineContext } from "../context/numbersLineContext";
+import { ActionTypes, Colors } from "../../type/toolbar-menu";
+import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { useEffect, useRef, useState } from "react";
-import { brushWidth, cursorColors, drawSpace } from "../consts/elementConsts";
+import { brushWidth, cursorColors, drawSpace } from "../../consts/elementConsts";
 import { v4 as uuidv4 } from "uuid";
-import { IElement, ILine } from "../type/moveable";
+import { IElement, ILine } from "../../type/moveable";
 
 const Brush = () => {
   const { windowSize, dragElements, setDragElements, color, zIndexCounter, setZIndexCounter } = useNumbersLineContext();

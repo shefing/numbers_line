@@ -1,13 +1,13 @@
-import { useNumbersLineContext } from "../context/numbersLineContext";
+import { useNumbersLineContext } from "../../context/numbersLineContext";
 import Moveable, { OnDragEnd, OnResize, OnResizeEnd } from "react-moveable";
-import { IElement } from "../type/moveable";
-import { calcXTransform, calcYTransform } from "../lib/utils";
-import { rulerMargin, ToolbarHeight, buttonsDraggElementWidth, jumpBaseHeight, jumpHeight } from "../consts/elementConsts";
-import { calcPosition } from "../lib/utils";
-import { ButtonViewable } from "../consts/ButtonViewable";
-import { useDraggableElementAction } from "../hooks/useDraggableElementAction";
-import { useHelpers } from "../hooks/useHelpers";
-import { ActionTypes, WritingSituation } from "../type/toolbar-Menu";
+import { IElement } from "../../type/moveable";
+import { calcXTransform, calcYTransform } from "../../lib/utils";
+import { rulerMargin, ToolbarHeight, buttonsDraggElementWidth, jumpBaseHeight, jumpHeight } from "../../consts/elementConsts";
+import { calcPosition } from "../../lib/utils";
+import { ButtonViewable } from "../../consts/ButtonViewable";
+import { useDraggableElementAction } from "../../hooks/useDraggableElementAction";
+import { useHelpers } from "../../hooks/useHelpers";
+import { ActionTypes, WritingSituation } from "../../type/toolbar-menu";
 
 interface IProps {
   moveableRef: any;

@@ -3,7 +3,7 @@ import { Button } from "../ui/button";
 import { LineRange, RulerLenth } from "../../type/ruler";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { RulerPaddingSides, rulerDefinitionButtonDetials } from "../../consts/elementConsts";
-import { IRulerDefinition, TypeCover } from "../../type/toolbar-Menu";
+import { IRulerDefinition, TypeCover } from "../../type/toolbar-menu";
 import openMenu from "/assets/icons/menuButtonOpen.svg";
 import closeMenu from "/assets/icons/menuButtonClose.svg";
 

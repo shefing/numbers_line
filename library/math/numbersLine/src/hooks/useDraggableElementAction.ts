@@ -2,7 +2,7 @@ import { useNumbersLineContext } from "@/context/numbersLineContext";
 import { IElement } from "../type/moveable";
 import { v4 as uuidv4 } from "uuid";
 import { LineRange } from "../type/ruler";
-import { ActionTypes, NaviKeniIconsTypes } from "../type/toolbar-Menu";
+import { ActionTypes, NaviKeniIconsTypes } from "../type/toolbar-menu";
 import {
   buttonsDraggElementWidth,
   duplicateElementStepSpace,
