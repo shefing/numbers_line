@@ -1,4 +1,4 @@
-# Introduction -- Rachel
+# Introduction
 This repo contains the code to implement the numbers-line asset as Defined in requirement docs provided by Shani Assor and according to the graphic design available in https://www.figma.com/proto/kgijoBmmxgSxhmTSpwjWtO/Yeshar-Hamisparim?node-id=239-4016&scaling=min-zoom&page-id=239%3A4009. 
 
 # Getting Started
