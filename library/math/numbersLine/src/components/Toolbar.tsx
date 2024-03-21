@@ -2,7 +2,7 @@ import LineDefinition from "./toolbar/LineDefinition";
 import fullscreen from "/assets/icons/toolbar/fullscreen.svg";
 import IconsToolbar from "./toolbar/IconsToolbar";
 import { ToolbarHeight, actionIconsDetials } from "../consts/elementConsts";
-import { IActionIcon } from "../type/toolbar-menu";
+import { IActionIcon } from "../type/toolbar";
 
 const Toolbar = () => {
   return (

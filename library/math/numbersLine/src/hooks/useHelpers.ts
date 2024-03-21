@@ -1,7 +1,7 @@
 import { useNumbersLineContext } from "../context/numbersLineContext";
 import { LineRange, RulerLenth, unitAmount } from "../type/ruler";
 import { RulerPaddingSides } from "../consts/elementConsts";
-import { TypeCover } from "../type/toolbar-menu";
+import { TypeCover } from "../type/toolbar";
 
 export const useHelpers = () => {
   const {
