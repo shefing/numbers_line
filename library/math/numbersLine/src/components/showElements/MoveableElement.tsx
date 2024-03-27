@@ -1,5 +1,5 @@
 import { useNumbersLineContext } from "../../context/numbersLineContext";
-import Moveable, { OnDragEnd, OnResize, OnResizeEnd } from "react-moveable";
+import Moveable, { OnDragEnd, OnResize, OnResizeEnd, OnScale } from "react-moveable";
 import { IElement } from "../../type/moveable";
 import { calcXTransform, calcYTransform } from "../../lib/utils";
 import { rulerMargin, ToolbarHeight, buttonsDraggElementWidth, jumpBaseHeight, jumpHeight } from "../../consts/elementConsts";
@@ -87,28 +87,15 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
   };
 
   const onResize = (e: OnResize) => {
-    //not use direction   use position !
     if (!element.jump) return;
-    // e.target.style.width = `${e.width}px`;
     const rightDirection = e.direction[0] == 1;
     const xPosition = calcXTransform(e.target.style.transform);
     const newWidth = rightDirection ? e.clientX - xPosition : element.jump.width + xPosition - e.clientX; //check
     if (!(newWidth < 0) && ((rightDirection && element.jump.minus) || (!rightDirection && !element.jump.minus)) && newWidth <= unit) return;
-    // rightDirection ? console.log("right", e.width, e) : console.log("left", e.width, e.direction);
-    console.log(rightDirection ? "right\n" : "left\n", " e.clientX:", e.clientX, " xPosition: ", xPosition, "e.width: ", e.width, " newWidth ", newWidth);
-
-    if (e.width == 0) {
-      e.target.style.width = `${1}px`;
-      rightDirection && (e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + e.clientX));
+    if (newWidth < 10 || e.width == 0) {
+      e.target.style.width = `${-newWidth}px`;
+      if (rightDirection) e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + e.clientX); //nicere
     } else {
-      if ((rightDirection && e.clientX - xPosition < 0) || (!rightDirection && e.clientX - xPosition > 0)) {
-        console.log("scale!");
-        rightDirection ? (e.target.style.width = `${e.width + xPosition - e.clientX}px`) : (e.target.style.width = `${e.clientX - xPosition}px`);
-        rightDirection && (e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + e.clientX));
-      } else {
-        // e.target.style.width = `${e.width}px`;
-        // e.target.style.transform = e.drag.transform;
-      }
       e.target.style.width = `${e.width}px`;
       e.target.style.transform = e.drag.transform;
     }
@@ -117,8 +104,6 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
       transform: e.target.style.transform,
       jump: { ...element.jump, width: newWidth < 0 ? -newWidth : e.width, minus: newWidth < 0 ? (rightDirection ? true : false) : element.jump.minus },
     }); //in tje end and add transtion
-    // console.log("elelemnt: ", element.jump.minus);
-    // console.log("minus: ", newWidth < 0, "widths: ", newWidth, e.width);
 
     // updateDragElements(element.id, { ...element, jump: { ...element.jump, width: e.width } });
   };
@@ -147,33 +132,33 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
     }
     updateDragElements(element.id, { ...element, transform: newTransform, jump: { ...element.jump, width: newWidth, value: newValue } });
   };
-  // const onScale = (e: OnScale) => {
-  //   if (!element.jump) return;
-  //   //width:
-  //   const rightDirection = e.direction[0] == 1;
-  //   const xPosition = calcXTransform(e.target.style.transform);
-  //   const endPosition = xPosition + element.jump.width;
-  //   let newWidth = element.jump.width;
-  //   rightDirection ? (newWidth += e.clientX - endPosition) : (newWidth += xPosition - e.clientX); //check
-  //   e.target.style.width = `${newWidth}px`;
-  //   updateDragElements(element.id, { ...element, jump: { ...element.jump!, width: newWidth } }); //in tje end and add transtion
-  //   //position:
-  //   const scaleMatch = e.drag.transform.match(/scale\(([^)]+)\)/);
-  //   const scaleString = scaleMatch ? scaleMatch[0] : "";
-  //   if (!rightDirection) {
-  //     //do it only if dragg from left
-  //     console.log("before", e.target.style.transform);
-  //     let transform = e.drag.transform.replace(scaleString, "");
-  //     e.target.style.transform = transform.replace("(" + xPosition, "(" + e.clientX);
-  //     // e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + newXPosition);
-  //     console.log("after", e.target.style.transform);
-  //   }
-  //   //change jumo to minus:
-  //   if (newWidth < 0 && rightDirection) {
-  //     e.target.style.width = `${-newWidth}px`;
-  //     e.target.style.transform = e.drag.transform.replace(scaleString, "") + "scale(-1,1)"; //nicere
-  //   }
-  // };
+  const onScale = (e: OnScale) => {
+    if (!element.jump) return;
+    //width:
+    const rightDirection = e.direction[0] == 1;
+    const xPosition = calcXTransform(e.target.style.transform);
+    const endPosition = xPosition + element.jump.width;
+    let newWidth = element.jump.width;
+    rightDirection ? (newWidth += e.clientX - endPosition) : (newWidth += xPosition - e.clientX); //check
+    e.target.style.width = `${newWidth}px`;
+    updateDragElements(element.id, { ...element, jump: { ...element.jump!, width: newWidth } }); //in tje end and add transtion
+    //position:
+    const scaleMatch = e.drag.transform.match(/scale\(([^)]+)\)/);
+    const scaleString = scaleMatch ? scaleMatch[0] : "";
+    if (!rightDirection) {
+      //do it only if dragg from left
+      console.log("before", e.target.style.transform);
+      let transform = e.drag.transform.replace(scaleString, "");
+      e.target.style.transform = transform.replace("(" + xPosition, "(" + e.clientX);
+      // e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + newXPosition);
+      console.log("after", e.target.style.transform);
+    }
+    //change jumo to minus:
+    if (newWidth < 0 && rightDirection) {
+      e.target.style.width = `${-newWidth}px`;
+      e.target.style.transform = e.drag.transform.replace(scaleString, "") + "scale(-1,1)"; //nicere
+    }
+  };
   // e.target.style.transform = e.target.style.transform.replace("(" + xPosition, newXPosition + "");
   return (
     <Moveable
