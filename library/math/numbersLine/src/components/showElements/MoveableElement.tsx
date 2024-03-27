@@ -1,5 +1,5 @@
 import { useNumbersLineContext } from "../../context/numbersLineContext";
-import Moveable, { OnDragEnd, OnResize, OnResizeEnd, OnScale } from "react-moveable";
+import Moveable, { OnDragEnd, OnResize, OnResizeEnd } from "react-moveable";
 import { IElement } from "../../type/moveable";
 import { calcXTransform, calcYTransform } from "../../lib/utils";
 import { rulerMargin, ToolbarHeight, buttonsDraggElementWidth, jumpBaseHeight, jumpHeight } from "../../consts/elementConsts";
@@ -147,33 +147,33 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
     }
     updateDragElements(element.id, { ...element, transform: newTransform, jump: { ...element.jump, width: newWidth, value: newValue } });
   };
-  const onScale = (e: OnScale) => {
-    if (!element.jump) return;
-    //width:
-    const rightDirection = e.direction[0] == 1;
-    const xPosition = calcXTransform(e.target.style.transform);
-    const endPosition = xPosition + element.jump.width;
-    let newWidth = element.jump.width;
-    rightDirection ? (newWidth += e.clientX - endPosition) : (newWidth += xPosition - e.clientX); //check
-    e.target.style.width = `${newWidth}px`;
-    updateDragElements(element.id, { ...element, jump: { ...element.jump!, width: newWidth } }); //in tje end and add transtion
-    //position:
-    const scaleMatch = e.drag.transform.match(/scale\(([^)]+)\)/);
-    const scaleString = scaleMatch ? scaleMatch[0] : "";
-    if (!rightDirection) {
-      //do it only if dragg from left
-      console.log("before", e.target.style.transform);
-      let transform = e.drag.transform.replace(scaleString, "");
-      e.target.style.transform = transform.replace("(" + xPosition, "(" + e.clientX);
-      // e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + newXPosition);
-      console.log("after", e.target.style.transform);
-    }
-    //change jumo to minus:
-    if (newWidth < 0 && rightDirection) {
-      e.target.style.width = `${-newWidth}px`;
-      e.target.style.transform = e.drag.transform.replace(scaleString, "") + "scale(-1,1)"; //nicere
-    }
-  };
+  // const onScale = (e: OnScale) => {
+  //   if (!element.jump) return;
+  //   //width:
+  //   const rightDirection = e.direction[0] == 1;
+  //   const xPosition = calcXTransform(e.target.style.transform);
+  //   const endPosition = xPosition + element.jump.width;
+  //   let newWidth = element.jump.width;
+  //   rightDirection ? (newWidth += e.clientX - endPosition) : (newWidth += xPosition - e.clientX); //check
+  //   e.target.style.width = `${newWidth}px`;
+  //   updateDragElements(element.id, { ...element, jump: { ...element.jump!, width: newWidth } }); //in tje end and add transtion
+  //   //position:
+  //   const scaleMatch = e.drag.transform.match(/scale\(([^)]+)\)/);
+  //   const scaleString = scaleMatch ? scaleMatch[0] : "";
+  //   if (!rightDirection) {
+  //     //do it only if dragg from left
+  //     console.log("before", e.target.style.transform);
+  //     let transform = e.drag.transform.replace(scaleString, "");
+  //     e.target.style.transform = transform.replace("(" + xPosition, "(" + e.clientX);
+  //     // e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + newXPosition);
+  //     console.log("after", e.target.style.transform);
+  //   }
+  //   //change jumo to minus:
+  //   if (newWidth < 0 && rightDirection) {
+  //     e.target.style.width = `${-newWidth}px`;
+  //     e.target.style.transform = e.drag.transform.replace(scaleString, "") + "scale(-1,1)"; //nicere
+  //   }
+  // };
   // e.target.style.transform = e.target.style.transform.replace("(" + xPosition, newXPosition + "");
   return (
     <Moveable
