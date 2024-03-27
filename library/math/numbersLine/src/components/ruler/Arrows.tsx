@@ -44,10 +44,10 @@ const Arrows = () => {
     <div className="flex justify-between w-full ">
       {rulerType == LineRange.hundred && (
         <>
-          <div className="m-5 cursor-pointer relative " onClick={() => updatePositionOnArrowClick("left")}>
+          <div className="m-5 cursor-pointer relative z-[999]" onClick={() => updatePositionOnArrowClick("left")}>
             <img src={leftArrowIcon} alt="Left Arrow" />
           </div>
-          <div className="m-5  cursor-pointer relative " onClick={() => updatePositionOnArrowClick("right")}>
+          <div className="m-5  cursor-pointer relative z-[999]" onClick={() => updatePositionOnArrowClick("right")}>
             <img src={rightArrowIcon} alt="Right Arrow" />
           </div>
         </>

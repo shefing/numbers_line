@@ -1,5 +1,5 @@
 import { useNumbersLineContext } from "../../context/numbersLineContext";
-import Moveable, { OnDragEnd, OnResize, OnResizeEnd } from "react-moveable";
+import Moveable, { OnDragEnd, OnResize, OnResizeEnd, OnScale } from "react-moveable";
 import { IElement } from "../../type/moveable";
 import { calcXTransform, calcYTransform } from "../../lib/utils";
 import { rulerMargin, ToolbarHeight, buttonsDraggElementWidth, jumpBaseHeight, jumpHeight } from "../../consts/elementConsts";
@@ -19,7 +19,7 @@ interface IProps {
 const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: IProps) => {
   const { windowSize, rulerType, rulerPaddingSides, leftPosition, idDraggElementClick, setIdDraggElementClick, color } = useNumbersLineContext();
   const { deleteDragElement, duplicateDragJump, updateDragElements, updateDragElementsLayers } = useDraggableElementAction();
-  const { calculatRulerWidth, calculatScreenWidth, calculatUnitsAmount } = useHelpers();
+  const { calculatScreenWidth, calculatUnitsAmount } = useHelpers();
 
   const ableProps = {
     ButtonViewable: true,
@@ -28,6 +28,7 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
     copyViewAble: element.type === ActionTypes.jump && idDraggElementClick === element.id,
     onCopyClick: () => duplicateDragJump(element, unit),
     underRuler: element.jump?.underRuler,
+    minus: element.jump?.minus,
     rulerType: rulerType,
     leftPosition: leftPosition,
     rulerPaddingSides: rulerPaddingSides,
@@ -86,20 +87,48 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
   };
 
   const onResize = (e: OnResize) => {
-    if (!(parseFloat(e.target.style.width) / unit < 1 && e.dist[0] < 0) && !(parseFloat(e.target.style.width) > calculatRulerWidth() && e.dist[0] > 0)) {
+    //not use direction   use position !
+    if (!element.jump) return;
+    // e.target.style.width = `${e.width}px`;
+    const rightDirection = e.direction[0] == 1;
+    const xPosition = calcXTransform(e.target.style.transform);
+    const newWidth = rightDirection ? e.clientX - xPosition : element.jump.width + xPosition - e.clientX; //check
+    if (!(newWidth < 0) && ((rightDirection && element.jump.minus) || (!rightDirection && !element.jump.minus)) && newWidth <= unit) return;
+    // rightDirection ? console.log("right", e.width, e) : console.log("left", e.width, e.direction);
+    console.log(rightDirection ? "right\n" : "left\n", " e.clientX:", e.clientX, " xPosition: ", xPosition, "e.width: ", e.width, " newWidth ", newWidth);
+
+    if (e.width == 0) {
+      e.target.style.width = `${1}px`;
+      rightDirection && (e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + e.clientX));
+    } else {
+      if ((rightDirection && e.clientX - xPosition < 0) || (!rightDirection && e.clientX - xPosition > 0)) {
+        console.log("scale!");
+        rightDirection ? (e.target.style.width = `${e.width + xPosition - e.clientX}px`) : (e.target.style.width = `${e.clientX - xPosition}px`);
+        rightDirection && (e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + e.clientX));
+      } else {
+        // e.target.style.width = `${e.width}px`;
+        // e.target.style.transform = e.drag.transform;
+      }
       e.target.style.width = `${e.width}px`;
-      updateDragElements(element.id, { ...element, jump: { ...element.jump!, width: e.width } });
       e.target.style.transform = e.drag.transform;
     }
+    updateDragElements(element.id, {
+      ...element,
+      transform: e.target.style.transform,
+      jump: { ...element.jump, width: newWidth < 0 ? -newWidth : e.width, minus: newWidth < 0 ? (rightDirection ? true : false) : element.jump.minus },
+    }); //in tje end and add transtion
+    // console.log("elelemnt: ", element.jump.minus);
+    // console.log("minus: ", newWidth < 0, "widths: ", newWidth, e.width);
+
+    // updateDragElements(element.id, { ...element, jump: { ...element.jump, width: e.width } });
   };
 
   const onResizeEnd = (e: OnResizeEnd) => {
-    if (!element.jump || !e.lastEvent.width) return;
+    if (!element.jump || !e.lastEvent) return;
     // Changes the width of the jump according to the axis.
-    const newValue = Math.round(e.lastEvent.width / unit);
+    const newValue = Math.round(element.jump.width / unit);
     const newWidth = newValue * unit;
     e.target.style.width = `${newWidth}px`;
-    element.jump.width = newWidth;
     const xPosition = calcXTransform(e.target.style.transform);
     //Change position when jump out of range.
     if (xPosition + newWidth > windowSize.width - rulerPaddingSides) {
@@ -109,15 +138,43 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
     }
     //Change position when jump reSize on the left.
     let newTransform = e.target.style.transform;
-    if (e.clientX < xPosition) {
-      const range = e.lastEvent.width - newWidth;
+    const rightDirection = e.lastEvent.direction[0] == 1;
+    if (!rightDirection) {
+      const range = element.jump.width - newWidth;
       const newXPosition = "(" + (xPosition + range);
       newTransform = e.target.style.transform.replace("(" + xPosition, newXPosition);
       e.target.style.transform = newTransform;
     }
-    updateDragElements(element.id, { ...element, transform: newTransform, jump: { ...element.jump, value: newValue } });
+    updateDragElements(element.id, { ...element, transform: newTransform, jump: { ...element.jump, width: newWidth, value: newValue } });
   };
-
+  const onScale = (e: OnScale) => {
+    if (!element.jump) return;
+    //width:
+    const rightDirection = e.direction[0] == 1;
+    const xPosition = calcXTransform(e.target.style.transform);
+    const endPosition = xPosition + element.jump.width;
+    let newWidth = element.jump.width;
+    rightDirection ? (newWidth += e.clientX - endPosition) : (newWidth += xPosition - e.clientX); //check
+    e.target.style.width = `${newWidth}px`;
+    updateDragElements(element.id, { ...element, jump: { ...element.jump!, width: newWidth } }); //in tje end and add transtion
+    //position:
+    const scaleMatch = e.drag.transform.match(/scale\(([^)]+)\)/);
+    const scaleString = scaleMatch ? scaleMatch[0] : "";
+    if (!rightDirection) {
+      //do it only if dragg from left
+      console.log("before", e.target.style.transform);
+      let transform = e.drag.transform.replace(scaleString, "");
+      e.target.style.transform = transform.replace("(" + xPosition, "(" + e.clientX);
+      // e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + newXPosition);
+      console.log("after", e.target.style.transform);
+    }
+    //change jumo to minus:
+    if (newWidth < 0 && rightDirection) {
+      e.target.style.width = `${-newWidth}px`;
+      e.target.style.transform = e.drag.transform.replace(scaleString, "") + "scale(-1,1)"; //nicere
+    }
+  };
+  // e.target.style.transform = e.target.style.transform.replace("(" + xPosition, newXPosition + "");
   return (
     <Moveable
       target={moveableRef}
@@ -129,9 +186,12 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
       onDrag={(e) => (e.target.style.transform = e.transform)}
       onDragEnd={(e) => onDragEnd(e)}
       resizable={element.jump}
+      // onResizeStart={(e) => e.setMin([unit])}
       renderDirections={idDraggElementClick === element.id && ["w", "e"]}
       onResize={(e) => onResize(e)}
       onResizeEnd={(e) => onResizeEnd(e)}
+      // scalable={element.jump}
+      // onScale={(e) => onScale(e)}
       snappable={true}
       bounds={{
         left: element.jump ? rulerPaddingSides : 1,

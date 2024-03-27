@@ -48,7 +48,7 @@ export const useDraggableElementAction = () => {
     };
 
     if (typeAction === ActionTypes.jump) {
-      newElement.jump = { value: 1, underRuler: false, width: elementWidth };
+      newElement.jump = { value: 1, underRuler: false, width: elementWidth, minus: false };
     }
     if (typeAction === ActionTypes.naviAndKeni) {
       if (type)
@@ -80,9 +80,9 @@ export const useDraggableElementAction = () => {
     let newTransform = "";
     const startPosition = calcXTransform(element.transform);
     const endNewJumpPosition = startPosition + elementWidth * 2;
-    const outOfRange = element.jump?.underRuler ? startPosition - elementWidth : endNewJumpPosition - windowSize.width + rulerPaddingSides - 10;
-    let newPosition = element.jump?.underRuler ? startPosition - elementWidth : startPosition + elementWidth;
-    if (rulerType == LineRange.hundred && ((!element.jump?.underRuler && outOfRange > 0) || (element.jump?.underRuler && outOfRange < 0))) {
+    const outOfRange = element.jump?.minus ? startPosition - elementWidth : endNewJumpPosition - windowSize.width + rulerPaddingSides - 10;
+    let newPosition = element.jump?.minus ? startPosition - elementWidth : startPosition + elementWidth;
+    if (rulerType == LineRange.hundred && ((!element.jump?.minus && outOfRange > 0) || (element.jump?.minus && outOfRange < 0))) {
       setLeftPosition((prevLeft: number) => prevLeft - outOfRange);
 
       newPosition -= outOfRange;
