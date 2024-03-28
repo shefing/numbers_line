@@ -15,6 +15,7 @@ export interface IJump {
   value: number;
   underRuler: boolean;
   width: number;
+  minus: boolean;
 }
 export interface IIcons {
   type: NaviKeniIconsTypes;
@@ -33,6 +34,7 @@ export interface IAbleProps {
   copyViewAble: boolean;
   onCopyClick: () => void;
   underRuler: boolean;
+  minus: boolean;
   rulerType: LineRange;
   leftPosition: number;
   rulerPaddingSides: number;
