@@ -22,7 +22,6 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
   const { windowSize, rulerType, rulerPaddingSides, leftPosition, idDraggElementClick, setIdDraggElementClick, color } = useNumbersLineContext();
   const { deleteDragElement, duplicateDragJump, updateDragElements, updateDragElementsLayers } = useDraggableElementAction();
   const { calculatScreenWidth, calculatUnitsAmount } = useHelpers();
-  const [resizeStartPosition, setResizeStartPosition] = useState(0);
   const [leftStartPosition, setLeftStartPosition] = useState(0);
   const [rightStartPosition, setRightStartPosition] = useState(0);
 
@@ -95,11 +94,6 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
     if (!element.jump) return;
     const rightDirectionAction = e.direction[0] == 1;
     if ((rightDirectionAction && element.jump.minus) || (!rightDirectionAction && !element.jump.minus)) e.setMin([unit]);
-    else {
-      element.jump.minus
-        ? setResizeStartPosition(e.moveable.controlBox.children[5].getBoundingClientRect().left)
-        : setResizeStartPosition(e.moveable.controlBox.children[7].getBoundingClientRect().left);
-    }
     setRightStartPosition(e.moveable.controlBox.children[5].getBoundingClientRect().left);
     setLeftStartPosition(e.moveable.controlBox.children[7].getBoundingClientRect().left);
   };
