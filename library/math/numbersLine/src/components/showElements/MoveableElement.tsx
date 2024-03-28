@@ -160,7 +160,9 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
     }
     //Change position when jump reSize on the left.
     let newTransform = e.target.style.transform;
-    if (e.clientX < rightStartPosition) {
+    const rightDirectionAction = e.lastEvent.direction[0] == 1;
+
+    if (e.clientX < rightStartPosition && !(!element.jump.minus && rightDirectionAction)) {
       const range = element.jump.width - newWidth;
       const newXPosition = "(" + (xPosition + range);
       newTransform = e.target.style.transform.replace("(" + xPosition, newXPosition);
