@@ -109,8 +109,6 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
     const xPosition = calcXTransform(e.target.style.transform);
     const rightPositionPrecent = e.moveable.controlBox.children[5].getBoundingClientRect().left;
     const leftPositionPrecent = e.moveable.controlBox.children[7].getBoundingClientRect().left;
-
-    ////
     if (rightPositionPrecent > leftStartPosition && leftPositionPrecent < rightStartPosition && e.width > 0) {
       e.target.style.width = `${e.width}px`;
       e.target.style.transform = e.drag.transform;
@@ -127,28 +125,13 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
         updateDragElements(element.id, { ...element, transform: e.target.style.transform, jump: { ...element.jump, width, minus: false } });
       }
     }
-    ////
-
-    // if ((rightDirectionAction && resizeStartPosition >= e.clientX) || (!rightDirectionAction && resizeStartPosition <= e.clientX) || e.width == 0) {
-    //   const width = Math.abs(resizeStartPosition - e.clientX);
-    //   e.target.style.width = `${width}px`;
-    //   if (rightDirectionAction) {
-    //     e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + e.clientX);
-    //     updateDragElements(element.id, { ...element, transform: e.target.style.transform, jump: { ...element.jump, width, minus: true } });
-    //   } else {
-    //     updateDragElements(element.id, { ...element, transform: e.target.style.transform, jump: { ...element.jump, width, minus: false } });
-    //   }
-    // } else {
-    //   e.target.style.width = `${e.width}px`;
-    //   e.target.style.transform = e.drag.transform;
-    //   updateDragElements(element.id, { ...element, transform: e.target.style.transform, jump: { ...element.jump, width: e.width } });
-    // }
   };
 
   const onResizeEnd = (e: OnResizeEnd) => {
     if (!element.jump || !e.lastEvent) return;
     // Changes the width of the jump according to the axis.
-    const newValue = Math.round(element.jump.width / unit);
+    let newValue = Math.round(element.jump.width / unit);
+    if (!newValue) newValue = 1;
     const newWidth = newValue * unit;
     e.target.style.width = `${newWidth}px`;
     const xPosition = calcXTransform(e.target.style.transform);
