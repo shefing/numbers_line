@@ -8,6 +8,7 @@ import { ButtonViewable } from "../../consts/ButtonViewable";
 import { useDraggableElementAction } from "../../hooks/useDraggableElementAction";
 import { useHelpers } from "../../hooks/useHelpers";
 import { ActionTypes, WritingSituation } from "../../type/toolbar";
+import { useState } from "react";
 
 interface IProps {
   moveableRef: any;
@@ -20,6 +21,7 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
   const { windowSize, rulerType, rulerPaddingSides, leftPosition, idDraggElementClick, setIdDraggElementClick, color } = useNumbersLineContext();
   const { deleteDragElement, duplicateDragJump, updateDragElements, updateDragElementsLayers } = useDraggableElementAction();
   const { calculatScreenWidth, calculatUnitsAmount } = useHelpers();
+  const [resizeStartPosition, setResizeStartPosition] = useState(0);
 
   const ableProps = {
     ButtonViewable: true,
@@ -86,29 +88,82 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
     updateDragElements(element.id, { ...element, transform: e.target.style.transform, jump: { ...element.jump, underRuler: isUnderRuler } });
   };
 
+  const onResize1 = (e: OnResize) => {
+    if (!element.jump) return;
+    const rightDirectionAction = e.direction[0] == 1;
+    const rightDirection = e.moveable.controlBox.children[5].getBoundingClientRect().left;
+    const leftDirection = e.moveable.controlBox.children[7].getBoundingClientRect().left;
+    let newWidth = 0;
+    //if (rightDirectionAction) newWidth = e.clientX - leftDirection;
+    if ((rightDirectionAction && !element.jump.minus) || (!rightDirectionAction && element.jump.minus)) newWidth = e.clientX - leftDirection;
+    else newWidth = rightDirection - e.clientX;
+    const xPosition = calcXTransform(e.target.style.transform);
+    if (newWidth > 0 || e.width > 0) {
+      e.target.style.width = `${newWidth}px`;
+      e.target.style.transform = e.target.style.transform;
+      updateDragElements(element.id, { ...element, transform: e.target.style.transform, jump: { ...element.jump, width: newWidth } });
+    } else {
+      e.target.style.width = `${Math.abs(41)}px`;
+      e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + xPosition + 41); //nicere
+      updateDragElements(element.id, {
+        ...element,
+        transform: e.target.style.transform,
+        jump: { ...element.jump, width: Math.abs(newWidth), minus: rightDirectionAction ? true : false },
+      });
+      // if (rightDirection) e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + e.clientX); //nicere
+    }
+  };
   const onResize = (e: OnResize) => {
     if (!element.jump) return;
-    const rightDirection = e.direction[0] == 1;
+    const rightDirectionAction = e.direction[0] == 1;
+    const rightDirection = e.moveable.controlBox.children[5].getBoundingClientRect().right;
     const xPosition = calcXTransform(e.target.style.transform);
-    const newWidth = rightDirection ? e.clientX - xPosition : element.jump.width + xPosition - e.clientX; //check
-    if (!(newWidth < 0) && ((rightDirection && element.jump.minus) || (!rightDirection && !element.jump.minus)) && newWidth <= unit) return;
-    if (newWidth < 10 || e.width == 0) {
-      e.target.style.width = `${-newWidth}px`;
-      if (rightDirection) e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + e.clientX); //nicere
-    } else {
+
+    // if (newWidth > 0 && newWidth <= unit && ((rightDirectionAction && element.jump.minus) || (!rightDirectionAction && !element.jump.minus))) {
+    //   console.log("out", newWidth);
+    //   return;
+    // }
+    console.log(e.width);
+
+    if (resizeStartPosition < rightDirection) {
       e.target.style.width = `${e.width}px`;
       e.target.style.transform = e.drag.transform;
-    }
-    updateDragElements(element.id, {
-      ...element,
-      transform: e.target.style.transform,
-      jump: { ...element.jump, width: newWidth < 0 ? -newWidth : e.width, minus: newWidth < 0 ? (rightDirection ? true : false) : element.jump.minus },
-    }); //in tje end and add transtion
+      updateDragElements(element.id, { ...element, transform: e.target.style.transform, jump: { ...element.jump, width: e.width } });
+    } else {
+      if (rightDirectionAction) {
+        e.target.style.width = `${10}px`;
+        console.log("before", e.target.style.transform);
+        debugger;
+        e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + (xPosition - 10));
+        console.log("after", e.target.style.transform);
 
-    // updateDragElements(element.id, { ...element, jump: { ...element.jump, width: e.width } });
+        updateDragElements(element.id, { ...element, transform: e.target.style.transform, jump: { ...element.jump, width: 10, minus: true } });
+      } else {
+        e.target.style.width = `${10}px`;
+        updateDragElements(element.id, { ...element, transform: e.target.style.transform, jump: { ...element.jump, width: 10, minus: false } });
+      }
+      // let newWidth = 0;
+      // if (rightDirectionAction) {
+      //   // debugger;
+
+      //   newWidth = rightDirection - e.clientX;
+      //   e.target.style.width = `${Math.abs(newWidth)}px`;
+      //   e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + e.clientX);
+      // } else {
+      //   newWidth = e.clientX - xPosition;
+      //   e.target.style.width = `${Math.abs(newWidth)}px`;
+      // }
+      // updateDragElements(element.id, {
+      //   ...element,
+      //   transform: e.target.style.transform,
+      //   jump: { ...element.jump, width: Math.abs(newWidth), minus: newWidth <= 0 ? (rightDirectionAction ? true : false) : element.jump.minus },
+      // });
+    }
   };
 
   const onResizeEnd = (e: OnResizeEnd) => {
+    console.log("end");
+
     if (!element.jump || !e.lastEvent) return;
     // Changes the width of the jump according to the axis.
     const newValue = Math.round(element.jump.width / unit);
@@ -134,29 +189,28 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
   };
   const onScale = (e: OnScale) => {
     if (!element.jump) return;
-    //width:
-    const rightDirection = e.direction[0] == 1;
+    const rightDirectionAction = e.direction[0] == 1;
+    const rightDirection = e.moveable.controlBox.children[5].getBoundingClientRect().left;
+    const leftDirection = e.moveable.controlBox.children[7].getBoundingClientRect().left;
+    let newWidth = 0;
+    if ((rightDirectionAction && !element.jump.minus) || (!rightDirectionAction && element.jump.minus)) newWidth = e.clientX - leftDirection;
+    else newWidth = rightDirection - e.clientX;
+    console.log("(", leftDirection, rightDirectionAction);
+    //const newWidth = rightDirection - leftDirection;
     const xPosition = calcXTransform(e.target.style.transform);
-    const endPosition = xPosition + element.jump.width;
-    let newWidth = element.jump.width;
-    rightDirection ? (newWidth += e.clientX - endPosition) : (newWidth += xPosition - e.clientX); //check
-    e.target.style.width = `${newWidth}px`;
-    updateDragElements(element.id, { ...element, jump: { ...element.jump!, width: newWidth } }); //in tje end and add transtion
-    //position:
-    const scaleMatch = e.drag.transform.match(/scale\(([^)]+)\)/);
-    const scaleString = scaleMatch ? scaleMatch[0] : "";
-    if (!rightDirection) {
-      //do it only if dragg from left
-      console.log("before", e.target.style.transform);
-      let transform = e.drag.transform.replace(scaleString, "");
-      e.target.style.transform = transform.replace("(" + xPosition, "(" + e.clientX);
-      // e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + newXPosition);
-      console.log("after", e.target.style.transform);
-    }
-    //change jumo to minus:
-    if (newWidth < 0 && rightDirection) {
-      e.target.style.width = `${-newWidth}px`;
-      e.target.style.transform = e.drag.transform.replace(scaleString, "") + "scale(-1,1)"; //nicere
+    if (newWidth > 0) {
+      e.target.style.width = `${newWidth}px`;
+      if (!rightDirectionAction) e.target.style.transform = element.transform.replace("(" + xPosition, "(" + e.clientX);
+      updateDragElements(element.id, { ...element, transform: e.target.style.transform, jump: { ...element.jump, width: newWidth } });
+    } else {
+      e.target.style.width = `${Math.abs(newWidth)}px`;
+      if (rightDirectionAction) e.target.style.transform = element.transform.replace("(" + xPosition, "(" + e.clientX);
+      updateDragElements(element.id, {
+        ...element,
+        transform: e.target.style.transform,
+        jump: { ...element.jump, width: Math.abs(newWidth), minus: rightDirectionAction ? true : false },
+      });
+      // if (rightDirection) e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + e.clientX); //nicere
     }
   };
   // e.target.style.transform = e.target.style.transform.replace("(" + xPosition, newXPosition + "");
@@ -171,6 +225,7 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
       onDrag={(e) => (e.target.style.transform = e.transform)}
       onDragEnd={(e) => onDragEnd(e)}
       resizable={element.jump}
+      onResizeStart={(e) => setResizeStartPosition(e.moveable.controlBox.children[7].getBoundingClientRect().left)}
       // onResizeStart={(e) => e.setMin([unit])}
       renderDirections={idDraggElementClick === element.id && ["w", "e"]}
       onResize={(e) => onResize(e)}
