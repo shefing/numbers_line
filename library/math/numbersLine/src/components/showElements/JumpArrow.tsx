@@ -20,7 +20,11 @@ const JumpArrow = ({ element, jumpWidth }: IProps) => {
   }, [jumpWidth]);
 
   return (
-    <svg id={`${dragElementID}-jumpArrow`} className=" w-full " style={{ height: jumpArrowHeight + "px" }}>
+    <svg
+      id={`${dragElementID}-jumpArrow`}
+      className={`w-full  ${minus == underRuler ? "transform scale-x-[1]" : "transform scale-x-[-1]"}`}
+      style={{ height: jumpArrowHeight + "px" }}
+    >
       <path
         d={
           underRuler
@@ -32,8 +36,15 @@ const JumpArrow = ({ element, jumpWidth }: IProps) => {
         strokeWidth="4"
         strokeLinecap="round"
         strokeDasharray="15 15"
-        // strokeDashoffset={underRuler ? 0 : 20} // Set stroke dash offset to 0 to show the entire stroke, or 20 to make the last 20 pixels transparent
+        strokeDashoffset={20}
       />
+      {/* <svg
+        className="overflow-visible"
+        x={`${underRuler ? jumpWidth - 15 + matchingSpace / 5 : jumpWidth + 7 - matchingSpace / 5}`}
+        y={`${underRuler ? 5 - matchingSpace : jumpArrowHeight - 1 - matchingSpace}`}
+      >
+        <polygon points="-20,0 0,10 -20,20 " transform={`rotate(${underRuler ? -triangleRotation : triangleRotation})`} fill={minus ? "#F48460" : "#009FDE"} />
+      </svg> */}
       <svg
         className="overflow-visible"
         x={`${underRuler ? -7 + matchingSpace / 5 : jumpWidth + 7 - matchingSpace / 5}`}
