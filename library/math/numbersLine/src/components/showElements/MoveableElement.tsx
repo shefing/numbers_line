@@ -24,7 +24,7 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
   const { calculatScreenWidth, calculatUnitsAmount } = useHelpers();
   const [rightStartPosition, setRightStartPosition] = useState(0);
   const [boundScale, setBoundScale] = useState(0);
-  const [changeSituation, setChangeSituation] = useState(false);
+  const [changeDragState, setChangeDragState] = useState(false);
 
   const ableProps = {
     ButtonViewable: true,
@@ -94,12 +94,18 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
   const onResizeStart = (e: OnResizeStart) => {
     if (!element.jump) return;
     const rightDirectionAction = e.direction[0] == 1;
-    if ((rightDirectionAction && element.jump.minus) || (!rightDirectionAction && !element.jump.minus)) e.setMin([unit]);
-    rightDirectionAction
-      ? setBoundScale(e.moveable.controlBox.children[7].getBoundingClientRect().left)
-      : setBoundScale(e.moveable.controlBox.children[5].getBoundingClientRect().left);
-    setRightStartPosition(e.moveable.controlBox.children[5].getBoundingClientRect().left);
-    setChangeSituation(false);
+    if ((rightDirectionAction && element.jump.minus) || (!rightDirectionAction && !element.jump.minus))
+      e.setMin([unit]);
+
+    const selectedElement = e.moveable.controlBox.querySelector(
+        `[data-line-key${rightDirectionAction ? `=render-line-1` : `=render-line-3`}]`
+    );
+
+    const startElement = e.moveable.controlBox.querySelector(`[data-line-key="render-line-1"]`);
+
+    setBoundScale(selectedElement.getBoundingClientRect().left)
+    setRightStartPosition(startElement.getBoundingClientRect().left);
+    setChangeDragState(false);
   };
   const onResize = (e: OnResize) => {
     if (!element.jump) return;
@@ -111,9 +117,9 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
       updateDragElements(element.id, {
         ...element,
         transform: e.target.style.transform,
-        jump: { ...element.jump, width: e.width, minus: changeSituation ? !element.jump.minus : element.jump.minus },
+        jump: { ...element.jump, width: e.width, minus: changeDragState ? !element.jump.minus : element.jump.minus },
       });
-      setChangeSituation(false);
+      setChangeDragState(false);
     } else {
       if (e.clientX > windowSize.width - rulerPaddingSides || e.clientX < rulerPaddingSides) return;
       if (rightDirectionAction) {
@@ -126,7 +132,7 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
         e.target.style.width = `${width}px`;
         updateDragElements(element.id, { ...element, transform: e.target.style.transform, jump: { ...element.jump, width, minus: false } });
       }
-      setChangeSituation(true);
+      setChangeDragState(true);
     }
   };
 

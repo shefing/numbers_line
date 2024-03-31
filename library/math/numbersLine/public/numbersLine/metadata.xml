@@ -15,6 +15,7 @@
             <!--  if there are more than one samples, the first one in the list is the default sample  -->
             <!--  the title is optional. If no title is given , it will be autocreated -->
             <Sample title="Number Lines"><![CDATA[NumberLines]]></Sample>
+        </Preset>
     </App>
 </Apps>
 	
