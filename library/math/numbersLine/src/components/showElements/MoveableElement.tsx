@@ -94,19 +94,19 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
   const onResizeStart = (e: OnResizeStart) => {
     if (!element.jump) return;
     const rightDirectionAction = e.direction[0] == 1;
-    if ((rightDirectionAction && element.jump.minus) || (!rightDirectionAction && !element.jump.minus))
-      e.setMin([unit]);
-
-    const selectedElement = e.moveable.controlBox.querySelector(
-        `[data-line-key${rightDirectionAction ? `=render-line-1` : `=render-line-3`}]`
-    );
-
-    const startElement = e.moveable.controlBox.querySelector(`[data-line-key="render-line-1"]`);
-
-    setBoundScale(selectedElement.getBoundingClientRect().left)
-    setRightStartPosition(startElement.getBoundingClientRect().left);
+    if ((rightDirectionAction && element.jump.minus) || (!rightDirectionAction && !element.jump.minus)) e.setMin([unit]);
+    // render-line-:  +-----0-----+
+    //                |           |
+    //                3           1
+    //                |           |
+    //                +-----2-----+
+    const selectedElement = e.moveable.controlBox.querySelector(`[data-line-key${rightDirectionAction ? `=render-line-3` : `=render-line-1`}]`);
+    const endElement = e.moveable.controlBox.querySelector(`[data-line-key="render-line-1"]`);
+    setBoundScale(selectedElement ? selectedElement.getBoundingClientRect().left : 0);
+    setRightStartPosition(endElement ? endElement.getBoundingClientRect().left : 0);
     setChangeDragState(false);
   };
+
   const onResize = (e: OnResize) => {
     if (!element.jump) return;
     const rightDirectionAction = e.direction[0] == 1;
