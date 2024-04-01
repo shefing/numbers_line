@@ -5,6 +5,7 @@ import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { useDraggableElementAction } from "../../hooks/useDraggableElementAction";
 import { dragElementID, maxTextBoxSize, textBoxSize } from "../../consts/elementConsts";
 import { calcXTransform } from "../../lib/utils";
+import KeyboardCET from "./KeyboardCET";
 
 interface IProps {
   element: IElement;
@@ -52,6 +53,7 @@ const Text = ({ element }: IProps) => {
           zIndex: element.zIndex,
         }}
       />
+      <KeyboardCET />
       {idDraggElementClick == element.id && (
         <div id={`${dragElementID}-text`}>
           <MoveableElement moveableRef={moveableRef} element={element} unit={0} dragging={dragging} setDragging={setDragging} />

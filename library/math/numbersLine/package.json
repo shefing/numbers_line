@@ -20,6 +20,7 @@
     "moveable": "^0.53.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-simple-keyboard": "^3.7.105",
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7",
     "uuid": "^9.0.1"
