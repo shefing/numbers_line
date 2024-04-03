@@ -16,67 +16,55 @@ const Text = ({ element }: IProps) => {
   const { deleteDragElement, updateDragElements, updateDragElementsLayers } = useDraggableElementAction();
   const [dragging, setDragging] = useState(false);
   const [inputFocused, setInputFocused] = useState(true);
-  const [value, setValue] = useState("");
-  const [cursorPosition, setCursorPosition] = useState(0);
   const moveableRef = useRef<any>(null);
-  const textInput = useRef<any>(null);
+  const textInput = useRef<any>();
 
   useEffect(() => {
+    const closeKeyboard = (event: any) => {
+      moveableRef.current.contains(event.target) ? setInputFocused(true) : setInputFocused(false);
+    };
     document.addEventListener("mousedown", closeKeyboard);
-    textInput.current.addEventListener("click", updateCursorPosition);
     return () => {
       document.removeEventListener("mousedown", closeKeyboard);
-      textInput.current.removeEventListener("click", updateCursorPosition);
     };
   }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (event: any) => {
+      console.log("ok!", event.key);
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
   useEffect(() => {
     inputFocused ? textInput.current?.focus() : textInput.current?.blur();
   }, [inputFocused]);
-  useEffect(() => {
-    updateDragElements(element.id, { ...element, text: { value } });
-  }, [value]);
-
-  const closeKeyboard = (event: any) => {
-    moveableRef.current.contains(event.target) ? setInputFocused(true) : setInputFocused(false);
-  };
-
-  const updateCursorPosition = () => {
-    setCursorPosition(textInput.current.selectionStart);
-  };
-
-  const autoheight = () => {
-    textInput.current.style.height = textInput.current.scrollHeight + "px";
-  };
 
   const updateValue = (v: string) => {
     if (!element.text) return;
-    updateCursorPosition();
     updateDragElementsLayers(element);
     setIdDraggElementClick("");
-    if (v === "Backspace" || v === "Delete" || v === "⌫") {
-      console.log("cursorPosition", cursorPosition);
-      console.log("first", element.text.value.substring(0, cursorPosition - 1), "secound", element.text.value.substring(cursorPosition));
-      const newValue = element.text.value.substring(0, cursorPosition - 1) + element.text.value.substring(cursorPosition);
-      setValue(newValue);
-      setCursorPosition(cursorPosition - 1);
-    } else if (v === "Enter" || v == "⏎") {
-      setValue(value + "\n");
+    if (v === "⌫") {
+      textInput.current.value = textInput.current.value.substring(0, textInput.current.selectionStart - 1) + textInput.current.value.substring(textInput.current.selectionStart);
+      // textInput.current.focus();
+      // textInput.current.dispatchEvent(new KeyboardEvent("keydown", { bubbles: true, cancelable: true, key: "Backspace" }));
     } else {
-      setValue(value + v);
+      textInput.current.value = textInput.current.value.substring(0, textInput.current.selectionStart) + v + textInput.current.value.substring(textInput.current.selectionStart);
+      //textInput.current.dispatchEvent(new KeyboardEvent("keydown", { bubbles: true, cancelable: true, key: v }));
     }
-    autoheight();
+    textInput.current.style.height = textInput.current.scrollHeight + "px";
   };
 
-  const onKeyDown = (e: any) => {
-    if (keboardLayers.some((item) => item.includes(e.key)) || e.key === "Backspace" || e.key === "Delete" || e.key === "Enter") updateValue(e.key);
-  };
-
-  const onKeyPress = (button: string, event: any) => {
+  const onChangeKB = (button: string, event: any) => {
     if (event.which && event.which == 3) {
       event.preventDefault();
       return;
     }
-    updateValue(button);
+    event.target.dispatchEvent(new KeyboardEvent("keydown", { bubbles: true, cancelable: true, key: button }));
+    updateValue(button == "⏎" ? "\n" : button);
   };
 
   const onBlur = (e: { target: { value: string } }) => {
@@ -97,9 +85,9 @@ const Text = ({ element }: IProps) => {
         <textarea
           ref={textInput}
           id={`dragElement-${element.id}`}
-          value={element.text?.value}
+          //value={element.text?.value}
           autoFocus
-          onKeyDown={onKeyDown}
+          //onKeyDown={onChange}
           onBlur={onBlur}
           className={`text-box max-h-50${dragging && "outline-none border-[1.5px] border-[#009FDE]"}`}
           style={{
@@ -112,7 +100,7 @@ const Text = ({ element }: IProps) => {
           <Keyboard
             id="keyboardCET"
             layoutName="default"
-            onKeyPress={(input, event) => onKeyPress(input, event)}
+            onKeyPress={(input, event) => onChangeKB(input, event)}
             layout={{
               default: keboardLayers,
             }}
