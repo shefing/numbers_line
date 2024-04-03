@@ -1,8 +1,8 @@
 import { IElement } from "../../type/moveable";
 import { useRef } from "react";
 import MoveableElement from "./MoveableElement";
-import navi from "/assets/icons/naviOnScreen.svg";
-import keni from "/assets/icons/keniOnScreen.svg";
+import navi from "../../assets/icons/naviOnScreen.svg";
+import keni from "../../assets/icons/keniOnScreen.svg";
 import { NaviKeniIconsTypes } from "../../type/toolbar";
 import { dragElementID } from "../../consts/elementConsts";
 

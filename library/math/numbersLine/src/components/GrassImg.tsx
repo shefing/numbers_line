@@ -1,5 +1,5 @@
 import { grassHeight } from "@/consts/elementConsts";
-import urlImg from "/assets/icons/grass.png";
+import urlImg from "../assets/icons/grass.png";
 
 const GrassImg = () => {
   return (

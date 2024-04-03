@@ -1,7 +1,7 @@
 import { MoveableManagerInterface } from "react-moveable";
-import deleteIcon from "/assets/icons/delete.svg";
-import duplicateIcon from "/assets/icons/duplicate.svg";
-import duplicateDisable from "/assets/icons/duplicateDisable.svg";
+import deleteIcon from "../assets/icons/delete.svg";
+import duplicateIcon from "../assets/icons/duplicate.svg";
+import duplicateDisable from "../assets/icons/duplicateDisable.svg";
 import { IAbleProps } from "../type/moveable";
 import { LineRange } from "../type/ruler";
 import { buttonsDraggElementWidth } from "./elementConsts";

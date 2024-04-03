@@ -1,7 +1,7 @@
-import leftArrow from "/assets/icons/arrowLeft.svg";
-import leftArrowDisable from "/assets/icons/arrowLeftDisable.svg";
-import rightArrow from "/assets/icons/arrowRight.svg";
-import rightArrowDisable from "/assets/icons/arrowRightDisable.svg";
+import leftArrow from "../../assets/icons/arrowLeft.svg";
+import leftArrowDisable from "../../assets/icons/arrowLeftDisable.svg";
+import rightArrow from "../../assets/icons/arrowRight.svg";
+import rightArrowDisable from "../../assets/icons/arrowRightDisable.svg";
 import { LineRange, RulerLenth } from "../../type/ruler";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { useEffect, useRef, useState } from "react";

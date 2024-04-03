@@ -11,18 +11,18 @@ import {
   Colors,
 } from "../type/toolbar";
 import { LineRange } from "../type/ruler";
-import jump from "/assets/icons/toolbar/jump.svg";
-import text from "/assets/icons/toolbar/text.svg";
-import writing from "/assets/icons/toolbar/writing.svg";
-import eye from "/assets/icons/toolbar/eye.svg";
-import naviAndKeni from "/assets/icons/toolbar/naviAndKeni.svg";
-import restart from "/assets/icons/toolbar/restart.svg";
-import navi from "/assets/icons/navi.svg";
-import keni from "/assets/icons/keni.svg";
-import writingBlue from "/assets/icons/writingBlueMenu.svg";
-import writingGreen from "/assets/icons/writingGreenMenu.svg";
-import writingOrange from "/assets/icons/writingOrangeMenu.svg";
-import writingDelete from "/assets/icons/writingDeleteMenu.svg";
+import jump from "../assets/icons/toolbar/jump.svg";
+import text from "../assets/icons/toolbar/text.svg";
+import writing from "../assets/icons/toolbar/writing.svg";
+import eye from "../assets/icons/toolbar/eye.svg";
+import naviAndKeni from "../assets/icons/toolbar/naviAndKeni.svg";
+import restart from "../assets/icons/toolbar/restart.svg";
+import navi from "../assets/icons/navi.svg";
+import keni from "../assets/icons/keni.svg";
+import writingBlue from "../assets/icons/writingBlueMenu.svg";
+import writingGreen from "../assets/icons/writingGreenMenu.svg";
+import writingOrange from "../assets/icons/writingOrangeMenu.svg";
+import writingDelete from "../assets/icons/writingDeleteMenu.svg";
 
 export const actionIconsDetials: IActionIcon[] = [
   { type: ActionTypes.restart, url: restart },

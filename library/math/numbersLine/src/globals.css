@@ -9,13 +9,13 @@
   .drag-element{
     @apply flex absolute top-0 left-0
   }
-  .cursor-blue {cursor: url("/assets/icons/cursorBlue.svg"), pointer;
+  .cursor-blue {cursor: url("./assets/icons/cursorBlue.svg"), pointer;
   }
-  .cursor-green {cursor: url("/assets/icons/cursorGreen.svg"), pointer;
+  .cursor-green {cursor: url("./assets/icons/cursorGreen.svg"), pointer;
   }
-  .cursor-orange {cursor: url("/assets/icons/cursorOrange.svg"), pointer;
+  .cursor-orange {cursor: url("./assets/icons/cursorOrange.svg"), pointer;
   }
-  .cursor-delete {cursor: url("/assets/icons/cursorDelete.svg"), pointer;
+  .cursor-delete {cursor: url("./assets/icons/cursorDelete.svg"), pointer;
 }
 
 }
