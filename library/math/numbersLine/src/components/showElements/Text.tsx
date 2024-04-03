@@ -34,7 +34,6 @@ const Text = ({ element }: IProps) => {
   }, [inputFocused]);
 
   const updateValue = (v: string) => {
-    onChange();
     let startIndex = textInput.current.selectionStart;
     const endIndex = textInput.current.selectionEnd;
     if (v === "⌫") {
@@ -92,6 +91,7 @@ const Text = ({ element }: IProps) => {
         {inputFocused && (
           <Keyboard
             onKeyPress={(input, event) => onKeyPress(input, event)}
+            onChange={onChange}
             layout={{
               default: keboardLayers,
             }}
