@@ -2712,6 +2712,13 @@ uuid@^9.0.1:
   resolved "https://registry.npmjs.org/uuid/-/uuid-9.0.1.tgz"
   integrity sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==
 
+vite-plugin-singlefile@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/vite-plugin-singlefile/-/vite-plugin-singlefile-2.0.1.tgz#04c0ffdb54a83e236c54f199d5ce07130a2d4d32"
+  integrity sha512-J74tfN6TE4fz0Hp7E1+dmVTmCpyazv4yuIpR6jd22Kq76d2CQDSQx3wDiHX8LT02f922V+YrLhRq2VIk/UYrig==
+  dependencies:
+    micromatch "^4.0.5"
+
 vite@^5.0.8:
   version "5.1.1"
   resolved "https://registry.npmjs.org/vite/-/vite-5.1.1.tgz"
