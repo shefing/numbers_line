@@ -4,7 +4,32 @@
  
 @layer components{
   .text-box{
-    @apply bg-transparent px-2 text-[26px] w-[315px] h-[50px] font-[Arial] focus-visible:outline-none focus-visible:border-[1.5px] focus-visible:border-[#009FDE] 
+    @apply bg-transparent px-2 text-[26px] w-[325px] h-[39px] font-[Arial] focus-visible:outline-none focus-visible:border-[1.5px] focus-visible:border-[#009FDE] 
+  }
+   
+  .keyboard-buttons{
+    background: #E1F4FD !important;
+    border-radius: 0  !important;
+    border-bottom: 0 !important;
+    box-shadow: none !important;
+    font-family: Arial;
+    font-size: 32px;
+    width: 50px !important;
+    height: 50px !important;
+    padding: 3px !important;
+  }
+    .keyboard-buttons-enter{
+    width: 105px !important;
+    color: #ffffff !important;
+    background: #30B675 !important;
+  } 
+  .keyboard-background{
+    @apply bg-[#fff];
+    padding:0px !important;
+    padding-top:  5px  !important;
+    border-radius: 0  !important;
+    width: auto;
+    height: auto;
   }
   .drag-element{
     @apply flex absolute top-0 left-0

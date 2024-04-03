@@ -82,3 +82,6 @@ export const duplicateElementStepSpace = 30;
 export const brushWidth = 10;
 export const drawSpace = 20;
 export const dragElementID = "dragElement";
+export const keboardLayers = ["7 8 9 - = ⌫", "4 5 6 + < >", "1 2 3 x ≤ ≥", ", 0 . / ⏎"];
+export const keboardDifferentlButton = "⏎";
+export const keboardNormalButtons = keboardLayers.filter((item) => item !== keboardDifferentlButton).join(" ");
