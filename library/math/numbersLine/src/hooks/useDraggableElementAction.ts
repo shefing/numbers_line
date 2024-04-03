@@ -50,9 +50,6 @@ export const useDraggableElementAction = () => {
     if (typeAction === ActionTypes.jump) {
       newElement.jump = { value: 1, underRuler: false, width: elementWidth, minus: false };
     }
-    if (typeAction === ActionTypes.text) {
-      newElement.text = { value: "" };
-    }
     if (typeAction === ActionTypes.naviAndKeni) {
       if (type)
         newElement.icons = {

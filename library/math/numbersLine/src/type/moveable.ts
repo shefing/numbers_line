@@ -5,7 +5,6 @@ export interface IElement {
   id: string;
   type: ActionTypes;
   jump?: IJump;
-  text?: IText;
   icons?: IIcons;
   writing?: ILine;
   transform: string;
@@ -17,9 +16,6 @@ export interface IJump {
   underRuler: boolean;
   width: number;
   minus: boolean;
-}
-export interface IText {
-  value: string;
 }
 export interface IIcons {
   type: NaviKeniIconsTypes;
