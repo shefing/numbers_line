@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && yarn custom-build",
+    "custom-build": "ncp dist/assets dist/NumberLinesTemplate/he/assets && ncp dist/fonts dist/NumberLinesTemplate/he/fonts  && ncp dist/index.html dist/NumberLinesTemplate/he/index.htm",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -25,6 +26,7 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "ncp": "^2.0.0",
     "@types/node": "^20.11.4",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",

@@ -8,7 +8,7 @@
 
 @font-face {
   font-family: 'Abraham';
-  src: local('abraham'), url('/fonts/Abraham.otf') format('woff');
+  src: local('abraham'), url('./fonts/Abraham.otf') format('woff');
   font-display: swap;
 }
 
