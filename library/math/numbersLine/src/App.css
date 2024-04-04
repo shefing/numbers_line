@@ -8,10 +8,14 @@
 
 @font-face {
   font-family: 'Abraham';
+  src: local('abraham'), url('/fonts/Abraham.otf') format('woff');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Abraham';
   src: local('abraham'), url('./fonts/Abraham.otf') format('woff');
   font-display: swap;
 }
-
 body{
   overflow: hidden;
 }
