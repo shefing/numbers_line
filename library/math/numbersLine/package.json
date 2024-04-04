@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && yarn custom-build",
-    "custom-build": "ncp dist/assets dist/NumberLinesTemplate/he/assets && ncp dist/fonts dist/NumberLinesTemplate/he/fonts  && ncp dist/index.html dist/NumberLinesTemplate/he/index.htm",
+    "build": "tsc && vite build && yarn custom-build-he && yarn custom-build-ar",
+    "custom-build-he": "ncp dist/assets dist/NumberLinesTemplate/he/assets && ncp dist/fonts dist/NumberLinesTemplate/he/fonts  && ncp dist/index.html dist/NumberLinesTemplate/he/index.htm",
+    "custom-build-ar": "ncp dist/assets dist/NumberLinesTemplate/ar/assets && ncp dist/fonts dist/NumberLinesTemplate/ar/fonts  && ncp dist/index.html dist/NumberLinesTemplate/ar/index.htm",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
