@@ -3,7 +3,18 @@ import { LineRange } from "../type/ruler";
 import { Colors, IColor, IWindowSize, TypeCover, WritingSituation } from "../type/toolbar";
 import { IElement } from "../type/moveable";
 import { RulerPaddingSides } from "@/consts/elementConsts";
+import i18n from "../i18n";
+import { ILanguage } from "../type/language";
+
+const params = new URLSearchParams(location.search);
+let locale = params.get("locale");
+if (locale) i18n.changeLanguage(locale);
+if (!locale) {
+  locale = ILanguage.HE;
+}
+
 interface INumbersLineContextProps {
+  language: ILanguage;
   windowSize: IWindowSize;
   rulerType: LineRange;
   setrulerType: (v: LineRange) => void;
@@ -32,6 +43,7 @@ interface INumbersLineContextProps {
 }
 
 export const NumbersLineContext = React.createContext({
+  language: locale,
   windowSize: {} as IWindowSize,
   rulerType: {} as LineRange,
   setrulerType: () => null,
@@ -60,6 +72,7 @@ export const NumbersLineContext = React.createContext({
 } as INumbersLineContextProps);
 
 export const NumbersLineContexProvider = (props: any) => {
+  const [language] = useState<ILanguage>(locale as ILanguage);
   const [windowSize, setWindowSize] = useState<IWindowSize>({ height: window.innerHeight, width: window.innerWidth });
   const [rulerType, setRulerType] = useState(LineRange.ten);
   const [rulerTypeShould, setRulerTypeShould] = useState(LineRange.ten);
@@ -89,6 +102,7 @@ export const NumbersLineContexProvider = (props: any) => {
   return (
     <NumbersLineContext.Provider
       value={{
+        language,
         windowSize,
         rulerType,
         setrulerType: setRulerType,

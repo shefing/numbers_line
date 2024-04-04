@@ -40,11 +40,11 @@ export const rulerDefinitionButtonDetials: IRulerDefinition[] = [
 ];
 
 export const displayRulerButtonDetials: IDisplayRuller[] = [
-  { type: "הסתר הכל", visitDisable: TypeCover.allCover, choice: TypeCover.allCover },
-  { type: "הסתר חלקית", visitDisable: TypeCover.randomly, choice: TypeCover.randomly },
-  { type: "הסתר ידנית", visitDisable: TypeCover.allCover, choice: TypeCover.partiallyCover },
-  { type: "הצג ידנית", visitDisable: TypeCover.allDiscover, choice: TypeCover.partiallyDiscover },
-  { type: "הצג הכל", visitDisable: TypeCover.allDiscover, choice: TypeCover.allDiscover },
+  { type: "hide_everything", visitDisable: TypeCover.allCover, choice: TypeCover.allCover },
+  { type: "hide_partially", visitDisable: TypeCover.randomly, choice: TypeCover.randomly },
+  { type: "hide_manually", visitDisable: TypeCover.allCover, choice: TypeCover.partiallyCover },
+  { type: "show_manually", visitDisable: TypeCover.allDiscover, choice: TypeCover.partiallyDiscover },
+  { type: "show_all", visitDisable: TypeCover.allDiscover, choice: TypeCover.allDiscover },
 ];
 
 export const iconsNaviKeni: IIconsNaviKeni[] = [
