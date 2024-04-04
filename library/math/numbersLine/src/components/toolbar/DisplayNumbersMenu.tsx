@@ -1,8 +1,9 @@
 import { Button } from "../ui/button";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { IDisplayRuller, TypeCover } from "../../type/toolbar";
-import triangleToMenu from "/assets/icons/TriangleToMenu.png";
 import { ToolbarHeight, displayRulerButtonDetials } from "../../consts/elementConsts";
+import { t } from "i18next";
+import triangleToMenu from "/assets/icons/TriangleToMenu.png";
 
 interface IProps {
   setOpen: (val: boolean) => void;
@@ -28,7 +29,7 @@ const DisplayNumbersMenu = ({ setOpen }: IProps) => {
               isVisitDisable={item.visitDisable == visitableDisplayButton}
               onClick={() => onClickButtons(item.choice)}
             >
-              {item.type}
+              {t(item.type)}
             </Button>
           ))}
         </div>
