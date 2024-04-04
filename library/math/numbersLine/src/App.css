@@ -8,10 +8,14 @@
 
 @font-face {
   font-family: 'Abraham';
+  src: local('abraham'), url('/fonts/Abraham.otf') format('woff');
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Abraham';
   src: local('abraham'), url('./fonts/Abraham.otf') format('woff');
   font-display: swap;
 }
-
 body{
   overflow: hidden;
 }
@@ -43,7 +47,9 @@ body{
     animation: logo-spin infinite 20s linear;
   }
 }
-
+.text-box::-webkit-scrollbar {
+  display: none;
+}
 .card {
   padding: 2em;
 }

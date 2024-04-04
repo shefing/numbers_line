@@ -66,7 +66,7 @@ const ShowElements = () => {
   }, [rulerType, windowResizing]);
 
   useEffect(() => {
-    dragElements.map((element: IElement) => updateTransform(element));
+    dragElements.map((element: IElement) => element.type != ActionTypes.text && updateTransform(element));
   }, [unit]);
 
   return dragElements.map((element: IElement) => (
