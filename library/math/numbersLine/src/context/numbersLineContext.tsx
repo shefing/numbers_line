@@ -12,7 +12,7 @@ if (locale) i18n.changeLanguage(locale);
 if (!locale) {
   locale = ILanguage.HE;
 }
-
+console.log("lcoale",locale);
 interface INumbersLineContextProps {
   language: ILanguage;
   windowSize: IWindowSize;
