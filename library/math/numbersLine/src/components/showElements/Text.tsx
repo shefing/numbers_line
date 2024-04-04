@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import MoveableElement from "./MoveableElement";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { useDraggableElementAction } from "../../hooks/useDraggableElementAction";
-import { dragElementID, keboardDifferentlButton, keboardLayers, keboardNormalButtons } from "../../consts/elementConsts";
+import { dragElementID, keboardActioKeys, keboardDifferentlButton, keboardLayers, keboardNormalButtons } from "../../consts/elementConsts";
 import Keyboard from "react-simple-keyboard";
 import "react-simple-keyboard/build/css/index.css";
 
@@ -15,23 +15,28 @@ const Text = ({ element }: IProps) => {
   const { idDraggElementClick, setIdDraggElementClick } = useNumbersLineContext();
   const { deleteDragElement, updateDragElementsLayers } = useDraggableElementAction();
   const [dragging, setDragging] = useState(false);
-  const [inputFocused, setInputFocused] = useState(true);
+  const [openKeyboard, setOpenKeyboard] = useState(true);
   const moveableRef = useRef<any>(null);
   const textInput = useRef<any>();
 
   useEffect(() => {
     const closeKeyboard = (event: any) => {
-      moveableRef.current.contains(event.target) ? setInputFocused(true) : setInputFocused(false);
+      !moveableRef.current.contains(event.target) && setOpenKeyboard(false);
+    };
+    const openKeyboard = (event: any) => {
+      textInput.current.contains(event.target) && setOpenKeyboard(true);
     };
     document.addEventListener("mousedown", closeKeyboard);
+    document.addEventListener("dblclick", openKeyboard);
     return () => {
       document.removeEventListener("mousedown", closeKeyboard);
+      document.removeEventListener("dblclick", openKeyboard);
     };
   }, []);
 
   useEffect(() => {
-    inputFocused ? textInput.current?.focus() : textInput.current?.blur();
-  }, [inputFocused]);
+    openKeyboard ? textInput.current?.focus() : textInput.current?.blur();
+  }, [openKeyboard]);
 
   const updateValue = (v: string) => {
     let startIndex = textInput.current.selectionStart;
@@ -45,13 +50,11 @@ const Text = ({ element }: IProps) => {
     }
     textInput.current.setSelectionRange(startIndex, startIndex);
   };
-
-  const onKeyPress = (button: string, event: any) => {
-    if (event.which && event.which == 3) {
-      event.preventDefault();
+  const onKeyDown = (e: any) => {
+    if (!(keboardLayers.some((item) => item.includes(e.key)) || keboardActioKeys.includes(e.key))) {
+      e.preventDefault();
       return;
     }
-    updateValue(button == "⏎" ? "\n" : button);
   };
 
   const onChange = () => {
@@ -61,15 +64,23 @@ const Text = ({ element }: IProps) => {
   };
 
   const onBlur = (e: { target: { value: string } }) => {
-    textInput.current?.focus();
-    !e.target.value.length && !inputFocused && deleteDragElement(element.id);
+    openKeyboard ? textInput.current?.focus() : textInput.current?.blur();
+    !e.target.value.length && !openKeyboard && deleteDragElement(element.id);
+  };
+
+  const onKeyPress = (button: string, event: any) => {
+    if (event.which && event.which == 3) {
+      event.preventDefault();
+      return;
+    }
+    updateValue(button == "⏎" ? "\n" : button);
   };
   return (
     <>
       <div
         id={`dragElement-keyboardCET-${element.id}`}
         ref={moveableRef}
-        className={`drag-element ${inputFocused ? "flex-col bg-white rounded-[6px] border border-[#009FDE] p-2 " : ""}`}
+        className={`drag-element ${openKeyboard ? "flex-col bg-white rounded-[6px] border border-[#009FDE] p-1.5 mt-[-1.5] " : ""}`}
         style={{
           transform: element.transform,
           zIndex: element.zIndex,
@@ -79,16 +90,18 @@ const Text = ({ element }: IProps) => {
           ref={textInput}
           id={`dragElement-${element.id}`}
           autoFocus
+          onKeyDown={(e) => onKeyDown(e)}
           onChange={onChange}
           onBlur={onBlur}
           className={`text-box max-h-50${dragging && "outline-none border-[1.5px] border-[#009FDE]"}`}
           style={{
             zIndex: element.zIndex,
             resize: "none",
-            overflow: "auto",
+            overflowY: "auto",
+            wordWrap: "break-word",
           }}
         />
-        {inputFocused && (
+        {openKeyboard && (
           <Keyboard
             onKeyPress={(input, event) => onKeyPress(input, event)}
             onChange={onChange}
