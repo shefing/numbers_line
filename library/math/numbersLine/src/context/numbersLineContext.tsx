@@ -7,12 +7,12 @@ import i18n from "../i18n";
 import { ILanguage } from "../type/language";
 
 const params = new URLSearchParams(location.search);
-let locale = params.get("locale");
+let locale = params.get("locale") || (window as any).locale;
 if (locale) i18n.changeLanguage(locale);
 if (!locale) {
   locale = ILanguage.HE;
 }
-
+console.log("lcoale",locale);
 interface INumbersLineContextProps {
   language: ILanguage;
   windowSize: IWindowSize;
