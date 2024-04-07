@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import { IElement } from "../../type/moveable";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { LineRange } from "../../type/ruler";
-import { baseJumpClassName } from "../../styles/jump";
 import { dragElementID } from "../../consts/elementConsts";
 
 interface IProps {
@@ -35,7 +34,7 @@ const Jump = ({ element, unit }: IProps) => {
         }}
       >
         <JumpArrow element={element} jumpWidth={moveableRef.current ? moveableRef.current.getBoundingClientRect().width : unit * jump.value} />
-        <div id={`${dragElementID}-jumpBase`} className={`${baseJumpClassName} ${jump.minus ? " bg-[#F48460]" : " bg-[#009FDE]"}${jump.underRuler ? " mb-[1rem]" : " mt-[1rem]"}`}>
+        <div id={`${dragElementID}-jumpBase`} className={`jump-base ${jump.minus ? " bg-[#F48460]" : " bg-[#009FDE]"}${jump.underRuler ? " mb-[1rem]" : " mt-[1rem]"}`}>
           <span id={`${dragElementID}-jumpLength`} className="cursor-pointer" onClick={() => setHideNumber(!hideNumber)}>
             {hideNumber ? "?" : rulerType != LineRange.hundredCircular ? jump.value : jump.value * 10}
           </span>
