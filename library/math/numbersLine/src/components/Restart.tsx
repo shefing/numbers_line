@@ -1,20 +1,20 @@
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "./ui/alert-dialog";
 import { useNumbersLineContext } from "../context/numbersLineContext";
 import { useHelpers } from "@/hooks/useHelpers";
+import { t } from "i18next";
 
 const Restart = () => {
   const { rulerType, openRestartDialog, setOpenRestartDialog, setrulerTypeShould } = useNumbersLineContext();
   const { restart } = useHelpers();
-  //e.preventDefault() - to prevent auto focous in AlertDialogCancel
   return (
     <AlertDialog open={openRestartDialog} onOpenChange={setOpenRestartDialog}>
       <AlertDialogContent onOpenAutoFocus={(e) => e.preventDefault()}>
         <AlertDialogHeader>
-          <AlertDialogTitle>?אתם רוצים להתחיל מחדש</AlertDialogTitle>
+          <AlertDialogTitle>{t("restart_question")}</AlertDialogTitle>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel onClick={() => setrulerTypeShould(rulerType)}>הישארו</AlertDialogCancel>
-          <AlertDialogAction onClick={restart}>מחק הכל</AlertDialogAction>
+          <AlertDialogCancel onClick={() => setrulerTypeShould(rulerType)}>{t("stay")}</AlertDialogCancel>
+          <AlertDialogAction onClick={restart}>{t("delete_all")}</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
