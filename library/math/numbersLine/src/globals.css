@@ -1,8 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
- 
+@import  "../consts/elementConsts";
+
 @layer components{
+  .jump-base{
+    @apply h-[40px] bg-opacity-85 rounded-[1px] border border-[#A4A3AE] border-[0.5px] text-center text-white text-[24px] font-[700] font-[Arial];
+    /* jumpBaseHeight=40px */
+  }
   .text-box{
     @apply bg-transparent p-1 text-[26px] w-[325px] h-[50px] font-[Arial] focus-visible:outline-none focus-visible:border-[1.5px] focus-visible:border-[#009FDE];
     min-height: 30px;
