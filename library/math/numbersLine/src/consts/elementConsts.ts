@@ -4,6 +4,7 @@ import {
   IRulerDefinition,
   ActionTypes,
   TypeCover,
+  IUrl,
   NaviKeniIconsTypes,
   IIconsNaviKeni,
   WritingSituation,
@@ -12,26 +13,51 @@ import {
 } from "../type/toolbar";
 import { LineRange } from "../type/ruler";
 import jump from "/assets/icons/toolbar/jump.svg";
+import jumpHover from "/assets/icons/toolbar/jumpHover.svg";
 import text from "/assets/icons/toolbar/text.svg";
+import textHover from "/assets/icons/toolbar/textHover.svg";
 import writing from "/assets/icons/toolbar/writing.svg";
+import writingHover from "/assets/icons/toolbar/writingHover.svg";
+import writingBlue from "/assets/icons/toolbar/writingBlue.svg";
+import writingGreen from "/assets/icons/toolbar/writingGreen.svg";
+import writingOrange from "/assets/icons/toolbar/writingOrange.svg";
+import writingDelete from "/assets/icons/toolbar/writingDelete.svg";
+import writingOpen from "/assets/icons/toolbar/writingOpen.svg";
 import eye from "/assets/icons/toolbar/eye.svg";
+import eyeHover from "/assets/icons/toolbar/eyeHover.svg";
+import eyeOpen from "/assets/icons/toolbar/eyeOpen.svg";
 import naviAndKeni from "/assets/icons/toolbar/naviAndKeni.svg";
+import naviAndKeniHover from "/assets/icons/toolbar/naviAndKeniHover.svg";
+import naviAndKeniOpen from "/assets/icons/toolbar/naviAndKeniOpen.svg";
 import restart from "/assets/icons/toolbar/restart.svg";
+import restartHover from "/assets/icons/toolbar/restartHover.svg";
+import restartOpen from "/assets/icons/toolbar/restartOpen.svg";
+import restartDisable from "/assets/icons/toolbar/restartDisable.svg";
 import navi from "/assets/icons/navi.svg";
+import naviHover from "/assets/icons/naviHover.svg";
 import keni from "/assets/icons/keni.svg";
-import writingBlue from "/assets/icons/writingBlueMenu.svg";
-import writingGreen from "/assets/icons/writingGreenMenu.svg";
-import writingOrange from "/assets/icons/writingOrangeMenu.svg";
-import writingDelete from "/assets/icons/writingDeleteMenu.svg";
+import keniHover from "/assets/icons/keniHover.svg";
+import writingBlueMenu from "/assets/icons/writingBlueMenu.svg";
+import writingGreenMenu from "/assets/icons/writingGreenMenu.svg";
+import writingOrangeMenu from "/assets/icons/writingOrangeMenu.svg";
+import writingDeleteMenu from "/assets/icons/writingDeleteMenu.svg";
+
+const restartUrls: IUrl = { url: restart, hover: restartHover, open: restartOpen, disable: restartDisable };
+const naviAndKeniUrls: IUrl = { url: naviAndKeni, hover: naviAndKeniHover, open: naviAndKeniOpen };
+const eyetUrls: IUrl = { url: eye, hover: eyeHover, open: eyeOpen };
+const writingUrls: IUrl = { url: writing, hover: writingHover, open: writingOpen, blue: writingBlue, green: writingGreen, orange: writingOrange, delete: writingDelete };
+const textUrls: IUrl = { url: text, hover: textHover };
+const jumpUrls: IUrl = { url: jump, hover: jumpHover };
 
 export const actionIconsDetials: IActionIcon[] = [
-  { type: ActionTypes.restart, url: restart },
-  { type: ActionTypes.naviAndKeni, url: naviAndKeni, isMenu: true },
-  { type: ActionTypes.displayNumbersLine, url: eye, isMenu: true },
-  { type: ActionTypes.writing, url: writing, isMenu: true },
-  { type: ActionTypes.text, url: text, isDragged: true },
-  { type: ActionTypes.jump, url: jump, isDragged: true },
+  { type: ActionTypes.restart, url: restartUrls },
+  { type: ActionTypes.naviAndKeni, url: naviAndKeniUrls, isMenu: true },
+  { type: ActionTypes.displayNumbersLine, url: eyetUrls, isMenu: true },
+  { type: ActionTypes.writing, url: writingUrls, isMenu: true },
+  { type: ActionTypes.text, url: textUrls, isDragged: true },
+  { type: ActionTypes.jump, url: jumpUrls, isDragged: true },
 ];
+
 export const rulerDefinitionButtonDetials: IRulerDefinition[] = [
   { type: "0-10", choice: LineRange.ten },
   { type: "0-20", choice: LineRange.twenty },
@@ -48,15 +74,15 @@ export const displayRulerButtonDetials: IDisplayRuller[] = [
 ];
 
 export const iconsNaviKeni: IIconsNaviKeni[] = [
-  { type: NaviKeniIconsTypes.navi, url: navi },
-  { type: NaviKeniIconsTypes.keni, url: keni },
+  { type: NaviKeniIconsTypes.navi, url: navi, urlHover: naviHover },
+  { type: NaviKeniIconsTypes.keni, url: keni, urlHover: keniHover },
 ];
 
 export const writingSituationList: IWritingSituation[] = [
-  { type: { description: WritingSituation.blue, url: Colors.blue }, url: writingBlue },
-  { type: { description: WritingSituation.green, url: Colors.green }, url: writingGreen },
-  { type: { description: WritingSituation.orange, url: Colors.orange }, url: writingOrange },
-  { type: { description: WritingSituation.delete, url: Colors.delete }, url: writingDelete },
+  { type: { description: WritingSituation.blue, url: Colors.blue }, url: writingBlueMenu },
+  { type: { description: WritingSituation.green, url: Colors.green }, url: writingGreenMenu },
+  { type: { description: WritingSituation.orange, url: Colors.orange }, url: writingOrangeMenu },
+  { type: { description: WritingSituation.delete, url: Colors.delete }, url: writingDeleteMenu },
 ];
 export const cursorColors: Record<string, string> = { Blue: "cursor-blue", Green: "cursor-green", Orange: "cursor-orange", Delete: "cursor-delete" };
 

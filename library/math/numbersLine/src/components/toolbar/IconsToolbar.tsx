@@ -5,10 +5,10 @@ import { useDraggableElementAction } from "../../hooks/useDraggableElementAction
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { useEffect, useRef, useState } from "react";
 import { getSrc } from "../../lib/utils";
-import { ActionTypes, Colors, TypeCover, WritingSituation } from "../../type/toolbar";
+import { ActionTypes, Colors, IUrl, TypeCover, WritingSituation } from "../../type/toolbar";
 interface IProps {
   typeAction: ActionTypes;
-  iconUrl: string;
+  iconUrl: IUrl;
   isDragged?: boolean;
   isMenu?: boolean;
 }
@@ -18,7 +18,7 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
   const { addDraggableElement } = useDraggableElementAction();
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const [iconSrc, setIconSrc] = useState(getSrc(iconUrl, isHovered));
+  const [iconSrc, setIconSrc] = useState(iconUrl.url);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -39,10 +39,10 @@ const IconsToolbar = ({ typeAction, iconUrl, isDragged, isMenu }: IProps) => {
 
   useEffect(() => {
     const isClicked = typeAction === ActionTypes.restart ? openRestartDialog : isOpen;
-    let isDisabled = typeAction === ActionTypes.restart && dragElements.length == 0 && visitableDisplayButton == TypeCover.allDiscover;
+    const isDisabled = typeAction === ActionTypes.restart && dragElements.length == 0 && visitableDisplayButton == TypeCover.allDiscover;
     typeAction === ActionTypes.writing && color.description != WritingSituation.non && color.description != WritingSituation.delete
-      ? setIconSrc(getSrc(iconUrl, isHovered, isClicked, isDisabled, color.description))
-      : setIconSrc(getSrc(iconUrl, isHovered, isClicked, isDisabled));
+      ? setIconSrc(getSrc(iconUrl, isHovered, isClicked, isDisabled, color.description)) // The writing mode requires addressing the writing direction with the icon symbol
+      : setIconSrc(getSrc(iconUrl, isHovered, isClicked, isDisabled)); //else
   }, [isOpen, isHovered, openRestartDialog, dragElements, visitableDisplayButton, color]);
 
   const onButtonClick = () => {
