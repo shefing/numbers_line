@@ -34,7 +34,10 @@ const Jump = ({ element, unit }: IProps) => {
         }}
       >
         <JumpArrow element={element} jumpWidth={moveableRef.current ? moveableRef.current.getBoundingClientRect().width : unit * jump.value} />
-        <div id={`${dragElementID}-jumpBase`} className={`jump-base ${jump.minus ? " bg-[#F48460]" : " bg-[#009FDE]"}${jump.underRuler ? " mb-[1rem]" : " mt-[1rem]"}`}>
+        <div
+          id={`${dragElementID}-jumpBase`}
+          className={`jump-base ${jump.minus ? " bg-[#F48460] bg-opacity-85 " : " bg-[#009FDE] bg-opacity-85 "}${jump.underRuler ? " mb-[1rem]" : " mt-[1rem]"}`}
+        >
           <span id={`${dragElementID}-jumpLength`} className="cursor-pointer" onClick={() => setHideNumber(!hideNumber)}>
             {hideNumber ? "?" : rulerType != LineRange.hundredCircular ? jump.value : jump.value * 10}
           </span>
