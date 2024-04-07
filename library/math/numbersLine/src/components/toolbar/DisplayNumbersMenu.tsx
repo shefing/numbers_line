@@ -20,7 +20,7 @@ const DisplayNumbersMenu = ({ setOpen }: IProps) => {
     <div className="fixed ">
       <div className="flex flex-col items-center" style={{ margin: ToolbarHeight - 10 + "px" }}>
         <img className="relative mb-[-3px] " src={triangleToMenu} alt="triple for menu" />
-        <div className="flex flex-col items-end bg-white rounded-[6px] border border-[#009FDE] p-2 ">
+        <div className="flex flex-col items-end bg-white rounded-[6px] border border-[#009FDE] p-2 ease-in-out ">
           {displayRulerButtonDetials.map((item: IDisplayRuller, i: number) => (
             <Button
               key={i}
