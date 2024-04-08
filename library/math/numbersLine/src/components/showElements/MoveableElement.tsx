@@ -1,5 +1,5 @@
 import { useNumbersLineContext } from "../../context/numbersLineContext";
-import Moveable, { OnDragEnd, OnResize, OnResizeEnd } from "react-moveable";
+import Moveable, { OnResize, OnResizeEnd } from "react-moveable";
 import { IElement } from "../../type/moveable";
 import { calcXTransform, calcYTransform } from "../../lib/utils";
 import { rulerMargin, ToolbarHeight, buttonsDraggElementWidth, jumpBaseHeight, jumpHeight } from "../../consts/elementConsts";
@@ -9,7 +9,7 @@ import { useDraggableElementAction } from "../../hooks/useDraggableElementAction
 import { useHelpers } from "../../hooks/useHelpers";
 import { ActionTypes, WritingSituation } from "../../type/toolbar";
 import { useState } from "react";
-import { OnResizeStart } from "moveable";
+import { OnDragEnd, OnResizeStart } from "moveable";
 
 interface IProps {
   moveableRef: any;
@@ -108,7 +108,7 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
   };
 
   const onResize = (e: OnResize) => {
-    if (!element.jump) return;
+    if (!element.jump || e.clientX > windowSize.width - rulerPaddingSides || e.clientX < rulerPaddingSides) return;
     const rightDirectionAction = e.direction[0] == 1;
     const xPosition = calcXTransform(e.target.style.transform);
     if (((rightDirectionAction && boundScale < e.clientX) || (!rightDirectionAction && boundScale > e.clientX)) && e.width > 0) {
@@ -121,15 +121,13 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
       });
       setChangeDragState(false);
     } else {
-      if (e.clientX > windowSize.width - rulerPaddingSides || e.clientX < rulerPaddingSides) return;
+      const width = Math.abs(boundScale - e.clientX);
+      e.target.style.width = `${width}px`;
       if (rightDirectionAction) {
-        const width = Math.abs(boundScale - e.clientX);
-        e.target.style.width = `${width}px`;
         e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + e.clientX);
         updateDragElements(element.id, { ...element, transform: e.target.style.transform, jump: { ...element.jump, width, minus: true } });
       } else {
-        const width = Math.abs(boundScale - e.clientX);
-        e.target.style.width = `${width}px`;
+        e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + boundScale);
         updateDragElements(element.id, { ...element, transform: e.target.style.transform, jump: { ...element.jump, width, minus: false } });
       }
       setChangeDragState(true);
