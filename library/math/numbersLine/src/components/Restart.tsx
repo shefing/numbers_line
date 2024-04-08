@@ -2,9 +2,9 @@ import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, 
 import { useNumbersLineContext } from "../context/numbersLineContext";
 import { useHelpers } from "@/hooks/useHelpers";
 import { t } from "i18next";
-
+import { ILanguage } from "@/type/language";
 const Restart = () => {
-  const { rulerType, openRestartDialog, setOpenRestartDialog, setrulerTypeShould } = useNumbersLineContext();
+  const { language, rulerType, openRestartDialog, setOpenRestartDialog, setrulerTypeShould } = useNumbersLineContext();
   const { restart } = useHelpers();
   return (
     <AlertDialog open={openRestartDialog} onOpenChange={setOpenRestartDialog}>
@@ -13,8 +13,12 @@ const Restart = () => {
           <AlertDialogTitle>{t("restart_question")}</AlertDialogTitle>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel onClick={() => setrulerTypeShould(rulerType)}>{t("stay")}</AlertDialogCancel>
-          <AlertDialogAction onClick={restart}>{t("delete_all")}</AlertDialogAction>
+          <AlertDialogCancel className={`${language === ILanguage.AR && "text-[18px]"}`} onClick={() => setrulerTypeShould(rulerType)}>
+            {t("stay")}
+          </AlertDialogCancel>
+          <AlertDialogAction className={`${language === ILanguage.AR && "text-[18px]"}`} onClick={restart}>
+            {t("delete_all")}
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

@@ -5,12 +5,13 @@ import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { RulerPaddingSides, rulerDefinitionButtonDetials } from "../../consts/elementConsts";
 import { IRulerDefinition, TypeCover } from "../../type/toolbar";
 import { t } from "i18next";
+import { ILanguage } from "../../type/language";
 import openMenu from "/assets/icons/menuButtonOpen.svg";
 import closeMenu from "/assets/icons/menuButtonClose.svg";
 
 const LineDefinition = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { windowSize, rulerType, setrulerType, setRulerPaddingSides, setLeftPosition, dragElements, visitableDisplayButton, setOpenRestartDialog, setrulerTypeShould } =
+  const { language, windowSize, rulerType, setrulerType, setRulerPaddingSides, setLeftPosition, dragElements, visitableDisplayButton, setOpenRestartDialog, setrulerTypeShould } =
     useNumbersLineContext();
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -45,10 +46,15 @@ const LineDefinition = () => {
   };
 
   return (
-    <div ref={wrapperRef} className={`flex flex-col items-end p-2 rounded-md w-[16rem] ${isMenuOpen && "shadow-2xl bg-[#009FDE]"} relative`}>
+    <div
+      ref={wrapperRef}
+      className={`flex flex-col items-end p-2 rounded-md  ${language === ILanguage.AR ? "w-[18rem]" : " w-[16rem]"} w-[16rem] ${isMenuOpen && "shadow-2xl bg-[#009FDE]"} relative`}
+    >
       <div className="cursor-pointer flex" onClick={handleButtonClick}>
         <img className="p-3 pr-6" src={isMenuOpen ? closeMenu : openMenu} alt="Menu Arrow" />
-        <div className={`pr-3 text-[#009FDE] text-[32px] font-[500] font-[Abraham] ${isMenuOpen && " text-white"}`}>{t("line_defination")}</div>
+        <div className={`pr-3 text-[#009FDE] ${language === ILanguage.AR ? "text-[22px]" : " text-[32px]"} font-[500] font-[Abraham] ${isMenuOpen && " text-white"}`}>
+          {t("line_defination")}
+        </div>
       </div>
 
       {isMenuOpen && (
