@@ -17,7 +17,6 @@ const JumpArrow = ({ element, jumpWidth }: IProps) => {
     const slope = (jumpArrowHeight * 2 - 15) / (jumpWidth * 0.5);
     const perpendicularAngle = Math.atan(slope) * (180 / Math.PI);
     setTriangleRotation(perpendicularAngle);
-    console.log("jumpwidth", jumpWidth, perpendicularAngle);
   }, [jumpWidth, triangleRotation]);
 
   return (

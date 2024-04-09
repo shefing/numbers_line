@@ -59,7 +59,7 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
     if (element.type == ActionTypes.text) setDragging!(true);
   };
 
-  const onDragEnd = (e: OnDragEnd) => {
+  const onDragEnd = (e: OnDragEnd | OnResizeEnd, resizeElement?: IElement) => {
     if (element.type == ActionTypes.text) {
       updateDragElements(element.id, { ...element, transform: e.target.style.transform });
       setDragging!(false);
@@ -88,7 +88,11 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
       }
       e.target.style.transform = e.target.style.transform.replace(yTransform + "px)", newYPositionString);
     }
-    updateDragElements(element.id, { ...element, transform: e.target.style.transform, jump: { ...element.jump, underRuler: isUnderRuler } });
+    updateDragElements(element.id, {
+      ...element,
+      transform: e.target.style.transform,
+      jump: { ...(resizeElement ? resizeElement.jump! : element.jump), underRuler: isUnderRuler },
+    });
   };
 
   const onResizeStart = (e: OnResizeStart) => {
@@ -111,9 +115,11 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
     if (!element.jump || e.clientX > windowSize.width - rulerPaddingSides || e.clientX < rulerPaddingSides) return;
     const rightDirectionAction = e.direction[0] == 1;
     const xPosition = calcXTransform(e.target.style.transform);
+    //checking if the jump resize within the bounds or -else the jump width is negative
     if (((rightDirectionAction && boundScale < e.clientX) || (!rightDirectionAction && boundScale > e.clientX)) && e.width > 0) {
+      if ((Math.abs(calcXTransform(e.drag.transform) - xPosition) < 1000 && rightDirectionAction) || calcXTransform(e.drag.transform) < windowSize.width)
+        e.target.style.transform = e.drag.transform;
       e.target.style.width = `${e.width}px`;
-      e.target.style.transform = e.drag.transform;
       updateDragElements(element.id, {
         ...element,
         transform: e.target.style.transform,
@@ -121,15 +127,10 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
       });
       setChangeDragState(false);
     } else {
+      e.target.style.transform = e.target.style.transform.replace("(" + xPosition, rightDirectionAction ? "(" + e.clientX : "(" + boundScale);
       const width = Math.abs(boundScale - e.clientX);
       e.target.style.width = `${width}px`;
-      if (rightDirectionAction) {
-        e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + e.clientX);
-        updateDragElements(element.id, { ...element, transform: e.target.style.transform, jump: { ...element.jump, width, minus: true } });
-      } else {
-        e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + boundScale);
-        updateDragElements(element.id, { ...element, transform: e.target.style.transform, jump: { ...element.jump, width, minus: false } });
-      }
+      updateDragElements(element.id, { ...element, transform: e.target.style.transform, jump: { ...element.jump, width, minus: rightDirectionAction } });
       setChangeDragState(true);
     }
   };
@@ -158,7 +159,7 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
       newTransform = e.target.style.transform.replace("(" + xPosition, newXPosition);
       e.target.style.transform = newTransform;
     }
-    updateDragElements(element.id, { ...element, transform: newTransform, jump: { ...element.jump, width: newWidth, value: newValue } });
+    onDragEnd(e, { ...element, transform: newTransform, jump: { ...element.jump, width: newWidth, value: newValue } });
   };
 
   return (
