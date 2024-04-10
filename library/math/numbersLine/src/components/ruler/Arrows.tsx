@@ -17,7 +17,9 @@ const Arrows = () => {
   const updatePositionOnArrowClick = (direction: "left" | "right") => {
     setIdDraggElementClick("");
     const step = windowSize.width / RulerLenth.hundred;
-    setLeftPosition(direction === "left" ? Math.min(0, leftPosition + step) : Math.max(calculatScreenWidth(), leftPosition - step));
+    const newLeftPosition = direction === "left" ? Math.min(0, leftPosition + step) : Math.max(calculatScreenWidth(), leftPosition - step);
+    const unit = windowSize.width / RulerLenth.hundred;
+    setLeftPosition(Math.round(newLeftPosition / unit) * unit);
   };
 
   useEffect(() => {
@@ -44,10 +46,13 @@ const Arrows = () => {
     <div className="flex justify-between w-full ">
       {rulerType == LineRange.hundred && (
         <>
-          <div className="m-5 cursor-pointer relative z-[999]" onClick={() => updatePositionOnArrowClick("left")}>
+          <div className={`m-5 cursor-pointer relative z-[999] ${!leftPosition && "pointer-events-none"}`} onClick={() => updatePositionOnArrowClick("left")}>
             <img src={leftArrowIcon} alt="Left Arrow" />
           </div>
-          <div className="m-5  cursor-pointer relative z-[999]" onClick={() => updatePositionOnArrowClick("right")}>
+          <div
+            className={`m-5 cursor-pointer relative z-[999] ${leftPosition == calculatScreenWidth() && "pointer-events-none"}`}
+            onClick={() => updatePositionOnArrowClick("right")}
+          >
             <img src={rightArrowIcon} alt="Right Arrow" />
           </div>
         </>

@@ -21,7 +21,7 @@ export const ButtonViewable = {
       const outOfRange = minus ? parseInt(xPosition) - cssWidth : endXPosition - window.innerWidth + rulerPaddingSides - 10;
       //Checking if there is an option to copy in terms of space on the screen for the new jump
       if (!minus && outOfRange > 0 && (rulerType != LineRange.hundred || leftPosition - outOfRange < calculatScreenWidth())) copyApproval = false;
-      if (minus && outOfRange < 0 && (rulerType != LineRange.hundred || parseFloat(xPosition) + outOfRange > 0)) copyApproval = false;
+      if (minus && outOfRange < 0 && (rulerType != LineRange.hundred || leftPosition - outOfRange > 0)) copyApproval = false;
     }
     const Icons = moveable.useCSS(
       "div",
@@ -71,7 +71,11 @@ export const ButtonViewable = {
           </div>
         )}
         {copyViewAble && (
-          <div className="m-[1px] cursor-pointer" style={{ width: buttonsDraggElementWidth + "px" }} onClick={copyApproval ? onCopyClick : () => {}}>
+          <div
+            className={`m-[1px] cursor-pointer  ${!copyApproval && "pointer-events-none"}`}
+            style={{ width: buttonsDraggElementWidth + "px" }}
+            onClick={copyApproval ? onCopyClick : () => {}}
+          >
             <img
               id="jump-copy"
               src={copyApproval ? duplicateIcon : duplicateDisable}
