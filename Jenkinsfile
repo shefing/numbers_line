@@ -93,7 +93,7 @@ pipeline {
                 global_prettyPrintWithHeaderAndFooter header: "Running batch script", body: script
                 sh "${script}"
                 }
-                dir ("${WORKSPACE}/library/math/numbersLine/dist"){
+                dir ("${WORKSPACE}/library/math/numbersLine/dist/NumberLinesTemplate"){
                 sh "zip -r ${serviceName}.zip *"
                 sh "unzip -l ${serviceName}.zip"
                 }                
@@ -106,7 +106,7 @@ pipeline {
              script {      
               withCredentials([string(credentialsId: 'az_devops_personal_access_token', variable: 'TOKEN')]) {
                 env.AZURE_DEVOPS_EXT_PAT = "$TOKEN"
-                publishCmd = "az artifacts universal publish --organization 'https://dev.azure.com/CET-Tech/' --feed 'artifacts-feed' --name ${serviceName} --version ${artifactVersion} --description ${PushBRANCH} --path ${WORKSPACE}/library/math/numbersLine/dist/${serviceName}.zip"
+                publishCmd = "az artifacts universal publish --organization 'https://dev.azure.com/CET-Tech/' --feed 'artifacts-feed' --name ${serviceName} --version ${artifactVersion} --description ${PushBRANCH} --path ${WORKSPACE}/library/math/numbersLine/dist/NumberLinesTemplate/${serviceName}.zip"
                 println "${publishCmd}"
                 sh "${publishCmd}"
               }         
