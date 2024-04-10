@@ -1,6 +1,8 @@
 import { MoveableManagerInterface } from "react-moveable";
 import deleteIcon from "/assets/icons/delete.svg";
+import deleteIconHover from "/assets/icons/deleteHover.svg";
 import duplicateIcon from "/assets/icons/duplicate.svg";
+import duplicateIconHover from "/assets/icons/duplicateHover.svg";
 import duplicateDisable from "/assets/icons/duplicateDisable.svg";
 import { IAbleProps } from "../type/moveable";
 import { LineRange } from "../type/ruler";
@@ -38,21 +40,6 @@ export const ButtonViewable = {
     }
     `
     );
-    const changeHover = (event: any, isdelete?: boolean) => {
-      if (copyApproval || isdelete) {
-        const url = isdelete ? deleteIcon : duplicateIcon;
-        const dotIndex = url.indexOf(".");
-        const beforeDot = url.substring(0, dotIndex);
-        event.target.src = beforeDot + "Hover.svg";
-      }
-    };
-
-    const backNotHover = (event: any, isdelete?: boolean) => {
-      if (copyApproval || isdelete) {
-        const url = isdelete ? deleteIcon : duplicateIcon;
-        event.target.src = url;
-      }
-    };
 
     return (
       <Icons
@@ -67,7 +54,7 @@ export const ButtonViewable = {
       >
         {deleteViewAble && (
           <div className="m-[1px] cursor-pointer" style={{ width: buttonsDraggElementWidth + "px" }} onClick={onDeleteClick}>
-            <img src={deleteIcon} alt="Delete Icon" onMouseEnter={(e) => changeHover(e, true)} onMouseLeave={(e) => backNotHover(e, true)} />
+            <img src={deleteIcon} alt="Delete Icon" onMouseEnter={(e: any) => (e.target.src = deleteIconHover)} onMouseLeave={(e: any) => (e.target.src = deleteIcon)} />
           </div>
         )}
         {copyViewAble && (
@@ -80,8 +67,8 @@ export const ButtonViewable = {
               id="jump-copy"
               src={copyApproval ? duplicateIcon : duplicateDisable}
               alt="DuplicateIcon Icon"
-              onMouseEnter={(e) => changeHover(e)}
-              onMouseLeave={(e) => backNotHover(e)}
+              onMouseEnter={(e: any) => copyApproval && (e.target.src = duplicateIconHover)}
+              onMouseLeave={(e: any) => copyApproval && (e.target.src = duplicateIcon)}
             />
           </div>
         )}
