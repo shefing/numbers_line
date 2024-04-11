@@ -37,10 +37,9 @@ export const useDraggableElementAction = () => {
   const { calculatRulerWidth, calculatUnitsAmount } = useHelpers();
 
   const addDraggableElement = (typeAction: ActionTypes, type?: NaviKeniIconsTypes) => {
-    const elementWidth = typeAction == ActionTypes.jump || ActionTypes.naviAndKeni ? calculatRulerWidth() / calculatUnitsAmount() : textBoxWidth;
+    const elementWidth = typeAction == ActionTypes.jump || typeAction == ActionTypes.naviAndKeni ? calculatRulerWidth() / calculatUnitsAmount() : textBoxWidth;
     const xTranslate = (windowSize.width - elementWidth) / 2 + duplicateElementSpace;
     const yTranslate = windowSize.height / 4 + duplicateElementSpace;
-
     let newElement: IElement = {
       id: uuidv4(),
       type: typeAction,
