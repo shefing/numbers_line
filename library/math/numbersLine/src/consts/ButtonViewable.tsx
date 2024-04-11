@@ -20,7 +20,7 @@ export const ButtonViewable = {
     if (matchX) {
       const xPosition = matchX[1];
       const endXPosition = parseFloat(xPosition) + cssWidth * 2;
-      const outOfRange = minus ? parseInt(xPosition) - cssWidth : endXPosition - window.innerWidth + rulerPaddingSides - 10;
+      const outOfRange = minus ? parseInt(xPosition) - cssWidth - rulerPaddingSides + 5 : endXPosition - window.innerWidth + rulerPaddingSides - 5;
       //Checking if there is an option to copy in terms of space on the screen for the new jump
       if (!minus && outOfRange > 0 && (rulerType != LineRange.hundred || leftPosition - outOfRange < calculatScreenWidth())) copyApproval = false;
       if (minus && outOfRange < 0 && (rulerType != LineRange.hundred || leftPosition - outOfRange > 0)) copyApproval = false;
