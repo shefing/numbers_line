@@ -17,7 +17,7 @@ const JumpArrow = ({ element, jumpWidth }: IProps) => {
     const slope = (jumpArrowHeight * 2 - 15) / (jumpWidth * 0.5);
     const perpendicularAngle = Math.atan(slope) * (180 / Math.PI);
     setTriangleRotation(perpendicularAngle);
-  }, [jumpWidth]);
+  }, [jumpWidth, triangleRotation]);
 
   return (
     <svg
@@ -38,13 +38,6 @@ const JumpArrow = ({ element, jumpWidth }: IProps) => {
         strokeDasharray="15 15"
         strokeDashoffset={20}
       />
-      {/* <svg
-        className="overflow-visible"
-        x={`${underRuler ? jumpWidth - 15 + matchingSpace / 5 : jumpWidth + 7 - matchingSpace / 5}`}
-        y={`${underRuler ? 5 - matchingSpace : jumpArrowHeight - 1 - matchingSpace}`}
-      >
-        <polygon points="-20,0 0,10 -20,20 " transform={`rotate(${underRuler ? -triangleRotation : triangleRotation})`} fill={minus ? "#F48460" : "#009FDE"} />
-      </svg> */}
       <svg
         className="overflow-visible"
         x={`${underRuler ? -7 + matchingSpace / 5 : jumpWidth + 7 - matchingSpace / 5}`}
@@ -57,4 +50,3 @@ const JumpArrow = ({ element, jumpWidth }: IProps) => {
 };
 
 export default JumpArrow;
-//${underRuler ? -6 : jumpWidth + 5}

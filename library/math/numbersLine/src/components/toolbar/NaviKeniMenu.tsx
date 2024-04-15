@@ -16,7 +16,7 @@ const NaviKanyMenu = ({ setOpen }: IProps) => {
   };
 
   return (
-    <div className={`flex flex-col mt-[-4rem] pt-[4rem] w-[50] h-[162] pb-2 relative z-0 rounded-3xl bg-[#009FDE] shadow-2xl ease-in-out`}>
+    <div className={`flex flex-col mt-[-4rem] pt-[4rem] w-[50px] h-[162px] pb-2 relative z-0 rounded-3xl bg-[#009FDE] shadow-2xl ease-in-out`}>
       {iconsNaviKeni.map((item: IIconsNaviKeni, i: number) => (
         <img
           key={i}

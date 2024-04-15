@@ -14,7 +14,8 @@ const XAxis = () => {
 
   useEffect(() => {
     const newLeftPosition = (windowSize.width / prevWindowSize) * leftPosition;
-    setLeftPosition(newLeftPosition);
+    const unit = windowSize.width / RulerLenth.hundred;
+    setLeftPosition(Math.round(newLeftPosition / unit) * unit);
     setPrevWindowSize(windowSize.width);
   }, [windowSize]);
 
@@ -35,8 +36,7 @@ const XAxis = () => {
   const handleStopDrag = () => {
     setisDragging(false);
     const unit = windowSize.width / RulerLenth.hundred;
-    const rulerPosition = Math.round(leftPosition / unit) * unit;
-    setLeftPosition(rulerPosition);
+    setLeftPosition((preLeftPosition) => Math.round(preLeftPosition / unit) * unit);
   };
 
   return (

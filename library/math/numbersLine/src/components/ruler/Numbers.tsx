@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { LineRange, PartToCover, RulerLenth } from "../../type/ruler";
 import { TypeCover } from "../../type/toolbar";
+import { barWidth } from "../../consts/elementConsts";
 
 const Numbers = () => {
   const { windowSize, rulerType, rulerPaddingSides, leftPosition, coverSituation, setCoverSituation, setVisitableDisplayButton } = useNumbersLineContext();
@@ -52,11 +53,11 @@ const Numbers = () => {
 
   return (
     <div
-      className={`fixed left-0 right-0 flex justify-between border-t-4 border-gray-900 pt-0 mx-0`}
+      className={`fixed left-0 right-0 flex justify-between border-t-4 border-gray-900 mx-0`}
       style={
         rulerType == LineRange.hundred
           ? {
-              width: windowSize.width * (LineRange.hundred / RulerLenth.hundred),
+              width: windowSize.width * (LineRange.hundred / RulerLenth.hundred) - barWidth * 3,
               left: `${leftPosition}px`,
               paddingLeft: `${rulerPaddingSides}px`,
               paddingRight: `${rulerPaddingSides}px`,
@@ -67,9 +68,9 @@ const Numbers = () => {
       {labels.map((label) =>
         rulerType != LineRange.hundredCircular || label % 10 == 0 ? (
           <div key={label} className="flex flex-col items-center">
-            <div className="h-4 border-l-4 border-gray-900 w-1366" />
+            <div className="h-6 border-l-4 border-gray-900 w-1366" />
             <div
-              className={`pl-2 pr-2 select-none text-2xl absolute m-5 ${label % 5 == 0 && " font-bold"} ${
+              className={`pl-2 pr-2 select-none text-2xl absolute m-6 ${label % 5 == 0 && " font-bold"} ${
                 (coverSituation == TypeCover.partiallyCover || coverSituation == TypeCover.partiallyDiscover) && " cursor-pointer"
               } ${labelsCover.has(label) && " text-[transparent]"}`}
               onClick={() => displayLabel(label)}
