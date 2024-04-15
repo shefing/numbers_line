@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { LineRange, PartToCover, RulerLenth } from "../../type/ruler";
 import { TypeCover } from "../../type/toolbar";
+import { barWidth } from "../../consts/elementConsts";
 
 const Numbers = () => {
   const { windowSize, rulerType, rulerPaddingSides, leftPosition, coverSituation, setCoverSituation, setVisitableDisplayButton } = useNumbersLineContext();
@@ -52,11 +53,11 @@ const Numbers = () => {
 
   return (
     <div
-      className={`fixed left-0 right-0 flex justify-between border-t-4 border-gray-900 pt-0 mx-0`}
+      className={`fixed left-0 right-0 flex justify-between border-t-4 border-gray-900 mx-0`}
       style={
         rulerType == LineRange.hundred
           ? {
-              width: windowSize.width * (LineRange.hundred / RulerLenth.hundred),
+              width: windowSize.width * (LineRange.hundred / RulerLenth.hundred) - barWidth * 3,
               left: `${leftPosition}px`,
               paddingLeft: `${rulerPaddingSides}px`,
               paddingRight: `${rulerPaddingSides}px`,
