@@ -68,9 +68,9 @@ const Numbers = () => {
       {labels.map((label) =>
         rulerType != LineRange.hundredCircular || label % 10 == 0 ? (
           <div key={label} className="flex flex-col items-center">
-            <div className="h-4 border-l-4 border-gray-900 w-1366" />
+            <div className="h-6 border-l-4 border-gray-900 w-1366" />
             <div
-              className={`pl-2 pr-2 select-none text-2xl absolute m-5 ${label % 5 == 0 && " font-bold"} ${
+              className={`pl-2 pr-2 select-none text-2xl absolute m-6 ${label % 5 == 0 && " font-bold"} ${
                 (coverSituation == TypeCover.partiallyCover || coverSituation == TypeCover.partiallyDiscover) && " cursor-pointer"
               } ${labelsCover.has(label) && " text-[transparent]"}`}
               onClick={() => displayLabel(label)}
