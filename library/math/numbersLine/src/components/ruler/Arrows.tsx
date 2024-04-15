@@ -13,14 +13,7 @@ const Arrows = () => {
   const [leftArrowIcon, setLeftArrowIcon] = useState(leftArrow);
   const [rightArrowIcon, setRightArrowIcon] = useState(rightArrow);
   const leftPositionRef = useRef(leftPosition);
-
-  const updatePositionOnArrowClick = (direction: "left" | "right") => {
-    setIdDraggElementClick("");
-    const step = windowSize.width / RulerLenth.hundred;
-    const newLeftPosition = direction === "left" ? Math.min(0, leftPosition + step) : Math.max(calculatScreenWidth(), leftPosition - step);
-    const unit = windowSize.width / RulerLenth.hundred;
-    setLeftPosition(Math.round(newLeftPosition / unit) * unit);
-  };
+  const intervalRef = useRef<number | null>(null); // Ref to hold the interval ID
 
   useEffect(() => {
     setLeftArrowIcon(!leftPosition ? leftArrowDisable : leftArrow);
@@ -42,19 +35,48 @@ const Arrows = () => {
     leftPositionRef.current = leftPosition;
   }, [leftPosition]);
 
+  const updatePositionOnArrowClick = (direction: "left" | "right") => {
+    setIdDraggElementClick("");
+    const step = windowSize.width / RulerLenth.hundred;
+    const unit = windowSize.width / RulerLenth.hundred;
+    setLeftPosition((prev) => Math.round((direction === "left" ? Math.min(0, prev + step) : Math.max(calculatScreenWidth(), prev - step)) / unit) * unit);
+  };
+
+  const handleMouseDown = (direction: "left" | "right") => {
+    // Start the interval when mouse is pressed down
+    intervalRef.current = window.setInterval(() => {
+      updatePositionOnArrowClick(direction);
+    }, 300); // Interval duration (in milliseconds)
+  };
+  const handleMouseUp = () => {
+    // Clear the interval when mouse is released
+    if (intervalRef.current !== null) {
+      window.clearInterval(intervalRef.current);
+    }
+  };
+
   return (
     <div className="flex justify-between w-full ">
       {rulerType == LineRange.hundred && (
         <>
-          <div className={`m-5 cursor-pointer relative z-[999] ${!leftPosition && "pointer-events-none"}`} onClick={() => updatePositionOnArrowClick("left")}>
-            <img src={leftArrowIcon} alt="Left Arrow" />
-          </div>
-          <div
+          <img
+            src={leftArrowIcon}
+            alt="Left Arrow"
+            className={`m-5 cursor-pointer relative z-[999] ${!leftPosition && "pointer-events-none"}`}
+            onClick={() => updatePositionOnArrowClick("left")}
+            onMouseDown={() => handleMouseDown("left")}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
+          />
+          <img
+            src={rightArrowIcon}
+            alt="Right Arrow"
             className={`m-5 cursor-pointer relative z-[999] ${leftPosition == calculatScreenWidth() && "pointer-events-none"}`}
             onClick={() => updatePositionOnArrowClick("right")}
-          >
-            <img src={rightArrowIcon} alt="Right Arrow" />
-          </div>
+            onMouseDown={() => handleMouseDown("right")}
+            onMouseUp={handleMouseUp}
+            onMouseLeave={handleMouseUp}
+          />
         </>
       )}
     </div>

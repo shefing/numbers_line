@@ -47,8 +47,6 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
     const elementWidth = element.icons ? unit * element.icons.widthRelatively : unit * element.jump!.value;
     // few pixels for the precise position of the element, the calculation is done relative to the position on the axis.
     const sidesPixels = element.jump ? ((windowSize.width / 2 - xPosition - element.jump?.width / 2) / windowSize.width) * 4 : 0;
-    console.log("sidesPixels", sidesPixels);
-
     let newXPosition = Math.round((xPosition + IconsFootLength - rulerPaddingSides) / unitPresent) * unitPresent + rulerPaddingSides - IconsFootLength + sidesPixels;
     if (newXPosition + elementWidth > windowSize.width) newXPosition -= unitPresent;
     if (newXPosition < 0) newXPosition += unitPresent;
