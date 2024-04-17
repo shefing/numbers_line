@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 import { LineRange } from "../type/ruler";
 import { ActionTypes, NaviKeniIconsTypes } from "../type/toolbar";
 import {
+  RulerPaddingSides,
   buttonsDraggElementWidth,
   duplicateElementStepSpace,
   jumpBaseHeight,
@@ -23,7 +24,6 @@ export const useDraggableElementAction = () => {
   const {
     windowSize,
     rulerType,
-    rulerPaddingSides,
     unit,
     leftPosition,
     setLeftPosition,
@@ -64,7 +64,7 @@ export const useDraggableElementAction = () => {
     setZIndexCounter((prev) => prev + 1);
     setDuplicateElementSpace((prevPixels) => prevPixels + duplicateElementStepSpace);
     const outOfRange =
-      xTranslate > windowSize.width - windowSize.width / calculatUnitsAmount() - rulerPaddingSides ||
+      xTranslate > windowSize.width - windowSize.width / calculatUnitsAmount() - RulerPaddingSides ||
       yTranslate > windowSize.height - (jumpHeight + jumpBaseHeight + buttonsDraggElementWidth + duplicateElementStepSpace);
 
     outOfRange && setDuplicateElementSpace(0);
@@ -81,7 +81,7 @@ export const useDraggableElementAction = () => {
     let newTransform = "";
     const startPosition = calcXTransform(element.transform);
     const endNewJumpPosition = startPosition + elementWidth * 2;
-    const outOfRange = element.jump?.minus ? startPosition - elementWidth : endNewJumpPosition - windowSize.width + rulerPaddingSides - 10;
+    const outOfRange = element.jump?.minus ? startPosition - elementWidth : endNewJumpPosition - windowSize.width + RulerPaddingSides - 10;
     let newPosition = element.jump?.minus ? startPosition - elementWidth : startPosition + elementWidth;
     if (rulerType == LineRange.hundred && ((!element.jump?.minus && outOfRange > 0) || (element.jump?.minus && outOfRange < 0))) {
       newPosition -= +leftPosition - Math.round((leftPosition - outOfRange) / unit) * unit;

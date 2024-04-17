@@ -9,7 +9,6 @@ export const useHelpers = () => {
     rulerType,
     setrulerType,
     rulerTypeShould,
-    setRulerPaddingSides,
     setLeftPosition,
     setDragElements,
     setDuplicateElementSpace,
@@ -31,7 +30,6 @@ export const useHelpers = () => {
   };
   const restart = () => {
     setrulerType(rulerTypeShould);
-    rulerTypeShould == LineRange.hundred ? setRulerPaddingSides(windowSize.width / RulerLenth.hundred / 2) : RulerPaddingSides;
     setDragElements([]);
     setCoverSituation(TypeCover.allDiscover);
     setVisitableDisplayButton(TypeCover.allDiscover);

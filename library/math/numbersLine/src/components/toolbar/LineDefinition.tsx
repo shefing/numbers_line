@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Button } from "../ui/button";
-import { LineRange, RulerLenth } from "../../type/ruler";
+import { LineRange } from "../../type/ruler";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
-import { RulerPaddingSides, rulerDefinitionButtonDetials } from "../../consts/elementConsts";
+import { rulerDefinitionButtonDetials } from "../../consts/elementConsts";
 import { IRulerDefinition, TypeCover } from "../../type/toolbar";
 import { t } from "i18next";
 import { ILanguage } from "../../type/language";
@@ -11,8 +11,7 @@ import closeMenu from "/assets/icons/menuButtonClose.svg";
 
 const LineDefinition = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { language, windowSize, rulerType, setrulerType, setRulerPaddingSides, setLeftPosition, dragElements, visitableDisplayButton, setOpenRestartDialog, setrulerTypeShould } =
-    useNumbersLineContext();
+  const { language, rulerType, setrulerType, setLeftPosition, dragElements, visitableDisplayButton, setOpenRestartDialog, setrulerTypeShould } = useNumbersLineContext();
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -37,7 +36,6 @@ const LineDefinition = () => {
     setIsMenuOpen(false);
     if (dragElements.length == 0 && visitableDisplayButton == TypeCover.allDiscover) {
       setrulerType(type);
-      rulerType == LineRange.hundred ? setRulerPaddingSides(windowSize.width / RulerLenth.hundred / 2) : RulerPaddingSides;
       setLeftPosition(0);
     } else {
       setrulerTypeShould(type);

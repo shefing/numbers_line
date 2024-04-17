@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { LineRange } from "../type/ruler";
 import { Colors, IColor, IWindowSize, TypeCover, WritingSituation } from "../type/toolbar";
 import { IElement } from "../type/moveable";
-import { RulerPaddingSides } from "@/consts/elementConsts";
 import i18n from "../i18n";
 import { ILanguage } from "../type/language";
 import { useHelpers } from "@/hooks/useHelpers";
@@ -20,8 +19,6 @@ interface INumbersLineContextProps {
   setrulerType: (v: LineRange) => void;
   rulerTypeShould: LineRange;
   setrulerTypeShould: (v: LineRange) => void;
-  rulerPaddingSides: number;
-  setRulerPaddingSides: (v: number) => void;
   unit: number;
   setUnit: (v: number) => void;
   leftPosition: number;
@@ -51,8 +48,6 @@ export const NumbersLineContext = React.createContext({
   setrulerType: () => null,
   rulerTypeShould: {} as LineRange,
   setrulerTypeShould: () => null,
-  rulerPaddingSides: {} as number,
-  setRulerPaddingSides: () => null,
   unit: {} as number,
   setUnit: () => null,
   leftPosition: {} as number,
@@ -90,7 +85,6 @@ export const NumbersLineContexProvider = (props: any) => {
   const [coverSituation, setCoverSituation] = useState(TypeCover.allDiscover);
   const [visitableDisplayButton, setVisitableDisplayButton] = useState(TypeCover.allDiscover);
   const [openRestartDialog, setOpenRestartDialog] = useState(false);
-  const [rulerPaddingSides, setRulerPaddingSides] = useState(RulerPaddingSides);
   const [color, setColor] = useState<IColor>({ description: WritingSituation.non, url: Colors.non });
   const [zIndexCounter, setZIndexCounter] = useState(1);
 
@@ -115,8 +109,6 @@ export const NumbersLineContexProvider = (props: any) => {
         setrulerType: setRulerType,
         rulerTypeShould,
         setrulerTypeShould: setRulerTypeShould,
-        rulerPaddingSides,
-        setRulerPaddingSides,
         unit,
         setUnit,
         leftPosition,
