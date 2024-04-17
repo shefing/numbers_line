@@ -14,12 +14,11 @@ import { OnDragEnd, OnResizeStart } from "moveable";
 interface IProps {
   moveableRef: any;
   element: IElement;
-  unit: number;
   dragging?: boolean;
   setDragging?: (v: boolean) => void;
 }
-const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: IProps) => {
-  const { windowSize, rulerType, rulerPaddingSides, leftPosition, idDraggElementClick, setIdDraggElementClick, color } = useNumbersLineContext();
+const MoveableElement = ({ moveableRef, element, dragging, setDragging }: IProps) => {
+  const { windowSize, rulerType, unit, rulerPaddingSides, leftPosition, idDraggElementClick, setIdDraggElementClick, color } = useNumbersLineContext();
   const { deleteDragElement, duplicateDragJump, updateDragElements, updateDragElementsLayers } = useDraggableElementAction();
   const { calculatScreenWidth } = useHelpers();
   const [rightStartPosition, setRightStartPosition] = useState(0);
@@ -31,7 +30,7 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
     deleteViewAble: idDraggElementClick === element.id && !dragging,
     onDeleteClick: () => deleteDragElement(element.id),
     copyViewAble: element.type === ActionTypes.jump && idDraggElementClick === element.id,
-    onCopyClick: () => duplicateDragJump(element, unit),
+    onCopyClick: () => duplicateDragJump(element),
     underRuler: element.jump?.underRuler,
     minus: element.jump?.minus,
     rulerType: rulerType,
@@ -159,7 +158,7 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
       newTransform = e.target.style.transform.replace("(" + xPosition, newXPosition);
       e.target.style.transform = newTransform;
     }
-    onDragEnd(e, { ...element, transform: newTransform, jump: { ...element.jump, width: newWidth, value: newValue } });
+    updateDragElements(element.id, { ...element, transform: newTransform, jump: { ...element.jump, width: newWidth, value: newValue } });
   };
 
   return (

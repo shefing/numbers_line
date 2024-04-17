@@ -1,7 +1,7 @@
 import { useNumbersLineContext } from "@/context/numbersLineContext";
 import { IElement } from "../type/moveable";
 import { v4 as uuidv4 } from "uuid";
-import { LineRange, RulerLenth } from "../type/ruler";
+import { LineRange } from "../type/ruler";
 import { ActionTypes, NaviKeniIconsTypes } from "../type/toolbar";
 import {
   buttonsDraggElementWidth,
@@ -24,6 +24,7 @@ export const useDraggableElementAction = () => {
     windowSize,
     rulerType,
     rulerPaddingSides,
+    unit,
     leftPosition,
     setLeftPosition,
     dragElements,
@@ -74,7 +75,7 @@ export const useDraggableElementAction = () => {
     setDragElements(newDragElements);
   };
 
-  const duplicateDragJump = (element: IElement, unit: number) => {
+  const duplicateDragJump = (element: IElement) => {
     const elementWidth = unit * element.jump!.value;
     const id = uuidv4();
     let newTransform = "";
@@ -83,7 +84,6 @@ export const useDraggableElementAction = () => {
     const outOfRange = element.jump?.minus ? startPosition - elementWidth : endNewJumpPosition - windowSize.width + rulerPaddingSides - 10;
     let newPosition = element.jump?.minus ? startPosition - elementWidth : startPosition + elementWidth;
     if (rulerType == LineRange.hundred && ((!element.jump?.minus && outOfRange > 0) || (element.jump?.minus && outOfRange < 0))) {
-      const unit = windowSize.width / RulerLenth.hundred;
       newPosition -= +leftPosition - Math.round((leftPosition - outOfRange) / unit) * unit;
       setLeftPosition((prev) => Math.round((prev - outOfRange) / unit) * unit);
     }

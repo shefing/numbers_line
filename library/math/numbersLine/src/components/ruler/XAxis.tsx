@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
-import { LineRange, RulerLenth } from "../../type/ruler";
+import { LineRange } from "../../type/ruler";
 import Numbers from "./Numbers";
 import { useHelpers } from "../../hooks/useHelpers";
 import { ruleHeight } from "../../consts/elementConsts";
 const XAxis = () => {
-  const { windowSize, rulerType, leftPosition, setLeftPosition, setIdDraggElementClick } = useNumbersLineContext();
+  const { windowSize, rulerType, unit, leftPosition, setLeftPosition, setIdDraggElementClick } = useNumbersLineContext();
   const { calculatScreenWidth } = useHelpers();
 
   const [startX, setStartX] = useState(0);
@@ -14,7 +14,6 @@ const XAxis = () => {
 
   useEffect(() => {
     const newLeftPosition = (windowSize.width / prevWindowSize) * leftPosition;
-    const unit = windowSize.width / RulerLenth.hundred;
     setLeftPosition(Math.round(newLeftPosition / unit) * unit);
     setPrevWindowSize(windowSize.width);
   }, [windowSize]);
@@ -35,7 +34,6 @@ const XAxis = () => {
 
   const handleStopDrag = () => {
     setisDragging(false);
-    const unit = windowSize.width / RulerLenth.hundred;
     setLeftPosition((preLeftPosition) => Math.round(preLeftPosition / unit) * unit);
   };
 

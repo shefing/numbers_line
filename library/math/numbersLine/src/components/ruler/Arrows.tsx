@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { useHelpers } from "../../hooks/useHelpers";
 
 const Arrows = () => {
-  const { rulerType, windowSize, leftPosition, setLeftPosition, dragElements, idDraggElementClick, setIdDraggElementClick } = useNumbersLineContext();
+  const { windowSize, rulerType, unit, leftPosition, setLeftPosition, dragElements, idDraggElementClick, setIdDraggElementClick } = useNumbersLineContext();
   const { calculatScreenWidth } = useHelpers();
   const [leftArrowIcon, setLeftArrowIcon] = useState(leftArrow);
   const [rightArrowIcon, setRightArrowIcon] = useState(rightArrow);
@@ -38,7 +38,6 @@ const Arrows = () => {
   const updatePositionOnArrowClick = (direction: "left" | "right") => {
     setIdDraggElementClick("");
     const step = windowSize.width / RulerLenth.hundred;
-    const unit = windowSize.width / RulerLenth.hundred;
     setLeftPosition((prev) => Math.round((direction === "left" ? Math.min(0, prev + step) : Math.max(calculatScreenWidth(), prev - step)) / unit) * unit);
   };
 

@@ -8,14 +8,12 @@ import { ActionTypes, IWindowSize } from "../type/toolbar";
 import { calcXTransform, calcYTransform } from "../lib/utils";
 import { useDraggableElementAction } from "../hooks/useDraggableElementAction";
 import { useHelpers } from "../hooks/useHelpers";
-import { LineRange, RulerLenth } from "../type/ruler";
 import { IElement } from "../type/moveable";
 
 const ShowElements = () => {
-  const { windowSize, rulerType, dragElements, setIdDraggElementClick } = useNumbersLineContext();
+  const { windowSize, rulerType, unit, setUnit, dragElements, setIdDraggElementClick } = useNumbersLineContext();
   const { calculatRulerWidth, calculatUnitsAmount } = useHelpers();
   const { updateDragElements } = useDraggableElementAction();
-  const [unit, setUnit] = useState(calculatRulerWidth() / calculatUnitsAmount());
   const [windowResizing, setWindowResizing] = useState(false);
   const [prevWindowSize, setPrevWindowSize] = useState<IWindowSize>({ height: windowSize.height, width: windowSize.width });
 
@@ -60,8 +58,7 @@ const ShowElements = () => {
   useEffect(() => {
     if (windowResizing) return;
     setPrevWindowSize({ height: windowSize.height, width: windowSize.width });
-    const unitWidth = calculatRulerWidth() / calculatUnitsAmount();
-    const newUnit = rulerType == LineRange.hundred ? windowSize.width / RulerLenth.hundred : unitWidth;
+    const newUnit = calculatRulerWidth() / calculatUnitsAmount();
     setUnit(newUnit);
   }, [rulerType, windowResizing]);
 
@@ -74,11 +71,11 @@ const ShowElements = () => {
       {(() => {
         switch (element.type) {
           case ActionTypes.jump:
-            return <Jump element={element} unit={unit} />;
+            return <Jump element={element} />;
           case ActionTypes.text:
             return <Text element={element} />;
           case ActionTypes.naviAndKeni:
-            return <NaviKeni element={element} unit={unit} />;
+            return <NaviKeni element={element} />;
           case ActionTypes.writing:
             return <Writing element={element} />;
           default:
