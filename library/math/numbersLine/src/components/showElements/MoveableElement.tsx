@@ -47,8 +47,6 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
     const elementWidth = element.icons ? unit * element.icons.widthRelatively : unit * element.jump!.value;
     // few pixels for the precise position of the element, the calculation is done relative to the position on the axis.
     const sidesPixels = element.jump ? ((windowSize.width / 2 - xPosition - element.jump?.width / 2) / windowSize.width) * 4 : 0;
-    console.log("sidesPixels", sidesPixels);
-
     let newXPosition = Math.round((xPosition + IconsFootLength - rulerPaddingSides) / unitPresent) * unitPresent + rulerPaddingSides - IconsFootLength + sidesPixels;
     if (newXPosition + elementWidth > windowSize.width) newXPosition -= unitPresent;
     if (newXPosition < 0) newXPosition += unitPresent;
@@ -118,8 +116,9 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
     const xPosition = calcXTransform(e.target.style.transform);
     //checking if the jump resize within the bounds or -else the jump width is negative
     if (((rightDirectionAction && boundScale < e.clientX) || (!rightDirectionAction && boundScale > e.clientX)) && e.width > 0) {
-      if ((Math.abs(calcXTransform(e.drag.transform) - xPosition) < 1000 && rightDirectionAction) || calcXTransform(e.drag.transform) < windowSize.width)
-        e.target.style.transform = e.drag.transform;
+      //Questions for arranging the jump position
+      if (!rightDirectionAction && calcXTransform(e.drag.transform) < windowSize.width) e.target.style.transform = e.drag.transform;
+      if (rightDirectionAction) e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + boundScale);
       e.target.style.width = `${e.width}px`;
       updateDragElements(element.id, {
         ...element,
