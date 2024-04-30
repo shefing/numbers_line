@@ -1,6 +1,6 @@
+import { RulerPaddingSides } from "../consts/elementConsts";
 import { useNumbersLineContext } from "../context/numbersLineContext";
 import { LineRange, unitAmount } from "../type/ruler";
-import { RulerPaddingSides } from "../consts/elementConsts";
 import { TypeCover } from "../type/toolbar";
 
 export const useHelpers = () => {
@@ -19,11 +19,11 @@ export const useHelpers = () => {
   } = useNumbersLineContext();
 
   const calculatScreenWidth = () => {
-    return -(unit * (LineRange.hundred - 20) - RulerPaddingSides * 2);
+    return -(unit * (LineRange.hundred - 20) - calculatRulerPaddingSides() * 2);
   };
 
   const calculatRulerWidth = () => {
-    return windowSize.width - RulerPaddingSides * 2;
+    return windowSize.width - calculatRulerPaddingSides() * 2;
   };
 
   const calculatUnitsAmount = () => {
