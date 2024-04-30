@@ -6,6 +6,7 @@ import { TypeCover } from "../type/toolbar";
 export const useHelpers = () => {
   const {
     windowSize,
+    unit,
     rulerType,
     setrulerType,
     rulerTypeShould,
@@ -18,7 +19,7 @@ export const useHelpers = () => {
   } = useNumbersLineContext();
 
   const calculatScreenWidth = () => {
-    return -windowSize.width * ((LineRange.hundred - RulerLenth.hundred) / RulerLenth.hundred);
+    return -unit * (LineRange.hundred - 20) + RulerPaddingSides * 2;
   };
 
   const calculatRulerWidth = () => {
@@ -28,6 +29,7 @@ export const useHelpers = () => {
   const calculatUnitsAmount = () => {
     return rulerType == LineRange.hundred || rulerType == LineRange.twenty ? unitAmount.twenty : unitAmount.ten;
   };
+
   const restart = () => {
     setrulerType(rulerTypeShould);
     setDragElements([]);

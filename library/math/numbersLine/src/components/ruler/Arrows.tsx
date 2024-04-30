@@ -17,7 +17,7 @@ const Arrows = () => {
 
   useEffect(() => {
     setLeftArrowIcon(!leftPosition ? leftArrowDisable : leftArrow);
-    setRightArrowIcon(leftPosition == calculatScreenWidth() ? rightArrowDisable : rightArrow);
+    setRightArrowIcon(leftPosition <= calculatScreenWidth() ? rightArrowDisable : rightArrow);
 
     dragElements.forEach((item) => {
       if (item.id != idDraggElementClick) {
@@ -70,7 +70,7 @@ const Arrows = () => {
           <img
             src={rightArrowIcon}
             alt="Right Arrow"
-            className={`m-5 cursor-pointer relative z-[999] ${leftPosition == calculatScreenWidth() && "pointer-events-none"}`}
+            className={`m-5 cursor-pointer relative z-[999] ${leftPosition <= calculatScreenWidth() && "pointer-events-none"}`}
             onClick={() => updatePositionOnArrowClick("right")}
             onMouseDown={() => handleMouseDown("right")}
             onMouseUp={handleMouseUp}
