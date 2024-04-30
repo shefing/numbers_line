@@ -19,7 +19,7 @@ export const useHelpers = () => {
   } = useNumbersLineContext();
 
   const calculatScreenWidth = () => {
-    return -unit * (LineRange.hundred - 20) + RulerPaddingSides * 2;
+    return -(unit * (LineRange.hundred - 20) - RulerPaddingSides * 2);
   };
 
   const calculatRulerWidth = () => {
@@ -29,7 +29,9 @@ export const useHelpers = () => {
   const calculatUnitsAmount = () => {
     return rulerType == LineRange.hundred || rulerType == LineRange.twenty ? unitAmount.twenty : unitAmount.ten;
   };
-
+  const calculatRulerPaddingSides = () => {
+    return rulerType == LineRange.hundred || rulerType == LineRange.twenty ? unit / 2 : RulerPaddingSides;
+  };
   const restart = () => {
     setrulerType(rulerTypeShould);
     setDragElements([]);
@@ -44,6 +46,7 @@ export const useHelpers = () => {
     calculatScreenWidth,
     calculatRulerWidth,
     calculatUnitsAmount,
+    calculatRulerPaddingSides,
     restart,
   };
 };
