@@ -19,11 +19,13 @@ export const useHelpers = () => {
   } = useNumbersLineContext();
 
   const calculatScreenWidth = () => {
-    return -(unit * (LineRange.hundred - 20) - calculatRulerPaddingSides() * 2);
+    return -(unit * (LineRange.hundred - 21));
   };
 
   const calculatRulerWidth = () => {
-    return windowSize.width - calculatRulerPaddingSides() * 2;
+    const padding = rulerType == LineRange.hundred || rulerType == LineRange.twenty ? windowSize.width / 21 / 2 : RulerPaddingSides;
+    console.log(windowSize.width - padding * 2);
+    return windowSize.width - padding * 2;
   };
 
   const calculatUnitsAmount = () => {
@@ -32,6 +34,7 @@ export const useHelpers = () => {
   const calculatRulerPaddingSides = () => {
     return rulerType == LineRange.hundred || rulerType == LineRange.twenty ? unit / 2 : RulerPaddingSides;
   };
+
   const restart = () => {
     setrulerType(rulerTypeShould);
     setDragElements([]);
