@@ -1,5 +1,5 @@
 import { useNumbersLineContext } from "../context/numbersLineContext";
-import { LineRange, RulerLenth, unitAmount } from "../type/ruler";
+import { LineRange, unitAmount } from "../type/ruler";
 import { RulerPaddingSides } from "../consts/elementConsts";
 import { TypeCover } from "../type/toolbar";
 
