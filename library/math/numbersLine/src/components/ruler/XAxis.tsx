@@ -8,8 +8,8 @@ const XAxis = () => {
   const { windowSize, rulerType, unit, leftPosition, setLeftPosition, setIdDraggElementClick } = useNumbersLineContext();
   const { calculatScreenWidth } = useHelpers();
 
-  const [startX, setStartX] = useState(0);
-  const [isDragging, setisDragging] = useState(false);
+  const [startX, setStartX] = useState(-1);
+  const [startLeftPosition, setStartLeftPosition] = useState(leftPosition);
   const [prevWindowSize, setPrevWindowSize] = useState(windowSize.width);
 
   useEffect(() => {
@@ -18,37 +18,42 @@ const XAxis = () => {
     setPrevWindowSize(windowSize.width);
   }, [windowSize]);
 
-  const handleStartDrag = (e: any) => {
-    setIdDraggElementClick("");
-    setisDragging(true);
-    setStartX(e.clientX);
-  };
+  useEffect(() => {
+    if (startX > 0) {
+      document.addEventListener("mousemove", onDrag);
+      document.addEventListener("mouseup", onStopDrag);
+    } else {
+      document.removeEventListener("mousemove", onDrag);
+      document.removeEventListener("mouseup", onStopDrag);
+    }
+  }, [startX]);
 
-  const handleonDrag = (e: any) => {
-    if (isDragging) {
+  const onDrag = (e: any) => {
+    if (startX > 0) {
       const deltaX = e.clientX - startX;
-      setLeftPosition((prevLeft: number) => Math.max(calculatScreenWidth(), Math.min(0, prevLeft + deltaX)));
-      setStartX(e.clientX);
+      setLeftPosition(Math.max(calculatScreenWidth(), Math.min(0, startLeftPosition + deltaX)));
     }
   };
 
-  const handleStopDrag = () => {
-    setisDragging(false);
+  const onStopDrag = () => {
     setLeftPosition((preLeftPosition) => Math.round(preLeftPosition / unit) * unit);
+    setStartX(-1);
+    document.removeEventListener("mousemove", onDrag);
+    document.removeEventListener("mouseup", onStopDrag);
   };
 
   return (
     <div
       className={rulerType == LineRange.hundred ? `cursor-move  w-full` : ""}
-      onMouseDown={rulerType == LineRange.hundred ? handleStartDrag : () => {}}
-      onMouseMove={rulerType == LineRange.hundred ? handleonDrag : () => {}}
-      onMouseUp={rulerType == LineRange.hundred ? handleStopDrag : () => {}}
-      onMouseLeave={rulerType == LineRange.hundred ? handleStopDrag : () => {}}
+      onMouseDown={(e) => {
+        setStartLeftPosition(leftPosition);
+        setStartX(e.clientX);
+        setIdDraggElementClick("");
+      }}
       style={{ height: ruleHeight + "px" }}
     >
       <Numbers />
     </div>
   );
 };
-
 export default XAxis;

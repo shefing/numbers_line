@@ -24,7 +24,6 @@ export const useHelpers = () => {
 
   const calculatRulerWidth = () => {
     const padding = rulerType == LineRange.hundred || rulerType == LineRange.twenty ? windowSize.width / 21 / 2 : RulerPaddingSides;
-    console.log(windowSize.width - padding * 2);
     return windowSize.width - padding * 2;
   };
 
