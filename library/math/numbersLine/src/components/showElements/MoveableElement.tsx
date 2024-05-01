@@ -14,14 +14,13 @@ import { OnDragEnd, OnResizeStart } from "moveable";
 interface IProps {
   moveableRef: any;
   element: IElement;
-  unit: number;
   dragging?: boolean;
   setDragging?: (v: boolean) => void;
 }
-const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: IProps) => {
-  const { windowSize, rulerType, rulerPaddingSides, leftPosition, idDraggElementClick, setIdDraggElementClick, color } = useNumbersLineContext();
+const MoveableElement = ({ moveableRef, element, dragging, setDragging }: IProps) => {
+  const { windowSize, rulerType, unit, leftPosition, idDraggElementClick, setIdDraggElementClick, color } = useNumbersLineContext();
   const { deleteDragElement, duplicateDragJump, updateDragElements, updateDragElementsLayers } = useDraggableElementAction();
-  const { calculatScreenWidth } = useHelpers();
+  const { calculatScreenWidth, calculatRulerPaddingSides } = useHelpers();
   const [rightStartPosition, setRightStartPosition] = useState(0);
   const [boundScale, setBoundScale] = useState(0);
   const [changeDragState, setChangeDragState] = useState(false);
@@ -31,12 +30,12 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
     deleteViewAble: idDraggElementClick === element.id && !dragging,
     onDeleteClick: () => deleteDragElement(element.id),
     copyViewAble: element.type === ActionTypes.jump && idDraggElementClick === element.id,
-    onCopyClick: () => duplicateDragJump(element, unit),
+    onCopyClick: () => duplicateDragJump(element),
     underRuler: element.jump?.underRuler,
     minus: element.jump?.minus,
     rulerType: rulerType,
     leftPosition: leftPosition,
-    rulerPaddingSides: rulerPaddingSides,
+    rulerPaddingSides: calculatRulerPaddingSides(),
     calculatScreenWidth: () => calculatScreenWidth(),
   };
 
@@ -47,7 +46,8 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
     const elementWidth = element.icons ? unit * element.icons.widthRelatively : unit * element.jump!.value;
     // few pixels for the precise position of the element, the calculation is done relative to the position on the axis.
     const sidesPixels = element.jump ? ((windowSize.width / 2 - xPosition - element.jump?.width / 2) / windowSize.width) * 4 : 0;
-    let newXPosition = Math.round((xPosition + IconsFootLength - rulerPaddingSides) / unitPresent) * unitPresent + rulerPaddingSides - IconsFootLength + sidesPixels;
+    let newXPosition =
+      Math.round((xPosition + IconsFootLength - calculatRulerPaddingSides()) / unitPresent) * unitPresent + calculatRulerPaddingSides() - IconsFootLength + sidesPixels;
     if (newXPosition + elementWidth > windowSize.width) newXPosition -= unitPresent;
     if (newXPosition < 0) newXPosition += unitPresent;
     e.target.style.transform = e.target.style.transform.replace("(" + xPosition, "(" + newXPosition);
@@ -111,7 +111,7 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
   };
 
   const onResize = (e: OnResize) => {
-    if (!element.jump || e.clientX > windowSize.width - rulerPaddingSides || e.clientX < rulerPaddingSides) return;
+    if (!element.jump || e.clientX > windowSize.width - calculatRulerPaddingSides() || e.clientX < calculatRulerPaddingSides()) return;
     const rightDirectionAction = e.direction[0] == 1;
     const xPosition = calcXTransform(e.target.style.transform);
     //checking if the jump resize within the bounds or -else the jump width is negative
@@ -144,8 +144,8 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
     e.target.style.width = `${newWidth}px`;
     const xPosition = calcXTransform(e.target.style.transform);
     //Change position when jump out of range.
-    if (xPosition + newWidth > windowSize.width - rulerPaddingSides) {
-      const range = xPosition + newWidth - windowSize.width + rulerPaddingSides;
+    if (xPosition + newWidth > windowSize.width - calculatRulerPaddingSides()) {
+      const range = xPosition + newWidth - windowSize.width + calculatRulerPaddingSides();
       const newXPosition = "(" + (xPosition - range);
       e.target.style.transform = e.target.style.transform.replace("(" + xPosition, newXPosition);
     }
@@ -159,7 +159,7 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
       newTransform = e.target.style.transform.replace("(" + xPosition, newXPosition);
       e.target.style.transform = newTransform;
     }
-    onDragEnd(e, { ...element, transform: newTransform, jump: { ...element.jump, width: newWidth, value: newValue } });
+    updateDragElements(element.id, { ...element, transform: newTransform, jump: { ...element.jump, width: newWidth, value: newValue } });
   };
 
   return (
@@ -179,9 +179,9 @@ const MoveableElement = ({ moveableRef, element, unit, dragging, setDragging }: 
       onResizeEnd={(e) => onResizeEnd(e)}
       snappable={true}
       bounds={{
-        left: element.jump ? rulerPaddingSides : 1,
+        left: element.jump ? calculatRulerPaddingSides() : 1,
         top: ToolbarHeight + buttonsDraggElementWidth,
-        right: element.jump ? rulerPaddingSides : 1,
+        right: element.jump ? calculatRulerPaddingSides() : 1,
         bottom: element.jump ? (element.jump.underRuler ? buttonsDraggElementWidth : jumpHeight - jumpBaseHeight + buttonsDraggElementWidth) : 1,
         position: "css",
       }}

@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
-import { LineRange, PartToCover, RulerLenth } from "../../type/ruler";
+import { LineRange, PartToCover } from "../../type/ruler";
 import { TypeCover } from "../../type/toolbar";
-import { barWidth } from "../../consts/elementConsts";
+import { useHelpers } from "../../hooks/useHelpers";
 
 const Numbers = () => {
-  const { windowSize, rulerType, rulerPaddingSides, leftPosition, coverSituation, setCoverSituation, setVisitableDisplayButton } = useNumbersLineContext();
+  const { unit, rulerType, leftPosition, coverSituation, setCoverSituation, setVisitableDisplayButton } = useNumbersLineContext();
+  const { calculatRulerPaddingSides } = useHelpers();
   const [labels, setLabels] = useState<number[]>([]);
   const [labelsCover, setClickedLabelsCover] = useState(new Set());
 
@@ -57,12 +58,12 @@ const Numbers = () => {
       style={
         rulerType == LineRange.hundred
           ? {
-              width: windowSize.width * (LineRange.hundred / RulerLenth.hundred) - barWidth * 3,
+              width: unit * (LineRange.hundred - 1) + calculatRulerPaddingSides() * 2,
               left: `${leftPosition}px`,
-              paddingLeft: `${rulerPaddingSides}px`,
-              paddingRight: `${rulerPaddingSides}px`,
+              paddingLeft: `${calculatRulerPaddingSides()}px`,
+              paddingRight: `${calculatRulerPaddingSides()}px`,
             }
-          : { paddingLeft: `${rulerPaddingSides}px`, paddingRight: `${rulerPaddingSides}px` }
+          : { paddingLeft: `${calculatRulerPaddingSides()}px`, paddingRight: `${calculatRulerPaddingSides()}px` }
       }
     >
       {labels.map((label) =>

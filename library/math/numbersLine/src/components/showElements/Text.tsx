@@ -124,7 +124,7 @@ const Text = ({ element }: IProps) => {
       </div>
       {idDraggElementClick == element.id && (
         <div id={`${dragElementID}-text`}>
-          <MoveableElement moveableRef={moveableRef} element={element} unit={0} dragging={dragging} setDragging={setDragging} />
+          <MoveableElement moveableRef={moveableRef} element={element} dragging={dragging} setDragging={setDragging} />
         </div>
       )}
     </>

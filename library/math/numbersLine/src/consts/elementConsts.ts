@@ -90,7 +90,6 @@ export const RulerPaddingSides = 32;
 export const rulerMargin = 0.35;
 export const ruleHeight = 50;
 export const grassHeight = 150;
-export const barWidth = 4;
 export const jumpBaseHeight = 40;
 export const jumpArrowHeight = 64;
 export const jumpHeight = 120;

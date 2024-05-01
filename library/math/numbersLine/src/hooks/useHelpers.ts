@@ -1,15 +1,15 @@
-import { useNumbersLineContext } from "../context/numbersLineContext";
-import { LineRange, RulerLenth, unitAmount } from "../type/ruler";
 import { RulerPaddingSides } from "../consts/elementConsts";
+import { useNumbersLineContext } from "../context/numbersLineContext";
+import { LineRange, unitAmount } from "../type/ruler";
 import { TypeCover } from "../type/toolbar";
 
 export const useHelpers = () => {
   const {
     windowSize,
+    unit,
     rulerType,
     setrulerType,
     rulerTypeShould,
-    setRulerPaddingSides,
     setLeftPosition,
     setDragElements,
     setDuplicateElementSpace,
@@ -19,19 +19,23 @@ export const useHelpers = () => {
   } = useNumbersLineContext();
 
   const calculatScreenWidth = () => {
-    return -windowSize.width * ((LineRange.hundred - RulerLenth.hundred) / RulerLenth.hundred);
+    return -(unit * (LineRange.hundred - 21));
   };
 
   const calculatRulerWidth = () => {
-    return windowSize.width - RulerPaddingSides * 2;
+    const padding = rulerType == LineRange.hundred || rulerType == LineRange.twenty ? windowSize.width / 21 / 2 : RulerPaddingSides;
+    return windowSize.width - padding * 2;
   };
 
   const calculatUnitsAmount = () => {
     return rulerType == LineRange.hundred || rulerType == LineRange.twenty ? unitAmount.twenty : unitAmount.ten;
   };
+  const calculatRulerPaddingSides = () => {
+    return rulerType == LineRange.hundred || rulerType == LineRange.twenty ? unit / 2 : RulerPaddingSides;
+  };
+
   const restart = () => {
     setrulerType(rulerTypeShould);
-    rulerTypeShould == LineRange.hundred ? setRulerPaddingSides(windowSize.width / RulerLenth.hundred / 2) : RulerPaddingSides;
     setDragElements([]);
     setCoverSituation(TypeCover.allDiscover);
     setVisitableDisplayButton(TypeCover.allDiscover);
@@ -44,6 +48,7 @@ export const useHelpers = () => {
     calculatScreenWidth,
     calculatRulerWidth,
     calculatUnitsAmount,
+    calculatRulerPaddingSides,
     restart,
   };
 };

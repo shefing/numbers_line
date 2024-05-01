@@ -1,7 +1,7 @@
 import { useNumbersLineContext } from "@/context/numbersLineContext";
 import { IElement } from "../type/moveable";
 import { v4 as uuidv4 } from "uuid";
-import { LineRange, RulerLenth } from "../type/ruler";
+import { LineRange } from "../type/ruler";
 import { ActionTypes, NaviKeniIconsTypes } from "../type/toolbar";
 import {
   buttonsDraggElementWidth,
@@ -23,7 +23,7 @@ export const useDraggableElementAction = () => {
   const {
     windowSize,
     rulerType,
-    rulerPaddingSides,
+    unit,
     leftPosition,
     setLeftPosition,
     dragElements,
@@ -34,7 +34,7 @@ export const useDraggableElementAction = () => {
     zIndexCounter,
     setZIndexCounter,
   } = useNumbersLineContext();
-  const { calculatRulerWidth, calculatUnitsAmount } = useHelpers();
+  const { calculatRulerWidth, calculatUnitsAmount, calculatRulerPaddingSides } = useHelpers();
 
   const addDraggableElement = (typeAction: ActionTypes, type?: NaviKeniIconsTypes) => {
     const elementWidth = typeAction == ActionTypes.jump || typeAction == ActionTypes.naviAndKeni ? calculatRulerWidth() / calculatUnitsAmount() : textBoxWidth;
@@ -63,7 +63,7 @@ export const useDraggableElementAction = () => {
     setZIndexCounter((prev) => prev + 1);
     setDuplicateElementSpace((prevPixels) => prevPixels + duplicateElementStepSpace);
     const outOfRange =
-      xTranslate > windowSize.width - windowSize.width / calculatUnitsAmount() - rulerPaddingSides ||
+      xTranslate > windowSize.width - windowSize.width / calculatUnitsAmount() - calculatRulerPaddingSides() ||
       yTranslate > windowSize.height - (jumpHeight + jumpBaseHeight + buttonsDraggElementWidth + duplicateElementStepSpace);
 
     outOfRange && setDuplicateElementSpace(0);
@@ -74,16 +74,15 @@ export const useDraggableElementAction = () => {
     setDragElements(newDragElements);
   };
 
-  const duplicateDragJump = (element: IElement, unit: number) => {
+  const duplicateDragJump = (element: IElement) => {
     const elementWidth = unit * element.jump!.value;
     const id = uuidv4();
     let newTransform = "";
     const startPosition = calcXTransform(element.transform);
     const endNewJumpPosition = startPosition + elementWidth * 2;
-    const outOfRange = element.jump?.minus ? startPosition - elementWidth : endNewJumpPosition - windowSize.width + rulerPaddingSides - 10;
+    const outOfRange = element.jump?.minus ? startPosition - elementWidth : endNewJumpPosition - windowSize.width + calculatRulerPaddingSides() - 10;
     let newPosition = element.jump?.minus ? startPosition - elementWidth : startPosition + elementWidth;
     if (rulerType == LineRange.hundred && ((!element.jump?.minus && outOfRange > 0) || (element.jump?.minus && outOfRange < 0))) {
-      const unit = windowSize.width / RulerLenth.hundred;
       newPosition -= +leftPosition - Math.round((leftPosition - outOfRange) / unit) * unit;
       setLeftPosition((prev) => Math.round((prev - outOfRange) / unit) * unit);
     }

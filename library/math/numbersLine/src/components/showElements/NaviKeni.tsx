@@ -5,13 +5,14 @@ import navi from "/assets/icons/naviOnScreen.svg";
 import keni from "/assets/icons/keniOnScreen.svg";
 import { NaviKeniIconsTypes } from "../../type/toolbar";
 import { dragElementID } from "../../consts/elementConsts";
+import { useNumbersLineContext } from "@/context/numbersLineContext";
 
 interface IProps {
   element: IElement;
-  unit: number;
 }
 
-const NaviKany = ({ element, unit }: IProps) => {
+const NaviKany = ({ element }: IProps) => {
+  const { unit } = useNumbersLineContext();
   const moveableRef = useRef<any>(null);
 
   return (
@@ -28,7 +29,7 @@ const NaviKany = ({ element, unit }: IProps) => {
         }}
       />
       <div id={`${dragElementID}-naviKeni`}>
-        <MoveableElement moveableRef={moveableRef} element={element} unit={unit} />
+        <MoveableElement moveableRef={moveableRef} element={element} />
       </div>
     </>
   );

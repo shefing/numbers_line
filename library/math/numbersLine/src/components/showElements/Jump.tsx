@@ -8,10 +8,9 @@ import { dragElementID } from "../../consts/elementConsts";
 
 interface IProps {
   element: IElement;
-  unit: number;
 }
-const Jump = ({ element, unit }: IProps) => {
-  const { rulerType, idDraggElementClick } = useNumbersLineContext();
+const Jump = ({ element }: IProps) => {
+  const { rulerType, unit, idDraggElementClick } = useNumbersLineContext();
   const [hideNumber, setHideNumber] = useState(true);
   const [click, setClick] = useState(false);
   const moveableRef = React.useRef<HTMLDivElement>(null);
@@ -44,7 +43,7 @@ const Jump = ({ element, unit }: IProps) => {
         </div>
       </div>
       <div id={`${dragElementID}-jump-${jump.underRuler ? "under" : "on"}${click ? "-click" : "-notclick"}`}>
-        <MoveableElement moveableRef={moveableRef} element={element} unit={unit} />
+        <MoveableElement moveableRef={moveableRef} element={element} />
       </div>
     </>
   );

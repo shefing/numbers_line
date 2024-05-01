@@ -8,7 +8,7 @@ import { useEffect, useRef, useState } from "react";
 import { useHelpers } from "../../hooks/useHelpers";
 
 const Arrows = () => {
-  const { rulerType, windowSize, leftPosition, setLeftPosition, dragElements, idDraggElementClick, setIdDraggElementClick } = useNumbersLineContext();
+  const { windowSize, rulerType, unit, leftPosition, setLeftPosition, dragElements, idDraggElementClick, setIdDraggElementClick } = useNumbersLineContext();
   const { calculatScreenWidth } = useHelpers();
   const [leftArrowIcon, setLeftArrowIcon] = useState(leftArrow);
   const [rightArrowIcon, setRightArrowIcon] = useState(rightArrow);
@@ -17,7 +17,7 @@ const Arrows = () => {
 
   useEffect(() => {
     setLeftArrowIcon(!leftPosition ? leftArrowDisable : leftArrow);
-    setRightArrowIcon(leftPosition == calculatScreenWidth() ? rightArrowDisable : rightArrow);
+    setRightArrowIcon(leftPosition - 5 <= calculatScreenWidth() ? rightArrowDisable : rightArrow);
 
     dragElements.forEach((item) => {
       if (item.id != idDraggElementClick) {
@@ -38,7 +38,6 @@ const Arrows = () => {
   const updatePositionOnArrowClick = (direction: "left" | "right") => {
     setIdDraggElementClick("");
     const step = windowSize.width / RulerLenth.hundred;
-    const unit = windowSize.width / RulerLenth.hundred;
     setLeftPosition((prev) => Math.round((direction === "left" ? Math.min(0, prev + step) : Math.max(calculatScreenWidth(), prev - step)) / unit) * unit);
   };
 
@@ -71,7 +70,7 @@ const Arrows = () => {
           <img
             src={rightArrowIcon}
             alt="Right Arrow"
-            className={`m-5 cursor-pointer relative z-[999] ${leftPosition == calculatScreenWidth() && "pointer-events-none"}`}
+            className={`m-5 cursor-pointer relative z-[999] ${leftPosition - 5 <= calculatScreenWidth() && "pointer-events-none"}`}
             onClick={() => updatePositionOnArrowClick("right")}
             onMouseDown={() => handleMouseDown("right")}
             onMouseUp={handleMouseUp}
