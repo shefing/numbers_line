@@ -45,11 +45,15 @@ const XAxis = () => {
   return (
     <div
       className={rulerType == LineRange.hundred ? `cursor-move  w-full` : ""}
-      onMouseDown={(e) => {
-        setStartLeftPosition(leftPosition);
-        setStartX(e.clientX);
-        setIdDraggElementClick("");
-      }}
+      onMouseDown={
+        rulerType == LineRange.hundred
+          ? (e) => {
+              setStartLeftPosition(leftPosition);
+              setStartX(e.clientX);
+              setIdDraggElementClick("");
+            }
+          : () => {}
+      }
       style={{ height: ruleHeight + "px" }}
     >
       <Numbers />
