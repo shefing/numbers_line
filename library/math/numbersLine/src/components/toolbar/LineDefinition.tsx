@@ -46,7 +46,9 @@ const LineDefinition = () => {
   return (
     <div
       ref={wrapperRef}
-      className={`flex flex-col items-end p-2 rounded-md  ${language === ILanguage.AR ? "w-[18rem]" : " w-[16rem]"} w-[16rem] ${isMenuOpen && "shadow-2xl bg-[#009FDE]"} relative`}
+      className={`flex flex-col items-end p-2 rounded-md ${language === ILanguage.AR ? "w-[18rem]" : " w-[16rem]"} w-[16rem] ${
+        isMenuOpen && "shadow-2xl bg-[#009FDE]"
+      } relative  z-[999]`}
     >
       <div className="cursor-pointer flex" onClick={handleButtonClick}>
         <img className="p-3 pr-6" src={isMenuOpen ? closeMenu : openMenu} alt="Menu Arrow" />

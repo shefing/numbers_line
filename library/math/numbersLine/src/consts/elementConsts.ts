@@ -61,8 +61,8 @@ export const actionIconsDetials: IActionIcon[] = [
 export const rulerDefinitionButtonDetials: IRulerDefinition[] = [
   { type: "0-10", choice: LineRange.ten },
   { type: "0-20", choice: LineRange.twenty },
-  { type: "0-100", choice: LineRange.hundredCircular },
-  { type: "0-100", choice: LineRange.hundred },
+  { type: "", choice: LineRange.hundredCircular },
+  { type: "", choice: LineRange.hundred },
 ];
 
 export const displayRulerButtonDetials: IDisplayRuller[] = [
