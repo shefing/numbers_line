@@ -61,7 +61,7 @@ const Arrows = () => {
           <img
             src={leftArrowIcon}
             alt="Left Arrow"
-            className={`m-5 cursor-pointer relative z-[999] ${!leftPosition && "pointer-events-none"}`}
+            className={`m-5 cursor-pointer relative z-[995] ${!leftPosition && "pointer-events-none"}`}
             onClick={() => updatePositionOnArrowClick("left")}
             onMouseDown={() => handleMouseDown("left")}
             onMouseUp={handleMouseUp}
@@ -70,7 +70,7 @@ const Arrows = () => {
           <img
             src={rightArrowIcon}
             alt="Right Arrow"
-            className={`m-5 cursor-pointer relative z-[999] ${leftPosition - 5 <= calculatScreenWidth() && "pointer-events-none"}`}
+            className={`m-5 cursor-pointer relative z-[995] ${leftPosition - 5 <= calculatScreenWidth() && "pointer-events-none"}`}
             onClick={() => updatePositionOnArrowClick("right")}
             onMouseDown={() => handleMouseDown("right")}
             onMouseUp={handleMouseUp}

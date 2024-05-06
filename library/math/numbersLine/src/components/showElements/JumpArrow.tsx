@@ -24,6 +24,8 @@ const JumpArrow = ({ element, jumpWidth }: IProps) => {
       id={`${dragElementID}-jumpArrow`}
       className={`w-full  ${minus == underRuler ? "transform scale-x-[1]" : "transform scale-x-[-1]"}`}
       style={{ height: jumpArrowHeight + "px" }}
+      viewBox={`0 0 ${jumpWidth + 3} ${jumpArrowHeight}`}
+      preserveAspectRatio="none"
     >
       <path
         d={
