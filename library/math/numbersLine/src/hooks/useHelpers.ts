@@ -41,7 +41,7 @@ export const useHelpers = () => {
     setVisitableDisplayButton(TypeCover.allDiscover);
     setLeftPosition(0);
     setDuplicateElementSpace(0);
-    setZIndexCounter(0);
+    setZIndexCounter(1);
   };
 
   return {
