@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { LineRange } from "../../type/ruler";
-import Numbers from "./Numbers";
 import { useHelpers } from "../../hooks/useHelpers";
 import { ruleHeight } from "../../consts/elementConsts";
+import Numbers from "./Numbers";
+
 const XAxis = () => {
   const { windowSize, rulerType, unit, leftPosition, setLeftPosition, setIdDraggElementClick } = useNumbersLineContext();
   const { calculatScreenWidth } = useHelpers();
@@ -45,11 +46,15 @@ const XAxis = () => {
   return (
     <div
       className={rulerType == LineRange.hundred ? `cursor-move  w-full` : ""}
-      onMouseDown={(e) => {
-        setStartLeftPosition(leftPosition);
-        setStartX(e.clientX);
-        setIdDraggElementClick("");
-      }}
+      onMouseDown={
+        rulerType == LineRange.hundred
+          ? (e) => {
+              setStartLeftPosition(leftPosition);
+              setStartX(e.clientX);
+              setIdDraggElementClick("");
+            }
+          : () => {}
+      }
       style={{ height: ruleHeight + "px" }}
     >
       <Numbers />

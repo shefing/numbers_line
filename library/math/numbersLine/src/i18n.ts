@@ -5,8 +5,8 @@ const resources = {
   he: {
     translation: {
       line_defination: "הגדרת הישר",
-      ruler_jump_size_10: "(קפיצות של 10) ",
-      ruler_jump_size_1: "(קפיצות של 1) ",
+      ruler_jump_size_10: "(קפיצות של 10) 0-100",
+      ruler_jump_size_1: "(קפיצות של 1) 0-100",
       hide_everything: "הסתר הכל",
       hide_partially: "הסתר חלקית",
       hide_manually: "הסתר ידנית",
@@ -20,8 +20,8 @@ const resources = {
   ar: {
     translation: {
       line_defination: "تعريف مستقيم الأعداد",
-      ruler_jump_size_10: "(قفزات من 10)",
-      ruler_jump_size_1: "(قفزات من 1)",
+      ruler_jump_size_10: "(قفزات من 10) 100-0",
+      ruler_jump_size_1: "(قفزات من 1) 100-0",
       hide_everything: "إخفاء كل شيء",
       hide_partially: "إخفاء جزئيا",
       hide_manually: "إخفاء يدويا",

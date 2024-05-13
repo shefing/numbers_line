@@ -61,8 +61,8 @@ export const actionIconsDetials: IActionIcon[] = [
 export const rulerDefinitionButtonDetials: IRulerDefinition[] = [
   { type: "0-10", choice: LineRange.ten },
   { type: "0-20", choice: LineRange.twenty },
-  { type: "0-100", choice: LineRange.hundredCircular },
-  { type: "0-100", choice: LineRange.hundred },
+  { type: "", choice: LineRange.hundredCircular },
+  { type: "", choice: LineRange.hundred },
 ];
 
 export const displayRulerButtonDetials: IDisplayRuller[] = [
@@ -87,9 +87,8 @@ export const writingSituationList: IWritingSituation[] = [
 export const cursorColors: Record<string, string> = { Blue: "cursor-blue", Green: "cursor-green", Orange: "cursor-orange", Delete: "cursor-delete" };
 
 export const RulerPaddingSides = 32;
-export const rulerMargin = 0.35;
+export const rulerLocation = 0.35;
 export const ruleHeight = 50;
-export const grassHeight = 150;
 export const jumpBaseHeight = 40;
 export const jumpArrowHeight = 64;
 export const jumpHeight = 120;

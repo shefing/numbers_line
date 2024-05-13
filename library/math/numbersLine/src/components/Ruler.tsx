@@ -1,18 +1,13 @@
 import Arrows from "./ruler/Arrows";
 import XAxis from "./ruler/XAxis";
-import { grassHeight, ruleHeight, rulerMargin } from "../consts/elementConsts";
-import { useNumbersLineContext } from "../context/numbersLineContext";
+import { rulerLocation } from "../consts/elementConsts";
 
 const Ruler = () => {
-  const { windowSize } = useNumbersLineContext();
-
   return (
-    <>
+    <div style={{ position: "absolute", bottom: rulerLocation * 100 + "%", width: "100%" }}>
       <Arrows />
-      <div style={{ paddingBottom: windowSize.height * rulerMargin - grassHeight - ruleHeight + "px" }}>
-        <XAxis />
-      </div>
-    </>
+      <XAxis />
+    </div>
   );
 };
 
