@@ -1,18 +1,13 @@
 import Arrows from "./ruler/Arrows";
 import XAxis from "./ruler/XAxis";
-import { rulerMargin } from "../consts/elementConsts";
-import { useNumbersLineContext } from "../context/numbersLineContext";
+import { rulerLocation } from "../consts/elementConsts";
 
 const Ruler = () => {
-  const { windowSize } = useNumbersLineContext();
-
   return (
-    <>
+    <div style={{ position: "absolute", bottom: rulerLocation * 100 + "%", width: "100%" }}>
       <Arrows />
-      <div style={{ marginBottom: windowSize.height * rulerMargin + "px" }}>
-        <XAxis />
-      </div>
-    </>
+      <XAxis />
+    </div>
   );
 };
 

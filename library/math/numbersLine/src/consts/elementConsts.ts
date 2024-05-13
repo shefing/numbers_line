@@ -87,9 +87,8 @@ export const writingSituationList: IWritingSituation[] = [
 export const cursorColors: Record<string, string> = { Blue: "cursor-blue", Green: "cursor-green", Orange: "cursor-orange", Delete: "cursor-delete" };
 
 export const RulerPaddingSides = 32;
-export const rulerMargin = 0.15;
+export const rulerLocation = 0.35;
 export const ruleHeight = 50;
-export const grassHeight = 150;
 export const jumpBaseHeight = 40;
 export const jumpArrowHeight = 64;
 export const jumpHeight = 120;

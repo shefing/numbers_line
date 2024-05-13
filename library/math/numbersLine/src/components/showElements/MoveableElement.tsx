@@ -2,7 +2,7 @@ import { useNumbersLineContext } from "../../context/numbersLineContext";
 import Moveable, { OnResize, OnResizeEnd } from "react-moveable";
 import { IElement } from "../../type/moveable";
 import { calcXTransform, calcYTransform } from "../../lib/utils";
-import { rulerMargin, ToolbarHeight, buttonsDraggElementWidth, jumpBaseHeight, jumpHeight, grassHeight, ruleHeight } from "../../consts/elementConsts";
+import { rulerLocation, ToolbarHeight, buttonsDraggElementWidth, jumpBaseHeight, jumpHeight, ruleHeight } from "../../consts/elementConsts";
 import { calcPosition } from "../../lib/utils";
 import { ButtonViewable } from "../../consts/ButtonViewable";
 import { useDraggableElementAction } from "../../hooks/useDraggableElementAction";
@@ -66,7 +66,7 @@ const MoveableElement = ({ moveableRef, element, dragging, setDragging }: IProps
       return;
     }
     const yTransform = calcYTransform(e.target.style.transform);
-    const rulerPosition = windowSize.height * (1 - rulerMargin) - grassHeight - ruleHeight;
+    const rulerPosition = windowSize.height * (1 - rulerLocation) - ruleHeight;
     let elementPsition = calcPosition(yTransform, element, unit);
     // Change the position of the element relative to the integers, provided that the position is close to the axis.
     if (Math.abs(rulerPosition - elementPsition) < 50) updateXLocation(e);
