@@ -30,8 +30,8 @@ const JumpArrow = ({ element, jumpWidth }: IProps) => {
       <path
         d={
           underRuler
-            ? `M${2 + matchingSpace / 3},${2 + matchingSpace / 3} Q${jumpWidth * 0.5},${jumpArrowHeight * 2 - 15} ${jumpWidth},0`
-            : `M0,${jumpArrowHeight} Q${jumpWidth * 0.5},-${jumpArrowHeight - 15} ${jumpWidth - 3 - matchingSpace / 3},${jumpArrowHeight - 3 - matchingSpace / 3}`
+            ? `M${5 + matchingSpace / 3},${5 + matchingSpace / 3} Q${jumpWidth * 0.5},${jumpArrowHeight * 2 - 15} ${jumpWidth},0`
+            : `M0,${jumpArrowHeight} Q${jumpWidth * 0.5},-${jumpArrowHeight - 15} ${jumpWidth - 5 - matchingSpace / 3},${jumpArrowHeight - 5 - matchingSpace / 3}`
         }
         fill="none"
         stroke={minus ? "#F48460" : "#009FDE"}
@@ -42,8 +42,8 @@ const JumpArrow = ({ element, jumpWidth }: IProps) => {
       />
       <svg
         className="overflow-visible"
-        x={`${underRuler ? -7 + matchingSpace / 5 : jumpWidth + 7 - matchingSpace / 5}`}
-        y={`${underRuler ? 1 + matchingSpace : jumpArrowHeight - 1 - matchingSpace}`}
+        x={`${underRuler ? -5 + matchingSpace / 4: jumpWidth + 6 - matchingSpace / 4}`}
+        y={`${underRuler ? 2 + matchingSpace/0.9 : jumpArrowHeight - 2- matchingSpace/0.9}`}
       >
         <polygon points="-20,0 0,10 -20,20 " transform={`rotate(${underRuler ? triangleRotation - 180 : triangleRotation})`} fill={minus ? "#F48460" : "#009FDE"} />
       </svg>
