@@ -1,3 +1,4 @@
+import { calcXTransform, calcYTransform } from "@/lib/utils";
 import { RulerPaddingSides } from "../consts/elementConsts";
 import { useNumbersLineContext } from "../context/numbersLineContext";
 import { LineRange, unitAmount } from "../type/ruler";
@@ -30,8 +31,17 @@ export const useHelpers = () => {
   const calculatUnitsAmount = () => {
     return rulerType == LineRange.hundred || rulerType == LineRange.twenty ? unitAmount.twenty : unitAmount.ten;
   };
+  
   const calculatRulerPaddingSides = () => {
     return rulerType == LineRange.hundred || rulerType == LineRange.twenty ? unit / 2 : RulerPaddingSides;
+  };
+
+  const calculatWidthRatio = (transform: string): number => {
+    return calcXTransform(transform)/windowSize.width;
+  };
+
+  const calculatHeightRatio = (transform: string): number => {
+    return calcYTransform(transform)/windowSize.height;
   };
 
   const restart = () => {
@@ -49,6 +59,8 @@ export const useHelpers = () => {
     calculatRulerWidth,
     calculatUnitsAmount,
     calculatRulerPaddingSides,
+    calculatHeightRatio,
+    calculatWidthRatio,
     restart,
   };
 };

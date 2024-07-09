@@ -45,6 +45,8 @@ export const useDraggableElementAction = () => {
       type: typeAction,
       transform: `translate(${xTranslate}px, ${yTranslate}px)`,
       zIndex: zIndexCounter,
+      heightRatio: xTranslate/windowSize.width,
+      widthRatio: yTranslate/windowSize.height,
     };
 
     if (typeAction === ActionTypes.jump) {
