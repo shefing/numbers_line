@@ -88,6 +88,8 @@ const Brush = () => {
       id: uuidv4(),
       type: ActionTypes.writing,
       transform: "",
+      heightRatio: 0,
+      widthRatio: 0,
       writing: line,
       zIndex: zIndexCounter,
     };

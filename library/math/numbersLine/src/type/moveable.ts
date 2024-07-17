@@ -8,6 +8,8 @@ export interface IElement {
   icons?: IIcons;
   writing?: ILine;
   transform: string;
+  heightRatio: number;
+  widthRatio: number;
   zIndex: number;
 }
 
