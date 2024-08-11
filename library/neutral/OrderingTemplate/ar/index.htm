@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <title>Ordering template</title>
+
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width" />
+  <meta charset="utf-8">
+  <link src="//cdn.cet.ac.il/fonts/Abraham/stylesheet.css" rel="stylesheet" type="text/css" />
+  <link href='//fonts.googleapis.com/css?family=Arimo:400,400italic,700,700italic&subset=latin,hebrew' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Lateef' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../content/style.css" type="text/css" />
+
+  <script src="localization.js"></script>
+
+  <script type="text/javascript" src="../../../lib/js/external/jquery/2.0.3/jquery-2.0.3.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../../../lib/js/external/jquery/jqueryui/1.10.3/jquery-ui-1.10.3.custom.min.js"></script>
+  <script type="text/javascript" src="../../../lib/js/external/jquery/jquery.ui.touch-punch.min.js"></script>
+
+  <script>
+      var env = "cet.ac.il";
+      if (/dev\.cet\.ac\.il/.test(window.location.hostname)) env = 'dev.' + env;
+      if (/testing\.cet\.ac\.il/.test(window.location.hostname)) env = 'testing.' + env;
+      document.write('<script src="//cdn.' + env + '/libs/cet.content/1/client.min.js"><' + '/script>');
+      document.write('<script src="//cdn.' + env + '/libs/cet.content.lms/1/client.min.js"><' + '/script>');
+  </script>
+  <script type="text/javascript" src="../../../lib/js/internal/plugins/cet.math.helpers.js"></script>
+  <script src="../dist/main.js"></script>
+  <script src="../js/lz-string.min.js"></script>
+
+</head>
+<body class="cet-ordering-template">
+
+    <div class="template-wrapper">
+
+        <div id="sortable-container">
+            <div class="sortable-wrapper">
+            </div>
+        </div>
+
+        <!--<div id="hint-wrapper">
+          bla=bla
+        </div>-->
+        <!--   <div class="button-wrapper">
+          <div id="Restart-button" class="restart-button">
+            <input type="button" value="Restart" />
+          </div>
+          <div id="Check-button" class="check-button">
+            <input type="button" value="Check" />
+          </div>
+          <div id="Solution-button" class="solution-button">
+            <input type="button" value="Solution" />
+          </div>
+        </div>-->
+    </div>
+
+    <div id="final-feedback">
+        <div class="feedback-overlay">
+            <div class="feedback-back">
+                <div class="feedback-caption" tabindex="0">
+
+                    <!--כל הכבוד!-->
+                </div>
+                <div id="feedback-close" class="sprite-ot-close ui-sprite" tabindex="0" role="button"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var init = function () {
+            var ot = new orderingTemplate();
+            ot.init();
+            ot.registerEvents();
+        };
+
+        if (cet.content.UI.clientReady()) {
+            init();
+        }
+        else {
+            cet.content.UI.bind('clientready', function () { init() });
+        }
+    </script>
+
+</body>
+
+</html>

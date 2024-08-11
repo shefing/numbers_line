@@ -1,0 +1,369 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1A60250B-C72A-48B2-B6F2-3DE749A1BF2B}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TextITApp</RootNamespace>
+    <AssemblyName>TextITApp</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="asset.html" />
+    <Content Include="audio\audacity\audio2.aup" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000004.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000020.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e000008f.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e00000a4.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000104.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e000018b.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e00001b1.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e00001bd.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000249.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e000025c.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000265.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e000026c.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000273.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000278.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000279.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e00002b1.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e00002fc.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e000036a.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e000039a.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e00004fe.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000546.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e000059e.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e00005bd.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e00005c8.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e000063e.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e000066d.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e00006cd.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e00006da.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000753.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000757.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e000077e.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e00007c3.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000813.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000862.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e00008c3.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000928.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000936.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e000093d.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e00009be.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e00009f2.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e00009f8.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000a7f.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000a99.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000acc.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000aec.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000aee.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000b32.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000b76.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000b8c.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000bd7.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000be2.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000c10.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000c17.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000cbe.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000d25.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000de5.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000dff.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000e09.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000f26.au" />
+    <Content Include="audio\audacity\audio2_data\e00\d00\e0000f90.au" />
+    <Content Include="audio\audacity\zavtush_adults.aup" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000020.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e000002f.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000071.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e00000a7.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e00000a9.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e00000ac.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000114.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000131.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e00001fa.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e00002ed.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000346.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000359.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e000042d.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000489.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e00004c2.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e00004f4.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e000050e.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000511.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e00005dc.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000612.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000636.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000646.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e000070c.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e00007af.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e00007c4.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e00008a8.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e00008b7.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e00008cf.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e00008e4.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e00008eb.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e00008f3.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e000090f.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e000092c.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e00009c1.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e00009fd.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000a15.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000a2c.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000a7e.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000a88.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000a99.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000b28.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000b34.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000b9e.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000c9c.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000ca1.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000cca.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000d35.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000dd1.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000dd4.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000de0.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000e1d.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000e29.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000e67.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000ea7.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000ed6.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000eeb.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000ef2.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000f22.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000f65.au" />
+    <Content Include="audio\audacity\zavtush_adults_data\e00\d00\e0000fcc.au" />
+    <Content Include="audio\bell.wav" />
+    <Content Include="audio\needle-skip.wav" />
+    <Content Include="css\book-skin.css" />
+    <Content Include="css\cursors.css" />
+    <Content Include="css\bidirectional.css" />
+    <Content Include="css\menu.css" />
+    <Content Include="css\questions.css" />
+    <Content Include="css\style.css" />
+    <Content Include="cursors\cursor-basic.cur" />
+    <Content Include="cursors\cursor-basic.png" />
+    <Content Include="cursors\cursor-grab.cur" />
+    <Content Include="cursors\cursor-grab.png" />
+    <Content Include="cursors\cursor-grabbing.cur" />
+    <Content Include="cursors\cursor-grabbing.png" />
+    <Content Include="cursors\cursor-lasso.cur" />
+    <Content Include="cursors\cursor-narration.cur" />
+    <Content Include="cursors\cursor-narration.png" />
+    <Content Include="cursors\cursor-note.cur" />
+    <Content Include="cursors\cursor-note.png" />
+    <Content Include="cursors\cursor-pointer.cur" />
+    <Content Include="cursors\cursor-pointer.png" />
+    <Content Include="cursors\cursor-resize.cur" />
+    <Content Include="cursors\cursor-resize.png" />
+    <Content Include="cursors\cursor-lasso.png" />
+    <Content Include="cursors\mark-blue.cur" />
+    <Content Include="cursors\mark-blue.png" />
+    <Content Include="cursors\mark-colors-cursor.png" />
+    <Content Include="cursors\mark-cursor.cur" />
+    <Content Include="cursors\mark-cursor.png" />
+    <Content Include="cursors\mark-green.cur" />
+    <Content Include="cursors\mark-green.png" />
+    <Content Include="cursors\mark-purple.cur" />
+    <Content Include="cursors\mark-purple.png" />
+    <Content Include="cursors\mark-red.cur" />
+    <Content Include="cursors\mark-red.png" />
+    <Content Include="designer\audiotool.html" />
+    <Content Include="designer\documentation.css" />
+    <Content Include="designer\documentation.html" />
+    <Content Include="designer\js\wizard.js" />
+    <Content Include="designer\wizard.html" />
+    <Content Include="designer\designer.html" />
+    <Content Include="designer\js\textit.xmlbuilder.js" />
+    <Content Include="designer\designer.css" />
+    <Content Include="i18n\lang.ar.js" />
+    <Content Include="i18n\lang.en.js" />
+    <Content Include="i18n\lang.he.js" />
+    <Content Include="i18n\loader.js" />
+    <Content Include="i18n\strings.js" />
+    <Content Include="icons\candy.png" />
+    <Content Include="icons\candy_in_text1.png" />
+    <Content Include="icons\delete-marker.png" />
+    <Content Include="icons\help-exit.png" />
+    <Content Include="icons\help.png" />
+    <Content Include="icons\mark-cursor.png" />
+    <Content Include="icons\mark.png" />
+    <Content Include="icons\menu_icons.png" />
+    <Content Include="icons\embed_menu_icons.png" />
+    <Content Include="icons\pin.png" />
+    <Content Include="icons\splash screen.png" />
+    <Content Include="icons\trash.png" />
+    <Content Include="icons\V.png" />
+    <Content Include="icons\X.png" />
+    <Content Include="img\cover.png" />
+    <Content Include="img\greekcoastline.jpg" />
+    <Content Include="img\help.png" />
+    <Content Include="img\lakeMonster\lakeMonster1.png" />
+    <Content Include="img\lakeMonster\lakeMonster2.png" />
+    <Content Include="img\lakeMonster\lakeMonster3.png" />
+    <Content Include="img\lakeMonster\lakeMonster4.png" />
+    <Content Include="img\lakeMonster\lakeMonster5.png" />
+    <Content Include="img\liongate.jpg" />
+    <Content Include="img\mouseonly.png" />
+    <Content Include="img\resolution.png" />
+    <Content Include="europe.html" />
+    <Content Include="booklayout-demo.html" />
+    <Content Include="js\clipper\clipper.js" />
+    <Content Include="js\clipper\clipper_unminified.js" />
+    <Content Include="js\clipper\README.txt" />
+    <Content Include="js\domExtensions.js" />
+    <Content Include="js\matter\matter.js" />
+    <Content Include="js\matter\matter.min.js" />
+    <Content Include="js\MorphSVG\MorphSVGPlugin.js" />
+    <Content Include="js\MorphSVG\MorphSVGPlugin.min.js" />
+    <Content Include="js\promise.js" />
+    <Content Include="js\textit.article.js" />
+    <Content Include="js\textit.graphicMarker.js" />
+    <Content Include="js\textit.js" />
+    <Content Include="js\textit.samples.js" />
+    <Content Include="js\textit.trashAndLike.js" />
+    <Content Include="js\textit.components.js" />
+    <Content Include="js\textit.dragDropManager.js" />
+    <Content Include="js\textit.elements.js" />
+    <Content Include="js\textit.draggedMarkedText.js" />
+    <Content Include="js\textit.external.js" />
+    <Content Include="js\textit.mouse.js" />
+    <Content Include="js\textit.narrator.js" />
+    <Content Include="js\textit.articleMarker.js" />
+    <Content Include="js\textit.questions.js" />
+    <Content Include="js\textit.util.js" />
+    <Content Include="js\textit.xapi.js" />
+    <Content Include="js\ToolChain.js" />
+    <Content Include="js\TRanges.js" />
+    <Content Include="js\Tween.js" />
+    <Content Include="js\TweenMax\TimelineLite.js" />
+    <Content Include="js\TweenMax\TimelineLite.min.js" />
+    <Content Include="js\TweenMax\TimelineMax.min.js" />
+    <Content Include="js\TweenMax\TweenLite.js" />
+    <Content Include="js\TweenMax\TweenLite.min.js" />
+    <Content Include="js\TweenMax\TweenMax.min.js" />
+    <Content Include="js\textit.draggables.js" />
+    <Content Include="js\textit.menu.js" />
+    <Content Include="img\lakeMonster\lakeMonster.txt" />
+    <Content Include="fonts\FbKapriza-Regular.eot" />
+    <Content Include="fonts\FbKapriza-Regular.ttf" />
+    <Content Include="fonts\FbKapriza-Regular.woff" />
+    <Content Include="fonts\SegoeScript.eot" />
+    <Content Include="fonts\SegoeScript.ttf" />
+    <Content Include="fonts\SegoeScript.woff" />
+    <Content Include="fonts\SegoeUI.eot" />
+    <Content Include="fonts\SegoeUI.ttf" />
+    <Content Include="fonts\SegoeUI.woff" />
+    <Content Include="fonts\GveretLevinAlefAlefAlef-Regular.eot" />
+    <Content Include="fonts\GveretLevinAlefAlefAlef-Regular.ttf" />
+    <Content Include="fonts\GveretLevinAlefAlefAlef-Regular.woff" />
+    <Content Include="fonts\AbrahamCETTEST3-Light.woff" />
+    <Content Include="fonts\AbrahamCETTEST3-Medium.woff" />
+    <Content Include="fonts\AbrahamCETTEST3-Regular.woff" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="index.html" />
+    <Content Include="test2.html" />
+    <Content Include="test.html" />
+    <Content Include="textit.html" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="docs\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>10111</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:10111/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

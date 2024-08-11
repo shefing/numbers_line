@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<bundle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://vswebessentials.com/schemas/v1/bundle.xsd">
+  <settings>
+    <!--Determines if the bundle file should be automatically optimized after creation/update.-->
+    <minify>true</minify>
+    <!--Determin whether to generate/re-generate this bundle on building the solution.-->
+    <runOnBuild>true</runOnBuild>
+    <!--Specifies a custom subfolder to save files to. By default, compiled output will be placed in the same folder and nested under the original file.-->
+    <outputDirectory />
+  </settings>
+  <!--The order of the <file> elements determines the order of the files in the bundle.-->
+  <!--Using /library/bundleconfig.json file instead
+  <files>
+
+    <file>/edgy/lib/external/jquery.colorbox-min.js</file>
+    <file>/edgy/lib/external/jscolor-1.4.2/jscolor/jscolor.js</file>
+
+    <file>/edgy/lib/modules/utils.js</file>
+    <file>/edgy/lib/modules/units.js</file>
+    <file>/edgy/lib/modules/draggable.js</file>
+
+    <file>/edgy/dragndrop/wizard/design/js/basketdata.js</file>
+    <file>/edgy/dragndrop/wizard/design/js/basket.js</file>
+    <file>/edgy/dragndrop/wizard/design/js/baskets.js</file>
+    <file>/edgy/dragndrop/wizard/design/js/groupdata.js</file>
+    <file>/edgy/dragndrop/wizard/design/js/group.js</file>
+    <file>/edgy/dragndrop/wizard/design/js/groups.js</file>
+    <file>/edgy/dragndrop/wizard/design/js/mediadata.js</file>
+    <file>/edgy/dragndrop/wizard/design/js/media.js</file>
+    <file>/edgy/dragndrop/wizard/design/js/medias.js</file>
+    <file>/edgy/dragndrop/wizard/design/js/properties.js</file>
+    <file>/edgy/dragndrop/wizard/design/js/link.js</file>
+    <file>/edgy/dragndrop/wizard/design/js/links.js</file>
+    <file>/edgy/dragndrop/wizard/design/js/stage.js</file>
+    <file>/edgy/dragndrop/wizard/design/js/ui.js</file>
+    <file>/edgy/dragndrop/wizard/design/js/preset.js</file>
+    <file>/edgy/dragndrop/wizard/design/js/wizard.js</file>
+    <file>/edgy/dragndrop/wizard/design/js/toolbar.js</file>
+  </files>-->
+</bundle>

@@ -1,0 +1,497 @@
+<?xml version="1.0" standalone="no" ?>
+<!DOCTYPE project PUBLIC "-//audacityproject-1.3.0//DTD//EN" "http://audacity.sourceforge.net/xml/audacityproject-1.3.0.dtd" >
+<project xmlns="http://audacity.sourceforge.net/xml/" projname="record 2_data" version="1.3.0" audacityversion="2.1.2" sel0="135.1702494331" sel1="135.3817687075" vpos="0" h="134.9090249433" zoom="2756.2500000000" rate="44100.0" snapto="off" selectionformat="hh:mm:ss + milliseconds" frequencyformat="Hz" bandwidthformat="octaves">
+	<tags/>
+	<wavetrack name="Audio Track" channel="0" linked="1" mute="0" solo="0" height="149" minimized="0" isSelected="1" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="4587520">
+				<waveblock start="0">
+					<simpleblockfile filename="e0000004.au" len="140237" min="-0.687469" max="0.753815" rms="0.095321"/>
+				</waveblock>
+				<waveblock start="140237">
+					<simpleblockfile filename="e0000f26.au" len="156622" min="-0.831726" max="0.766449" rms="0.072349"/>
+				</waveblock>
+				<waveblock start="296859">
+					<simpleblockfile filename="e000077e.au" len="262144" min="-1.0" max="0.934265" rms="0.096127"/>
+				</waveblock>
+				<waveblock start="559003">
+					<simpleblockfile filename="e00008c3.au" len="145509" min="-0.965607" max="0.83371" rms="0.108182"/>
+				</waveblock>
+				<waveblock start="704512">
+					<simpleblockfile filename="e00005bd.au" len="173005" min="-0.819733" max="0.657074" rms="0.082756"/>
+				</waveblock>
+				<waveblock start="877517">
+					<simpleblockfile filename="e0000cbe.au" len="173006" min="-0.844696" max="0.589355" rms="0.091294"/>
+				</waveblock>
+				<waveblock start="1050523">
+					<simpleblockfile filename="e00009be.au" len="262144" min="-0.776855" max="0.809296" rms="0.105459"/>
+				</waveblock>
+				<waveblock start="1312667">
+					<simpleblockfile filename="e00005c8.au" len="262144" min="-0.837677" max="0.699005" rms="0.090417"/>
+				</waveblock>
+				<waveblock start="1574811">
+					<simpleblockfile filename="e000039a.au" len="262144" min="-1.0" max="0.8909" rms="0.104946"/>
+				</waveblock>
+				<waveblock start="1836955">
+					<simpleblockfile filename="e000063e.au" len="221285" min="-0.683807" max="0.575317" rms="0.059883"/>
+				</waveblock>
+				<waveblock start="2058240">
+					<simpleblockfile filename="e0000279.au" len="186317" min="-0.660767" max="0.720734" rms="0.092693"/>
+				</waveblock>
+				<waveblock start="2244557">
+					<simpleblockfile filename="e00002b1.au" len="186318" min="-0.618896" max="0.53479" rms="0.082973"/>
+				</waveblock>
+				<waveblock start="2430875">
+					<simpleblockfile filename="e0000104.au" len="262144" min="-1.0" max="0.842224" rms="0.096219"/>
+				</waveblock>
+				<waveblock start="2693019">
+					<simpleblockfile filename="e0000813.au" len="262144" min="-0.947754" max="0.676483" rms="0.10944"/>
+				</waveblock>
+				<waveblock start="2955163">
+					<simpleblockfile filename="e00000a4.au" len="237669" min="-1.0" max="0.919647" rms="0.12702"/>
+				</waveblock>
+				<waveblock start="3192832">
+					<simpleblockfile filename="e0000aec.au" len="163840" min="-0.72644" max="0.525513" rms="0.062623"/>
+				</waveblock>
+				<waveblock start="3356672">
+					<simpleblockfile filename="e0000acc.au" len="166861" min="-0.793762" max="0.832031" rms="0.095272"/>
+				</waveblock>
+				<waveblock start="3523533">
+					<simpleblockfile filename="e0000de5.au" len="166862" min="-0.708893" max="0.827362" rms="0.084316"/>
+				</waveblock>
+				<waveblock start="3690395">
+					<simpleblockfile filename="e0000aee.au" len="262144" min="-0.842834" max="0.808228" rms="0.117998"/>
+				</waveblock>
+				<waveblock start="3952539">
+					<simpleblockfile filename="e0000e09.au" len="262144" min="-0.954834" max="0.844635" rms="0.107314"/>
+				</waveblock>
+				<waveblock start="4214683">
+					<simpleblockfile filename="e0000249.au" len="186418" min="-0.879608" max="0.911438" rms="0.107385"/>
+				</waveblock>
+				<waveblock start="4401101">
+					<simpleblockfile filename="e0000862.au" len="186419" min="-1.0" max="0.999969" rms="0.104821"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+		<waveclip offset="104.02539683">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="1419264">
+				<waveblock start="0">
+					<simpleblockfile filename="e00009f2.au" len="173851" min="-0.846771" max="0.666016" rms="0.108638"/>
+				</waveblock>
+				<waveblock start="173851">
+					<simpleblockfile filename="e0000bd7.au" len="141426" min="-0.80835" max="0.800201" rms="0.091407"/>
+				</waveblock>
+				<waveblock start="315277">
+					<simpleblockfile filename="e0000020.au" len="141427" min="-0.81488" max="0.735291" rms="0.09249"/>
+				</waveblock>
+				<waveblock start="456704">
+					<simpleblockfile filename="e0000278.au" len="166797" min="-1.0" max="0.935822" rms="0.114873"/>
+				</waveblock>
+				<waveblock start="623501">
+					<simpleblockfile filename="e0000b76.au" len="166798" min="-1.0" max="0.999969" rms="0.112485"/>
+				</waveblock>
+				<waveblock start="790299">
+					<simpleblockfile filename="e0000c17.au" len="262144" min="-0.713531" max="0.726807" rms="0.097548"/>
+				</waveblock>
+				<waveblock start="1052443">
+					<simpleblockfile filename="e00004fe.au" len="183410" min="-0.959961" max="0.726013" rms="0.100951"/>
+				</waveblock>
+				<waveblock start="1235853">
+					<simpleblockfile filename="e00001b1.au" len="183411" min="-0.658417" max="0.552185" rms="0.073859"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<wavetrack name="Audio Track" channel="1" linked="0" mute="0" solo="0" height="149" minimized="0" isSelected="1" rate="44100" gain="1.0" pan="0.0">
+		<waveclip offset="0.00000000">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="4587520">
+				<waveblock start="0">
+					<simpleblockfile filename="e000059e.au" len="140237" min="-0.687469" max="0.753815" rms="0.095321"/>
+				</waveblock>
+				<waveblock start="140237">
+					<simpleblockfile filename="e00006da.au" len="156622" min="-0.831696" max="0.766449" rms="0.072349"/>
+				</waveblock>
+				<waveblock start="296859">
+					<simpleblockfile filename="e0000753.au" len="262144" min="-1.0" max="0.934265" rms="0.096128"/>
+				</waveblock>
+				<waveblock start="559003">
+					<simpleblockfile filename="e0000265.au" len="145509" min="-0.965607" max="0.83371" rms="0.108182"/>
+				</waveblock>
+				<waveblock start="704512">
+					<simpleblockfile filename="e0000c10.au" len="173005" min="-0.819733" max="0.657074" rms="0.082756"/>
+				</waveblock>
+				<waveblock start="877517">
+					<simpleblockfile filename="e0000757.au" len="173006" min="-0.844666" max="0.589355" rms="0.091294"/>
+				</waveblock>
+				<waveblock start="1050523">
+					<simpleblockfile filename="e0000928.au" len="262144" min="-0.776825" max="0.809296" rms="0.105459"/>
+				</waveblock>
+				<waveblock start="1312667">
+					<simpleblockfile filename="e000026c.au" len="262144" min="-0.837646" max="0.698975" rms="0.090417"/>
+				</waveblock>
+				<waveblock start="1574811">
+					<simpleblockfile filename="e00006cd.au" len="262144" min="-1.0" max="0.8909" rms="0.104946"/>
+				</waveblock>
+				<waveblock start="1836955">
+					<simpleblockfile filename="e0000936.au" len="221285" min="-0.683807" max="0.575317" rms="0.059883"/>
+				</waveblock>
+				<waveblock start="2058240">
+					<simpleblockfile filename="e000066d.au" len="186317" min="-0.660767" max="0.720764" rms="0.092693"/>
+				</waveblock>
+				<waveblock start="2244557">
+					<simpleblockfile filename="e000018b.au" len="186318" min="-0.618896" max="0.53479" rms="0.082973"/>
+				</waveblock>
+				<waveblock start="2430875">
+					<simpleblockfile filename="e0000b32.au" len="262144" min="-1.0" max="0.842224" rms="0.096219"/>
+				</waveblock>
+				<waveblock start="2693019">
+					<simpleblockfile filename="e000025c.au" len="262144" min="-0.947754" max="0.676483" rms="0.10944"/>
+				</waveblock>
+				<waveblock start="2955163">
+					<simpleblockfile filename="e0000be2.au" len="237669" min="-1.0" max="0.919647" rms="0.127021"/>
+				</waveblock>
+				<waveblock start="3192832">
+					<simpleblockfile filename="e0000546.au" len="163840" min="-0.72644" max="0.525513" rms="0.062623"/>
+				</waveblock>
+				<waveblock start="3356672">
+					<simpleblockfile filename="e0000a99.au" len="166861" min="-0.793732" max="0.832031" rms="0.095272"/>
+				</waveblock>
+				<waveblock start="3523533">
+					<simpleblockfile filename="e00007c3.au" len="166862" min="-0.708893" max="0.827362" rms="0.084316"/>
+				</waveblock>
+				<waveblock start="3690395">
+					<simpleblockfile filename="e0000273.au" len="262144" min="-0.842804" max="0.808228" rms="0.117998"/>
+				</waveblock>
+				<waveblock start="3952539">
+					<simpleblockfile filename="e0000d25.au" len="262144" min="-0.954834" max="0.844635" rms="0.107314"/>
+				</waveblock>
+				<waveblock start="4214683">
+					<simpleblockfile filename="e00009f8.au" len="186418" min="-0.879578" max="0.911438" rms="0.107385"/>
+				</waveblock>
+				<waveblock start="4401101">
+					<simpleblockfile filename="e00002fc.au" len="186419" min="-1.0" max="0.999969" rms="0.104821"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+		<waveclip offset="104.02539683">
+			<sequence maxsamples="262144" sampleformat="262159" numsamples="1419264">
+				<waveblock start="0">
+					<simpleblockfile filename="e000093d.au" len="173851" min="-0.846832" max="0.666016" rms="0.108638"/>
+				</waveblock>
+				<waveblock start="173851">
+					<simpleblockfile filename="e0000f90.au" len="141426" min="-0.80838" max="0.800232" rms="0.091407"/>
+				</waveblock>
+				<waveblock start="315277">
+					<simpleblockfile filename="e000008f.au" len="141427" min="-0.81488" max="0.73526" rms="0.09249"/>
+				</waveblock>
+				<waveblock start="456704">
+					<simpleblockfile filename="e0000dff.au" len="166797" min="-1.0" max="0.935822" rms="0.114873"/>
+				</waveblock>
+				<waveblock start="623501">
+					<simpleblockfile filename="e000036a.au" len="166798" min="-1.0" max="0.999969" rms="0.112485"/>
+				</waveblock>
+				<waveblock start="790299">
+					<simpleblockfile filename="e0000b8c.au" len="262144" min="-0.713531" max="0.726837" rms="0.097548"/>
+				</waveblock>
+				<waveblock start="1052443">
+					<simpleblockfile filename="e0000a7f.au" len="183410" min="-0.959991" max="0.726013" rms="0.100951"/>
+				</waveblock>
+				<waveblock start="1235853">
+					<simpleblockfile filename="e00001bd.au" len="183411" min="-0.658417" max="0.552185" rms="0.073859"/>
+				</waveblock>
+			</sequence>
+			<envelope numpoints="0"/>
+		</waveclip>
+	</wavetrack>
+	<labeltrack name="Label Track" numlabels="286" height="73" minimized="0" isSelected="1">
+		<label t="0.3932879819" t1="1.0376417234" title=""/>
+		<label t="1.0376417234" t1="1.5687981859" title=""/>
+		<label t="1.8260317460" t1="2.2817233560" title=""/>
+		<label t="2.2817233560" t1="2.5687074830" title=""/>
+		<label t="2.5687074830" t1="3.0519727891" title=""/>
+		<label t="3.0526984127" t1="3.2674829932" title=""/>
+		<label t="3.2711111111" t1="3.7587301587" title=""/>
+		<label t="3.7667120181" t1="4.3987301587" title=""/>
+		<label t="4.3987301587" t1="4.7412244898" title=""/>
+		<label t="4.7412244898" t1="5.0619501134" title=""/>
+		<label t="5.0619501134" t1="5.6090702948" title=""/>
+		<label t="8.0544217687" t1="8.4462585034" title=""/>
+		<label t="8.4462585034" t1="9.0528798186" title=""/>
+		<label t="9.0528798186" t1="9.2647619048" title=""/>
+		<label t="9.2807256236" t1="9.7131972789" title=""/>
+		<label t="9.7131972789" t1="10.0876190476" title=""/>
+		<label t="10.0876190476" t1="10.2704761905" title=""/>
+		<label t="10.2704761905" t1="10.8524263039" title=""/>
+		<label t="11.4227664399" t1="11.6780045351" title=""/>
+		<label t="11.6780045351" t1="11.7971882086" title=""/>
+		<label t="11.7971882086" t1="11.9060317460" title=""/>
+		<label t="11.9060317460" t1="12.0497052154" title=""/>
+		<label t="12.0497052154" t1="12.6287528345" title=""/>
+		<label t="13.0118820862" t1="13.4730158730" title=""/>
+		<label t="13.4731972789" t1="13.6126984127" title=""/>
+		<label t="13.6126984127" t1="13.9249659864" title=""/>
+		<label t="13.9249659864" t1="14.3969160998" title=""/>
+		<label t="14.3969160998" t1="14.7772335601" title=""/>
+		<label t="14.7772335601" t1="15.2119727891" title=""/>
+		<label t="15.2177777778" t1="15.8055328798" title=""/>
+		<label t="17.0173242630" t1="17.6761904762" title=""/>
+		<label t="17.6761904762" t1="18.0607709751" title=""/>
+		<label t="18.0607709751" t1="18.2214965986" title=""/>
+		<label t="18.2214965986" t1="18.5834013605" title=""/>
+		<label t="18.5834013605" t1="18.7969160998" title=""/>
+		<label t="18.7969160998" t1="19.0628571429" title=""/>
+		<label t="19.0628571429" t1="19.5004081633" title=""/>
+		<label t="19.5004081633" t1="20.0867120181" title=""/>
+		<label t="20.6476190476" t1="21.0699319728" title=""/>
+		<label t="21.0699319728" t1="21.2324716553" title=""/>
+		<label t="21.2324716553" t1="21.5256235828" title=""/>
+		<label t="21.5256235828" t1="21.7917913832" title=""/>
+		<label t="21.7917913832" t1="22.3685260771" title=""/>
+		<label t="22.7382312925" t1="22.9530612245" title=""/>
+		<label t="22.9530612245" t1="23.3589115646" title=""/>
+		<label t="23.3596371882" t1="23.5185487528" title=""/>
+		<label t="23.5185487528" t1="24.0362811791" title=""/>
+		<label t="24.0377324263" t1="24.4397278912" title=""/>
+		<label t="24.4397278912" t1="24.6639455782" title=""/>
+		<label t="24.6639455782" t1="25.3529251701" title=""/>
+		<label t="25.3529251701" t1="25.5448526077" title=""/>
+		<label t="25.5452154195" t1="26.2229478458" title=""/>
+		<label t="26.5273469388" t1="27.0309297052" title=""/>
+		<label t="27.0309297052" t1="27.2014512472" title=""/>
+		<label t="27.2014512472" t1="27.9691609977" title=""/>
+		<label t="27.9689795918" t1="28.3712925170" title=""/>
+		<label t="28.3712925170" t1="28.5089342404" title=""/>
+		<label t="28.5090249433" t1="28.7825850340" title=""/>
+		<label t="28.7840362812" t1="29.0624943311" title=""/>
+		<label t="29.0632199546" t1="29.6821768707" title=""/>
+		<label t="29.8686621315" t1="30.5551020408" title=""/>
+		<label t="30.5551020408" t1="30.7707936508" title=""/>
+		<label t="30.7707936508" t1="31.1459410431" title=""/>
+		<label t="31.1495691610" t1="31.4209523810" title=""/>
+		<label t="31.4216780045" t1="31.5871201814" title=""/>
+		<label t="31.5871201814" t1="31.8643083900" title=""/>
+		<label t="31.8679365079" t1="32.3250793651" title=""/>
+		<label t="34.0839909297" t1="34.3854875283" title=""/>
+		<label t="34.3843990930" t1="34.7297959184" title=""/>
+		<label t="34.7297959184" t1="34.9648979592" title=""/>
+		<label t="34.9648979592" t1="35.5272562358" title=""/>
+		<label t="35.5272562358" t1="35.6654875283" title=""/>
+		<label t="35.6651247166" t1="36.1861224490" title=""/>
+		<label t="36.1890249433" t1="36.5772335601" title=""/>
+		<label t="36.5823129252" t1="37.1388662132" title=""/>
+		<label t="37.3913832200" t1="37.7512925170" title=""/>
+		<label t="37.7512925170" t1="38.1155555556" title=""/>
+		<label t="38.1155555556" t1="38.6786394558" title=""/>
+		<label t="38.9964625850" t1="39.2747392290" title=""/>
+		<label t="39.2747392290" t1="39.6001814059" title=""/>
+		<label t="39.6001814059" t1="39.7380498866" title=""/>
+		<label t="39.7431292517" t1="40.0703854875" title=""/>
+		<label t="40.0703854875" t1="40.5964625850" title=""/>
+		<label t="40.9179138322" t1="41.1043990930" title=""/>
+		<label t="41.1043990930" t1="41.3385034014" title=""/>
+		<label t="41.3385034014" t1="41.4372789116" title=""/>
+		<label t="41.4372789116" t1="41.5644444444" title=""/>
+		<label t="41.5644444444" t1="41.9069387755" title=""/>
+		<label t="41.9069387755" t1="42.2864399093" title=""/>
+		<label t="43.3066666667" t1="43.7068480726" title=""/>
+		<label t="43.7068480726" t1="43.9742403628" title=""/>
+		<label t="43.9742403628" t1="44.4168707483" title=""/>
+		<label t="44.4168707483" t1="44.8156009070" title=""/>
+		<label t="45.0401814059" t1="45.4964172336" title=""/>
+		<label t="45.4965986395" t1="45.6987755102" title=""/>
+		<label t="45.7002267574" t1="46.3097505669" title=""/>
+		<label t="46.9768707483" t1="47.1756916100" title=""/>
+		<label t="47.1771428571" t1="47.8998639456" title=""/>
+		<label t="47.9027664399" t1="48.2307482993" title=""/>
+		<label t="48.2307482993" t1="48.5514739229" title=""/>
+		<label t="48.5514739229" t1="48.7604535147" title=""/>
+		<label t="48.7604535147" t1="49.1363265306" title=""/>
+		<label t="49.1363265306" t1="49.5847619048" title=""/>
+		<label t="49.6108843537" t1="50.0448072562" title=""/>
+		<label t="50.0433560091" t1="50.3989115646" title=""/>
+		<label t="50.4018140590" t1="50.7080272109" title=""/>
+		<label t="50.6978684807" t1="50.8546031746" title=""/>
+		<label t="50.8546031746" t1="51.1187301587" title=""/>
+		<label t="51.1187301587" t1="51.5671655329" title=""/>
+		<label t="51.8008163265" t1="52.4146938776" title=""/>
+		<label t="52.4146938776" t1="52.9719727891" title=""/>
+		<label t="52.9690702948" t1="53.1591836735" title=""/>
+		<label t="53.1591836735" t1="53.4886167800" title=""/>
+		<label t="53.4886167800" t1="53.8833560091" title=""/>
+		<label t="53.8833560091" t1="54.0277551020" title=""/>
+		<label t="54.0277551020" t1="54.2476190476" title=""/>
+		<label t="54.2476190476" t1="54.8571428571" title=""/>
+		<label t="55.4303854875" t1="55.8893424036" title=""/>
+		<label t="55.8893424036" t1="56.6566893424" title=""/>
+		<label t="56.7423129252" t1="57.0942403628" title=""/>
+		<label t="57.0942403628" t1="57.4824489796" title=""/>
+		<label t="57.4853514739" t1="57.9736961451" title=""/>
+		<label t="59.0701133787" t1="59.5330612245" title=""/>
+		<label t="59.5330612245" t1="59.8886167800" title=""/>
+		<label t="59.8886167800" t1="60.3878458050" title=""/>
+		<label t="60.3834920635" t1="60.5075736961" title=""/>
+		<label t="60.5082993197" t1="61.0851700680" title=""/>
+		<label t="61.3993650794" t1="61.8680725624" title=""/>
+		<label t="61.8700226757" t1="62.2077097506" title=""/>
+		<label t="62.2077097506" t1="62.4768707483" title=""/>
+		<label t="62.4768707483" t1="63.1444897959" title=""/>
+		<label t="63.3237188209" t1="63.7685260771" title=""/>
+		<label t="63.7685260771" t1="64.3896598639" title=""/>
+		<label t="64.9186394558" t1="65.3017687075" title=""/>
+		<label t="65.3017687075" t1="65.6108843537" title=""/>
+		<label t="65.6108843537" t1="66.0767346939" title=""/>
+		<label t="66.0767346939" t1="66.3581859410" title=""/>
+		<label t="66.3581859410" t1="66.4932426304" title=""/>
+		<label t="66.4961451247" t1="67.0976870748" title=""/>
+		<label t="67.3951927438" t1="67.7819501134" title=""/>
+		<label t="67.7819501134" t1="68.1084807256" title=""/>
+		<label t="68.1084807256" t1="68.2274829932" title=""/>
+		<label t="68.2274829932" t1="68.7426757370" title=""/>
+		<label t="69.1025850340" t1="69.3253514739" title=""/>
+		<label t="69.3224489796" t1="69.6134240363" title=""/>
+		<label t="69.6134240363" t1="69.9784126984" title=""/>
+		<label t="69.9834920635" t1="70.0995918367" title=""/>
+		<label t="70.0995918367" t1="70.4892517007" title=""/>
+		<label t="70.4892517007" t1="71.0102494331" title=""/>
+		<label t="71.0102494331" t1="71.5102040816" title=""/>
+		<label t="71.5102040816" t1="71.6096145125" title=""/>
+		<label t="71.6088888889" t1="72.2017233560" title=""/>
+		<label t="72.9774149660" t1="73.4606802721" title=""/>
+		<label t="73.4606802721" t1="73.8141496599" title=""/>
+		<label t="73.8141496599" t1="74.1582766440" title=""/>
+		<label t="74.1582766440" t1="74.6141043084" title=""/>
+		<label t="74.6141043084" t1="74.9855782313" title=""/>
+		<label t="74.9855782313" t1="75.3414965986" title=""/>
+		<label t="75.3414965986" t1="75.8175056689" title=""/>
+		<label t="76.3791383220" t1="76.8571428571" title=""/>
+		<label t="76.8589569161" t1="77.6208616780" title=""/>
+		<label t="77.8855328798" t1="78.2911564626" title=""/>
+		<label t="78.2907936508" t1="78.5385941043" title=""/>
+		<label t="78.5385941043" t1="78.6503401361" title=""/>
+		<label t="78.6503401361" t1="78.8556916100" title=""/>
+		<label t="78.8556916100" t1="79.2497052154" title=""/>
+		<label t="79.3665306122" t1="79.4811791383" title=""/>
+		<label t="79.4811791383" t1="79.8461678005" title=""/>
+		<label t="79.8476190476" t1="80.2612244898" title=""/>
+		<label t="80.2612244898" t1="80.8671201814" title=""/>
+		<label t="81.5992743764" t1="82.0498866213" title=""/>
+		<label t="82.0498866213" t1="82.6216780045" title=""/>
+		<label t="83.4488888889" t1="83.7935600907" title=""/>
+		<label t="83.7935600907" t1="84.0587755102" title=""/>
+		<label t="84.0696598639" t1="84.4244897959" title=""/>
+		<label t="84.4219501134" t1="84.6650340136" title=""/>
+		<label t="84.6657596372" t1="85.1323356009" title=""/>
+		<label t="85.1323356009" t1="85.4712018141" title=""/>
+		<label t="85.4712018141" t1="85.5735147392" title=""/>
+		<label t="85.5735147392" t1="85.8790022676" title=""/>
+		<label t="85.8790022676" t1="86.4783673469" title=""/>
+		<label t="86.7990929705" t1="87.3200907029" title=""/>
+		<label t="87.3229931973" t1="87.6183219955" title=""/>
+		<label t="87.6183219955" t1="88.0304761905" title=""/>
+		<label t="88.0326530612" t1="88.5209977324" title=""/>
+		<label t="88.8097959184" t1="89.2589569161" title=""/>
+		<label t="89.2538775510" t1="89.3786848073" title=""/>
+		<label t="89.3786848073" t1="89.9040362812" title=""/>
+		<label t="89.9040362812" t1="90.5019501134" title=""/>
+		<label t="90.5026757370" t1="91.0635827664" title=""/>
+		<label t="91.6440816327" t1="92.0083446712" title=""/>
+		<label t="92.0083446712" t1="92.3697052154" title=""/>
+		<label t="92.3697052154" t1="92.6788208617" title=""/>
+		<label t="92.6788208617" t1="93.0329251701" title=""/>
+		<label t="93.0329251701" t1="93.4690249433" title=""/>
+		<label t="94.6677551020" t1="94.8237641723" title=""/>
+		<label t="94.8237641723" t1="95.0164172336" title=""/>
+		<label t="95.0164172336" t1="95.3781405896" title=""/>
+		<label t="95.3781405896" t1="95.6546031746" title=""/>
+		<label t="95.6546031746" t1="95.7924716553" title=""/>
+		<label t="95.7924716553" t1="96.2162358277" title=""/>
+		<label t="96.2162358277" t1="96.6175056689" title=""/>
+		<label t="96.6189569161" t1="97.1457596372" title=""/>
+		<label t="97.2749206349" t1="97.4998639456" title=""/>
+		<label t="97.4998639456" t1="97.7451247166" title=""/>
+		<label t="97.7451247166" t1="97.9805895692" title=""/>
+		<label t="97.9805895692" t1="98.4696598639" title=""/>
+		<label t="98.9090249433" t1="99.0425396825" title=""/>
+		<label t="99.0425396825" t1="99.2609523810" title=""/>
+		<label t="99.2609523810" t1="99.4808163265" title=""/>
+		<label t="99.4808163265" t1="99.6936054422" title=""/>
+		<label t="99.6936054422" t1="99.9542857143" title=""/>
+		<label t="99.9548299320" t1="100.4952380952" title=""/>
+		<label t="100.4952380952" t1="100.8230385488" title=""/>
+		<label t="101.7404081633" t1="102.2224036281" title=""/>
+		<label t="102.2247619048" t1="102.3865759637" title=""/>
+		<label t="102.3865759637" t1="102.7936507937" title=""/>
+		<label t="102.7936507937" t1="103.4630385488" title=""/>
+		<label t="104.4157823129" t1="104.8362811791" title=""/>
+		<label t="104.8362811791" t1="104.9806802721" title=""/>
+		<label t="104.9806802721" t1="105.1357823129" title=""/>
+		<label t="105.1357823129" t1="105.5963718821" title=""/>
+		<label t="105.5963718821" t1="105.9054875283" title=""/>
+		<label t="105.9054875283" t1="106.3735147392" title=""/>
+		<label t="106.3735147392" t1="106.5882993197" title=""/>
+		<label t="106.5890249433" t1="106.9336961451" title=""/>
+		<label t="106.9336961451" t1="107.6092517007" title=""/>
+		<label t="107.8312925170" t1="108.3283446712" title=""/>
+		<label t="108.3283446712" t1="108.4529705215" title=""/>
+		<label t="108.4529705215" t1="108.8413605442" title=""/>
+		<label t="108.8413605442" t1="109.1453968254" title=""/>
+		<label t="109.1461224490" t1="109.2705668934" title=""/>
+		<label t="109.2716553288" t1="109.6166893424" title=""/>
+		<label t="109.6166893424" t1="110.0179591837" title=""/>
+		<label t="110.0186848073" t1="110.4649433107" title=""/>
+		<label t="110.7522902494" t1="110.9598185941" title=""/>
+		<label t="110.9569160998" t1="111.4220408163" title=""/>
+		<label t="111.4220408163" t1="111.9339682540" title=""/>
+		<label t="111.9339682540" t1="112.4985034014" title=""/>
+		<label t="112.8903401361" t1="113.0840816327" title=""/>
+		<label t="113.0840816327" t1="113.4251247166" title=""/>
+		<label t="113.4251247166" t1="113.7110204082" title=""/>
+		<label t="113.7110204082" t1="114.2617687075" title=""/>
+		<label t="114.8190476190" t1="115.0149659864" title=""/>
+		<label t="115.0149659864" t1="115.4735600907" title=""/>
+		<label t="115.4779138322" t1="115.9270748299" title=""/>
+		<label t="115.9270748299" t1="116.1462131519" title=""/>
+		<label t="116.1462131519" t1="116.5467573696" title=""/>
+		<label t="116.5467573696" t1="117.2803628118" title=""/>
+		<label t="117.2839909297" t1="117.6417233560" title=""/>
+		<label t="117.6439002268" t1="118.1946485261" title=""/>
+		<label t="118.6365532880" t1="119.0570521542" title=""/>
+		<label t="119.0570521542" t1="119.6030839002" title=""/>
+		<label t="119.6053514739" t1="119.7838548753" title=""/>
+		<label t="119.7859410431" t1="120.3268027211" title=""/>
+		<label t="120.3306122449" t1="120.7941950113" title=""/>
+		<label t="120.7941950113" t1="121.0559637188" title=""/>
+		<label t="121.0559637188" t1="121.5143764172" title=""/>
+		<label t="122.2146031746" t1="122.5382312925" title=""/>
+		<label t="122.5382312925" t1="122.7457596372" title=""/>
+		<label t="122.7486621315" t1="123.3248072562" title=""/>
+		<label t="123.3248072562" t1="123.5403174603" title=""/>
+		<label t="123.5403174603" t1="123.8704761905" title=""/>
+		<label t="123.8733786848" t1="124.5641723356" title=""/>
+		<label t="124.7775056689" t1="125.1025850340" title=""/>
+		<label t="125.1033106576" t1="125.4095238095" title=""/>
+		<label t="125.4095238095" t1="125.9871201814" title=""/>
+		<label t="126.5204535147" t1="126.9268027211" title=""/>
+		<label t="126.9311564626" t1="127.5196371882" title=""/>
+		<label t="127.6429931973" t1="127.8389115646" title=""/>
+		<label t="127.8418140590" t1="128.2663038549" title=""/>
+		<label t="128.2713832200" t1="128.6334693878" title=""/>
+		<label t="128.6334693878" t1="129.0224036281" title=""/>
+		<label t="129.0224036281" t1="129.5717006803" title=""/>
+		<label t="130.2407256236" t1="130.5505668934" title=""/>
+		<label t="130.5505668934" t1="130.7515646259" title=""/>
+		<label t="130.7515646259" t1="131.2943310658" title=""/>
+		<label t="131.6005442177" t1="132.1487528345" title=""/>
+		<label t="132.1487528345" t1="132.6565079365" title=""/>
+		<label t="132.6565079365" t1="133.0753741497" title=""/>
+		<label t="133.0753741497" t1="133.5241723356" title=""/>
+		<label t="133.5263492063" t1="133.8060770975" title=""/>
+		<label t="134.4402721088" t1="134.7602721088" title=""/>
+		<label t="134.7602721088" t1="134.8803628118" title=""/>
+		<label t="134.8814512472" t1="135.1702494331" title=""/>
+		<label t="135.1702494331" t1="135.3817687075" title=""/>
+	</labeltrack>
+</project>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 17.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="820.125px" height="379.535px" viewBox="0 0 820.125 379.535" enable-background="new 0 0 820.125 379.535"
+	 xml:space="preserve">
+<g id="eror">
+</g>
+<g id="correct">
+</g>
+<g id="Layer_5">
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_5_" x="0" y="0" width="820.125" height="379.535"/>
+	</defs>
+	<clipPath id="SVGID_1_">
+		<use xlink:href="#SVGID_5_"  overflow="visible"/>
+	</clipPath>
+	
+		<radialGradient id="SVGID_2_" cx="913.9207" cy="-1310.2592" r="426.0941" gradientTransform="matrix(1.3479 0.0787 -0.0582 0.9975 -857.3903 1393.8899)" gradientUnits="userSpaceOnUse">
+		<stop  offset="0.4819" style="stop-color:#FFFFFF"/>
+		<stop  offset="1" style="stop-color:#F2F2EA;stop-opacity:0"/>
+	</radialGradient>
+	<polygon opacity="0.03" clip-path="url(#SVGID_1_)" fill="url(#SVGID_2_)" points="436.618,247.814 1062.657,416.87 
+		1077.256,252.279 423.224,236.614 1104.166,195.636 1064.711,107.955 421.14,217.847 1020.596,10.298 917.299,-61.708 
+		419.543,200.289 812.288,-149.338 601.982,-184.904 407.387,184.058 453.375,-199.403 262.502,-208.608 381.932,170.929 
+		122.542,-191.555 -4.8,-121.376 367.961,185.637 -106.672,-38.063 -133.9,69.012 364.44,200.955 -204.541,156.085 
+		-207.342,272.309 373.194,225.309 -148.354,316.542 76.063,424.726 389.599,235.322 181.658,496.309 315.155,509.309 
+		403.953,240.309 418.618,515.309 534.574,498.464 418.618,254.309 740.746,491.309 901.253,456.881 	"/>
+</g>
+</svg>

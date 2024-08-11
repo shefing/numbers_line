@@ -1,0 +1,307 @@
+﻿@font-face {
+    font-family: 'Abraham-AR-Light';
+    src: url('../fonts/AbrahamCETTEST3-Light.woff') format('woff');
+    font-weight: lighter;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Abraham-AR-Medium';
+    src: url('../fonts/AbrahamCETTEST3-Medium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Abraham-AR';
+    src: url('../fonts/AbrahamCETTEST3-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+	font-family: 'Segoe UI';
+	src: url('../fonts/SegoeUI.eot');
+	src: url('../fonts/SegoeUI.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/SegoeUI.woff') format('woff'),
+		url('../fonts/SegoeUI.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Segoe Script';
+	src: url('../fonts/SegoeScript.eot');
+	src: url('../fonts/SegoeScript.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/SegoeScript.woff') format('woff'),
+		url('../fonts/SegoeScript.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+  font-family: 'FbKapriza';
+  src: url('../fonts/FbKapriza-Regular.eot');
+  src: url('../fonts/FbKapriza-Regular.eot?#iefix') format('embedded-opentype'), url('../fonts/FbKapriza-Regular.woff') format('woff'), url('../fonts/FbKapriza-Regular.ttf') format('truetype');
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #fff;
+  font-family: 'Segoe UI', sans-serif;
+  overflow:hidden;
+}
+
+
+    .editor,
+    .preview{
+      position:absolute;
+      top:0px;
+      height:100%;
+      width:50%;
+    }
+    .editor{
+      right:0px;
+    }
+    .preview{
+      left:0px;
+    }
+    .editor > h1,
+    .preview > h1{
+      margin:0px;
+      padding:1em;
+      background:#ccc;
+      text-align:center;
+      font-family:sans-serif;
+      font-size:16px;
+    }
+    .editor > h1{
+      background:#E15943;
+      color:#fff; 
+    }
+    .editor{
+      border-left:1px solid #ccc;
+    }
+    .editor > textarea{
+      resize: none;
+      position:absolute;
+      top:50px;
+      letter-spacing:0px;
+      height:calc(100% - 50px);
+      right:0px;
+      width:100%;
+      padding:10px;
+      font-family:sans-serif;
+      font-size:18px;
+      box-sizing: border-box;
+    }
+
+.question {
+  background: #ddd;
+}
+.question__type{
+  display:inline-block;
+  padding:0 .2em;
+  text-transform: uppercase;
+  background:#222;
+  color:#fff;
+}
+.question__type[data-type="multiplechoice"]{
+  background:#B2B08C;
+}
+.question__type[data-type="cloze"]{
+  background:#669974;
+}
+.question__type[data-type="open"]{
+  background:#998669;
+}
+.question__type[data-type="mark"]{
+  background:#CF494F;
+}
+.question__type[data-type="drag"]{
+  background:#CD59CF;
+}
+#preview-text[dir="ltr"] .question__type {
+  margin-right:.5em;
+}
+#preview-text[dir="rtl"] .question__type {
+  margin-left:.5em;
+}
+
+#preview-text{
+    position:absolute;
+    top:50px;
+    white-space: pre-wrap;
+    font-size:18px;
+    padding:10px;
+    overflow:scroll;
+    width:100%;
+    box-sizing:border-box;
+          bottom:0px;
+          line-height:1.7em;
+    padding-bottom:20px;
+    overflow-x:hidden;
+}
+
+
+#text[lang="he"],
+#preview-text[lang="he"]{
+  direction:rtl;
+}
+
+#text[lang="en"], #preview-text[lang="en"]{
+  direction:ltr;
+}
+
+.btn-edit{
+  margin:.5em;
+  font-size:18px;
+  padding:.25em 1em;
+}
+.btn-edit:before{
+  content:'\270E';
+  margin-left: .2em;
+}
+
+#preview-text headline {
+   text-align:center;
+  display:block;
+  font-size: 2.5em;
+  line-height: normal;
+
+  background:none;
+  font-family: 'Segoe UI', sans-serif;
+  margin:.5em 0;
+}
+#preview-text headline[importance="2"]{
+  font-size: 2em;
+}
+#preview-text headline[importance="3"]{
+  font-size: 1.5em;
+}
+#preview-text headline[importance="4"],
+#preview-text headline[importance="5"],
+#preview-text headline[importance="6"]{
+  font-size: 1em;
+}
+
+
+ #preview-text figure{
+   margin:.1em;
+   text-align:center;
+ }
+ #preview-text figure img{
+   max-width:100%;
+   margin: auto;
+ }
+  #preview-text figure figcaption{
+    font-size:.7em;
+  }
+  
+ #preview-text hotword{
+  color:steelblue;
+  position:relative;
+  white-space: nowrap;
+  display:inline-block;
+}
+
+#preview-text hotword:before{  
+  content: attr(translation);
+  position: absolute;
+  top: -1.2em;
+  font-family: "Segoe Script", "FbKapriza";
+  color: steelblue;
+  left: 50%;
+  z-index: 1;
+  font-size: .6em;
+  text-align: center;
+  display: block;
+  white-space: nowrap;
+  transform:translate(-50%, 0);
+}
+#preview-text call{
+  background:#ddd;
+}
+#preview-text lnk{
+  color:blue;
+  text-decoration: underline;
+  cursor:pointer;
+}
+
+#preview-text list,
+#preview-text numberedlist{
+      display: block;
+    list-style-type: disc;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+}
+#preview-text numberedlist{
+  list-style-type: none;
+  list-style-position: inside;
+  counter-reset: list-counter;
+}
+#preview-text list item{
+  display: list-item;
+  text-align: -webkit-match-parent;
+}
+#preview-text numberedlist item:before{
+  margin-right:-1em;
+  counter-increment: list-counter;
+  content: counter(list-counter) '. ';
+}
+#preview-text tembed{
+  display:inline-block;
+  background-color:#000;
+  position:relative;
+  width:120px;
+  color:transparent;
+  text-align:center;
+}
+#preview-text tembed:after{
+  content: ' embed ';
+  color:#fff;
+  position:relative;
+  margin-left:-2em;
+}
+
+   
+.dev-nav{
+      z-index: 100;
+    text-align: center;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    padding: 10px;
+    background: #353535;
+    color: #fff;
+    border: #00f;
+}
+
+.dev-nav a{
+  text-decoration:none;
+  color:#fff;
+  font-family:Arial;
+}
+
+.card {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  padding:.5em 1em;
+  margin-top:.5em;
+  margin-bottom:.5em;
+  background:#f2f2f2;
+  position:relative;
+}
+
+reference {
+  display:block;
+  margin:1em 0;
+  font-size:.7em;
+}

@@ -1,0 +1,22 @@
+{
+  "name": "dragndrop",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "build": "gulp obfuscate"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "gulp": "^5.0.0",
+    "gulp-cli": "^3.0.0",
+    "gulp-javascript-obfuscator": "^1.1.6"
+  },
+  "devDependencies": {
+    "vinyl-sourcemaps-apply": "^0.2.1"
+  }
+}

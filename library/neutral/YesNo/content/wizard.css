@@ -1,0 +1,36 @@
+﻿body, html {
+  margin: 0 !important;
+  padding: 0 !important; }
+
+.wizard-wrapper {
+  font-size: 10px; }
+
+.yesno-skin[data-skin='0'], .yesno-skin[data-skin='2'] {
+    display: none !important;
+}
+.yesno-tools_btn_wraper {
+    display: block !important;
+}
+/******** skin hatav ********/
+/*.yesno[data-skin='1'] .yesno-status_bar {
+    border-color: transparent;
+    box-shadow: 0 0 0.9em 0 rgb(0 106 231 / 37%);
+    background-color: #FEFEFE;
+    height: 7.6em !important;
+    top: 1em !important;
+    width: 58.2em !important;
+    border-radius: 14% 14% 14% 14%/46% 92% 54% 100% !important;
+}
+.yesno[data-skin='1'] .yesno-question-answer_btn {
+    height: 16.2em !important;
+    width: 16.3em !important;
+    border: 0.6em solid #FFFFFF;
+    box-shadow: 0 1em 2.7em 1.6em rgba(2,144,221,0.37);
+    border-radius: 49% 51% 49% 51% / 61% 45% 55% 39%!important;
+}
+.yesno[data-skin='1'] .yesno-contaner:before {
+    border-width: 0;
+}
+.yesno[data-dir='rtl'][data-skin='1'] .yesno-contaner .yesno-status_bar .yesno-status_bar-timer-wraper {
+    left: 2.4em;
+}*/

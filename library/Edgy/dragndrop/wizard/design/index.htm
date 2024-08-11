@@ -1,0 +1,374 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="he">
+<head>
+  <title>אשף גרירה</title>
+
+  <link rel="prefetch" type="application/l10n" href="localization/locales.ini" />
+
+  <link href="css/bundle/dragndrop.design.css" rel="stylesheet" />
+  <link src="//cdn.cet.ac.il/fonts/Abraham/stylesheet.css" rel="stylesheet" type="text/css" />
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script src="//cdn.cet.ac.il/libs/cet.content/1/client.min.js"></script>
+  <script src="//cdn.cet.ac.il/libs/cet.content.designtime/1/client.min.js"></script>
+
+  <script type="text/javascript" src="../../../../lib/js/external/webL10n/l10n.js"></script>
+
+  <script src="js/bundle/bundle.js"></script>
+
+</head>
+<body>
+  <fieldset>
+    <legend data-l10n-id="general">כללי&nbsp;</legend>
+    <ul class="fields nostyle">
+      <li class="field">
+        <div class="field-key">
+          <label data-l10n-id="returnIncorrectToStorage:">החזרת שגיאות למחסן:</label>
+        </div>
+        <div>
+          <input type="radio" name="errorRemoval" id="errorRemovalTrue" checked="checked" />
+          <label for="errorRemovalTrue" data-l10n-id="yes">כן</label>
+          <input type="radio" name="errorRemoval" id="errorRemovalFalse" />
+          <label for="errorRemovalFalse" data-l10n-id="no">לא</label>
+        </div>
+      </li>
+      <li class="field">
+        <div class="field-key">
+          <label data-l10n-id="finiteStorage:">מחסן מתכלה:</label>
+          <div class="tooltip">
+            <div class="tooltip-icon">?</div>
+            <div class="tooltip-body" data-l10n-id="storageTooltip">
+              בבחירת אפשרות של מחסן לא מתכלה ניתן לגרור את אותה תשובה מספר פעמים מהמחסן לאיזור הגרירה.
+              <br />
+              בכדי לאפשר גרירה של אותה תשובה למקומות שונים הוספנו יכולת בשם "שכפול כמקושר". <span class="component-duplicate-linked" title="שכפול כמקושר"></span>
+            </div>
+          </div>
+        </div>
+        <div>
+          <input type="radio" name="perishableStorage" id="perishable-storage-true" checked="checked" />
+          <label for="perishable-storage-true" data-l10n-id="yes">כן</label>
+          <input type="radio" name="perishableStorage" id="perishable-storage-false" />
+          <label for="perishable-storage-false" data-l10n-id="no">לא</label>
+        </div>
+      </li>
+      <li class="field field-free-group">
+        <div class="field-key">
+          <label data-l10n-id="freeGroup">מיקום התשובות בקבוצה:</label>
+          <!--<div class="tooltip">
+           <div class="tooltip-icon">?</div>
+           <div class="tooltip-body" data-l10n-id="storageTooltip">
+            בבחירת אפשרות של מחסן לא מתכלה ניתן לגרור את אותו מסיח מספר פעמים מהמחסן לאיזור הגרירה.
+            <br />
+            בכדי לאפשר גרירה של אותו מסיח למקומות שונים הוספנו יכולת בשם "שכפול כמקושר". <span class="component-duplicate-linked" title="שכפול כמקושר"></span>
+           </div>
+          </div>-->
+        </div>
+        <div>
+          <input type="radio" name="freeGroupMode" id="free-group-mode-false" checked="checked" />
+          <label for="free-group-mode-false" data-l10n-id="freeGroupFalse">מוגדר מראש</label>
+          <input type="radio" name="freeGroupMode" id="free-group-mode-true" />
+          <label for="free-group-mode-true" data-l10n-id="freeGroupTrue">חופשי</label>
+        </div>
+      </li>
+    </ul>
+  </fieldset>
+  <br />
+  <fieldset style="height: 701px;">
+    <legend data-l10n-id="workSurface">משטח העבודה&nbsp;</legend>
+    <!--<ul class="fields nostyle">
+      <li class="field">
+        <div class="field-key">
+          <label data-l10n-id="background:">רקע:</label>
+        </div>
+        <div>
+          <input id="background-color" class="color" value="ffffff" />
+        </div>
+        <div class="background-image-input">
+          <form class="file-upload-form" enctype="multipart/form-data" method="post" action="//api.assets.cet.ac.il/filesUpload.ashx?maxfilesize=524288" target="iframe-fileupload">
+            <div class="hw-add-picture" data-l10n-id="uploadImage">
+              <input value="value" name="file" type="file" />
+              העלו תמונה
+            </div>
+            <button class="delete-icon"></button>
+            <input type="submit" />
+            <div class="loading" style="visibility: hidden;">
+            </div>
+          </form>
+        </div>
+      </li>
+    </ul>-->
+
+    <div class="stage-and-basketproperties">
+
+      <div class="stage-toolbar">
+        <div id="btn-basket" class="btn-basket toolbar-button" data-l10n-id="distractor">תשובה</div>
+        <div id="btn-media" class="btn-media toolbar-button" data-l10n-id="media">מדיה</div>
+        <div id="btn-group" class="btn-group toolbar-button" data-l10n-id="group">קבוצה</div>
+
+      </div>
+
+      <div class="stage" tabindex="0">
+
+        <blockquote class="stage-tooltip" data-l10n-id="stageTooltip">
+          <p>על מנת ליצור ישויות חדשות, גררו אלמנטים מהתפריט העליון למשטח העבודה.</p>
+        </blockquote>
+      </div>
+
+      <div class="warning-message">
+        <label data-l10n-id="textMessage:">שימו לב: אין להכניס למחסן את אותה מילה יותר מפעם אחת.</label>
+      </div>
+
+      <div class="properties">
+        <div class="properties-disable-mask" data-l10n-id="propertiesDisableMask" title="יש לבחור תשובה על מנת לאפשר את השדות לעריכה "></div>
+        <div class="component-buttons">
+          <button id="component-delete" class="delete-icon"></button>
+          <button id="component-duplicate" data-l10n-id="duplicateBtn" title="שכפול"></button>
+          <button id="component-duplicate-linked" data-l10n-id="duplicateLinkedBtn" title="שכפול כמקושר"></button>
+        </div>
+
+        <div class="property image-input">
+          <form class="file-upload-form" enctype="multipart/form-data" method="post" action="//api.assets.cet.ac.il/filesUpload.ashx?maxfilesize=524288" target="iframe-fileupload">
+            <div class="hw-add-picture" data-l10n-id="uploadImage">
+              <input value="value" name="file" type="file">העלאת תמונה
+            </div>
+            <button class="delete-icon"></button>
+            <input type="submit">
+            <div class="loading" style="visibility: hidden;">
+            </div>
+          </form>
+
+        </div>
+        <div class="property text-input">
+          <span class="property-name" data-l10n-id="text:">טקסט:</span>
+          <input class="input" type="text" />
+          <input class="color" value="000000" />
+          <div class="text-disable-mask" data-l10n-id="textMask" title="שדה טקסט אינו רלוונטי לקבוצות"></div>
+        </div>
+
+        <div class="property">
+          <div class="width-input">
+            <label data-l10n-id="width:">רוחב:</label>&nbsp;<input type="number" />
+          </div>
+          <div class="height-input">
+            <label data-l10n-id="height:">גובה:</label>&nbsp;<input type="number" />
+          </div>
+          <div class="top-input">
+            <label data-l10n-id="distanceFromTop:">מרחק מלמעלה:</label>&nbsp;<input type="number" />
+          </div>
+          <div class="left-input">
+            <label data-l10n-id="distanceFromLeft:">מרחק משמאל:</label>&nbsp;<input type="number" />
+          </div>
+        </div>
+        <div class="property is-distracting-option">
+          <input type="checkbox" name="is-distracting-option" />
+          <label for="is-distracting-option" data-l10n-id="isDistractingOption">תשובה מטעה</label>
+        </div>
+        <div class="property basket-storage-preview">
+          <div class="basket">
+            <div class="text-parent"><span class="text"></span></div>
+            <div class="background"></div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </fieldset>
+  <br />
+  <fieldset>
+    <legend data-l10n-id="commonFeatures">מאפייני עיצוב</legend>
+    <div class="tabs">
+      <div class="tab-titles">
+        <div class="tab-title tab-title-template" data-tab="templates" data-l10n-id="template">כללי</div>
+        <div class="tab-title" data-tab="baskets" data-l10n-id="distractors">תשובות</div>
+        <div class="tab-title tab-title-groups" data-tab="groups" data-l10n-id="groups">קבוצות</div>
+        <div class="tab-title" data-tab="medias" data-l10n-id="media">מדיה</div>
+      </div>
+      <div class="tab-contents">
+        <div class="tab-content" data-tab="templates">
+          <ul class="fields nostyle">
+            <li class="field">
+              <div class="field-key">
+                <label data-l10n-id="background:">רקע:</label>
+              </div>
+              <div>
+                <input id="background-color" class="color" value="ffffff" />
+              </div>
+              <div class="background-image-input">
+                <form class="file-upload-form" enctype="multipart/form-data" method="post" action="//api.assets.cet.ac.il/filesUpload.ashx?maxfilesize=524288" target="iframe-fileupload">
+                  <div class="hw-add-picture" data-l10n-id="uploadImage">
+                    <input value="value" name="file" type="file" />
+                    העלאת תמונה
+                  </div>
+                  <button class="delete-icon"></button>
+                  <input type="submit" />
+                  <div class="loading" style="visibility: hidden;">
+                  </div>
+                </form>
+              </div>
+            </li>
+            <li class="field">
+              <div class="field-key">
+                <label data-l10n-id="border:">צבע מסגרת התבנית:</label>
+              </div>
+              <div>
+                <input id="template-border-color" class="color" value="6f747a" />&nbsp;&nbsp;
+              </div>
+            </li>
+            <li class="field">
+              <div class="field-key">
+                <label data-l10n-id="fontSize:">גודל פונט:</label>
+              </div>
+              <div>
+                <input type="radio" name="font" id="fontSmall" value="small" />
+                <label for="fontSmall" data-l10n-id="small">קטן</label>
+                <input type="radio" name="font" id="fontMedium" value="medium" checked="checked" />
+                <label for="fontMedium" data-l10n-id="medium">בינוני</label>
+                <input type="radio" name="font" id="fontLarge" value="large" />
+                <label for="fontLarge" data-l10n-id="large">גדול</label>
+                <input type="radio" name="font" id="fontOther" value="other" />
+                <select name="fontOther" id="fontOther">
+                  <option value="14">14</option>
+                  <option value="16">16</option>
+                  <option value="18">18</option>
+                  <option value="20">20</option>
+                  <option value="22">22</option>
+                  <option value="24">24</option>
+                  <option value="26">26</option>
+                  <option value="28">28</option>
+                  <option value="30">30</option>
+                  <option value="32">32</option>
+                  <option value="34">34</option>
+                  <option value="36">36</option>
+                  <option value="38">38</option>
+                  <option value="40">40</option>
+                </select>
+              </div>
+            </li>
+            <li class="field">
+              <div class="field-key">
+                <label data-l10n-id="fontName:">סוג פונט:</label>
+              </div>
+              <div>
+                <select name="fontName" id="fontName">
+                  <option value="Alef">Alef</option>
+                  <option value="Abraham">Abraham</option>
+                  <option value="Arial">Arial</option>
+                  <option value="Arimo">Arimo</option>
+                  <option value="Assistant">Assistant</option>
+                  <option value="Courier New">Courier New</option>
+                  <option value="Heebo">Heebo</option>
+                  <option value="Lateef">Lateef</option>
+                  <option value="Noto Sans Hebrew">Noto Sans Hebrew</option>
+                  <option value="Open Sans Hebrew">Open Sans Hebrew</option>
+                  <option value="Tahoma">Tahoma</option>
+                  <option value="Times New Roman">Times New Roman</option>
+                  <option value="Traditional Arabic">Traditional Arabic</option>
+                </select>
+              </div>
+            </li>
+            <li class="field">
+              <div class="field-key">
+                <label data-l10n-id="backgroundColor:">צבע רקע מחסן תשובות:</label>
+              </div>
+              <div>
+                <input id="Mdistractor-background-color" class="color" value="4a4d52" />
+              </div>
+              <div>&nbsp;&nbsp;</div>
+              <div>
+                <label data-l10n-id="arrows:">צבע חץ התקדמות במחסן:</label>
+              </div>
+              <div>
+                <input id="arrows-color" class="color" value="1CF7FF" />&nbsp;&nbsp;
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="tab-content" data-tab="baskets">
+          <ul class="fields nostyle">
+            <li class="field">
+              <div class="field-key">
+                <label data-l10n-id="backgroundColor:">צבע רקע:</label>
+              </div>
+              <div>
+                <input id="basket-background-color" class="color" value="FFED94" />
+                &nbsp;&nbsp;
+                <span data-l10n-id="transparent">שקוף</span><input id="basket-transparency" type="range" value="שקוף" min="1" max="10" /><span data-l10n-id="opaque">אטום</span>
+              </div>
+            </li>
+            <li class="field">
+              <div class="field-key">
+                <label data-l10n-id="border:">מסגרת:</label>
+              </div>
+              <div>
+                <input id="basket-show-border-on" type="radio" name="basketBorder" checked="checked" /><label for="basket-show-border-on" data-l10n-id="color">צבע</label>
+                <input id="basket-border-color" class="color" value="1CF7FF" />&nbsp;&nbsp;
+                <input id="basket-show-border-off" type="radio" name="basketBorder" /><label for="basket-show-border-off" data-l10n-id="noBorder">ללא מסגרת</label>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="tab-content" data-tab="groups">
+          <ul class="fields nostyle">
+            <li class="field">
+              <div class="field-key">
+                <label data-l10n-id="backgroundColor:">צבע רקע:</label>
+              </div>
+              <div>
+                <input id="group-background-color" class="color" value="FFED94" />
+                &nbsp;&nbsp;
+                <span data-l10n-id="transparent">שקוף</span><input id="group-transparency" type="range" value="שקוף" min="1" max="10" /><span data-l10n-id="opaque">אטום</span>
+              </div>
+            </li>
+            <li class="field">
+              <div class="field-key">
+                <label data-l10n-id="border:">מסגרת:</label>
+              </div>
+              <div>
+                <input id="group-show-border-on" type="radio" name="groupBorder" checked="checked" /><label for="group-show-border-on" data-l10n-id="color">צבע</label>
+                <input id="group-border-color" class="color" value="F2441C" />&nbsp;&nbsp;
+                <input id="group-show-border-off" type="radio" name="groupBorder" /><label for="group-show-border-off" data-l10n-id="noBorder">ללא מסגרת</label>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="tab-content" data-tab="medias">
+          <ul class="fields nostyle">
+            <li class="field">
+              <div class="field-key">
+                <label data-l10n-id="backgroundColor:">צבע רקע:</label>
+              </div>
+              <div>
+                <input id="media-background-color" class="color" value="FFED94" />
+                &nbsp;&nbsp;
+                <span data-l10n-id="transparent">שקוף</span><input id="media-transparency" type="range" value="שקוף" min="1" max="10" /><span data-l10n-id="opaque">אטום</span>
+              </div>
+            </li>
+            <li class="field">
+              <div class="field-key">
+                <label data-l10n-id="border:">מסגרת:</label>
+              </div>
+              <div>
+                <input id="media-show-border-on" type="radio" name="mediaBorder" checked="checked" /><label for="media-show-border-on" data-l10n-id="color">צבע</label>
+                <input id="media-border-color" class="color" value="ADA6BD" />&nbsp;&nbsp;
+                <input id="media-show-border-off" type="radio" name="mediaBorder" /><label for="media-show-border-off" data-l10n-id="noBorder">ללא מסגרת</label>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+  <iframe id="iframe-fileupload" name="iframe-fileupload"></iframe>
+  <div style='display: none'>
+    <div id="alert-dialog" class="dialog">
+      <div class="body">
+      </div>
+      <div class="actions">
+        <div class="main"></div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

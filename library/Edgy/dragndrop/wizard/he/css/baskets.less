@@ -1,0 +1,54 @@
+﻿.basket {
+ border: 1px dashed black;
+ border-radius: 4px;
+ position: absolute;
+ -moz-transition: background-color 1s;
+ -o-transition: background-color 1s;
+ -webkit-transition: background-color 1s;
+ transition: background-color 1s;
+ z-index: 1;
+
+ &.hidden{
+   display:none;
+ }
+ &.occupied {
+  opacity: 1 !important;
+  /*zachi moved it, couldnt find if theres a problem*/
+  /*background-color: white !important;*/
+ }
+
+ &.feedback-visible {
+  opacity: 1 !important;
+ }
+
+ &.hover {
+  opacity: 0.5 !important;
+ }
+
+ .background-color {
+  width: calc(~"100% - 2px");
+  height: calc(~"100% - 2px");
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  border-radius: 3px;
+ }
+
+ .text {
+  z-index: 1;
+ }
+
+ .feedback-error, .feedback-correct {
+  background-image: url('../images/feedback__x.svg');
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  display: none;
+ }
+
+ .feedback-correct {
+  background-image: url('../images/feedback__v.svg');
+ }
+}

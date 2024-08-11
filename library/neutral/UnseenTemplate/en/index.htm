@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <title>Unseen template</title>
+
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width" />
+  <meta charset="utf-8">
+  <link href="../../../lib/fonts/Alef-Webfont-v2/alef-webfont.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../content/template.css" type="text/css" />
+  
+  <script type="text/javascript" src="../../../lib/js/external/jquery/2.0.3/jquery-2.0.3.min.js" charset="utf-8"></script>
+  <!--<script src="../js/jquery-2.0.3.js"></script>-->
+  <script src="localization.js"></script>
+  <script type="text/javascript" src="../../../lib/js/external/jquery/jqueryui/1.10.3/jquery-ui-1.10.3.custom.min.js"></script>
+  <script type="text/javascript" src="../../../lib/js/external/jquery/jquery.ui.touch-punch.min.js"></script>
+  <script src="../../../lib/js/external/jquery/jquery.mobile.custom.min.js"></script>
+  <script>
+    var env = "cet.ac.il";
+    if (/dev\.cet\.ac\.il/.test(window.location.hostname)) env = 'dev.' + env;
+    if (/testing\.cet\.ac\.il/.test(window.location.hostname)) env = 'testing.' + env;
+    document.write('<script src="//cdn.' + env + '/libs/cet.content/1/client.min.js"><' + '/script>');
+    document.write('<script src="//cdn.' + env + '/libs/cet.content.lms/1/client.min.js"><' + '/script>');
+  </script>
+  <script type="text/javascript" src="../../../lib/js/internal/plugins/cet.math.helpers.js"></script>
+  <script type="text/javascript" src="../dist/template.js"></script>
+
+</head>
+<body class="cet-unseen-template">
+
+  <div class="template-wrapper">
+
+    <div class="target-wrapper">
+
+      <div class="target">
+      </div>
+      <br>
+      <div id="wordWarehouse"></div>
+      <div class="storage">
+      </div>
+    </div>
+    <div class="feedback-wrapper">
+
+    </div>
+
+  </div>
+
+  <script>
+    var init = function () {
+      var ut = new unseenTemplate();
+      ut.init();
+      ut.registerEvents();
+    };
+
+    if (cet.content.UI.clientReady()) {
+      init();
+    }
+    else {
+      cet.content.UI.bind('clientready', function () { init() });
+    }
+  </script>
+
+</body>
+
+</html>

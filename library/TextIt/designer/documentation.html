@@ -1,0 +1,335 @@
+﻿<html dir="rtl">
+<head>
+  <link rel="stylesheet" type="text/css" href="documentation.css">  
+</head>
+<body>
+  <style>
+    .btn-copy{
+      float:left;
+      position:relative;
+      top:2.5em;
+      left:.3em;
+    }
+  </style>
+  <article>
+    <h1>1. דוקומנטציה</h1>
+    <p>
+      ...
+    </p>
+    <h2>1.2 סוגי המרק-אפ הקיימים</h2>
+    <table>
+      <tr>
+        <th>סוג</th>
+        <th>סימון</th>
+      </tr>
+      <tr>
+        <td>כותרת</td>
+        <td>
+          כותרות עטופות בסימן שווה, לפי גודל הכותרת שרוצים.<br />
+          לדוגמה: <button class="btn-copy">העתק</button><br />
+<code class="markup-example">
+= כותרת ראשית = <br />&nbsp;<br />
+== כותרת משנה == <br />&nbsp;<br />
+=== כותרת תת-משנה ===
+</code>
+        </td>
+      </tr>
+      <tr>
+        <td>פסקה</td>
+        <td>
+          שורה רווחה<br />
+          לדוגמה: <button class="btn-copy">העתק</button><br />
+          <code class="markup-example">פסקה 1<br />&nbsp;<br />פסקה 2<br />&nbsp;<br />פסקה 3</code>
+        </td>
+      </tr>
+      <tr>
+        <td>מראה מקום</td>
+        <td>
+          מראה מקום היא פסקה שמטרתה להגיד מאיפה הטקסט לקוח, או מאיפה הפסקה שמעליה לקוחה<br />
+          לדוגמה: <button class="btn-copy">העתק</button><br />
+          <code class="markup-example">פסקה 1<br />&nbsp;<br />>>> מתוך: דוגמאות של טקסטיט, דף העזרה</code>
+        </td>
+      </tr>
+      <tr>
+        <td>מעבר עמוד</td>
+        <td>
+          קו מפריד כפול.<br />
+          לדוגמה: <button class="btn-copy">העתק</button><br />
+          <code class="markup-example">
+            &nbsp;<br />
+            -- <br />&nbsp;<br />
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>פירוש למילה ("מילים חמות")</td>
+        <td>
+          הסימון מורכב מסוגריים מרובעות, כאשר בין המילה לפירושה יופיע קו מפריד אנכי.<br />
+          בלחיצה על המילה תיפתח כרטיסייה<br/>
+          לדוגמה: <button class="btn-copy">העתק</button><br />
+          <code class="markup-example">[מילה|פירוש]</code>
+          ניתן לבטל את הכרטיסייה אם מכפילים את הקו המפריד:
+          <button class="btn-copy">העתק</button><br />
+          <code class="markup-example">[מילה||פירוש]</code>
+        </td>
+      </tr>
+      <tr>
+        <td>לינק</td>
+        <td>
+          הסימון מורכב מסוגריים מרובעות, כאשר בין המילה לכתובת הקישור יופיע קו מפריד אנכי.<br />
+          לדוגמה: <button class="btn-copy">העתק</button><br />
+          <code class="markup-example">[מילה|http://cet.ac.il]</code>
+        </td>
+      </tr>
+      <tr>
+        <td>הדגשה</td>
+        <td>
+          עטוף בכוכביות.<br />
+          לדוגמה: <button class="btn-copy">העתק</button><br />
+          <code class="markup-example">*מילה מודגשת*</code>
+        </td>
+      </tr>
+      <tr>
+        <td>רשימה</td>
+        <td>
+          קו-מפריד בתחילת כל פריט של הרשימה.<br />
+          לדוגמה: <button class="btn-copy">העתק</button><br />
+          <code class="markup-example">- פריט מתוך הרשימה<br />- פריט נוסף מתוך הרשימה</code>
+        </td>
+      </tr>
+      <tr>
+        <td>תמונה</td>
+        <td>
+          מתחילה ומסתיימת בסימן הטילדה. בין כתובת התמונה ברשת האינטרנט לבין התיאור שלה .<br />
+          לדוגמה: <button class="btn-copy">העתק</button><br />
+          <code class="markup-example">~ url | תיאור ~</code>
+        </td>
+      </tr>
+      <tr>
+        <td>הטמעה</td>
+        <td>
+          מתחילה ומסתיימת בסימן הטילדה.<br />
+          לדוגמה: <button class="btn-copy">העתק</button><br />
+<code class="markup-example">~ url ~ <br/>
+~http://storage.cet.ac.il/TextIT_Storage/zavtush/adults.ogg~ <br />
+~https://www.youtube.com/watch?v=12coz7_iffE&t=2234s~
+</code>
+        </td>
+      </tr>
+      ~https://www.youtube.com/watch?v=12coz7_iffE&t=2234s~
+      <tr>
+        <td>תוכן כרטיסייה</td>
+        <td>
+          תוכן הכרטיסייה נכתב בין סוגריים מרובעים כפולים עם שורה מעל ושורה מתחת. בשורה הראשונה נכתב המושג ובשורות הבאות התוכן.<br />
+          לדוגמה: <button class="btn-copy">העתק</button><br />
+<code class="markup-example">
+[[ מושג <br />
+תוכן של הכרטיסייה על המושג<br />
+שורה נוספת<br />
+]]
+</code>
+        </td>
+      </tr>
+      <tr>
+        <th colspan="2">שאלות</th>
+      </tr>
+      <tr>
+        <td>שאלה פתוחה</td>
+        <td>
+          שאלה פתוחה
+          <br />לדוגמה: <button class="btn-copy">העתק</button><br />
+          <code class="markup-example">
+            [? (פתוחה) מהן הסיבות שהובילו לפרוץ מלחמת העולם הראשונה? ?]
+          </code>
+        </td>
+      </tr>
+      <tr>
+        <td>שאלת רב ברירה</td>
+        <td>
+          "רב ברירה" בין סוגריים עגולות.<br />
+          לאחר מכן, באה השאלה ומתחתיה האפשרויות לתשובה, כשהתשובה בנכונה מתחילה בכוכבית. 
+          <br />לדוגמה: <button class="btn-copy">העתק</button><br />
+<code class="markup-example">
+[? (רב ברירה) מהי עיר הבירה של ישראל?<br />
+תל אביב<br />
+חיפה<br />
+*ירושלים<br />
+?]
+</code>
+        </td>
+      </tr>
+      <tr>
+        <td>שאלת גרירה</td>
+        <td>
+          שאלת הגרירה מתחילה בהגדרתה כשאלת גרירה על ידי כתיבת סוג השאלה "גרירה" בין סוגריים עגולות.<br />
+          לאחר מכן, באה ההוראה, ומתחתיה התשובות, כל תשובה בשורה נפרדת. לכל תשובה יכולות להיות כמה חלופות שמופרדות בקו אנכי מפריד
+          <br />לדוגמה: <button class="btn-copy">העתק</button><br />
+<code class="markup-example">
+[? (גרירה) מהן התחומים בהם עסקו היוונים לפי הטקסט?<br />
+דיג דגים | דיג<br />
+גידולי חקלאות | חקלאות<br />
+?]
+</code>
+        </td>
+      </tr>
+      <tr>
+        <td>שאלת סימון</td>
+        <td>
+          שאלת הסימון מתחילה בהגדרתה כשאלת סימון על ידי כתיבת סוג השאלה "סימון" בין סוגריים עגולות.<br />
+          לאחר מכן, באה ההוראה, ומתחתיה התשובות, כל תשובה בשורה נפרדת. לכל תשובה יכולות להיות כמה חלופות שמופרדות בקו אנכי מפריד
+          <br /> לפני כל תשובה, יש לכתוב את הצבע בה היא צריכה להיות צבועה
+          <br />לדוגמה: <button class="btn-copy">העתק</button><br />
+<code class="markup-example">
+[? (סימון) סמנו בירוק טיעונים בעד שימוש בטלפון בכיתה ובאדום טיעונים נגד <br />
+ירוק - יכול לעזור בלימודים | לעזור בלימודים <br />
+אדום - מפריע למורה <br />
+אדום - מסיח את תשומת לב התלמידים ?]<br />
+</code>
+          כדי להוסיף כלי מרקר באמצע המשפט, הוסיפו סוגריים מרובעים ובהם האות הראשונה של שם הצבע באנגלית במקום ההוראה
+          <br />לדוגמה: <button class="btn-copy">העתק</button><br />
+<span class="markup-example">
+[? (סימון) סמנו בירוק [G] טיעונים בעד שימוש בטלפון בכיתה ובאדום טיעונים נגד [R]
+?]<br />
+</span>
+          <p>
+            הצבעים הזמינים כרגע הם:
+            <span style="display:inline-block; padding: 0 1em; background-color: rgba(0,255,0,0.4);">ירוק</span>
+            <span style="display:inline-block; padding: 0 1em; background-color: rgba(255,0,0,0.4);">אדום</span>
+            <span style="display:inline-block; padding: 0 1em; background-color: #ff9df5;">סגול</span>
+            <span style="display:inline-block; padding: 0 1em; background-color: #9dfffe">כחול</span>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>שאלת השלמה</td>
+        <td>
+         שאלת השלמה היא שאלה בה חלקים מהטקסט הופכים לקווים להשלמה, והמשתמש צריך לגרור אליהם מתוך מחסן מילים
+          <br />לדוגמה:<button class="btn-copy">העתק</button><br />
+<code class="markup-example">
+[? (השלמה) השׂלימו את הקטע? <br />
+נֶהֱנָה<br/>
+נָשרָה<br />
+שָׂם לֵב
+</code>
+        </td>
+      </tr>
+      <tr>
+        <td>אפשרויות שאלה</td>
+        <td>
+          אפשרויות נוספות, תרגום ורמז, מופיעות בתוך גוף השאלה, כך: <button class="btn-copy">העתק</button>
+<code class="markup-example">
+[? (פתוחה) הוראה <br />
+רמז: זה הרמז שייפתח לבקשת התלמיד<br />
+תרגום: זה התרגום לאנגלית שייפתח במעבר עכבר<br />
+?]
+</code>
+
+        </td>
+      </tr>
+
+
+    </table>
+
+    <h2>1.3 קבצי הקראה</h2>
+    <p>
+      כדי שההקראה תעבוד, צריך
+      <ol style="line-height:200%;">
+        <li>ליצור קובץ oga (אפשר לייצא קובץ ogg ולשנות את הסיומת ל-oga)</li>
+        <li>לערוך את הקובץ ב-audacity ולסמן עליו labels, ולייצא דרך Export Labels.</li>
+        <li>
+          לשים את שני הקבצים באותה תיקייה בתוך Textit_Storage עם קונבנציות שיום כזו:
+          <ul>
+            <li><i>audio</i>.oga</li>
+            <li><i>audio</i>_timecodes.txt</li>
+            <li>**** עבור  קבצי   mp3 (לאייפד)<br/> <i>audio</i>mp3.mp3 <br/><i>audio</i>mp3_timecodes.txt</li>
+          </ul>
+        </li>
+        <li>
+          להוסיף לעורך את השורה המפרטת את המיקום של קובץ הקול + ה-timecodes 
+          <br />לדוגמה: <button class="btn-copy">העתק</button><br />
+          <code class="markup-example">{{audio=http://storage.cet.ac.il/TextIT_Storage/Vegetarianism/audio}}</code>
+        </li>
+      </ol>
+    </p>
+    <h2>1.4 אפשרויות נוספות</h2>
+    <table>
+      <tr>
+        <th>סוג</th>
+        <th>סימון</th>
+      </tr>
+      <tr>
+        <td>הכנסת טקסטיט בתוך שאלון כ-embed</td>
+        <td>
+          צריך להוסיף את אפשרות ההטמעה באנגלית בין סוגריים כפולים מסולסלים
+          <br />לדוגמה: <button class="btn-copy">העתק</button><br />
+          <code class="markup-example">{{embed=true}}</code>
+        </td>
+      </tr>
+      <tr>
+        <td>שפת ממשק</td>
+        <td>
+          צריך להוסיף את אפשרות שינוי השפה בין סוגריים כפולים מסולסלים, עם רווח שורה מעל ורווח שורה מתחת
+          <br />לדוגמה: <button class="btn-copy">העתק</button><br />
+          <code class="markup-example">{{language=ar|he|en}}</code>
+        </td>
+      </tr>
+      <tr>
+        <td>דפוס</td>
+        <td>
+          השאלות והתרגומים יופיעו בדפוס (ולא בפונא כתב היד ברירת המחדל)
+          <br />לדוגמה: <button class="btn-copy">העתק</button><br />
+          <code class="markup-example">{{dfus=true}}</code>
+        </td>
+      </tr>
+      <tr>
+        <td>פונט שאלות<br/>
+         פונט טקסט</td>
+        <td>
+          שלושה פרמטרים שמופרדים בקו אנכי. הראשון הוא הפונט, השני הצבע, והשלישי הגודל.<br/>
+          ניתן להשתמש רק בכמות הפרמטרים (לדוגמה, רק פונט, או רק פונט וצבע)
+          <br />לדוגמה: <button class="btn-copy">העתק</button><br />
+          <code class="markup-example">{{questionStyle=Alef|blue|12}}</code>
+          <br />לדוגמה: <button class="btn-copy">העתק</button><br />
+          <code class="markup-example">{{questionStyle=Alef}}</code>
+          <br />לדוגמה: <button class="btn-copy">העתק</button><br />
+          <code class="markup-example">{{textStyle=Alef|red}}</code>
+        </td>
+      </tr>
+    </table>
+  </article>
+
+  <script type="text/javascript">
+    function copyToClipboard(text) {
+      var temp = document.createElement('textarea');
+      temp.style.cssText = 'position:fixed; top:0; left:0;';
+      document.body.appendChild(temp);
+      temp.value = text;
+      temp.select();
+      document.execCommand("copy");
+      temp.remove();
+    }
+    function initCopyButton(btn) {
+      var markup = btn.nextSibling;
+      while(markup != null && markup.className != 'markup-example'){
+        markup = markup.nextSibling;
+      }
+      if (markup) {
+        btn.addEventListener('click', function () {
+          copyToClipboard(markup.textContent);
+        })
+      }
+        
+    }
+    var copyButtons = document.getElementsByClassName('btn-copy');
+    for (var i = 0, len = copyButtons.length; i < len; i++) {
+      initCopyButton(copyButtons[i]);
+    }
+  </script>
+
+  <!--
+  <footer class="dev-nav">
+    <a href="./">Designer</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="../">Viewer</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="./documentation.html">Documentation</a>
+  </footer>-->
+
+</body>
+</html>

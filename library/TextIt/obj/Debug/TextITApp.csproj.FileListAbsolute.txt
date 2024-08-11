@@ -1,0 +1,6 @@
+D:\TFSProjects\Textit\TextITApp\obj\Debug\TextITApp.csprojResolveAssemblyReference.cache
+D:\TFSProjects\Textit\TextITApp\bin\TextITApp.dll.config
+D:\TFSProjects\Textit\TextITApp\bin\TextITApp.dll
+D:\TFSProjects\Textit\TextITApp\bin\TextITApp.pdb
+D:\TFSProjects\Textit\TextITApp\obj\Debug\TextITApp.dll
+D:\TFSProjects\Textit\TextITApp\obj\Debug\TextITApp.pdb

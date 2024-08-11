@@ -1,0 +1,64 @@
+﻿html{
+  overflow:hidden;
+}
+body {
+ background-color: none;
+}
+
+#Stage {
+ position: absolute!important;
+ top: 0;
+ bottom: 0;
+ left: 0;
+ right: 0;
+ margin: auto;
+ width: 700px;
+ height: 418px;
+ -moz-user-select: none;
+ -ms-user-select: none;
+ -webkit-user-select: none;
+ user-select: none;
+ /*font-family: Alef-Bold;*/
+ line-height: 14px;
+ direction: rtl;
+}
+
+::selection {
+ background: transparent;
+}
+
+.option {
+ -ms-touch-action: none;
+ z-index: 100;
+}
+
+.animate-transition {
+ -webkit-transition: left 500ms;
+ -moz-transition: left 500ms;
+ -o-transition: left 500ms;
+ transition: left 500ms;
+}
+
+.animation-stopped .animate-transition {
+ -webkit-transition: none;
+ -moz-transition: none;
+ -o-transition: none;
+ transition: none;
+}
+
+.animation-stopped .options-window {
+ overflow: hidden!important;
+}
+
+
+.ltr {
+ direction: ltr;
+}
+
+.button-navigation-right, .button-navigation-left {
+ z-index: 1000;
+}
+
+.hide {
+ display: none!important;
+}

@@ -1,0 +1,120 @@
+@font-face {
+    font-family: 'Abraham';
+    src: url('Abraham-Black.eot');
+    src: url('Abraham-Black.eot?#iefix') format('embedded-opentype'),
+        url('Abraham-Black.woff2') format('woff2'),
+        url('Abraham-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Abraham';
+    src: url('Abraham-Medium.eot');
+    src: url('Abraham-Medium.eot?#iefix') format('embedded-opentype'),
+        url('Abraham-Medium.woff2') format('woff2'),
+        url('Abraham-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Abraham';
+    src: url('Abraham-Regular.eot');
+    src: url('Abraham-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Abraham-Regular.woff2') format('woff2'),
+        url('Abraham-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Abraham';
+    src: url('Abraham-Bold.eot');
+    src: url('Abraham-Bold.eot?#iefix') format('embedded-opentype'),
+        url('Abraham-Bold.woff2') format('woff2'),
+        url('Abraham-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Abraham';
+    src: url('Abraham-Light.eot');
+    src: url('Abraham-Light.eot?#iefix') format('embedded-opentype'),
+        url('Abraham-Light.woff2') format('woff2'),
+        url('Abraham-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Abraham';
+    src: url('Abraham-Thin.eot');
+    src: url('Abraham-Thin.eot?#iefix') format('embedded-opentype'),
+        url('Abraham-Thin.woff2') format('woff2'),
+        url('Abraham-Thin.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Abraham';
+    src: url('Abraham-Bold.eot');
+    src: url('Abraham-Bold.eot?#iefix') format('embedded-opentype'),
+        url('Abraham-Bold.woff2') format('woff2'),
+        url('Abraham-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Abraham';
+    src: url('Abraham-Black.eot');
+    src: url('Abraham-Black.eot?#iefix') format('embedded-opentype'),
+        url('Abraham-Black.woff2') format('woff2'),
+        url('Abraham-Black.woff') format('woff');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Abraham';
+    src: url('Abraham-Thin.eot');
+    src: url('Abraham-Thin.eot?#iefix') format('embedded-opentype'),
+        url('Abraham-Thin.woff2') format('woff2'),
+        url('Abraham-Thin.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Abraham';
+    src: url('Abraham-Medium.eot');
+    src: url('Abraham-Medium.eot?#iefix') format('embedded-opentype'),
+        url('Abraham-Medium.woff2') format('woff2'),
+        url('Abraham-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Abraham';
+    src: url('Abraham-Light.eot');
+    src: url('Abraham-Light.eot?#iefix') format('embedded-opentype'),
+        url('Abraham-Light.woff2') format('woff2'),
+        url('Abraham-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Abraham';
+    src: url('Abraham-Regular.eot');
+    src: url('Abraham-Regular.eot?#iefix') format('embedded-opentype'),
+        url('Abraham-Regular.woff2') format('woff2'),
+        url('Abraham-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+

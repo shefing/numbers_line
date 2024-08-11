@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<App title="Unseen template" optimalWidth="810" optimalHeight="500" status="dev" tech="outsource" urlRouteId="unseentemplate">
+  <Description>
+  </Description>
+  <!-- The preset definition -->
+  <Preset enabled="true">
+    <Explanation>
+      This is free text explaining how to create a preset.
+    </Explanation>
+    <!--  if there are more than one samples, the first one in the list is the default sample  -->
+    <!--  the title is optional. If no title is given , it will be autocreated -->
+    <Sample title="rtl">
+      <![CDATA[%3CUnseenTemplate%20direction%3D%22rtl%22%20font%3D%220%22%20size%3D%220%22%3E%3Cspan%20class%3D%22marker%22%3E%D7%91%D7%99%D7%AA%20%D7%9E%D7%A9%D7%A4%D7%98%20%D7%91%D7%9E%D7%A6%D7%A8%D7%99%D7%9D%3C%2Fspan%3E%26nbsp%3B%D7%94%D7%95%D7%A8%D7%94%20%D7%94%D7%99%D7%95%D7%9D%20(%D7%99%D7%95%D7%9D%20%D7%92')%20%D7%9C%D7%90%D7%A1%D7%95%D7%A8%20%D7%90%D7%AA%20%D7%9B%D7%9C%20%D7%94%D7%A4%D7%A2%D7%99%D7%9C%D7%95%D7%99%D7%95%D7%AA%20%D7%A9%D7%9C%20%3Cspan%20class%3D%22marker%22%3E%D7%AA%D7%A0%D7%95%D7%A2%D7%AA%20%3C%2Fspan%3E%D7%97%D7%9E%D7%90%D7%A1%20%D7%91%D7%9E%D7%93%D7%99%D7%A0%D7%94%20%D7%95%D7%9C%D7%A2%D7%A7%D7%9C%20%D7%90%D7%AA%20%D7%9B%D7%9C%20%D7%9E%D7%98%D7%95%D7%AA%20%D7%94%D7%AA%D7%A0%D7%95%D7%A2%D7%94%20%D7%94%D7%90%D7%99%D7%A1%D7%9C%D7%90%D7%9E%D7%99%D7%AA%20%D7%91%D7%A7%D7%94%D7%99%D7%A8.%20%D7%94%D7%94%D7%97%D7%9C%D7%98%D7%94%20%D7%94%D7%93%D7%A8%D7%9E%D7%98%D7%99%D7%AA%20%D7%94%D7%AA%D7%A7%D7%91%D7%9C%D7%94%20%D7%91%D7%A2%D7%A7%D7%91%D7%95%D7%AA%20%D7%AA%D7%91%D7%99%D7%A2%D7%94%20%D7%A9%D7%94%D7%95%D7%92%D7%A9%D7%94%20%D7%9C%D7%91%D7%99%D7%AA%20%D7%94%D7%9E%D7%A9%D7%A4%D7%98%20%D7%91%D7%91%D7%A7%D7%A9%D7%94%20%D7%9C%D7%94%D7%92%D7%93%D7%99%D7%A8%20%D7%90%D7%AA%20%D7%97%D7%9E%D7%90%D7%A1%20%D7%9B%D7%90%D7%A8%D7%92%D7%95%D7%9F%20%3Cspan%20class%3D%22marker%22%3E%D7%98%D7%A8%D7%95%D7%A8%20%D7%A2%D7%9C%3C%2Fspan%3E%20%D7%A8%D7%A7%D7%A2%20%D7%9E%D7%A2%D7%95%D7%A8%D7%91%D7%95%D7%AA%D7%95%2C%20%D7%A2%D7%9C%20%D7%A4%D7%99%20%3Cspan%20class%3D%22marker%22%3E%D7%94%D7%98%D7%A2%D7%A0%D7%95%D7%AA%2C%20%D7%91%D7%92%D7%9C%20%D7%94%D7%98%D7%A8%D7%95%D7%A8%3C%2Fspan%3E%20%D7%A9%D7%A4%D7%95%D7%A7%D7%93%20%D7%90%D7%AA%20%3Cspan%20class%3D%22marker%22%3E%D7%9E%D7%A6%D7%A8%D7%99%D7%9D%20%D7%9E%D7%90%D7%96%3C%2Fspan%3E%20%D7%94%D7%93%D7%97%D7%AA%D7%95%20%D7%A9%D7%9C%26nbsp%3B%3Cspan%20class%3D%22marker%22%3E%D7%9E%D7%95%D7%97%D7%9E%D7%93%3C%2Fspan%3E%20%D7%9E%D7%95%D7%A8%D7%A1%D7%99.%20%D7%97%D7%9E%D7%90%D7%A1%20%D7%92%D7%9D%20%D7%A0%D7%90%D7%A9%D7%9D%20%D7%91%D7%A9%D7%99%D7%AA%D7%95%D7%A3%20%D7%A4%D7%A2%D7%95%D7%9C%D7%94%20%D7%A2%D7%9D%20%D7%AA%D7%A0%D7%95%D7%A2%D7%AA%20%22%D7%94%D7%90%D7%97%D7%99%D7%9D%20%D7%94%D7%9E%D7%95%D7%A1%D7%9C%D7%9E%D7%99%D7%9D%22%20%D7%A9%D7%9B%D7%91%D7%A8%20%D7%9E%D7%95%D7%92%D7%93%D7%A8%D7%AA%20%D7%A2%D7%9C%20%D7%99%D7%93%D7%99%20%D7%94%D7%9E%D7%9E%D7%A9%D7%9C%D7%94%20%D7%91%D7%A7%D7%94%D7%99%D7%A8%20%D7%9B%D7%90%D7%A8%D7%92%D7%95%D7%9F%20%D7%98%D7%A8%D7%95%D7%A8.%3Cbr%3E%3C%2FUnseenTemplate%3E]]>
+    </Sample>
+    <Sample title="ltr">
+      <![CDATA[%3CUnseenTemplate%20direction%3D%22ltr%22%20font%3D%22Arial%22%20size%3D%2218px%22%3E%3Cspan%20class%3D%22marker%22%3Eaaaaaa%3C%2Fspan%3E%20bbbbbbbbbbb%20cccccccc%20%3Cspan%20class%3D%22marker%22%3Eddddddddd%20%3C%2Fspan%3E%26nbsp%3B%3Cbr%3Eeeeeeeeee%20ffffffff%20%3Cspan%20class%3D%22marker%22%3Egggggggggg%3C%2Fspan%3E%20hhhh%3Cbr%3Ekkkkkkkkk%20lllll%20mmmm%20ooooooooo%20pppppppppp%3Cbr%3Eqqqqqqq%20rrrrrrr%20rrrrrrrrrrr%20rrrrrrrrrrr%20%3Cspan%20class%3D%22marker%22%3Errrrrrrrrr%20ssssssssssss%3C%2Fspan%3E%20sssssssssssssss%20ttttttttttttt%20%3Cspan%20class%3D%22marker%22%3Euuuuuu%3C%2Fspan%3E%20vvvvvvvvvvvvvvvvvvvvvvvvvv%20xxxxxxx%20%3Cspan%20class%3D%22marker%22%3Eyyyyyyyy%3C%2Fspan%3E%20%3Cspan%20class%3D%22marker%22%3Ezzzzzzzzz%3C%2Fspan%3E%26nbsp%3B%3C%2FUnseenTemplate%3E]]>
+    </Sample>
+   
+  </Preset>
+</App>

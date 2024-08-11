@@ -1,0 +1,13 @@
+﻿<svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    
+    <symbol id="arrowRight" viewBox="0 0 13.883 24.938">
+		    <polyline style="fill:none;stroke-width:2;stroke-miterlimit:10;" points="0.707,24.23 12.469,12.469 0.707,0.707 "/>
+    </symbol>
+    
+    <symbol id="arrowLeft" viewBox="0 0 13.883 24.938">
+      <polyline style="fill:none;stroke-width:2;stroke-miterlimit:10;" points="13.176,24.23 1.414,12.469 13.176,0.707 		"/>
+    </symbol>
+    
+  </defs>
+</svg>

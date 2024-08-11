@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Apps>
+  <App title="פעילות סלים - דוגמא" skin="none" optimalWidth="810" optimalHeight="500" status="ready" tech="outsource" urlRouteId="tetris2">
+    <Description>פעילות גרירה</Description>
+    <!-- The preset definition -->
+    <Preset enabled="true">
+      <Explanation>
+     This is free text explaining how to create a preset.
+    </Explanation>
+      <!--  if there are more than one samples, the first one in the list is the default sample  -->
+      <!--  the title is optional. If no title is given , it will be autocreated -->
+      <Sample title="content1"><![CDATA[content1.js]]></Sample>
+      <Sample title="content.he.3x5"><![CDATA[content.he.3x5.js]]></Sample>
+      <Sample title="content.he.5x4"><![CDATA[content.he.5x4.js]]></Sample>
+      <Sample title="content.ar.3x3"><![CDATA[content.ar.3x3.js]]></Sample>
+      <Sample title="content.he.3x5.multiple"><![CDATA[content.he.3x5.multiple.js]]></Sample>
+    </Preset>
+  </App>
+</Apps>

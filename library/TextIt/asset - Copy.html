@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Asset</title>
+  
+  <script type="text/javascript" src="http://apps.assets.cet.ac.il/library/lib/js/external/jquery/2.0.3/jquery-2.0.3.min.js" charset="utf-8"></script>
+  <script src="//cdn.testing.cet.ac.il/libs/cet.content/1/client.min.js"></script>
+  <script src="//cdn.testing.cet.ac.il/libs/cet.content.lms/1/client.min.js"></script>
+
+</head>
+<body>
+
+  <script>
+    var article;
+    var lmsVisited = false;
+    var workMode;
+
+    function start(){
+      cet.content.lms.Activity.start();
+    }
+
+    function init() {
+      var lmsMode = cet.content.lms.Activity.engagement.mode;
+      var lmsAccess = cet.content.lms.Activity.engagement.access;
+      var workMode;
+
+      if (lmsMode == "solved")
+        workMode = "Solution";
+      else if (lmsMode == "browse")
+        workMode = "Learning";
+      else if (lmsMode == "normal")
+        workMode = "Evaluation";
+      else if (lmsMode == "review") {
+        if (lmsAccess == "read")
+          workMode = "Results";
+        else
+          workMode = "Repair";
+      }
+
+
+      function load() {
+        cet.content.State.load(function (data) {
+          // load the state
+        })
+      }
+
+      cet.content.lms.Activity.settings.supportsCheck(true);
+      cet.content.lms.Activity.settings.supportsReset(false);
+      cet.content.lms.Activity.settings.supportsShowSolution(false);
+
+    }
+
+    cet.content.on('clientready', function () {
+      init();
+      start();
+    });
+
+
+    function save() {
+      // call to score
+      cet.content.lms.Activity.score(e.overallScore * 100);
+
+      var state = JSON.stringify(article.serializeState());
+      cet.content.State.save(state);
+    }
+
+  </script>
+
+
+</body>
+
+</html>

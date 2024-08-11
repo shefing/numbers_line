@@ -1,0 +1,9 @@
+﻿צריך לסגור גרסה
+
+56057	כלל הפעילויות: חצים בתפריט התחתון מפסיקים לעבוד	Associate
+56059	כלל הפעילויות: תפקוד לא נכון בעת בדיקת הפעילות	Associate
+56053	כלל האפליקציות: לחיצה על התחל מחדש לא מפסיקה את הסאונד אם הוא בדיוק מושמע, ולא מתחילה את הסאונד מהתחלה	Associate
+
+verticle align = middle + fix for basket updateDropPosition
+navagation arrows visibility fix
+storage numberOfVisiblePositions fix 

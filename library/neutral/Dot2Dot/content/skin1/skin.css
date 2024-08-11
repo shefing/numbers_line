@@ -1,0 +1,84 @@
+﻿
+
+/*#region SKIN*/
+
+.template-background {
+  background-color: #dde3e3;
+}
+
+
+#svg path {
+stroke: #80a09f;
+}
+
+
+.dot {
+  background: url(bullitOFF.svg)0 0 no-repeat;
+}
+
+  .dot.full {
+    background-image: url(bullitON.svg);
+  }
+
+.correct .dot,
+.correct .dot.full {
+  background-image: url(feedback_V.svg);
+}
+.wrong .dot,
+.wrong .dot.full {
+  background-image: url(feedback_X.svg);
+}
+
+
+.sound-box,
+.image-box,
+.text-box {  
+  border: 1px solid #bfcfcf;
+  background-color: #ffffff; 
+
+  border-radius: 10px;
+
+
+}
+
+
+.content-wrapper {
+  background-color: #ffffff;
+  border-radius: 8px;
+}
+
+.image-box {
+
+}
+
+.text-box {
+  color: #333333;
+}
+
+.correct .text-box,
+.correct .image-box,
+.correct .sound-box {
+  background-color: #5AAD00;
+  border-color: #498B00;
+}
+
+.wrong .text-box,
+.wrong .image-box,
+.wrong .sound-box {
+  background-color: #EE1448;
+  border-color: #AC0B31;
+}
+
+
+
+.final-feedback {
+
+  background-color: #5AAD00;
+
+  /*border: 5px solid #5AAD00;*/
+}
+
+.close {
+  /*border-color: #5AAD00;*/
+}
+/*#endregion*/

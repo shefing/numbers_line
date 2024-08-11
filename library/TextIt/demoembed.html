@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html dir="rtl">
+
+<head>
+  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+  <meta charset="UTF-8" />
+  <title>Texit</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <script src="js/promise.js"></script>
+  <script src="js/clipper/clipper.js"></script>
+  <script src="js/Tween.js"></script>
+  <script src="js/TweenMax/TweenLite.min.js"></script>
+  <script src="js/MorphSVG/MorphSVGPlugin.min.js"></script>
+  <script src="js/domExtensions.js"></script>
+  <script src="js/TRanges.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/matter/matter.min.js"></script>
+  <script src="js/ToolChain.js"></script>
+  <script src="js/textit.mouse.js"></script>
+  <script src="js/textit.menu.js"></script>
+  <script src="js/textit.draggedMarkedText.js"></script>
+  <script src="js/textit.draggables.js"></script>
+  <script src="js/textit.dragDropManager.js"></script>
+  <script src="js/textit.graphicMarker.js"></script>
+  <script src="js/textit.articleMarker.js"></script>
+  <script src="js/textit.narrator.js"></script>
+  <script src="js/textit.article.js"></script>
+  <script src="js/textit.questions.js"></script>
+  <script src="js/textit.components.js"></script>
+  <script src="js/textit.elements.js"></script>
+  <script src="i18n/lang.en.js"></script>
+  <script src="i18n/lang.he.js"></script>
+  <script src="i18n/lang.ar.js"></script>
+  <script src="js/textit.external.js"></script>
+  <script src="js/textit.xapi.js"></script>
+</head>
+<body>
+  <style>article .image--paralax img {width:15em;} hr{clear:both}</style>
+  <div class="help"></div>
+  <div class="page-margin--bottom"></div>
+
+  <script>
+    // texts
+    var texts = {
+      book: "<article ><headline importance=\"2\">שבטים מצפון אירופה מתיישבים ביוון </headline><p>סיפורה של יוון העתיקה מתחיל לפני אלפי שנים. כבר לפני כ-500,‏3 שנים חיו ביוון אנשים שנהנו מתרבות מפותחת למדי. תרבות זו מכונה \"התרבות המילונית\", ושרידיה התגלו בעיר הקדומה מיקנה  בדרום יוון (ראו במפה בעמוד ‏14). החברה המילונית התפרסמה במיוחד בעושרה הרב, במבני הארמונות המרשימים שלה ובצבאה החזק. הסיבות להתמוטטותה אינן ברורות לגמרי. לאחר נפילת המיקנים, החלו לפלוש ליוון שבטים שונים מצפון אירופה שחיפשו מקום חדש לגור בו ומקורות מחיה חדשים. \n\n</p><p>השבט המרכזי בשבטים אלה היה שבט ה''איונים\". לאחר שהתיישבו האיונים ביוון הם שגשגו מבחינה כלכלית וקשרו קשרים עם שכניהם בארצות הים התיכון. בני כל השבטים שהתיישבו ביוון כונו על ידי שכניהם - יוונים (=איונים).המתיישבים ביוון שמו של אב קדמון בשם כינו את עצמם \"הלנים\", על שמו של אב קדמון בשמם הלנוס, ואת ארצם הם כינו \"הלאוס\".\n\n\n</p><image src=\"img/liongate.jpg\" description=\"שער האריות במיקנה (שרידים מהמאה ה-14 לפני הספירה)\">null</image><p>שימו לב לאבנים הגדולות ששימשו לבנייה באותה תקופה. \nמצאו את האריות שעל שמם נקרא העיר. \n\n</p><pagebreak>null</pagebreak><headline importance=\"2\"> תנאי הטבע השפיעו על חיי התושבים </headline><p>המיקום הגאוגרפי של כל מדינה, מזג האוויר השורר בה, תנאי השטח וגורמים נוספים יכולים להשפיע על צורת ההתיישבות, על עיסוקי המתיישבים, על המשטר הפוליטי ואפילו על אופי התושבים. מיקומה של יוון והתנאים הגאוגרפיים שלה קבעו במידה רבה את אורח החיים של תושביה הקדומים. \n\n</p><headline importance=\"2\"> הפוליס - הארגון המדיני של תושבי יוון </headline><p>יש חוקרים הטוענים כי התנאים הגאוגרפיים השפיעו לא רק על אזורי ההתיישבות של תושבי יוון ועל העיסוקים שלהם, אלא גם על המבנה המדיני שלה. רכסי ההרים הגבוהים, הקשים למעבר, גרמו לפיצולה המדיני של יוון העתיקה. רוב התושבים התיישבו בעמקים שבין ההרים, וחלקם הקימו ושבות חדשות לאורך חופי הים התיכון. התנאים הגאוגרפיים הקשו על הקשר בין התושבים ולכן לא הייתה יוון מדינה מאוחדת, אלא מפוצלת לערי-מדינה רבות, כלומר ליחידות מדיניות קטנות ועצמאיות. כל עיר-מדינה שאפה להיות עצמאית ולנהל את ענייניה בכל התחומים: כלכלה, חברה, דת וענייני חוץ. עיר-המדינה נקראה ביוונית \"פוליס\". הפוליס הייתה בנויה סביב האקרופוליס, שהוא מקום גבוה ומבוצר (\"אקרו\" ביוונית פירושו גבוה).באקרופוליס היו מצודה ומקדשים שבהם התקיימו טקסי הדת. אנשי הפוליס חיו סביב האקרופוליס ועסקו בעיקר בחקלאות. בכל פוליס הייתה אגורה, היא כיכר שוק. בתחילה הייתה האגורה מקום הכינוס של האזרחים. מאוחר יותר היא נעשתה המרכז המסחרי של הפוליס, ולשם באו התושבים למכור ולקנות סחורה. \n\n</p><image src=\"img/greekcoastline.jpg\" description=\"שער האריות במיקנה (שרידים מהמאה ה-14 לפני הספירה)\">null</image></article>",
+      greek1: "<article embed=\"true\"><headline importance=\"2\">שבטים מצפון אירופה מתיישבים ביוון</headline><p>סיפורה של יוון העתיקה מתחיל לפני אלפי שנים. כבר לפני כ-500,‏3 שנים חיו ביוון אנשים שנהנו מתרבות מפותחת למדי. תרבות זו מכונה \"התרבות המיקנית\", ושרידיה התגלו בעיר הקדומה מיקנה שבדרום יוון. החברה המיקנית התפרסמה במיוחד בעושרה הרב, במבני הארמונות המרשימים שלה ובצבאה החזק. הסיבות להתמוטטותה אינן ברורות לגמרי. לאחר נפילת המיקנים, החלו לפלוש ליוון שבטים שונים מצפון אירופה שחיפשו מקום חדש לגור בו ומקורות מחיה חדשים. השבט המרכזי בשבטים אלה היה שבט ה-''איונים\". לאחר שהתיישבו האיונים ביוון הם שגשגו מבחינה כלכלית וקשרו קשרים עם שכניהם בארצות הים התיכון. בני כל השבטים שהתיישבו ביוון כונו על ידי שכניהם - יוונים (= איונים). המתיישבים ביוון שמו של אב קדמון בשם כינו את עצמם \"הלנים\", על שמו של אב קדמון בשם הלנוס, ואת ארצם הם כינו \"הלאוס\".\n\n</p><question index=\"1\" type=\"mark\" open=\"false\"><stem>סמנו את כל השמות של תושבי איי יוון המופיעים בטקסט</stem><answer color=\"purple\"><value>יוונים</value></answer><answer color=\"purple\"><value>איונים</value></answer><answer color=\"purple\"><value>הלנים</value></answer><answer color=\"purple\"><value>המיקנים</value><value>המיקנית</value></answer></question><image src=\"img/liongate.jpg\" description=\"שער האריות במיקנה (שרידים מהמאה ה-14 לפני הספירה)\">null</image><p>שימו לב לאבנים הגדולות ששימשו לבנייה באותה תקופה. \nמצאו את האריות שעל שמם נקרא העיר. \n</p></article>",
+      greek2: "<article embed=\"true\"><headline importance=\"2\"> תנאי הטבע השפיעו על חיי התושבים </headline><p>המיקום הגאוגרפי של כל מדינה, מזג האוויר השורר בה, תנאי השטח וגורמים נוספים יכולים להשפיע על צורת ההתיישבות, על עיסוקי המתיישבים, על המשטר הפוליטי ואפילו על אופי התושבים. מיקומה של יוון והתנאים הגאוגרפיים שלה קבעו במידה רבה את אורח החיים של תושביה הקדומים.\n\n</p><image src=\"img/greekcoastline.jpg\" description=\"יוון. קו החוף המפורץ הנראה בתמונה אופייני לחופי יוון\">null</image><p>שימו לב לאבנים הגדולות ששימשו לבנייה באותה תקופה. \nמצאו את האריות שעל שמם נקרא העיר. </p></article>",
+      greek3: "<article embed=\"true\"><headline importance=\"2\"> הפוליס - הארגון המדיני של תושבי יוון </headline><p>יש חוקרים הטוענים כי התנאים הגאוגרפיים השפיעו לא רק על אזורי ההתיישבות של תושבי יוון ועל העיסוקים שלהם, אלא גם על המבנה המדיני שלה. רכסי ההרים הגבוהים, הקשים למעבר, גרמו לפיצולה המדיני של יוון העתיקה. רוב התושבים התיישבו בעמקים שבין ההרים, וחלקם הקימו מושבות חדשות לאורך חופי הים התיכון. התנאים הגאוגרפיים הקשו על הקשר בין התושבים ולכן לא הייתה יוון מדינה מאוחדת, אלא מפוצלת לערי-מדינה רבות, כלומר ליחידות מדיניות קטנות ועצמאיות. כל עיר-מדינה שאפה להיות עצמאית ולנהל את ענייניה בכל התחומים: כלכלה, חברה, דת וענייני חוץ.\n\n</p><question index=\"1\" type=\"drag\" open=\"false\"><stem>למה גרמו התנאים הגיאוגרפים של יוון מבחינת ההרכב המדיני? </stem><answer><value>התנאים הגאוגרפיים הקשו על הקשר בין התושבים ולכן לא הייתה יוון מדינה מאוחדת</value><value>מפוצלת לערי-מדינה רבות, כלומר ליחידות מדיניות קטנות ועצמאיות</value><value>מפוצלת לערי-מדינה רבות</value></answer></question><p>עיר-המדינה נקראה ביוונית \"פוליס\". הפוליס הייתה בנויה סביב האקרופוליס, שהוא מקום גבוה ומבוצר (\"אקרו\" ביוונית פירושו גבוה). באקרופוליס היו מצודה ומקדשים שבהם התקיימו טקסי הדת. אנשי הפוליס חיו סביב האקרופוליס ועסקו בעיקר בחקלאות. בכל פוליס הייתה אגורה, היא כיכר שוק. בתחילה הייתה האגורה מקום הכינוס של האזרחים. מאוחר יותר היא נעשתה המרכז המסחרי של הפוליס, ולשם באו התושבים למכור ולקנות סחורה.</p></article>",
+      greekdemo: "<article embed=\"true\"><p>בתהליך ממושך התגבשה במזרח ההלניסטי דת ממוזגת, שהחליפה את דת יוון העתיקה ואת פולחניה. המיזוג התבטא בשילוב בין הדת היוונית לדתות המזרח, כמו במציאת קווי דמיון בין משפחות האלים והתכונות של מרכיביהם. כך יצא שהתפתחו זהויות מהותיות וחיצוניות בין אלי יוון ודמויות מן המיתולוגיה היוונית לבין אלו שבמזרח. והדבר התרחש כיוון שהיווני היה רגיל, לזהות את אלהי העמים האחרים עם אלהיו. </p><p>כך, שונה שמה של העיר רשף, הפיניקית לשעבר, לאפולוניה, בשל התכונות המשותפות בין רשף ל-אפולו. באופן דומה, נוצרה טשטוש זהויות בין מלקרת הצורי לבין הרקולס היווני, האל הסורי בעל זוהה עם האל היוני זאוס, והאל היהודי זוהה באופן מתמיה דווקא עם <hotword translation=\"אל השתייה\">דיוניסוס</hotword> </p><question index=\"1\" type=\"mark\" open=\"false\"><stem>סמנו את האלים החשובים במיתולוגיה </stem><answer color=\"purple\"><value>אפולו</value></answer><answer color=\"purple\"><value>הרקולס</value></answer><answer color=\"purple\"><value>דיוניסוס</value></answer></question><p>המקדשים בתרבות ההלניסטית ביטאו סינקרטיזם, סגנון הבניה היה מקומי, עם תוספות בסגנון יוני. בפולחן שולבו לעתים יסודות מדת היוונים, אך הייתה הקפדה על שמירת עליונות דת המקומיים, וקיום המסורת והמנהגים שלה. הטקסים הדתיים נוהלו רק בידי שכבה ממוצא נבחר (בניגוד לפוליס היוני בו זה היה תפקיד שהועמד להצבעה). </p><p>היוונים מצאו לעתים בדתות המזרח את המיסטיות, את שלוות הנפש, את ההתבוננות אל מהויות הפרט, ובעיקר את השונה מדתם ומפולחנם. </p></article>"
+    }
+  </script>
+  <script>
+    var textname = util.getQueryParameter('text') || Object.keys(texts)[0];
+    var xml = texts[textname];
+    var xmlDoc = (new window.DOMParser()).parseFromString(xml, "text/xml");
+    
+      
+
+    var lang = 'he';
+    var article = new Textit.Article(lang);
+      
+    article.loadFromXML(xmlDoc.documentElement);
+
+    function animationUpdateLoop() {
+      requestAnimationFrame(animationUpdateLoop);
+      TWEEN.update();
+    }
+    animationUpdateLoop();
+
+    document.body.appendChild(article.dom);
+    window.addEventListener('load', function () {
+      window.postMessage({ height: document.body.offsetHeight }, '*');;
+      article.setFont('normal 16px/200% Segoe UI');
+    })
+
+    if (textname == "book") {
+      for (var i = 2, len = article.dom.childNodes.length - 1; i < len; i++) {
+        if (i < 4 || (i > 7 && i < 10)) {
+          article.dom.childNodes[i].style.float = 'right';
+          article.dom.childNodes[i].style.width = '30%';
+        }
+        //if(article.dom.childNodes[i])
+      }
+      article.dom.childNodes[len - 1].querySelector('img').style.width = '55em';
+      article.dom.childNodes[6].style.backgroundColor = '#b8e2ba';
+      article.dom.childNodes[8].style.backgroundColor = '#ffca00';
+      Textit.menu.create();
+      Textit.drawer.create();
+    } else {
+      xmlDoc.documentElement.setAttribute("embed", "true");
+      Textit.embedmenu.create();
+      article.dom.style.paddingTop = '0';
+    }
+  </script>
+
+  <div id="preloaded-images">
+    <img src="icons/candy_in_text1.png" width="1" height="1" />
+    <img src="cursors/mark-red.png" width="1" height="1" />
+    <img src="cursors/mark-green.png" width="1" height="1" />
+    <img src="cursors/mark-blue.png" width="1" height="1" />
+    <img src="cursors/mark-purple.png" width="1" height="1" />
+  </div>
+
+  <div class="alert-non-fullscreen"></div>
+  <div class="alert-no-mouse"></div>
+</body>
+</html>

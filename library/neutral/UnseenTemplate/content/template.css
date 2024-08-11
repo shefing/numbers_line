@@ -1,0 +1,143 @@
+﻿/*html[lang=he] {
+  font-family: Arial;
+}
+html[lang=ar], html[lang=he] {
+  font-family: 'Arabic Typesetting';
+}*/
+
+html[data-dir=rtl] {
+}
+
+
+body {
+  overflow: hidden;
+  margin: 0;
+  /*direction: rtl;*/
+  /*font-family: Arial;*/
+}
+
+.template-wrapper * {
+  -khtml-user-select: none;
+  -moz-user-select: -moz-none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.target {
+  width: auto;
+  background-color: white;
+  height: auto;
+  border: 4px solid #4a4d52;
+  padding: 15px 20px;
+  cursor: default;
+  line-height: 1.7;
+}
+
+
+  .target.ltr {
+    direction: ltr;
+    text-align: left;
+  }
+
+  .target.rtl {
+    direction: rtl;
+    text-align: right;
+  }
+
+.storage {
+  /*margin-top: 30px;*/
+  width: auto;
+  background-color: #4a4d52;
+  height: auto;
+  border: 4px solid #4a4d52;
+  position: relative;
+}
+
+  .storage.ltr {
+    direction: ltr;
+    text-align: left;
+  }
+
+  .storage.rtl {
+    direction: rtl;
+    text-align: right;
+  }
+
+.dropHere {
+  /*background-color: #71dde2;
+  color: #71dde2;
+  cursor: pointer;*/
+  cursor: pointer;
+  /*border: 2px dotted #71dde2;*/
+  border: 1px solid #71dde2;
+  background-color: #c5ced7;
+  padding: 0 5px;
+  color: #c5ced7;
+}
+
+.dropHere.dropOver {
+   background-color: #71dde2;
+   color:#71dde2;
+}
+
+  .dropHere[occupiedBy] {
+    /*color: black;*/
+    color: black;
+    
+    background-color:white;
+  }
+
+  .dropHere-occupiedBy {
+    /*color: black;*/
+    color: black;
+    
+    background-color:white;
+  }
+
+.dragMe {
+  background-color: white;
+  border: 1px solid #4a4d52;
+  width: auto;
+  height: auto;
+  position: absolute;
+  cursor: pointer;
+  padding:0 5px;
+  -moz-transform: translate3d(0,0,0);
+  -ms-transform: translate3d(0,0,0);
+  -o-transform: translate3d(0,0,0);
+  -webkit-transform: translate3d(0,0,0);
+  transform: translate3d(0,0,0);
+}
+
+.inStorage {
+  white-space: nowrap;
+}
+
+.feedback-wrapper {
+  position: absolute;
+  left: -200px;
+}
+
+.fb_bg {
+  background: url(img/feedbacks.png) no-repeat top left;
+  position: absolute;
+}
+
+.fb_correct {
+  background-position: 0 0;
+  width: 12px;
+  height: 12px;
+}
+
+.fb_dummy {
+  background-position: -13px 0;
+  width: 12px;
+  height: 12px;
+}
+
+.fb_wrong {
+  background-position: -26px 0;
+  width: 12px;
+  height: 12px;
+}

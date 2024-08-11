@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<bundle xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://vswebessentials.com/schemas/v1/bundle.xsd">
+  <settings>
+    <!--Determines if the bundle file should be automatically optimized after creation/update.-->
+    <minify>true</minify>
+    <!--Determin whether to generate/re-generate this bundle on building the solution.-->
+    <runOnBuild>true</runOnBuild>
+    <!--Specifies a custom subfolder to save files to. By default, compiled output will be placed in the same folder and nested under the original file.-->
+    <outputDirectory />
+  </settings>
+  <!--The order of the <file> elements determines the order of the files in the bundle.-->
+  <files>
+    <file>/lib/js/external/jquery/2.0.3/jquery-2.0.3.min.js</file>
+    <file>/Edgy/lib/external/soundmanager2/soundmanager2-nodebug-jsmin.js</file>
+    <file>/Edgy/lib/modules/draggable.js</file>
+    <file>/Edgy/lib/modules/Content.js</file>
+    <file>/Edgy/lib/modules/FinalFeedback.js</file>
+    <file>/Edgy/lib/modules/Stage.js</file>
+    <file>/Edgy/lib/modules/Lms.js</file>
+    <file>/Edgy/lib/modules/GoogleAnalytics.js</file>
+    <file>/Edgy/lib/modules/Audio.js</file>
+    <file>/Edgy/lib/modules/Preloader.js</file>
+    <file>/Edgy/lib/modules/App.js</file>
+    <file>/Edgy/lib/modules/units.js</file>
+    
+    <file>/Edgy/dragndrop/lib/modules/basket.js</file>
+    <file>/Edgy/dragndrop/lib/modules/Baskets.js</file>
+    <file>/Edgy/dragndrop/lib/modules/DragOption.js</file>
+    <file>/Edgy/dragndrop/lib/modules/DragSync.js</file>
+    <file>/Edgy/dragndrop/lib/modules/Content.js</file>
+    <file>/Edgy/dragndrop/lib/modules/Buttons.js</file>
+    <file>/Edgy/dragndrop/lib/modules/Utils.js</file>
+    <file>/Edgy/dragndrop/lib/modules/App.js</file>
+    <file>/Edgy/dragndrop/lib/modules/Lms.js</file>
+    <file>/Edgy/dragndrop/standard/lib/modules/Storage.js</file>
+  </files>
+</bundle>

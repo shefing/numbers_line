@@ -1,0 +1,214 @@
+﻿body {
+  direction: rtl;
+  font-family: Arial;
+  font-size: 12px;
+  font-weight: normal;
+  margin: 0;
+  overflow: hidden;
+}
+
+[data-dir=ltr] {
+  direction: ltr;
+}
+
+.fields {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.field {
+  overflow: hidden;
+  /*margin-bottom: 1.2em;*/
+}
+
+.field-key {
+  float: right;
+  width: 110px;
+  line-height: 22px;
+}
+
+  .field-key label {
+    font-weight: bold;
+    color: #585858;
+  }
+
+.field-value {
+  float: right;
+  /*width: -webkit-calc(100% - 110px);
+  width: calc(100% - 110px);*/
+  width: 100%;
+}
+
+.wizard-wrapper {
+  padding: 10px 0;
+}
+
+.instruction {
+  position: relative;
+  /*right:110px;*/
+  margin-bottom: 10px;
+  font-weight: bold;
+  color: #585858;
+}
+
+.editor {
+  background-color: white;
+  border: 1px solid #c5c5bd;
+  padding: 2px 5px 2px 5px;
+  position: relative;
+  /*right: 109px;*/
+  /*font-size: 18px;
+  font-family: Arial;*/
+  line-height: 1.7;
+  margin-top: -1px;
+  min-height: 150px;
+}
+
+  .editor.rtl {
+    direction: rtl;
+    text-align: right;
+  }
+
+  .editor.ltr {
+    direction: ltr;
+    text-align: left;
+  }
+
+#choosefontfamily,
+#choosefontsize {
+  margin: 2px;
+}
+
+[data-dir=rtl] #choosefontfamily,
+[data-dir=rtl] #choosefontsize {
+  direction: rtl;
+}
+
+[data-dir=ltr] #choosefontfamily,
+[data-dir=ltr] #choosefontsize {
+  direction: ltr;
+}
+
+.mark, .unmark {
+  position: relative;
+  /*margin: 0 30px;*/
+  height: 26px;
+  border: 1px solid #d9d6cf;
+  background-color: #fffcf5;
+  cursor: pointer;
+  width: 140px;
+  /*font-weight: bold;*/
+  border-radius: 5px;
+}
+
+  .mark:hover, .unmark:hover {
+    background-color: #71dde2;
+  }
+
+.mark {
+  /*right: 110px;*/
+}
+
+[data-dir=ltr] .unmark {
+  left: 10px;
+}
+
+[data-dir=rtl] .unmark {
+  right: 10px;
+}
+
+.marker {
+  background-color: #71dde2;
+}
+
+.ui-dir {
+  background: url(img/directions.png) no-repeat top left;
+}
+
+.ltr-off {
+  background-position: 0 0;
+  width: 20px;
+  height: 20px;
+}
+
+.ltr-on {
+  background-position: -21px 0;
+  width: 20px;
+  height: 20px;
+}
+
+.rtl-off {
+  background-position: -42px 0;
+  width: 20px;
+  height: 20px;
+}
+
+.rtl-on {
+  background-position: -63px 0;
+  width: 20px;
+  height: 20px;
+}
+
+.font-wrapper {
+  /*right: 109px;*/
+  position: relative;
+  background-color: #F0F0EE;
+  border: 1px solid #c5c5bd;
+  height: 24px;
+}
+
+
+#directionRTL {
+  display: none;
+}
+
+  #directionRTL + label {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    background: url(img/directions.png) no-repeat top left;
+    background-position: -42px 0;
+    margin: -2px 4px 0 0;
+    vertical-align: middle;
+  }
+
+  #directionRTL:checked + label {
+    background: url(img/directions.png) no-repeat top left;
+    background-position: -63px 0;
+  }
+
+#directionLTR {
+  display: none;
+}
+
+  #directionLTR + label {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    background: url(img/directions.png) no-repeat top left;
+    background-position: 0px 0;
+    margin: -2px -1px 0 0;
+    vertical-align: middle;
+  }
+
+  #directionLTR:checked + label {
+    background: url(img/directions.png) no-repeat top left;
+    background-position: -21px 0;
+  }
+
+.directionWrapper {
+  display: inline-block;
+  direction: rtl;
+}
+
+.padding1{
+  padding-bottom: 50px;
+  padding-top: 0px;
+}
+
+.padding2{
+  padding-bottom: 5px;
+}

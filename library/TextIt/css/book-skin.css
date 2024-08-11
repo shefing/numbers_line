@@ -1,0 +1,64 @@
+﻿
+body.textit--book-skin {
+  margin: 0;
+  padding: 0;
+}
+
+body.textit--book-skin::-webkit-scrollbar {
+  width: 14px;
+  background: #fff;
+}
+
+body.textit--book-skin::-webkit-scrollbar-thumb {
+  background: #8a9aae;
+  border: 2px solid #fff;
+}
+
+body.textit--book-skin {
+  background-color: rgba(88,106,128,1);
+}
+
+body.textit--book-skin {
+  padding-top: 30px;
+  background: #8a9aae;
+  background: linear-gradient(to bottom, rgba(138,154,174,1) 0%, rgba(88,106,128,1) 100%);
+  background-attachment: fixed;
+  overflow: auto;
+}
+
+
+
+  body.textit--book-skin:before {
+    content: '';
+    position: absolute;
+    top: 0px;
+    left: 0;
+    right: 0;
+    height: 30px;
+    /*background: linear-gradient(to bottom, rgb(138, 154, 174) 25%, rgba(138, 154, 174, 0) 100%);*/
+    background: linear-gradient(to bottom, rgba(138,154,174,1) 0%, rgba(88,106,128,1) 100%);
+    background-attachment: fixed;
+    z-index: 2;
+  }
+
+  body.textit--book-skin:after {
+    content: '';
+    position: relative;
+    height: 50px;
+    display: block;
+    margin-top: -50px;
+    /*background: linear-gradient(to bottom, rgb(138, 154, 174) 25%, rgba(138, 154, 174, 0) 100%);*/
+    background: linear-gradient(to bottom, rgba(138,154,174,1) 0%, rgba(88,106,128,1) 100%);
+    background-attachment: fixed;
+    z-index: 2;
+  }
+
+  body.textit--book-skin .container{
+    width:800px;
+    padding: 0;
+    margin:auto;
+    margin-bottom: 50px;
+  }
+  body.textit--book-skin article{
+    padding: 40px 0;
+  }

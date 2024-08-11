@@ -1,0 +1,16 @@
+﻿
+options share DOM id
+cosmetic sync between wizard perishable buttons -> what about already linked options
+remove remark -> #stage { /*left: auto;*/ }
+group.data errors
+fix coupling of basketdata & basketJsonData
+check option id creation
+Groups.resolveBaskets ...
+move  preset.buildGroupJson to group.toJson
+remove basketdata options
+app - cannnot drag option once in a group.
+merge new version, Sasha changes
+lms support 
+change UI.setAsResizable to new resizable
+namimg: change wizard stage to canvas
+

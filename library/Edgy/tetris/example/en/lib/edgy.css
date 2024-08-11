@@ -1,0 +1,206 @@
+﻿body {
+  background-color: none;
+  overflow: hidden;
+}
+
+#Stage {
+  position: absolute !important;
+  top: 0;
+  /*bottom: 0;*/
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 700px;
+  height: 418px;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  /*font-family: Alef-Bold;*/
+  line-height: 14px;
+  direction: rtl;
+  overflow: visible !important;
+}
+
+::selection {
+  background: transparent;
+}
+
+.option {
+  -ms-touch-action: none;
+  touch-action: none;
+}
+
+  .option.dropped {
+    -webkit-transition: none;
+    -moz-transition: none;
+    -o-transition: none;
+    transition: none;
+  }
+
+
+
+
+.ltr {
+  direction: ltr;
+}
+
+.button-navigation-right, .button-navigation-left {
+  z-index: 1000;
+}
+
+.hide {
+  display: none !important;
+}
+
+
+.font-small .text {
+  font-size: 120% !important;
+}
+
+.font-small .dropped .text {
+  font-size: 100% !important;
+  line-height: 10% !important;
+}
+
+.he.font-medium .dropped, .he.font-medium .basket-title-text, .he.font-medium .option .text,
+.english.font-medium .dropped, .english.font-medium .basket-title-text, .english.font-medium .option .text {
+  padding-top: 1%;
+}
+
+.he.font-small .dropped, .he.font-small .basket-title-text, .he.font-small .option .text,
+.english.font-small .dropped, .english.font-small .basket-title-text, .english.font-small .option .text {
+  padding-top: 2%;
+}
+
+
+
+
+.font-medium .text {
+  font-size: 150% !important;
+}
+
+.font-medium .dropped .text {
+  font-size: 120% !important;
+}
+
+.font-large .text {
+  font-size: 200% !important;
+}
+
+.font-large .dropped .text {
+  font-size: 150% !important;
+  line-height: 85% !important;
+}
+
+.ar.font-small .text {
+  font-size: 131% !important;
+  font-family: Lateef !important;
+  line-height: 75% !important;
+}
+
+.ar.font-small .dropped .text {
+  font-size: 94% !important;
+  font-family: Lateef !important;
+  line-height: 100% !important;
+}
+
+.ar.font-medium .text {
+  font-size: 150% !important;
+  font-family: Lateef !important;
+  line-height: 52% !important;
+}
+
+.ar.font-medium .dropped .text {
+  font-size: 107% !important;
+  font-family: Lateef !important;
+  line-height: 60% !important;
+}
+
+.ar.font-large .text {
+  font-size: 162% !important;
+  font-family: Lateef !important;
+  line-height: 55% !important;
+}
+
+.ar.font-large .dropped .text {
+  font-size: 119% !important;
+  font-family: Lateef !important;
+  line-height: 60% !important;
+}
+
+.ar .feedback-text {
+  font-size: 330% !important;
+  font-family: Lateef !important;
+}
+
+.en .button-restart {
+  left: 91.6% !important;
+  right: auto !important;
+}
+
+.en .button-mute {
+  left: 84.7% !important;
+  right: auto !important;
+}
+
+.en .Stage_lifeContainer_id {
+  left: 2.4% !important;
+  right: auto !important;
+}
+
+.he .Stage_lifeContainer_id {
+  left: 2.4% !important;
+  right: auto !important;
+}
+
+.en .life:nth-child(1) {
+  left: 89.6% !important;
+  right: auto !important;
+}
+
+.en .life:nth-child(2) {
+  left: 77% !important;
+  right: auto !important;
+}
+
+.en .life:nth-child(3) {
+  left: 64.1% !important;
+  right: auto !important;
+}
+
+.en .life:nth-child(4) {
+  left: 51.2% !important;
+  right: auto !important;
+}
+
+.en .life:nth-child(5) {
+  left: 38.3% !important;
+  right: auto !important;
+}
+
+.en .life:nth-child(6) {
+  left: 25.8% !important;
+  right: auto !important;
+}
+
+.en .life:nth-child(7) {
+  left: 12.9% !important;
+  right: auto !important;
+}
+
+.en .life:nth-child(8) {
+  left: 0 !important;
+  right: auto !important;
+}
+
+/*somehow these properties ruin rendrering on android tablets*/
+.android .try-again {
+  -webkit-transform-style: flat !important;
+  transform-style: flat !important;
+  -moz-transform: none !important;
+  -ms-transform: none !important;
+  -o-transform: none !important;
+  -webkit-transform: none !important;
+  transform: none !important;
+}

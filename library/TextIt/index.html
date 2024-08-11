@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Texit</title>
+  <link src="//cdn.cet.ac.il/fonts/Abraham/stylesheet.css" rel="stylesheet" type="text/css" />
+
+  <script src="js/textit.js" type="text/javascript"></script>
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <link href="css/book-skin.css" rel="stylesheet" type="text/css" />
+</head>
+<body data-origin="false" style="overflow:auto; user-select:none;">
+  <div class="container textit-container">
+
+  </div>
+  <div class="help"></div>
+
+  <script src="js/textit.samples.js"></script>
+  <script>
+    // http://mybag.ebag.cet.ac.il/dashboard/studio/editor.aspx?itemid=d4ce13ed-92cb-42a2-ae6e-72df7b433fe2&lng=Hebrew
+    // http://storage.cet.ac.il/TextIT_Storage/
+
+    function load() {
+      if (Textit.util.isIE()) {
+        document.body.dataset.ie = "true";
+      }
+      var container = document.querySelector('.container');
+      // 1. listen to query paramaters
+      var embed = Textit.util.getQueryParameter('embed') === 'true';
+      if (embed) document.body.className += ' embed';
+      
+      var sample = Textit.util.getQueryParameter('sample');
+      if (sample) window.addEventListener('load', function () { document.querySelector('footer').style.display = 'none'; })
+
+      var xml = sessionStorage['textit-xml'] || (sample ? Textit.samples[sample].xml : Textit.samples['zavtush'].xml);
+      var xmlDoc = (new window.DOMParser()).parseFromString(xml, "text/xml").documentElement;
+      // 2. create the article
+      var article = new Textit.Article();
+      if (embed)
+        xmlDoc.setAttribute("embed", "true");
+      article.loadFromXML(xmlDoc);
+
+      if (article.embed) {
+        var embedmenu = new Textit.EmbedMenu();
+        container.appendChild(embedmenu.create(article));
+      } else {
+        document.body.className = 'textit--book-skin';
+        var menu = new Textit.CircleMenu()
+        , drawer = new Textit.Drawer();
+        menu.setDrawer(drawer);
+        drawer.setMenu(menu);
+        container.appendChild(menu.create(article));
+        container.appendChild(drawer.create(article));
+      }
+
+      container.appendChild(article.dom);
+      article.setOrigin(false);
+
+      // save on change
+      article.on('change', function () {
+        var state = JSON.stringify(article.serializeState());
+        sessionStorage.setItem('state', state);
+      })
+
+      // load on start
+      article.deserializeState(sessionStorage.getItem('state'));
+
+      // show xapi
+      var xapi = new Textit.XAPI.XAPIEmitter(article)
+      xapi.onChange = function () {
+        var xapistate = xapi.getData();
+      };
+    }
+    window.addEventListener('load', function () {
+      window.Textit.onScriptLoad = load;
+      if (window.Textit.ScriptLoaded) load();
+    });
+
+
+
+    var F2_keyCode = 113, F3_keyCode = 115;
+    document.body.addEventListener('keydown', function (e) {
+      if (e.keyCode == F2_keyCode) {
+        location = location; // funny way to refresh
+        window.addEventListener('unload', function () {
+          sessionStorage.removeItem('state');
+        });
+      }
+      if (e.keyCode == F3_keyCode) {
+        var data = JSON.stringify(article.serializeState());
+        data = JSON.parse(data);
+        article.deserializeState(data);
+      }
+    })
+
+  </script>
+  <footer class="dev-nav">
+    <a href="./designer/designer.html">Designer</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="./index.html">Viewer</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="./designer/documentation.html">Documentation</a>
+  </footer>
+  <div id="preloaded-images">
+    <img src="icons/candy_in_text1.png" width="1" height="1" />
+    <img src="cursors/mark-red.png" width="1" height="1" />
+    <img src="cursors/mark-green.png" width="1" height="1" />
+    <img src="cursors/mark-blue.png" width="1" height="1" />
+    <img src="cursors/mark-purple.png" width="1" height="1" />
+  </div>
+</body>
+</html>

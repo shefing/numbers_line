@@ -1,0 +1,204 @@
+﻿<!DOCTYPE html>
+<html dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Texit</title>
+
+  <link src="//cdn.cet.ac.il/fonts/Abraham/stylesheet.css" rel="stylesheet" type="text/css" />
+
+  <script src="dist/textit.external.js" type="text/javascript"></script>
+  <script src="dist/textit.js" type="text/javascript"></script>
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <link href="css/book-skin.css" rel="stylesheet" type="text/css" />
+
+  <script type="text/javascript" src="http://apps.assets.cet.ac.il/library/lib/js/external/jquery/2.0.3/jquery-2.0.3.min.js" charset="utf-8"></script>
+  <script src="//cdn.cet.ac.il/libs/cet.content/1/client.min.js"></script>
+  <script src="//cdn.cet.ac.il/libs/cet.content.lms/1/client.min.js"></script>
+</head>
+<body>
+
+  <div class="container textit-container"></div>
+  <div class="help"></div>
+
+  <script>
+    var article;
+    var lmsVisited = false;
+    var workMode;
+    var xapi;
+    var container = document.querySelector('.container');
+
+    function init() {
+
+      article = new Textit.Article();
+      var lmsMode = cet.content.lms.Activity.engagement.mode;
+      var lmsAccess = cet.content.lms.Activity.engagement.access;
+      var workMode;
+
+      if (lmsMode == "solved")
+        workMode = "Solution";
+      else if (lmsMode == "browse")
+        workMode = "Learning";
+      else if (lmsMode == "normal")
+        workMode = "Evaluation";
+      else if (lmsMode == "review") {
+        if (lmsAccess == "read")
+          workMode = "Results";
+        else
+          workMode = "Repair";
+      }
+
+
+      if (workMode == "Evaluation" && lmsAccess != "read")
+        article.feedback = false;
+
+      var xml = parsePresetXML(cet.content.Settings.preset);
+      var xmlDoc = (new window.DOMParser()).parseFromString(xml, "text/xml");
+      article.loadFromXML(xmlDoc.documentElement);
+
+      var patchedRepair = false;
+      article.on('load', function () {
+        if (patchedRepair) return;
+        patchedRepair = true;
+        if (workMode == "Repair") // TODO: come on... this is just a patch... the feedback attribute should be private
+          setTimeout(function () { article.feedback = false; }, 1500)
+      });
+
+      function load() {
+        cet.content.State.load(function (data) {
+          if (data) article.deserializeState(data);
+        })
+      }
+
+      cet.content.lms.Activity.settings.supportsCheck(true);
+      cet.content.lms.Activity.settings.supportsReset(false);
+      cet.content.lms.Activity.settings.supportsShowSolution(false);
+      var rndid = Math.floor(Math.random()*1000);
+      cet.content.lms.Activity.bind('check', function () {
+        sendXAPI(xapi.getData('asked_check'));
+      });
+      cet.content.lms.Activity.bind('coupledStateChanged', function () {
+        load();
+      });
+
+      function onArticleReady() {
+        initXapi();
+        if (workMode == "Solution")
+          article.forEachQuestion(function (i, q) { if (q.solve) q.solve() });
+        else
+          load();
+      }
+
+      if (article.isReady) onArticleReady();
+      else article.on('ready', onArticleReady);
+
+      article.on('score', function (e) {
+        if (!lmsVisited) {
+          lmsVisited = true;
+          cet.content.lms.Activity.start();
+        }
+
+        // fix 279530 - very rare situation when e.overallScore is NaN
+        if (!isNaN(e.overallScore)) {
+          cet.content.lms.Activity.score(e.overallScore * 100);
+        }
+
+        if (!article.embed) {
+          Textit.externalQuestions.score(e.questionIndex, e.questionScore);
+        }
+      })
+
+
+      function save() {
+        var state = JSON.stringify(article.serializeState());
+        cet.content.State.save(state);
+      }
+      article.on('change', save);
+
+      if (article.embed) {
+        var embedmenu = new Textit.EmbedMenu();
+        container.appendChild(embedmenu.create(article));
+        autoResizeHeight();
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.className = 'textit--book-skin';
+        var menu = new Textit.CircleMenu()
+        , drawer = new Textit.Drawer();
+        menu.setDrawer(drawer);
+        drawer.setMenu(menu);
+        container.appendChild(menu.create(article));
+        container.appendChild(drawer.create(article));
+      }
+
+      if (cet.content.lms.Settings.supported && cet.content.lms.Activity.engagement.access == "read") {
+        article.SetReadOnly(true);
+      }
+      container.appendChild(article.dom);
+      article.setOrigin(false);
+    }
+
+    function load() {
+      var f = function () {
+        cet.content.getModel(function (data) {
+          Textit.externalQuestions.load(data);
+          init();
+        });
+      }
+      var w = function () {
+        if (window.Textit.ScriptLoaded) f();
+        else window.Textit.onScriptLoad = f;
+      }
+      
+      if (cet.content.UI.clientReady()) w();
+      else cet.content.on('clientready', w);
+    }
+
+    window.addEventListener('load', load);
+
+    function initXapi() {
+      if (cet.content.xapiSupported) {
+        xapi = new Textit.XAPI.XAPIEmitter(article);
+        xapi.onChange = function () {
+          sendXAPI(xapi.getData());
+        }
+      }
+    }
+    function sendXAPI(xapistate) {
+      if (!lmsVisited) {
+        lmsVisited = true;
+        cet.content.lms.Activity.start();
+      }
+      cet.content.xapi.send(xapistate);
+    }
+
+    function parsePresetXML(preset) {
+      var p = JSON.parse(decodeURIComponent(preset));
+      if (p && p.xml)
+        return p.xml;
+      return preset;
+    }
+
+
+    function autoResizeHeight() {
+      var lastHeight = 0, h;
+      setInterval(function () {
+        h = article.dom.offsetHeight + 65;
+        if (lastHeight != h) cet.content.UI.setHeight(h);
+        lastHeight = h;
+      }, 1500);
+    }
+
+  </script>
+
+  <div id="preloaded-images">
+    <img src="icons/candy_in_text1.png" width="1" height="1" />
+    <img src="cursors/mark-red.png" width="1" height="1" />
+    <img src="cursors/mark-green.png" width="1" height="1" />
+    <img src="cursors/mark-blue.png" width="1" height="1" />
+    <img src="cursors/mark-purple.png" width="1" height="1" />
+  </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+/* 
+ * Lateef (Arabic) http://www.google.com/webfonts/earlyaccess
+ */
+@font-face {
+  font-family: 'Lateef';
+  font-style: normal;
+  font-weight: 400;
+  src: url(LateefRegOT.eot);
+  src: url(LateefRegOT.eot?#iefix) format('embedded-opentype'),
+       url(LateefRegOT.woff2) format('woff2'),
+       url(LateefRegOT.woff) format('woff'),
+       url(LateefRegOT.ttf) format('truetype');
+}

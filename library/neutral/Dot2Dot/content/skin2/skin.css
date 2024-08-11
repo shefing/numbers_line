@@ -1,0 +1,81 @@
+﻿
+
+/*#region SKIN*/
+
+.template-background {
+  background-color: #cf6450;
+}
+
+
+#svg path {
+stroke: #fdd35b;
+}
+
+
+.dot {
+  background: url(bullitOFF.svg)0 0 no-repeat;
+}
+
+  .dot.full {
+    background-image: url(bullitON.svg);
+  }
+
+.correct .dot,
+.correct .dot.full {
+  background-image: url(feedback_V.svg);
+}
+.wrong .dot,
+.wrong .dot.full {
+  background-image: url(feedback_X.svg);
+}
+
+
+.sound-box,
+.image-box,
+.text-box {  
+  border: 1px solid #b3432f;
+  background-color: #FFF; 
+  border-radius: 3px;
+}
+
+
+.content-wrapper {
+  background-color: #ffffff;
+    border-radius: 2px;
+}
+
+.image-box {
+
+}
+
+.text-box {
+  color: #333333;
+}
+
+.correct .text-box,
+.correct .image-box,
+.correct .sound-box {
+  background-color: #95C63F;
+  border-color: #B1EB4C;
+}
+
+.wrong .text-box,
+.wrong .image-box,
+.wrong .sound-box {
+  background-color: #B52658;
+  border-color: #E93272;
+}
+
+
+.final-feedback {
+
+  background-color: #fdd35b;
+
+  border: 5px solid #B52658;
+}
+
+.close {
+  border-color: #B52658;
+}
+
+/*#endregion*/

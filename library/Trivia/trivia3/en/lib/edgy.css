@@ -1,0 +1,141 @@
+﻿body {
+  background-color: transparent;
+  overflow: hidden;
+}
+
+#Stage {
+  direction: ltr;
+}
+
+::selection {
+  background: transparent;
+}
+
+.option {
+  -ms-touch-action: none;
+  /*z-index: 100;*/
+}
+
+
+.ltr {
+  direction: ltr;
+}
+
+.hide {
+  display: none !important;
+}
+
+
+.option .text {
+  overflow: hidden;
+}
+
+.title .text {
+  overflow: hidden;
+}
+
+.timer {
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+
+.vertical-pos-parent {
+  position: relative;
+  display: table;
+  height: 100%;
+}
+
+.vertical-pos-child {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+
+
+.lang-he,
+.lang-en {
+  font-family: Alef;
+}
+
+.lang-ar {
+  font-family: Lateef,serif;
+}
+
+
+
+.option-text.lang-he.font-size-small,
+.option-text.lang-en.font-size-small {
+  font-size: 100%;
+  line-height: 106%;
+}
+
+.option-text.lang-he.font-size-medium,
+.option-text.lang-en.font-size-medium {
+  font-size: 112.5%;
+  line-height: 117%;
+}
+
+.option-text.lang-he.font-size-large,
+.option-text.lang-en.font-size-large {
+  font-size: 125%;
+  line-height: 119%;
+}
+
+.option-text.lang-ar.font-size-small {
+  font-size: 100%;
+  line-height: 175%;
+}
+
+.option-text.lang-ar.font-size-medium {
+  font-size: 106.3%;
+  line-height: 171%;
+}
+
+.option-text.lang-ar.font-size-large {
+  font-size: 143.8%;
+  line-height: 174%;
+}
+
+
+
+
+
+.title-text.lang-he.font-size-small,
+.title-text.lang-en.font-size-small {
+  font-size: 137.5%;
+  line-height: 100%;
+}
+
+.title-text.lang-he.font-size-medium,
+.title-text.lang-en.font-size-medium {
+  font-size: 156.3%;
+  line-height: 108%;
+}
+
+.title-text.lang-he.font-size-large,
+.title-text.lang-en.font-size-large {
+  font-size: 175%;
+  line-height: 100%;
+}
+
+.title-text.lang-ar.font-size-small {
+  font-size: 131%;
+  line-height: 181%;
+}
+
+.title-text.lang-ar.font-size-medium {
+  font-size: 156.3%;
+  line-height: 180%;
+}
+
+.title-text.lang-ar.font-size-large {
+  font-size: 187.5%;
+  line-height: 190%;
+}
+
+
+p {
+  margin: 0;
+}

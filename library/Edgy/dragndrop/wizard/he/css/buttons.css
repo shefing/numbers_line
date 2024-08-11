@@ -1,0 +1,42 @@
+﻿.button-check,
+.button-restart {
+  position: absolute;
+  top: 90%;
+  left: 10%;
+  width: 6%;
+  height: 8%;
+  background: #939e9a url('../images/icon_check.svg') no-repeat 50% 50%;
+  -moz-background-size: 59% 57%;
+  -o-background-size: 59% 57%;
+  background-size: 59% 57%;
+  border-radius: 50%;
+  z-index: 99 !important;
+}
+.button-check:hover,
+.button-restart:hover {
+  cursor: pointer;
+  background-color: #97b597;
+}
+.button-restart {
+  left: 2%;
+  background-image: url('../images/icon_restart.svg');
+  background-size: 65% 65%;
+}
+.english .button-check {
+  left: initial;
+  right: 10%;
+}
+.english .button-restart {
+  left: initial;
+  right: 2%;
+}
+.buttons-background {
+  width: 98%;
+  left: 1%;
+  background-color: #6f747a;
+  top: 88.5%;
+  height: 11%;
+  position: absolute;
+  z-index: 90;
+}
+/*# sourceMappingURL=buttons.css.map */

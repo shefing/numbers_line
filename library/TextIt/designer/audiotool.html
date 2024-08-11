@@ -1,0 +1,41 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+</head>
+<body style="text-align:center; font-family:sans-serif; font-size:1.5em;">
+  <h1>Quick Fix: Converting old Audacity txt to Textit timecodes</h1>
+  <h2>This should be unecessary with the new version of textit (after May 10th 2017)</h2>
+  <p>
+    <b>1.</b> Paste the `_timecodes.txt` file into the box below:
+  </p>
+  <textarea id="text" rows="15" cols="70"></textarea>
+  <p><b>2.</b> Press the <button>Convert</button> button to parse the Audcaity txt to a text file Textit could easily read</p>
+  <p>
+    <b>3.</b> Copy and paste the result in the `_timecodes.txt` file;
+  </p>
+  <script type="text/javascript">
+    function parseTimeCodes(raw) {
+      // parse time codes supports json, or fall backs to tab delimited lines
+      var res = [];
+      if (/\[[\s\S]*\]/.test(raw)) { // if can be a json array (soft test, doesn't check validation)
+        res = JSON.parse(raw); // assumes valid, could throw an error if invalid json
+      } else {
+        res = [];
+        var lines = raw.split('\n');
+        for (var i = 0; i < lines.length; i++) {
+          var comps = lines[i].split('\t');
+          if (comps.length > 1)
+            res.push([parseFloat(comps[0].trim()), parseFloat(comps[1].trim())]);
+        }
+      }
+      return res;
+    }
+    document.querySelector('button').addEventListener('click', function (e) {
+      var parsed = parseTimeCodes(document.querySelector('textarea').value);
+      document.querySelector('textarea').value = JSON.stringify(parsed);
+    })
+  </script>
+</body>
+</html>
