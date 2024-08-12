@@ -8,6 +8,7 @@ TFS_BUILD_CRED_ID = "win_super_admin"
 properties([
   parameters([
     string(name: 'PushBRANCH', value: ""),
+    booleanParam(name: 'Delpoy', defaultValue: false, description: 'Do you wish to deploy the service to devENV?'),
   ])
 ])  
  
@@ -115,55 +116,40 @@ pipeline {
          }
 
         stage ('TriggerDeploy') {
+          when {
+          expression {params.Delpoy}
+          }
           steps {
             script {
-              if(PushBRANCH == 'develop'){
-                machines = "btesting02"
-                confType = ""
-                envName = ""
-                            
-                build job: "Microservice-Deploy", 
-                parameters: [
-                      string(name: 'SERVICE_NAME', value: serviceName),
-                      string(name: 'ARTIFACT_VERSION', value: artifactVersion),
-                      string(name: 'BRANCH', value: PushBRANCH),
-                      string(name: 'SERVICE_PATH', value: servicePathOnRemoteServer),
-                      string(name: 'MACHINES', value: machines),
-                      string(name: 'ENVIRONMENT', value: envName),
-                      string(name: 'CONF_TYPE', value: confType)
-                      ]
-              }else if(PushBRANCH.contains('release') || PushBRANCH == 'master' || PushBRANCH.contains('hotfix')){ 
-                println "Skipping deployment for PREPROD enviroment.."
-                  machines = "BPXX.azure.cet-prod,BPXX.azure.cet-prod,BPXX.azure.cet-prod,BPXX.azure.cet-prod,BPXX.azure.cet-prod,BPXX.azure.cet-prod,BPXX.azure.cet-prod,BPXX.azure.cet-prod"
-                  global_sendEmailNotification(
-                  subject: "RC Build ${serviceName}",
-                  body: "SERVICE_NAME: ${serviceName}\nARTIFACT_VERSION: ${artifactVersion}\nBRANCH: ${PushBRANCH}\nSERVICE_PATH: ${servicePathOnRemoteServer}",
-                  to: 'suhah@cet.ac.il',
-                  )
-                currentBuild.result = 'SUCCESS'
-                return
-              }else{
-                machines = "btesting02"
-                confType = ""
-                envName = ""
-                            
-                build job: "Microservice-Deploy", 
-                parameters: [
-                  string(name: 'SERVICE_NAME', value: serviceName),
-                  string(name: 'ARTIFACT_VERSION', value: artifactVersion),
-                  string(name: 'BRANCH', value: PushBRANCH),
-                  string(name: 'SERVICE_PATH', value: servicePathOnRemoteServer),
-                  string(name: 'MACHINES', value: machines),
-                  string(name: 'ENVIRONMENT', value: envName),
-                  string(name: 'CONF_TYPE', value: confType)
-                ]
-              //  machines = ""//"ApiGW-01.azure.cet-prod,ApiGW-02.azure.cet-prod,MS-01.azure.cet-prod,MS-02.azure.cet-prod"                                          
-              //  confType = "appsetting"
-              //  envName = ""
-              //  break
-              }
+              machines = "btesting02"
+              confType = ""
+              envName = ""
+                          
+              build job: "Microservice-Deploy", 
+              parameters: [
+                    string(name: 'SERVICE_NAME', value: serviceName),
+                    string(name: 'ARTIFACT_VERSION', value: artifactVersion),
+                    string(name: 'BRANCH', value: PushBRANCH),
+                    string(name: 'SERVICE_PATH', value: servicePathOnRemoteServer),
+                    string(name: 'MACHINES', value: machines),
+                    string(name: 'ENVIRONMENT', value: envName),
+                    string(name: 'CONF_TYPE', value: confType)
+                    ]
+                    //  machines = ""//"ApiGW-01.azure.cet-prod,ApiGW-02.azure.cet-prod,MS-01.azure.cet-prod,MS-02.azure.cet-prod"                                          
+                    //  confType = "appsetting"
+                    //  envName = ""
+                    //  break
+
+              // sync sevice to kub testing cluster
+              build job: "WindowsNodeServiceDeploy",
+              parameters: [
+                    string(name: 'SERVICE_NAME', value: 'SecurityManagerWeb'),
+                    string(name: 'artifactVersion', value: artifactVersion),
+                    string(name: 'ENVIRONMENT_TYPE', value: 'Testing'),
+              ]
+                    
             }
-          }  
+          }
         }
       }
 
