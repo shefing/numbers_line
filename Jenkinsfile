@@ -139,14 +139,6 @@ pipeline {
                     //  confType = "appsetting"
                     //  envName = ""
                     //  break
-
-              // sync sevice to kub testing cluster
-              build job: "WindowsNodeServiceDeploy",
-              parameters: [
-                    string(name: 'SERVICE_NAME', value: 'SecurityManagerWeb'),
-                    string(name: 'artifactVersion', value: artifactVersion),
-                    string(name: 'ENVIRONMENT_TYPE', value: 'Testing'),
-              ]
                     
             }
           }
