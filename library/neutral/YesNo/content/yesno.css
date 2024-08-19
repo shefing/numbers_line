@@ -2117,6 +2117,19 @@ body {
   cursor: pointer;
   border: 1px solid currentColor;
 }
+.yesno[data-dir=rtl] .yesno-contaner .yesno-status_bar .yesno-deactivating-The-Timer {
+  position: absolute;
+  top: 46%;
+  right: 79%;
+  transform: translate(1.4em, -50%);
+  width: 3.7em;
+  height: 3.7em;
+  cursor: pointer;
+  display: none;
+}
+.imageToStopTimerOrContinue{
+  width: 100%;
+}
 
 .yesno[data-dir=rtl] .yesno-contaner .yesno-status_bar .yesno-status_bar-clear-wraper svg {
   position: absolute;

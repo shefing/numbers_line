@@ -14,15 +14,15 @@ Array.prototype.remove_item = function (item) {
     }
 };
 String.prototype.convertToRGB = function(){
-  
-  var color = this.replace(/[^0-9a-z]/gi, '');
- 
+
+    var color = this.replace(/[^0-9a-z]/gi, '');
+
   if(color.length != 6){
-    //color = oPreset.skin_data.leading_color    ;
-      throw "Only six-digit hex colors are allowed.";
+        //color = oPreset.skin_data.leading_color    ;
+        throw "Only six-digit hex colors are allowed.";
     }
 
-  var aRgbHex = color.match(/.{1,2}/g);
+    var aRgbHex = color.match(/.{1,2}/g);
     var aRgb = [
         parseInt(aRgbHex[0], 16),
         parseInt(aRgbHex[1], 16),
@@ -44,17 +44,17 @@ window.cancelAnimationFrame = window.cancelAnimationFrame
 var oPreset;
 var currentSkin;
 var yesno = function (yesno_params) {
-  var preset = yesno_params.preset, 
-      lang = yesno_params.lang, 
-      isEditMote = yesno_params.isEditMote, 
-      container = yesno_params.container, 
-      onFullScreen = yesno_params.onFullScreen ? yesno_params.onFullScreen : function(){}, 
-      saveState = yesno_params.saveState ? yesno_params.saveState : function(state){},
-      isReadOnly = yesno_params.isReadOnly ? yesno_params.isReadOnly : false,
-      workMode = yesno_params.workMode;
+    var preset = yesno_params.preset,
+        lang = yesno_params.lang,
+        isEditMote = yesno_params.isEditMote,
+        container = yesno_params.container,
+        onFullScreen = yesno_params.onFullScreen ? yesno_params.onFullScreen : function(){},
+        saveState = yesno_params.saveState ? yesno_params.saveState : function(state){},
+        isReadOnly = yesno_params.isReadOnly ? yesno_params.isReadOnly : false,
+        workMode = yesno_params.workMode;
 
     var self = this;
-     oPreset = JSON.parse(JSON.stringify(preset));
+    oPreset = JSON.parse(JSON.stringify(preset));
     var dom;
 
     var isIE;
@@ -104,7 +104,7 @@ var yesno = function (yesno_params) {
             remove_slide: 'מחיקה',
             clone_slide: 'שכפול',
             max_slide_number: 'עד 10 שאלות',
-            
+
             edit_game_bg: 'עריכת הרקע',
             add_image_bg: 'העלאת תמונת רקע',
             update_image_bg: 'החלפת תמונת רקע',
@@ -150,7 +150,7 @@ var yesno = function (yesno_params) {
             he: 'עברית',
             ar: 'ערבית',
             en: 'אנגלית',
-            
+
             start_title: 'הודעת פתיחת המשחק',
             start_text: 'בואו נתחיל',
             start_text_min_error: 'חסר טקסט פתיחה',
@@ -208,7 +208,7 @@ var yesno = function (yesno_params) {
             add_slide: 'إضافة سؤال + ',
             remove_slide: 'حذف',
             clone_slide: 'نسخ',
-            max_slide_number: 'حتّى 10 أسئلة',            
+            max_slide_number: 'حتّى 10 أسئلة',
             edit_game_bg: 'تحرير الخلفيّة',
             add_image_bg: 'رفع صورة خلفيّة',
             update_image_bg: 'استبدال صورة  الخلفيّة',
@@ -254,7 +254,7 @@ var yesno = function (yesno_params) {
             he: 'العبريّ’',
             ar: 'العربيّة',
             en: 'الإنجليزيّة',
-            
+
             start_title: 'رسالة افتتاح اللعبة',
             start_text: 'هيّا نبدأ',
             start_text_min_error: 'חסר טקסט פתיחה',
@@ -310,7 +310,7 @@ var yesno = function (yesno_params) {
             add_slide: 'add a question',
             remove_slide: 'delete',
             clone_slide: 'copy',
-            max_slide_number: 'total: 10 questions',            
+            max_slide_number: 'total: 10 questions',
             edit_game_bg: 'background',
             add_image_bg: 'upload background picture',
             update_image_bg: 'change background picture',
@@ -356,7 +356,7 @@ var yesno = function (yesno_params) {
             he: 'hebrew',
             ar: 'arabic',
             en: 'english',
-            
+
             start_title: 'opening message',
             start_text: 'Let’s start!',
             start_text_min_error: 'Missing introductory text.',
@@ -453,7 +453,7 @@ var yesno = function (yesno_params) {
         },
         {
             comon: { //hatav
-              font: "'Assistant',sans-serif",
+                font: "'Assistant',sans-serif",
                 leading_color: '006AE7',
                 game_bg_image: '../content/img/skins/hatav/bg.png',
                 game_bg_color: 'ffffff',
@@ -507,7 +507,7 @@ var yesno = function (yesno_params) {
         },
         {
             comon: { //other
-              font: "'Open Sans Hebrew',sans-serif",
+                font: "'Open Sans Hebrew',sans-serif",
                 leading_color: '31BFE2',//'29abe2',
                 game_bg_image: '../content/img/skins/other/bg.png',
                 game_bg_color: 'ffffff',
@@ -560,7 +560,7 @@ var yesno = function (yesno_params) {
     };
 
     var fontSelector = false,
-        langSelsector = false, 
+        langSelsector = false,
         startTitleInput = false,
         entTitleInput = false,
         pauseTitleInput = false,
@@ -574,14 +574,14 @@ var yesno = function (yesno_params) {
         timer = false,
         barProgressSelector = false,
         barOrderQuestionsSelector = false,
-        barBgColorPicker = false, 
-        answer_btn_panel = false, 
-        answerBtnBgColorPicker = false, 
-        answerBtnTextColorPicker = false, 
+        barBgColorPicker = false,
+        answer_btn_panel = false,
+        answerBtnBgColorPicker = false,
+        answerBtnTextColorPicker = false,
         answerBtnFontSizeSelector = false;
 
     var slidesDom, shapesDom, questionsDom;
-
+    var flag=true;
     $('body').on('dragstart drop', function (e) {
         e.preventDefault();
         return false;
@@ -609,7 +609,7 @@ var yesno = function (yesno_params) {
             oPreset.leading_color = false;
         }
         if (!('game_bg_image' in oPreset)) {
-          oPreset.game_bg_image = defaultSkinData.getPresetVal('game_bg_image',true);//false;
+            oPreset.game_bg_image = defaultSkinData.getPresetVal('game_bg_image',true);//false;
         }
         if (!('game_bg_color' in oPreset)) {
             oPreset.game_bg_color = false;
@@ -617,7 +617,7 @@ var yesno = function (yesno_params) {
         if (!('game_bg_image_layout' in oPreset)) {
             oPreset.game_bg_image_layout = false;
         }
-        
+
         if (!('start_text' in oPreset)) {
             oPreset.start_text = langList[oPreset.lang_data].start_text;
         }
@@ -685,16 +685,16 @@ var yesno = function (yesno_params) {
     }
 
     var init = function () {
-      var wm = "n";
-      if(workMode == "Evaluation"){
-        wm = "ev";
-      }else if(workMode == "Results" || workMode == "Solution"){
-        wm = "sol";
-      }
-      var icon_start = "icon-play";
-      if(oPreset.skin == 1)
-        icon_start = "icon-start";
-      dom = '<div class="yesno" data-lang="' + _L.lang + '" data-content_lang="' + oPreset.lang_data + '" data-skin="' + oPreset.skin + '" data-dir="' + _L.dir + '" data-is_edit="' + (isEditMote ? '1' : '0') + '" mode="'+wm+'">\
+        var wm = "n";
+        if(workMode == "Evaluation"){
+            wm = "ev";
+        }else if(workMode == "Results" || workMode == "Solution"){
+            wm = "sol";
+        }
+        var icon_start = "icon-play";
+        if(oPreset.skin == 1)
+            icon_start = "icon-start";
+        dom = '<div class="yesno" data-lang="' + _L.lang + '" data-content_lang="' + oPreset.lang_data + '" data-skin="' + oPreset.skin + '" data-dir="' + _L.dir + '" data-is_edit="' + (isEditMote ? '1' : '0') + '" mode="'+wm+'">\
                     <div data-edit_mode="1">\
                         <div class="yesno-editor_section" ><div class="yesno-editor_title">' + _L.skins_title + '</div><div class="yesno-editor_input yesno-skins"></div></div>\
                         <div class="yesno-editor_section"><div class="yesno-editor_title">' + _L.lang_data + '</div><div class="yesno-editor_input yesno-lang_data"></div></div>\
@@ -730,6 +730,7 @@ var yesno = function (yesno_params) {
                         </div>\
                         <div class="yesno-status_bar">\
                             <div class="yesno-status_bar-items"></div>\
+                             <div class="yesno-deactivating-The-Timer"><img class ="imageToStopTimerOrContinue" src="../content/img/btn_hover.png" alt=""></div>\
                             <div class="yesno-status_bar-timer-wraper">\
                                 <div class="yesno-status_bar-timer"></div>\
                                 <div class="yesno-tools_btn_wraper" data-edite="timer" data-layout="h" data-edit_mode="1">\
@@ -830,72 +831,72 @@ var yesno = function (yesno_params) {
                 </div>';
         dom = $(dom);
 
-        slidesDom = dom.find('.yesno-slides'); 
-        shapesDom = dom.find('.yesno-status_bar-items'); 
+        slidesDom = dom.find('.yesno-slides');
+        shapesDom = dom.find('.yesno-status_bar-items');
         questionsDom = dom.find('.yesno-questions .swiper-wrapper');
-    
-        dom.on('click', '.yesno-edit_btn.yesno-tools_btn[data-edite="game_bg"] .yesno-edit_panel-refresh_btn', function() {          
-          oPreset.game_bg_image  = oPreset.skin_data['game_bg_image'];
-          oPreset.game_bg_color = false;
-          oPreset.game_bg_image_layout = false;
-          updateDefaultSkinData();
+
+        dom.on('click', '.yesno-edit_btn.yesno-tools_btn[data-edite="game_bg"] .yesno-edit_panel-refresh_btn', function() {
+            oPreset.game_bg_image  = oPreset.skin_data['game_bg_image'];
+            oPreset.game_bg_color = false;
+            oPreset.game_bg_image_layout = false;
+            updateDefaultSkinData();
         });
-
+       
         dom.on('click', '.slider.arrow.a-left', function() {
-          if(last_sound)
-            last_sound.stop();
-          var data_item_id = document.querySelector('.swiper-wrapper .swiper-slide[data-selected="1"]').getAttribute('data-item_id');
-          if(data_item_id.split('_')[1] == 0){  
-            return;
-          }
-          document.querySelector('.yesno-status_bar-item[data-item_id='+ data_item_id +']').setAttribute('data-selected','0');
-    
-          data_item_id = "item_" + --data_item_id.split('_')[1];
-          if(data_item_id.split('_')[1] == 0){  
-            $('.slider.arrow.a-left').addClass('swiper-button-disabled').removeAttr('role').removeAttr('tabindex');
-          }
-          if(data_item_id.split('_')[1] < oPreset.items.length-1){  
-            $('.slider.arrow.a-right').removeClass('swiper-button-disabled').attr('role', 'button').attr('tabindex', 3);
-          }
-          $('.yesno-status_bar-item').removeClass('currentSlide');
-          $('.yesno-status_bar-item[data-item_id='+ data_item_id +']').addClass('currentSlide');
-          document.querySelector('.yesno-status_bar-item[data-item_id='+ data_item_id +']').setAttribute('data-selected','1');
+            if(last_sound)
+                last_sound.stop();
+            var data_item_id = document.querySelector('.swiper-wrapper .swiper-slide[data-selected="1"]').getAttribute('data-item_id');
+            if(data_item_id.split('_')[1] == 0){
+                return;
+            }
+            document.querySelector('.yesno-status_bar-item[data-item_id='+ data_item_id +']').setAttribute('data-selected','0');
 
-          document.querySelector('.swiper-wrapper .swiper-slide[data-selected="1"]').setAttribute('data-selected', '0');
-          removeQuestionButtonKeyboardSelection();
-          document.querySelector('.swiper-wrapper .swiper-slide[data-item_id=' + data_item_id + ']').setAttribute('data-selected', '1');
-          setQuestionButtonKeyboardSelction();
-          console.log(1);
+            data_item_id = "item_" + --data_item_id.split('_')[1];
+            if(data_item_id.split('_')[1] == 0){
+                $('.slider.arrow.a-left').addClass('swiper-button-disabled').removeAttr('role').removeAttr('tabindex');
+            }
+            if(data_item_id.split('_')[1] < oPreset.items.length-1){
+                $('.slider.arrow.a-right').removeClass('swiper-button-disabled').attr('role', 'button').attr('tabindex', 3);
+            }
+            $('.yesno-status_bar-item').removeClass('currentSlide');
+            $('.yesno-status_bar-item[data-item_id='+ data_item_id +']').addClass('currentSlide');
+            document.querySelector('.yesno-status_bar-item[data-item_id='+ data_item_id +']').setAttribute('data-selected','1');
+
+            document.querySelector('.swiper-wrapper .swiper-slide[data-selected="1"]').setAttribute('data-selected', '0');
+            removeQuestionButtonKeyboardSelection();
+            document.querySelector('.swiper-wrapper .swiper-slide[data-item_id=' + data_item_id + ']').setAttribute('data-selected', '1');
+            setQuestionButtonKeyboardSelction();
+            console.log(1);
         });
 
         dom.on('click', '.slider.arrow.a-right', function() {
-          if(last_sound)
-            last_sound.stop();
-          var data_item_id = document.querySelector('.swiper-wrapper [data-selected="1"]').getAttribute('data-item_id');
-          if(data_item_id.split('_')[1] == oPreset.items.length-1){  
-            return;
-          }
-          document.querySelector('.yesno-status_bar-item[data-item_id='+ data_item_id +']').setAttribute('data-selected','0');
-          data_item_id = "item_" + ++data_item_id.split('_')[1];
-          if(data_item_id.split('_')[1] == oPreset.items.length-1){  
-            $('.slider.arrow.a-right').addClass('swiper-button-disabled').removeAttr('role').removeAttr('tabindex');
-          }
-          if(data_item_id.split('_')[1] > 0){
-            $('.slider.arrow.a-left').removeClass('swiper-button-disabled').attr('role', 'button').attr('tabindex', 4);
-          }
-          $('.yesno-status_bar-item').removeClass('currentSlide');
-          $('.yesno-status_bar-item[data-item_id='+ data_item_id +']').addClass('currentSlide');
-          document.querySelector('.yesno-status_bar-item[data-item_id='+ data_item_id +']').setAttribute('data-selected','1');
+            if(last_sound)
+                last_sound.stop();
+            var data_item_id = document.querySelector('.swiper-wrapper [data-selected="1"]').getAttribute('data-item_id');
+            if(data_item_id.split('_')[1] == oPreset.items.length-1){
+                return;
+            }
+            document.querySelector('.yesno-status_bar-item[data-item_id='+ data_item_id +']').setAttribute('data-selected','0');
+            data_item_id = "item_" + ++data_item_id.split('_')[1];
+            if(data_item_id.split('_')[1] == oPreset.items.length-1){
+                $('.slider.arrow.a-right').addClass('swiper-button-disabled').removeAttr('role').removeAttr('tabindex');
+            }
+            if(data_item_id.split('_')[1] > 0){
+                $('.slider.arrow.a-left').removeClass('swiper-button-disabled').attr('role', 'button').attr('tabindex', 4);
+            }
+            $('.yesno-status_bar-item').removeClass('currentSlide');
+            $('.yesno-status_bar-item[data-item_id='+ data_item_id +']').addClass('currentSlide');
+            document.querySelector('.yesno-status_bar-item[data-item_id='+ data_item_id +']').setAttribute('data-selected','1');
 
-          document.querySelector('.swiper-wrapper [data-selected="1"]').setAttribute('data-selected', '0');
-          removeQuestionButtonKeyboardSelection();
-          document.querySelector('.swiper-wrapper .swiper-slide[data-item_id=' + data_item_id + ']').setAttribute('data-selected', '1');
-          
-          var next = selected_item.dom_item.next('.yesno-question[data-item_id]');
-          items[next.attr('data-item_id')].select();
-          if(selected_item) {
-            selected_item.autoPlaySound();
-          }
+            document.querySelector('.swiper-wrapper [data-selected="1"]').setAttribute('data-selected', '0');
+            removeQuestionButtonKeyboardSelection();
+            document.querySelector('.swiper-wrapper .swiper-slide[data-item_id=' + data_item_id + ']').setAttribute('data-selected', '1');
+
+            var next = selected_item.dom_item.next('.yesno-question[data-item_id]');
+            items[next.attr('data-item_id')].select();
+            if(selected_item) {
+                selected_item.autoPlaySound();
+            }
         });
 
         if (isMobile) {
@@ -913,7 +914,7 @@ var yesno = function (yesno_params) {
             fullScreenBtn.on('click', onFullScreen);
             dom.find('.yesno-container').append(fullScreenBtn);
         }
-        
+        if(flag==true){
         timer = create_timer({
             time: oPreset.timer_limit,
             stroke_width: 2,
@@ -930,8 +931,30 @@ var yesno = function (yesno_params) {
             onStop: function() {},
             onPlay: function() {}
         });
+    }
         dom.find('.yesno-status_bar-timer').append(timer);
-
+        dom.on('click keyup', '.yesno-deactivating-The-Timer', function(event) {
+                if (event.type === 'click' || (event.type === 'keyup' && (event.key === 'Enter' ||  event.key === ' '))) {
+                    var img = document.querySelector('.imageToStopTimerOrContinue');
+                        if (img.getAttribute('src') === '../content/img/btn_hover.png') {
+                            img.setAttribute('src', '../content/img/btn_clicked.png');
+                            var timerContent = $('.timer-time span').text();
+                            timer.cancel();
+                            var timerSpan = document.querySelector('.timer-time span');
+                            timerSpan.textContent = timerContent; 
+                            flag = false;
+                            return;
+                        } else {
+                            img.setAttribute('src', '../content/img/btn_hover.png');
+                            var timerContent = $('.timer-time span').text();
+                            timer.play();
+                            var timerSpan = document.querySelector('.timer-time span');
+                            timerSpan.textContent = timerContent; 
+                            return;
+                        }
+                }
+            });
+        
         if (isEditMote) {
             dom.find('[data-edit_mode="0"]').remove();
 
@@ -956,48 +979,48 @@ var yesno = function (yesno_params) {
             }));
 
             langSelsector = createSelector(
-                    {
+                {
                     val: oPreset.lang_data,
-                        items: ['he','ar', 'en'].map(function(lang){return {text: _L[lang], val: lang}}) 
-                    },
-                    function (data) {
-                        var old_lang = oPreset.lang_data;
-                        oPreset.lang_data = data.val;
-                        dom.attr('data-content_lang', oPreset.lang_data);
+                    items: ['he','ar', 'en'].map(function(lang){return {text: _L[lang], val: lang}})
+                },
+                function (data) {
+                    var old_lang = oPreset.lang_data;
+                    oPreset.lang_data = data.val;
+                    dom.attr('data-content_lang', oPreset.lang_data);
 
-                        updateDefaultSkinData();
-                        
-                        if(langList[old_lang].start_text == oPreset.start_text) {
-                            startTitleInput.set_val(langList[oPreset.lang_data].start_text);
-                        }
-                        if(langList[old_lang].end_text == oPreset.end_text) {
-                            entTitleInput.set_val(langList[oPreset.lang_data].end_text);
-                        }
-                        if(langList[old_lang].pause_text == oPreset.pause_text) {
-                            pauseTitleInput.set_val(langList[oPreset.lang_data].pause_text);
-                        }
-                        if(langList[old_lang].time_over_text == oPreset.time_over_text) {
-                            timeOverTitlerInput.set_val(langList[oPreset.lang_data].time_over_text);
-                        }
+                    updateDefaultSkinData();
+
+                    if(langList[old_lang].start_text == oPreset.start_text) {
+                        startTitleInput.set_val(langList[oPreset.lang_data].start_text);
                     }
-                );
+                    if(langList[old_lang].end_text == oPreset.end_text) {
+                        entTitleInput.set_val(langList[oPreset.lang_data].end_text);
+                    }
+                    if(langList[old_lang].pause_text == oPreset.pause_text) {
+                        pauseTitleInput.set_val(langList[oPreset.lang_data].pause_text);
+                    }
+                    if(langList[old_lang].time_over_text == oPreset.time_over_text) {
+                        timeOverTitlerInput.set_val(langList[oPreset.lang_data].time_over_text);
+                    }
+                }
+            );
             dom.find('.yesno-lang_data').append(langSelsector);
-            
+
             fontSelector = createSelector(
-                    {
-                        val: defaultSkinData.getPresetVal('font'),
-                        items: fontList.map(function(font){return {text: font.title, val: font.font}}) 
-                    },
-                    function (data) {
-                        oPreset.font = data.val;
-                        setDynamicStyle();
-                    }
-                );
+                {
+                    val: defaultSkinData.getPresetVal('font'),
+                    items: fontList.map(function(font){return {text: font.title, val: font.font}})
+                },
+                function (data) {
+                    oPreset.font = data.val;
+                    setDynamicStyle();
+                }
+            );
             dom.find('.yesno-contaner-tools .yesno-contaner-tool[data-tool="font"]').append(fontSelector);
 
             leadingColorPicker = createColorPicker(defaultSkinData.getPresetVal('leading_color'), function (_color, _dom) {
-              _color = _color.replace(/[^0-9a-z]/gi, '');  
-              oPreset.leading_color =  _color;
+                _color = _color.replace(/[^0-9a-z]/gi, '');
+                oPreset.leading_color =  _color;
                 setDynamicStyle();
             });
             dom.find('.yesno-contaner-tools .yesno-contaner-tool[data-tool="color"]').append(leadingColorPicker);
@@ -1030,7 +1053,7 @@ var yesno = function (yesno_params) {
                 oPreset.end_text = val;
             });
             dom.find('.yesno-editor-ent_title').append(entTitleInput);
-            
+
             pauseTitleInput = create_text({
                 val: oPreset.pause_text,
                 min: 0,
@@ -1054,19 +1077,19 @@ var yesno = function (yesno_params) {
             dom.find('.yesno-edito-time_over_title').append(timeOverTitlerInput);
 
             gameBgLayouySelector = createSelector(
-                    {
-                        val: defaultSkinData.getPresetVal('game_bg_image_layout'),
-                        items: [
-                           { text: _L.full_width, val: 'w', icon: 'icon-image_layout_w' },
-                           { text: _L.full_height, val: 'h', icon: 'icon-image_layout_h' },
-                           { text: _L.cover, val: 'c', icon: 'icon-image_layout_c' },
-                        ]
-                    },
-                    function (data) {
-                        oPreset.game_bg_image_layout = data.val;
-                        setDynamicStyle();
-                    }
-                );
+                {
+                    val: defaultSkinData.getPresetVal('game_bg_image_layout'),
+                    items: [
+                        { text: _L.full_width, val: 'w', icon: 'icon-image_layout_w' },
+                        { text: _L.full_height, val: 'h', icon: 'icon-image_layout_h' },
+                        { text: _L.cover, val: 'c', icon: 'icon-image_layout_c' },
+                    ]
+                },
+                function (data) {
+                    oPreset.game_bg_image_layout = data.val;
+                    setDynamicStyle();
+                }
+            );
             dom.find('.yesno-edit_btn[data-edite="game_bg"] .yesno-edit_panel-row-val[data-val="game_bg_image_layout"]').append(gameBgLayouySelector);
 
             gameBgColorPicker = createColorPicker(defaultSkinData.getPresetVal('game_bg_color'), function (_color, _dom) {
@@ -1074,15 +1097,15 @@ var yesno = function (yesno_params) {
                 setDynamicStyle();
             });
             dom.find('.yesno-edit_btn[data-edite="game_bg"] .yesno-edit_panel-row-val[data-val="game_bg_color"]').append(gameBgColorPicker);
-            
+
             dom.on('click', '.yesno-edit_btn[data-edite="game_bg"] .yesno-edit_panel-update_file', function() {
                 uplodeFile(
-                    'image', 
-                    $(this), 
+                    'image',
+                    $(this),
                     function (url) {
                         oPreset.game_bg_image = url;
                         updateDefaultSkinData();
-                    }, 
+                    },
                     function(){
                     }
                 );
@@ -1095,18 +1118,18 @@ var yesno = function (yesno_params) {
             });
 
             timerHasLimitSelector = createSelector(
-                    {
-                        val: oPreset.timer_has_limit ? '1' : '0',
-                        items: [
-                           { text: _L.edit_timer_settings_time_limit, val: '1' },
-                           { text: _L.edit_timer_settings_without_time, val: '0' }
-                        ]
-                    },
-                    function (data) {
-                      oPreset.timer_has_limit = data.val == '1';
-                      updateDefaultSkinData();
-                    }
-                );
+                {
+                    val: oPreset.timer_has_limit ? '1' : '0',
+                    items: [
+                        { text: _L.edit_timer_settings_time_limit, val: '1' },
+                        { text: _L.edit_timer_settings_without_time, val: '0' }
+                    ]
+                },
+                function (data) {
+                    oPreset.timer_has_limit = data.val == '1';
+                    updateDefaultSkinData();
+                }
+            );
             dom.find('.yesno-edit_btn[data-edite="timer"] .yesno-edit_panel-row-val[data-val="timer_has_limit"]').append(timerHasLimitSelector);
 
             timerLimitInput = create_number({
@@ -1123,32 +1146,32 @@ var yesno = function (yesno_params) {
             dom.find('.yesno-edit_btn[data-edite="timer"] .yesno-edit_panel-row-val[data-val="timer_limit"]').append(timerLimitInput).append('<span>' + _L.edit_timer_settings_seconds + '</span>');
 
             barProgressSelector = createSelector(
-                    {
-                        val: defaultSkinData.getPresetVal('bar_shape'),
-                        items: [
-                           { text: _L.edit_bar_settings_shape1, val: 1, icon: 'icon-bar_shape_selector_1' },
-                           { text: _L.edit_bar_settings_shape2, val: 2, icon: 'icon-bar_shape_selector_2' }
-                        ]
-                    },
-                    function (data) {
-                        oPreset.bar_shape = data.val;
-                        setDynamicStyle();
-                    }
-                );
+                {
+                    val: defaultSkinData.getPresetVal('bar_shape'),
+                    items: [
+                        { text: _L.edit_bar_settings_shape1, val: 1, icon: 'icon-bar_shape_selector_1' },
+                        { text: _L.edit_bar_settings_shape2, val: 2, icon: 'icon-bar_shape_selector_2' }
+                    ]
+                },
+                function (data) {
+                    oPreset.bar_shape = data.val;
+                    setDynamicStyle();
+                }
+            );
             dom.find('.yesno-edit_btn[data-edite="bar"] .yesno-edit_panel-row-val[data-val="bar_settings_progress"]').append(barProgressSelector);
 
             barOrderQuestionsSelector = createSelector(
-                    {
-                        val: oPreset.bar_order_of_questions,
-                        items: [
-                           { text: _L.edit_bar_settings_order_of_questions_in_the_order, val: 'o'},
-                           { text: _L.edit_bar_settings_order_of_questions_random, val: 'r'}
-                        ]
-                    },
-                    function (data) {
-                        oPreset.bar_order_of_questions = data.val;
-                    }
-                );
+                {
+                    val: oPreset.bar_order_of_questions,
+                    items: [
+                        { text: _L.edit_bar_settings_order_of_questions_in_the_order, val: 'o'},
+                        { text: _L.edit_bar_settings_order_of_questions_random, val: 'r'}
+                    ]
+                },
+                function (data) {
+                    oPreset.bar_order_of_questions = data.val;
+                }
+            );
             dom.find('.yesno-edit_btn[data-edite="bar"] .yesno-edit_panel-row-val[data-val="bar_settings_order_of_questions"]').append(barOrderQuestionsSelector);
 
             barBgColorPicker = createColorPicker(defaultSkinData.getPresetVal('bar_background_color'), function (_color, _dom) {
@@ -1192,15 +1215,15 @@ var yesno = function (yesno_params) {
             answer_btn_panel.find('.yesno-edit_panel-row-val[data-val="answer_btn_text_color"]').append(answerBtnTextColorPicker);
 
             answerBtnFontSizeSelector = createSelector(
-                    {
-                        val: defaultSkinData.getPresetVal('answer_btn_font_size'),
-                        items: [1,1.2,1.4,1.6,1.8,2,2.2,2.4,2.6,2.8,3,3.2,3.4,3.6].map(function(size){return {text: size, val: size}})
-                    },
-                    function (data) {
-                        oPreset.answer_btn_font_size = data.val;
-                        setDynamicStyle();
-                    }
-                );
+                {
+                    val: defaultSkinData.getPresetVal('answer_btn_font_size'),
+                    items: [1,1.2,1.4,1.6,1.8,2,2.2,2.4,2.6,2.8,3,3.2,3.4,3.6].map(function(size){return {text: size, val: size}})
+                },
+                function (data) {
+                    oPreset.answer_btn_font_size = data.val;
+                    setDynamicStyle();
+                }
+            );
             answer_btn_panel.find('.yesno-edit_panel-row-val[data-val="answer_btn_font_size"]').append(answerBtnFontSizeSelector);
 
             answer_btn_panel.on('click', '.yesno-edit_panel-refresh_btn', function() {
@@ -1259,9 +1282,9 @@ var yesno = function (yesno_params) {
 
             updateDefaultSkinData();
             if(workMode == "Solution" || workMode == "Results"){
-              set_game_state('end');
+                set_game_state('end');
             }else{
-              set_game_state('play');
+                set_game_state('play');
             }
         }
         else {
@@ -1298,11 +1321,11 @@ var yesno = function (yesno_params) {
                 }
                 set_game_state('play');
             });
-          dom.on('keyup', '.yesno-play_panel-btn, .yesno-question-answer_btn, .arrow,.btnEnd, .yesno-status_bar-clear-wraper, .yesno-sound_player-btn, .yesno-sound_player-btn', function (e) {
-            if (e.key && (e.key !== 'Enter' && e.key !== ' ')) {
-                return;
-              }
-              $(e.target).click();
+            dom.on('keyup', '.yesno-play_panel-btn, .yesno-question-answer_btn, .arrow,.btnEnd, .yesno-status_bar-clear-wraper, .yesno-sound_player-btn, .yesno-sound_player-btn', function (e) {
+                if (e.key && (e.key !== 'Enter' && e.key !== ' ')) {
+                    return;
+                }
+                $(e.target).click();
             });
 
             //dom.on('click', '.yesno-contaner[data-game_state="end"] .yesno-status_bar .yesno-status_bar-items .yesno-status_bar-item', function(){
@@ -1330,51 +1353,51 @@ var yesno = function (yesno_params) {
             }
 
             setDynamicStyle();
-              if(workMode == "Solution" || workMode == "Results"){
+            if(workMode == "Solution" || workMode == "Results"){
                 set_game_state('end');
                 // TODO: check if stars have correct color
-              }
-              else if(!oPreset.game_state) {
+            }
+            else if(!oPreset.game_state) {
                 set_game_state('start');
-              }
-              else if(oPreset.game_state == 'play' && oPreset.timer_has_limit && oPreset.timer_limit > 0 && workMode !=="Evaluation") {
+            }
+            else if(oPreset.game_state == 'play' && oPreset.timer_has_limit && oPreset.timer_limit > 0 && workMode !=="Evaluation") {
                 set_game_state('pause');
-              }
-              else if((oPreset.game_state == 'pause' && (!oPreset.timer_has_limit || oPreset.timer_limit <= 0))
-                   ||oPreset.game_state == 'pause' && workMode =="Evaluation") {
+            }
+            else if((oPreset.game_state == 'pause' && (!oPreset.timer_has_limit || oPreset.timer_limit <= 0))
+                ||oPreset.game_state == 'pause' && workMode =="Evaluation") {
                 set_game_state('play');
-              }
-              else {
+            }
+            else {
                 set_game_state(oPreset.game_state);
-              }
-      }
-      var oldDoms = container.find(".yesno-contaner");
-      if (oldDoms.length > 0) {
-        oldDoms.remove()
-      }
-       container.prepend(dom);
+            }
+        }
+        var oldDoms = container.find(".yesno-contaner");
+        if (oldDoms.length > 0) {
+            oldDoms.remove()
+        }
+        container.prepend(dom);
 
-     };
+    };
 
     var removeQuestionButtonKeyboardSelection = function () {
-      $('.yesno-question-answer_btn[tabindex]').map((i, el) => { $(el).removeAttr('role').removeAttr('tabindex'); });
+        $('.yesno-question-answer_btn[tabindex]').map((i, el) => { $(el).removeAttr('role').removeAttr('tabindex'); });
     }
 
     var setQuestionButtonKeyboardSelction = function () {
-      $('.swiper-wrapper .swiper-slide[data-selected=1]').find('.yesno-question-answer_btn').map((i, el) => { $(el).attr('role', 'button').attr('tabindex', (i + 1)); });
+        $('.swiper-wrapper .swiper-slide[data-selected=1]').find('.yesno-question-answer_btn').map((i, el) => { $(el).attr('role', 'button').attr('tabindex', (i + 1)); });
     }
 
     var showEndScreen = function(){
-      dom.find('.yesno-contaner').addClass('end');
-      var correctAns = oPreset.items.filter(key => key.answer == key.correct_answer).length;
-      var totalQuestions = oPreset.items.length;
-      var final_txt = "";
-      var lottie='<lottie-player src="" background="transparent"  speed="1"  style="width: 100%; height: 100%;" autoplay></lottie-player>';
-      if((correctAns / totalQuestions * 100) >= 50 ){
-        final_txt = oPreset.end_text;
-        lottie='<lottie-player src="../content/img/skins/confetti.json" background="transparent"  speed="1"  style="width: 100%; height: 100%;" autoplay></lottie-player>';
-      }
-      var end_panel = '<div class="yesno-end_panel-contaner"><div class="end_panel">\
+        dom.find('.yesno-contaner').addClass('end');
+        var correctAns = oPreset.items.filter(key => key.answer == key.correct_answer).length;
+        var totalQuestions = oPreset.items.length;
+        var final_txt = "";
+        var lottie='<lottie-player src="" background="transparent"  speed="1"  style="width: 100%; height: 100%;" autoplay></lottie-player>';
+        if((correctAns / totalQuestions * 100) >= 50 ){
+            final_txt = oPreset.end_text;
+            lottie='<lottie-player src="../content/img/skins/confetti.json" background="transparent"  speed="1"  style="width: 100%; height: 100%;" autoplay></lottie-player>';
+        }
+        var end_panel = '<div class="yesno-end_panel-contaner"><div class="end_panel">\
                           '+ lottie +'\
                                       <div class="yesno-end_panel-tetle yesno-text">\
                                         <span class="correct_ans_txt">'+ final_txt + '</span>\
@@ -1389,117 +1412,117 @@ var yesno = function (yesno_params) {
                         <div class="btn_viewAns btnEnd" tabindex="0" role="button" aria-label="' + _L.viewAns + '">\
                           <span class="viewAns_txt">' + _L.viewAns + '</span>\
                         </div>';
-      $('.yesno-contaner').prepend(end_panel); 
-    
+        $('.yesno-contaner').prepend(end_panel);
 
-      dom.on('click', '.btn_viewAns', function(){
-        set_game_state('final');
-        setSwiperSlide();
-      });
-      
-      dom.on('click', '.btn_tryAgain', clear_game);
+
+        dom.on('click', '.btn_viewAns', function(){
+            set_game_state('final');
+            setSwiperSlide();
+        });
+
+        dom.on('click', '.btn_tryAgain', clear_game);
 
     }
 
     var setSwiperSlide = function () {
-      
-      dom.find('.yesno-contaner').removeClass('end');
 
-      removeQuestionButtonKeyboardSelection();
+        dom.find('.yesno-contaner').removeClass('end');
 
-      $('.yesno-question.swiper-slide').attr('data-selected',1);
-      var slidePerView = 1.5;
-      var spaceBetween = 50;
-      if(oPreset.skin == 3){
-       // slidePerView = 1;
-        spaceBetween = 70;
-      }
-      if(isMobile){
-        window.swiper1 = new Swiper(".yesno-questions", {
-          grabCursor: true,
-          observer: true,
-          updateOnWindowResize: true,
-          slideToClickedSlide: true,
-          slidesPerView: 1,// 4.5,
-          spaceBetween: 0,
-          centeredSlides: true,
-          //loopAdditionalSlides: 2,
-          simulateTouch: false,
-          noSwiping: true,
-          direction: 'horizontal',
-          loop: false,
-          // Navigation arrows
-          navigation: {
-            nextEl: '.a-right',
-            prevEl: '.a-left',
-          }, 
-          breakpoints: {
-            // when window width is <= 320px
-            699: {
-              simulateTouch: true,
-              slidesPerView: 1,
-            },
-          },
-          on: {
-            init: function () {
-              $('.yesno-status_bar-item').removeClass('currentSlide');
-              document.querySelector('.yesno-status_bar-items').children[0].classList.add('currentSlide');
-            },
-            slideChange:function(){
-              var data_item_id = document.querySelector('.swiper-wrapper').children[this.activeIndex].getAttribute('data-item_id');
-              $('.yesno-status_bar-item').removeClass('currentSlide');
-              $('.yesno-status_bar-item[data-item_id='+ data_item_id +']').addClass('currentSlide');
-            },
-            transitionEnd:function(){
-              if(isMobile){
-                var data_item_id = $('.swiper-slide-active')[0].getAttribute('data-item_id');
-                $('.yesno-status_bar-item').removeClass('currentSlide');
-                $('.yesno-status_bar-item[data-item_id='+ data_item_id +']').addClass('currentSlide');
-              }
-            },
-          },
-        });
-      }else{
-        window.swiper1 = new Swiper(".yesno-questions", {
-          grabCursor: true,
-          centeredSlides: true,
-          observer: true,
-          updateOnWindowResize: true,
-          slideToClickedSlide: true,
-          slidesPerView: 1.5,// 4.5,
-          spaceBetween: 50,
-          //loopAdditionalSlides: 2,
-          simulateTouch: false,
-          noSwiping: true,
-          direction: 'horizontal',
-          loop: false,
-          // Navigation arrows
-          navigation: {
-            nextEl: _L.lang == "en" ? '.a-left': '.a-right',
-            prevEl: _L.lang == "en" ? '.a-right' : '.a-left',
-          },
-          keyboard: true,
-          breakpoints: {
-            // when window width is <= 320px
-            699: {
-              simulateTouch: true,
-              slidesPerView: 1,
-            },
-          },
-          on: {
-            init: function () {
-              $('.yesno-status_bar-item').removeClass('currentSlide');
-              document.querySelector('.yesno-status_bar-items').children[0].classList.add('currentSlide');
-            },
-            slideChange:function(){
-              var data_item_id = document.querySelector('.swiper-wrapper').children[this.activeIndex].getAttribute('data-item_id');
-              $('.yesno-status_bar-item').removeClass('currentSlide');
-              $('.yesno-status_bar-item[data-item_id='+ data_item_id +']').addClass('currentSlide');
-            },
-          },
-        });
-      }
-      
+        removeQuestionButtonKeyboardSelection();
+
+        $('.yesno-question.swiper-slide').attr('data-selected',1);
+        var slidePerView = 1.5;
+        var spaceBetween = 50;
+        if(oPreset.skin == 3){
+            // slidePerView = 1;
+            spaceBetween = 70;
+        }
+        if(isMobile){
+            window.swiper1 = new Swiper(".yesno-questions", {
+                grabCursor: true,
+                observer: true,
+                updateOnWindowResize: true,
+                slideToClickedSlide: true,
+                slidesPerView: 1,// 4.5,
+                spaceBetween: 0,
+                centeredSlides: true,
+                //loopAdditionalSlides: 2,
+                simulateTouch: false,
+                noSwiping: true,
+                direction: 'horizontal',
+                loop: false,
+                // Navigation arrows
+                navigation: {
+                    nextEl: '.a-right',
+                    prevEl: '.a-left',
+                },
+                breakpoints: {
+                    // when window width is <= 320px
+                    699: {
+                        simulateTouch: true,
+                        slidesPerView: 1,
+                    },
+                },
+                on: {
+                    init: function () {
+                        $('.yesno-status_bar-item').removeClass('currentSlide');
+                        document.querySelector('.yesno-status_bar-items').children[0].classList.add('currentSlide');
+                    },
+                    slideChange:function(){
+                        var data_item_id = document.querySelector('.swiper-wrapper').children[this.activeIndex].getAttribute('data-item_id');
+                        $('.yesno-status_bar-item').removeClass('currentSlide');
+                        $('.yesno-status_bar-item[data-item_id='+ data_item_id +']').addClass('currentSlide');
+                    },
+                    transitionEnd:function(){
+                        if(isMobile){
+                            var data_item_id = $('.swiper-slide-active')[0].getAttribute('data-item_id');
+                            $('.yesno-status_bar-item').removeClass('currentSlide');
+                            $('.yesno-status_bar-item[data-item_id='+ data_item_id +']').addClass('currentSlide');
+                        }
+                    },
+                },
+            });
+        }else{
+            window.swiper1 = new Swiper(".yesno-questions", {
+                grabCursor: true,
+                centeredSlides: true,
+                observer: true,
+                updateOnWindowResize: true,
+                slideToClickedSlide: true,
+                slidesPerView: 1.5,// 4.5,
+                spaceBetween: 50,
+                //loopAdditionalSlides: 2,
+                simulateTouch: false,
+                noSwiping: true,
+                direction: 'horizontal',
+                loop: false,
+                // Navigation arrows
+                navigation: {
+                    nextEl: _L.lang == "en" ? '.a-left': '.a-right',
+                    prevEl: _L.lang == "en" ? '.a-right' : '.a-left',
+                },
+                keyboard: true,
+                breakpoints: {
+                    // when window width is <= 320px
+                    699: {
+                        simulateTouch: true,
+                        slidesPerView: 1,
+                    },
+                },
+                on: {
+                    init: function () {
+                        $('.yesno-status_bar-item').removeClass('currentSlide');
+                        document.querySelector('.yesno-status_bar-items').children[0].classList.add('currentSlide');
+                    },
+                    slideChange:function(){
+                        var data_item_id = document.querySelector('.swiper-wrapper').children[this.activeIndex].getAttribute('data-item_id');
+                        $('.yesno-status_bar-item').removeClass('currentSlide');
+                        $('.yesno-status_bar-item[data-item_id='+ data_item_id +']').addClass('currentSlide');
+                    },
+                },
+            });
+        }
+
 
     }
 
@@ -1516,129 +1539,129 @@ var yesno = function (yesno_params) {
     };
     var sendEvent = function (events_type) {
         //if (!isEditMote && events_type != events_types.none && cet && cet.content && cet.content.xapiSupported && cet.content.xapi && cet.content.xapi.send) {
-            var score = 0;
-            var fieldsResponse = {};
-            var fieldsScore = {};
-            for (var i = 0; i < oPreset.items.length; i++) {
-                var id = 'q' + (i + 1);
-                fieldsResponse[id] = '';
-                fieldsScore[id] = 0;
+        var score = 0;
+        var fieldsResponse = {};
+        var fieldsScore = {};
+        for (var i = 0; i < oPreset.items.length; i++) {
+            var id = 'q' + (i + 1);
+            fieldsResponse[id] = '';
+            fieldsScore[id] = 0;
 
-                if (oPreset.items[i].answer == oPreset.items[i].correct_answer) {
-                    score++;
-                    fieldsScore[id] = 1;
-                }
-
-                if(oPreset.items[i].answer == 1) {
-                    fieldsResponse[id] = oPreset.items[i].text_btn_1;
-                }
-                if(oPreset.items[i].answer == 2) {
-                    fieldsResponse[id] = oPreset.items[i].text_btn_2;
-                }
+            if (oPreset.items[i].answer == oPreset.items[i].correct_answer) {
+                score++;
+                fieldsScore[id] = 1;
             }
-            score = score / oPreset.items.length;
 
-            if( workMode == "Evaluation" || workMode == 'Repair'){
-              cet.content.lms.Activity.score(score*100);
+            if(oPreset.items[i].answer == 1) {
+                fieldsResponse[id] = oPreset.items[i].text_btn_1;
             }
-            
+            if(oPreset.items[i].answer == 2) {
+                fieldsResponse[id] = oPreset.items[i].text_btn_2;
+            }
+        }
+        score = score / oPreset.items.length;
 
-            var cetEvent = {};
-            if(events_type == events_types.answer || events_type == events_types.asked_check) {
-               cetEvent = {
-                 verb: events_type,//events_types.asked_check,//events_type,    
+        if( workMode == "Evaluation" || workMode == 'Repair'){
+            cet.content.lms.Activity.score(score*100);
+        }
+
+
+        var cetEvent = {};
+        if(events_type == events_types.answer || events_type == events_types.asked_check) {
+            cetEvent = {
+                verb: events_type,//events_types.asked_check,//events_type,    
                 fieldsScore: fieldsScore,
                 fieldsResponse: fieldsResponse,
                 interactionType: "YesNo",
-              };
-            }
+            };
+        }
 
 
-            if(events_type == events_types.loaded || events_type == events_types.asked_generate) {
-              cetEvent = {
-                verb: events_type,    
+        if(events_type == events_types.loaded || events_type == events_types.asked_generate) {
+            cetEvent = {
+                verb: events_type,
                 fieldsScore: fieldsScore,
                 fieldsResponse: fieldsResponse,
                 interactionType: "YesNo",
                 objectAdditionalInformation: {state: JSON.parse(JSON.stringify(oPreset))},
-              };
-            }
+            };
+        }
 
-            try{
-              if( cetEvent.verb ){
+        try{
+            if( cetEvent.verb ){
                 cet.content.cetEvent.send(cetEvent);
-              }
             }
-            catch (e) {
-            }
+        }
+        catch (e) {
+        }
 
     };
 
     var updateSkinData = function (reset=false) {
-      dom.find('[data-on_costume_skin_show="1"]').show();
-   
-      if(oPreset.timer_has_limit) {
-        dom.find('.yesno-edit_btn[data-edite="timer"] .yesno-edit_panel-row-val[data-val="timer_limit"]').show();
-        dom.find('.yesno-edit_btn[data-edite="timer"] .yesno-edit_panel-row').removeClass('has_timer');
-      }
-      else {
-        dom.find('.yesno-edit_btn[data-edite="timer"] .yesno-edit_panel-row-val[data-val="timer_limit"]').hide();
-        dom.find('.yesno-edit_btn[data-edite="timer"] .yesno-edit_panel-row').addClass('has_timer');
-      }
+        dom.find('[data-on_costume_skin_show="1"]').show();
 
-      dom.find('.yesno-edit_btn[data-edite="game_bg"] .yesno-edit_panel-update_file').attr('data-togel', oPreset.skin_data['game_bg_image'] ? '1' : '0');
-      
-      var game_bg_img;
-      var game_bg_layout;
-      var game_bg_color;
-      var answer_bg_color;
-      var answer_font_size;
-      var answer_text_color;
-      (((oPreset.game_bg_image == defaultSkinData[currentSkin].comon.game_bg_image) || (!oPreset.game_bg_image)) ? game_bg_img = true : game_bg_img = false);
-      (((oPreset.game_bg_image_layout == defaultSkinData[currentSkin].comon.game_bg_image_layout) || (!oPreset.game_bg_image_layout)) ? game_bg_layout = true : game_bg_layout = false);           
-      (((oPreset.game_bg_color == defaultSkinData[currentSkin].comon.game_bg_color) || (!oPreset.game_bg_color)) ? game_bg_color = true : game_bg_color = false);
-      (((oPreset.answer_btn_bg_color == defaultSkinData[currentSkin].comon.answer_btn_bg_color) || (!oPreset.answer_btn_bg_color)) ? answer_bg_color = true : answer_bg_color = false);
-      (((oPreset.answer_btn_font_size == defaultSkinData[currentSkin].comon.answer_btn_font_size) || (!oPreset.answer_btn_font_size)) ? answer_font_size = true : answer_font_size = false);
-      (((oPreset.answer_btn_text_color == defaultSkinData[currentSkin].comon.answer_btn_text_color) || (!oPreset.answer_btn_text_color)) ? answer_text_color = true : answer_text_color = false);
+        if(oPreset.timer_has_limit) {
+            dom.find('.yesno-edit_btn[data-edite="timer"] .yesno-edit_panel-row-val[data-val="timer_limit"]').show();
+            dom.find('.yesno-edit_btn[data-edite="timer"] .yesno-edit_panel-row').removeClass('has_timer');
+        }
+        else {
+            dom.find('.yesno-edit_btn[data-edite="timer"] .yesno-edit_panel-row-val[data-val="timer_limit"]').hide();
+            dom.find('.yesno-edit_btn[data-edite="timer"] .yesno-edit_panel-row').addClass('has_timer');
+        }
 
-      oPreset.skin_data = defaultSkinData.getData();
-      fontSelector.set_val(defaultSkinData.getPresetVal('font',reset));
-      leadingColorPicker.set_color(defaultSkinData.getPresetVal('leading_color',reset));
-      barBgColorPicker.set_color(defaultSkinData.getPresetVal('bar_background_color',reset));
-      barProgressSelector.set_val(defaultSkinData.getPresetVal('bar_shape',reset));
-      gameBgLayouySelector.set_val(defaultSkinData.getPresetVal('game_bg_image_layout',reset));
-      gameBgColorPicker.set_color(defaultSkinData.getPresetVal('game_bg_color',game_bg_color));
-      answerBtnBgColorPicker.set_color(defaultSkinData.getPresetVal('answer_btn_bg_color',answer_bg_color));
-      answerBtnTextColorPicker.set_color(defaultSkinData.getPresetVal('answer_btn_text_color',answer_text_color));
-      answerBtnFontSizeSelector.set_val(defaultSkinData.getPresetVal('answer_btn_font_size',answer_font_size));
+        dom.find('.yesno-edit_btn[data-edite="game_bg"] .yesno-edit_panel-update_file').attr('data-togel', oPreset.skin_data['game_bg_image'] ? '1' : '0');
 
-      /*dir*/
-      var dir = defaultSkinData.getPresetVal('dir',reset);
-      dom.find('.yesno-tools_btn_wraper[data-edite="timer"]').css({
-        left: (dir == 'rtl' ? '-22px' : 'auto'),
-        right: (dir == 'rtl' ? 'auto' : '-22px'),
-      });
-      dom.find('.yesno-tools_btn_wraper[data-edite="timer"] .yesno-edit_btn').attr('data-tooltip_layout_h', (dir == _L.dir ? 'r' : 'l'));
-      dom.find('.yesno-tools_btn_wraper[data-edite="timer"] .yesno-edit_panel').attr('data-layout_h', (dir == _L.dir ? 'r' : 'l'));
-      dom.find('.yesno-tools_btn_wraper[data-edite="bar"]').css({
-        right: (dir == 'rtl' ? '-22px' : 'auto'),
-        left: (dir == 'rtl' ? 'auto' : '-22px'),
-      });
-      dom.find('.yesno-tools_btn_wraper[data-edite="bar"] .yesno-edit_btn').attr('data-tooltip_layout_h', (dir == _L.dir ? 'l' : 'r'));
-      dom.find('.yesno-tools_btn_wraper[data-edite="bar"] .yesno-edit_panel').attr('data-layout_h', (dir == _L.dir ? 'l' : 'r'));
-      dom.find('.yesno-tools_btn_wraper[data-edite="sound_player-icon-question-text_sound"] .yesno-edit_panel').attr('data-layout_h', (dir == _L.dir ? 'l' : 'r'));
-      dom.find('.yesno-tools_btn_wraper[data-edite="sound_player-icon-question-text_sound"] .yesno-edit_btn').attr('data-tooltip_layout_h', (dir == _L.dir ? 'l' : 'r'));
-      dom.find('.yesno-tools_btn_wraper[data-edite="sound_player-icon-question-text_sound"]').css({
-        right: (dir == 'rtl' ? '0' : 'auto'),
-        left: (dir == 'rtl' ? 'auto' : '0'),
-        transform: (dir == 'rtl' ? 'translate(50%, 50%)' : 'translate(-50%, 50%)'),
-      });
+        var game_bg_img;
+        var game_bg_layout;
+        var game_bg_color;
+        var answer_bg_color;
+        var answer_font_size;
+        var answer_text_color;
+        (((oPreset.game_bg_image == defaultSkinData[currentSkin].comon.game_bg_image) || (!oPreset.game_bg_image)) ? game_bg_img = true : game_bg_img = false);
+        (((oPreset.game_bg_image_layout == defaultSkinData[currentSkin].comon.game_bg_image_layout) || (!oPreset.game_bg_image_layout)) ? game_bg_layout = true : game_bg_layout = false);
+        (((oPreset.game_bg_color == defaultSkinData[currentSkin].comon.game_bg_color) || (!oPreset.game_bg_color)) ? game_bg_color = true : game_bg_color = false);
+        (((oPreset.answer_btn_bg_color == defaultSkinData[currentSkin].comon.answer_btn_bg_color) || (!oPreset.answer_btn_bg_color)) ? answer_bg_color = true : answer_bg_color = false);
+        (((oPreset.answer_btn_font_size == defaultSkinData[currentSkin].comon.answer_btn_font_size) || (!oPreset.answer_btn_font_size)) ? answer_font_size = true : answer_font_size = false);
+        (((oPreset.answer_btn_text_color == defaultSkinData[currentSkin].comon.answer_btn_text_color) || (!oPreset.answer_btn_text_color)) ? answer_text_color = true : answer_text_color = false);
 
-      setDynamicStyle(reset,game_bg_img,game_bg_layout,game_bg_color,answer_bg_color,answer_text_color,answer_font_size);
+        oPreset.skin_data = defaultSkinData.getData();
+        fontSelector.set_val(defaultSkinData.getPresetVal('font',reset));
+        leadingColorPicker.set_color(defaultSkinData.getPresetVal('leading_color',reset));
+        barBgColorPicker.set_color(defaultSkinData.getPresetVal('bar_background_color',reset));
+        barProgressSelector.set_val(defaultSkinData.getPresetVal('bar_shape',reset));
+        gameBgLayouySelector.set_val(defaultSkinData.getPresetVal('game_bg_image_layout',reset));
+        gameBgColorPicker.set_color(defaultSkinData.getPresetVal('game_bg_color',game_bg_color));
+        answerBtnBgColorPicker.set_color(defaultSkinData.getPresetVal('answer_btn_bg_color',answer_bg_color));
+        answerBtnTextColorPicker.set_color(defaultSkinData.getPresetVal('answer_btn_text_color',answer_text_color));
+        answerBtnFontSizeSelector.set_val(defaultSkinData.getPresetVal('answer_btn_font_size',answer_font_size));
+
+        /*dir*/
+        var dir = defaultSkinData.getPresetVal('dir',reset);
+        dom.find('.yesno-tools_btn_wraper[data-edite="timer"]').css({
+            left: (dir == 'rtl' ? '-22px' : 'auto'),
+            right: (dir == 'rtl' ? 'auto' : '-22px'),
+        });
+        dom.find('.yesno-tools_btn_wraper[data-edite="timer"] .yesno-edit_btn').attr('data-tooltip_layout_h', (dir == _L.dir ? 'r' : 'l'));
+        dom.find('.yesno-tools_btn_wraper[data-edite="timer"] .yesno-edit_panel').attr('data-layout_h', (dir == _L.dir ? 'r' : 'l'));
+        dom.find('.yesno-tools_btn_wraper[data-edite="bar"]').css({
+            right: (dir == 'rtl' ? '-22px' : 'auto'),
+            left: (dir == 'rtl' ? 'auto' : '-22px'),
+        });
+        dom.find('.yesno-tools_btn_wraper[data-edite="bar"] .yesno-edit_btn').attr('data-tooltip_layout_h', (dir == _L.dir ? 'l' : 'r'));
+        dom.find('.yesno-tools_btn_wraper[data-edite="bar"] .yesno-edit_panel').attr('data-layout_h', (dir == _L.dir ? 'l' : 'r'));
+        dom.find('.yesno-tools_btn_wraper[data-edite="sound_player-icon-question-text_sound"] .yesno-edit_panel').attr('data-layout_h', (dir == _L.dir ? 'l' : 'r'));
+        dom.find('.yesno-tools_btn_wraper[data-edite="sound_player-icon-question-text_sound"] .yesno-edit_btn').attr('data-tooltip_layout_h', (dir == _L.dir ? 'l' : 'r'));
+        dom.find('.yesno-tools_btn_wraper[data-edite="sound_player-icon-question-text_sound"]').css({
+            right: (dir == 'rtl' ? '0' : 'auto'),
+            left: (dir == 'rtl' ? 'auto' : '0'),
+            transform: (dir == 'rtl' ? 'translate(50%, 50%)' : 'translate(-50%, 50%)'),
+        });
+
+        setDynamicStyle(reset,game_bg_img,game_bg_layout,game_bg_color,answer_bg_color,answer_text_color,answer_font_size);
     };
 
     var updateDefaultSkinData = function (reset=false) {
-      dom.find('[data-on_costume_skin_show="1"]').show();
+        dom.find('[data-on_costume_skin_show="1"]').show();
         //if(defaultSkinData.isCostumeSkin()) {
         //    dom.find('[data-on_costume_skin_show="1"]').show();
         //}
@@ -1647,12 +1670,12 @@ var yesno = function (yesno_params) {
         //}
 
         if(oPreset.timer_has_limit) {
-          dom.find('.yesno-edit_btn[data-edite="timer"] .yesno-edit_panel-row-val[data-val="timer_limit"]').show();
-          dom.find('.yesno-edit_btn[data-edite="timer"] .yesno-edit_panel-row').removeClass('has_timer');
+            dom.find('.yesno-edit_btn[data-edite="timer"] .yesno-edit_panel-row-val[data-val="timer_limit"]').show();
+            dom.find('.yesno-edit_btn[data-edite="timer"] .yesno-edit_panel-row').removeClass('has_timer');
         }
         else {
-          dom.find('.yesno-edit_btn[data-edite="timer"] .yesno-edit_panel-row-val[data-val="timer_limit"]').hide();
-          dom.find('.yesno-edit_btn[data-edite="timer"] .yesno-edit_panel-row').addClass('has_timer');
+            dom.find('.yesno-edit_btn[data-edite="timer"] .yesno-edit_panel-row-val[data-val="timer_limit"]').hide();
+            dom.find('.yesno-edit_btn[data-edite="timer"] .yesno-edit_panel-row').addClass('has_timer');
         }
         dom.find('.yesno-edit_btn[data-edite="game_bg"] .yesno-edit_panel-update_file').attr('data-togel', oPreset.skin_data['game_bg_image'] ? '1' : '0');
         var oldOpresetSkinData = JSON.parse(JSON.stringify(oPreset.skin_data));
@@ -1692,9 +1715,9 @@ var yesno = function (yesno_params) {
         setDynamicStyle(reset);
     };
 
-      var setDynamicStyle = function (reset=false,game_bg_img,game_bg_layout,game_bg_color,answer_bg_color,answer_text_color,answer_font_size) {
-        
-        if(game_bg_img == undefined) game_bg_img = reset; 
+    var setDynamicStyle = function (reset=false,game_bg_img,game_bg_layout,game_bg_color,answer_bg_color,answer_text_color,answer_font_size) {
+
+        if(game_bg_img == undefined) game_bg_img = reset;
         if(game_bg_layout == undefined) game_bg_layout = reset;
         if(game_bg_color == undefined) game_bg_color = reset;
         if(answer_bg_color == undefined) answer_bg_color = reset;
@@ -1720,7 +1743,7 @@ var yesno = function (yesno_params) {
         //style += '.yesno[data-dir="ltr"] .yesno-contaner .yesno-questions .yesno-question[data-layout="ata"] .yesno-question-contaner .yesno-question-text_sound {'+left+': 0.2em;}';
         style += '.yesno-contaner .yesno-questions .yesno-question[data-layout="ta"] .yesno-question-contaner .yesno-question-text_sound {'+right+': 0; transform: translate('+ (dir == 'rtl' ? '' : '-') +'100%, 0em);}';
 
-        
+
         /*leading_color*/
         var leading_color = defaultSkinData.getPresetVal('leading_color',reset);
         leading_color = leading_color.replace(/[^0-9a-z]/gi, '');
@@ -1737,9 +1760,9 @@ var yesno = function (yesno_params) {
         var bar_background_color = defaultSkinData.getPresetVal('bar_background_color',reset);
         style += '.yesno-status_bar {background-color: #' + bar_background_color + ';} ';
 
-        
+
         /*answer_btn_bg_color*/
-        var answer_btn_bg_color = defaultSkinData.getPresetVal('answer_btn_bg_color',answer_bg_color);        
+        var answer_btn_bg_color = defaultSkinData.getPresetVal('answer_btn_bg_color',answer_bg_color);
         var answer_btn_bg_color_rgb = answer_btn_bg_color.convertToRGB();
         style += '.yesno-question-answer_btn {color: #' + answer_btn_bg_color + '; box-shadow: 0.5em 0.5em 0.5em 0em rgba(0, 0, 0, 0.2), 0 0 0 1em rgba('+answer_btn_bg_color_rgb[0]+','+answer_btn_bg_color_rgb[1]+','+answer_btn_bg_color_rgb[2]+',0.2), 0 0 0 2em rgba('+answer_btn_bg_color_rgb[0]+','+answer_btn_bg_color_rgb[1]+','+answer_btn_bg_color_rgb[2]+',0.2);} ';
 
@@ -1750,24 +1773,24 @@ var yesno = function (yesno_params) {
         /*answer_btn_font_size*/
         var answer_btn_font_size = defaultSkinData.getPresetVal('answer_btn_font_size',answer_font_size);
         style += '.yesno-question-answer_btn .yesno-question-answer_btn-text * {font-size: ' + answer_btn_font_size + 'rem; line-height: ' + (oPreset.lang_data == 'ar' ? 1.5 : 1.1) + '} ';
-        
+
         /*bar_shape*/
         var bar_shape = defaultSkinData.getPresetVal('bar_shape',reset);
         if(bar_shape !='2')
-          bar_shape = defaultSkinData.getPresetVal('bar_shape',true);
+            bar_shape = defaultSkinData.getPresetVal('bar_shape',true);
         dom.find('.yesno-status_bar-items').attr('data-shape_id', bar_shape);
         dom.find('.yesno-status_bar-items svg use').attr('href', '../content/img/icons.svg#icon-bar_shape_' + bar_shape);
 
 
         /*game_bg_color*/
         style += '.yesno-contaner {background-color: #' + defaultSkinData.getPresetVal('game_bg_color',game_bg_color) + ';} ';
-        
-      /*game_bg_image*/
+
+        /*game_bg_image*/
         var game_bg_image = false;
         if(game_bg_img)
-          game_bg_image = defaultSkinData.getPresetVal('game_bg_image',game_bg_img);  
-        else 
-          game_bg_image =oPreset.game_bg_image;
+            game_bg_image = defaultSkinData.getPresetVal('game_bg_image',game_bg_img);
+        else
+            game_bg_image =oPreset.game_bg_image;
         if(game_bg_image) {
             dom.find('#yesno-dynamic_bg_image_style').html('.yesno-contaner {background-image: url("' + game_bg_image + '");} ');
         }
@@ -1798,7 +1821,7 @@ var yesno = function (yesno_params) {
 
         dom.find('#yesno-dynamic_style').html(style);
     };
-    
+
     var uplodeFile = function (type, triger, onsuccess, onerror) {
         var suportedTypes = [], maxSize = 0, accept = '*.*';
         if(type == 'image') {
@@ -1886,7 +1909,7 @@ var yesno = function (yesno_params) {
                                 <div class="refresh" data-tooltip="' + _L.refresh + '" data-tooltip_layout_v="b" data-tooltip_layout_h="r"><svg><use xlink:href="../content/img/icons.svg#refresh"></use></svg></div>\
                             </div>');
         }
-        
+
         skins_dom.on('click', '.yesno-skin', function () {
             currentSkin = oPreset.skin;
             var val = Number($(this).attr('data-skin'));
@@ -1895,21 +1918,21 @@ var yesno = function (yesno_params) {
 
             var sound_icon='icon-question-sound';
             switch(oPreset.skin){
-              case 1: {sound_icon ='icon-sound';oPreset.bar_shape=1;break;}
-              default: {sound_icon = 'icon-question-sound';break;}
+                case 1: {sound_icon ='icon-sound';oPreset.bar_shape=1;break;}
+                default: {sound_icon = 'icon-question-sound';break;}
             }
 
             //document.querySelector(".yesno-question-text_sound .yesno-sound_player-btn svg[data-play='1'] use").setAttribute('href', "../content/img/icons.svg#icon-sound-play" );
             //document.querySelector(".yesno-question-text_sound .yesno-sound_player-btn svg[data-play='0'] use").setAttribute('href', "../content/img/icons.svg#icon-sound-stop" );
             var sound_btn_play = document.querySelectorAll(".yesno-question-sound .yesno-sound_player-btn svg[data-play='1'] use");
             sound_btn_play.forEach(function(item) {
-              item.setAttribute('href', "../content/img/icons.svg#" + sound_icon + "-play" );
-            });           
+                item.setAttribute('href', "../content/img/icons.svg#" + sound_icon + "-play" );
+            });
             var sound_btn_stop = document.querySelectorAll(".yesno-question-sound .yesno-sound_player-btn svg[data-play='0'] use");
             sound_btn_stop.forEach(function(item) {
-              item.setAttribute('href', "../content/img/icons.svg#" + sound_icon + "-stop" );
+                item.setAttribute('href', "../content/img/icons.svg#" + sound_icon + "-stop" );
             });
-            
+
 
             oPreset.bar_background_color =  false;
 
@@ -1926,17 +1949,17 @@ var yesno = function (yesno_params) {
             (((oPreset.answer_btn_font_size == defaultSkinData[currentSkin].comon.answer_btn_font_size) || (!oPreset.answer_btn_font_size)) ? answer_font_size = true : answer_font_size = false);
             (((oPreset.answer_btn_text_color == defaultSkinData[currentSkin].comon.answer_btn_text_color) || (!oPreset.answer_btn_text_color)) ? answer_text_color = true : answer_text_color = false);
 
-          if(game_bg_image)
-            oPreset.game_bg_image = defaultSkinData.getPresetVal('game_bg_image',true);//false;
-         if(game_bg_layout)
-           oPreset.game_bg_image_layout = false;
-          if(answer_bg_color)
-            oPreset.answer_btn_bg_color = false;
-          if(answer_font_size)
-            oPreset.answer_btn_font_size = false;
-          if(answer_text_color)
-            oPreset.answer_btn_text_color = false;
-            
+            if(game_bg_image)
+               oPreset.game_bg_image = defaultSkinData.getPresetVal('game_bg_image',true);//false;
+            if(game_bg_layout)
+               oPreset.game_bg_image_layout = false;
+            if(answer_bg_color)
+               oPreset.answer_btn_bg_color = false;
+            if(answer_font_size)
+               oPreset.answer_btn_font_size = false;
+            if(answer_text_color)
+                oPreset.answer_btn_text_color = false;
+
             oPreset.font = false;
             //updateDefaultSkinData(true);
             updateSkinData(true);
@@ -2223,7 +2246,7 @@ var yesno = function (yesno_params) {
         dom.setShowError = setShowError;
         return dom;
     };
-    
+
     var create_number = function (data, onChange) {
         var last = data.val;
         var dom = create_text({
@@ -2281,8 +2304,7 @@ var yesno = function (yesno_params) {
                                 <path class="svg-timer-arc" stroke-width="' + stroke_width + '"/>\
                             </svg>\
                         </div>\
-                        <div class="timer-time-triger" ></div>\
-                    </div>';
+                        </div>';
         dom = $(dom);
 
         if(!show_trigger) {
@@ -2406,7 +2428,7 @@ var yesno = function (yesno_params) {
             timeStrDom.css({
                 'font-size': textSize + 'em'
             });
-            
+
             return p;
         };
         var pause = function () {
@@ -2422,6 +2444,17 @@ var yesno = function (yesno_params) {
             if(onPause){
                 onPause();
             }};
+        var cancel = function () {
+            if (!is_playing) {
+                return;
+            }
+            is_playing = false;
+            is_end = false;
+            total_time += Math.floor((Date.now() - start_time) / 1000);
+            dom.attr('data-playing', '0');
+            timer_handler_stop();
+            drow();
+        };
         var stop = function () {
             if(!is_playing) {
                 return;
@@ -2444,9 +2477,11 @@ var yesno = function (yesno_params) {
             start_time = Date.now();
             dom.attr('data-playing', '1');
             timer_handler();
+            if(flag==true){
             if(onPlay){
                 onPlay();
             }
+        }
         };
         var refresh = function () {
             is_end = false;
@@ -2458,13 +2493,14 @@ var yesno = function (yesno_params) {
             time = _time;
             refresh();
         };
-        
+
         dom.drow = drow;
         dom.pause = pause;
         dom.stop = stop;
         dom.play = play;
         dom.refresh = refresh;
         dom.set_time = set_time;
+        dom.cancel = cancel;
 
         drow();
 
@@ -2581,7 +2617,7 @@ var yesno = function (yesno_params) {
             dom_item.on('click', '.yesno-question-image_uploder-delete', function() {
                 setImage(false);
             });
-            
+
             dom_item.on('click', '.yesno-question-answer_btn[data-answer="1"] .yesno-question-answer_btn-selected-edit', function() {
                 setCorrectAnswer(1);
             });
@@ -2594,34 +2630,34 @@ var yesno = function (yesno_params) {
             dom_item.find('[data-edit_mode="1"]').remove();
 
             if((workMode !== "Results" && workMode !== "Solution")){
-              dom_item.on('click', '.yesno-question-answer_btn[data-answer="1"]', function() {
-                if(!data.answer || (data.answer && workMode=="Evaluation")) {
-                  setAnswer(1);
-                  saveState(oPreset);
-                  timer.stop();
-                  if(workMode !== "Evaluation")
-                    setTimeout(next_question, 1500);
-                  else
-                    sendEvent(events_types.answer);
-                }
-              });
-              dom_item.on('click', '.yesno-question-answer_btn[data-answer="2"]', function() {
-                if(!data.answer|| (data.answer && workMode=="Evaluation")) {
-                  setAnswer(2);
-                  saveState(oPreset);
-                  timer.stop();
-                  if(workMode !== "Evaluation")
-                    setTimeout(next_question, 1500);
-                  else
-                    sendEvent(events_types.answer);
-                }
-              });
+                dom_item.on('click', '.yesno-question-answer_btn[data-answer="1"]', function() {
+                    if(!data.answer || (data.answer && workMode=="Evaluation")) {
+                        setAnswer(1);
+                        saveState(oPreset);
+                        timer.stop();
+                        if(workMode !== "Evaluation")
+                            setTimeout(next_question, 1500);
+                        else
+                            sendEvent(events_types.answer);
+                    }
+                });
+                dom_item.on('click', '.yesno-question-answer_btn[data-answer="2"]', function() {
+                    if(!data.answer|| (data.answer && workMode=="Evaluation")) {
+                        setAnswer(2);
+                        saveState(oPreset);
+                        timer.stop();
+                        if(workMode !== "Evaluation")
+                            setTimeout(next_question, 1500);
+                        else
+                            sendEvent(events_types.answer);
+                    }
+                });
             }
         }
 
         var createSound = function(data, icon, dir, onplay, onpause) {
             //{url: false, auto_play: false}
-          var dom_sound = '<div class="yesno-sound_player" data-play="0">\
+            var dom_sound = '<div class="yesno-sound_player" data-play="0">\
                                 <div class="yesno-sound_player-btn" role="button" tabindex="1" aria-label="'+ _L.btn_play_sound +'">\
                                     <svg data-play="1"><use xlink:href="../content/img/icons.svg#' + icon + '-play"></use></svg>\
                                     <svg data-play="0"><use xlink:href="../content/img/icons.svg#' + icon + '-stop"></use></svg>\
@@ -2751,25 +2787,25 @@ var yesno = function (yesno_params) {
 
         var sound_auto_play = false;
         if(data.layout == "ata" || data.layout == "at" || data.layout == "a"){
-          sound_auto_play = !isEditMote && data.sound.auto_play;
+            sound_auto_play = !isEditMote && data.sound.auto_play;
         }
         var text_sound_auto_play = false;
         if(data.layout == "ita" || data.layout == "ata" || data.layout == "ta"){
-          text_sound_auto_play = !isEditMote && data.text_sound.url && data.text_sound.auto_play;
+            text_sound_auto_play = !isEditMote && data.text_sound.url && data.text_sound.auto_play;
         }
         var sound = false, text_sound = false;
         var sound_icon='icon-question-sound';
         var text_sound_icon='icon-sound_1';
         switch(oPreset.skin){
-          case 1: sound_icon ='icon-sound';text_sound_icon='icon-sound'; break;
-          case 3: sound_icon = 'icon-question-sound';text_sound_icon='icon-sound_1';break;
-          default: sound_icon = 'icon-question-sound';text_sound_icon='icon-sound_1';break;
+            case 1: sound_icon ='icon-sound';text_sound_icon='icon-sound'; break;
+            case 3: sound_icon = 'icon-question-sound';text_sound_icon='icon-sound_1';break;
+            default: sound_icon = 'icon-question-sound';text_sound_icon='icon-sound_1';break;
         }
-        sound = createSound(data.sound, sound_icon, _L.dir, function(){ 
-            sound_auto_play = false; 
+        sound = createSound(data.sound, sound_icon, _L.dir, function(){
+            sound_auto_play = false;
         });
-        text_sound = createSound(data.text_sound, text_sound_icon, defaultSkinData.getPresetVal('dir'), function(){ 
-            text_sound_auto_play = false; 
+        text_sound = createSound(data.text_sound, text_sound_icon, defaultSkinData.getPresetVal('dir'), function(){
+            text_sound_auto_play = false;
         }, function(){
             autoPlaySound();
         });
@@ -2777,8 +2813,8 @@ var yesno = function (yesno_params) {
         dom_item.find('.yesno-question-text_sound').html(text_sound);
 
         var stopSound = function() {
-            sound_auto_play = false; 
-            text_sound_auto_play = false; 
+            sound_auto_play = false;
+            text_sound_auto_play = false;
             sound.stop();
             text_sound.stop();
         };
@@ -2838,7 +2874,7 @@ var yesno = function (yesno_params) {
 
             tinymce.init(config);
         }
-        
+
         var initBtnTiny = function (tId, edit) {
             var config = {
                 target: edit[0],
@@ -2908,14 +2944,14 @@ var yesno = function (yesno_params) {
         var select = function (slideTemp) {
             if (selected_item) {
                 selected_item.unSelect();
-          }
-          removeQuestionButtonKeyboardSelection();
+            }
+            removeQuestionButtonKeyboardSelection();
             selected_item = item;
             dom_slide_item.addClass('yesno-slide_item--selected');
             dom_shape.attr('data-selected', '1');
             dom_item.attr('data-selected', '1');
-            setQuestionButtonKeyboardSelction();  
-            
+            setQuestionButtonKeyboardSelction();
+
             if(!isEditMote) {
                 oPreset.index = index;
                 var sound_auto_play = data.sound.auto_play;
@@ -2988,7 +3024,7 @@ var yesno = function (yesno_params) {
 
         var icon_preset='';
         if(oPreset.skin == 1){
-          icon_preset = "_1";
+            icon_preset = "_1";
         }
         var answerMarkerV = $('<div class="yesno-question-answer_marker" data-marck="v"><svg><use href="../content/img/icons.svg#icon-question_answer_marker_v'+icon_preset+'"></use></svg></div>');
         var answerMarkerX = $('<div class="yesno-question-answer_marker" data-marck="x"><svg><use href="../content/img/icons.svg#icon-question_answer_marker_x'+icon_preset+'"></use></svg></div>');
@@ -2998,21 +3034,21 @@ var yesno = function (yesno_params) {
                 data.answer = answer; // -1 , (0 / false), 1, 2
                 dom_item.find('.yesno-question-contaner').attr('data-answer', data.answer);
                 answerMarkerV.remove();
-                answerMarkerX.remove(); 
+                answerMarkerX.remove();
                 if(workMode == "Evaluation"){
-                  //answerEmpty.remove();
-                  dom_item.find('.yesno-question-contaner').find('.yesno-question-no-answer').remove();
-                  dom_item.find('.yesno-question-answer_btn').append(answerEmpty);
-                  dom_item.find('.yesno-question-answer_btn[data-answer="' + data.answer + '"]').append(answerMarkerV);
-                  dom_item.find('.yesno-question-answer_btn[data-answer="' + data.answer + '"]').find('.yesno-question-no-answer').remove();
-                  var answer_btn_bg_color = defaultSkinData.getPresetVal('answer_btn_bg_color',false); 
-                  style = '.yesno-question-answer_marker[data-marck="v"] svg {stroke: #' + answer_btn_bg_color +' ;} ';
-                  style += '.yesno-question-answer_marker{ background: #FFF!important;  border: .3em solid #' + answer_btn_bg_color +';}';
-                  style += '.yesno-question[data-selected="1"] .yesno-question-contaner .yesno-question-answer_btn{ opacity: 1!important; }';
-                  style += '.yesno-question-no-answer{ border-color: #' + answer_btn_bg_color +'; }';
-                  dom.find('#yesno-dynamic_style').append(style);
+                    //answerEmpty.remove();
+                    dom_item.find('.yesno-question-contaner').find('.yesno-question-no-answer').remove();
+                    dom_item.find('.yesno-question-answer_btn').append(answerEmpty);
+                    dom_item.find('.yesno-question-answer_btn[data-answer="' + data.answer + '"]').append(answerMarkerV);
+                    dom_item.find('.yesno-question-answer_btn[data-answer="' + data.answer + '"]').find('.yesno-question-no-answer').remove();
+                    var answer_btn_bg_color = defaultSkinData.getPresetVal('answer_btn_bg_color',false);
+                    style = '.yesno-question-answer_marker[data-marck="v"] svg {stroke: #' + answer_btn_bg_color +' ;} ';
+                    style += '.yesno-question-answer_marker{ background: #FFF!important;  border: .3em solid #' + answer_btn_bg_color +';}';
+                    style += '.yesno-question[data-selected="1"] .yesno-question-contaner .yesno-question-answer_btn{ opacity: 1!important; }';
+                    style += '.yesno-question-no-answer{ border-color: #' + answer_btn_bg_color +'; }';
+                    dom.find('#yesno-dynamic_style').append(style);
                 }else{
-                  dom_item.find('.yesno-question-answer_btn[data-answer="' + data.answer + '"]').append(data.answer == data.correct_answer ? answerMarkerV : answerMarkerX);
+                    dom_item.find('.yesno-question-answer_btn[data-answer="' + data.answer + '"]').append(data.answer == data.correct_answer ? answerMarkerV : answerMarkerX);
                 }
                 //if(data.answer == -1){
                 //  dom_item.find('.yesno-question-answer_btn[data-answer="' + data.correct_answer + '"]').append( answerMarkerV);
@@ -3105,7 +3141,7 @@ var yesno = function (yesno_params) {
         if(isEditMote) {
             initTiny();
         }
-        
+
         return item;
     };
 
@@ -3139,12 +3175,19 @@ var yesno = function (yesno_params) {
             case 'time_over':
                 timer.stop();
                 timer.refresh();
+                var myDiv = document.querySelector('.yesno[data-dir=rtl] .yesno-contaner .yesno-status_bar .yesno-deactivating-The-Timer');
+                    myDiv.style.display = 'none';
+                    myDiv.setAttribute('tabindex','-1');
                 if(selected_item) {
                     selected_item.stopSound();
                 }
                 break;
             case 'play':
-                timer.play();
+                if(flag==true){
+                timer.play();}
+                var myDiv = document.querySelector('.yesno[data-dir=rtl] .yesno-contaner .yesno-status_bar .yesno-deactivating-The-Timer');
+                    myDiv.style.display = 'block';
+                    myDiv.setAttribute('tabindex','0');
                 if(selected_item) {
                     selected_item.autoPlaySound();
                 }
@@ -3156,11 +3199,14 @@ var yesno = function (yesno_params) {
                     selected_item.stopSound();
                 }
                 showEndScreen();
+                var myDiv = document.querySelector('.yesno[data-dir=rtl] .yesno-contaner .yesno-status_bar .yesno-deactivating-The-Timer');
+                    myDiv.style.display = 'none';
+                    myDiv.setAttribute('tabindex','-1');
                 //setSwiperSlide();
                 break;
-          case 'final':
-            setSwiperSlide();
-            break;
+            case 'final':
+                setSwiperSlide();
+                break;
         }
 
         saveState(oPreset);
@@ -3206,11 +3252,11 @@ var yesno = function (yesno_params) {
         saveState(oPreset);
         sendEvent(events_types.loaded);
         if(oPreset.game_state=='end'){
-          showEndScreen();
-          //setSwiperSlide();
+            showEndScreen();
+            //setSwiperSlide();
         }
         if(oPreset.game_state=='final'){
-          setSwiperSlide();
+            setSwiperSlide();
         }
     };
 
@@ -3225,7 +3271,9 @@ var yesno = function (yesno_params) {
             }
             else {
                 items[next.attr('data-item_id')].select();
+                if(flag==true){
                 timer.play();
+            }
                 set_game_state('play');
             }
             sendEvent(events_types.answer);
@@ -3233,6 +3281,7 @@ var yesno = function (yesno_params) {
     }
 
     var clear_game = function () {
+        flag=true;
         oPreset.sort_items = false;
         oPreset.index = 0;
         questionsDom.hide();
@@ -3255,16 +3304,16 @@ var yesno = function (yesno_params) {
 
     var __item_id = document.querySelector('.swiper-wrapper .swiper-slide[data-selected="1"]').getAttribute('data-item_id');
     if(__item_id.split('_')[1] == 0){
-      $('.slider.arrow.a-left').addClass('swiper-button-disabled').removeAttr('role').removeAttr('tabindex');
+        $('.slider.arrow.a-left').addClass('swiper-button-disabled').removeAttr('role').removeAttr('tabindex');
     }
     else {
-      $('.slider.arrow.a-left').attr('role', 'button').attr('tabindex', 4);
+        $('.slider.arrow.a-left').attr('role', 'button').attr('tabindex', 4);
     }
-      if(__item_id.split('_')[1] == oPreset.items.length-1){  
+    if(__item_id.split('_')[1] == oPreset.items.length-1){
         $('.slider.arrow.a-right').addClass('swiper-button-disabled').removeAttr('role').removeAttr('tabindex');
     }
     else {
-      $('.slider.arrow.a-right').attr('role', 'button').attr('tabindex', 3);
+        $('.slider.arrow.a-right').attr('role', 'button').attr('tabindex', 3);
     }
 
     return {
