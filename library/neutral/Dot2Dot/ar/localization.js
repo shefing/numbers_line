@@ -6,4 +6,5 @@ cet.localization = {
   feedbackAllCorrectCaption: 'كلّ الاحترام!',
   feedbackAllCorrectText: 'وجدت جميع الإجابات الصحيحة.',
   connected: 'لوئِم بين'
+  
 };

@@ -443,13 +443,6 @@ var dotToDot = function () {
     var showNumberOfPairs = $('#selectPairsNum').val();
   
 
-    var isImageUploaded = $('#bgImageFieldWrapper .picture-self img').length > 0;
-    var sImageDescription = $('#backgroundDescription').val().trim();
-    if (isImageUploaded && sImageDescription === "") {
-      return [_L('imageDescriptionError')];
-    }
-  
-
     if ($('.pair').length < minNumberOfPairs) {
       return [_L('minNumberOfPairs', { minNumber: minNumberOfPairs })];
     }
@@ -564,9 +557,6 @@ var dotToDot = function () {
   function buildPreset() {
     oPreset = {};
     
-
-    oPreset.backgroundDescription = $('#backgroundDescription').val();
-
     oPreset.direction = sDir;
 
     oPreset.alignment = sTextAlign;

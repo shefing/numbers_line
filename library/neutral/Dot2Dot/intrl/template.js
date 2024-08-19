@@ -324,11 +324,11 @@ var dotToDotTemplate = function () {
       'background-color': '#' + background.color,
       'opacity': background.opacity / 100,
     });
-
+    
 
     if (background.image != '') {
-      var imageDescription = oPreset.backgroundDescription;
-      $('.template-background').attr('alt', imageDescription);
+     var imageDescription = oPreset.backgroundDescription;
+     $('.template-background').attr('alt', imageDescription);
 
       $templateBackground.css({
         'background-size': 'cover',
@@ -341,17 +341,25 @@ var dotToDotTemplate = function () {
 
 
   function createTemplate() {
-    // set background setTemplateBackground();
+
+    // set background
+    setTemplateBackground();
+
 
 
     var html = '';
+
     var dt = 100 / maxNumberOfPairs;
 
+
     for (var i = 0; i < maxNumberOfPairs; i++) {
+
       var leftMemberType = oPairs && oPairs[State.aGroupLeft[i]].leftMember.type;
       var rightMemberType = oPairs && oPairs[State.aGroupRight[i]].rightMember.type;
+
       var leftMemberData = oPairs[State.aGroupLeft[i]].leftMember.data;
       var rightMemberData = oPairs[State.aGroupRight[i]].rightMember.data;
+
       var leftMemberDataUnEntity = unEntity(leftMemberData);
       var rightMemberDataUnEntity = unEntity(rightMemberData);
 
@@ -360,6 +368,7 @@ var dotToDotTemplate = function () {
 
 
       $('.left-box').eq(i).addClass(leftMemberType);
+
       switch (leftMemberType) {
         case 'text':
           var $leftBox = $('.left-box').eq(i);
@@ -377,17 +386,17 @@ var dotToDotTemplate = function () {
           break;
         case 'image':
           $('.left-box').eq(i).html('<div class="image-box">\n\
-            <div class="content-wrapper">\n\
-            ' + leftMemberData + '\n\
-            </div>\n\
+          <div class="content-wrapper">\n\
+          '+ leftMemberData + '\n\
+          </div>\n\
           </div>');
           $('#boxes [data-order="' + (i * 2) + '"]').attr('data-name', 'תמונה'); //todo
-          break
+          break;
         case 'sound':
           $('.left-box').eq(i).html('<div class="sound-box" >\n\
-            <div class="content-wrapper">\n\
-            '+ leftMemberData + '\n\
-            </div>\n\
+          <div class="content-wrapper">\n\
+          '+ leftMemberData + '\n\
+          </div>\n\
           </div>');
           $('#boxes [data-order="' + (i * 2) + '"]').attr('data-name', 'שמע').attr('aria-label', 'שמע'); //todo
           var sound = leftMemberData;
@@ -397,7 +406,9 @@ var dotToDotTemplate = function () {
           break;
       }
 
+
       $('.right-box').eq(i).addClass(rightMemberType);
+
       switch (rightMemberType) {
         case 'text':
           var $rightBox = $('.right-box').eq(i);
@@ -415,16 +426,17 @@ var dotToDotTemplate = function () {
           break;
         case 'image':
           $('.right-box').eq(i).html('<div class="image-box">\n\
-            <div class="content-wrapper">\n\ ' + rightMemberData + '\n\
-            </div>\n\
+          <div class="content-wrapper">\n\
+          ' + rightMemberData + '\n\
+          </div>\n\
           </div>');
           $('#boxes [data-order="' + (i * 2 + 1) + '"]').attr('data-name','תמונה'); //todo
           break;
         case 'sound':
           $('.right-box').eq(i).html('<div class="sound-box">\n\
-            <div class="content-wrapper">\n\
-            ' + rightMemberData + '\n\
-            </div>\n\
+          <div class="content-wrapper">\n\
+          ' + rightMemberData + '\n\
+          </div>\n\
           </div>');
           $('#boxes [data-order="' + (i * 2 + 1) + '"]').attr('data-name', 'שמע').attr('aria-label', 'שמע'); //todo
           var sound = rightMemberData;
@@ -434,11 +446,14 @@ var dotToDotTemplate = function () {
           break;
       }
     }
-    $('.box').append('<div class="feedback-box"></div>');
-    createDots();
-    manageTabOrder();
-  }
 
+    $('.box').append('<div class="feedback-box"></div>');
+
+    createDots();
+
+    manageTabOrder();
+
+  }
 
   function handleTabKey(e, boxes, currentIndex, otherBoxes) {
     if (!e.shiftKey) {
@@ -499,14 +514,14 @@ var dotToDotTemplate = function () {
     leftBoxes.first().attr('tabindex', 0).focus();
   }
 
-  function unEntity(str) {
-    //return $("<textarea></textarea>").html(str).text();
-  
-    //return str.replace(/'<'/g, '&lt;').replace(/'>'/g, '&gt;');
-    return str.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-    //return str.replace('<', '&lt;');
-  }
-  
+function unEntity(str) {
+  //return $("<textarea></textarea>").html(str).text();
+
+  //return str.replace(/'<'/g, '&lt;').replace(/'>'/g, '&gt;');
+  return str.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  //return str.replace('<', '&lt;');
+}
+
 /**************************sounds***********************************/
 
 function stopSounds() {
@@ -522,361 +537,390 @@ function createSound(pairNumber, memberSide, sSound) {
   arSoundObjects[pairNumber][memberSide] = sSound;
 }
 
+/**************************dots***********************************/
 
-  /**************************dots***********************************/
+function createDots() { //Places dots for each drawing and passes to createLines for mouse events.
 
-  function createDots() { //Places dots for each drawing and passes to createLines for mouse events.
-    for (var i = 0; i < maxNumberOfPairs * 2; i++) { //create dots on stage
-      var dot = $("<div/>", { class: 'dot' });
-      dots.push(dot[0]); //store each dot in dots array 
-    }
-    var populatingCount = 0;
-    var populatingTimer = window.setInterval(function () { //display dots in sequence
-      if (populatingCount > dots.length - 1) {
-        clearInterval(populatingTimer);
-        halfDotWidth = $('.dot').width() / 2;
-        halfDotHeight = $('.dot').height() / 2;
-        // all dots are created in this point
-        // moved here because we need to draw existing lines according to LMS state
-        // and we need the dots positions to
-        createLines();
-        return;
-      }
-      $($('.box[data-order="' + populatingCount + '"] .feedback-box')).append(dots[populatingCount]);
-      populatingCount++;
-      //TODO actavate SFX
-      //sfx.pop();
-    }, 1000 / 15);
-  };
-  /*************************lines***********************************/
-
-  function loadLinesFromLms() {
-    for (var i = 0; i < maxNumberOfPairs; i++) {
-      if (State.aCouples[i] >= 0) {
-        createStraightLine((i * 2), (State.aCouples[i] * 2 + 1));
-      }
-    }
-  }
-  
-
-  function createStraightLine(startDot, endDot) {
-
-    var ax = 0;
-    var ay = 0;
-    var cx = 0;
-    var cy = 0;
-    var color = "#ff0000";
-    var correct = false;
-  
-    ax = $($('.box[data-order="' + startDot + '"] .dot')).offset().left + halfDotWidth - $('.template-wrapper').offset().left;
-    ay = $($('.box[data-order="' + startDot + '"] .dot')).offset().top + halfDotHeight - $('.template-wrapper').offset().top;
-  
-    cx = $($('.box[data-order="' + endDot + '"] .dot')).offset().left + halfDotWidth - $('.template-wrapper').offset().left;
-    cy = $($('.box[data-order="' + endDot + '"] .dot')).offset().top + halfDotHeight - $('.template-wrapper').offset().top;
-  
-    var line = {
-  
-      curve: r.path('M ' + ax + ' ' + ay + ' L ' + cx + ' ' + cy + '').attr({ stroke: color, "stroke-width": 10, "stroke-linecap": "round" }),
-      controls: r.set(),
-      elastic: {
-      },
-      startDot: startDot,
-      endDot: endDot,
-      correct: correct,
-      loop: null
-    };
-
-    // update dots to full
-    $($('.box[data-order="' + startDot + '"] .dot')).addClass('full');
-    $($('.box[data-order="' + endDot + '"] .dot')).addClass('full');
-
-    setConnectedAriaLabels(startDot, endDot);
-    lines.push(line);
-  }
-  function setInitialAriaLabel(elemIndex) {
-    var elem = $($('.box[data-order="' + elemIndex + '"]'));
-    elem.removeAttr('data-connected').attr("aria-label", elem.attr("data-name"));
-  }
-  function setConnectedAriaLabels(dotStartIndex, dotEndIndex) {
-    var startElem = $($('.box[data-order="' + dotStartIndex + '"]'));
-    var endElem = $($('.box[data-order="' + dotEndIndex + '"]'));
-    startElem.attr('aria-label', cet.localization.connected + " " + startElem.attr('data-name') + " " + endElem.attr('data-name')).attr('data-connected', endElem.attr("data-order")).removeAttr('selected');
-    endElem.attr('aria-label', cet.localization.connected + " " + endElem.attr('data-name') + " " + startElem.attr('data-name')).attr('data-connected', startElem.attr("data-order")).removeAttr('selected');
-  }
-
-  function removeLine(existingLine) {
-
-    if (existingLine >= 0) { //remove existing line
-
-      var currentLine = lines[existingLine];
-      disconnectMembers(currentLine.startDot, currentLine.endDot);
-
-    // update dots to NOT full
-      $($('.box[data-order="' + currentLine.startDot + '"] .dot')).removeClass('full');
-      $($('.box[data-order="' + currentLine.endDot + '"] .dot')).removeClass('full');
-
-      setInitialAriaLabel(currentLine.startDot);
-      setInitialAriaLabel(currentLine.endDot);
-
-      if (currentLine.loop) {
-        window.clearInterval(currentLine.loop);
-      }
-      currentLine.curve.remove();
-      currentLine.controls.remove();
-      lines.splice(existingLine, 1);
-    }
-  }
-
-  var createLines = function () { //handles mouse events for line creation. Passes to finishedShape() when drawing is completed.
-
-    // this can run safely because all dots are already created on screen
-    loadLinesFromLms();
-
-    var newLine = function (ax, ay, bx, by, cx, cy, color) {
-      var line = {
-        path: [["M", ax, ay], ["Q", bx, by, cx, cy]],
-        curve: r.path(this.path).attr({ stroke: color, "stroke-width": 10, "stroke-linecap": "round" }),
-        controls: r.set(
-          r.circle(ax, ay, 5).attr({ fill: "#fff", stroke: "none" }),
-          r.circle(bx, by, 5).attr({ fill: "none", stroke: "none" }),
-          r.circle(cx, cy, 5).attr({ fill: "none", stroke: "none" })
-        ),
-        elastic: {
-          currentX: ax,
-          currentY: ay,
-          targetX: ax,
-          targetY: ay,
-          vX: 0,
-          vY: 0
-        },
-        startDot: null,
-        endDot: null,
-        correct: false,
-        loop: null
-      };
-      return line;
-    };
-
-    var endLine = function (state, dotStartIndex, dotEndIndex, event) {
-      var lineIndex = lines.length - 1; //allowing for setTimeout to finish
-      $(dots).off('mouseover');
-      $body.off(); //removes mousemove and mouseup for line
-      $(document).off(); //removes mouseout of page for line
-  
-
-      if (state === true) {//checking if line ends on suitable dot
-        var line = lines[lineIndex],
-          x = $(dots[dotEndIndex]).offset().left + halfDotWidth - $('.template-wrapper').offset().left,
-          y = $(dots[dotEndIndex]).offset().top + halfDotHeight - $('.template-wrapper').offset().top;
-        line.controls[2].attr({ cx: x, cy: y }); //snapping end of line to center of end dot
-        line.path[1][3] = x;
-        line.path[1][4] = y;
-        line.elastic.targetX = line.controls[0].attr("cx") + (x - line.controls[0].attr("cx")) * 1 / 2;
-        line.elastic.targetY = line.controls[0].attr("cy") + (y - line.controls[0].attr("cy")) * 1 / 2;
-        var loop = lines[lineIndex].loop; //declare to allow for loop to finish
-        window.setTimeout(function () {
-          window.clearInterval(loop);
-        }, 4000); //four seconds for animation to subside
-  
-        // update line endDot index
-        line.endDot = dotEndIndex;
-
-
-        //check if end dot of current line is already full and disconnect the line and the member it connected to
-        // (lines.length - 1) because we are checking all lines except the last one, the one we connected right now
-        removeLinesByDotValues([dotEndIndex], true);
-        // check line direction (left to right or right to left)
-        // connect the members
-        // update line.correct
-        if (dotStartIndex % 2 == 0) {
-          line.correct = connectMembers((dotStartIndex / 2), (dotEndIndex - 1) / 2);
-        }
-        else {
-          line.correct = connectMembers((dotEndIndex / 2), (dotStartIndex - 1) / 2);
-        }
-        $(dots[dotEndIndex]).addClass('full');
-        setConnectedAriaLabels(dotStartIndex, dotEndIndex);
-      } else { //line doesn't end on suitable dot
-        $(dots[dotStartIndex]).removeClass('full');
-        window.clearInterval(lines[lineIndex].loop);
-        lines[lines.length - 1].curve.remove();
-        lines[lines.length - 1].controls.remove();
-        lines.splice(lines.length - 1, 1);
-      }
-    };
-    var lineHandler = function (e) { //touch functionality
-
-      if (bBlock) return;
-  
-      //remove existing line if there is any
-      removeLinesByDotValues([dots.indexOf(e)]);
-  
-      // add full dot to start dot
-      $(e).addClass('full');
-  
-  
-      lines.push(
-        newLine(
-          $(e).offset().left + halfDotWidth - $('.template-wrapper').offset().left,
-          $(e).offset().top + halfDotHeight - $('.template-wrapper').offset().top,
-          $(e).offset().left + halfDotWidth - $('.template-wrapper').offset().left,
-          $(e).offset().top + halfDotHeight - $('.template-wrapper').offset().top,
-          $(e).offset().left + halfDotWidth - $('.template-wrapper').offset().left,
-          $(e).offset().top + halfDotHeight - $('.template-wrapper').offset().top,
-  
-          "#e1f6f1")
-      );//initial co-ords and color for 3-point curve
-  
-      var line = lines[lines.length - 1];
-      line.startDot = dots.indexOf(e);
-  
-
-      $body.on('mousemove touchmove', function (event) {
-        event.preventDefault();//prevent page scrolling
-
-        if (event.type == 'mousemove') {
-          var x = event.pageX - $('.template-wrapper').offset().left,
-            y = event.pageY - $('.template-wrapper').offset().top;
-
-        } else {
-          var x = event.originalEvent.changedTouches[0].pageX - $('.template-wrapper').offset().left,
-            y = event.originalEvent.changedTouches[0].pageY - $('.template-wrapper').offset().top;
-        }
-
-
-        line.controls[2].attr({ cx: x, cy: y });
-        line.path[1][3] = x;
-        line.path[1][4] = y;
-        line.elastic.targetX = line.controls[0].attr("cx") + (x - line.controls[0].attr("cx")) * 1 / 2;
-        line.elastic.targetY = line.controls[0].attr("cy") + (y - line.controls[0].attr("cy")) * 1 / 2;
-        if (!line.loop) {
-          line.loop = window.setInterval(function () {
-            var el = line.elastic;
-            el.vX += (el.targetX - el.currentX) * spring; //spring: elastic coefficient
-            el.currentX += (el.vX *= friction); //friction: friction force
-            el.vY += (el.targetY - el.currentY) * spring; //spring: elastic coefficient
-            el.currentY += (el.vY *= friction); //friction: friction force
-            line.controls[1].attr({ cx: el.currentX, cy: el.currentY });
-            line.path[1][1] = el.currentX;
-            line.path[1][2] = el.currentY;
-            line.curve.attr({ path: line.path });
-          }, 1000 / 30);
-        }
-        $(dots).each(function (i, f) {
-          if (dots.indexOf(e) !== dots.indexOf(f)) { //ensuring different start and finish dot, ignore self
-            if ((dots.indexOf(e) % 2) != (dots.indexOf(f) % 2)) { //ensuring different start and finish dot groups, ignore self group
-              var hotpointX = $(f).offset().left - $('.template-wrapper').offset().left, hotpointY = $(f).offset().top - $('.template-wrapper').offset().top;
-              if (x > hotpointX && y > hotpointY && x < (hotpointX + 30) && y < (hotpointY + 30)) {
-                touching = false;
-                endLine(true, dots.indexOf(e), dots.indexOf(f));
-              }
-            }
-          }
-        });
+  for (var i = 0; i < maxNumberOfPairs * 2; i++) { //create dots on stage
+    var dot = $("<div/>", {
+      class: 'dot'
     });
 
-      $body.on('mouseup touchend', function (event) {
-        event.preventDefault();//prevent page scrolling
-        touching = false;
-        endLine(false, dots.indexOf(e));//unsuccessful
-      });
+    dots.push(dot[0]); //store each dot in dots array
+  }
+
+  var populatingCount = 0;
+  var populatingTimer = window.setInterval(function () { //display dots in sequence
+    if (populatingCount > dots.length - 1) {
+      clearInterval(populatingTimer);
+
+      halfDotWidth = $('.dot').width() / 2;
+      halfDotHeight = $('.dot').height() / 2;
+
+      // all dots are created in this point
+      // moved here because we need to draw existing lines according to LMS state
+      // and we need the dots positions to
+      createLines();
+
+      return;
+    }
+
+    $($('.box[data-order="' + populatingCount + '"] .feedback-box')).append(dots[populatingCount]);
+
+    populatingCount++;
+
+    //TODO actavate SFX
+    //sfx.pop();
+  }, 1000 / 15);
+
+};
+
+/*************************lines***********************************/
+
+function loadLinesFromLms() {
+  for (var i = 0; i < maxNumberOfPairs; i++) {
+    if (State.aCouples[i] >= 0) {
+      createStraightLine((i * 2), (State.aCouples[i] * 2 + 1));
+    }
+  }
+}
+
+function createStraightLine(startDot, endDot) {
+
+  var ax = 0;
+  var ay = 0;
+  var cx = 0;
+  var cy = 0;
+  var color = "#ff0000";
+  var correct = false;
+
+  ax = $($('.box[data-order="' + startDot + '"] .dot')).offset().left + halfDotWidth - $('.template-wrapper').offset().left;
+  ay = $($('.box[data-order="' + startDot + '"] .dot')).offset().top + halfDotHeight - $('.template-wrapper').offset().top;
+
+  cx = $($('.box[data-order="' + endDot + '"] .dot')).offset().left + halfDotWidth - $('.template-wrapper').offset().left;
+  cy = $($('.box[data-order="' + endDot + '"] .dot')).offset().top + halfDotHeight - $('.template-wrapper').offset().top;
+
+  var line = {
+
+    curve: r.path('M ' + ax + ' ' + ay + ' L ' + cx + ' ' + cy + '').attr({ stroke: color, "stroke-width": 10, "stroke-linecap": "round" }),
+    controls: r.set(),
+    elastic: {
+    },
+    startDot: startDot,
+    endDot: endDot,
+    correct: correct,
+    loop: null
+  };
+
+  // update dots to full
+  $($('.box[data-order="' + startDot + '"] .dot')).addClass('full');
+  $($('.box[data-order="' + endDot + '"] .dot')).addClass('full');
 
 
-      $(document).on('mouseout', function (event) {
-        event = event ? event : window.event;
-        var from = event.relatedTarget || event.toElement;
-        if (!from || from.nodeName == "HTML") {
-          touching = false; // only in case we are using super smart touchscreen projector 
-          // that uses a regular mouse but thinks he is a touch device
-          endLine(false, dots.indexOf(e));
+  setConnectedAriaLabels(startDot, endDot);
+  lines.push(line);
+}
+function setInitialAriaLabel(elemIndex) {
+  var elem = $($('.box[data-order="' + elemIndex + '"]'));
+  elem.removeAttr('data-connected').attr("aria-label", elem.attr("data-name"));
+}
+function setConnectedAriaLabels(dotStartIndex, dotEndIndex) {
+  var startElem = $($('.box[data-order="' + dotStartIndex + '"]'));
+  var endElem = $($('.box[data-order="' + dotEndIndex + '"]'));
+
+  startElem.attr('aria-label', cet.localization.connected + " " + startElem.attr('data-name') + " " + endElem.attr('data-name')).attr('data-connected', endElem.attr("data-order")).removeAttr('selected');
+  endElem.attr('aria-label', cet.localization.connected + " " + endElem.attr('data-name') + " " + startElem.attr('data-name')).attr('data-connected', startElem.attr("data-order")).removeAttr('selected');
+}
+function removeLine(existingLine) {
+
+  if (existingLine >= 0) { //remove existing line
+    var currentLine = lines[existingLine];
+    disconnectMembers(currentLine.startDot, currentLine.endDot);
+
+    // update dots to NOT full
+    $($('.box[data-order="' + currentLine.startDot + '"] .dot')).removeClass('full');
+    $($('.box[data-order="' + currentLine.endDot + '"] .dot')).removeClass('full');
+
+
+    setInitialAriaLabel(currentLine.startDot);
+    setInitialAriaLabel(currentLine.endDot);
+
+    if (currentLine.loop) {
+      window.clearInterval(currentLine.loop);
+    }
+    currentLine.curve.remove();
+    currentLine.controls.remove();
+    lines.splice(existingLine, 1);
+  }
+}
+
+var createLines = function () { //handles mouse events for line creation. Passes to finishedShape() when drawing is completed.
+
+  // this can run safely because all dots are already created on screen
+  loadLinesFromLms();
+
+  var newLine = function (ax, ay, bx, by, cx, cy, color) {
+    var line = {
+      path: [["M", ax, ay], ["Q", bx, by, cx, cy]],
+      curve: r.path(this.path).attr({ stroke: color, "stroke-width": 10, "stroke-linecap": "round" }),
+      controls: r.set(
+        r.circle(ax, ay, 5).attr({ fill: "#fff", stroke: "none" }),
+        r.circle(bx, by, 5).attr({ fill: "none", stroke: "none" }),
+        r.circle(cx, cy, 5).attr({ fill: "none", stroke: "none" })
+      ),
+      elastic: {
+        currentX: ax,
+        currentY: ay,
+        targetX: ax,
+        targetY: ay,
+        vX: 0,
+        vY: 0
+      },
+      startDot: null,
+      endDot: null,
+      correct: false,
+      loop: null
+    };
+    return line;
+  };
+
+  var endLine = function (state, dotStartIndex, dotEndIndex, event) {
+    var lineIndex = lines.length - 1; //allowing for setTimeout to finish
+    $(dots).off('mouseover');
+    $body.off(); //removes mousemove and mouseup for line
+    $(document).off(); //removes mouseout of page for line
+
+
+    if (state === true) {//checking if line ends on suitable dot
+      var line = lines[lineIndex],
+        x = $(dots[dotEndIndex]).offset().left + halfDotWidth - $('.template-wrapper').offset().left,
+        y = $(dots[dotEndIndex]).offset().top + halfDotHeight - $('.template-wrapper').offset().top;
+      line.controls[2].attr({ cx: x, cy: y }); //snapping end of line to center of end dot
+      line.path[1][3] = x;
+      line.path[1][4] = y;
+      line.elastic.targetX = line.controls[0].attr("cx") + (x - line.controls[0].attr("cx")) * 1 / 2;
+      line.elastic.targetY = line.controls[0].attr("cy") + (y - line.controls[0].attr("cy")) * 1 / 2;
+
+      var loop = lines[lineIndex].loop; //declare to allow for loop to finish
+      window.setTimeout(function () {
+        window.clearInterval(loop);
+      }, 4000); //four seconds for animation to subside
+
+      // update line endDot index
+      line.endDot = dotEndIndex;
+
+      //check if end dot of current line is already full and disconnect the line and the member it connected to
+      // (lines.length - 1) because we are checking all lines except the last one, the one we connected right now
+
+      removeLinesByDotValues([dotEndIndex], true);
+      // check line direction (left to right or right to left)
+      // connect the members
+      // update line.correct
+      if (dotStartIndex % 2 == 0) {
+        line.correct = connectMembers((dotStartIndex / 2), (dotEndIndex - 1) / 2);
+      }
+      else {
+        line.correct = connectMembers((dotEndIndex / 2), (dotStartIndex - 1) / 2);
+      }
+
+      $(dots[dotEndIndex]).addClass('full');
+      setConnectedAriaLabels(dotStartIndex, dotEndIndex);
+    } else { //line doesn't end on suitable dot
+      $(dots[dotStartIndex]).removeClass('full');
+      window.clearInterval(lines[lineIndex].loop);
+      lines[lines.length - 1].curve.remove();
+      lines[lines.length - 1].controls.remove();
+      lines.splice(lines.length - 1, 1);
+    }
+
+  };
+
+  var lineHandler = function (e) { //touch functionality
+
+    if (bBlock) return;
+
+    //remove existing line if there is any
+    removeLinesByDotValues([dots.indexOf(e)]);
+
+    // add full dot to start dot
+    $(e).addClass('full');
+
+    lines.push(
+      newLine(
+        $(e).offset().left + halfDotWidth - $('.template-wrapper').offset().left,
+        $(e).offset().top + halfDotHeight - $('.template-wrapper').offset().top,
+        $(e).offset().left + halfDotWidth - $('.template-wrapper').offset().left,
+        $(e).offset().top + halfDotHeight - $('.template-wrapper').offset().top,
+        $(e).offset().left + halfDotWidth - $('.template-wrapper').offset().left,
+        $(e).offset().top + halfDotHeight - $('.template-wrapper').offset().top,
+
+        "#e1f6f1")
+    );//initial co-ords and color for 3-point curve
+
+    var line = lines[lines.length - 1];
+    line.startDot = dots.indexOf(e);
+
+
+    $body.on('mousemove touchmove', function (event) {
+      event.preventDefault();//prevent page scrolling
+
+      if (event.type == 'mousemove') {
+        var x = event.pageX - $('.template-wrapper').offset().left,
+          y = event.pageY - $('.template-wrapper').offset().top;
+
+      } else {
+        var x = event.originalEvent.changedTouches[0].pageX - $('.template-wrapper').offset().left,
+          y = event.originalEvent.changedTouches[0].pageY - $('.template-wrapper').offset().top;
+      }
+
+
+      line.controls[2].attr({ cx: x, cy: y });
+      line.path[1][3] = x;
+      line.path[1][4] = y;
+      line.elastic.targetX = line.controls[0].attr("cx") + (x - line.controls[0].attr("cx")) * 1 / 2;
+      line.elastic.targetY = line.controls[0].attr("cy") + (y - line.controls[0].attr("cy")) * 1 / 2;
+
+      if (!line.loop) {
+        line.loop = window.setInterval(function () {
+          var el = line.elastic;
+
+          el.vX += (el.targetX - el.currentX) * spring; //spring: elastic coefficient
+          el.currentX += (el.vX *= friction); //friction: friction force
+
+          el.vY += (el.targetY - el.currentY) * spring; //spring: elastic coefficient
+          el.currentY += (el.vY *= friction); //friction: friction force
+
+          line.controls[1].attr({ cx: el.currentX, cy: el.currentY });
+          line.path[1][1] = el.currentX;
+          line.path[1][2] = el.currentY;
+          line.curve.attr({ path: line.path });
+
+        }, 1000 / 30);
+      }
+
+      $(dots).each(function (i, f) {
+
+        if (dots.indexOf(e) !== dots.indexOf(f)) { //ensuring different start and finish dot, ignore self
+          if ((dots.indexOf(e) % 2) != (dots.indexOf(f) % 2)) { //ensuring different start and finish dot groups, ignore self group
+
+            var hotpointX = $(f).offset().left - $('.template-wrapper').offset().left,
+              hotpointY = $(f).offset().top - $('.template-wrapper').offset().top;
+
+            if (x > hotpointX && y > hotpointY && x < (hotpointX + 30) && y < (hotpointY + 30)) {
+              touching = false;
+              endLine(true, dots.indexOf(e), dots.indexOf(f));
+            }
+          }
         }
       });
+    });
+    
 
-    };
 
-    if (bBlock) {
-      return
-    }
-    else {
+    $body.on('mouseup touchend', function (event) {
+      event.preventDefault();//prevent page scrolling
+      touching = false;
+      endLine(false, dots.indexOf(e));//unsuccessful
+    });
 
-      $(dots).each(function (i, e) {
 
-        $(e).on('mousedown touchstart', function (event) {
-          event.preventDefault();//prevent page scrolling
+    $(document).on('mouseout', function (event) {
+      event = event ? event : window.event;
+      var from = event.relatedTarget || event.toElement;
+      if (!from || from.nodeName == "HTML") {
+        touching = false; // only in case we are using super smart touchscreen projector 
+        // that uses a regular mouse but thinks he is a touch device
+        endLine(false, dots.indexOf(e));
+      }
+    });
+
+  };
+
+  if (bBlock) {
+    return
+  }
+  else {
+
+    $(dots).each(function (i, e) {
+
+      $(e).on('mousedown touchstart', function (event) {
+        event.preventDefault();//prevent page scrolling
 
           if (touching == false) {
             touching = true;
-            lineHandler(e);
+          lineHandler(e);
           }
-        });
+
+
       });
+    });
 
-    }
-  };
+  }
+};
 
-  /***************************pairs***********************************/
+/***************************pairs***********************************/
 
-  function connectMembers(leftMemberNumber, rightMemberNumber) {
-    State.aCouples[leftMemberNumber] = rightMemberNumber;
-    lastAction = actANSWER;
-    changesMade();
-  
+function connectMembers(leftMemberNumber, rightMemberNumber) {
+  State.aCouples[leftMemberNumber] = rightMemberNumber;
+  lastAction = actANSWER;
+  changesMade();
 
-    //returns true if connection is correct
-    if (State.aGroupLeft[leftMemberNumber] == State.aGroupRight[rightMemberNumber]) {
-      return true;
-    }
-    else {
-      return false;
-    }
+
+  //returns true if connection is correct
+  if (State.aGroupLeft[leftMemberNumber] == State.aGroupRight[rightMemberNumber]) {
+    return true;
+  }
+  else {
+    return false;
+  }
+}
+
+function disconnectMembers(startDot, endDot) {
+  if (startDot % 2 == 0) {
+    //conection from Left to Right
+    State.aCouples[startDot / 2] = "-1";
+  }
+  else {
+    //conection from Right to left
+    State.aCouples[endDot / 2] = "-1";
+  }
+  lastAction = actANSWER;
+  changesMade();
+}
+
+function createRandomPairs(numberOfPairs) {
+
+  var aGroupLeft = [];
+  var aGroupRight = [];
+  var aCouples = [];
+  var aTemp = [];
+
+  // initSet is from - cet.math.helpers
+  aTemp = initSet(0, numberOfPairs - 1);
+  aTemp.completeDisorder();
+
+  aGroupLeft = aTemp.slice(0, maxNumberOfPairs);
+  aGroupRight = aTemp.slice(0, maxNumberOfPairs);
+
+
+  // this is needed because when we do "completeDisorder" on 2 elements for the same amount of time for both groups
+  // the order stays the same as in the beggining
+  if (maxNumberOfPairs != 2) {
+    aGroupLeft.completeDisorder();
   }
 
-  function disconnectMembers(startDot, endDot) {
-    if (startDot % 2 == 0) {
-      //conection from Left to Right
-      State.aCouples[startDot / 2] = "-1";
-    }
-    else {
-      //conection from Right to left
-      State.aCouples[endDot / 2] = "-1";
-    }
-    lastAction = actANSWER;
-    changesMade();
+  aGroupRight.completeDisorder();
+
+  // init couples array with "-1"
+  for (var i = 0; i < maxNumberOfPairs; i++) {
+    aCouples[i] = -1;
   }
 
-  function createRandomPairs(numberOfPairs) {
+  State.aGroupLeft = aGroupLeft;
+  State.aGroupRight = aGroupRight;
+  State.aCouples = aCouples;
 
-    var aGroupLeft = [];
-    var aGroupRight = [];
-    var aCouples = [];
-    var aTemp = [];
-
-    // initSet is from - cet.math.helpers
-    aTemp = initSet(0, numberOfPairs - 1);
-    aTemp.completeDisorder();
-
-    aGroupLeft = aTemp.slice(0, maxNumberOfPairs);
-    aGroupRight = aTemp.slice(0, maxNumberOfPairs);
-  
-
-    // this is needed because when we do "completeDisorder" on 2 elements for the same amount of time for both groups
-    // the order stays the same as in the beggining
-    if (maxNumberOfPairs != 2) {
-      aGroupLeft.completeDisorder();
-    }
-
-    aGroupRight.completeDisorder();
-
-    // init couples array with "-1"
-    for (var i = 0; i < maxNumberOfPairs; i++) {
-      aCouples[i] = -1;
-    }
-  
-    State.aGroupLeft = aGroupLeft;
-    State.aGroupRight = aGroupRight;
-    State.aCouples = aCouples;
-  
-  }
+}
 
 /*****************************results*********************************/
 var bSilentSave = true; // by default first save always silent
