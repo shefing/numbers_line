@@ -100,15 +100,15 @@ Textit.Components.Card.prototype.createFromJson = function (json) {
   }
   inner = inner.replace(/\n/g, '<br/>');
   var commnetsHTML = '<div class="word-card__notes">' + 
-                          '<h2>' + Textit.strings[this.article.lang].ui.card_comments_title + '</h2>' +
-                          //'<div class="note" contenteditable="true"></div>' + 
-                          '<textarea class="note"></textarea>' + 
+                          // '<h2>' + Textit.strings[this.article.lang].ui.card_comments_title + '</h2>' +
+                          // //'<div class="note" contenteditable="true"></div>' + 
+                          // '<textarea class="note"></textarea>' + 
                      '</div>'
 
   this.dom = Textit.util.createHtml({
     html: '<div class="word-card"></div>',
     content: '<div class="word-card__inner">'
-      + '<h1>' + Textit.util.escape(this.term) + '</h1>' + inner + '</div>'
+      // + '<h1>' + Textit.util.escape(this.term) + '</h1>' + inner + '</div>'
       + commnetsHTML,
   });
   this.commentsEl = this.dom.querySelector('.note');
@@ -202,11 +202,15 @@ Textit.Components.Card.prototype.close = function () {
 
 Textit.Components.Card.prototype.deserializeState = function (state) {
   if (state && state.comments != null) {
-    this.commentsEl.value = state.comments;
+    if(this.commentsEl){
+      this.commentsEl.value = state.comments;
+    }
+    
   }
 }
 Textit.Components.Card.prototype.serializeState = function (state) {
-  return { comments: this.commentsEl.value };
+  if(this.commentsEl){
+  return { comments: this.commentsEl.value };}
 }
 
 // Textit.Components.Image

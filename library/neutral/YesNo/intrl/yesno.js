@@ -193,6 +193,11 @@ var yesno = function (yesno_params) {
             viewAns:'צפייה בתשובות',
             tryAgain:'משחק חדש',
 
+            btn_next: 'הבא',
+            btn_previous: 'קודם',
+            btn_play_sound:'נגן קובץ שמע'
+
+
         },
         ar: {
             lang: 'ar',
@@ -291,6 +296,10 @@ var yesno = function (yesno_params) {
 
             viewAns:'مشاهدة الإجابات',
             tryAgain:'لعبة جديدة',
+
+            btn_next: 'التالي',
+            btn_previous: 'السابق',
+            btn_play_sound: 'تشغيل ملف صوتي'
         },
         en: {
             lang: 'en',
@@ -389,6 +398,11 @@ var yesno = function (yesno_params) {
 
             viewAns:'Review the answers',
             tryAgain:'Replay',
+
+            btn_next: 'Next',
+            btn_previous: 'Previous',
+            btn_play_sound: 'Play sound'
+
         }
     };
     var _L = (lang in langList) ? langList[lang] : langList.he;
@@ -711,7 +725,7 @@ var yesno = function (yesno_params) {
                                     <span class="yesno-play_panel-tetle--pause">' + oPreset.pause_text + '</span>\
                                     <span class="yesno-play_panel-tetle--time_over">' + oPreset.time_over_text + '</span>\
                                 </div>\
-                                <div class="yesno-play_panel-btn"><svg><use href="../content/img/icons.svg#'+icon_start+'"></use></svg></div>\
+                                <div tabindex="0" role="button" aria-label="' + oPreset.start_text + '"  class="yesno-play_panel-btn"><svg><use href="../content/img/icons.svg#'+ icon_start +'"></use></svg></div>\
                             </div>\
                         </div>\
                         <div class="yesno-status_bar">\
@@ -737,7 +751,7 @@ var yesno = function (yesno_params) {
                                     </div>\
                                 </div>\
                             </div>\
-                            <div class="yesno-status_bar-clear-wraper" data-edit_mode="0"><svg><use href="../content/img/icons.svg#icon-clear_game"></use></svg></div>\
+                            <div class="yesno-status_bar-clear-wraper" tabindex="0" role="button"   aria-label="' + _L.tryAgain + '" data-edit_mode="0"><svg><use href="../content/img/icons.svg#icon-clear_game"></use></svg></div>\
                             <div class="yesno-tools_btn_wraper" data-edite="bar" data-layout="h" data-edit_mode="1">\
                                 <div class="yesno-edit_btn yesno-tools_btn" data-edite="bar" data-tooltip="' + _L.edit_bar_settings + '" data-tooltip_layout_v="b" data-tooltip_layout_h="l">\
                                     <svg><use href="../content/img/icons.svg#icon-edit"></use></svg>\
@@ -769,10 +783,10 @@ var yesno = function (yesno_params) {
                         <div class="yesno-questions">\
                           <div class="swiper-wrapper">\
                           </div>\
-                          <div class="slider arrow a-right"></div>\
-                          <div class="slider arrow a-left"></div>\
-                          <div class="arrow a-right"></div>\
-                          <div class="arrow a-left"></div>\
+                          <div class="slider arrow a-right" aria-label="'+ (_L.lang == "en" ? _L.btn_previous : _L.btn_next) +'" ></div>\
+                          <div class="slider arrow a-left" aria-label="'+ (_L.lang == "en" ? _L.btn_next : _L.btn_previous) +'" ></div>\
+                          <div class="arrow a-right" aria-label="'+ (_L.lang == "en" ? _L.btn_previous : _L.btn_next) +'" ></div>\
+                          <div class="arrow a-left" aria-label="'+ (_L.lang == "en" ? _L.btn_next : _L.btn_previous) +'" ></div>\
                         </div>\
                         <div class="yesno-tools_btn_wraper" data-edite="game_bg" data-layout="h" data-edit_mode="1" data-on_costume_skin_show="1">\
                             <div class="yesno-edit_btn yesno-tools_btn" data-edite="game_bg" data-tooltip="' + _L.edit_game_bg + '" data-tooltip_layout_v="b" data-tooltip_layout_h="l">\
@@ -838,23 +852,20 @@ var yesno = function (yesno_params) {
     
           data_item_id = "item_" + --data_item_id.split('_')[1];
           if(data_item_id.split('_')[1] == 0){  
-            $('.slider.arrow.a-left').addClass('swiper-button-disabled');
+            $('.slider.arrow.a-left').addClass('swiper-button-disabled').removeAttr('role').removeAttr('tabindex');
           }
           if(data_item_id.split('_')[1] < oPreset.items.length-1){  
-            $('.slider.arrow.a-right').removeClass('swiper-button-disabled');
+            $('.slider.arrow.a-right').removeClass('swiper-button-disabled').attr('role', 'button').attr('tabindex', 3);
           }
           $('.yesno-status_bar-item').removeClass('currentSlide');
           $('.yesno-status_bar-item[data-item_id='+ data_item_id +']').addClass('currentSlide');
           document.querySelector('.yesno-status_bar-item[data-item_id='+ data_item_id +']').setAttribute('data-selected','1');
 
-          document.querySelector('.swiper-wrapper .swiper-slide[data-selected="1"]').setAttribute('data-selected','0');
-          document.querySelector('.swiper-wrapper .swiper-slide[data-item_id='+ data_item_id +']').setAttribute('data-selected','1');
-
-          //var prev = selected_item.dom_item.prev('.yesno-question[data-item_id]');
-          //items[prev.attr('data-item_id')].select();
-          //if(selected_item) {
-          //  selected_item.autoPlaySound();
-          //}
+          document.querySelector('.swiper-wrapper .swiper-slide[data-selected="1"]').setAttribute('data-selected', '0');
+          removeQuestionButtonKeyboardSelection();
+          document.querySelector('.swiper-wrapper .swiper-slide[data-item_id=' + data_item_id + ']').setAttribute('data-selected', '1');
+          setQuestionButtonKeyboardSelction();
+          console.log(1);
         });
 
         dom.on('click', '.slider.arrow.a-right', function() {
@@ -867,18 +878,19 @@ var yesno = function (yesno_params) {
           document.querySelector('.yesno-status_bar-item[data-item_id='+ data_item_id +']').setAttribute('data-selected','0');
           data_item_id = "item_" + ++data_item_id.split('_')[1];
           if(data_item_id.split('_')[1] == oPreset.items.length-1){  
-            $('.slider.arrow.a-right').addClass('swiper-button-disabled');
+            $('.slider.arrow.a-right').addClass('swiper-button-disabled').removeAttr('role').removeAttr('tabindex');
           }
-          if(data_item_id.split('_')[1] > 0){  
-            $('.slider.arrow.a-left').removeClass('swiper-button-disabled');
+          if(data_item_id.split('_')[1] > 0){
+            $('.slider.arrow.a-left').removeClass('swiper-button-disabled').attr('role', 'button').attr('tabindex', 4);
           }
           $('.yesno-status_bar-item').removeClass('currentSlide');
           $('.yesno-status_bar-item[data-item_id='+ data_item_id +']').addClass('currentSlide');
           document.querySelector('.yesno-status_bar-item[data-item_id='+ data_item_id +']').setAttribute('data-selected','1');
 
-          document.querySelector('.swiper-wrapper [data-selected="1"]').setAttribute('data-selected','0');
-          document.querySelector('.swiper-wrapper .swiper-slide[data-item_id='+ data_item_id +']').setAttribute('data-selected','1');
-
+          document.querySelector('.swiper-wrapper [data-selected="1"]').setAttribute('data-selected', '0');
+          removeQuestionButtonKeyboardSelection();
+          document.querySelector('.swiper-wrapper .swiper-slide[data-item_id=' + data_item_id + ']').setAttribute('data-selected', '1');
+          
           var next = selected_item.dom_item.next('.yesno-question[data-item_id]');
           items[next.attr('data-item_id')].select();
           if(selected_item) {
@@ -1286,6 +1298,12 @@ var yesno = function (yesno_params) {
                 }
                 set_game_state('play');
             });
+          dom.on('keyup', '.yesno-play_panel-btn, .yesno-question-answer_btn, .arrow,.btnEnd, .yesno-status_bar-clear-wraper, .yesno-sound_player-btn, .yesno-sound_player-btn', function (e) {
+            if (e.key && (e.key !== 'Enter' && e.key !== ' ')) {
+                return;
+              }
+              $(e.target).click();
+            });
 
             //dom.on('click', '.yesno-contaner[data-game_state="end"] .yesno-status_bar .yesno-status_bar-items .yesno-status_bar-item', function(){
             //    if(oPreset.game_state == 'end') {
@@ -1329,11 +1347,22 @@ var yesno = function (yesno_params) {
               else {
                 set_game_state(oPreset.game_state);
               }
-        }
+      }
+      var oldDoms = container.find(".yesno-contaner");
+      if (oldDoms.length > 0) {
+        oldDoms.remove()
+      }
+       container.prepend(dom);
 
-        container.prepend(dom);
+     };
 
-    };
+    var removeQuestionButtonKeyboardSelection = function () {
+      $('.yesno-question-answer_btn[tabindex]').map((i, el) => { $(el).removeAttr('role').removeAttr('tabindex'); });
+    }
+
+    var setQuestionButtonKeyboardSelction = function () {
+      $('.swiper-wrapper .swiper-slide[data-selected=1]').find('.yesno-question-answer_btn').map((i, el) => { $(el).attr('role', 'button').attr('tabindex', (i + 1)); });
+    }
 
     var showEndScreen = function(){
       dom.find('.yesno-contaner').addClass('end');
@@ -1354,10 +1383,10 @@ var yesno = function (yesno_params) {
                                         <span class="final_txt"><span class="s_txt">'  + _L.final_score_correct_1 + ' </span></br><b>' + correctAns + '</b> ' + _L.final_score_correct_2+ ' <b>' + totalQuestions + '</b> ' + _L.final_score_correct_3 + '</span>\
                                       </div>\
                                   </div></div>\
-                        <div class="btn_tryAgain btnEnd">\
+                        <div class="btn_tryAgain btnEnd" tabindex="1" role="button" aria-label="' + _L.tryAgain + '">\
                           <span class="tryAgain_txt">' + _L.tryAgain + '</span>\
                         </div>\
-                        <div class="btn_viewAns btnEnd">\
+                        <div class="btn_viewAns btnEnd" tabindex="0" role="button" aria-label="' + _L.viewAns + '">\
                           <span class="viewAns_txt">' + _L.viewAns + '</span>\
                         </div>';
       $('.yesno-contaner').prepend(end_panel); 
@@ -1375,6 +1404,8 @@ var yesno = function (yesno_params) {
     var setSwiperSlide = function () {
       
       dom.find('.yesno-contaner').removeClass('end');
+
+      removeQuestionButtonKeyboardSelection();
 
       $('.yesno-question.swiper-slide').attr('data-selected',1);
       var slidePerView = 1.5;
@@ -1401,7 +1432,7 @@ var yesno = function (yesno_params) {
           navigation: {
             nextEl: '.a-right',
             prevEl: '.a-left',
-          },
+          }, 
           breakpoints: {
             // when window width is <= 320px
             699: {
@@ -1447,6 +1478,7 @@ var yesno = function (yesno_params) {
             nextEl: _L.lang == "en" ? '.a-left': '.a-right',
             prevEl: _L.lang == "en" ? '.a-right' : '.a-left',
           },
+          keyboard: true,
           breakpoints: {
             // when window width is <= 320px
             699: {
@@ -2249,7 +2281,7 @@ var yesno = function (yesno_params) {
                                 <path class="svg-timer-arc" stroke-width="' + stroke_width + '"/>\
                             </svg>\
                         </div>\
-                        <div class="timer-time-triger"></div>\
+                        <div class="timer-time-triger" ></div>\
                     </div>';
         dom = $(dom);
 
@@ -2589,8 +2621,8 @@ var yesno = function (yesno_params) {
 
         var createSound = function(data, icon, dir, onplay, onpause) {
             //{url: false, auto_play: false}
-            var dom_sound = '<div class="yesno-sound_player" data-play="0">\
-                                <div class="yesno-sound_player-btn">\
+          var dom_sound = '<div class="yesno-sound_player" data-play="0">\
+                                <div class="yesno-sound_player-btn" role="button" tabindex="1" aria-label="'+ _L.btn_play_sound +'">\
                                     <svg data-play="1"><use xlink:href="../content/img/icons.svg#' + icon + '-play"></use></svg>\
                                     <svg data-play="0"><use xlink:href="../content/img/icons.svg#' + icon + '-stop"></use></svg>\
                                 </div>\
@@ -2876,12 +2908,14 @@ var yesno = function (yesno_params) {
         var select = function (slideTemp) {
             if (selected_item) {
                 selected_item.unSelect();
-            }
+          }
+          removeQuestionButtonKeyboardSelection();
             selected_item = item;
             dom_slide_item.addClass('yesno-slide_item--selected');
             dom_shape.attr('data-selected', '1');
             dom_item.attr('data-selected', '1');
-
+            setQuestionButtonKeyboardSelction();  
+            
             if(!isEditMote) {
                 oPreset.index = index;
                 var sound_auto_play = data.sound.auto_play;
@@ -3220,11 +3254,17 @@ var yesno = function (yesno_params) {
     start_game();
 
     var __item_id = document.querySelector('.swiper-wrapper .swiper-slide[data-selected="1"]').getAttribute('data-item_id');
-    if(__item_id.split('_')[1] == 0){  
-      $('.slider.arrow.a-left').addClass('swiper-button-disabled');
+    if(__item_id.split('_')[1] == 0){
+      $('.slider.arrow.a-left').addClass('swiper-button-disabled').removeAttr('role').removeAttr('tabindex');
     }
-    if(__item_id.split('_')[1] == oPreset.items.length-1){  
-      $('.slider.arrow.a-right').addClass('swiper-button-disabled');
+    else {
+      $('.slider.arrow.a-left').attr('role', 'button').attr('tabindex', 4);
+    }
+      if(__item_id.split('_')[1] == oPreset.items.length-1){  
+        $('.slider.arrow.a-right').addClass('swiper-button-disabled').removeAttr('role').removeAttr('tabindex');
+    }
+    else {
+      $('.slider.arrow.a-right').attr('role', 'button').attr('tabindex', 3);
     }
 
     return {

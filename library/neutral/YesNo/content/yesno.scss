@@ -3132,6 +3132,11 @@ body {
   opacity: 0;
 }
 
+.yesno[data-dir='rtl'] .yesno-contaner[data-game_state='start'] .yesno-questions {
+  display: none;
+  pointer-events: none !important;
+}
+
 .yesno[data-dir='rtl'] .yesno-contaner[data-game_state='start'] .yesno-questions,
 .yesno[data-dir='rtl'] .yesno-contaner[data-game_state='start'] .yesno-questions *,
 .yesno[data-dir='rtl'] .yesno-contaner[data-game_state='start'] .yesno-questions * *,
@@ -8664,4 +8669,9 @@ svg#answer_icon {
 
 .yesno[data-skin="1"][mode="ev"] .yesno-question-answer_marker[data-marck="v"] svg use {
   display: none;
+}
+
+
+.yesno .yesno-contaner .yesno-questions .yesno-question:not([data-selected="1"]) .yesno-question-contaner .yesno-sound_player .yesno-sound_player-btn {
+  display: none !important;
 }

@@ -51,26 +51,27 @@ Textit.Questions = (function () {
 
     this.dom = Textit.util.createHtml({
       html: '<div class="question" data-open="false">' +
-                  '<button class="question__pin"></button>' +
-                  ((data.clue && data.clue.length > 0 && data.clue != 'null') ?
-                      '<div class="question__clue"><span class="qusestion__clue__opener">' + Textit.strings[this.article.lang].ui.question_clue + '</span><div class="question__clue__content">' + data.clue + '</div></div>' : '') +
-                  '<span class="question__feedback question__feedback--empty">' +
-                      '<span class="question__feedback__fill"><span class="question__feedback__fill__dividers"></span></span>' +
-                      '<span class="question__btn-done">' + Textit.strings[this.article.lang].ui.question_done + '</span>' +
-                  '</span>' +
-                  '<span class="question__stem">' + data.stem + '</span>' +
-                  (!!data.translation ? '<span class="question__translation">' + data.translation + '</span>' : '') +
-                  '<div class="question__content"></div>' +
-               '</div>'
+        '<button class="question__pin"></button>' +
+        ((data.clue && data.clue.length > 0 && data.clue != 'null') ?
+          '<div class="question__clue"><span class="qusestion__clue__opener">' + Textit.strings[this.article.lang].ui.question_clue + '</span><div class="question__clue__content">' + data.clue + '</div></div>' : '') +
+        '<span class="question__stem">' + data.stem + '</span>' +
+        (!!data.translation ? '<span class="question__translation">' + data.translation + '</span>' : '') +
+        '<div class="question__content"></div>' +
+        '<span class="question__feedback question__feedback--empty">' +
+        '<span class="buttonA question__feedback__fill"  role="button" tabindex="0" aria-label="' + Textit.strings[this.article.lang].ui.answer_question + '"><span class="question__feedback__fill__dividers"></span></span>' +
+        '</span>' +
+        '</div>'
     });
+
     if (className) this.dom.$addClass(className);
     this._stemElement = this.dom.querySelector('.question__stem');
     this._contentElement = this.dom.querySelector('.question__content');
     this._feedbackElement = this.dom.querySelector('.question__feedback');
-    this._feedbackFillElement = this.dom.querySelector('.question__feedback__fill');
+    this._feedbackFillElement = this.dom.querySelector('.buttonA');
     this._feedbackDividersElement = this.dom.querySelector('.question__feedback__fill__dividers');
     this._clueElement = this.dom.querySelector('.question__clue');
     this._pinButtonElement = this.dom.querySelector('.question__pin');
+
     if (this.article.styles.questions.font)
       this._stemElement.style.fontFamily = this.article.styles.questions.font;
     if (this.article.styles.questions.color)
@@ -109,10 +110,83 @@ Textit.Questions = (function () {
   * @private
   */
   QuestionBase.prototype.bindEvents = function () {
+    var self = this;
     this._stemElement.addEventListener('click', this.toggleExpand.bind(this));
     this._feedbackElement.addEventListener('click', this.toggleExpand.bind(this));
+  
+    // הוספתי פונקציה שגם בעת ארוע מקלדת יעשה את הפונקציה:toggleExpand
+    this._feedbackElement.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+          this.toggleExpand();
+      }
+  }.bind(this));
+    this._contentElement.style.visibility= 'hidden';
+    this._stemElement.addEventListener('click', function () {
+      var element = document.querySelector('.buttonA');
+      if (element.classList.contains('question__btn-done')) {
+        contentElement = document.querySelector('.question__content');
+        contentElement.style.visibility= 'hidden';
+        element.classList.remove('question__btn-done');
+        element.classList.add('question__feedback__fill');
+        element.setAttribute('aria-label', Textit.strings[self.article.lang].ui.answer_question);
+        element.textContent = ''
+      } else if (element.classList.contains('question__feedback__fill')) {
+        contentElement = document.querySelector('.question__content');
+        contentElement.style.visibility= 'visible';
+        element.classList.remove('question__feedback__fill');
+        element.classList.add('question__btn-done');
+        element.setAttribute('aria-label', Textit.strings[self.article.lang].ui.question_done);
+        element.textContent = Textit.strings[self.article.lang].ui.question_done;
+        setTimeout(() => {
+          contentElement.focus();
+      }, 0);
+      }
+    });
+  
+    this._feedbackElement.addEventListener('click', function () {
+      var element = document.querySelector('.buttonA');
+      if (element.classList.contains('question__btn-done')) {
+        contentElement = document.querySelector('.question__content');
+        contentElement.style.visibility= 'hidden';
+        element.classList.remove('question__btn-done');
+        element.classList.add('question__feedback__fill');
+        element.setAttribute('aria-label', Textit.strings[self.article.lang].ui.answer_question);
+        element.textContent = ''
+      } else if (element.classList.contains('question__feedback__fill')) {
+        contentElement = document.querySelector('.question__content');
+        contentElement.style.visibility= 'visible';
+        element.classList.remove('question__feedback__fill');
+        element.classList.add('question__btn-done');
+        element.setAttribute('aria-label', Textit.strings[self.article.lang].ui.question_done);
+        element.textContent = Textit.strings[self.article.lang].ui.question_done;
+        setTimeout(() => {
+          contentElement.focus();
+      }, 0);
+      }
+    });
+    this._feedbackElement.addEventListener('keydown', function (event) {
+      if(event.key==='Enter' || event.key===' '){
+      var element = document.querySelector('.buttonA');
+      if (element.classList.contains('question__btn-done')) {
+        contentElement = document.querySelector('.question__content');
+        contentElement.style.visibility= 'hidden';
+        element.classList.remove('question__btn-done');
+        element.classList.add('question__feedback__fill');
+        element.setAttribute('aria-label', Textit.strings[self.article.lang].ui.answer_question);
+        element.textContent = ''
+      } else if (element.classList.contains('question__feedback__fill')) {
+        contentElement = document.querySelector('.question__content');
+        contentElement.style.visibility= 'visible';
+        element.classList.remove('question__feedback__fill');
+        element.classList.add('question__btn-done');
+        element.setAttribute('aria-label', Textit.strings[self.article.lang].ui.question_done);
+        element.textContent = Textit.strings[self.article.lang].ui.question_done;
+        setTimeout(() => {
+          contentElement.focus();
+      }, 0);
+      }}
+    });
     this._pinButtonElement.addEventListener('click', this.toggleFloat.bind(this));
-
     if (this._clueElement) {
       this._clueElement.addEventListener('click', this.setClueOpen.bind(this, true, null));
       this.dom.addEventListener('click', this.setClueOpen.bind(this, false, null));
@@ -217,6 +291,13 @@ Textit.Questions = (function () {
       this.dom.$removeClass('dragging');
       this.dom.style.cssText = '';
       this.article.getScrollParent().removeEventListener('scroll', this.updateFloatBind);
+      var element = document.querySelector('.buttonA');
+      if (element.classList.contains('question__btn-done')) {
+        element.classList.remove('question__btn-done');
+        element.classList.add('question__feedback__fill');
+        element.setAttribute('aria-label', Textit.strings[this.article.lang].ui.answer_question);
+        element.textContent = ''
+      }
       this.collapse();
     }
   }
@@ -312,18 +393,20 @@ Textit.Questions = (function () {
 
     var direction = this.article.direction == 'rtl' ? 'bottom' : 'top';
     var tween = new TWEEN.Tween({ completion: this.completion })
-        .easing(TWEEN.Easing.Sinusoidal.Out)
-        .to({ completion: completion }, 500)
-        .onUpdate(function () {
-          self._feedbackFillElement.style.background = 'linear-gradient(to ' + direction + ', #FBE5D6 ' + (100 - this.completion * 100) + '%, #ED7D32 ' + (100 - this.completion * 100) + '%)';
+      .easing(TWEEN.Easing.Sinusoidal.Out)
+      .to({ completion: completion }, 500)
+      .onUpdate(function () {
+        if (self._feedbackFillElement) {
+          // self._feedbackFillElement.style.background = 'linear-gradient(to ' + direction + ', #FBE5D6 ' + (100 - this.completion * 100) + '%, #ED7D32 ' + (100 - this.completion * 100) + '%)';
           if (this.completion == 1)
             self._feedbackElement.className = 'question__feedback' + (self.article.feedback ? ' question__feedback--done' : '');
-            /*else if (this.completion == 0)
-              self._feedbackElement.className = 'question__feedback question__feedback--empty';*/
+          /*else if (this.completion == 0)
+            self._feedbackElement.className = 'question__feedback question__feedback--empty';*/
           else
             self._feedbackElement.className = 'question__feedback';
-        })
-        .start()
+        }
+      })
+      .start()
 
     this.completion = completion;
   }
@@ -384,8 +467,8 @@ Textit.Questions = (function () {
         this.answers.push(i);
       }
       html += '<li class="question--multiple-choice__option" data-choice-index="' + i + '"><label><input type="radio" name="mcquestion' + compId + '" value="' + i + '">' +
-          '<span>' + data.options[i].text + '</span>' +
-          '</label></li>';
+        '<span>' + data.options[i].text + '</span>' +
+        '</label></li>';
     }
     html += '</ul>';
 
@@ -1244,7 +1327,7 @@ Textit.Questions = (function () {
         scrollTop = scrollParent === window ? function () { return scrollParent.scrollY; } : function () { return scrollParent.scrollTop }
       var chain = this.chain = new ToolChain(rect.right - 5, scrollTop() + rect.top + 7, scrollParent);
       chain.setCursor(Textit.path("cursors/mark-" + color + ".png"), 32, 32, 1, 27, 25, -20);
-      this.markerMover = function (event) {  chain.updateMousePos(event.clientX, scrollTop() + event.clientY); };
+      this.markerMover = function (event) { chain.updateMousePos(event.clientX, scrollTop() + event.clientY); };
       this.escListener = function (event) { if (event.keyCode == 27) { self.endMark(self.activeMark); } };
       document.addEventListener('mousemove', this.markerMover);
       document.addEventListener('keydown', this.escListener);
@@ -1368,8 +1451,8 @@ Textit.Questions = (function () {
 
     // 5. set content html
     this.setContentHtml('<div class="question--cloze__bank">' +
-                            '<span class="question--cloze__bank__title">' + Textit.strings[this.article.lang].ui.question_cloze_bank + '</span>' +
-                             draggableOptions.join('') + '</div>')
+      '<span class="question--cloze__bank__title">' + Textit.strings[this.article.lang].ui.question_cloze_bank + '</span>' +
+      draggableOptions.join('') + '</div>')
 
     this.optionsContainer = this.dom.querySelector('.question--cloze__bank');
     this.optionsElements = this.optionsContainer.querySelectorAll('.draggable-cloze-option');
@@ -1689,7 +1772,7 @@ Textit.Questions = (function () {
   function compareAnswers(text1, text2) {
     if (text1 == null || text2 == null) return false;
     var words1 = Textit.Word.Tokenize(text1)
-        , word2 = Textit.Word.Tokenize(text2);
+      , word2 = Textit.Word.Tokenize(text2);
     return Textit.util.compareArrays(words1, word2);
   }
 

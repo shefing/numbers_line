@@ -22,7 +22,18 @@ Textit.strings.he = {
     view_options_font_spacing: 'רווח',
     review_mode_title: 'מצב בדיקה',
     review_mode_insturction: 'הינך צופה בשאלון במצב בדיקה. במצב בדיקה לא ניתן לערוך את השאלון',
-    review_mode_back: 'חזרה'
+    review_mode_back: 'חזרה',
+    voice_prompt_click_view:'כפתורי התצוגה מוצגים: הגדלת הגופן והקטנת הגופן',
+    voice_prompt_click_narrator:'כפתורי ההקראה מוצגים: הגברת ווליום , הנמכת הווליום , הגברת מהירות ההקראה , האטתמהירות ההקראה , הפעלת ההקראה והשהיה',
+    font_reduction:'הקטנת הגוֹפן',
+    font_enlargement:'הגדלת הגוֹפן',
+    volume_down:'הנמכת הווליום',
+    increasing_volume:'הגברת הווליום',
+    slowing_down_reading_speed:'הֶאָטַת מהירות ההקראה',
+    acceleration_of_reading_speed:'הגברת מהירות ההקראה',
+    reading_activation:'הפעלת הקראה',
+    reading_delay:'השהיית הקראה',
+    answer_question:'לחץ למענה על הַשְאֵלָה'
   },
   walkme:{
     notes: 'לחצו בשוליים הימניים של הטקסט כדי להוסיף הערה',

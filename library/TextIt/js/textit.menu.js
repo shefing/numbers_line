@@ -13,12 +13,12 @@
     _el = document.createElement('aside');
     _el.className = 'menu';
     _el.innerHTML =
-          '<a href="#" class="menu-item" data-pos="selected" data-menu-action="close" title="עבודה"></a>' +
-          (article.narrator != null ? '<a href="#" class="menu-item" data-pos="1" data-menu-action="narrator" title="הקראה"></a>' : '') +
-          '<a href="#" class="menu-item" data-pos="2" data-menu-action="view" title="תצוגה"></a>' +
-          '<a href="#" class="menu-item" data-pos="3" data-menu-action="origin" title="מקור"></a>' +
-          '<a href="#" class="menu-item" data-pos="4" data-menu-action="help" title="עזרה"></a>' +
-          '<a href="#" class="menu-item" data-pos="5" data-menu-action="drop" title="סימונים"></a>';
+      '<a href="#" class="menu-item" data-pos="selected" data-menu-action="close" title="עבודה"></a>' +
+      (article.narrator != null ? '<a href="#" class="menu-item" data-pos="1" data-menu-action="narrator" title="הקראה"></a>' : '') +
+      '<a href="#" class="menu-item" data-pos="2" data-menu-action="view" title="תצוגה"></a>' +
+      '<a href="#" class="menu-item" data-pos="3" data-menu-action="origin" title="מקור"></a>' +
+      '<a href="#" class="menu-item" data-pos="4" data-menu-action="help" title="עזרה"></a>' +
+      '<a href="#" class="menu-item" data-pos="5" data-menu-action="drop" title="סימונים"></a>';
     init();
     return _el;
   }
@@ -59,10 +59,16 @@
    */
   function bind() {
     _el.addEventListener('click', click);
+    _el.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        click();
+      }
+    });
     document.addEventListener('mouseup', function (e) {
       if (e.target == document.body)
         close();
-    })
+    });
+
     _article.on('textmode-change', function () {
       if (_runningMenuAction == 'origin') {
         close();
@@ -256,32 +262,32 @@ Textit.Drawer = function () {
     _el = document.createElement('aside');
     _el.className = 'drawer';
     _el.innerHTML =
-    '<div class="drawer__bg"></div>' +
-    '<button class="drawer__btn-close">&#x2715;</button>' +
-    '<section class="drawer__drops-areas" data-menu-name="drop-areas">' +
+      '<div class="drawer__bg"></div>' +
+      '<button class="drawer__btn-close">&#x2715;</button>' +
+      '<section class="drawer__drops-areas" data-menu-name="drop-areas">' +
       '<ul class="drawer__actions">' +
-        '<li class="drawer__action" data-action="like"></li>' +
-        '<li class="drawer__action" data-action="trash"></li>' +
+      '<li class="drawer__action" data-action="like"></li>' +
+      '<li class="drawer__action" data-action="trash"></li>' +
       '</ul>' +
-    '</section>' +
-    '<section class="drawer__view-options" data-menu-name="view-options">' +
+      '</section>' +
+      '<section class="drawer__view-options" data-menu-name="view-options">' +
       '<ul>' +
-        '<li data-view-style="0"></li>' +
-        '<li data-view-style="1"></li>' +
-        '<li data-view-style="2"></li>' +
-        '<li data-view-style="3"></li>' +
-        '<li data-view-style="4"></li>' +
+      '<li data-view-style="0"></li>' +
+      '<li data-view-style="1"></li>' +
+      '<li data-view-style="2"></li>' +
+      '<li data-view-style="3"></li>' +
+      '<li data-view-style="4"></li>' +
       '</ul>' +
-    '</section>' +
-    '<section class="drawer__narration-options" data-menu-name="narration-options">' +
+      '</section>' +
+      '<section class="drawer__narration-options" data-menu-name="narration-options">' +
       '<ul>' +
-        '<li>' +
-          '<div class="dial" data-interactive="false" data-dial-action="time"><span class="dial__content"><button class="icon icon--pause"></button><span class="dial__time"></span></span></div>' +
-          '<div class="dial" data-interactive="true" data-dial-action="volume"><span class="dial__content"><i class="icon icon--volume"></i></span></div>' +
-          '<div class="dial" data-interactive="true" data-dial-action="speed"><span class="dial__content"><i class="icon icon--rabbit"></i></span></div>' +
-        '</li>' +
+      '<li>' +
+      '<div class="dial" data-interactive="false" data-dial-action="time"><span class="dial__content"><button class="icon icon--pause"></button><span class="dial__time"></span></span></div>' +
+      '<div class="dial" data-interactive="true" data-dial-action="volume"><span class="dial__content"><i class="icon icon--volume"></i></span></div>' +
+      '<div class="dial" data-interactive="true" data-dial-action="speed"><span class="dial__content"><i class="icon icon--rabbit"></i></span></div>' +
+      '</li>' +
       '</ul>' +
-    '</section>';
+      '</section>';
 
     _drawer_submenus = new Textit.drawer_submenus(_article, _menu, self);
     init();
@@ -446,10 +452,10 @@ Textit.drawer_submenus = function (article, menu, drawer) {
     var _el;
     var startFontSize = parseInt(article.styles.text.size) || 20;
     var styles = [{ fontStyle: 'normal', fontSize: startFontSize - 4 + 'px', lineHeight: '200%', fontFamily: article.styles.text.font || 'Segoe UI' },
-                  { fontStyle: 'normal', fontSize: startFontSize - 2 + 'px', lineHeight: '200%', fontFamily: article.styles.text.font || 'Segoe UI' },
-                  { fontStyle: 'normal', fontSize: startFontSize + 'px', lineHeight: '200%', fontFamily: article.styles.text.font || 'Segoe UI', 'default': true },
-                  { fontStyle: 'normal', fontSize: startFontSize + 2 + 'px', lineHeight: '200%', fontFamily: article.styles.text.font || 'Segoe UI' },
-                  { fontStyle: 'normal', fontSize: startFontSize + 4 + 'px', lineHeight: '200%', fontFamily: article.styles.text.font || 'Segoe UI' }];
+    { fontStyle: 'normal', fontSize: startFontSize - 2 + 'px', lineHeight: '200%', fontFamily: article.styles.text.font || 'Segoe UI' },
+    { fontStyle: 'normal', fontSize: startFontSize + 'px', lineHeight: '200%', fontFamily: article.styles.text.font || 'Segoe UI', 'default': true },
+    { fontStyle: 'normal', fontSize: startFontSize + 2 + 'px', lineHeight: '200%', fontFamily: article.styles.text.font || 'Segoe UI' },
+    { fontStyle: 'normal', fontSize: startFontSize + 4 + 'px', lineHeight: '200%', fontFamily: article.styles.text.font || 'Segoe UI' }];
     var _sampleText = 'sample';
     var _itemElements;
     var _radios = [];
@@ -472,6 +478,11 @@ Textit.drawer_submenus = function (article, menu, drawer) {
       _sampleText = Textit.strings[_article.lang].ui.view_options_example_text;
       _el = _drawer.el().querySelector('.drawer__view-options');
       _el.addEventListener('click', click);
+      _el.addEventListener('keydown', function (event) {
+        if (event.key === 'Enter' || event.key === ' ') {
+          click();
+        }
+      });
       _el.addEventListener('mousemove', hover);
       _el.addEventListener('mouseleave', hover);
       _itemElements = _el.querySelectorAll('li');
@@ -487,10 +498,10 @@ Textit.drawer_submenus = function (article, menu, drawer) {
 
         _itemElements[i].style.font = compileFont(styles[i]);
         _itemElements[i].innerHTML = '<input type="radio" name="font-styles" id="radio_viewstyle' + i + '" />' + '<label for="radio_viewstyle' + i + '">' +
-                                          '<strong>' + name + '</strong>&nbsp;' +
-                                          '<em>' + description + '</em>' +
-                                          '<p aria-hidden="true">' + _sampleText + '</p>' +
-                                     '</label>'
+          '<strong>' + name + '</strong>&nbsp;' +
+          '<em>' + description + '</em>' +
+          '<p aria-hidden="true">' + _sampleText + '</p>' +
+          '</label>'
         var radioinput = _itemElements[i].querySelector('input');
         if (styles[i].default)
           radioinput.setAttribute('checked', 'checked');
@@ -641,9 +652,11 @@ Textit.drawer_submenus = function (article, menu, drawer) {
           })
           _article.narrator.on('start', function () {
             playpauseIcon.className = 'icon icon--pause';
+            playpauseIcon.setAttribute('aria-label', Textit.strings[_article.lang].ui['reading_activation']);
           })
           _article.narrator.on('stop', function () {
             playpauseIcon.className = 'icon icon--resume';
+            playpauseIcon.setAttribute('aria-label', Textit.strings[_article.lang].ui['reading_delay']);
           })
           dial.on('start-drag', function (e) {
             if (_article.narrator.isPlaying) _article.narrator.pauseNarration();
@@ -726,7 +739,7 @@ Textit.drawer_submenus = function (article, menu, drawer) {
       var html = '<svg viewBox="0 0 110 110" class="dial__fill" version="1.1" xmlns="http://www.w3.org/2000/svg"><circle cx="50%" cy="50%" r="50"></circle></svg>';
       if (this._interactive) {
         html += '<button class="dial__button--increase"></button>' +
-                '<button class="dial__button--decrease"></button>'
+          '<button class="dial__button--decrease"></button>'
       }
       el.innerHTML = html + el.innerHTML;
       this._textEl = el.querySelector('.dial__content');
@@ -767,7 +780,7 @@ Textit.drawer_submenus = function (article, menu, drawer) {
     }
 
     Dial.prototype.decrease = function () {
-      if (this._el.dataset.dialAction=='volume')
+      if (this._el.dataset.dialAction == 'volume')
         Textit.XAPI.sendEvent({ verb: 'pressed', object_id: 'textIt_toolbar_volumeDown', objectName: 'volumeDown' });
       else
         Textit.XAPI.sendEvent({ verb: 'pressed', object_id: 'textIt_toolbar_speedDown', objectName: 'speedDown' });
@@ -919,9 +932,9 @@ Textit.drawer_submenus = function (article, menu, drawer) {
     */
     function intersectRect(r1, r2) {
       return !(r2.left > r1.right ||
-               r2.right < r1.left ||
-               r2.top > r1.bottom ||
-               r2.bottom < r1.top);
+        r2.right < r1.left ||
+        r2.top > r1.bottom ||
+        r2.bottom < r1.top);
     }
     function inRect(rect, point) {
       return rect.left < point.x && point.x < rect.right &&
@@ -976,43 +989,43 @@ Textit.EmbedMenu = function () {
   function create(article) {
     var startFontSize = parseInt(article.styles.text.size) || 20;
     fontStyles = [{ fontStyle: 'normal', fontSize: startFontSize - 4 + 'px', lineHeight: '200%', fontFamily: article.styles.text.font || 'Segoe UI' },
-                  { fontStyle: 'normal', fontSize: startFontSize - 2 + 'px', lineHeight: '200%', fontFamily: article.styles.text.font || 'Segoe UI' },
-                  { fontStyle: 'normal', fontSize: startFontSize + 'px', lineHeight: '200%', fontFamily: article.styles.text.font || 'Segoe UI', 'default': true },
-                  { fontStyle: 'normal', fontSize: startFontSize + 2 + 'px', lineHeight: '200%', fontFamily: article.styles.text.font || 'Segoe UI' },
-                  { fontStyle: 'normal', fontSize: startFontSize + 4 + 'px', lineHeight: '200%', fontFamily: article.styles.text.font || 'Segoe UI' }];
+    { fontStyle: 'normal', fontSize: startFontSize - 2 + 'px', lineHeight: '200%', fontFamily: article.styles.text.font || 'Segoe UI' },
+    { fontStyle: 'normal', fontSize: startFontSize + 'px', lineHeight: '200%', fontFamily: article.styles.text.font || 'Segoe UI', 'default': true },
+    { fontStyle: 'normal', fontSize: startFontSize + 2 + 'px', lineHeight: '200%', fontFamily: article.styles.text.font || 'Segoe UI' },
+    { fontStyle: 'normal', fontSize: startFontSize + 4 + 'px', lineHeight: '200%', fontFamily: article.styles.text.font || 'Segoe UI' }];
 
     _article = article;
     _el = document.createElement('aside');
     _el.className = 'embedmenu';
     _el.innerHTML =
-    '<ul class="topmenu" data-menu-selected="null">' +
+      '<ul class="topmenu" data-menu-selected="null">' +
 
-      '<li data-menu-index="1"><button class="topmenu-button topmenu-button--origin" data-selected="false"><i class="icon icon--work"></i>' + Textit.strings[_article.lang].ui['menu_title_origin'] + '</button>' + '</li>' +
-      '<li data-menu-index="2"><button class="topmenu-button topmenu-button--view"><i class="icon icon--view"></i>' + Textit.strings[_article.lang].ui['menu_title_view'] + '</button></li>' +
+      '<li data-menu-index="1" class="optionText"><button aria-pressed="false" class="topmenu-button topmenu-button--origin" data-selected="false"><i class="icon icon--work"></i>' + Textit.strings[_article.lang].ui['menu_title_origin'] + '</button>' + '</li>' +
+      '<li data-menu-index="2" class="optionText"><div id="aria-live-message" aria-live="polite"style="position: absolute; width: 1px; height: 1px; margin: -1px; border: 0; padding: 0; clip: rect(0, 0, 0, 0); overflow: hidden;"></div><div id="aria-live-message" aria-live="polite"></div><button aria-pressed="false" class="topmenu-button topmenu-button--view"><i class="icon icon--view"></i>' + Textit.strings[_article.lang].ui['menu_title_view'] + '</button></li>' +
       (_article.narrator != null ? '' +
-      '<li data-menu-index="3"><button class="topmenu-button topmenu-button--narrator"><i class="icon icon--narrator"></i>' + Textit.strings[_article.lang].ui['menu_title_narrator'] + '</button>' + '</li>' +
-      '' : '') +
-    '</ul>' +
-    '<button class="topmenu-button--help">?</button>' +
-    '<div class="submenus">' +
-        '<ul class="narrator-options" style="display:none;">' +
-               '<li>' +
-                '<span class="time">0:00</span>' +
-                '<button class="playback-btn icon icon--resume"></button>' +
-              '</li>' +
-              '<li class="speed-range">' +
-                '<span><i class="icon icon--rabbit"></i><button class="range__btn--decrease"></button><button class="range__btn--increase"></button></span>' +
-              '</li>' +
-              '<li class="volume-range">' +
-                '<span><i class="icon icon--volume"></i><button class="range__btn--decrease"></button><button class="range__btn--increase"></button></span>' +
-              '</li>' +
-          '</ul>' +
-          '<ul class="view-options" style="display:none;">' +
-              '<li class="size-range">' +
-                '<span><i class="icon icon--font--' + _article.lang + '"></i><button class="range__btn--decrease"></button><button class="range__btn--increase"></button></span>' +
-              '</li>' +
-         '</ul>' +
-    '</div>';
+        '<li data-menu-index="3" class="optionText"><button aria-pressed="false" class="topmenu-button topmenu-button--narrator"><i class="icon icon--narrator"></i>' + Textit.strings[_article.lang].ui['menu_title_narrator'] + '</button>' + '</li>' +
+        '' : '') +
+      '</ul>' +
+      '<button class="topmenu-button--help">?</button>' +
+      '<div class="submenus">' +
+      '<ul class="narrator-options" style="display:none;">' +
+      '<li>' +
+      '<span class="time">0:00</span>' +
+      '<button class="playback-btn icon icon--resume" aria-label="' + Textit.strings[_article.lang].ui['reading_activation'] + '"></button>' +
+      '</li>' +
+      '<li class="speed-range">' +
+      '<span><i class="icon icon--rabbit"></i><button class="range__btn--decrease" aria-label="' + Textit.strings[_article.lang].ui['slowing_down_reading_speed'] + '"></button><button class="range__btn--increase" aria-label="' + Textit.strings[_article.lang].ui['acceleration_of_reading_speed'] + '"></button></span>' +
+      '</li>' +
+      '<li class="volume-range">' +
+      '<span><i class="icon icon--volume"></i><button class="range__btn--decrease" aria-label="' + Textit.strings[_article.lang].ui['volume_down'] + '" ></button><button class="range__btn--increase" aria-label="' + Textit.strings[_article.lang].ui['increasing_volume'] + '"></button></span>' +
+      '</li>' +
+      '</ul>' +
+      '<ul class="view-options" style="display:none;">' +
+      '<li class="size-range">' +
+      '<span><i class="icon icon--font--' + _article.lang + '"></i><button class="range__btn--decrease" aria-label="' + Textit.strings[_article.lang].ui['font_reduction'] + '"></button><button class="range__btn--increase" aria-label="' + Textit.strings[_article.lang].ui['font_enlargement'] + '"></button></span>' +
+      '</li>' +
+      '</ul>' +
+      '</div>';
     document.body.insertBefore(_el, document.body.firstChild);
     init();
     return _el;
@@ -1035,6 +1048,11 @@ Textit.EmbedMenu = function () {
     h.addEventListener('click', function () {
       _article.WalkMe(true);
     })
+    h.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter' || event.key === ' ') {
+        _article.WalkMe(true);
+      }
+    })
     // origin
     var o = _el.querySelector('.topmenu-button--origin');
     o.addEventListener('click', click.bind(this, 'origin', o.parentNode.dataset.menuIndex))
@@ -1042,6 +1060,7 @@ Textit.EmbedMenu = function () {
       if (_active == 'origin')
         click('origin')
     })
+
     // view
     var v = _el.querySelector('.topmenu-button--view');
     v.addEventListener('click', click.bind(this, 'view', v.parentNode.dataset.menuIndex))
@@ -1052,6 +1071,7 @@ Textit.EmbedMenu = function () {
       _article.setFont(compileFont(fontStyles[sizeRange.value]), sizeRange.value);
     })
     _article.setFont(compileFont(fontStyles[sizeRange.value]), sizeRange.value);
+
     // narrator
     var n = _el.querySelector('.topmenu-button--narrator');
     if (!n) return;
@@ -1067,9 +1087,11 @@ Textit.EmbedMenu = function () {
     })
     _article.narrator.on('start', function () {
       playpauseIcon.className = 'icon icon--pause';
+      playpauseIcon.setAttribute('aria-label', Textit.strings[_article.lang].ui['reading_delay']);
     })
     _article.narrator.on('stop', function () {
       playpauseIcon.className = 'icon icon--resume';
+      playpauseIcon.setAttribute('aria-label', Textit.strings[_article.lang].ui['reading_activation']);
     })
     playpauseIcon.addEventListener('click', function () {
       if (Textit.util.hasClass(this, 'icon--pause')) {
@@ -1134,24 +1156,91 @@ Textit.EmbedMenu = function () {
   }
 
   var z = 1;
+
   function click(action, index) {
     stop(_active);
-    if (action == _active)
+    if (action == _active) {
+      resetTabIndexes();
       return _active = null, _menuEl.dataset.menuSelected = 'null', false;
+    }
+
+    updateTabIndexes(action);
     if (_submenus[action]) _submenus[action].style.display = '';
     _menuEl.dataset.menuSelected = index;
     Textit.util.addClass(_menuEl.querySelector('li[data-menu-index="' + index + '"]'), 'selected');
     _menuEl.querySelector('li[data-menu-index="' + index + '"]').style.zIndex = z++;
     _active = action;
+    const element = document.querySelector('.optionText');
+    if (element) {
+      element.classList.remove('optionText');
+    }
     switch (action) {
       case 'narrator':
-        _submenus['narrator'].style.display = '';
-        _article.narrator.startNarration();
+        {
+          _submenus['narrator'].style.display = '';
+          const icons = document.querySelectorAll('.textit-container .embedmenu .icon');
+
+          icons.forEach(icon => {
+            if (icon.classList.contains('icon--resume')) {
+              icon.focus();
+              return;
+            }
+          });
+        }
         break;
       case 'origin':
         _article.setOrigin(true);
+        var help = document.querySelector('.topmenu-button--help');
+        help.setAttribute('tabindex', '0');
         break;
+      case 'view':
+        {
+          const elements = document.querySelectorAll('.textit-container .embedmenu .range__btn--decrease');
+
+          elements.forEach(element => {
+            if (element.parentElement.querySelector('.icon.icon--font--' + _article.lang)) {
+              element.focus();
+            }
+          });
+        }
+        break;
+
     }
+    $('#aria-live-message').text('');
+    setTimeout(function () {
+      if (action == 'view') {
+        $('#aria-live-message').text(Textit.strings[_article.lang].ui['voice_prompt_click_view']);
+      }
+      else if (action == 'narrator') {
+        $('#aria-live-message').text(Textit.strings[_article.lang].ui['voice_prompt_click_narrator']);
+      }
+    }, 1000);
+  }
+
+  function resetTabIndexes() {
+    var help = document.querySelector('.topmenu-button--help');
+    help.setAttribute('tabindex', '0');
+    const buttons = document.querySelectorAll('.topmenu-button');
+    buttons.forEach(btn => {
+      btn.setAttribute('tabindex', '0'); // Reset tabindex for all buttons
+      btn.setAttribute('aria-pressed', 'false');
+
+    });
+  }
+
+  function updateTabIndexes(action) {
+    var help = document.querySelector('.topmenu-button--help');
+    help.setAttribute('tabindex', '-1');
+    const buttons = document.querySelectorAll('.topmenu-button');
+    buttons.forEach(btn => {
+      if (btn.classList.contains('topmenu-button--' + action)) {
+        btn.setAttribute('tabindex', '0'); // Enable tab navigation for the selected button
+        btn.setAttribute('aria-pressed', 'true');
+      } else {
+        btn.setAttribute('tabindex', '-1'); // Disable tab navigation for other buttons
+        btn.setAttribute('aria-pressed', 'false');
+      }
+    });
   }
 
   return {

@@ -22,7 +22,18 @@ Textit.strings.ar = {
     view_options_font_spacing: 'الفراغ بين الأسطر',
     review_mode_title: 'وَضعيّةُ فحصٍ',
     review_mode_insturction: 'أنتَ تشاهدُ الِاستمارةَ في وَضعيّةِ فحصٍ. في هذهِ الوَضعيّةِ لا يمكنُ تعديلُ الِاستمارةِ.',
-    review_mode_back: 'عودة'
+    review_mode_back: 'عودة',
+    voice_prompt_click_view:'أزرار العرض معروضة: تكبير الخطّ وتصغير الخطّ',
+    voice_prompt_click_narrator:'أزرار القراءة معروضة: رفع الصوت, خفض الصوت, تسريع القراءة, إبطاء القراءة, تشغيل القراءة وإيقافها',
+    font_reduction:'تصغير حجم الخطّ',
+    font_enlargement:'تكبير حجم الخطّ',
+    volume_down:'خفض الصوت',
+    increasing_volume:'رفع الصوت',
+    slowing_down_reading_speed:'إبطاء سرعة القراءة',
+    acceleration_of_reading_speed:'زيادة سرعة القراءة',
+    reading_activation:'تشغيل القراءة',
+    reading_delay:'إيقاف القراءة',
+    answer_question:'إضغط للإجابة عن السؤال'
   },
   walkme: {
     notes: 'לחצו בשוליים הימניים של הטקסט כדי להוסיף הערה',

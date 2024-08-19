@@ -348,9 +348,9 @@ Textit.Article.prototype.bindEvents = function () {
     }
     if (mark && mark.markType == Textit.Questions.DragQuestion.lassoSelector) mark = null;
     if ((lastHoveredMark === null && mark !== null) ||
-        (lastHoveredMark !== null && mark === null) ||
-        (mark != null && lastHoveredMark != null && lastHoveredMark.range != mark.range)
-      ) { // if hover on new mark
+      (lastHoveredMark !== null && mark === null) ||
+      (mark != null && lastHoveredMark != null && lastHoveredMark.range != mark.range)
+    ) { // if hover on new mark
 
       if (activeDelButton) {
         (function (delBtn) { // remove
@@ -396,10 +396,12 @@ Textit.Article.prototype.bindEvents = function () {
     }
   });
   //-------------------------------------------------------
-  this.dom.addEventListener('click', function (event) {
+  this.dom.addEventListener('click', handleClick);
+  function handleClick(event) {
     var mouseX = event.pageX;
     var mouseY = event.pageY - Textit.util.scrollTop();
     var word;
+
     if (self.narrator != null && self.narrator.isPlaying()) {
       word = self.getWordByPosition(mouseX, mouseY).word;
       if (word != null) {
@@ -408,31 +410,33 @@ Textit.Article.prototype.bindEvents = function () {
       }
       return;
     } else {
-      if (self.markType != 0) return;
+      if (self.markType !== 0) return;
       var targetElement = event.target;
-      if (targetElement == self.noteContainer) {
-        for (var i = self.components.length - 1; i >= 0 ; i--) {
+      if (targetElement === self.noteContainer) {
+        for (var i = self.components.length - 1; i >= 0; i--) {
           var offset = event.clientY - self.components[i].dom.getBoundingClientRect().top + 10;
           if (offset > 0) {
             var fontSize = parseFloat(window.getComputedStyle(self.dom).getPropertyValue('font-size')) * .8;
             self.addNoteAt(i, Math.floor(offset / fontSize) - 1 + 'em');
             break;
           }
-
         }
+        var contentElement = document.querySelector('.question__content');
+        contentElement.focus();
         return;
       }
-      while (targetElement != self.dom && targetElement != null) {
-        for (var elementIndex = 0; elementIndex < self.elements.length; elementIndex++)
-          if (targetElement == self.elements[elementIndex].dom) {
-            self.elements[elementIndex].click(); //activate click on element
+      while (targetElement !== self.dom && targetElement !== null) {
+        for (var elementIndex = 0; elementIndex < self.elements.length; elementIndex++) {
+          if (targetElement === self.elements[elementIndex].dom) {
+            self.elements[elementIndex].click(); // activate click on element
             if (self.activeQuestion) self.activeQuestion.collapse(); // collapse the current active question
             return;
           }
+        }
         targetElement = targetElement.parentNode;
       }
     }
-  });
+  };
   //-------------------------------------------------------
   document.addEventListener('mousedown', function (e) {
     if (!e.target.$isChildOf(self.dom)) { // if clicked outside
@@ -440,6 +444,16 @@ Textit.Article.prototype.bindEvents = function () {
         self.setOrigin(false);
         self.events.emit('textmode-change');
       }
+      const obj = document.querySelector('.buttonA');
+    if (obj.classList.contains('question__btn-done')) {
+      obj.classList.remove('question__btn-done');
+      obj.classList.add('question__feedback__fill');
+      // שינוי התווית aria-label לטקסט המתאים
+      obj.setAttribute('aria-label', Textit.strings[article.lang].ui.answer_question);
+      obj.textContent = ''
+      var contentElement = document.querySelector('.question__content');
+      contentElement.style.visibility= 'hidden';
+    }
       self.events.emit('blur');
     } else if (self.isOrigin) {
       var isNarrating = self.narrator != null && self.narrator.isActive();
@@ -449,8 +463,35 @@ Textit.Article.prototype.bindEvents = function () {
       }
     }
   })
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+    if (!e.target.$isChildOf(self.dom)) { // if clicked outside
+      if (self.isOrigin && e.target == document.body) {
+        self.setOrigin(false);
+        self.events.emit('textmode-change');
+      }
+      const obj = document.querySelector('.buttonA');
+    if (obj.classList.contains('question__btn-done')) {
+      obj.classList.remove('question__btn-done');
+      obj.classList.add('question__feedback__fill');
+      // שינוי התווית aria-label לטקסט המתאים
+      obj.setAttribute('aria-label', Textit.strings[article.lang].ui.answer_question);
+      obj.textContent = ''
+      var contentElement = document.querySelector('.question__content');
+      contentElement.style.visibility= 'hidden';
+    }
+      self.events.emit('blur');
+    } else if (self.isOrigin) {
+      var isNarrating = self.narrator != null && self.narrator.isActive();
+      if (!isNarrating && self.isOrigin && e.target.$hasClass('word') && !e.target.parentNode.$hasClass('hotword')) {
+        self.setOrigin(false);
+        self.events.emit('textmode-change');
+      }
+    }
+ } })
   //-------------------------------------------------------
 }
+
 Textit.Article.prototype.onMarkChanged = function (event) {
   var markRanges = this.marker.getMarkRanges(this.defaultMarkType);
   var changes = this.markRanges.findChanges(markRanges);
@@ -641,11 +682,11 @@ Textit.Article.prototype.loadFromXML = function (xml, force_embed) {
 
   if (xml.getAttribute('dfus'))
     this.dom.setAttribute("data-dfus", xml.getAttribute('dfus') != 'false');
-  
+
   this.fontFamily = xml.getAttribute('textfont') || null;
   if (xml.getAttribute('dfus'))
     this.dom.setAttribute("data-dfus", xml.getAttribute('dfus') != 'false');
-    
+
 
   var audioUrl = xml.getAttribute('audio') || null;
   if (audioUrl != null)
@@ -726,8 +767,8 @@ Textit.Article.prototype.loadFromXML = function (xml, force_embed) {
   // add origin ribbon
   Textit.util.createHtml({
     html: '<div class="article__origin-ribbon">' +
-              '<span>' + Textit.strings[this.lang].ui.origin + '</span>' + this.title +
-           '</div>', parent: this.dom
+      '<span>' + Textit.strings[this.lang].ui.origin + '</span>' + this.title +
+      '</div>', parent: this.dom
   });
 
   // zero scores
@@ -747,7 +788,7 @@ Textit.Article.prototype.search = function (searchwords, paragraph, avoid_ranges
   function compare(text1, text2) {
     if (text1 == null || text2 == null) return false;
     var words1 = Textit.Word.Tokenize(text1)
-        , word2 = Textit.Word.Tokenize(text2);
+      , word2 = Textit.Word.Tokenize(text2);
     return Textit.util.compareArrays(words1, word2);
   }
   var words_matches = 0;
@@ -955,100 +996,154 @@ Textit.Article.prototype.WalkMe = function (restart) {
 
   if (restart || !this.walks)
     this.walks = [
-    { selector: 'aside.menu .menu-item', text: Textit.strings[article.lang].walkme.menu, direction: 'right', position: 'fixed' },
-    { selector: 'article .article__note-container', text: Textit.strings[article.lang].walkme.notes, direction: 'right', offsetTop: 200 },
-    { selector: 'article p', text: Textit.strings[article.lang].walkme.paragraph },
-    { selector: 'article .hotword', text: Textit.strings[article.lang].walkme.hotword },
-    { selector: 'article .question__stem', text: Textit.strings[article.lang].walkme.question },
-    { selector: 'article .question--mark__tool', text: Textit.strings[article.lang].walkme.marktool }];
+      { selector: 'aside.menu .menu-item', text: Textit.strings[article.lang].walkme.menu, direction: 'right', position: 'fixed' },
+      { selector: 'article .article__note-container', text: Textit.strings[article.lang].walkme.notes, direction: 'right', offsetTop: 200 },
+      { selector: 'article p', text: Textit.strings[article.lang].walkme.paragraph },
+      { selector: 'article .hotword', text: Textit.strings[article.lang].walkme.hotword },
+      { selector: 'article .question__stem', text: Textit.strings[article.lang].walkme.question },
+      { selector: 'article .question--mark__tool', text: Textit.strings[article.lang].walkme.marktool }];
 
 
   for (var i = 0; i < this.walks.length; i++) {
     var target = this.dom.parentNode.querySelector(this.walks[i].selector);
     if (target != null) {
-      if (this.walkmeBox) this.walkmeBox.destory();
+      if (this.walkmeBox) this.walkmeBox.destroy();
       this.walkmeBox = createWalkMeBox(target, this.walks[i].text, this.walks[i]);
       this.walks.splice(i, 1);
       return;
     }
   }
-  function createWalkMeBox(target, text, options) {
-    var containerDom = article.dom.parentNode;
-    var offsetTop = options.offsetTop || 0;
-    var donext = function () { closeBox(function () { article.WalkMe(); }); }
-    var className = 'walk-me ' + 'walk-me--' + options.direction;
-    var box = document.createElement('div');
-    box.className = className + ' walk-me--hidden';
-    box.textContent = text;
-    var articleRect = containerDom.getBoundingClientRect();
-    var rect = target.getBoundingClientRect();
+function createWalkMeBox(target, text, options) {
+  var containerDom = article.dom.parentNode;
+  var offsetTop = options.offsetTop || 0;
+  var donext = function () { closeBox(function () { article.WalkMe(); }); };
+  var className = 'walk-me ' + 'walk-me--' + options.direction;
+  var box = document.createElement('div');
+  box.className = className + ' walk-me--hidden';
+  box.textContent = text;
+  var articleRect = containerDom.getBoundingClientRect();
+  var rect = target.getBoundingClientRect();
 
 
-    if (options.position == 'fixed') {
+  if (options.position == 'fixed') {
       box.style.position = 'fixed';
       articleRect = { right: 0, left: 0, top: 0, bottom: 0 };
-    }
-
-    switch (options.direction) {
-      case 'right':
-        box.style.left = rect.left - articleRect.left + 'px';
-        box.style.top = offsetTop + rect.top - articleRect.top + 'px';
-        break;
-      default:
-        box.style.left = (rect.left + rect.width / 2) - articleRect.left + 'px';
-        box.style.top = offsetTop + rect.top - articleRect.top + 'px';
-    }
-
-    function closeBox(cb) {
-      box.classList.add('walk-me--hidden');
-      target.removeEventListener('mousedown', listenToEnd)
-      setTimeout(function () {
-        if (box.parentNode)
-          box.parentNode.removeChild(box);
-        if (cb) setTimeout(cb, 500);
-      }, 500)
-    }
-
-    // add buttons
-    box.appendChild(document.createElement('br'));
-    var btnNext = document.createElement('button');
-    btnNext.className = 'walk-me__btn-next';
-    btnNext.textContent = '' + Textit.strings[article.lang].walkme.button_next;
-    btnNext.addEventListener('click', donext);
-    box.appendChild(btnNext);
-    // close button
-    var btnClose = document.createElement('button');
-    btnClose.className = 'walk-me__btn-close';
-    btnClose.textContent = 'X';
-    btnClose.addEventListener('click', function () { closeBox(function () { }); });
-    box.appendChild(btnClose);
-    // skip link
-    var btnSkip = document.createElement('a');
-    btnSkip.setAttribute('href', '#');
-    btnSkip.className = 'walk-me__btn-skip';
-    btnSkip.textContent = '' + Textit.strings[article.lang].walkme.button_skip;
-    btnSkip.addEventListener('click', function (e) { e.preventDefault(); closeBox(); });
-    box.appendChild(btnSkip);
-
-    containerDom.appendChild(box);
-    box.offsetHeight;
-    box.classList.remove('walk-me--hidden');
-
-    // bind end
-    function listenToEnd() {
-      function end() {
-        donext();
-        document.removeEventListener('mouseup', end)
-        target.removeEventListener('mousedown', listenToEnd)
-      }
-      document.addEventListener('mouseup', end)
-    }
-    target.addEventListener('mousedown', listenToEnd)
-
-    return {
-      destory: closeBox
-    }
   }
+  
+  switch (options.direction) {
+      case 'right':
+          box.style.left = rect.left - articleRect.left + 'px';
+          box.style.top = offsetTop + rect.top - articleRect.top + 'px';
+          break;
+      default:
+          box.style.left = (rect.left + rect.width / 2) - articleRect.left + 'px';
+          box.style.top = offsetTop + rect.top - articleRect.top + 'px';
+  }
+  
+  function closeBox(cb) {
+      box.classList.add('walk-me--hidden');
+      target.removeEventListener('mousedown', listenToEnd);
+      setTimeout(function () {
+          if (box.parentNode)
+              box.parentNode.removeChild(box);
+          if (cb) setTimeout(cb, 500);
+      }, 500);
+  }
+  function trapFocus(event) {
+      if (!box.contains(event.target)) {
+          event.preventDefault();
+          event.stopPropagation();
+          btnNext.focus(); // הניחו שbtnNext מוגדר כמשתנה גלובלי במקום המתאים
+      }
+  }
+  function focusTrap() {
+      var focusableElements = box.querySelectorAll('a[href], button, input, textarea, select');
+      var firstFocusableElement = focusableElements[0];
+      var lastFocusableElement = focusableElements[focusableElements.length - 1];
+      
+      function handleTab(event) {
+          if (event.key === 'Tab') {
+              if (event.shiftKey) {
+                  if (document.activeElement === firstFocusableElement) {
+                      event.preventDefault();
+                      lastFocusableElement.focus();
+                  }
+              } else {
+                  if (document.activeElement === lastFocusableElement) {
+                      event.preventDefault();
+                      firstFocusableElement.focus();
+                  }
+              }
+          }
+      }
+
+      function handleFocus(event) {
+          if (!box.contains(event.target)) {
+              event.preventDefault();
+              firstFocusableElement.focus();
+          }
+      }
+      
+      document.addEventListener('keydown', handleTab);
+      box.addEventListener('focusin', handleFocus);
+
+      return function cleanup() {
+          document.removeEventListener('keydown', handleTab);
+          box.removeEventListener('focusin', handleFocus);
+      };
+  }
+
+  // add buttons
+  box.appendChild(document.createElement('br'));
+  var btnNext = document.createElement('button');
+  btnNext.className = 'walk-me__btn-next';
+  btnNext.textContent = '' + Textit.strings[article.lang].walkme.button_next;
+  btnNext.addEventListener('click', donext);
+  box.appendChild(btnNext);
+
+  // close button
+  var btnClose = document.createElement('button');
+  btnClose.className = 'walk-me__btn-close';
+  btnClose.textContent = 'X';
+  btnClose.addEventListener('click', function () {
+      closeBox(function () { }); });
+  box.appendChild(btnClose);
+  // skip link
+  var btnSkip = document.createElement('a');
+  btnSkip.setAttribute('href', '#');
+  btnSkip.className = 'walk-me__btn-skip';
+  btnSkip.textContent = '' + Textit.strings[article.lang].walkme.button_skip;
+  btnSkip.addEventListener('click', function (e) {
+    closeBox(function () { });});
+  btnSkip.addEventListener('keydown', function (e) {
+    if(e.key === 'Enter' || e.key === ' '){
+    closeBox(function () { });}
+  });
+  box.appendChild(btnSkip);
+  
+  containerDom.appendChild(box);
+  box.offsetHeight;
+  box.classList.remove('walk-me--hidden');
+  btnNext.focus();
+  var cleanupFocusTrap = focusTrap();
+  document.addEventListener('focusin', trapFocus);
+  function listenToEnd() {
+      function end() {
+          donext();
+          document.removeEventListener('mouseup', end);
+          target.removeEventListener('mousedown', listenToEnd);
+      }
+      document.addEventListener('mouseup', end);
+  }
+  target.addEventListener('mousedown', listenToEnd);
+
+  return {
+      destroy: function () {
+          cleanupFocusTrap();
+          closeBox(function () { });
+      }
+  };
+} 
 }
 
 //-------------------------------------------------------

@@ -540,12 +540,45 @@ body[data-ie="true"] .textit-container .drawer .drawer__action:before {
   width:20px;
   font-weight:normal;
 }
-.textit-container .embedmenu .range__btn--decrease:before{content:'-';}
+/* .textit-container .embedmenu .range__btn--decrease:before{content:'-';}
 .textit-container .embedmenu .range__btn--increase:before{content:'+';}
 .textit-container .embedmenu .range__btn--decrease:hover, 
 .textit-container .range__btn--increase:hover,.playback-btn:hover{
-  background-color:rgba(0,0,0,0.1);
+  background-color:rgba(235, 7, 208, 0.1);
+} */
+.textit-container .embedmenu .range__btn--decrease:before {
+  content: '-';
 }
+
+.textit-container .embedmenu .range__btn--increase:before {
+  content: '+';
+}
+
+.textit-container .embedmenu .range__btn--decrease:hover:before,
+.textit-container .embedmenu .range__btn--increase:hover:before,
+.playback-btn:hover {
+  border: 1px solid black;
+}
+
+.textit-container .embedmenu .range__btn--decrease:focus:before,
+.textit-container .embedmenu .range__btn--increase:focus:before,
+.playback-btn:focus {
+  border: 1px solid black;
+}
+.textit-container .embedmenu .icon.icon--resume:focus{
+  border: 1px solid black;
+}
+.textit-container .embedmenu .icon.icon--pause:focus{
+  border: 1px solid black;
+}
+.textit-container .embedmenu .icon.icon--resume:hover{
+  border: 1px solid black;
+}
+.textit-container .embedmenu .icon.icon--pause:hover{
+  border: 1px solid black;
+}
+
+
 
 /** submenu of top menu (embed) **/
 .textit-container .submenus{
@@ -641,7 +674,8 @@ body[data-ie="true"] .textit-container .topmenu li {
   position:absolute;
   left:6px;
   top:6px;
-  color:#ccc;
+  color:#000000;
+  font-weight: 20px;
   border:none;
   background:none;
   outline:none;
@@ -650,8 +684,19 @@ body[data-ie="true"] .textit-container .topmenu li {
   height:20px;
   line-height:16px;
   font-family:'Segoe UI', sans-serif;
+  
 }
 .topmenu-button--help:hover{
   background:#d2733d;
-  color:#fff;
+  border: 1px solid #282626; /* מסגרת רגילה */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(0, 0, 0, 0.1) inset; /* צל מעומעם עם קו מעומעם */
+
 }
+.topmenu-button--help:focus{
+  background:#d2733d;
+  border: 1px solid #000000; /* מסגרת רגילה */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(0, 0, 0, 0.1) inset; /* צל מעומעם עם קו מעומעם */
+
+}
+
+

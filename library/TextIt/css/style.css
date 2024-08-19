@@ -56,8 +56,31 @@
   src: url('../fonts/GeveretLevinAlefAlefAlef-Regular.eot');
   src: url('../fonts/GveretLevinAlefAlefAlef-Regular.eot?#iefix') format('embedded-opentype'), url('../fonts/GveretLevinAlefAlefAlef-Regular.woff') format('woff'), url('../fonts/GveretLevinAlefAlefAlef-Regular.ttf') format('truetype');
 }
+.topmenu-button:focus-within li.selected
+{
+    border:solid 1px #08090a; /* צבע רקע עבור כפתור מסומן */
+    outline: none;
+}
+.topmenu-button:focus,
+.topmenu-button:hover {
+    border:solid 1px #08090a; /* צבע רקע עבור כפתור מסומן */
+    outline: none;
+}
 
-
+.selected{
+  border: none;
+}
+.selected:hover{
+  border: 1px solid #000000; /* מסגרת רגילה */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(0, 0, 0, 0.1) inset; /* צל מעומעם עם קו מעומעם */
+}
+.selected:focus{
+  border: 1px solid #000000; /* מסגרת רגילה */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 0 0 2px rgba(0, 0, 0, 0.1) inset; /* צל מעומעם עם קו מעומעם */
+}
+.range__btn--increase:focus {
+  border: 2px solid black;
+}
 .textit-container{
   position:relative;
 }
@@ -449,11 +472,13 @@ body[data-ie="true"] .hotword__translation:before {
 
 
 .hotword:hover .hotword__translation,
+.hotword:focus .hotword__translation,
 .hotword--open .hotword__translation {
   opacity: 1;
 }
 
   .hotword:hover .hotword__translation:before,
+  .hotword:focus .hotword__translation:before,
   .hotword--open .hotword__translation:before {
     width: 100%;
   }
@@ -971,7 +996,9 @@ body[data-ie="true"]:not(.embed) article hr{
   padding:0;
   margin:0;
 }
-
+.walk-me__btn-close:focus{
+  border: solid 1px rgb(255, 255, 255);
+}
 .walk-me:after{
   content:'';
   z-index:-1;
@@ -1018,6 +1045,9 @@ body[data-ie="true"]:not(.embed) article hr{
 }
 .walk-me__btn-next:hover{
   background:#fd8c5b;
+}
+.walk-me__btn-next:focus{
+  border:1px solid rgb(255, 255, 255);
 }
 .walk-me__btn-next:active{
   background:#f18455;

@@ -126,6 +126,16 @@ body[data-ie="true"] .question__content {
   overflow: hidden;
 }
 
+.question__feedback:focus {
+  border: 1px solid black; /* הוספת מסגרת שחורה כאשר בפוקוס */
+  outline: none;
+}
+.question__feedback:hover {
+  border: 1px solid black; /* הוספת מסגרת שחורה כאשר בפוקוס */
+  outline: none;
+}
+
+
 body[data-ie="true"] .question .question__feedback {
   transition: none;
 }
@@ -217,7 +227,7 @@ article[dir="ltr"] .question .question__feedback{
   left: 0;
   transform: rotate(0);
   border-radius: 20px;
-  background: linear-gradient(rgb(251, 229, 214) 100%, rgb(237, 125, 50) 100%);
+  background: linear-gradient(rgb(244, 113, 26) 100%, rgb(237, 125, 50) 100%);
   transition: height .2s, transform .2s .2s;
   transform-origin: 10px 10px;
   box-sizing: border-box;
@@ -303,6 +313,7 @@ body[data-ie="true"] .question[data-open="true"] .question__feedback--done .ques
   transition: opacity .2s;
   opacity: 1;
 }
+
 body[data-ie="true"] .question[data-open="true"] .question__feedback:hover .question__btn-done {
   transition: none;
 }
@@ -659,6 +670,9 @@ body[data-ie="true"] .question[data-open="false"] .question--mark__tool {
 .question--mark__tool:hover {
   border-color: steelblue;
 }
+.question--mark__tool:focus {
+  border-color: steelblue;
+}
 
 .question--mark__tool.selected {
   opacity: .5;
@@ -671,6 +685,9 @@ body[data-ie="true"] .question[data-open="false"] .question--mark__tool {
 .question--mark__tool[data-color="green"]:hover {
   border-color:rgb(55,169,8);
 }
+.question--mark__tool[data-color="green"]:focus {
+  border-color:rgb(55,169,8);
+}
 
 /** color=red ***/
 .mark-cursor[data-color="red"], .question--mark__tool[data-color="red"] {
@@ -679,12 +696,19 @@ body[data-ie="true"] .question[data-open="false"] .question--mark__tool {
 .question--mark__tool[data-color="red"]:hover {
   border-color: rgba(255,0,0,0.8);
 }
+.question--mark__tool[data-color="red"]:focus {
+  border-color: rgba(255,0,0,0.8);
+}
+
 
 /** color=purple ***/
 .mark-cursor[data-color="purple"], .question--mark__tool[data-color="purple"] {
   background-position: calc(-32px * 0) center;
 }
 .question--mark__tool[data-color="purple"]:hover {
+  border-color: rgba(122, 67, 139, 0.8);
+}
+.question--mark__tool[data-color="purple"]:focus {
   border-color: rgba(122, 67, 139, 0.8);
 }
 
@@ -696,7 +720,9 @@ body[data-ie="true"] .question[data-open="false"] .question--mark__tool {
   border-color: rgb(33, 52, 177);
 }
 
-
+.question--mark__tool[data-color="blue"]:focus {
+  border-color: rgb(33, 52, 177);
+}
 
 .mark-cursor {
   position: fixed;

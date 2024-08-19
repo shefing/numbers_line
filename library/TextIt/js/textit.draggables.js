@@ -64,6 +64,15 @@ Textit.Draggables.DraggableQuestion = (function () {
     this.source.style.opacity = '';
     this.placeholder.style.backgroundColor = '';
     this.placeholder.style.border = '2px dotted #f2f2f2';
+    const obj = document.querySelector('.buttonA');
+    if (obj.classList.contains('question__btn-done')) {
+      obj.classList.remove('question__btn-done');
+      obj.classList.add('question__feedback__fill');
+      // שינוי התווית aria-label לטקסט המתאים
+      obj.setAttribute('aria-label', Textit.strings[article.lang].ui.answer_question);
+      obj.textContent = ''}
+      var contentElement = document.querySelector('.question__content');
+      contentElement.style.visibility= 'hidden';
     this.question.setDragging(true);
   }
 
