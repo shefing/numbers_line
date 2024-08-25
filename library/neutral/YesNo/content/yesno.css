@@ -2119,8 +2119,8 @@ body {
 }
 .yesno[data-dir=rtl] .yesno-contaner .yesno-status_bar .yesno-deactivating-The-Timer {
   position: absolute;
-  top: 46%;
-  right: 79%;
+  top: 50%;
+  right: 80%;
   transform: translate(1.4em, -50%);
   width: 3.7em;
   height: 3.7em;
@@ -6535,7 +6535,7 @@ body {
 }
 
 .yesno[data-dir=rtl][data-skin="1"] .yesno-contaner .yesno-status_bar .yesno-status_bar-items {
-  left: 2em;
+  left: 5.5em;
 }
 
 .yesno[data-dir=rtl][data-skin="1"] .yesno-contaner .yesno-status_bar .yesno-status_bar-timer-wraper,
@@ -6586,7 +6586,7 @@ body {
   box-shadow: 0 0 0.9em 0 rgba(0, 106, 231, 0.37);
   height: 7.6em;
   top: 1em !important;
-  width: 58.2em;
+  width: 60em;
   border-radius: 14% 14% 14% 14%/46% 92% 54% 100% !important;
 }
 
