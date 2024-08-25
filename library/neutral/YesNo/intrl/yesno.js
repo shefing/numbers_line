@@ -950,6 +950,7 @@ var yesno = function (yesno_params) {
                             timer.play();
                             var timerSpan = document.querySelector('.timer-time span');
                             timerSpan.textContent = timerContent; 
+                            flag = true;
                             return;
                         }
                 }
@@ -1344,6 +1345,7 @@ var yesno = function (yesno_params) {
 
             if(!oPreset.timer_has_limit || oPreset.timer_limit <= 0 || workMode == "Evaluation") {
                 dom.find('.yesno-status_bar-timer-wraper').remove();
+                dom.find('.yesno-deactivating-The-Timer').remove();
                 timer = {
                     pause: function(){},
                     stop: function(){},
