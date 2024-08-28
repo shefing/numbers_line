@@ -1727,8 +1727,9 @@ body {
 .yesno[data-dir="rtl"][data-skin="0"] [data-on_skin_show_0="1"] {
   display: block;
 }
+
 /*.yesno[data-dir='rtl'] .yesno-skins-wrapper .yesno-skin[data-skin='1'] {
-    background-image: url("img/skins/skin1/skin.png"); }*/
+  background-image: url("img/skins/skin1/skin.png"); }*/
 .yesno[data-dir="rtl"][data-skin="1"]
   .yesno-skins-wrapper
   .yesno-skin[data-skin="1"] {
@@ -2909,6 +2910,38 @@ body {
   display: none;
   cursor: pointer;
   border: 1px solid currentColor;
+}
+
+.yesno[data-dir="rtl"]
+  .yesno-contaner
+  .yesno-status_bar
+  .yesno-deactivating-The-Timer {
+  position: absolute;
+  top: 50%;
+  right: 80%;
+  transform: translate(1.4em, -50%);
+  width: 3.7em;
+  height: 3.7em;
+  cursor: pointer;
+  display: none;
+}
+
+.yesno[data-dir="ltr"]
+  .yesno-contaner
+  .yesno-status_bar
+  .yesno-deactivating-The-Timer {
+  position: absolute;
+  top: 50%;
+  right: 80%;
+  transform: translate(1.4em, -50%);
+  width: 3.7em;
+  height: 3.7em;
+  cursor: pointer;
+  display: none;
+}
+
+.imageToStopTimerOrContinue {
+  width: 100%;
 }
 
 .yesno[data-dir="rtl"]
@@ -5247,8 +5280,9 @@ body {
   opacity: 1;
   pointer-events: all;
 }
+
 /*.yesno[data-dir='rtl'] .yesno-contaner[data-game_state='end'] .yesno-status_bar .yesno-status_bar-items .yesno-status_bar-item {
-      cursor: pointer; }*/
+    cursor: pointer; }*/
 .yesno[data-dir="rtl"][data-is_edit="1"] .yesno-question-text {
   border: 1px dashed #6c85a1;
 }
@@ -7014,8 +7048,9 @@ body {
 .yesno[data-dir="ltr"] [data-on_skin_show="1"] {
   display: none;
 }
+
 /*.yesno[data-dir='ltr'] .yesno-skins-wrapper .yesno-skin[data-skin='0'] {
-    background-image: url("img/skins/skin0/skin.png"); }*/
+  background-image: url("img/skins/skin0/skin.png"); }*/
 .yesno[data-dir="ltr"][data-skin="0"]
   .yesno-skins-wrapper
   .yesno-skin[data-skin="0"] {
@@ -7036,8 +7071,9 @@ body {
 .yesno[data-dir="ltr"][data-skin="0"] [data-on_skin_show_0="1"] {
   display: block;
 }
+
 /*.yesno[data-dir='ltr'] .yesno-skins-wrapper .yesno-skin[data-skin='1'] {
-    background-image: url("img/skins/skin1/skin.png"); }*/
+  background-image: url("img/skins/skin1/skin.png"); }*/
 .yesno[data-dir="ltr"][data-skin="1"]
   .yesno-skins-wrapper
   .yesno-skin[data-skin="1"] {
@@ -10367,8 +10403,9 @@ body {
   .yesno-status_bar-clear-wraper {
   display: block;
 }
+
 /*.yesno[data-dir='ltr'] .yesno-contaner[data-game_state='end']:not([data-game_view='1']) .yesno-questions {
-      opacity: 0; }*/
+    opacity: 0; }*/
 .yesno[data-mobile="1"]
   .yesno-contaner[data-game_state="end"]
   .yesno-questions
@@ -10431,8 +10468,9 @@ body {
   opacity: 1;
   pointer-events: all;
 }
+
 /*.yesno[data-dir='ltr'] .yesno-contaner[data-game_state='end'] .yesno-status_bar .yesno-status_bar-items .yesno-status_bar-item {
-      cursor: pointer; }*/
+    cursor: pointer; }*/
 .yesno[data-dir="ltr"][data-is_edit="1"]
   .yesno-question:not([data-layout="ta"])
   .yesno-question-text,
@@ -10522,6 +10560,7 @@ body {
 .yesno[data-skin="3"] .yesno-question-text.yesno-question-element {
   top: 0em !important;
 }
+
 /******** skin hatav ********/
 .yesno[data-skin="1"] .yesno-fullscreen_btn {
   color: white;
@@ -10936,7 +10975,7 @@ body {
   .yesno-contaner
   .yesno-status_bar
   .yesno-status_bar-items {
-  left: 2em;
+  left: 5.5em;
 }
 
 .yesno[data-dir="rtl"][data-skin="1"]
@@ -11143,7 +11182,7 @@ body {
   box-shadow: 0 0 0.9em 0 rgba(0, 106, 231, 0.37);
   height: 7.6em;
   top: 1em !important;
-  width: 58.2em;
+  width: 60em;
   border-radius: 14% 14% 14% 14%/46% 92% 54% 100% !important;
 }
 
@@ -11152,7 +11191,7 @@ body {
   width: 16.3em !important;
   border: 0.7em solid #ffffff;
   box-shadow: 0 1em 2.7em 1.6em rgba(2, 144, 221, 0.37);
-  border-radius: 49% 51% 49% 51% / 61% 45% 55% 39% !important;
+  border-radius: 49% 51% 49% 51%/61% 45% 55% 39% !important;
 }
 
 .yesno[data-skin="1"] .yesno-contaner:before {
@@ -11200,10 +11239,10 @@ body {
   .yesno-question-sound.yesno-question-element
   .yesno-sound_player-btn {
   /*height: 18.4em !important;
-    width: 18.5em !important;*/
+  width: 18.5em !important;*/
   background-color: currentColor;
   box-shadow: 0 20px 29px 18px rgba(2, 144, 221, 0.37);
-  border-radius: 49% 51% 49% 51% / 61% 45% 55% 39% !important;
+  border-radius: 49% 51% 49% 51%/61% 45% 55% 39% !important;
 }
 
 .yesno[data-skin="1"]
@@ -11348,7 +11387,7 @@ body {
   width: 5.2em;
   background-color: #84b148;
   box-shadow: 0 0 9px 0 rgba(0, 106, 231, 0.37);
-  border-radius: 49% 51% 49% 51% / 61% 45% 55% 39%;
+  border-radius: 49% 51% 49% 51%/61% 45% 55% 39%;
 }
 
 .yesno[data-dir="rtl"][data-skin="1"]
@@ -11364,8 +11403,9 @@ body {
   .yesno-status_bar-clear-wraper {
   left: 1.5em;
 }
+
 /*.yesno[data-dir='ltr'][data-skin='1'] .yesno-contaner .yesno-status_bar .yesno-status_bar-clear-wraper {
-    left: 52.3em;
+  left: 52.3em;
 }*/
 .yesno[data-skin="1"] .yesno-question[data-selected="0"],
 .yesno[data-skin="1"]
@@ -11387,7 +11427,7 @@ body {
   width: 4.6em !important;
   background-color: #fefefe;
   box-shadow: 0 0 9px 0 rgba(0, 106, 231, 0.37);
-  border-radius: 49% 51% 49% 51% / 61% 45% 55% 39% !important;
+  border-radius: 49% 51% 49% 51%/61% 45% 55% 39% !important;
 }
 
 .yesno[data-skin="1"] .yesno-question-text_sound .yesno-sound_player-btn svg {
@@ -11424,7 +11464,7 @@ body {
   .yesno-question-contaner
   .yesno-question-image {
   /*border: 5px white solid;
-    box-shadow: 0 0 24px 0 rgb(140 140 140 / 75%);*/
+  box-shadow: 0 0 24px 0 rgb(140 140 140 / 75%);*/
   border: 0.5em solid #ffffff;
   border-radius: 5em 5em 3em 5em;
   box-shadow: 0 0.3em 2.4em rgba(140, 140, 140, 0.66);
@@ -11521,7 +11561,7 @@ body {
   border: 1.7em solid #006ae7;
   background-color: #006ae7;
   box-shadow: 0 2em 2.9em 1.8em rgba(2, 144, 221, 0.37);
-  border-radius: 49% 51% 49% 51% / 61% 45% 55% 39%;
+  border-radius: 49% 51% 49% 51%/61% 45% 55% 39%;
 }
 
 .yesno[data-dir="rtl"][data-skin="1"]
@@ -11616,6 +11656,7 @@ body {
   .yesno-question {
   top: 0.5em;
 }
+
 /* change svg color when worng/correct answer */
 svg#timeout_icon,
 svg#wrong_icon,
@@ -11685,7 +11726,7 @@ svg#answer_icon {
   .yesno-status_bar
   .yesno-status_bar-items[data-shape_id="2"] {
   /*width: 44.5em;
-    left: 1em;*/
+  left: 1em;*/
   width: 43.1em;
   left: 1.6em;
   height: 2em;
@@ -11737,6 +11778,7 @@ svg#answer_icon {
   fill: #84b148;
   border: 1px solid gray;
 }
+
 /**************** mobile *******************/
 .yesno[data-mobile="1"] .yesno-contaner {
   width: 100vw;
@@ -11881,6 +11923,7 @@ svg#answer_icon {
   .yesno-status_bar-item {
   left: unset;
 }
+
 /***skin hatav + mobile***/
 .yesno[data-skin="1"][data-mobile="1"] .yesno-question-answer_btn {
   height: 10.6em !important;
@@ -11924,11 +11967,12 @@ svg#answer_icon {
   height: 5.6em;
   width: 4.4em;
 }
+
 /*.yesno[data-dir='ltr'][data-skin='1'][data-mobile="1"] .yesno-contaner .yesno-status_bar .yesno-status_bar-clear-wraper {
-    left: 29.3em;
+  left: 29.3em;
 }*/
 /*.yesno[data-dir='ltr'][data-skin='1'][data-mobile="1"] .yesno-contaner .yesno-status_bar .yesno-status_bar-timer-wraper {
-    left: 29.3em;
+  left: 29.3em;
 }*/
 .yesno[data-dir="rtl"][data-skin="1"][data-mobile="1"]
   .yesno-contaner
@@ -12050,9 +12094,10 @@ svg#answer_icon {
   .yesno-status_bar-items[data-shape_id="2"] {
   width: 22.5em;
 }
+
 /***skin other + mobile***/
 /*.yesno[data-skin='3'][data-mobile="1"] .yesno-contaner {
-    background-image: none;
+  background-image: none;
 }*/
 .yesno[data-skin="3"][data-dir="rtl"][data-mobile="1"]
   .yesno-contaner
@@ -12184,6 +12229,7 @@ svg#answer_icon {
   width: 20.5em;
   left: 1em;
 }
+
 /*******end game skin hatav********/
 .yesno[data-dir="rtl"][data-skin="1"]
   .yesno-contaner[data-game_state="end"]
@@ -12233,12 +12279,6 @@ svg#answer_icon {
 .yesno .yesno-contaner[data-game_state="final"] .end_panel {
   width: 100%;
   height: 100%;
-}
-
-.yesno
-  .yesno-contaner[data-game_state="final"]
-  .yesno-questions
-  .yesno-end_panel-contaner.swiper-slide.yesno-question {
 }
 
 .yesno[data-dir="rtl"]
@@ -12364,7 +12404,7 @@ svg#answer_icon {
   width: 4.7em;
   background-color: #ffffff;
   box-shadow: 0 0 2.1em 1.4em rgba(2, 144, 221, 0.37);
-  border-radius: 49% 51% 49% 51% / 61% 45% 55% 39%;
+  border-radius: 49% 51% 49% 51%/61% 45% 55% 39%;
   cursor: pointer;
   pointer-events: all !important;
   background-position: center;
@@ -12739,9 +12779,10 @@ svg#answer_icon {
   .yesno-question.swiper-slide.swiper-slide-active {
   margin-right: 4em !important;
 }
+
 /*.yesno-contaner[data-game_state='final'] .yesno-questions .swiper-slide.yesno-question.swiper-slide-prev {
-    margin-left: 16.2em !important;
-    margin-right: -17.9em;
+  margin-left: 16.2em !important;
+  margin-right: -17.9em;
 }*/
 .yesno:not([data-mobile="1"])
   .yesno-contaner[data-game_state="final"]
@@ -12989,15 +13030,16 @@ svg#answer_icon {
 .yesno[data-mobile="1"] .yesno-contaner[data-game_state="final"] .a-left {
   left: 19em;
 }
+
 /*.yesno[data-mobile="1"] .yesno-contaner[data-game_state='final'] .yesno-questions .swiper-slide.yesno-question.swiper-slide-prev {
-    margin-left: 1em !important;
-    margin-right: -5em;
+  margin-left: 1em !important;
+  margin-right: -5em;
 }*/
 /*.yesno[data-mobile="1"] .yesno-contaner[data-game_state='final'] .yesno-questions .yesno-question.swiper-slide.swiper-slide-next {
-    margin-right: 0.5em !important;
+  margin-right: 0.5em !important;
 }
 .yesno[data-mobile="1"][data-skin='3'] .yesno-contaner[data-game_state='final'] .yesno-questions .yesno-question.swiper-slide.swiper-slide-next {
-    margin-right: 6em !important;
+  margin-right: 6em !important;
 }*/
 .yesno[data-mobile="1"]
   .yesno-contaner[data-game_state="final"]
@@ -13006,17 +13048,18 @@ svg#answer_icon {
   /*margin-right: 3em !important;*/
   height: 19.7em;
 }
+
 /*.yesno[data-mobile="1"][data-skin='1'] .yesno-contaner[data-game_state='final'] .yesno-questions .swiper-wrapper > .yesno-question.swiper-slide.swiper-slide-active:first-child {
-    margin-right: 3em !important;
+  margin-right: 3em !important;
 }*/
 /*.yesno[data-mobile="1"][data-skin='1'] .yesno-contaner[data-game_state='final'] .yesno-questions .yesno-question.swiper-slide.swiper-slide-active {
-    margin-right: 6em !important;
+  margin-right: 6em !important;
 }*/
 /*.yesno[data-mobile="1"][data-skin='3'] .yesno-contaner[data-game_state='final'] .yesno-questions .yesno-question.swiper-slide.swiper-slide-active {
-        margin-right: 10em !important;
-    }*/
+      margin-right: 10em !important;
+  }*/
 /*.yesno[data-mobile="1"] .yesno-contaner[data-game_state='final'] .yesno-question.swiper-slide {
-    width: 27.2em !important;
+  width: 27.2em !important;
 }*/
 .yesno[data-mobile="1"]
   .yesno-contaner[data-game_state="final"]
@@ -13031,14 +13074,14 @@ svg#answer_icon {
   margin-left: unset !important;
   margin-right: unset !important;
 }
-/*.yesno[data-mobile="1"] .yesno-contaner[data-game_state='final'] .yesno-questions .swiper-slide.yesno-question.swiper-slide-prev {
-    margin-left: 0em !important;
-    margin-right: 2.5em !important;
-}*/
 
+/*.yesno[data-mobile="1"] .yesno-contaner[data-game_state='final'] .yesno-questions .swiper-slide.yesno-question.swiper-slide-prev {
+  margin-left: 0em !important;
+  margin-right: 2.5em !important;
+}*/
 /*.yesno[data-mobile="1"][data-skin='3'] .yesno-contaner[data-game_state='final'] .yesno-questions .swiper-slide.yesno-question.swiper-slide-prev {
-    margin-left: 4em !important;
-    margin-right: -0.5em !important;
+  margin-left: 4em !important;
+  margin-right: -0.5em !important;
 }*/
 .yesno[data-mobile="1"][data-skin="3"]
   .yesno-contaner[data-game_state="final"]
@@ -13925,6 +13968,7 @@ svg#answer_icon {
   .yesno-status_bar-items[data-shape_id="2"] {
   left: 1em;
 }
+
 /******** wizard **********/
 .yesno[data-dir="rtl"]
   .yesno-contaner
@@ -13990,10 +14034,10 @@ svg#answer_icon {
   .yesno-edit_panel-row {
   width: 206px;
 }
-/*.yesno-question-answer_btn.yesno-question-element {
-    z-index: 100;
-}*/
 
+/*.yesno-question-answer_btn.yesno-question-element {
+  z-index: 100;
+}*/
 /*************** new end screen  **********************/
 .end_panel {
   position: absolute;
@@ -14616,7 +14660,6 @@ svg#answer_icon {
     background-color: unset;
   }
 }
-
 /************* ltr *****************/
 .yseno[data-dir="ltr"]
   .yesno-contaner
@@ -15284,8 +15327,9 @@ svg#answer_icon {
   .yesno-edit_panel-content {
   width: 290px;
 }
+
 /*.wizard-wrapper .yesno[data-dir='ltr'] .yesno-contaner .yesno-status_bar .yesno-status_bar-timer-wraper {
-    left: unset;
+  left: unset;
 }*/
 .yesno[data-dir="ltr"]
   .yesno-edit_btn.yesno-tools_btn[data-edite="bar"]
@@ -15381,7 +15425,7 @@ svg#answer_icon {
   width: 5.2em;
   height: 5.2em;
   box-shadow: 0 0 9px 0 rgba(0, 106, 231, 0.37);
-  border-radius: 49% 51% 49% 51% / 61% 45% 55% 39%;
+  border-radius: 49% 51% 49% 51%/61% 45% 55% 39%;
   background-color: #fff;
   position: relative;
   top: -2.8em;
@@ -15396,6 +15440,7 @@ svg#answer_icon {
   svg {
   fill: #31bfe2 !important;
 }
+
 .yesno[mode="ev"] .yesno-question-answer_marker[data-marck="v"] svg {
   stroke: rgba(0, 0, 0, 0);
 }
@@ -15414,9 +15459,10 @@ svg#answer_icon {
   svg#correct_icon {
   display: none;
 }
+
 /*.yesno[data-skin='1'][mode="ev"] .yesno-contaner .yesno-status_bar .yesno-status_bar-items[data-shape_id='4'] .yesno-status_bar-item[data-answer="0"] svg#timeout_icon,
 .yesno[data-skin='1'][mode="ev"] .yesno-contaner .yesno-status_bar .yesno-status_bar-items[data-shape_id='4'] .yesno-status_bar-item[data-answer="1"] svg#timeout_icon {
-    display: inline;
+  display: inline;
 }*/
 .yesno[mode="sol"] .yesno-contaner.end .yesno-status_bar-clear-wraper {
   display: none;
@@ -15583,7 +15629,7 @@ svg#answer_icon {
   height: 3.9em !important;
   width: 3.9em !important;
   background: #006ae7; /*#0b94de;*/
-  border-radius: 49% 51% 49% 51% / 61% 45% 55% 39%;
+  border-radius: 49% 51% 49% 51%/61% 45% 55% 39%;
   right: 0.7em !important;
   top: 0.7em !important;
 }
@@ -15603,18 +15649,4 @@ svg#answer_icon {
   .yesno-sound_player
   .yesno-sound_player-btn {
   display: none !important;
-}
-
-.yesno[data-dir="ltr"]
-  .yesno-contaner
-  .yesno-status_bar
-  .yesno-deactivating-The-Timer {
-  position: absolute;
-  top: 50%;
-  right: 80%;
-  transform: translate(1.4em, -50%);
-  width: 3.7em;
-  height: 3.7em;
-  cursor: pointer;
-  display: none;
 }
