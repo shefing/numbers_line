@@ -20,7 +20,7 @@ interface IProps {
 const MoveableElement = ({ moveableRef, element, dragging, setDragging }: IProps) => {
   const { windowSize, rulerType, unit, leftPosition, idDraggElementClick, setIdDraggElementClick, color } = useNumbersLineContext();
   const { deleteDragElement, duplicateDragJump, updateDragElements, updateDragElementsLayers } = useDraggableElementAction();
-  const { calculatScreenWidth, calculatRulerPaddingSides } = useHelpers();
+  const { calculatScreenWidth, calculatRulerPaddingSides, duplicateIfLength20 } = useHelpers();
   const [rightStartPosition, setRightStartPosition] = useState(0);
   const [boundScale, setBoundScale] = useState(0);
   const [changeDragState, setChangeDragState] = useState(false);
@@ -42,7 +42,7 @@ const MoveableElement = ({ moveableRef, element, dragging, setDragging }: IProps
   const updateXLocation = (e: any) => {
     const unitPresent = element.jump ? unit : unit / 2;
     const xPosition = calcXTransform(e.target.style.transform);
-    const IconsFootLength = element.icons ? unit * element.icons.widthRelatively * element.icons.footWidthRelatively : 0;
+    const IconsFootLength = element.icons ? unit * duplicateIfLength20() * element.icons.widthRelatively * element.icons.footWidthRelatively : 0;
     const elementWidth = element.icons ? unit * element.icons.widthRelatively : unit * element.jump!.value;
     // few pixels for the precise position of the element, the calculation is done relative to the position on the axis.
     const sidesPixels = element.jump ? ((windowSize.width / 2 - xPosition - element.jump?.width / 2) / windowSize.width) * 4 : 0;
@@ -67,7 +67,7 @@ const MoveableElement = ({ moveableRef, element, dragging, setDragging }: IProps
     }
     const yTransform = calcYTransform(e.target.style.transform);
     const rulerPosition = windowSize.height * (1 - rulerLocation) - ruleHeight;
-    let elementPsition = calcPosition(yTransform, element, unit);
+    let elementPsition = calcPosition(yTransform, element, unit * duplicateIfLength20());
     // Change the position of the element relative to the integers, provided that the position is close to the axis.
     if (Math.abs(rulerPosition - elementPsition) < 50) updateXLocation(e);
     // Change the type of jump if its position has changed relative to the ruler.

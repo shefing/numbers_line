@@ -34,6 +34,10 @@ export const useHelpers = () => {
     return rulerType == LineRange.hundred || rulerType == LineRange.twenty ? unit / 2 : RulerPaddingSides;
   };
 
+  const duplicateIfLength20 = (): number => {
+  return calculatUnitsAmount() == unitAmount.twenty ? 2 : 1;
+};
+
   const restart = () => {
     setrulerType(rulerTypeShould);
     setDragElements([]);
@@ -49,6 +53,7 @@ export const useHelpers = () => {
     calculatRulerWidth,
     calculatUnitsAmount,
     calculatRulerPaddingSides,
+    duplicateIfLength20,
     restart,
   };
 };
