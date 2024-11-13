@@ -180,7 +180,7 @@ const MoveableElement = ({ moveableRef, element, dragging, setDragging }: IProps
       snappable={true}
       bounds={{
         left: element.jump ? calculatRulerPaddingSides() : 1,
-        top: ToolbarHeight + buttonsDraggElementWidth,
+        top: ToolbarHeight,
         right: element.jump ? calculatRulerPaddingSides() : 1,
         bottom: element.jump ? (element.jump.underRuler ? buttonsDraggElementWidth : jumpHeight - jumpBaseHeight + buttonsDraggElementWidth) : 1,
         position: "css",

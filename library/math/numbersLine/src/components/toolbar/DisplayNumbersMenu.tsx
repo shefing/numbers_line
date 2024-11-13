@@ -9,7 +9,7 @@ interface IProps {
   setOpen: (val: boolean) => void;
 }
 const DisplayNumbersMenu = ({ setOpen }: IProps) => {
-  const { coverSituation, visitableDisplayButton, setCoverSituation } = useNumbersLineContext();
+  const { windowSize, coverSituation, visitableDisplayButton, setCoverSituation } = useNumbersLineContext();
 
   const onClickButtons = (type: TypeCover) => {
     coverSituation == type ? setCoverSituation(TypeCover.nothing) : setCoverSituation(type);
@@ -28,6 +28,7 @@ const DisplayNumbersMenu = ({ setOpen }: IProps) => {
               isChoice={item.choice == coverSituation}
               isVisitDisable={item.visitDisable == visitableDisplayButton}
               onClick={() => onClickButtons(item.choice)}
+              style={{ margin: windowSize.height > 400 ? "0.5rem" : "0.5%" }}
             >
               {t(item.type)}
             </Button>

@@ -47,7 +47,7 @@ const AlertDialogHeader = ({ className, ...props }: React.HTMLAttributes<HTMLDiv
 AlertDialogHeader.displayName = "AlertDialogHeader";
 
 const AlertDialogFooter = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
-  <div className={cn("sm:flex-row sm:justify-center sm:space-x-2", className)} {...props} />
+  <div className={cn("flex grid-cols-2 gap-x-[6rem] items-center sm:flex-row sm:justify-center sm:space-x-2", className)} {...props} />
 );
 AlertDialogFooter.displayName = "AlertDialogFooter";
 
@@ -62,12 +62,12 @@ const AlertDialogDescription = React.forwardRef<React.ElementRef<typeof AlertDia
 AlertDialogDescription.displayName = AlertDialogPrimitive.Description.displayName;
 
 const AlertDialogAction = React.forwardRef<React.ElementRef<typeof AlertDialogPrimitive.Action>, React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Action>>(
-  ({ className, ...props }, ref) => <AlertDialogPrimitive.Action ref={ref} className={cn(buttonVariants({ variant: "action" }), "mt-2 sm:mt-0", className)} {...props} />
+  ({ className, ...props }, ref) => <AlertDialogPrimitive.Action ref={ref} className={cn(buttonVariants({ variant: "action" }), "m-0 sm:mt-0", className)} {...props} />
 );
 AlertDialogAction.displayName = AlertDialogPrimitive.Action.displayName;
 
 const AlertDialogCancel = React.forwardRef<React.ElementRef<typeof AlertDialogPrimitive.Cancel>, React.ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Cancel>>(
-  ({ className, ...props }, ref) => <AlertDialogPrimitive.Cancel ref={ref} className={cn(buttonVariants({ variant: "cancel" }), "mt-2 sm:mt-0", className)} {...props} />
+  ({ className, ...props }, ref) => <AlertDialogPrimitive.Cancel ref={ref} className={cn(buttonVariants({ variant: "cancel" }), "m-0 sm:mt-0", className)} {...props} />
 );
 AlertDialogCancel.displayName = AlertDialogPrimitive.Cancel.displayName;
 
