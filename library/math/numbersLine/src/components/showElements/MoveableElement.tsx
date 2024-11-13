@@ -2,8 +2,7 @@ import { useNumbersLineContext } from "../../context/numbersLineContext";
 import Moveable, { OnResize, OnResizeEnd } from "react-moveable";
 import { IElement } from "../../type/moveable";
 import { calcXTransform, calcYTransform } from "../../lib/utils";
-import { rulerLocation, ToolbarHeight, buttonsDraggElementWidth, jumpBaseHeight, jumpHeight, ruleHeight } from "../../consts/elementConsts";
-import { calcPosition } from "../../lib/utils";
+import { rulerLocation, ToolbarHeight, buttonsDraggElementWidth, ruleHeight, screenHeightMinimum, DistanceRulerForUpdatePositioning } from "../../consts/elementConsts";
 import { ButtonViewable } from "../../consts/ButtonViewable";
 import { useDraggableElementAction } from "../../hooks/useDraggableElementAction";
 import { useHelpers } from "../../hooks/useHelpers";
@@ -20,7 +19,7 @@ interface IProps {
 const MoveableElement = ({ moveableRef, element, dragging, setDragging }: IProps) => {
   const { windowSize, rulerType, unit, leftPosition, idDraggElementClick, setIdDraggElementClick, color } = useNumbersLineContext();
   const { deleteDragElement, duplicateDragJump, updateDragElements, updateDragElementsLayers } = useDraggableElementAction();
-  const { calculatScreenWidth, calculatRulerPaddingSides, duplicateIfLength20 } = useHelpers();
+  const { calculatScreenWidth, calculatRulerPaddingSides, calculatJumpHeightWithoutBase, calcElementPosition, duplicateIfLength20 } = useHelpers();
   const [rightStartPosition, setRightStartPosition] = useState(0);
   const [boundScale, setBoundScale] = useState(0);
   const [changeDragState, setChangeDragState] = useState(false);
@@ -37,6 +36,7 @@ const MoveableElement = ({ moveableRef, element, dragging, setDragging }: IProps
     leftPosition: leftPosition,
     rulerPaddingSides: calculatRulerPaddingSides(),
     calculatScreenWidth: () => calculatScreenWidth(),
+    calculatJumpHeightWithoutBase: () => calculatJumpHeightWithoutBase(),
   };
 
   const updateXLocation = (e: any) => {
@@ -67,9 +67,9 @@ const MoveableElement = ({ moveableRef, element, dragging, setDragging }: IProps
     }
     const yTransform = calcYTransform(e.target.style.transform);
     const rulerPosition = windowSize.height * (1 - rulerLocation) - ruleHeight;
-    let elementPsition = calcPosition(yTransform, element, unit * duplicateIfLength20());
+    let elementPsition = calcElementPosition(yTransform, element, unit * duplicateIfLength20());
     // Change the position of the element relative to the integers, provided that the position is close to the axis.
-    if (Math.abs(rulerPosition - elementPsition) < 50) updateXLocation(e);
+    if (Math.abs(rulerPosition - elementPsition) < DistanceRulerForUpdatePositioning) updateXLocation(e);
     // Change the type of jump if its position has changed relative to the ruler.
     if (!element?.jump) {
       updateDragElements(element.id, { ...element, transform: e.target.style.transform });
@@ -80,10 +80,10 @@ const MoveableElement = ({ moveableRef, element, dragging, setDragging }: IProps
       let newYPositionString = "";
       if (rulerPosition < elementPsition) {
         isUnderRuler = true;
-        newYPositionString = Math.round(yTransform + jumpHeight - jumpBaseHeight) + "px)";
+        newYPositionString = Math.round(yTransform + calculatJumpHeightWithoutBase()) + "px)";
       } else {
         isUnderRuler = false;
-        newYPositionString = Math.round(yTransform - jumpHeight + jumpBaseHeight) + "px)";
+        newYPositionString = Math.round(yTransform - calculatJumpHeightWithoutBase()) + "px)";
       }
       e.target.style.transform = e.target.style.transform.replace(yTransform + "px)", newYPositionString);
     }
@@ -182,7 +182,7 @@ const MoveableElement = ({ moveableRef, element, dragging, setDragging }: IProps
         left: element.jump ? calculatRulerPaddingSides() : 1,
         top: ToolbarHeight,
         right: element.jump ? calculatRulerPaddingSides() : 1,
-        bottom: element.jump ? (element.jump.underRuler ? buttonsDraggElementWidth : jumpHeight - jumpBaseHeight + buttonsDraggElementWidth) : 1,
+        bottom: element.jump ? (element.jump.underRuler ? buttonsDraggElementWidth : buttonsDraggElementWidth + windowSize.height > screenHeightMinimum ? calculatJumpHeightWithoutBase() : calculatJumpHeightWithoutBase()) : 1,
         position: "css",
       }}
     />

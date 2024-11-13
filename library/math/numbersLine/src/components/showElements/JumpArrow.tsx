@@ -1,14 +1,17 @@
 import { IElement } from "@/type/moveable";
-import { dragElementID, jumpArrowHeight } from "../../consts/elementConsts";
+import { dragElementID, jumpArrowHeightRelative, jumpArrowHeightConst, screenHeightMinimum } from "../../consts/elementConsts";
 import { useEffect, useState } from "react";
+import { useNumbersLineContext } from "@/context/numbersLineContext";
 
 interface IProps {
   element: IElement;
   jumpWidth: number;
 }
 const JumpArrow = ({ element, jumpWidth }: IProps) => {
+  const { windowSize } = useNumbersLineContext();
   const underRuler = element.jump?.underRuler;
   const minus = element.jump?.minus;
+  const jumpArrowHeight = windowSize.height > screenHeightMinimum ? jumpArrowHeightConst : jumpArrowHeightRelative * windowSize.height;
   const [matchingSpace, setMatchingPixels] = useState(0);
   const [triangleRotation, setTriangleRotation] = useState(Math.atan((jumpArrowHeight * 2 - 15) / (jumpWidth * 0.5)) * (180 / Math.PI));
 

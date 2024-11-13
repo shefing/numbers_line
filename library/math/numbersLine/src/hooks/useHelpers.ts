@@ -1,4 +1,5 @@
-import { RulerPaddingSides } from "../consts/elementConsts";
+import { IElement } from "@/type/moveable";
+import { jumpArrowHeightConst, jumpArrowHeightRelative, jumpBaseHeight, jumpToArrowDistance, RulerPaddingSides, screenHeightMinimum } from "../consts/elementConsts";
 import { useNumbersLineContext } from "../context/numbersLineContext";
 import { LineRange, unitAmount } from "../type/ruler";
 import { TypeCover } from "../type/toolbar";
@@ -30,9 +31,22 @@ export const useHelpers = () => {
   const calculatUnitsAmount = () => {
     return rulerType == LineRange.hundred || rulerType == LineRange.twenty ? unitAmount.twenty : unitAmount.ten;
   };
+
   const calculatRulerPaddingSides = () => {
     return rulerType == LineRange.hundred || rulerType == LineRange.twenty ? unit / 2 : RulerPaddingSides;
   };
+
+    const calculatJumpHeightWithoutBase = () => {
+    return windowSize.height > screenHeightMinimum ?  jumpArrowHeightConst + jumpToArrowDistance : jumpArrowHeightRelative * windowSize.height + (jumpToArrowDistance/2);
+  };
+
+   const calcElementPosition = (transfomPosition: number, element: IElement, unit: number): number => {
+  if (element.jump) {
+    const base = transfomPosition + jumpBaseHeight / 3;
+    return element.jump.underRuler ? base : base + calculatJumpHeightWithoutBase();
+  }
+  return element.icons ? transfomPosition + element.icons?.heightRelativelyWidth * element.icons.widthRelatively * unit : 0;
+};
 
   const duplicateIfLength20 = (): number => {
   return calculatUnitsAmount() == unitAmount.twenty ? 2 : 1;
@@ -53,6 +67,8 @@ export const useHelpers = () => {
     calculatRulerWidth,
     calculatUnitsAmount,
     calculatRulerPaddingSides,
+    calculatJumpHeightWithoutBase,
+    calcElementPosition,
     duplicateIfLength20,
     restart,
   };

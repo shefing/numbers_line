@@ -11,12 +11,14 @@
   src: local('abraham'), url('/fonts/Abraham.otf') format('woff');
   font-display: swap;
 }
+
 @font-face {
   font-family: 'Abraham';
   src: local('abraham'), url('./fonts/Abraham.otf') format('woff');
   font-display: swap;
 }
-body{
+
+body {
   overflow: hidden;
 }
 
@@ -26,9 +28,11 @@ body{
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -37,6 +41,7 @@ body{
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
@@ -47,9 +52,11 @@ body{
     animation: logo-spin infinite 20s linear;
   }
 }
+
 .text-box::-webkit-scrollbar {
   display: none;
 }
+
 .card {
   padding: 2em;
 }
@@ -58,28 +65,42 @@ body{
   color: #888;
 }
 
-.moveable-origin{
-  visibility: hidden !important
-}
-#dragElement-naviKeni .moveable-line{
+.moveable-origin {
   visibility: hidden !important
 }
 
-#dragElement-text .moveable-line{
+#dragElement-naviKeni .moveable-line {
+  visibility: hidden !important
+}
+
+#dragElement-text .moveable-line {
   background: #ffffff00 !important;
   padding: 5px;
 
 }
 
-#dragElement-jump-under-click .moveable-line, #dragElement-jump-on-click .moveable-line{
+#dragElement-jump-under-click .moveable-line,
+#dragElement-jump-on-click .moveable-line,
+#dragElement-jump-under-click-smallheight .moveable-line,
+#dragElement-jump-on-click-smallheight .moveable-line {
   background: #A4A3AE !important;
 }
-#dragElement-jump-under-notclick .moveable-line, #dragElement-jump-on-notclick .moveable-line{
+
+#dragElement-jump-under-notclick .moveable-line,
+#dragElement-jump-on-notclick .moveable-line,
+#dragElement-jump-under-notclick-smallheight .moveable-line,
+#dragElement-jump-on-notclick-smallheight .moveable-line {
   visibility: hidden !important
 }
 
-#dragElement-jump-under-click .moveable-direction.moveable-e, #dragElement-jump-under-click .moveable-direction.moveable-w,
-#dragElement-jump-on-click .moveable-direction.moveable-e, #dragElement-jump-on-click .moveable-direction.moveable-w {
+#dragElement-jump-under-click .moveable-direction.moveable-e,
+#dragElement-jump-under-click .moveable-direction.moveable-w,
+#dragElement-jump-on-click .moveable-direction.moveable-e,
+#dragElement-jump-on-click .moveable-direction.moveable-w,
+#dragElement-jump-under-click-smallheight .moveable-direction.moveable-e,
+#dragElement-jump-under-click-smallheight .moveable-direction.moveable-w,
+#dragElement-jump-on-click-smallheight .moveable-direction.moveable-e,
+#dragElement-jump-on-click-smallheight .moveable-direction.moveable-w {
   background-size: contain !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
@@ -93,8 +114,14 @@ body{
   border-top-left-radius: 0px !important;
 }
 
-#dragElement-jump-under-notclick .moveable-direction.moveable-e, #dragElement-jump-under-notclick .moveable-direction.moveable-w,
-#dragElement-jump-on-notclick .moveable-direction.moveable-e, #dragElement-jump-on-notclick .moveable-direction.moveable-w {
+#dragElement-jump-under-notclick .moveable-direction.moveable-e,
+#dragElement-jump-under-notclick .moveable-direction.moveable-w,
+#dragElement-jump-on-notclick .moveable-direction.moveable-e,
+#dragElement-jump-on-notclick .moveable-direction.moveable-w,
+#dragElement-jump-under-notclick-smallheight .moveable-direction.moveable-e,
+#dragElement-jump-under-notclick-smallheight .moveable-direction.moveable-w,
+#dragElement-jump-on-notclick-smallheight .moveable-direction.moveable-e,
+#dragElement-jump-on-notclick-smallheight .moveable-direction.moveable-w {
   background-size: contain !important;
   background-repeat: no-repeat !important;
   background-position: center !important;
@@ -108,20 +135,40 @@ body{
   border-top-left-radius: 0px !important;
 }
 
-#dragElement-jump-on-click .moveable-direction.moveable-e, #dragElement-jump-on-click .moveable-direction.moveable-w {
-  margin-top: 30px !important;
-}
-
-#dragElement-jump-under-click .moveable-direction.moveable-e, #dragElement-jump-under-click .moveable-direction.moveable-w {
-  margin-top: -50px !important;
-}
-
-#dragElement-jump-under-click .moveable-direction.moveable-e, #dragElement-jump-on-click .moveable-direction.moveable-e {
-  background-image: url('../public/assets/icons/resizeRight.svg')  !important;
+#dragElement-jump-under-click .moveable-direction.moveable-e,
+#dragElement-jump-on-click .moveable-direction.moveable-e,
+#dragElement-jump-under-click-smallheight .moveable-direction.moveable-e,
+#dragElement-jump-on-click-smallheight .moveable-direction.moveable-e {
+  background-image: url('../public/assets/icons/resizeRight.svg') !important;
   margin-inline: -1px !important;
 }
 
-#dragElement-jump-under-click .moveable-direction.moveable-w, #dragElement-jump-on-click .moveable-direction.moveable-w{
-  background-image: url('../public/assets/icons/resizeLeft.svg')  !important;
-  margin-inline:-14px !important;
+#dragElement-jump-under-click .moveable-direction.moveable-w,
+#dragElement-jump-on-click .moveable-direction.moveable-w,
+#dragElement-jump-under-click-smallheight .moveable-direction.moveable-w,
+#dragElement-jump-on-click-smallheight .moveable-direction.moveable-w {
+  background-image: url('../public/assets/icons/resizeLeft.svg') !important;
+  margin-inline: -14px !important;
 }
+
+#dragElement-jump-on-click .moveable-direction.moveable-e,
+#dragElement-jump-on-click .moveable-direction.moveable-w {
+  margin-top: 30px !important;
+}
+
+#dragElement-jump-under-click .moveable-direction.moveable-e,
+#dragElement-jump-under-click .moveable-direction.moveable-w {
+  margin-top: -50px !important;
+}
+
+#dragElement-jump-on-click-smallheight .moveable-direction.moveable-e,
+#dragElement-jump-on-click-smallheight .moveable-direction.moveable-w {
+  margin-top: 17px !important;
+}
+
+#dragElement-jump-under-click-smallheight .moveable-direction.moveable-e,
+#dragElement-jump-under-click-smallheight .moveable-direction.moveable-w {
+  margin-top: -34px !important;
+}
+
+/* smallheight */
