@@ -115,3 +115,5 @@ export const keboardActioKeys = ["Backspace", "Delete", "Enter", "ArrowDown", "A
 export const keboardLayers = ["7 8 9 - = ⌫", "4 5 6 + < >", "1 2 3 x ≤ ≥", ", 0 . / ⏎"];
 export const keboardDifferentlButton = "⏎";
 export const keboardNormalButtons = keboardLayers.filter((item) => item !== keboardDifferentlButton).join(" ");
+export const maxheightElementSmallScreen= 210 + buttonsDraggElementWidth + duplicateElementStepSpace
+export const maxheightElement= 250 + buttonsDraggElementWidth + duplicateElementStepSpace
