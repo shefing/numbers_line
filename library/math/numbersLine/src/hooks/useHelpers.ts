@@ -1,3 +1,4 @@
+import { calcXTransform, calcYTransform } from "@/lib/utils";
 import { IElement } from "@/type/moveable";
 import { jumpArrowHeightConst, jumpArrowHeightRelative, jumpBaseHeight, jumpToArrowDistance, RulerPaddingSides, screenHeightMinimum } from "../consts/elementConsts";
 import { useNumbersLineContext } from "../context/numbersLineContext";
@@ -30,7 +31,7 @@ export const useHelpers = () => {
 
   const calculatUnitsAmount = () => {
     return rulerType == LineRange.hundred || rulerType == LineRange.twenty ? unitAmount.twenty : unitAmount.ten;
-  };
+  };  
 
   const calculatRulerPaddingSides = () => {
     return rulerType == LineRange.hundred || rulerType == LineRange.twenty ? unit / 2 : RulerPaddingSides;
@@ -52,6 +53,14 @@ export const useHelpers = () => {
   return calculatUnitsAmount() == unitAmount.twenty ? 2 : 1;
 };
 
+  const calculatWidthRatio = (transform: string): number => {
+    return calcXTransform(transform)/windowSize.width;
+  };
+
+  const calculatHeightRatio = (transform: string): number => {
+    return calcYTransform(transform)/windowSize.height;
+  };
+
   const restart = () => {
     setrulerType(rulerTypeShould);
     setDragElements([]);
@@ -67,6 +76,8 @@ export const useHelpers = () => {
     calculatRulerWidth,
     calculatUnitsAmount,
     calculatRulerPaddingSides,
+    calculatHeightRatio,
+    calculatWidthRatio,
     calculatJumpHeightWithoutBase,
     calcElementPosition,
     duplicateIfLength20,

@@ -4,26 +4,18 @@ import NaviKeni from "./showElements/NaviKeni";
 import Writing from "./showElements/Writing";
 import { useNumbersLineContext } from "../context/numbersLineContext";
 import { useEffect, useState } from "react";
-import { ActionTypes, IWindowSize } from "../type/toolbar";
-import { calcXTransform, calcYTransform } from "../lib/utils";
-import { useDraggableElementAction } from "../hooks/useDraggableElementAction";
+import { ActionTypes } from "../type/toolbar";
 import { useHelpers } from "../hooks/useHelpers";
 import { IElement } from "../type/moveable";
+import { useDraggableElementAction } from "@/hooks/useDraggableElementAction";
 
 const ShowElements = () => {
   const { windowSize, rulerType, unit, setUnit, dragElements, setIdDraggElementClick } = useNumbersLineContext();
   const { calculatRulerWidth, calculatUnitsAmount } = useHelpers();
   const { updateDragElements } = useDraggableElementAction();
   const [windowResizing, setWindowResizing] = useState(false);
-  const [prevWindowSize, setPrevWindowSize] = useState<IWindowSize>({ height: windowSize.height, width: windowSize.width });
-
   const updateTransform = (element: IElement) => {
-    const xPosition = calcXTransform(element.transform);
-    const newXPosition = (xPosition / prevWindowSize.width) * windowSize.width;
-    const yPosition = calcYTransform(element.transform);
-    const newYPosition = (yPosition / prevWindowSize.height) * windowSize.height;
-    const newXYPositionString = "(" + newXPosition.toFixed(2) + "px, " + newYPosition.toFixed(2) + "px)";
-    const newTransform = element.transform.replace("(" + xPosition + "px, " + yPosition + "px)", newXYPositionString);
+    const newTransform = `translate(${(element.widthRatio * windowSize.width).toFixed(2)}px, ${(element.heightRatio * windowSize.height).toFixed(2)}px)`
     const documentElement = document.getElementById(`dragElement-${element.id}`);
     if (!documentElement) return;
     documentElement.style.transform = newTransform;
@@ -57,7 +49,6 @@ const ShowElements = () => {
 
   useEffect(() => {
     if (windowResizing) return;
-    setPrevWindowSize({ height: windowSize.height, width: windowSize.width });
     const newUnit = calculatRulerWidth() / calculatUnitsAmount();
     setUnit(newUnit);
   }, [rulerType, windowResizing]);

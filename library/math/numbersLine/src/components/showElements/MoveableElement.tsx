@@ -19,7 +19,7 @@ interface IProps {
 const MoveableElement = ({ moveableRef, element, dragging, setDragging }: IProps) => {
   const { windowSize, rulerType, unit, leftPosition, idDraggElementClick, setIdDraggElementClick, color } = useNumbersLineContext();
   const { deleteDragElement, duplicateDragJump, updateDragElements, updateDragElementsLayers } = useDraggableElementAction();
-  const { calculatScreenWidth, calculatRulerPaddingSides, calculatJumpHeightWithoutBase, calcElementPosition, duplicateIfLength20 } = useHelpers();
+  const { calculatScreenWidth, calculatRulerPaddingSides, calculatJumpHeightWithoutBase, calcElementPosition, duplicateIfLength20, calculatWidthRatio, calculatHeightRatio} = useHelpers();
   const [rightStartPosition, setRightStartPosition] = useState(0);
   const [boundScale, setBoundScale] = useState(0);
   const [changeDragState, setChangeDragState] = useState(false);
@@ -60,7 +60,7 @@ const MoveableElement = ({ moveableRef, element, dragging, setDragging }: IProps
 
   const onDragEnd = (e: OnDragEnd | OnResizeEnd, resizeElement?: IElement) => {
     if (element.type == ActionTypes.text) {
-      updateDragElements(element.id, { ...element, transform: e.target.style.transform });
+      updateDragElements(element.id, { ...element, transform: e.target.style.transform});
       setDragging!(false);
       setIdDraggElementClick("");
       return;
@@ -72,7 +72,7 @@ const MoveableElement = ({ moveableRef, element, dragging, setDragging }: IProps
     if (Math.abs(rulerPosition - elementPsition) < DistanceRulerForUpdatePositioning) updateXLocation(e);
     // Change the type of jump if its position has changed relative to the ruler.
     if (!element?.jump) {
-      updateDragElements(element.id, { ...element, transform: e.target.style.transform });
+      updateDragElements(element.id, { ...element, transform: e.target.style.transform, widthRatio: calculatWidthRatio(e.target.style.transform), heightRatio: calculatHeightRatio(e.target.style.transform)});
       return;
     }
     let isUnderRuler = element.jump.underRuler;
@@ -90,6 +90,8 @@ const MoveableElement = ({ moveableRef, element, dragging, setDragging }: IProps
     updateDragElements(element.id, {
       ...element,
       transform: e.target.style.transform,
+      widthRatio: calculatWidthRatio(e.target.style.transform),
+      heightRatio: calculatHeightRatio(e.target.style.transform),
       jump: { ...(resizeElement ? resizeElement.jump! : element.jump), underRuler: isUnderRuler },
     });
   };
@@ -159,7 +161,7 @@ const MoveableElement = ({ moveableRef, element, dragging, setDragging }: IProps
       newTransform = e.target.style.transform.replace("(" + xPosition, newXPosition);
       e.target.style.transform = newTransform;
     }
-    updateDragElements(element.id, { ...element, transform: newTransform, jump: { ...element.jump, width: newWidth, value: newValue } });
+    updateDragElements(element.id, { ...element, transform: newTransform,  widthRatio: calculatWidthRatio(e.target.style.transform), heightRatio: calculatHeightRatio(e.target.style.transform), jump: { ...element.jump, width: newWidth, value: newValue } });
   };
 
   return (

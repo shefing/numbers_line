@@ -45,6 +45,8 @@ export const useDraggableElementAction = () => {
       type: typeAction,
       transform: `translate(${xTranslate}px, ${yTranslate}px)`,
       zIndex: zIndexCounter,
+      heightRatio: xTranslate/windowSize.width,
+      widthRatio: yTranslate/windowSize.height,
     };
 
     if (typeAction === ActionTypes.jump) {
@@ -71,6 +73,7 @@ export const useDraggableElementAction = () => {
 
   const deleteDragElement = (elementId: string) => {
     const newDragElements = dragElements.filter((element) => element.id !== elementId);
+    setDuplicateElementSpace((prevPixels) => prevPixels>0? prevPixels- duplicateElementStepSpace:prevPixels)
     setDragElements(newDragElements);
   };
 

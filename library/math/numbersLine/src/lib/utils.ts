@@ -6,13 +6,13 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const calcXTransform = (transfom: string): number => {
-  const match = transfom.match(/\((.*?)px/);
+export const calcXTransform = (transform: string): number => {
+  const match = transform.match(/\((.*?)px/);
   return match ? parseFloat(match[1]) : 0;
 };
 
-export const calcYTransform = (transfom: string): number => {
-  const match = transfom.match(/,\s*(-?\d+\.?\d*)px\)/);
+export const calcYTransform = (transform: string): number => {
+  const match = transform.match(/,\s*(-?\d+\.?\d*)px\)/);
   return match ? parseFloat(match[1]) : 0;
 };
 
