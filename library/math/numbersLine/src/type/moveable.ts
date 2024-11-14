@@ -41,4 +41,5 @@ export interface IAbleProps {
   leftPosition: number;
   rulerPaddingSides: number;
   calculatScreenWidth: () => number;
+  calculatJumpHeightWithoutBase: () => number;
 }

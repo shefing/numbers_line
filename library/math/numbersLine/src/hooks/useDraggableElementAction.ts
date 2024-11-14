@@ -1,7 +1,7 @@
 import { useNumbersLineContext } from "@/context/numbersLineContext";
 import { IElement } from "../type/moveable";
 import { v4 as uuidv4 } from "uuid";
-import { LineRange } from "../type/ruler";
+import { LineRange, unitAmount } from "../type/ruler";
 import { ActionTypes, NaviKeniIconsTypes } from "../type/toolbar";
 import {
   buttonsDraggElementWidth,
@@ -37,7 +37,7 @@ export const useDraggableElementAction = () => {
   const { calculatRulerWidth, calculatUnitsAmount, calculatRulerPaddingSides } = useHelpers();
 
   const addDraggableElement = (typeAction: ActionTypes, type?: NaviKeniIconsTypes) => {
-    const elementWidth = typeAction == ActionTypes.jump || typeAction == ActionTypes.naviAndKeni ? calculatRulerWidth() / calculatUnitsAmount() : textBoxWidth;
+    const elementWidth = typeAction == ActionTypes.jump ? calculatRulerWidth() / calculatUnitsAmount(): typeAction == ActionTypes.naviAndKeni? calculatRulerWidth() / unitAmount.ten: textBoxWidth;
     const xTranslate = (windowSize.width - elementWidth) / 2 + duplicateElementSpace;
     const yTranslate = windowSize.height / 4 + duplicateElementSpace;
     let newElement: IElement = {

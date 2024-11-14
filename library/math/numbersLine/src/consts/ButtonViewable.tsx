@@ -6,13 +6,13 @@ import duplicateIconHover from "/assets/icons/duplicateHover.svg";
 import duplicateDisable from "/assets/icons/duplicateDisable.svg";
 import { IAbleProps } from "../type/moveable";
 import { LineRange } from "../type/ruler";
-import { buttonsDraggElementWidth } from "./elementConsts";
+import { buttonsDraggElementWidth, jumpBaseHeight } from "./elementConsts";
 
 export const ButtonViewable = {
   name: "ButtonViewable",
   props: ["ButtonViewable"],
   render(moveable: MoveableManagerInterface) {
-    const { deleteViewAble, onDeleteClick, copyViewAble, onCopyClick, underRuler, minus, rulerType, leftPosition, rulerPaddingSides, calculatScreenWidth } =
+    const { deleteViewAble, onDeleteClick, copyViewAble, onCopyClick, underRuler, minus, rulerType, leftPosition, rulerPaddingSides, calculatScreenWidth, calculatJumpHeightWithoutBase } =
       moveable.props as unknown as IAbleProps;
     const { cssWidth, inlineTransform } = moveable.state;
     const matchX = inlineTransform.match(/\((.*?)px/);
@@ -48,7 +48,7 @@ export const ButtonViewable = {
           justifyContent: "center",
           width: cssWidth,
           position: "absolute",
-          top: `${underRuler ? 120 : -35}px`,
+          top: `${underRuler ? calculatJumpHeightWithoutBase() + jumpBaseHeight + 1 : -35}px`,
           // cursor: "pointer",
         }}
       >
@@ -61,7 +61,7 @@ export const ButtonViewable = {
           <div
             className={`m-[1px] cursor-pointer  ${!copyApproval && "pointer-events-none"}`}
             style={{ width: buttonsDraggElementWidth + "px" }}
-            onClick={copyApproval ? onCopyClick : () => {}}
+            onClick={copyApproval ? onCopyClick : () => { }}
           >
             <img
               id="jump-copy"
