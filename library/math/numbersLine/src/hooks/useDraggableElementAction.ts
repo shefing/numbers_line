@@ -4,16 +4,16 @@ import { v4 as uuidv4 } from "uuid";
 import { LineRange, unitAmount } from "../type/ruler";
 import { ActionTypes, NaviKeniIconsTypes } from "../type/toolbar";
 import {
-  buttonsDraggElementWidth,
   duplicateElementStepSpace,
-  jumpBaseHeight,
-  jumpHeight,
   keniFoot,
   keniHeight,
   keniWidth,
+  maxheightElement,
+  maxheightElementSmallScreen,
   naviFoot,
   naviHeight,
   naviWidth,
+  screenHeightMinimum,
   textBoxWidth,
 } from "../consts/elementConsts";
 import { calcXTransform } from "../lib/utils";
@@ -66,8 +66,7 @@ export const useDraggableElementAction = () => {
     setDuplicateElementSpace((prevPixels) => prevPixels + duplicateElementStepSpace);
     const outOfRange =
       xTranslate > windowSize.width - windowSize.width / calculatUnitsAmount() - calculatRulerPaddingSides() ||
-      yTranslate > windowSize.height - (jumpHeight + jumpBaseHeight + buttonsDraggElementWidth + duplicateElementStepSpace);
-
+      yTranslate > windowSize.height - (windowSize.height < screenHeightMinimum ? maxheightElementSmallScreen: maxheightElement)
     outOfRange && setDuplicateElementSpace(0);
   };
 
