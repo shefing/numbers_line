@@ -92,6 +92,8 @@ const Brush = () => {
       widthRatio: 0,
       writing: line,
       zIndex: zIndexCounter,
+      xRatio: 0,
+      yRatio: 0
     };
     setDragElements([...dragElements, newElement]);
     setZIndexCounter((prev) => prev + 1);
