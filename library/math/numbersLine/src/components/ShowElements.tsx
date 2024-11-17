@@ -9,6 +9,7 @@ import { useHelpers } from "../hooks/useHelpers";
 import { IElement } from "../type/moveable";
 import { useDraggableElementAction } from "@/hooks/useDraggableElementAction";
 import { RulerPaddingSides } from "@/consts/elementConsts";
+import { unitAmount } from "@/type/ruler";
 
 const ShowElements = () => {
   const { windowSize, rulerType, unit, setUnit, dragElements, setIdDraggElementClick } = useNumbersLineContext();
@@ -17,11 +18,19 @@ const ShowElements = () => {
   const [windowResizing, setWindowResizing] = useState(false);
 
   const updateTransform = (element: IElement) => {
-    let translateY = (element.yRatio * calculatRulerPosition()).toFixed(2)//TODO delelte ).toFixed(2)
-    if (element.yRatio < 0) //under ruler
-      translateY = (-1 * element.yRatio * (windowSize.height - calculatRulerPosition()) + calculatRulerPosition()).toFixed(2)
-    const translateX = ((element.xRatio * (windowSize.width - 2 * RulerPaddingSides)) + RulerPaddingSides).toFixed(2)//TODO calc with 1/2 unit padding too
-    const newTransform = `translate(${translateX}px, ${translateY}px)`
+    let translateX;
+    if (calculatUnitsAmount() === unitAmount.twenty) {
+      translateX = (element.xRatio * (windowSize.width - unit)) + 0.5 * unit;
+    } else {
+      translateX = (element.xRatio * (windowSize.width - 2 * RulerPaddingSides)) + RulerPaddingSides;
+    }
+    let translateY;
+    if (element.yRatio < 0) { // Element is below the ruler
+      translateY = (-1 * element.yRatio * (windowSize.height - calculatRulerPosition())) + calculatRulerPosition();
+    } else {
+      translateY = element.yRatio * calculatRulerPosition();
+    }
+    const newTransform = `translate(${translateX.toFixed(2)}px, ${translateY.toFixed(2)}px)`;
     const documentElement = document.getElementById(`dragElement-${element.id}`);
     if (!documentElement) return;
     documentElement.style.transform = newTransform;
