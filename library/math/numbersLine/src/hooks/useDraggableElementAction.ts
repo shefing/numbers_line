@@ -34,12 +34,14 @@ export const useDraggableElementAction = () => {
     zIndexCounter,
     setZIndexCounter,
   } = useNumbersLineContext();
-  const { calculatRulerWidth, calculatUnitsAmount, calculatRulerPaddingSides } = useHelpers();
+  const { calculatRulerWidth, calculatUnitsAmount, calculatRulerPaddingSides, calculatXRatio, calculatYRatio } = useHelpers();
 
   const addDraggableElement = (typeAction: ActionTypes, type?: NaviKeniIconsTypes) => {
     const elementWidth = typeAction == ActionTypes.jump ? calculatRulerWidth() / calculatUnitsAmount(): typeAction == ActionTypes.naviAndKeni? calculatRulerWidth() / unitAmount.ten: textBoxWidth;
     const xTranslate = (windowSize.width - elementWidth) / 2 + duplicateElementSpace;
     const yTranslate = windowSize.height / 4 + duplicateElementSpace;
+    const xRatio = calculatXRatio(xTranslate)
+    const yRatio = calculatYRatio(yTranslate)
     let newElement: IElement = {
       id: uuidv4(),
       type: typeAction,
@@ -47,6 +49,8 @@ export const useDraggableElementAction = () => {
       zIndex: zIndexCounter,
       heightRatio: xTranslate/windowSize.width,
       widthRatio: yTranslate/windowSize.height,
+      xRatio: xRatio,
+      yRatio: yRatio,
     };
 
     if (typeAction === ActionTypes.jump) {
@@ -89,10 +93,12 @@ export const useDraggableElementAction = () => {
       setLeftPosition((prev) => Math.round((prev - outOfRange) / unit) * unit);
     }
     newTransform = element.transform.replace("(" + startPosition, "(" + newPosition);
+    const xRatio = calculatXRatio(newPosition)
     const newElement = {
       ...element,
       id,
       transform: newTransform,
+      xRatio
     };
     setDragElements([...dragElements, newElement]);
     setIdDraggElementClick(id);

@@ -8,14 +8,20 @@ import { ActionTypes } from "../type/toolbar";
 import { useHelpers } from "../hooks/useHelpers";
 import { IElement } from "../type/moveable";
 import { useDraggableElementAction } from "@/hooks/useDraggableElementAction";
+import { RulerPaddingSides } from "@/consts/elementConsts";
 
 const ShowElements = () => {
   const { windowSize, rulerType, unit, setUnit, dragElements, setIdDraggElementClick } = useNumbersLineContext();
-  const { calculatRulerWidth, calculatUnitsAmount } = useHelpers();
+  const { calculatRulerWidth, calculatUnitsAmount, calculatRulerPosition } = useHelpers();
   const { updateDragElements } = useDraggableElementAction();
   const [windowResizing, setWindowResizing] = useState(false);
+
   const updateTransform = (element: IElement) => {
-    const newTransform = `translate(${(element.widthRatio * windowSize.width).toFixed(2)}px, ${(element.heightRatio * windowSize.height).toFixed(2)}px)`
+    let translateY = (element.yRatio * calculatRulerPosition()).toFixed(2)//TODO delelte ).toFixed(2)
+    if (element.yRatio < 0) //under ruler
+      translateY = (-1 * element.yRatio * (windowSize.height - calculatRulerPosition()) + calculatRulerPosition()).toFixed(2)
+    const translateX = ((element.xRatio * (windowSize.width - 2 * RulerPaddingSides)) + RulerPaddingSides).toFixed(2)//TODO calc with 1/2 unit padding too
+    const newTransform = `translate(${translateX}px, ${translateY}px)`
     const documentElement = document.getElementById(`dragElement-${element.id}`);
     if (!documentElement) return;
     documentElement.style.transform = newTransform;
@@ -50,7 +56,10 @@ const ShowElements = () => {
   useEffect(() => {
     if (windowResizing) return;
     const newUnit = calculatRulerWidth() / calculatUnitsAmount();
+    if (newUnit == unit)
+      dragElements.map((element: IElement) => element.type != ActionTypes.text && updateTransform(element));
     setUnit(newUnit);
+
   }, [rulerType, windowResizing]);
 
   useEffect(() => {

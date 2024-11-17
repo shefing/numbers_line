@@ -1,6 +1,6 @@
 import { calcXTransform, calcYTransform } from "@/lib/utils";
 import { IElement } from "@/type/moveable";
-import { jumpArrowHeightConst, jumpArrowHeightRelative, jumpBaseHeight, jumpToArrowDistance, RulerPaddingSides, screenHeightMinimum } from "../consts/elementConsts";
+import { jumpArrowHeightConst, jumpArrowHeightRelative, jumpBaseHeight, jumpToArrowDistance, ruleHeight, rulerLocation, RulerPaddingSides, screenHeightMinimum } from "../consts/elementConsts";
 import { useNumbersLineContext } from "../context/numbersLineContext";
 import { LineRange, unitAmount } from "../type/ruler";
 import { TypeCover } from "../type/toolbar";
@@ -41,7 +41,7 @@ export const useHelpers = () => {
     return windowSize.height > screenHeightMinimum ?  jumpArrowHeightConst + jumpToArrowDistance : jumpArrowHeightRelative * windowSize.height + (jumpToArrowDistance/2);
   };
 
-   const calcElementPosition = (transfomPosition: number, element: IElement, unit: number): number => {
+   const calcYElementPosition = (transfomPosition: number, element: IElement, unit: number): number => {
   if (element.jump) {
     const base = transfomPosition + jumpBaseHeight / 3;
     return element.jump.underRuler ? base : base + calculatJumpHeightWithoutBase();
@@ -59,6 +59,22 @@ export const useHelpers = () => {
 
   const calculatHeightRatio = (transform: string): number => {
     return calcYTransform(transform)/windowSize.height;
+  };
+
+  const calculatRulerPosition = (): number => {
+    return windowSize.height - (windowSize.height * rulerLocation) - ruleHeight;
+  };
+
+  const calculatXRatio = (xPosition:number): number => {
+      if(calculatUnitsAmount() == unitAmount.twenty)
+        return (xPosition- 0.5*unit) / (windowSize.width - unit)
+      return (xPosition- RulerPaddingSides) / (windowSize.width - 2 * RulerPaddingSides)
+  };
+
+  const calculatYRatio = (yPosition: number): number => {
+      if(calculatRulerPosition() < yPosition)
+        return (yPosition - calculatRulerPosition()) / (windowSize.height - calculatRulerPosition()) * -1
+      return yPosition / calculatRulerPosition()
   };
 
   const restart = () => {
@@ -79,8 +95,11 @@ export const useHelpers = () => {
     calculatHeightRatio,
     calculatWidthRatio,
     calculatJumpHeightWithoutBase,
-    calcElementPosition,
+    calcYElementPosition,
+    calculatRulerPosition,
     duplicateIfLength20,
+    calculatXRatio,
+    calculatYRatio,
     restart,
   };
 };
