@@ -31,7 +31,9 @@ const ShowElements = () => {
       translateY = element.yRatio * calculatRulerPosition();
     }
     const newTransform = `translate(${translateX.toFixed(2)}px, ${translateY.toFixed(2)}px)`;
-    const documentElement = document.getElementById(`dragElement-${element.id}`);
+    let documentElement = document.getElementById(`dragElement-${element.id}`);
+    if (element.type == ActionTypes.text)
+      documentElement = document.getElementById(`dragElement-keyboardCET-${element.id}`);
     if (!documentElement) return;
     documentElement.style.transform = newTransform;
     element.jump
@@ -66,13 +68,13 @@ const ShowElements = () => {
     if (windowResizing) return;
     const newUnit = calculatRulerWidth() / calculatUnitsAmount();
     if (newUnit == unit)
-      dragElements.map((element: IElement) => element.type != ActionTypes.text && updateTransform(element));
+      dragElements.map((element: IElement) => updateTransform(element));
     setUnit(newUnit);
 
   }, [rulerType, windowResizing]);
 
   useEffect(() => {
-    dragElements.map((element: IElement) => element.type != ActionTypes.text && updateTransform(element));
+    dragElements.map((element: IElement) => updateTransform(element));
   }, [unit]);
 
   return dragElements.map((element: IElement) => (
