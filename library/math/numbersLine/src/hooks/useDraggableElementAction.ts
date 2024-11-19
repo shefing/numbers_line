@@ -1,19 +1,19 @@
 import { useNumbersLineContext } from "@/context/numbersLineContext";
 import { IElement } from "../type/moveable";
 import { v4 as uuidv4 } from "uuid";
-import { LineRange } from "../type/ruler";
+import { LineRange, unitAmount } from "../type/ruler";
 import { ActionTypes, NaviKeniIconsTypes } from "../type/toolbar";
 import {
-  buttonsDraggElementWidth,
   duplicateElementStepSpace,
-  jumpBaseHeight,
-  jumpHeight,
   keniFoot,
   keniHeight,
   keniWidth,
+  maxheightElement,
+  maxheightElementSmallScreen,
   naviFoot,
   naviHeight,
   naviWidth,
+  screenHeightMinimum,
   textBoxWidth,
 } from "../consts/elementConsts";
 import { calcXTransform } from "../lib/utils";
@@ -34,12 +34,14 @@ export const useDraggableElementAction = () => {
     zIndexCounter,
     setZIndexCounter,
   } = useNumbersLineContext();
-  const { calculatRulerWidth, calculatUnitsAmount, calculatRulerPaddingSides } = useHelpers();
+  const { calculatRulerWidth, calculatUnitsAmount, calculatRulerPaddingSides, calculatXRatio, calculatYRatio } = useHelpers();
 
   const addDraggableElement = (typeAction: ActionTypes, type?: NaviKeniIconsTypes) => {
-    const elementWidth = typeAction == ActionTypes.jump || typeAction == ActionTypes.naviAndKeni ? calculatRulerWidth() / calculatUnitsAmount() : textBoxWidth;
+    const elementWidth = typeAction == ActionTypes.jump ? calculatRulerWidth() / calculatUnitsAmount(): typeAction == ActionTypes.naviAndKeni? calculatRulerWidth() / unitAmount.ten: textBoxWidth;
     const xTranslate = (windowSize.width - elementWidth) / 2 + duplicateElementSpace;
     const yTranslate = windowSize.height / 4 + duplicateElementSpace;
+    const xRatio = calculatXRatio(xTranslate)
+    const yRatio = calculatYRatio(yTranslate)
     let newElement: IElement = {
       id: uuidv4(),
       type: typeAction,
@@ -47,6 +49,8 @@ export const useDraggableElementAction = () => {
       zIndex: zIndexCounter,
       heightRatio: xTranslate/windowSize.width,
       widthRatio: yTranslate/windowSize.height,
+      xRatio: xRatio,
+      yRatio: yRatio,
     };
 
     if (typeAction === ActionTypes.jump) {
@@ -66,8 +70,7 @@ export const useDraggableElementAction = () => {
     setDuplicateElementSpace((prevPixels) => prevPixels + duplicateElementStepSpace);
     const outOfRange =
       xTranslate > windowSize.width - windowSize.width / calculatUnitsAmount() - calculatRulerPaddingSides() ||
-      yTranslate > windowSize.height - (jumpHeight + jumpBaseHeight + buttonsDraggElementWidth + duplicateElementStepSpace);
-
+      yTranslate > windowSize.height - (windowSize.height < screenHeightMinimum ? maxheightElementSmallScreen: maxheightElement)
     outOfRange && setDuplicateElementSpace(0);
   };
 
@@ -90,10 +93,12 @@ export const useDraggableElementAction = () => {
       setLeftPosition((prev) => Math.round((prev - outOfRange) / unit) * unit);
     }
     newTransform = element.transform.replace("(" + startPosition, "(" + newPosition);
+    const xRatio = calculatXRatio(newPosition)
     const newElement = {
       ...element,
       id,
       transform: newTransform,
+      xRatio
     };
     setDragElements([...dragElements, newElement]);
     setIdDraggElementClick(id);

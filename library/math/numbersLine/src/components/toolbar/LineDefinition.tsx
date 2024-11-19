@@ -11,7 +11,7 @@ import closeMenu from "/assets/icons/menuButtonClose.svg";
 
 const LineDefinition = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { language, rulerType, setrulerType, setLeftPosition, dragElements, visitableDisplayButton, setOpenRestartDialog, setrulerTypeShould } = useNumbersLineContext();
+  const { windowSize, language, rulerType, setrulerType, setLeftPosition, dragElements, visitableDisplayButton, setOpenRestartDialog, setrulerTypeShould } = useNumbersLineContext();
   const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -46,9 +46,8 @@ const LineDefinition = () => {
   return (
     <div
       ref={wrapperRef}
-      className={`flex flex-col items-end p-2 rounded-md ${language === ILanguage.AR ? "w-[18rem]" : " w-[16rem]"} w-[16rem] ${
-        isMenuOpen && "shadow-2xl bg-[#009FDE]"
-      } relative  z-[999]`}
+      className={`flex flex-col items-end p-2 rounded-md ${language === ILanguage.AR ? "w-[18rem]" : " w-[16rem]"} w-[16rem] ${isMenuOpen && "shadow-2xl bg-[#009FDE]"
+        } relative  z-[999]`}
     >
       <div className="cursor-pointer flex" onClick={handleButtonClick}>
         <img className="p-3 pr-6" src={isMenuOpen ? closeMenu : openMenu} alt="Menu Arrow" />
@@ -60,7 +59,7 @@ const LineDefinition = () => {
       {isMenuOpen && (
         <div className="flex flex-col items-end pt-5 pb-2 rounded-md">
           {rulerDefinitionButtonDetials.map((item: IRulerDefinition, i: number) => (
-            <Button key={i} variant="linedefinition" isChoice={item.choice == rulerType} onClick={() => handleMenuButtonClick(item.choice)}>
+            <Button key={i} variant="linedefinition" isChoice={item.choice == rulerType} onClick={() => handleMenuButtonClick(item.choice)} style={{ margin: windowSize.height > 400 ? "0.5rem" : "0.5%" }}>
               {(item.choice == LineRange.hundredCircular ? t("ruler_jump_size_10") : item.choice == LineRange.hundred ? t("ruler_jump_size_1") : "") + item.type}
             </Button>
           ))}

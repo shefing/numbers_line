@@ -11,6 +11,8 @@ export interface IElement {
   heightRatio: number;
   widthRatio: number;
   zIndex: number;
+  xRatio: number;
+  yRatio: number;
 }
 
 export interface IJump {
@@ -41,4 +43,5 @@ export interface IAbleProps {
   leftPosition: number;
   rulerPaddingSides: number;
   calculatScreenWidth: () => number;
+  calculatJumpHeightWithoutBase: () => number;
 }

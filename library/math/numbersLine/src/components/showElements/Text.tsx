@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import MoveableElement from "./MoveableElement";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { useDraggableElementAction } from "../../hooks/useDraggableElementAction";
-import { dragElementID, keboardActioKeys, keboardDifferentlButton, keboardLayers, keboardNormalButtons } from "../../consts/elementConsts";
+import { dragElementID, keboardActioKeys, keboardDifferentlButton, keboardLayers, keboardNormalButtons, screenHeightMinimum } from "../../consts/elementConsts";
 import Keyboard from "react-simple-keyboard";
 import "react-simple-keyboard/build/css/index.css";
 
@@ -12,7 +12,7 @@ interface IProps {
 }
 
 const Text = ({ element }: IProps) => {
-  const { idDraggElementClick, setIdDraggElementClick } = useNumbersLineContext();
+  const { windowSize, idDraggElementClick, setIdDraggElementClick } = useNumbersLineContext();
   const { deleteDragElement, updateDragElementsLayers } = useDraggableElementAction();
   const [dragging, setDragging] = useState(false);
   const [openKeyboard, setOpenKeyboard] = useState(true);
@@ -111,11 +111,11 @@ const Text = ({ element }: IProps) => {
             theme={"hg-theme-default hg-layout-default keyboard-background"}
             buttonTheme={[
               {
-                class: "keyboard-buttons keyboard-buttons-enter",
+                class: `keyboard-buttons keyboard-buttons-enter ${windowSize.height < screenHeightMinimum && "smallscreen"}`,
                 buttons: keboardDifferentlButton,
               },
               {
-                class: "keyboard-buttons",
+                class: `keyboard-buttons ${windowSize.height < screenHeightMinimum && "smallscreen"}`,
                 buttons: keboardNormalButtons,
               },
             ]}

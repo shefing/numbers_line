@@ -89,9 +89,13 @@ export const cursorColors: Record<string, string> = { Blue: "cursor-blue", Green
 export const RulerPaddingSides = 32;
 export const rulerLocation = 0.35;
 export const ruleHeight = 50;
+export const screenHeightMinimum = 450;
+export const DistanceRulerForUpdatePositioning = 30;
 export const jumpBaseHeight = 40;
-export const jumpArrowHeight = 64;
+export const jumpArrowHeightRelative = 0.1;
+export const jumpArrowHeightConst = 64;
 export const jumpHeight = 120;
+export const jumpToArrowDistance = 16;
 export const ToolbarHeight = 80;
 export const buttonsDraggElementWidth = 30;
 export const textBoxWidth = 315;
@@ -111,3 +115,5 @@ export const keboardActioKeys = ["Backspace", "Delete", "Enter", "ArrowDown", "A
 export const keboardLayers = ["7 8 9 - = ⌫", "4 5 6 + < >", "1 2 3 x ≤ ≥", ", 0 . / ⏎"];
 export const keboardDifferentlButton = "⏎";
 export const keboardNormalButtons = keboardLayers.filter((item) => item !== keboardDifferentlButton).join(" ");
+export const maxheightElementSmallScreen= 210 + buttonsDraggElementWidth + duplicateElementStepSpace
+export const maxheightElement= 250 + buttonsDraggElementWidth + duplicateElementStepSpace
