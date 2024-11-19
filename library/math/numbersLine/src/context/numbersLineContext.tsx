@@ -71,13 +71,13 @@ export const NumbersLineContext = React.createContext({
 } as INumbersLineContextProps);
 
 export const NumbersLineContexProvider = (props: any) => {
-  const { calculatRulerWidth, calculatUnitsAmount } = useHelpers();
+  const { rulerWidth, unitsAmount } = useHelpers();
 
   const [language] = useState<ILanguage>(locale as ILanguage);
   const [windowSize, setWindowSize] = useState<IWindowSize>({ height: window.innerHeight, width: window.innerWidth });
   const [rulerType, setRulerType] = useState(LineRange.ten);
   const [rulerTypeShould, setRulerTypeShould] = useState(LineRange.ten);
-  const [unit, setUnit] = useState(calculatRulerWidth() / calculatUnitsAmount());
+  const [unit, setUnit] = useState(rulerWidth() / unitsAmount());
   const [leftPosition, setLeftPosition] = useState(0);
   const [dragElements, setDragElements] = useState<IElement[]>([]);
   const [idDraggElementClick, setIdDraggElementClick] = useState("");

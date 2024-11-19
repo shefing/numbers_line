@@ -34,14 +34,14 @@ export const useDraggableElementAction = () => {
     zIndexCounter,
     setZIndexCounter,
   } = useNumbersLineContext();
-  const { calculatRulerWidth, calculatUnitsAmount, calculatRulerPaddingSides, calculatXRatio, calculatYRatio } = useHelpers();
+  const { rulerWidth, unitsAmount, rulerPaddingSides, xRatio, yRatio } = useHelpers();
 
   const addDraggableElement = (typeAction: ActionTypes, type?: NaviKeniIconsTypes) => {
-    const elementWidth = typeAction == ActionTypes.jump ? calculatRulerWidth() / calculatUnitsAmount(): typeAction == ActionTypes.naviAndKeni? calculatRulerWidth() / unitAmount.ten: textBoxWidth;
+    const elementWidth = typeAction == ActionTypes.jump ? rulerWidth() / unitsAmount(): typeAction == ActionTypes.naviAndKeni? rulerWidth() / unitAmount.ten: textBoxWidth;
     const xTranslate = (windowSize.width - elementWidth) / 2 + duplicateElementSpace;
     const yTranslate = windowSize.height / 4 + duplicateElementSpace;
-    const xRatio = calculatXRatio(xTranslate)
-    const yRatio = calculatYRatio(yTranslate)
+    const xRatio = xRatio(xTranslate)
+    const yRatio = yRatio(yTranslate)
     let newElement: IElement = {
       id: uuidv4(),
       type: typeAction,
@@ -69,7 +69,7 @@ export const useDraggableElementAction = () => {
     setZIndexCounter((prev) => prev + 1);
     setDuplicateElementSpace((prevPixels) => prevPixels + duplicateElementStepSpace);
     const outOfRange =
-      xTranslate > windowSize.width - windowSize.width / calculatUnitsAmount() - calculatRulerPaddingSides() ||
+      xTranslate > windowSize.width - windowSize.width / unitsAmount() - rulerPaddingSides() ||
       yTranslate > windowSize.height - (windowSize.height < screenHeightMinimum ? maxheightElementSmallScreen: maxheightElement)
     outOfRange && setDuplicateElementSpace(0);
   };
@@ -86,14 +86,14 @@ export const useDraggableElementAction = () => {
     let newTransform = "";
     const startPosition = calcXTransform(element.transform);
     const endNewJumpPosition = startPosition + elementWidth * 2;
-    const outOfRange = element.jump?.minus ? startPosition - elementWidth : endNewJumpPosition - windowSize.width + calculatRulerPaddingSides() - 10;
+    const outOfRange = element.jump?.minus ? startPosition - elementWidth : endNewJumpPosition - windowSize.width + rulerPaddingSides() - 10;
     let newPosition = element.jump?.minus ? startPosition - elementWidth : startPosition + elementWidth;
     if (rulerType == LineRange.hundred && ((!element.jump?.minus && outOfRange > 0) || (element.jump?.minus && outOfRange < 0))) {
       newPosition -= +leftPosition - Math.round((leftPosition - outOfRange) / unit) * unit;
       setLeftPosition((prev) => Math.round((prev - outOfRange) / unit) * unit);
     }
     newTransform = element.transform.replace("(" + startPosition, "(" + newPosition);
-    const xRatio = calculatXRatio(newPosition)
+    const xRatio = xRatio(newPosition)
     const newElement = {
       ...element,
       id,
