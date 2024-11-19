@@ -13,22 +13,22 @@ import { unitAmount } from "@/type/ruler";
 
 const ShowElements = () => {
   const { windowSize, rulerType, unit, setUnit, dragElements, setIdDraggElementClick } = useNumbersLineContext();
-  const { calculatRulerWidth, calculatUnitsAmount, calculatRulerPosition } = useHelpers();
+  const { rulerWidth, unitsAmount, rulerPosition } = useHelpers();
   const { updateDragElements } = useDraggableElementAction();
   const [windowResizing, setWindowResizing] = useState(false);
 
   const updateTransform = (element: IElement) => {
     let translateX;
-    if (calculatUnitsAmount() === unitAmount.twenty) {
+    if (unitsAmount() === unitAmount.twenty) {
       translateX = (element.xRatio * (windowSize.width - unit)) + 0.5 * unit;
     } else {
       translateX = (element.xRatio * (windowSize.width - 2 * RulerPaddingSides)) + RulerPaddingSides;
     }
     let translateY;
     if (element.yRatio < 0) { // Element is below the ruler
-      translateY = (-1 * element.yRatio * (windowSize.height - calculatRulerPosition())) + calculatRulerPosition();
+      translateY = (-1 * element.yRatio * (windowSize.height - rulerPosition())) + rulerPosition();
     } else {
-      translateY = element.yRatio * calculatRulerPosition();
+      translateY = element.yRatio * rulerPosition();
     }
     const newTransform = `translate(${translateX.toFixed(2)}px, ${translateY.toFixed(2)}px)`;
     let documentElement = document.getElementById(`dragElement-${element.id}`);
@@ -66,7 +66,7 @@ const ShowElements = () => {
 
   useEffect(() => {
     if (windowResizing) return;
-    const newUnit = calculatRulerWidth() / calculatUnitsAmount();
+    const newUnit = rulerWidth() / unitsAmount();
     if (newUnit == unit)
       dragElements.map((element: IElement) => updateTransform(element));
     setUnit(newUnit);
