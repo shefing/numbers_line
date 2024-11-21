@@ -13,7 +13,7 @@ import { unitAmount } from "@/type/ruler";
 
 const ShowElements = () => {
   const { windowSize, rulerType, unit, setUnit, dragElements, setIdDraggElementClick } = useNumbersLineContext();
-  const { rulerWidth, unitsAmount, rulerPosition } = useHelpers();
+  const { rulerWidth, unitsAmount, calcRulerPosition } = useHelpers();
   const { updateDragElements } = useDraggableElementAction();
   const [windowResizing, setWindowResizing] = useState(false);
 
@@ -26,9 +26,9 @@ const ShowElements = () => {
     }
     let translateY;
     if (element.yRatio < 0) { // Element is below the ruler
-      translateY = (-1 * element.yRatio * (windowSize.height - rulerPosition())) + rulerPosition();
+      translateY = (-1 * element.yRatio * (windowSize.height - calcRulerPosition())) + calcRulerPosition();
     } else {
-      translateY = element.yRatio * rulerPosition();
+      translateY = element.yRatio * calcRulerPosition();
     }
     const newTransform = `translate(${translateX.toFixed(2)}px, ${translateY.toFixed(2)}px)`;
     let documentElement = document.getElementById(`dragElement-${element.id}`);

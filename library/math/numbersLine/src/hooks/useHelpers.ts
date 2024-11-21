@@ -61,20 +61,20 @@ export const useHelpers = () => {
     return calcYTransform(transform)/windowSize.height;
   };
 
-  const rulerPosition = (): number => {
+  const calcRulerPosition = (): number => {
     return windowSize.height - (windowSize.height * rulerLocation) - ruleHeight;
   };
 
-  const xRatio = (xPosition:number): number => {
+  const calcXRatio = (xPosition:number): number => {
       if(unitsAmount() == unitAmount.twenty)
         return (xPosition- 0.5*unit) / (windowSize.width - unit)
       return (xPosition- RulerPaddingSides) / (windowSize.width - 2 * RulerPaddingSides)
   };
 
-  const yRatio = (yPosition: number): number => {
-      if(rulerPosition() < yPosition)
-        return (yPosition - rulerPosition()) / (windowSize.height - rulerPosition()) * -1
-      return yPosition / rulerPosition()
+  const calcYRatio = (yPosition: number): number => {
+      if(calcRulerPosition() < yPosition)
+        return (yPosition - calcRulerPosition()) / (windowSize.height - calcRulerPosition()) * -1
+      return yPosition / calcRulerPosition()
   };
 
   const restart = () => {
@@ -96,10 +96,10 @@ export const useHelpers = () => {
     widthRatio,
     jumpHeightWithoutBase,
     calcYElementPosition,
-    rulerPosition,
+    calcRulerPosition,
     xAxisFactor,
-    xRatio,
-    yRatio,
+    calcXRatio,
+    calcYRatio,
     restart,
   };
 };

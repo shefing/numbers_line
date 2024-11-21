@@ -19,14 +19,14 @@ interface IProps {
 const MoveableElement = ({ moveableRef, element, dragging, setDragging }: IProps) => {
   const { windowSize, rulerType, unit, leftPosition, idDraggElementClick, setIdDraggElementClick, color } = useNumbersLineContext();
   const { deleteDragElement, duplicateDragJump, updateDragElements, updateDragElementsLayers } = useDraggableElementAction();
-  const { calculatScreenWidth, rulerPaddingSides, jumpHeightWithoutBase, calcYElementPosition, xAxisFactor, widthRatio, heightRatio, rulerPosition, xRatio, yRatio } = useHelpers();
+  const { calculatScreenWidth, rulerPaddingSides, jumpHeightWithoutBase, calcYElementPosition, xAxisFactor, widthRatio, heightRatio, calcRulerPosition, calcXRatio, calcYRatio } = useHelpers();
   const [rightStartPosition, setRightStartPosition] = useState(0);
   const [boundScale, setBoundScale] = useState(0);
   const [changeDragState, setChangeDragState] = useState(false);
-  const [rulerPosition, setRulerPosition] = useState(rulerPosition());
+  const [rulerPosition, setRulerPosition] = useState(calcRulerPosition());
 
   useEffect(() => {
-    setRulerPosition(rulerPosition());
+    setRulerPosition(calcRulerPosition());
   }, [windowSize]);
 
   const ableProps = {
@@ -65,8 +65,8 @@ const MoveableElement = ({ moveableRef, element, dragging, setDragging }: IProps
 
   const onDragEnd = (e: OnDragEnd | OnResizeEnd, resizeElement?: IElement) => {
     if (element.type == ActionTypes.text) {
-      const xRatio = xRatio(calcXTransform(e.target.style.transform));
-      const yRatio = yRatio(calcYTransform(e.target.style.transform));
+      const xRatio = calcXRatio(calcXTransform(e.target.style.transform));
+      const yRatio = calcYRatio(calcYTransform(e.target.style.transform));
       updateDragElements(element.id, { ...element, transform: e.target.style.transform, xRatio, yRatio });
       setDragging!(false);
       setIdDraggElementClick("");
@@ -78,8 +78,8 @@ const MoveableElement = ({ moveableRef, element, dragging, setDragging }: IProps
     if (Math.abs(rulerPosition - elementPsition) < DistanceRulerForUpdatePositioning) updateXLocation(e);
     // Change the type of jump if its position has changed relative to the ruler.
     if (!element?.jump) {
-      const xRatio = xRatio(calcXTransform(e.target.style.transform));
-      const yRatio = yRatio(calcYTransform(e.target.style.transform));
+      const xRatio = calcXRatio(calcXTransform(e.target.style.transform));
+      const yRatio = calcYRatio(calcYTransform(e.target.style.transform));
       updateDragElements(element.id, { ...element, transform: e.target.style.transform, widthRatio: widthRatio(e.target.style.transform), heightRatio: heightRatio(e.target.style.transform), xRatio, yRatio });
       return;
     }
@@ -95,8 +95,8 @@ const MoveableElement = ({ moveableRef, element, dragging, setDragging }: IProps
       }
       e.target.style.transform = e.target.style.transform.replace(yTransform + "px)", newYPositionString);
     }
-    const xRatio = xRatio(calcXTransform(e.target.style.transform));
-    const yRatio = yRatio(calcYTransform(e.target.style.transform));
+    const xRatio = calcXRatio(calcXTransform(e.target.style.transform));
+    const yRatio = calcYRatio(calcYTransform(e.target.style.transform));
     updateDragElements(element.id, {
       ...element,
       transform: e.target.style.transform,
@@ -173,7 +173,7 @@ const MoveableElement = ({ moveableRef, element, dragging, setDragging }: IProps
       newTransform = e.target.style.transform.replace("(" + xPosition, newXPosition);
       e.target.style.transform = newTransform;
     }
-    const xRatio = xRatio(calcXTransform(e.target.style.transform));
+    const xRatio = calcXRatio(calcXTransform(e.target.style.transform));
     updateDragElements(element.id, { ...element, transform: newTransform, widthRatio: widthRatio(e.target.style.transform), heightRatio: heightRatio(e.target.style.transform), jump: { ...element.jump, width: newWidth, value: newValue }, xRatio });
   };
 
