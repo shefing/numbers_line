@@ -88,8 +88,12 @@ const Brush = () => {
       id: uuidv4(),
       type: ActionTypes.writing,
       transform: "",
+      heightRatio: 0,
+      widthRatio: 0,
       writing: line,
       zIndex: zIndexCounter,
+      xRatio: 0,
+      yRatio: 0
     };
     setDragElements([...dragElements, newElement]);
     setZIndexCounter((prev) => prev + 1);

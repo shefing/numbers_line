@@ -1,14 +1,15 @@
 import { Button } from "../ui/button";
 import { useNumbersLineContext } from "../../context/numbersLineContext";
 import { IDisplayRuller, TypeCover } from "../../type/toolbar";
-import triangleToMenu from "/assets/icons/TriangleToMenu.png";
 import { ToolbarHeight, displayRulerButtonDetials } from "../../consts/elementConsts";
+import { t } from "i18next";
+import triangleToMenu from "/assets/icons/TriangleToMenu.png";
 
 interface IProps {
   setOpen: (val: boolean) => void;
 }
 const DisplayNumbersMenu = ({ setOpen }: IProps) => {
-  const { coverSituation, visitableDisplayButton, setCoverSituation } = useNumbersLineContext();
+  const { windowSize, coverSituation, visitableDisplayButton, setCoverSituation } = useNumbersLineContext();
 
   const onClickButtons = (type: TypeCover) => {
     coverSituation == type ? setCoverSituation(TypeCover.nothing) : setCoverSituation(type);
@@ -17,9 +18,9 @@ const DisplayNumbersMenu = ({ setOpen }: IProps) => {
 
   return (
     <div className="fixed ">
-      <div className="flex flex-col items-center" style={{ margin: ToolbarHeight - 10 + "px" }}>
+      <div className="flex flex-col items-center h-[284px]" style={{ margin: ToolbarHeight - 10 + "px" }}>
         <img className="relative mb-[-3px] " src={triangleToMenu} alt="triple for menu" />
-        <div className="flex flex-col items-end bg-white rounded-[6px] border border-[#009FDE] p-2 ">
+        <div className="flex flex-col items-end bg-white rounded-[6px] border border-[#009FDE] p-2 ease-in-out ">
           {displayRulerButtonDetials.map((item: IDisplayRuller, i: number) => (
             <Button
               key={i}
@@ -27,8 +28,9 @@ const DisplayNumbersMenu = ({ setOpen }: IProps) => {
               isChoice={item.choice == coverSituation}
               isVisitDisable={item.visitDisable == visitableDisplayButton}
               onClick={() => onClickButtons(item.choice)}
+              style={{ margin: windowSize.height > 400 ? "0.5rem" : "0.5%" }}
             >
-              {item.type}
+              {t(item.type)}
             </Button>
           ))}
         </div>

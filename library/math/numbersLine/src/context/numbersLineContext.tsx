@@ -2,15 +2,25 @@ import React, { useEffect, useState } from "react";
 import { LineRange } from "../type/ruler";
 import { Colors, IColor, IWindowSize, TypeCover, WritingSituation } from "../type/toolbar";
 import { IElement } from "../type/moveable";
-import { RulerPaddingSides } from "@/consts/elementConsts";
+import i18n from "../i18n";
+import { ILanguage } from "../type/language";
+import { useHelpers } from "@/hooks/useHelpers";
+
+const params = new URLSearchParams(location.search);
+let locale = params.get("locale") || (window as any).locale;
+if (locale) i18n.changeLanguage(locale);
+if (!locale) {
+  locale = ILanguage.HE;
+}
 interface INumbersLineContextProps {
+  language: ILanguage;
   windowSize: IWindowSize;
   rulerType: LineRange;
   setrulerType: (v: LineRange) => void;
   rulerTypeShould: LineRange;
   setrulerTypeShould: (v: LineRange) => void;
-  rulerPaddingSides: number;
-  setRulerPaddingSides: (v: number) => void;
+  unit: number;
+  setUnit: (v: number) => void;
   leftPosition: number;
   setLeftPosition: React.Dispatch<React.SetStateAction<number>>;
   dragElements: IElement[];
@@ -32,13 +42,14 @@ interface INumbersLineContextProps {
 }
 
 export const NumbersLineContext = React.createContext({
+  language: locale,
   windowSize: {} as IWindowSize,
   rulerType: {} as LineRange,
   setrulerType: () => null,
   rulerTypeShould: {} as LineRange,
   setrulerTypeShould: () => null,
-  rulerPaddingSides: {} as number,
-  setRulerPaddingSides: () => null,
+  unit: {} as number,
+  setUnit: () => null,
   leftPosition: {} as number,
   setLeftPosition: () => null,
   dragElements: {} as IElement[],
@@ -60,9 +71,13 @@ export const NumbersLineContext = React.createContext({
 } as INumbersLineContextProps);
 
 export const NumbersLineContexProvider = (props: any) => {
+  const { rulerWidth, unitsAmount } = useHelpers();
+
+  const [language] = useState<ILanguage>(locale as ILanguage);
   const [windowSize, setWindowSize] = useState<IWindowSize>({ height: window.innerHeight, width: window.innerWidth });
   const [rulerType, setRulerType] = useState(LineRange.ten);
   const [rulerTypeShould, setRulerTypeShould] = useState(LineRange.ten);
+  const [unit, setUnit] = useState(rulerWidth() / unitsAmount());
   const [leftPosition, setLeftPosition] = useState(0);
   const [dragElements, setDragElements] = useState<IElement[]>([]);
   const [idDraggElementClick, setIdDraggElementClick] = useState("");
@@ -70,7 +85,6 @@ export const NumbersLineContexProvider = (props: any) => {
   const [coverSituation, setCoverSituation] = useState(TypeCover.allDiscover);
   const [visitableDisplayButton, setVisitableDisplayButton] = useState(TypeCover.allDiscover);
   const [openRestartDialog, setOpenRestartDialog] = useState(false);
-  const [rulerPaddingSides, setRulerPaddingSides] = useState(RulerPaddingSides);
   const [color, setColor] = useState<IColor>({ description: WritingSituation.non, url: Colors.non });
   const [zIndexCounter, setZIndexCounter] = useState(1);
 
@@ -89,13 +103,14 @@ export const NumbersLineContexProvider = (props: any) => {
   return (
     <NumbersLineContext.Provider
       value={{
+        language,
         windowSize,
         rulerType,
         setrulerType: setRulerType,
         rulerTypeShould,
         setrulerTypeShould: setRulerTypeShould,
-        rulerPaddingSides,
-        setRulerPaddingSides,
+        unit,
+        setUnit,
         leftPosition,
         setLeftPosition,
         dragElements,
@@ -120,5 +135,4 @@ export const NumbersLineContexProvider = (props: any) => {
     </NumbersLineContext.Provider>
   );
 };
-
 export const useNumbersLineContext = () => React.useContext(NumbersLineContext);

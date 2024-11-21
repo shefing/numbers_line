@@ -1,13 +1,13 @@
 import "./App.css";
+import { useNumbersLineContext } from "./context/numbersLineContext";
+import { useEffect } from "react";
+import { dragElementID } from "./consts/elementConsts";
 import Ruler from "./components/Ruler";
 import GrassImg from "./components/GrassImg";
 import Toolbar from "./components/Toolbar";
 import ShowElements from "./components/ShowElements";
 import Restart from "./components/Restart";
-import { useNumbersLineContext } from "./context/numbersLineContext";
-import { useEffect } from "react";
 import Brush from "./components/showElements/Brush";
-import { dragElementID } from "./consts/elementConsts";
 
 const App = () => {
   const { setIdDraggElementClick } = useNumbersLineContext();

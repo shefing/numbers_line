@@ -4,29 +4,36 @@ import NaviKeni from "./showElements/NaviKeni";
 import Writing from "./showElements/Writing";
 import { useNumbersLineContext } from "../context/numbersLineContext";
 import { useEffect, useState } from "react";
-import { ActionTypes, IWindowSize } from "../type/toolbar";
-import { calcXTransform, calcYTransform } from "../lib/utils";
-import { useDraggableElementAction } from "../hooks/useDraggableElementAction";
+import { ActionTypes } from "../type/toolbar";
 import { useHelpers } from "../hooks/useHelpers";
-import { LineRange, RulerLenth } from "../type/ruler";
 import { IElement } from "../type/moveable";
+import { useDraggableElementAction } from "@/hooks/useDraggableElementAction";
+import { RulerPaddingSides } from "@/consts/elementConsts";
+import { unitAmount } from "@/type/ruler";
 
 const ShowElements = () => {
-  const { windowSize, rulerType, dragElements, setIdDraggElementClick } = useNumbersLineContext();
-  const { calculatRulerWidth, calculatUnitsAmount } = useHelpers();
+  const { windowSize, rulerType, unit, setUnit, dragElements, setIdDraggElementClick } = useNumbersLineContext();
+  const { rulerWidth, unitsAmount, calcRulerPosition } = useHelpers();
   const { updateDragElements } = useDraggableElementAction();
-  const [unit, setUnit] = useState(calculatRulerWidth() / calculatUnitsAmount());
   const [windowResizing, setWindowResizing] = useState(false);
-  const [prevWindowSize, setPrevWindowSize] = useState<IWindowSize>({ height: windowSize.height, width: windowSize.width });
 
   const updateTransform = (element: IElement) => {
-    const xPosition = calcXTransform(element.transform);
-    const newXPosition = (xPosition / prevWindowSize.width) * windowSize.width;
-    const yPosition = calcYTransform(element.transform);
-    const newYPosition = (yPosition / prevWindowSize.height) * windowSize.height;
-    const newXYPositionString = "(" + newXPosition.toFixed(2) + "px, " + newYPosition.toFixed(2) + "px)";
-    const newTransform = element.transform.replace("(" + xPosition + "px, " + yPosition + "px)", newXYPositionString);
-    const documentElement = document.getElementById(`dragElement-${element.id}`);
+    let translateX;
+    if (unitsAmount() === unitAmount.twenty) {
+      translateX = (element.xRatio * (windowSize.width - unit)) + 0.5 * unit;
+    } else {
+      translateX = (element.xRatio * (windowSize.width - 2 * RulerPaddingSides)) + RulerPaddingSides;
+    }
+    let translateY;
+    if (element.yRatio < 0) { // Element is below the ruler
+      translateY = (-1 * element.yRatio * (windowSize.height - calcRulerPosition())) + calcRulerPosition();
+    } else {
+      translateY = element.yRatio * calcRulerPosition();
+    }
+    const newTransform = `translate(${translateX.toFixed(2)}px, ${translateY.toFixed(2)}px)`;
+    let documentElement = document.getElementById(`dragElement-${element.id}`);
+    if (element.type == ActionTypes.text)
+      documentElement = document.getElementById(`dragElement-keyboardCET-${element.id}`);
     if (!documentElement) return;
     documentElement.style.transform = newTransform;
     element.jump
@@ -59,10 +66,11 @@ const ShowElements = () => {
 
   useEffect(() => {
     if (windowResizing) return;
-    setPrevWindowSize({ height: windowSize.height, width: windowSize.width });
-    const unitWidth = calculatRulerWidth() / calculatUnitsAmount();
-    const newUnit = rulerType == LineRange.hundred ? windowSize.width / RulerLenth.hundred : unitWidth;
+    const newUnit = rulerWidth() / unitsAmount();
+    if (newUnit == unit)
+      dragElements.map((element: IElement) => updateTransform(element));
     setUnit(newUnit);
+
   }, [rulerType, windowResizing]);
 
   useEffect(() => {
@@ -74,11 +82,11 @@ const ShowElements = () => {
       {(() => {
         switch (element.type) {
           case ActionTypes.jump:
-            return <Jump element={element} unit={unit} />;
+            return <Jump element={element} />;
           case ActionTypes.text:
             return <Text element={element} />;
           case ActionTypes.naviAndKeni:
-            return <NaviKeni element={element} unit={unit} />;
+            return <NaviKeni element={element} />;
           case ActionTypes.writing:
             return <Writing element={element} />;
           default:

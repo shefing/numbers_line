@@ -1,19 +1,19 @@
 import { useNumbersLineContext } from "@/context/numbersLineContext";
 import { IElement } from "../type/moveable";
 import { v4 as uuidv4 } from "uuid";
-import { LineRange } from "../type/ruler";
+import { LineRange, unitAmount } from "../type/ruler";
 import { ActionTypes, NaviKeniIconsTypes } from "../type/toolbar";
 import {
-  buttonsDraggElementWidth,
   duplicateElementStepSpace,
-  jumpBaseHeight,
-  jumpHeight,
   keniFoot,
   keniHeight,
   keniWidth,
+  maxheightElement,
+  maxheightElementSmallScreen,
   naviFoot,
   naviHeight,
   naviWidth,
+  screenHeightMinimum,
   textBoxWidth,
 } from "../consts/elementConsts";
 import { calcXTransform } from "../lib/utils";
@@ -23,7 +23,8 @@ export const useDraggableElementAction = () => {
   const {
     windowSize,
     rulerType,
-    rulerPaddingSides,
+    unit,
+    leftPosition,
     setLeftPosition,
     dragElements,
     setDragElements,
@@ -33,22 +34,27 @@ export const useDraggableElementAction = () => {
     zIndexCounter,
     setZIndexCounter,
   } = useNumbersLineContext();
-  const { calculatRulerWidth, calculatUnitsAmount } = useHelpers();
+  const { rulerWidth, unitsAmount, rulerPaddingSides, calcXRatio, calcYRatio } = useHelpers();
 
   const addDraggableElement = (typeAction: ActionTypes, type?: NaviKeniIconsTypes) => {
-    const elementWidth = typeAction == ActionTypes.jump || ActionTypes.naviAndKeni ? calculatRulerWidth() / calculatUnitsAmount() : textBoxWidth;
+    const elementWidth = typeAction == ActionTypes.jump ? rulerWidth() / unitsAmount(): typeAction == ActionTypes.naviAndKeni? rulerWidth() / unitAmount.ten: textBoxWidth;
     const xTranslate = (windowSize.width - elementWidth) / 2 + duplicateElementSpace;
     const yTranslate = windowSize.height / 4 + duplicateElementSpace;
-
+    const xRatio = calcXRatio(xTranslate)
+    const yRatio = calcYRatio(yTranslate)
     let newElement: IElement = {
       id: uuidv4(),
       type: typeAction,
       transform: `translate(${xTranslate}px, ${yTranslate}px)`,
       zIndex: zIndexCounter,
+      heightRatio: xTranslate/windowSize.width,
+      widthRatio: yTranslate/windowSize.height,
+      xRatio: xRatio,
+      yRatio: yRatio,
     };
 
     if (typeAction === ActionTypes.jump) {
-      newElement.jump = { value: 1, underRuler: false, width: elementWidth };
+      newElement.jump = { value: 1, underRuler: false, width: elementWidth, minus: false };
     }
     if (typeAction === ActionTypes.naviAndKeni) {
       if (type)
@@ -63,35 +69,36 @@ export const useDraggableElementAction = () => {
     setZIndexCounter((prev) => prev + 1);
     setDuplicateElementSpace((prevPixels) => prevPixels + duplicateElementStepSpace);
     const outOfRange =
-      xTranslate > windowSize.width - windowSize.width / calculatUnitsAmount() - rulerPaddingSides ||
-      yTranslate > windowSize.height - (jumpHeight + jumpBaseHeight + buttonsDraggElementWidth + duplicateElementStepSpace);
-
+      xTranslate > windowSize.width - windowSize.width / unitsAmount() - rulerPaddingSides() ||
+      yTranslate > windowSize.height - (windowSize.height < screenHeightMinimum ? maxheightElementSmallScreen: maxheightElement)
     outOfRange && setDuplicateElementSpace(0);
   };
 
   const deleteDragElement = (elementId: string) => {
     const newDragElements = dragElements.filter((element) => element.id !== elementId);
+    setDuplicateElementSpace((prevPixels) => prevPixels>0? prevPixels- duplicateElementStepSpace:prevPixels)
     setDragElements(newDragElements);
   };
 
-  const duplicateDragJump = (element: IElement, unit: number) => {
+  const duplicateDragJump = (element: IElement) => {
     const elementWidth = unit * element.jump!.value;
     const id = uuidv4();
     let newTransform = "";
     const startPosition = calcXTransform(element.transform);
     const endNewJumpPosition = startPosition + elementWidth * 2;
-    const outOfRange = element.jump?.underRuler ? startPosition - elementWidth : endNewJumpPosition - windowSize.width + rulerPaddingSides - 10;
-    let newPosition = element.jump?.underRuler ? startPosition - elementWidth : startPosition + elementWidth;
-    if (rulerType == LineRange.hundred && ((!element.jump?.underRuler && outOfRange > 0) || (element.jump?.underRuler && outOfRange < 0))) {
-      setLeftPosition((prevLeft: number) => prevLeft - outOfRange);
-
-      newPosition -= outOfRange;
+    const outOfRange = element.jump?.minus ? startPosition - elementWidth : endNewJumpPosition - windowSize.width + rulerPaddingSides() - 10;
+    let newPosition = element.jump?.minus ? startPosition - elementWidth : startPosition + elementWidth;
+    if (rulerType == LineRange.hundred && ((!element.jump?.minus && outOfRange > 0) || (element.jump?.minus && outOfRange < 0))) {
+      newPosition -= +leftPosition - Math.round((leftPosition - outOfRange) / unit) * unit;
+      setLeftPosition((prev) => Math.round((prev - outOfRange) / unit) * unit);
     }
     newTransform = element.transform.replace("(" + startPosition, "(" + newPosition);
+    const xRatio = calcXRatio(newPosition)
     const newElement = {
       ...element,
       id,
       transform: newTransform,
+      xRatio
     };
     setDragElements([...dragElements, newElement]);
     setIdDraggElementClick(id);

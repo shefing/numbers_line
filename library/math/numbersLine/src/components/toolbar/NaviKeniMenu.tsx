@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { iconsNaviKeni } from "../../consts/elementConsts";
 import { ActionTypes, IIconsNaviKeni, NaviKeniIconsTypes } from "../../type/toolbar";
-import { getSrc } from "../../lib/utils";
 import { useDraggableElementAction } from "../../hooks/useDraggableElementAction";
 
 interface IProps {
@@ -17,14 +16,14 @@ const NaviKanyMenu = ({ setOpen }: IProps) => {
   };
 
   return (
-    <div className={`flex flex-col mt-[-4rem] pt-[4rem] w-[50] h-[162] pb-2 relative z-0 rounded-3xl bg-[#009FDE] shadow-2xl`}>
+    <div className={`flex flex-col mt-[-4rem] pt-[4rem] w-[50px] h-[162px] pb-2 relative z-0 rounded-3xl bg-[#009FDE] shadow-2xl ease-in-out`}>
       {iconsNaviKeni.map((item: IIconsNaviKeni, i: number) => (
         <img
           key={i}
           className="m-1.5 mb-0 cursor-pointer"
-          src={getSrc(item.url, urlHovered == item.url)}
+          src={urlHovered == item.type ? item.urlHover : item.url}
           alt={item.type}
-          onMouseEnter={() => setUrlHovered(item.url)}
+          onMouseEnter={() => setUrlHovered(item.type)}
           onMouseLeave={() => setUrlHovered("")}
           onClick={() => onClickButtons(item.type)}
         />

@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build",
+    "build": "tsc && vite build && yarn custom-build-he && yarn custom-build-ar",
+    "custom-build-he": "ncp dist/assets dist/NumberLinesTemplate/he/assets && ncp dist/fonts dist/NumberLinesTemplate/he/fonts  && ncp dist/index.html dist/NumberLinesTemplate/he/index.htm",
+    "custom-build-ar": "ncp dist/assets dist/NumberLinesTemplate/ar/assets && ncp dist/fonts dist/NumberLinesTemplate/ar/fonts  && ncp dist/index.html dist/NumberLinesTemplate/ar/index.htm",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -16,10 +18,13 @@
     "@types/uuid": "^9.0.8",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "i18next": "^23.7.11",
     "lucide-react": "^0.309.0",
     "moveable": "^0.53.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-i18next": "^14.0.0",
+    "react-simple-keyboard": "^3.7.105",
     "tailwind-merge": "^2.2.0",
     "tailwindcss-animate": "^1.0.7",
     "uuid": "^9.0.1"
@@ -35,9 +40,11 @@
     "eslint": "^8.55.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "ncp": "^2.0.0",
     "postcss": "^8.4.33",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.2.2",
-    "vite": "^5.0.8"
+    "vite": "^5.0.8",
+    "vite-plugin-singlefile": "^2.0.2"
   }
 }

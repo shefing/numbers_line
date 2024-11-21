@@ -8,13 +8,18 @@ export interface IElement {
   icons?: IIcons;
   writing?: ILine;
   transform: string;
+  heightRatio: number;
+  widthRatio: number;
   zIndex: number;
+  xRatio: number;
+  yRatio: number;
 }
 
 export interface IJump {
   value: number;
   underRuler: boolean;
   width: number;
+  minus: boolean;
 }
 export interface IIcons {
   type: NaviKeniIconsTypes;
@@ -33,8 +38,10 @@ export interface IAbleProps {
   copyViewAble: boolean;
   onCopyClick: () => void;
   underRuler: boolean;
+  minus: boolean;
   rulerType: LineRange;
   leftPosition: number;
   rulerPaddingSides: number;
   calculatScreenWidth: () => number;
+  jumpHeightWithoutBase: () => number;
 }

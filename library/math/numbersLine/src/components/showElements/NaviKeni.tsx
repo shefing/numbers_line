@@ -5,13 +5,16 @@ import navi from "/assets/icons/naviOnScreen.svg";
 import keni from "/assets/icons/keniOnScreen.svg";
 import { NaviKeniIconsTypes } from "../../type/toolbar";
 import { dragElementID } from "../../consts/elementConsts";
+import { useNumbersLineContext } from "@/context/numbersLineContext";
+import { useHelpers } from "@/hooks/useHelpers";
 
 interface IProps {
   element: IElement;
-  unit: number;
 }
 
-const NaviKany = ({ element, unit }: IProps) => {
+const NaviKany = ({ element }: IProps) => {
+  const { unit } = useNumbersLineContext();
+  const { xAxisFactor } = useHelpers()
   const moveableRef = useRef<any>(null);
 
   return (
@@ -23,12 +26,12 @@ const NaviKany = ({ element, unit }: IProps) => {
         className="drag-element cursor-move"
         style={{
           transform: element.transform,
-          width: unit * element.icons!.widthRelatively,
+          width: unit * element.icons!.widthRelatively * xAxisFactor(),
           zIndex: element.zIndex,
         }}
       />
       <div id={`${dragElementID}-naviKeni`}>
-        <MoveableElement moveableRef={moveableRef} element={element} unit={unit} />
+        <MoveableElement moveableRef={moveableRef} element={element} />
       </div>
     </>
   );

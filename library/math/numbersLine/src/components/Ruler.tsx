@@ -1,24 +1,15 @@
 import Arrows from "./ruler/Arrows";
 import XAxis from "./ruler/XAxis";
-import { grassHeight, ruleHeight, rulerMargin } from "../consts/elementConsts";
-import { useNumbersLineContext } from "../context/numbersLineContext";
-import { useEffect } from "react";
-import { LineRange, RulerLenth } from "../type/ruler";
+import { rulerLocation } from "../consts/elementConsts";
+import { useNumbersLineContext } from "@/context/numbersLineContext";
 
 const Ruler = () => {
-  const { windowSize, rulerType, setRulerPaddingSides } = useNumbersLineContext();
-
-  useEffect(() => {
-    rulerType == LineRange.hundred && setRulerPaddingSides(windowSize.width / RulerLenth.hundred / 2);
-  }, [windowSize]);
-
+  const { windowSize } = useNumbersLineContext();
   return (
-    <>
+    <div style={{ position: "absolute", bottom: rulerLocation * windowSize.height, width: "100%" }}>
       <Arrows />
-      <div style={{ paddingBottom: windowSize.height * rulerMargin - grassHeight - ruleHeight + "px" }}>
-        <XAxis />
-      </div>
-    </>
+      <XAxis />
+    </div>
   );
 };
 

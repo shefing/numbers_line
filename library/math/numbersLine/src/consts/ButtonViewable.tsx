@@ -1,16 +1,18 @@
 import { MoveableManagerInterface } from "react-moveable";
 import deleteIcon from "/assets/icons/delete.svg";
+import deleteIconHover from "/assets/icons/deleteHover.svg";
 import duplicateIcon from "/assets/icons/duplicate.svg";
+import duplicateIconHover from "/assets/icons/duplicateHover.svg";
 import duplicateDisable from "/assets/icons/duplicateDisable.svg";
 import { IAbleProps } from "../type/moveable";
 import { LineRange } from "../type/ruler";
-import { buttonsDraggElementWidth } from "./elementConsts";
+import { buttonsDraggElementWidth, jumpBaseHeight } from "./elementConsts";
 
 export const ButtonViewable = {
   name: "ButtonViewable",
   props: ["ButtonViewable"],
   render(moveable: MoveableManagerInterface) {
-    const { deleteViewAble, onDeleteClick, copyViewAble, onCopyClick, underRuler, rulerType, leftPosition, rulerPaddingSides, calculatScreenWidth } =
+    const { deleteViewAble, onDeleteClick, copyViewAble, onCopyClick, underRuler, minus, rulerType, leftPosition, rulerPaddingSides, calculatScreenWidth, jumpHeightWithoutBase } =
       moveable.props as unknown as IAbleProps;
     const { cssWidth, inlineTransform } = moveable.state;
     const matchX = inlineTransform.match(/\((.*?)px/);
@@ -18,10 +20,10 @@ export const ButtonViewable = {
     if (matchX) {
       const xPosition = matchX[1];
       const endXPosition = parseFloat(xPosition) + cssWidth * 2;
-      const outOfRange = underRuler ? parseInt(xPosition) - cssWidth : endXPosition - window.innerWidth + rulerPaddingSides - 10;
+      const outOfRange = minus ? parseInt(xPosition) - cssWidth - rulerPaddingSides + 5 : endXPosition - window.innerWidth + rulerPaddingSides - 5;
       //Checking if there is an option to copy in terms of space on the screen for the new jump
-      if (!underRuler && outOfRange > 0 && (rulerType != LineRange.hundred || leftPosition - outOfRange < calculatScreenWidth())) copyApproval = false;
-      if (underRuler && outOfRange < 0 && (rulerType != LineRange.hundred || parseFloat(xPosition) + outOfRange > 0)) copyApproval = false;
+      if (!minus && outOfRange > 0 && (rulerType != LineRange.hundred || leftPosition - outOfRange < calculatScreenWidth())) copyApproval = false;
+      if (minus && outOfRange < 0 && (rulerType != LineRange.hundred || leftPosition - outOfRange > 0)) copyApproval = false;
     }
     const Icons = moveable.useCSS(
       "div",
@@ -38,21 +40,6 @@ export const ButtonViewable = {
     }
     `
     );
-    const changeHover = (event: any, isdelete?: boolean) => {
-      if (copyApproval || isdelete) {
-        const url = isdelete ? deleteIcon : duplicateIcon;
-        const dotIndex = url.indexOf(".");
-        const beforeDot = url.substring(0, dotIndex);
-        event.target.src = beforeDot + "Hover.svg";
-      }
-    };
-
-    const backNotHover = (event: any, isdelete?: boolean) => {
-      if (copyApproval || isdelete) {
-        const url = isdelete ? deleteIcon : duplicateIcon;
-        event.target.src = url;
-      }
-    };
 
     return (
       <Icons
@@ -61,23 +48,27 @@ export const ButtonViewable = {
           justifyContent: "center",
           width: cssWidth,
           position: "absolute",
-          top: `${underRuler ? 120 : -35}px`,
+          top: `${underRuler ? jumpHeightWithoutBase() + jumpBaseHeight + 1 : -35}px`,
           // cursor: "pointer",
         }}
       >
         {deleteViewAble && (
           <div className="m-[1px] cursor-pointer" style={{ width: buttonsDraggElementWidth + "px" }} onClick={onDeleteClick}>
-            <img src={deleteIcon} alt="Delete Icon" onMouseEnter={(e) => changeHover(e, true)} onMouseLeave={(e) => backNotHover(e, true)} />
+            <img src={deleteIcon} alt="Delete Icon" onMouseEnter={(e: any) => (e.target.src = deleteIconHover)} onMouseLeave={(e: any) => (e.target.src = deleteIcon)} />
           </div>
         )}
         {copyViewAble && (
-          <div className="m-[1px] cursor-pointer" style={{ width: buttonsDraggElementWidth + "px" }} onClick={copyApproval ? onCopyClick : () => {}}>
+          <div
+            className={`m-[1px] cursor-pointer  ${!copyApproval && "pointer-events-none"}`}
+            style={{ width: buttonsDraggElementWidth + "px" }}
+            onClick={copyApproval ? onCopyClick : () => { }}
+          >
             <img
               id="jump-copy"
               src={copyApproval ? duplicateIcon : duplicateDisable}
               alt="DuplicateIcon Icon"
-              onMouseEnter={(e) => changeHover(e)}
-              onMouseLeave={(e) => backNotHover(e)}
+              onMouseEnter={(e: any) => copyApproval && (e.target.src = duplicateIconHover)}
+              onMouseLeave={(e: any) => copyApproval && (e.target.src = duplicateIcon)}
             />
           </div>
         )}

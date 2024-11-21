@@ -1,11 +1,17 @@
-import { dragElementID, jumpArrowHeight } from "../../consts/elementConsts";
+import { IElement } from "@/type/moveable";
+import { dragElementID, jumpArrowHeightRelative, jumpArrowHeightConst, screenHeightMinimum } from "../../consts/elementConsts";
 import { useEffect, useState } from "react";
+import { useNumbersLineContext } from "@/context/numbersLineContext";
 
 interface IProps {
-  underRuler: boolean;
+  element: IElement;
   jumpWidth: number;
 }
-const JumpArrow = ({ underRuler, jumpWidth }: IProps) => {
+const JumpArrow = ({ element, jumpWidth }: IProps) => {
+  const { windowSize } = useNumbersLineContext();
+  const underRuler = element.jump?.underRuler;
+  const minus = element.jump?.minus;
+  const jumpArrowHeight = windowSize.height > screenHeightMinimum ? jumpArrowHeightConst : jumpArrowHeightRelative * windowSize.height;
   const [matchingSpace, setMatchingPixels] = useState(0);
   const [triangleRotation, setTriangleRotation] = useState(Math.atan((jumpArrowHeight * 2 - 15) / (jumpWidth * 0.5)) * (180 / Math.PI));
 
@@ -14,33 +20,38 @@ const JumpArrow = ({ underRuler, jumpWidth }: IProps) => {
     const slope = (jumpArrowHeight * 2 - 15) / (jumpWidth * 0.5);
     const perpendicularAngle = Math.atan(slope) * (180 / Math.PI);
     setTriangleRotation(perpendicularAngle);
-  }, [jumpWidth]);
+  }, [jumpWidth, triangleRotation]);
 
   return (
-    <svg id={`${dragElementID}-jumpArrow`} className=" w-full " style={{ height: jumpArrowHeight + "px" }}>
+    <svg
+      id={`${dragElementID}-jumpArrow`}
+      className={`w-full  ${minus == underRuler ? "transform scale-x-[1]" : "transform scale-x-[-1]"}`}
+      style={{ height: jumpArrowHeight + "px" }}
+      viewBox={`0 0 ${jumpWidth + 3} ${jumpArrowHeight}`}
+      preserveAspectRatio="none"
+    >
       <path
         d={
           underRuler
-            ? `M${2 + matchingSpace / 3},${2 + matchingSpace / 3} Q${jumpWidth * 0.5},${jumpArrowHeight * 2 - 15} ${jumpWidth},0`
-            : `M0,${jumpArrowHeight} Q${jumpWidth * 0.5},-${jumpArrowHeight - 15} ${jumpWidth - 2 - matchingSpace / 3},${jumpArrowHeight - 2 - matchingSpace / 3}`
+            ? `M${5 + matchingSpace / 3},${5 + matchingSpace / 3} Q${jumpWidth * 0.5},${jumpArrowHeight * 2 - 15} ${jumpWidth},0`
+            : `M0,${jumpArrowHeight} Q${jumpWidth * 0.5},-${jumpArrowHeight - 15} ${jumpWidth - 5 - matchingSpace / 3},${jumpArrowHeight - 5 - matchingSpace / 3}`
         }
         fill="none"
-        stroke={underRuler ? "#F48460" : "#009FDE"}
+        stroke={minus ? "#F48460" : "#009FDE"}
         strokeWidth="4"
         strokeLinecap="round"
         strokeDasharray="15 15"
-        strokeDashoffset={underRuler ? 0 : 20} // Set stroke dash offset to 0 to show the entire stroke, or 20 to make the last 20 pixels transparent
+        strokeDashoffset={20}
       />
       <svg
         className="overflow-visible"
-        x={`${underRuler ? -7 + matchingSpace / 5 : jumpWidth + 7 - matchingSpace / 5}`}
-        y={`${underRuler ? 1 + matchingSpace : jumpArrowHeight - 1 - matchingSpace}`}
+        x={`${underRuler ? -5 + matchingSpace / 4: jumpWidth + 6 - matchingSpace / 4}`}
+        y={`${underRuler ? 2 + matchingSpace/0.9 : jumpArrowHeight - 2- matchingSpace/0.9}`}
       >
-        <polygon points="-20,0 0,10 -20,20 " transform={`rotate(${underRuler ? triangleRotation - 180 : triangleRotation})`} fill={underRuler ? "#F48460" : "#009FDE"} />
+        <polygon points="-20,0 0,10 -20,20 " transform={`rotate(${underRuler ? triangleRotation - 180 : triangleRotation})`} fill={minus ? "#F48460" : "#009FDE"} />
       </svg>
     </svg>
   );
 };
 
 export default JumpArrow;
-//${underRuler ? -6 : jumpWidth + 5}

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Apps>
+    <App title="Line Numbers" optimalWidth="1024" optimalHeight="650" status="dev" tech="outsource" urlRouteId="numberLines" clientScript ="new">
+        <Description>Number Lines</Description>
+        <Params>
+        </Params>
+        <References>
+            <Reference>
+            </Reference>
+        </References>
+        <!-- The preset definition -->
+        <Preset enabled="true">
+            <Explanation>
+            </Explanation>
+            <!--  if there are more than one samples, the first one in the list is the default sample  -->
+            <!--  the title is optional. If no title is given , it will be autocreated -->
+            <Sample title="Number Lines"><![CDATA[NumberLines]]></Sample>
+        </Preset>
+    </App>
+</Apps>
+	
+	
+	
+	
+	
+	
+	 
+	
+	
+	 
+	
+	
+	 

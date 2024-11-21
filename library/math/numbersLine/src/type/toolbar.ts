@@ -40,9 +40,19 @@ export enum Colors {
 
 export interface IActionIcon {
   type: ActionTypes;
-  url: string;
+  url: IUrl;
   isMenu?: boolean;
   isDragged?: boolean;
+}
+export interface IUrl {
+  url: string;
+  hover: string;
+  open?: string;
+  disable?: string;
+  blue?: string;
+  green?: string;
+  orange?: string;
+  delete?: string;
 }
 export interface IDisplayRuller {
   type: string;
@@ -56,6 +66,7 @@ export interface IRulerDefinition {
 export interface IIconsNaviKeni {
   type: NaviKeniIconsTypes;
   url: string;
+  urlHover: string;
 }
 export interface IColor {
   description: WritingSituation;
