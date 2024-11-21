@@ -24,57 +24,57 @@ export const useHelpers = () => {
     return -(unit * (LineRange.hundred - 21));
   };
 
-  const calculatRulerWidth = () => {
+  const rulerWidth = () => {
     const padding = rulerType == LineRange.hundred || rulerType == LineRange.twenty ? windowSize.width / 21 / 2 : RulerPaddingSides;
     return windowSize.width - padding * 2;
   };
 
-  const calculatUnitsAmount = () => {
+  const unitsAmount = () => {
     return rulerType == LineRange.hundred || rulerType == LineRange.twenty ? unitAmount.twenty : unitAmount.ten;
   };  
 
-  const calculatRulerPaddingSides = () => {
+  const rulerPaddingSides = () => {
     return rulerType == LineRange.hundred || rulerType == LineRange.twenty ? unit / 2 : RulerPaddingSides;
   };
 
-    const calculatJumpHeightWithoutBase = () => {
+    const jumpHeightWithoutBase = () => {
     return windowSize.height > screenHeightMinimum ?  jumpArrowHeightConst + jumpToArrowDistance : jumpArrowHeightRelative * windowSize.height + (jumpToArrowDistance/2);
   };
 
    const calcYElementPosition = (transfomPosition: number, element: IElement, unit: number): number => {
   if (element.jump) {
     const base = transfomPosition + jumpBaseHeight / 3;
-    return element.jump.underRuler ? base : base + calculatJumpHeightWithoutBase();
+    return element.jump.underRuler ? base : base + jumpHeightWithoutBase();
   }
   return element.icons ? transfomPosition + element.icons?.heightRelativelyWidth * element.icons.widthRelatively * unit : 0;
 };
 
-  const duplicateIfLength20 = (): number => {
-  return calculatUnitsAmount() == unitAmount.twenty ? 2 : 1;
+  const xAxisFactor = (): number => {
+  return unitsAmount() == unitAmount.twenty ? 2 : 1;
 };
 
-  const calculatWidthRatio = (transform: string): number => {
+  const widthRatio = (transform: string): number => {
     return calcXTransform(transform)/windowSize.width;
   };
 
-  const calculatHeightRatio = (transform: string): number => {
+  const heightRatio = (transform: string): number => {
     return calcYTransform(transform)/windowSize.height;
   };
 
-  const calculatRulerPosition = (): number => {
+  const rulerPosition = (): number => {
     return windowSize.height - (windowSize.height * rulerLocation) - ruleHeight;
   };
 
-  const calculatXRatio = (xPosition:number): number => {
-      if(calculatUnitsAmount() == unitAmount.twenty)
+  const xRatio = (xPosition:number): number => {
+      if(unitsAmount() == unitAmount.twenty)
         return (xPosition- 0.5*unit) / (windowSize.width - unit)
       return (xPosition- RulerPaddingSides) / (windowSize.width - 2 * RulerPaddingSides)
   };
 
-  const calculatYRatio = (yPosition: number): number => {
-      if(calculatRulerPosition() < yPosition)
-        return (yPosition - calculatRulerPosition()) / (windowSize.height - calculatRulerPosition()) * -1
-      return yPosition / calculatRulerPosition()
+  const yRatio = (yPosition: number): number => {
+      if(rulerPosition() < yPosition)
+        return (yPosition - rulerPosition()) / (windowSize.height - rulerPosition()) * -1
+      return yPosition / rulerPosition()
   };
 
   const restart = () => {
@@ -89,17 +89,17 @@ export const useHelpers = () => {
 
   return {
     calculatScreenWidth,
-    calculatRulerWidth,
-    calculatUnitsAmount,
-    calculatRulerPaddingSides,
-    calculatHeightRatio,
-    calculatWidthRatio,
-    calculatJumpHeightWithoutBase,
+    rulerWidth,
+    unitsAmount,
+    rulerPaddingSides,
+    heightRatio,
+    widthRatio,
+    jumpHeightWithoutBase,
     calcYElementPosition,
-    calculatRulerPosition,
-    duplicateIfLength20,
-    calculatXRatio,
-    calculatYRatio,
+    rulerPosition,
+    xAxisFactor,
+    xRatio,
+    yRatio,
     restart,
   };
 };

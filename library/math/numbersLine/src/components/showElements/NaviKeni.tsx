@@ -14,7 +14,7 @@ interface IProps {
 
 const NaviKany = ({ element }: IProps) => {
   const { unit } = useNumbersLineContext();
-  const { duplicateIfLength20 } = useHelpers()
+  const { xAxisFactor } = useHelpers()
   const moveableRef = useRef<any>(null);
 
   return (
@@ -26,7 +26,7 @@ const NaviKany = ({ element }: IProps) => {
         className="drag-element cursor-move"
         style={{
           transform: element.transform,
-          width: unit * element.icons!.widthRelatively * duplicateIfLength20(),
+          width: unit * element.icons!.widthRelatively * xAxisFactor(),
           zIndex: element.zIndex,
         }}
       />

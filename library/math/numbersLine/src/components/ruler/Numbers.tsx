@@ -6,7 +6,7 @@ import { useHelpers } from "../../hooks/useHelpers";
 
 const Numbers = () => {
   const { unit, rulerType, leftPosition, coverSituation, setCoverSituation, setVisitableDisplayButton } = useNumbersLineContext();
-  const { calculatRulerPaddingSides } = useHelpers();
+  const { rulerPaddingSides } = useHelpers();
   const [labels, setLabels] = useState<number[]>([]);
   const [labelsCover, setClickedLabelsCover] = useState(new Set());
 
@@ -37,8 +37,8 @@ const Numbers = () => {
     labelsCover.size == 0
       ? setVisitableDisplayButton(TypeCover.allDiscover)
       : labelsCover.size == labels.length
-      ? setVisitableDisplayButton(TypeCover.allCover)
-      : setVisitableDisplayButton(TypeCover.nothing);
+        ? setVisitableDisplayButton(TypeCover.allCover)
+        : setVisitableDisplayButton(TypeCover.nothing);
   }, [labelsCover]);
 
   const displayLabel = (label: any) => {
@@ -58,12 +58,12 @@ const Numbers = () => {
       style={
         rulerType == LineRange.hundred
           ? {
-              width: unit * (LineRange.hundred - 1) + calculatRulerPaddingSides() * 2,
-              left: `${leftPosition}px`,
-              paddingLeft: `${calculatRulerPaddingSides()}px`,
-              paddingRight: `${calculatRulerPaddingSides()}px`,
-            }
-          : { paddingLeft: `${calculatRulerPaddingSides()}px`, paddingRight: `${calculatRulerPaddingSides()}px` }
+            width: unit * (LineRange.hundred - 1) + rulerPaddingSides() * 2,
+            left: `${leftPosition}px`,
+            paddingLeft: `${rulerPaddingSides()}px`,
+            paddingRight: `${rulerPaddingSides()}px`,
+          }
+          : { paddingLeft: `${rulerPaddingSides()}px`, paddingRight: `${rulerPaddingSides()}px` }
       }
     >
       {labels.map((label) =>
@@ -71,9 +71,8 @@ const Numbers = () => {
           <div key={label} className="flex flex-col items-center">
             <div className="h-6 border-l-4 border-gray-900 w-1366" />
             <div
-              className={`pl-2 pr-2 select-none text-2xl absolute m-6 ${label % 5 == 0 && " font-bold"} ${
-                (coverSituation == TypeCover.partiallyCover || coverSituation == TypeCover.partiallyDiscover) && " cursor-pointer"
-              } ${labelsCover.has(label) && " text-[transparent]"}`}
+              className={`pl-2 pr-2 select-none text-2xl absolute m-6 ${label % 5 == 0 && " font-bold"} ${(coverSituation == TypeCover.partiallyCover || coverSituation == TypeCover.partiallyDiscover) && " cursor-pointer"
+                } ${labelsCover.has(label) && " text-[transparent]"}`}
               onClick={() => displayLabel(label)}
             >
               {label}

@@ -12,7 +12,7 @@ export const ButtonViewable = {
   name: "ButtonViewable",
   props: ["ButtonViewable"],
   render(moveable: MoveableManagerInterface) {
-    const { deleteViewAble, onDeleteClick, copyViewAble, onCopyClick, underRuler, minus, rulerType, leftPosition, rulerPaddingSides, calculatScreenWidth, calculatJumpHeightWithoutBase } =
+    const { deleteViewAble, onDeleteClick, copyViewAble, onCopyClick, underRuler, minus, rulerType, leftPosition, rulerPaddingSides, calculatScreenWidth, jumpHeightWithoutBase } =
       moveable.props as unknown as IAbleProps;
     const { cssWidth, inlineTransform } = moveable.state;
     const matchX = inlineTransform.match(/\((.*?)px/);
@@ -48,7 +48,7 @@ export const ButtonViewable = {
           justifyContent: "center",
           width: cssWidth,
           position: "absolute",
-          top: `${underRuler ? calculatJumpHeightWithoutBase() + jumpBaseHeight + 1 : -35}px`,
+          top: `${underRuler ? jumpHeightWithoutBase() + jumpBaseHeight + 1 : -35}px`,
           // cursor: "pointer",
         }}
       >
