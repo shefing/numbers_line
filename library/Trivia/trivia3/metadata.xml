@@ -1,0 +1,900 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Apps>
+  <App title="טריויה - אשף" skin="neta" optimalWidth="900" optimalHeight="540" status="dev" tech="outsource"  urlRouteId="1102013">
+    <Description></Description>
+   <!-- The preset definition -->
+   <Preset enabled="true">
+    <Explanation>
+     This is free text explaining how to create a preset.
+    </Explanation>
+
+    <!--  if there are more than one samples, the first one in the list is the default sample  -->
+    <!--  the title is optional. If no title is given , it will be autocreated -->
+
+		 <!--<Sample title="content A">
+			 <![CDATA[{"random":{"options":true,"numberOfQuestions":10,"questions":false},"common":{"backgroundImage":"","timer":true,"direction":"rtl","helpers":false},"questions":[{"questionNumber":1,"title":"מתי מונה הורדוס למלך?","options":[{"text":"בשנת 37 לפני הספירה","correct":true},{"text":"בשנת 73 לפני הספירה","correct":false},{"text":"בשנת 37 לספירה","correct":false},{"text":"בשנת 73 לספירה","correct":false}]},{"questionNumber":2,"title":"כיצד כונה הורדוס?","options":[{"text":"הורדוס הגדול","correct":true},{"text":"המלך העליון הורדוס הראשון","correct":false},{"text":"מלך יהודה הראשון","correct":false},{"text":"הורדוס העליון","correct":false}]},{"questionNumber":3,"title":"לכבוד מי הקים הורדוס ערים ומקדשים בארץ ישראל?","options":[{"text":"לכבוד אוגוסטוס","correct":true},{"text":"לכבוד אנטיפטרוס","correct":false},{"text":"לכבוד אריסטובולוס השני","correct":false},{"text":"לכבוד הורקנוס השני","correct":false}]}]}]]>
+		 </Sample>-->
+		 		 <Sample title="content 1">
+			 <![CDATA[{"random":{"options":true,"numberOfQuestions":10,"questions":false},"common":{"backgroundImage":"","timer":true,"direction":"rtl","language":"hebrew","helpers":true},"questions":[{"questionNumber":1,"title":"שאלה 1 - 4 שאלות","options":[{"text":"1","correct":false},{"text":"1","correct":false},{"text":"1","correct":false},{"text":"1 נכון","correct":true}]},{"questionNumber":2,"title":"שאלה 2&nbsp;- 3 שאלות","options":[{"text":"2","correct":false},{"text":"2","correct":false},{"text":"2 נכון","correct":true}]},{"questionNumber":3,"title":"שאלה 3&nbsp;- 3 שאלות","options":[{"text":"3 נכון","correct":true},{"text":"3","correct":false},{"text":"3","correct":false}]},{"questionNumber":4,"title":"שאלה 4&nbsp;- 3 שאלות","options":[{"text":"4","correct":false},{"text":"4 נכון","correct":true},{"text":"4","correct":false}]},{"questionNumber":5,"title":"שאלה 5&nbsp;- 3 שאלות","options":[{"text":"5 נכון","correct":true},{"text":"5","correct":false},{"text":"5","correct":false}]},{"questionNumber":6,"title":"שאלה 6&nbsp;- 4 שאלות","options":[{"text":"6 נכון","correct":true},{"text":"6","correct":false},{"text":"6","correct":false},{"text":"6","correct":false}]},{"questionNumber":7,"title":"שאלה 7&nbsp;- 3 שאלות","options":[{"text":"7 נכון","correct":true},{"text":"7","correct":false},{"text":"7","correct":false}]},{"questionNumber":8,"title":"שאלה 8&nbsp;- 4 שאלות","options":[{"text":"8 נכון","correct":true},{"text":"8","correct":false},{"text":"8","correct":false},{"text":"8","correct":false}]},{"questionNumber":9,"title":"שאלה 9&nbsp;- 3 שאלות","options":[{"text":"9","correct":false},{"text":"9 נכון","correct":true},{"text":"9","correct":false}]},{"questionNumber":10,"title":"שאלה 10&nbsp;- 3 שאלות","options":[{"text":"10 נכון","correct":true},{"text":"10","correct":false},{"text":"10","correct":false}]},{"questionNumber":11,"title":"שאלה 11&nbsp;- 4 שאלות","options":[{"text":"11 - נכון","correct":true},{"text":"11","correct":false},{"text":"11","correct":false},{"text":"11","correct":false}]},{"questionNumber":12,"title":"שאלה 12&nbsp;- 3 שאלות","options":[{"text":"12","correct":false},{"text":"12 נכון","correct":true},{"text":"12","correct":false}]}]}]]>
+		 </Sample>
+		 <Sample title="content 3">
+			 <![CDATA[{
+    "random": {
+        "options": false,
+        "numberOfQuestions": 10,
+        "questions": false
+    },
+    "common": {
+        "backgroundImage": "",
+        "timer": false,
+        "scoreInterval": 10,
+        "direction": "rtl",
+				"language":"hebrew",
+        "helpers": false
+    },
+    "questions": [
+        {
+            "questionNumber": 1,
+            "title": "מתי מונה הורדוס למלך?",
+            "options": [
+                {
+                    "text": "בשנת 37<br> לפני הספירה",
+                    "correct": true
+                },
+                {
+                    "text": "בשנת 73<div> לפני הספירה</div>",
+                    "correct": false
+                },
+                {
+                    "text": "בשנת 37 לספירה",
+                    "correct": false
+                },
+                {
+                    "text": "בשנת 73 לספירה",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 2,
+            "title": "כיצד כונה הורדוס?",
+            "options": [
+                {
+                    "text": "הורדוס הגדול",
+                    "correct": true
+                },
+                {
+                    "text": "המלך העליון הורדוס הראשון",
+                    "correct": false
+                },
+                {
+                    "text": "מלך יהודה הראשון",
+                    "correct": false
+                },
+                {
+                    "text": "הורדוס העליון",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 3,
+            "title": "לכבוד מי הקים הורדוס ערים ומקדשים בארץ ישראל?",
+            "options": [
+                {
+                    "text": "לכבוד אוגוסטוס",
+                    "correct": true
+                },
+                {
+                    "text": "לכבוד אנטיפטרוס",
+                    "correct": false
+                },
+                {
+                    "text": "לכבוד אריסטובולוס השני",
+                    "correct": false
+                },
+                {
+                    "text": "לכבוד הורקנוס השני",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 4,
+            "title": "מה היה מפעל הבנייה המפואר ביותר של הורדוס?",
+            "options": [
+                {
+                    "text": "שיפוץ בית המקדש השני בירושלים",
+                    "correct": true
+                },
+                {
+                    "text": "בניית בית המקדש השני בירושלים",
+                    "correct": false
+                },
+                {
+                    "text": "בניית האמפיתאטרון בקיסריה",
+                    "correct": false
+                },
+                {
+                    "text": "בניית אמת המים בקיסריה",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 5,
+            "title": "היכן השתרעה ממלכתו של הורדוס בשיא כוחו?",
+            "options": [
+                {
+                    "text": "על פני כל ארץ ישראל",
+                    "correct": true
+                },
+                {
+                    "text": "על פני יהודה ושומרון",
+                    "correct": false
+                },
+                {
+                    "text": "על פני יהודה והגליל",
+                    "correct": false
+                },
+                {
+                    "text": "על פני ארץ ישראל וערי הלבנון",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 6,
+            "title": "איזה מבנה לא בנה הורדוס?",
+            "options": [
+                {
+                    "text": "את הקולוסיאום",
+                    "correct": true
+                },
+                {
+                    "text": "את המבצר במצדה",
+                    "correct": false
+                },
+                {
+                    "text": "את ההרודיון",
+                    "correct": false
+                },
+                {
+                    "text": "את האמפיתאטרון בקיסריה",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 7,
+            "title": "כיצד הגיבו היהודים להכתרתו של הורדוס למלך?",
+            "options": [
+                {
+                    "text": "רובם התנגדו",
+                    "correct": true
+                },
+                {
+                    "text": "רובם תמכו",
+                    "correct": false
+                },
+                {
+                    "text": "חצי תמכו וחצי התנגדו",
+                    "correct": false
+                },
+                {
+                    "text": "כולם התנגדו",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 8,
+            "title": "מי הייתה אחת מנשותיו של הורדוס?",
+            "options": [
+                {
+                    "text": "מרים החשמונאית",
+                    "correct": true
+                },
+                {
+                    "text": "שלומציון המלכה",
+                    "correct": false
+                },
+                {
+                    "text": "שלומית המלכה",
+                    "correct": false
+                },
+                {
+                    "text": "מרים הגלילית",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 9,
+            "title": "מי שלט בארץ ישראל לפני הורדוס?",
+            "options": [
+                {
+                    "text": "הרומאים",
+                    "correct": true
+                },
+                {
+                    "text": "הסלווקים",
+                    "correct": false
+                },
+                {
+                    "text": "החשמונאים",
+                    "correct": false
+                },
+                {
+                    "text": "האדומים",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 10,
+            "title": "מה היה תפקידו של הורדוס לפני שהוכתר למלך?",
+            "options": [
+                {
+                    "text": "מושל הגליל",
+                    "correct": true
+                },
+                {
+                    "text": "מושל יהודה",
+                    "correct": false
+                },
+                {
+                    "text": "מושל השומרון",
+                    "correct": false
+                },
+                {
+                    "text": "מושל ירושלים",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 11,
+            "title": "איזו תרבות הפיץ הורדוס בממלכתו?",
+            "options": [
+                {
+                    "text": "את התרבות הרומית",
+                    "correct": true
+                },
+                {
+                    "text": "את התרבות האדומית",
+                    "correct": false
+                },
+                {
+                    "text": "את התרבות השומרונית",
+                    "correct": false
+                },
+                {
+                    "text": "את התרבות היהודית",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 12,
+            "title": "איזו עיר חדשה הקים הורדוס בארץ ישראל?",
+            "options": [
+                {
+                    "text": "קיסריה",
+                    "correct": true
+                },
+                {
+                    "text": "בית שאן",
+                    "correct": false
+                },
+                {
+                    "text": "טבריה",
+                    "correct": false
+                },
+                {
+                    "text": "צור",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 13,
+            "title": "כיצד הוגדרה ממלכתו של הורדוס?",
+            "options": [
+                {
+                    "text": "ממלכה בחסות רומא",
+                    "correct": true
+                },
+                {
+                    "text": "ממלכה עצמאית",
+                    "correct": false
+                },
+                {
+                    "text": "פרובינקיה",
+                    "correct": false
+                },
+                {
+                    "text": "רפובליקה",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 14,
+            "title": "איזה פסל תלה הורדוס בפתח בית המקדש?",
+            "options": [
+                {
+                    "text": "נשר",
+                    "correct": true
+                },
+                {
+                    "text": "בז",
+                    "correct": false
+                },
+                {
+                    "text": "ינשוף",
+                    "correct": false
+                },
+                {
+                    "text": "נץ",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 15,
+            "title": "כיצד נקרא מקום קבורתו של הורדוס?",
+            "options": [
+                {
+                    "text": "הרודיון",
+                    "correct": true
+                },
+                {
+                    "text": "היפודרום",
+                    "correct": false
+                },
+                {
+                    "text": "מצדה",
+                    "correct": false
+                },
+                {
+                    "text": "אולימפוס",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 16,
+            "title": "מתי נפטר הורדוס?",
+            "options": [
+                {
+                    "text": "בשנת 4 לפני הספירה",
+                    "correct": true
+                },
+                {
+                    "text": "בשנת 4 לספירה",
+                    "correct": false
+                },
+                {
+                    "text": "בשנת 40 לפני הספירה",
+                    "correct": false
+                },
+                {
+                    "text": "בשנת 40 לספירה",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 17,
+            "title": "דגכ",
+            "options": [
+                {
+                    "text": "כל התשובות נכונות",
+                    "correct": true
+                },
+                {
+                    "text": "כי רצח רבים ממתנגדיו",
+                    "correct": false
+                },
+                {
+                    "text": "כי רצח את אשתו ואת בני משפחתה",
+                    "correct": false
+                },
+                {
+                    "text": "כי רצח כמה מילדיו",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 18,
+            "title": "מה עלה בגורל ממלכתו של הורדוס אחרי מותו?",
+            "options": [
+                {
+                    "text": "היא הועברה בירושה לשלושה מבניו",
+                    "correct": true
+                },
+                {
+                    "text": "היא הועברה בירושה לבנו הבכור",
+                    "correct": false
+                },
+                {
+                    "text": "היא הועברה בירושה לבנו הצעיר",
+                    "correct": false
+                },
+                {
+                    "text": "היא הועברה בירושה לאחיו הצעיר",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 19,
+            "title": "בזכות איזה מעשה זוכרים כיום את הורדוס?",
+            "options": [
+                {
+                    "text": "בזכות המבנים שהקים",
+                    "correct": true
+                },
+                {
+                    "text": "בזכות כיבוש ירושלים",
+                    "correct": false
+                },
+                {
+                    "text": "בזכות המרד ברומאים",
+                    "correct": false
+                },
+                {
+                    "text": "בזכות המאבק במתייוונים",
+                    "correct": false
+                }
+            ]
+        }
+    ]
+}]]>
+    </Sample>
+		 <Sample title="content 2">
+			 <![CDATA[{
+    "random": {
+        "options": false,
+        "numberOfQuestions": 10,
+        "questions": false
+    },
+    "common": {
+        "backgroundImage": "",
+        "timer": true,
+        "scoreInterval": 10,
+        "direction": "rtl",
+				"language":"arabic",
+        "helpers": true
+    },
+    "questions": [
+        {
+            "questionNumber": 1,
+            "title": "מתי מונה הורדוס למלך?",
+            "options": [
+                {
+                    "text": "בשנת 37 לפני הספירה",
+                    "correct": true
+                },
+                {
+                    "text": "בשנת 73 לפני הספירה",
+                    "correct": false
+                },
+                {
+                    "text": "בשנת 37 לספירה",
+                    "correct": false
+                },
+                {
+                    "text": "בשנת 73 לספירה",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 2,
+            "title": "כיצד כונה הורדוס?",
+            "options": [
+                {
+                    "text": "הורדוס הגדול",
+                    "correct": true
+                },
+                {
+                    "text": "המלך העליון הורדוס הראשון",
+                    "correct": false
+                },
+                {
+                    "text": "מלך יהודה הראשון",
+                    "correct": false
+                },
+                {
+                    "text": "הורדוס העליון",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 3,
+            "title": "לכבוד מי הקים הורדוס ערים ומקדשים בארץ ישראל?",
+            "options": [
+                {
+                    "text": "לכבוד אוגוסטוס",
+                    "correct": true
+                },
+                {
+                    "text": "לכבוד אנטיפטרוס",
+                    "correct": false
+                },
+                {
+                    "text": "לכבוד אריסטובולוס השני",
+                    "correct": false
+                },
+                {
+                    "text": "לכבוד הורקנוס השני",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 4,
+            "title": "מה היה מפעל הבנייה המפואר ביותר של הורדוס?",
+            "options": [
+                {
+                    "text": "שיפוץ בית המקדש השני בירושלים",
+                    "correct": true
+                },
+                {
+                    "text": "בניית בית המקדש השני בירושלים",
+                    "correct": false
+                },
+                {
+                    "text": "בניית האמפיתאטרון בקיסריה",
+                    "correct": false
+                },
+                {
+                    "text": "בניית אמת המים בקיסריה",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 5,
+            "title": "היכן השתרעה ממלכתו של הורדוס בשיא כוחו?",
+            "options": [
+                {
+                    "text": "על פני כל ארץ ישראל",
+                    "correct": true
+                },
+                {
+                    "text": "על פני יהודה ושומרון",
+                    "correct": false
+                },
+                {
+                    "text": "על פני יהודה והגליל",
+                    "correct": false
+                },
+                {
+                    "text": "על פני ארץ ישראל וערי הלבנון",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 6,
+            "title": "איזה מבנה לא בנה הורדוס?",
+            "options": [
+                {
+                    "text": "את הקולוסיאום",
+                    "correct": true
+                },
+                {
+                    "text": "את המבצר במצדה",
+                    "correct": false
+                },
+                {
+                    "text": "את ההרודיון",
+                    "correct": false
+                },
+                {
+                    "text": "את האמפיתאטרון בקיסריה",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 7,
+            "title": "כיצד הגיבו היהודים להכתרתו של הורדוס למלך?",
+            "options": [
+                {
+                    "text": "רובם התנגדו",
+                    "correct": true
+                },
+                {
+                    "text": "רובם תמכו",
+                    "correct": false
+                },
+                {
+                    "text": "חצי תמכו וחצי התנגדו",
+                    "correct": false
+                },
+                {
+                    "text": "כולם התנגדו",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 8,
+            "title": "מי הייתה אחת מנשותיו של הורדוס?",
+            "options": [
+                {
+                    "text": "מרים החשמונאית",
+                    "correct": true
+                },
+                {
+                    "text": "שלומציון המלכה",
+                    "correct": false
+                },
+                {
+                    "text": "שלומית המלכה",
+                    "correct": false
+                },
+                {
+                    "text": "מרים הגלילית",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 9,
+            "title": "מי שלט בארץ ישראל לפני הורדוס?",
+            "options": [
+                {
+                    "text": "הרומאים",
+                    "correct": true
+                },
+                {
+                    "text": "הסלווקים",
+                    "correct": false
+                },
+                {
+                    "text": "החשמונאים",
+                    "correct": false
+                },
+                {
+                    "text": "האדומים",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 10,
+            "title": "מה היה תפקידו של הורדוס לפני שהוכתר למלך?",
+            "options": [
+                {
+                    "text": "מושל הגליל",
+                    "correct": true
+                },
+                {
+                    "text": "מושל יהודה",
+                    "correct": false
+                },
+                {
+                    "text": "מושל השומרון",
+                    "correct": false
+                },
+                {
+                    "text": "מושל ירושלים",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 11,
+            "title": "איזו תרבות הפיץ הורדוס בממלכתו?",
+            "options": [
+                {
+                    "text": "את התרבות הרומית",
+                    "correct": true
+                },
+                {
+                    "text": "את התרבות האדומית",
+                    "correct": false
+                },
+                {
+                    "text": "את התרבות השומרונית",
+                    "correct": false
+                },
+                {
+                    "text": "את התרבות היהודית",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 12,
+            "title": "איזו עיר חדשה הקים הורדוס בארץ ישראל?",
+            "options": [
+                {
+                    "text": "קיסריה",
+                    "correct": true
+                },
+                {
+                    "text": "בית שאן",
+                    "correct": false
+                },
+                {
+                    "text": "טבריה",
+                    "correct": false
+                },
+                {
+                    "text": "צור",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 13,
+            "title": "כיצד הוגדרה ממלכתו של הורדוס?",
+            "options": [
+                {
+                    "text": "ממלכה בחסות רומא",
+                    "correct": true
+                },
+                {
+                    "text": "ממלכה עצמאית",
+                    "correct": false
+                },
+                {
+                    "text": "פרובינקיה",
+                    "correct": false
+                },
+                {
+                    "text": "רפובליקה",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 14,
+            "title": "איזה פסל תלה הורדוס בפתח בית המקדש?",
+            "options": [
+                {
+                    "text": "נשר",
+                    "correct": true
+                },
+                {
+                    "text": "בז",
+                    "correct": false
+                },
+                {
+                    "text": "ינשוף",
+                    "correct": false
+                },
+                {
+                    "text": "נץ",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 15,
+            "title": "כיצד נקרא מקום קבורתו של הורדוס?",
+            "options": [
+                {
+                    "text": "הרודיון",
+                    "correct": true
+                },
+                {
+                    "text": "היפודרום",
+                    "correct": false
+                },
+                {
+                    "text": "מצדה",
+                    "correct": false
+                },
+                {
+                    "text": "אולימפוס",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 16,
+            "title": "מתי נפטר הורדוס?",
+            "options": [
+                {
+                    "text": "בשנת 4 לפני הספירה",
+                    "correct": true
+                },
+                {
+                    "text": "בשנת 4 לספירה",
+                    "correct": false
+                },
+                {
+                    "text": "בשנת 40 לפני הספירה",
+                    "correct": false
+                },
+                {
+                    "text": "בשנת 40 לספירה",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 17,
+            "title": "דגכ",
+            "options": [
+                {
+                    "text": "כל התשובות נכונות",
+                    "correct": true
+                },
+                {
+                    "text": "כי רצח רבים ממתנגדיו",
+                    "correct": false
+                },
+                {
+                    "text": "כי רצח את אשתו ואת בני משפחתה",
+                    "correct": false
+                },
+                {
+                    "text": "כי רצח כמה מילדיו",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 18,
+            "title": "מה עלה בגורל ממלכתו של הורדוס אחרי מותו?",
+            "options": [
+                {
+                    "text": "היא הועברה בירושה לשלושה מבניו",
+                    "correct": true
+                },
+                {
+                    "text": "היא הועברה בירושה לבנו הבכור",
+                    "correct": false
+                },
+                {
+                    "text": "היא הועברה בירושה לבנו הצעיר",
+                    "correct": false
+                },
+                {
+                    "text": "היא הועברה בירושה לאחיו הצעיר",
+                    "correct": false
+                }
+            ]
+        },
+        {
+            "questionNumber": 19,
+            "title": "בזכות איזה מעשה זוכרים כיום את הורדוס?",
+            "options": [
+                {
+                    "text": "בזכות המבנים שהקים",
+                    "correct": true
+                },
+                {
+                    "text": "בזכות כיבוש ירושלים",
+                    "correct": false
+                },
+                {
+                    "text": "בזכות המרד ברומאים",
+                    "correct": false
+                },
+                {
+                    "text": "בזכות המאבק במתייוונים",
+                    "correct": false
+                }
+            ]
+        }
+    ]
+}]]>
+		 </Sample>
+
+
+
+
+	 </Preset>
+  </App>
+</Apps>

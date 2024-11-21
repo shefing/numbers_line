@@ -1,0 +1,260 @@
+﻿<!DOCTYPE html>
+<html lang="he">
+<head>
+  <title>Dot2Dot template</title>
+
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width" />
+  <meta charset="utf-8">
+
+  <link rel="prefetch" type="application/l10n" href="localization/locales.ini" />
+
+  <link src="//cdn.cet.ac.il/fonts/Abraham/stylesheet.css" rel="stylesheet" type="text/css" />
+
+  <link href="../../../lib/fonts/Alef-Webfont-v2/alef-webfont.css" rel="stylesheet" />
+
+  <link href='https://fonts.googleapis.com/css?family=Arimo:400,400italic,700,700italic&subset=latin,hebrew' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Lateef' rel='stylesheet' type='text/css'>
+
+  <!--<link href="../../../lib/fonts/Lateef-Webfont/stylesheet.css" rel="stylesheet" />-->
+
+  <link href="../content/wizard.css" rel="stylesheet" type="text/css" />
+  <link href="../content/colorbox.css" rel="stylesheet" />
+
+  <script type="text/javascript" src="../../../lib/js/external/jquery/2.0.3/jquery-2.0.3.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../../../lib/js/external/soundmanager/soundmanager2.js"></script>
+
+  <script type="text/javascript" src="../../../lib/js/external/jscolor-1.4.2/jscolor/jscolor.js"></script>
+
+  <script src="//cdn.cet.ac.il/libs/cet.content/1/client.min.js"></script>
+  <script src="//cdn.cet.ac.il/libs/cet.content.designtime/1/client.min.js"></script>
+  <script type="text/javascript" src="../../../lib/js/internal/plugins/cet.math.helpers.js"></script>
+
+  <script src="../js/jquery.colorbox-min.js"></script>
+
+  <script type="text/javascript" src="../../../lib/js/external/webL10n/l10n.js"></script>
+
+  <script src="../js/wizard.js"></script>
+
+  <script>
+    soundManager.setup({
+      preferFlash: false,
+      debugMode: false,
+      onready: function () {
+
+      }
+    })
+  </script>
+
+</head>
+<body>
+  <div class="wizard-wrapper">
+
+    <ol class="fields">
+
+
+      <li class="field">
+        <div class="field-key">
+          <label data-l10n-id="textSettings:">הגדרות טקסט:</label>
+        </div>
+        <div class="field-value">
+          <div class="font-wrapper">
+            <select id="choosefontfamily" name="choosefontfamily">
+              <option value="1">Arial</option>
+              <option value="11">Arimo</option>
+              <option value="12">Abraham</option>
+              <option value="10">Alef</option>
+              <!--<option value="2">Comic Sams MS</option>-->
+              <option value="3">Courier New</option>
+              <!--<option value="9">David</option>-->
+              <option value="4">Helvetica</option>
+              <option value="5">Tahoma</option>
+              <option value="6">Times New Roman</option>
+              <option value="7">Traditional Arabic</option>
+              <option value="8">Lateef</option>
+            </select>
+            <select id="choosefontsize" name="choosefontsize">
+              <option value="10">10px</option>
+              <option value="12">12px</option>
+              <option value="14">14px</option>
+              <option value="16">16px</option>
+              <option value="18">18px</option>
+              <option value="20">20px</option>
+              <option value="22">22px</option>
+              <option value="24">24px</option>
+              <option value="26">26px</option>
+              <option value="28">28px</option>
+              <option value="30">30px</option>
+              <option value="32">32px</option>
+              <option value="34">34px</option>
+              <option value="36">36px</option>
+              <option value="72">72px</option>
+            </select>
+
+            <span class="seperator"></span>
+
+            <input type="radio" name="radDirection" id="directionRTL" value="rtl" checked="checked" />
+            <label for="directionRTL"></label>
+
+            <input type="radio" name="radDirection" id="directionLTR" value="ltr" />
+            <label for="directionLTR"></label>
+
+            <span class="seperator"></span>
+
+            <input type="radio" name="radAlign" id="alignRight" value="right" />
+            <label for="alignRight"></label>
+
+            <input type="radio" name="radAlign" id="alignCenter" value="center" checked="checked" />
+            <label for="alignCenter"></label>
+
+            <input type="radio" name="radAlign" id="alignLeft" value="left" />
+            <label for="alignLeft"></label>
+
+            <span class="seperator"></span>
+
+            <input type="checkbox" name="checkBold" id="checkboxBold" value="bold" />
+            <label for="checkboxBold"></label>
+
+          </div>
+        </div>
+      </li>
+
+
+      <li class="field">
+        <div class="field-key">
+          <label data-l10n-id="background:">רקע:</label>
+        </div>
+        <div class="field-value">
+          <div class="background-color-wrapper">
+
+            <span class="color-title-text" data-l10n-id="color">צבע</span>
+
+            <span class="color-picker">
+              <input id="myColorPicker" value="dde3e3" maxlength="6">
+            </span>
+
+            <span class="or-title-text" data-l10n-id="or">או</span>
+
+            <div class="image-field-table" id="bgImageFieldWrapper">
+
+              <div class="add-picture">
+                <form id="" class="file-upload-form" enctype="multipart/form-data" method="post" action="//api.assets.cet.ac.il/filesUpload.ashx?maxfilesize=524326&callbackid=image" target="iFrame_fileUpload">
+                  <div class="hw-add-picture" data-l10n-id="image">
+                    <input name="file" type="file" accept="image/*" data-side="' + memberSide + '" />
+                    תמונה
+                  </div>
+
+                  <div class="bg-image-delete" data-l10n-id="deleteBackgroundImageBtn" title="הסר תמונת רקע"></div>
+
+                  <div class="loading" style="visibility: hidden;">
+                    <img src="../content/img/loading.gif" />
+                  </div>
+                </form>
+              </div>
+              <div class="picture-self-wrapper">
+                <div class="picture-self"></div>
+              </div>
+            </div>
+
+            <div class="transparency-wrapper">
+              <span data-l10n-id="transparent">שקוף</span><input id="transparencyBg" type="range" value="100" min="0" max="100" step="10" /><span data-l10n-id="opaque">אטום</span>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <li class="field">
+        <div class="field-key">
+          <label data-l10n-id="pairsToShow:">כמות הצמדים להצגה:</label>
+        </div>
+        <div class="field-value">
+          <select id="selectPairsNum">
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5" selected="selected">5</option>
+          </select>
+
+        </div>
+      </li>
+
+      <li class="field">
+        <div class="field-key">
+          <label data-l10n-id="pairSize:">גודל הצמדים:</label>
+        </div>
+        <div class="field-value">
+          <select id="selectPairSize">
+            <option value="small" data-l10n-id="small">קטן</option>
+            <option value="medium" data-l10n-id="medium">בינוני</option>
+            <option value="large" selected="selected" data-l10n-id="large">גדול</option>
+          </select>
+
+        </div>
+      </li>
+
+      <li class="field">
+        <div class="field-key">
+          <label data-l10n-id="pairs:">צמדים :</label>
+        </div>
+
+        <div class="field-value">
+          <div class="pairs"></div>
+
+
+          <div id="add-element">
+            <span class="ow-add-text" data-l10n-id="addPair">הוספת צמד</span><span class="sprite-ow-add ui-sprite"></span>
+          </div>
+        </div>
+
+        <iframe name="iFrame_fileUpload"></iframe>
+
+      </li>
+
+
+    </ol>
+  </div>
+
+  <div style='display: none'>
+    <div id="alert-dialog" class="dialog">
+      <div class="body">
+      </div>
+      <div class="actions">
+        <div class="main">
+          <div class="ht-ok" data-l10n-id="ok">אישור</div>
+          <div class="ht-cancel" style="display: none;" data-l10n-id="cancel">ביטול</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script>
+    $('body').hide();
+    window.addEventListener('localized', function () {
+      $('body').show();
+    }, false);
+
+
+    var init = function () {
+      var language = cet.content.DesignTime.language;
+      document.webL10n = initWebL10n(window, document, undefined, language);
+      document.webL10n.ready(function () {
+        $('html').attr('lang', language);
+        $('body').attr('data-dir', document.webL10n.getDirection());
+
+        var dtd = new dotToDot();
+        dtd.init();
+        dtd.registerEvents();
+      });
+    };
+
+    if (cet.content.UI.clientReady()) {
+      init();
+    }
+    else {
+      cet.content.on('clientready', init);
+    }
+  </script>
+</body>
+
+</html>

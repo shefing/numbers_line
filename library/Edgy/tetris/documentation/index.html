@@ -1,0 +1,850 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+ <title>Edge animate - blink</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="stylesheet" href="site.css" />
+ <script src="js/jquery-1.10.2.min.js"></script>
+ <script src="js/site.js"></script>
+</head>
+
+<body>
+
+ <!-- Masthead
+================================================== -->
+ <header>
+  <div class="text">
+   <h1>Edge animate - blink</h1>
+   <p>
+    <h3>All you need for creating adobe edge blink activity.</h3>
+   </p>
+  </div>
+ </header>
+ <div class="main clearfix">
+  <nav>
+   <ul>
+    <li><a id="nav-dictionary" href="#dictionary">1. dictionary</a></li>
+    <li><a id="nav-embed" href="#embed">2. embed</a></li>
+    <li><a id="nav-content" href="#content">3. content</a></li>
+    <li><a id="nav-faq" href="#faq">4. faq</a></li>
+    <li><a id="nav-download" href="#download">5. download</a></li>
+   </ul>
+  </nav>
+  <div class="content">
+   <div class="chapter edge-descriptions ">
+    <a id="dictionary"></a>
+    <h2>1. Dictionary</h2>
+
+  
+    <div class="edge-description">
+     <h3>option</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       option</li>
+      <li>
+       <label>css class: </label>
+       option</li>
+      <li>
+       <label>timeline labels:normal, hover, down</label>
+       none</li>
+      <li>
+       <label>edge type: symbol</label>
+       any</li>
+      <li>
+       <label>parent: </label>
+       Stage</li>
+      <li>
+       <label>mandatory: </label>
+       yes</li>
+     </ul>
+    </div>
+    
+    <div class="edge-description">
+     <h3>option image</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       option image</li>
+      <li>
+       <label>css class: </label>
+       image</li>
+      <li>
+       <label>timeline labels: </label>
+       none</li>
+      <li>
+       <label>edge type: </label>
+       any</li>
+      <li>
+       <label>parent: </label>
+       option</li>
+      <li>
+       <label>mandatory: </label>
+       no</li>
+     </ul>
+    </div>
+
+    <div class="edge-description">
+     <h3>option text</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       option text</li>
+      <li>
+       <label>css class: </label>
+       text</li>
+      <li>
+       <label>timeline labels: </label>
+       none</li>
+      <li>
+       <label>edge type: </label>
+       any</li>
+      <li>
+       <label>parent: </label>
+       option</li>
+      <li>
+       <label>mandatory: </label>
+       no</li>
+     </ul>
+    </div>
+
+    <div class="edge-description">
+     <h3>option sound</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       option sound</li>
+      <li>
+       <label>css class: </label>
+       sound</li>
+      <li>
+       <label>timeline labels: normal, hover, play </label>
+       none</li>
+      <li>
+       <label>edge type: </label>
+       symbol</li>
+      <li>
+       <label>parent: </label>
+       option</li>
+      <li>
+       <label>mandatory: </label>
+       no</li>
+     </ul>
+    </div>
+
+    <div class="edge-description">
+     <h3>blinkbox</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       selected option container</li>
+      <li>
+       <label>css class: </label>
+       blinkbox</li>
+
+      <li>
+       <label>timeline labels: </label>
+       normal, hover</li>
+      <li>
+       <label>edge type: </label>
+       symbol</li>
+      <li>
+       <label>parent: </label>
+       stage</li>
+      <li>
+       <label>mandatory: </label>
+       yes</li>
+     </ul>
+    </div>
+
+    <div class="edge-description">
+     <h3>correct answer feedback</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       correct answer feedback</li>
+      <li>
+       <label>css class: </label>
+       correct</li>
+
+      <li>
+       <label>timeline labels: </label>
+       none</li>
+      <li>
+       <label>edge type: </label>
+       symbol</li>
+      <li>
+       <label>parent: </label>
+       blinkbox</li>
+      <li>
+       <label>mandatory: </label>
+       yes</li>
+     </ul>
+    </div>
+  
+    <div class="edge-description">
+     <h3>correct answer feedback text</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       correct answer feedback text</li>
+      <li>
+       <label>css class: </label>
+       text</li>
+
+      <li>
+       <label>timeline labels: </label>
+       none</li>
+      <li>
+       <label>edge type: </label>
+       any</li>
+      <li>
+       <label>parent: </label>
+       correct answer feedback</li>
+      <li>
+       <label>mandatory: </label>
+       yes</li>
+     </ul>
+    </div>
+    
+    <div class="edge-description">
+     <h3>correct answer feedback image</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       correct answer feedback image</li>
+      <li>
+       <label>css class: </label>
+       image</li>
+
+      <li>
+       <label>timeline labels: </label>
+       none</li>
+      <li>
+       <label>edge type: </label>
+       image</li>
+      <li>
+       <label>parent: </label>
+       correct answer feedback</li>
+      <li>
+       <label>mandatory: </label>
+       no</li>
+     </ul>
+    </div>
+    
+    <div class="edge-description">
+     <h3>wrong answer feedback</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       wrong answer feedback</li>
+      <li>
+       <label>css class: </label>
+       error</li>
+
+      <li>
+       <label>timeline labels: </label>
+       none</li>
+      <li>
+       <label>edge type: </label>
+       any</li>
+      <li>
+       <label>parent: </label>
+       blinkbox</li>
+      <li>
+       <label>mandatory: </label>
+       yes</li>
+     </ul>
+    </div>
+   
+    <div class="edge-description">
+     <h3>wrong answer feedback text</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       wrong answer feedback text</li>
+      <li>
+       <label>css class: </label>
+       text</li>
+
+      <li>
+       <label>timeline labels: </label>
+       none</li>
+      <li>
+       <label>edge type: </label>
+       any</li>
+      <li>
+       <label>parent: </label>
+       wrong answer feedback</li>
+      <li>
+       <label>mandatory: </label>
+       yes</li>
+     </ul>
+    </div>
+
+    <div class="edge-description">
+     <h3>wrong answer feedback image</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       wrong answer feedback image</li>
+      <li>
+       <label>css class: </label>
+       image</li>
+
+      <li>
+       <label>timeline labels: </label>
+       none</li>
+      <li>
+       <label>edge type: </label>
+       image</li>
+      <li>
+       <label>parent: </label>
+       wrong answer feedback</li>
+      <li>
+       <label>mandatory: </label>
+       no</li>
+     </ul>
+    </div>
+   
+    <div class="edge-description">
+     <h3>question</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       the current question</li>
+      <li>
+       <label>css class: </label>
+       title</li>
+
+      <li>
+       <label>timeline labels: </label>
+       none</li>
+      <li>
+       <label>edge type: </label>
+       symbol</li>
+      <li>
+       <label>parent: </label>
+       basket</li>
+      <li>
+       <label>mandatory: </label>
+       yes</li>
+     </ul>
+    </div>
+   
+    <div class="edge-description">
+     <h3>question text</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       questions' text</li>
+      <li>
+       <label>css class: </label>
+       text</li>
+
+      <li>
+       <label>timeline labels: </label>
+       none</li>
+      <li>
+       <label>edge type: </label>
+       any</li>
+      <li>
+       <label>parent: </label>
+       title</li>
+      <li>
+       <label>mandatory: </label>
+       no</li>
+     </ul>
+    </div>
+    
+    <div class="edge-description">
+     <h3>question sound</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       questions' sound</li>
+      <li>
+       <label>css class: </label>
+       sound</li>
+
+      <li>
+       <label>timeline labels: </label>
+       normal, hover, play</li>
+      <li>
+       <label>edge type: </label>
+       symbol</li>
+      <li>
+       <label>parent: </label>
+       title</li>
+      <li>
+       <label>mandatory: </label>
+       no</li>
+     </ul>
+    </div>
+   
+    <div class="edge-description">
+     <h3>question image</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       questions' image</li>
+      <li>
+       <label>css class: </label>
+       image</li>
+
+      <li>
+       <label>timeline labels: </label>
+       none</li>
+      <li>
+       <label>edge type: </label>
+       any</li>
+      <li>
+       <label>parent: </label>
+       title</li>
+      <li>
+       <label>mandatory: </label>
+       no</li>
+     </ul>
+    </div>
+    
+    <div class="edge-description">
+     <h3>question hint</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       questions' hint</li>
+      <li>
+       <label>css class: </label>
+       hint</li>
+
+      <li>
+       <label>timeline labels: </label>
+       none</li>
+      <li>
+       <label>edge type: </label>
+       symbol</li>
+      <li>
+       <label>parent: </label>
+       title</li>
+      <li>
+       <label>mandatory: </label>
+       no</li>
+     </ul>
+    </div>
+    
+    <div class="edge-description">
+     <h3>question hint dialog</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       questions' hint dialog</li>
+      <li>
+       <label>css class: </label>
+       dialog</li>
+
+      <li>
+       <label>timeline labels: </label>
+       none</li>
+      <li>
+       <label>edge type: </label>
+       symbol</li>
+      <li>
+       <label>parent: </label>
+       title</li>
+      <li>
+       <label>mandatory: </label>
+       no</li>
+     </ul>
+    </div>
+
+    <div class="edge-description">
+     <h3>question hint image</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       questions' hint dialog image</li>
+      <li>
+       <label>css class: </label>
+       image</li>
+
+      <li>
+       <label>timeline labels: </label>
+       none</li>
+      <li>
+       <label>edge type: </label>
+       symbol</li>
+      <li>
+       <label>parent: </label>
+       hint-dialog</li>
+      <li>
+       <label>mandatory: </label>
+       no</li>
+     </ul>
+    </div>
+    
+    <div class="edge-description">
+     <h3>question hint close button</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       questions' hint dialog close button</li>
+      <li>
+       <label>css class: </label>
+       button-close</li>
+
+      <li>
+       <label>timeline labels: </label>
+       none</li>
+      <li>
+       <label>edge type: </label>
+       symbol</li>
+      <li>
+       <label>parent: </label>
+       hint-dialog</li>
+      <li>
+       <label>mandatory: </label>
+       no</li>
+     </ul>
+    </div>
+
+    <div class="edge-description">
+     <h3>lifes</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       lifes</li>
+      <li>
+       <label>css class: </label>
+       life</li>
+      <li>
+       <label>timeline labels: </label>
+       none</li>
+      <li>
+       <label>edge type: </label>
+       symbol</li>
+      <li>
+       <label>parent: </label>
+       stage</li>
+      <li>
+       <label>mandatory: </label>
+       yes</li>
+     </ul>
+    </div>
+    
+    <div class="edge-description">
+     <h3>life-alive</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       life alive symbol</li>
+      <li>
+       <label>css class: </label>
+       alive</li>
+      <li>
+       <label>timeline labels: </label>
+       none</li>
+      <li>
+       <label>edge type: </label>
+       symbol</li>
+      <li>
+       <label>parent: </label>
+       life</li>
+      <li>
+       <label>mandatory: </label>
+       yes</li>
+     </ul>
+    </div>
+
+    <div class="edge-description">
+     <h3>life-dead</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       life dead symbol</li>
+      <li>
+       <label>css class: </label>
+       dead</li>
+      <li>
+       <label>timeline labels: </label>
+       none</li>
+      <li>
+       <label>edge type: </label>
+       symbol</li>
+      <li>
+       <label>parent: </label>
+       life</li>
+      <li>
+       <label>mandatory: </label>
+       yes</li>
+     </ul>
+    </div>
+
+    <div class="edge-description">
+     <h3>button-check</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       button-check</li>
+      <li>
+       <label>css class: </label>
+       button-check</li>
+      <li>
+       <label>timeline labels: </label>
+       normal, hover, down</li>
+      <li>
+       <label>edge type: </label>
+       symbol</li>
+      <li>
+       <label>parent: </label>
+       stage</li>
+      <li>
+       <label>mandatory: </label>
+       yes</li>
+     </ul>
+    </div>
+
+    <div class="edge-description">
+     <h3>button-restart</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       button-check</li>
+      <li>
+       <label>css class: </label>
+       button-check</li>
+      <li>
+       <label>timeline labels: </label>
+       normal, hover, down</li>
+      <li>
+       <label>edge type: </label>
+       symbol</li>
+      <li>
+       <label>parent: </label>
+       stage</li>
+      <li>
+       <label>mandatory: </label>
+       yes</li>
+     </ul>
+    </div>
+
+    <div class="edge-description">
+     <h3>final feedback</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       final feedback</li>
+      <li>
+       <label>css class: </label>
+       final-feedback</li>
+      <li>
+       <label>timeline labels: </label>
+       any</li>
+      <li>
+       <label>edge type: </label>
+       symbol</li>
+      <li>
+       <label>parent: </label>
+       stage</li>
+      <li>
+       <label>mandatory: </label>
+       no</li>
+     </ul>
+    </div>
+   
+    <div class="edge-description">
+     <h3>final feedback success</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       final feedback success </li>
+      <li>
+       <label>css class: </label>
+       final-feedback-success</li>
+      <li>
+       <label>timeline labels: </label>
+       any</li>
+      <li>
+       <label>edge type: </label>
+       symbol</li>
+      <li>
+       <label>parent: </label>
+       final-feedback</li>
+      <li>
+       <label>mandatory: </label>
+       no</li>
+     </ul>
+    </div>
+
+    <div class="edge-description">
+     <h3>final feedback failure</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       final feedback failure </li>
+      <li>
+       <label>css class: </label>
+       final-feedback-failure</li>
+      <li>
+       <label>timeline labels: </label>
+       any</li>
+      <li>
+       <label>edge type: </label>
+       symbol</li>
+      <li>
+       <label>parent: </label>
+       final-feedback</li>
+      <li>
+       <label>mandatory: </label>
+       no</li>
+     </ul>
+    </div>
+        
+    <div class="edge-description">
+     <h3>button-feedback-close</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       button-feedback-close</li>
+      <li>
+       <label>css class: </label>
+       button-feedback-close</li>
+      <li>
+       <label>timeline labels: </label>
+       any</li>
+      <li>
+       <label>edge type: </label>
+       any</li>
+      <li>
+       <label>parent: </label>
+       final-feedback</li>
+      <li>
+       <label>mandatory: </label>
+       no</li>
+     </ul>
+    </div>
+
+    <div class="edge-description">
+     <h3>progress bar</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       progress bar </li>
+      <li>
+       <label>css class: </label>
+       progress</li>
+      <li>
+       <label>timeline labels: </label>
+       progress1, progress2, etc...</li>
+      <li>
+       <label>edge type: </label>
+       symbol</li>
+      <li>
+       <label>parent: </label>
+       Stage</li>
+      <li>
+       <label>mandatory: </label>
+       no</li>
+     </ul>
+    </div>
+
+    <div class="edge-description">
+     <h3>instructions button</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       instructions button </li>
+      <li>
+       <label>css class: </label>
+       button-instructions </li>
+      <li>
+       <label>timeline labels: </label>
+       normal, hover, down</li>
+      <li>
+       <label>edge type: </label>
+       symbol</li>
+      <li>
+       <label>parent: </label>
+       Stage</li>
+      <li>
+       <label>mandatory: </label>
+       no</li>
+     </ul>
+    </div>
+    
+    <div style="clear: both"></div>
+
+
+   </div>
+   <div class="chapter embed">
+    <a id="embed"></a>
+    <h2>2. Embed</h2>
+    <div class="code">
+     <h5>code</h5>
+     <div class="code-snippet">
+
+      <pre>
+cet = window.cet; cet = cet || {}; cet.content = cet.content || {}; cet.content.manualClientLoadedTrigger = true;
+yepnope(
+{
+	load: [
+	'lib/edgy.css',
+	'//cdn.cet.ac.il/libs/cet.content/1/client.min.js',
+	'//cdn.cet.ac.il/libs/cet.content.lms/1/client.min.js',
+	'lib/edgy.blink.min.js',
+
+	],
+});</pre>
+     </div>
+    </div>
+    <div class="image-preview">
+     <h5>open edge animate code dialog(Ctrl+E), enter the code under 'stage', see preview below</h5>
+     <a href="images/embed.png" class="image-embed" target="_blank">
+      <img style="height: 139px" src="images/embed.png" />
+     </a>
+    </div>
+   </div>
+   <div class="chapter content">
+    <a id="content"></a>
+    <h2>3. Content</h2>
+    <p>
+    
+  within the downloaded folder there is a file name content1.js which contains 2 types of data:
+  <pre>
+  1. questions: title, options, hint, etc...
+  2. conguration data: 
+     - number of questions 
+     - random flag
+     - feedback appearance flag 
+     - welcome sound
+     - instructions sound
+    </pre>        
+    <span>after editing content1.js paste its content <a href="http://jsonlint.com/" target="_blank">here</a> for format avalidation</span>
+     </p>
+
+   </div>
+   <div class="chapter FAQ">
+    <a id="faq"></a>
+    <h2>4. FAQ - frequently asked questions</h2>
+    <p>
+    <ul>
+     <li>for playing sound on custom edge events, use: cet.Audio.play('soundpath')</li>
+     <li>page sould be saved as index.htm (not html...)</li>
+    </ul>
+
+     </p>
+
+   </div>
+   <div class="chapter">
+    <a id="download"></a>
+    <h2>5. Download</h2>
+    <div>
+     <button onclick="window.location = 'edgy.rar'">download</button>
+    </div>
+   </div>
+
+  </div>
+ </div>
+ <footer></footer>
+</body>
+</html>

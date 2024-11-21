@@ -1,0 +1,642 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="utf-8">
+ <title>Edge animate - drag & drop</title>
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <link rel="stylesheet" href="site.css" />
+ <script src="js/jquery-1.10.2.min.js"></script>
+ <script src="js/site.js"></script>
+</head>
+<body>
+ <!-- Masthead ================================================== -->
+ <header>
+  <div class="text">
+   <h1>Edge animate - drag & drop</h1>
+   <p>
+    <h3>All you need for creating adobe edge drag & drop activity. </h3>
+   </p>
+  </div>
+ </header>
+ <div class="main clearfix">
+  <nav>
+   <ul>
+    <li><a id="nav-dictionary" href="#dictionary">1. dictionary</a></li>
+    <li><a id="nav-embed" href="#embed">2. embed</a></li>
+    <li><a id="nav-content" href="#content">3. content</a></li>
+    <li><a id="nav-faq" href="#faq">4. faq</a></li>
+    <li><a id="nav-versions" href="#versions">5. versions</a></li>
+    <li><a id="nav-download" href="#download">6. download</a></li>
+   </ul>
+  </nav>
+  <div class="content">
+   <div class="chapter edge-descriptions ">
+    <a id="dictionary"></a>
+    <h2>1. Dictionary</h2>
+
+    <div class="edge-description">
+     <h3>storage</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       storage visible container
+      </li>
+      <li>
+       <label>css class: </label>
+       storage
+      </li>
+      <li>
+       <label>timeline labels: </label>
+       none
+      </li>
+      <li>
+       <label>edge type: </label>
+       symbol
+      </li>
+      <li>
+       <label>parent: </label>
+       stage
+      </li>
+      <li>
+       <label>mandatory: </label>
+       yes
+      </li>
+     </ul>
+    </div>
+
+    <div class="edge-description">
+     <h3>options</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       a child of storage, options actual container, part of it is invisible
+      </li>
+      <li>
+       <label>css class: </label>
+       options
+      </li>
+      <li>
+       <label>timeline labels: </label>
+       none
+      </li>
+      <li>
+       <label>edge type: </label>
+       symbol/group
+      </li>
+      <li>
+       <label>parent: </label>
+       storage
+      </li>
+      <li>
+       <label>mandatory: </label>
+       yes
+      </li>
+     </ul>
+    </div>
+
+    <div class="edge-description">
+     <h3>option</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       option
+      </li>
+      <li>
+       <label>css class: </label><br />
+       1. option <br />
+       2. unique id. starts with 'option-...'
+      </li>
+      <li>
+       <label>timeline labels: </label>
+       none
+      </li>
+      <li>
+       <label>edge type: </label>
+       any
+      </li>
+      <li>
+       <label>parent: </label>
+       options
+      </li>
+      <li>
+       <label>mandatory: </label>
+       yes
+      </li>
+     </ul>
+    </div>
+
+    <div class="edge-description">
+     <h3>option-image</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       option image
+      </li>
+      <li>
+       <label>css class: </label>
+       img
+      </li>
+      <li>
+       <label>timeline labels: </label>
+       none
+      </li>
+      <li>
+       <label>edge type: </label>
+       any
+      </li>
+      <li>
+       <label>parent: </label>
+       option
+      </li>
+      <li>
+       <label>mandatory: </label>
+       no
+      </li>
+     </ul>
+    </div>
+
+    <div class="edge-description">
+     <h3>option-text</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       option text
+      </li>
+      <li>
+       <label>css class: </label>
+       text
+      </li>
+      <li>
+       <label>timeline labels: </label>
+       none
+      </li>
+      <li>
+       <label>edge type: </label>
+       any
+      </li>
+      <li>
+       <label>parent: </label>
+       option
+      </li>
+      <li>
+       <label>mandatory: </label>
+       no
+      </li>
+     </ul>
+    </div>
+
+    <div class="edge-description">
+     <h3>option-sound</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       option sound
+      </li>
+      <li>
+       <label>css class: </label>
+       sound
+      </li>
+      <li>
+       <label>timeline labels: </label>
+       none
+      </li>
+      <li>
+       <label>edge type: </label>
+       any
+      </li>
+      <li>
+       <label>parent: </label>
+       option
+      </li>
+      <li>
+       <label>mandatory: </label>
+       no
+      </li>
+     </ul>
+    </div>
+
+    <div class="edge-description">
+     <h3>basket</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       the area where options are dropped
+      </li>
+      <li>
+       <label>css class: </label><br />
+       1. basket <br />
+       2. unique id for matching option. starts with 'basket-...'
+      </li>
+      <li>
+       <label>timeline labels: </label>
+       normal, hover
+      </li>
+      <li>
+       <label>edge type: </label>
+       symbol
+      </li>
+      <li>
+       <label>parent: </label>
+       stage
+      </li>
+      <li>
+       <label>mandatory: </label>
+       yes
+      </li>
+     </ul>
+    </div>
+
+    <div class="edge-description">
+     <h3>basket feedback correct</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       single basket feedback for success
+      </li>
+      <li>
+       <label>css class: </label>
+       feedback-correct
+      </li>
+
+      <li>
+       <label>timeline labels: </label>
+       none
+      </li>
+      <li>
+       <label>edge type: </label>
+       any
+      </li>
+      <li>
+       <label>parent: </label>
+       basket
+      </li>
+      <li>
+       <label>mandatory: </label>
+       yes
+      </li>
+     </ul>
+    </div>
+
+    <div class="edge-description">
+     <h3>basket feedback error</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       single basket feedback for error
+      </li>
+      <li>
+       <label>css class: </label>
+       feedback-error
+      </li>
+
+      <li>
+       <label>timeline labels: </label>
+       none
+      </li>
+      <li>
+       <label>edge type: </label>
+       any
+      </li>
+      <li>
+       <label>parent: </label>
+       basket
+      </li>
+      <li>
+       <label>mandatory: </label>
+       yes
+      </li>
+     </ul>
+    </div>
+
+    <div class="edge-description">
+     <h3>button-navigation-left</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       left navigation button
+      </li>
+      <li>
+       <label>css class: </label>
+       button-navigation-left
+      </li>
+      <li>
+       <label>timeline labels: </label>
+       normal, disable
+      </li>
+      <li>
+       <label>edge type: </label>
+       symbol
+      </li>
+      <li>
+       <label>parent: </label>
+       stage
+      </li>
+      <li>
+       <label>mandatory: </label>
+       yes
+      </li>
+     </ul>
+    </div>
+
+    <div class="edge-description">
+     <h3>button-navigation-right</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       right navigation button
+      </li>
+      <li>
+       <label>css class: </label>
+       button-navigation-right
+      </li>
+      <li>
+       <label>timeline labels: </label>
+       normal, disable
+      </li>
+      <li>
+       <label>edge type: </label>
+       symbol
+      </li>
+      <li>
+       <label>parent: </label>
+       stage
+      </li>
+      <li>
+       <label>mandatory: </label>
+       yes
+      </li>
+     </ul>
+    </div>
+
+    <div class="edge-description">
+     <h3>button-check</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       button-check
+      </li>
+      <li>
+       <label>css class: </label>
+       button-check
+      </li>
+      <li>
+       <label>timeline labels: </label>
+       normal, hover, down
+      </li>
+      <li>
+       <label>edge type: </label>
+       symbol
+      </li>
+      <li>
+       <label>parent: </label>
+       stage
+      </li>
+      <li>
+       <label>mandatory: </label>
+       yes
+      </li>
+     </ul>
+    </div>
+
+    <div class="edge-description">
+     <h3>button-restart</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       button-restart
+      </li>
+      <li>
+       <label>css class: </label>
+       button-restart
+      </li>
+      <li>
+       <label>timeline labels: </label>
+       normal, hover, down
+      </li>
+      <li>
+       <label>edge type: </label>
+       symbol
+      </li>
+      <li>
+       <label>parent: </label>
+       stage
+      </li>
+      <li>
+       <label>mandatory: </label>
+       yes
+      </li>
+     </ul>
+    </div>
+
+    <div class="edge-description">
+     <h3>final feedback</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       final feedback
+      </li>
+      <li>
+       <label>css class: </label>
+       final-feedback
+      </li>
+      <li>
+       <label>timeline labels: </label>
+       any
+      </li>
+      <li>
+       <label>edge type: </label>
+       symbol
+      </li>
+      <li>
+       <label>parent: </label>
+       stage
+      </li>
+      <li>
+       <label>mandatory: </label>
+       no
+      </li>
+     </ul>
+    </div>
+
+    <div class="edge-description">
+     <h3>final feedback success</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       final feedback success
+      </li>
+      <li>
+       <label>css class: </label>
+       final-feedback-success
+      </li>
+      <li>
+       <label>timeline labels: </label>
+       any
+      </li>
+      <li>
+       <label>edge type: </label>
+       symbol
+      </li>
+      <li>
+       <label>parent: </label>
+       final-feedback
+      </li>
+      <li>
+       <label>mandatory: </label>
+       no
+      </li>
+     </ul>
+    </div>
+
+    <div class="edge-description">
+     <h3>button-feedback-close</h3>
+     <ul>
+      <li>
+       <label>description: </label>
+       button-feedback-close
+      </li>
+      <li>
+       <label>css class: </label>
+       button-feedback-close
+      </li>
+      <li>
+       <label>timeline labels: </label>
+       any
+      </li>
+      <li>
+       <label>edge type: </label>
+       any
+      </li>
+      <li>
+       <label>parent: </label>
+       final-feedback
+      </li>
+      <li>
+       <label>mandatory: </label>
+       no
+      </li>
+     </ul>
+    </div>
+
+    <div style="clear: both"></div>
+
+
+   </div>
+   <div class="chapter embed">
+    <a id="embed"></a>
+    <h2>2. Embed</h2>
+    <div class="code">
+     <h5>code</h5>
+     <div class="code-snippet">
+
+      <pre>
+cet = window.cet; cet = cet || {}; cet.content = cet.content || {}; cet.content.manualClientLoadedTrigger = true;
+yepnope(
+{
+load: [
+ 'lib/edgy.css',
+ '//cdn.cet.ac.il/libs/cet.content/1/client.min.js',
+ '//cdn.cet.ac.il/libs/cet.content.lms/1/client.min.js',
+ 'lib/edgy.dragndrop.js',
+],
+});</pre>
+     </div>
+    </div>
+    <div class="image-preview">
+     <h5>open edge animate code dialog(Ctrl+E), enter the code under 'stage', see preview below</h5>
+     <a href="images/embed.png" class="image-embed" target="_blank">
+      <img style="height: 139px" src="images/embed.png" />
+     </a>
+    </div>
+   </div>
+   <div class="chapter content">
+    <a id="content"></a>
+    <h2>3. Content</h2>
+    <p>
+
+     within the downloaded folder there is a file name content1.js which contains 2 types of data:
+     <pre>
+  1. options: id, text, image, sound, matching baskets.
+  2. conguration data: number of options, random flag, feedback appearance flag and welcome sound.
+  3. final feedback has 2 options for errors removal: "automaticaly", "onUserInteraction".
+  4. fade on drag, optional. fadeOnDrag: true/false.
+    </pre>
+     <span>after editing content1.js paste its content <a href="http://jsonlint.com/" target="_blank">here</a> for format avalidation</span>
+    </p>
+
+   </div>
+   <div class="chapter FAQ">
+    <a id="faq"></a>
+    <h2>4. FAQ - frequently asked questions</h2>
+    <p>
+     <ul>
+      <li>for playing sound on custom edge events, use: cet.Audio.play('soundpath')</li>
+     </ul>
+    </p>
+
+   </div>
+   <div class="chapter edge-descriptions ">
+    <a id="versions"></a>
+    <h2>5. Versions</h2>
+    <div class="edge-description">
+     <h3>1.0.9 (01/04/2015)</h3>
+     <ul>
+      <li>Fixes for responsive support.</li>
+     </ul>
+    </div>
+    <div class="edge-description">
+     <h3>1.0.8 (22/01/2015)</h3>
+     <ul>
+      <li>New responsive(css) version.</li>
+     </ul>
+    </div>
+    <div class="edge-description">
+     <h3>1.0.7 (04/12/2014)</h3>
+     <ul>
+      <li>Fixes for responsive support.</li>
+     </ul>
+    </div>
+    <div class="edge-description">
+     <h3>1.0.6 (17/11/2014)</h3>
+     <ul>
+      <li>Support old baskets ids (missing '-') </li>
+     </ul>
+    </div>
+    <div class="edge-description">
+     <h3>1.0.5 (28/10/2014)</h3>
+     <ul>
+      <li>Support responsive edge applications: <br />Every element on stage have to be in percentage '%' units </li>
+     </ul>
+    </div>
+    <div class="edge-description">
+     <h3>1.0.4 (23/03/2014)</h3>
+     <ul>
+      <li>Support a single option storage</li>
+     </ul>
+    </div>
+    <div class="edge-description">
+     <h3>1.0.3 (10/03/2014)</h3>
+     <ul>
+      <li>fix for no state restore after student submission</li>
+      <li>check, restart external button removed</li>
+
+     </ul>
+    </div>
+
+    <div style="clear: both"></div>
+
+
+   </div>
+   <div class="chapter">
+    <a id="download"></a>
+    <h2>5. Download</h2>
+    <div>
+     <button onclick="window.location = 'edgy.rar'">download</button>
+    </div>
+   </div>
+
+  </div>
+ </div>
+ <footer></footer>
+</body>
+</html>

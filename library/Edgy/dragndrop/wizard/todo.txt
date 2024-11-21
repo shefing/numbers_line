@@ -1,0 +1,10 @@
+﻿
+
+
+- change:
+ self.draggie.end = function (pointer) {
+ to 
+ self.draggie.on( 'end', function (pointer) {
+
+ fix basket._isValid
+ remove dimas localization

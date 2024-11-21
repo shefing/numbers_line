@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Apps>
+  <App title="textit" optimalWidth="810" optimalHeight="500" status="dev" tech="outsource"  urlRouteId="text-it">
+    <Description></Description>
+   <!-- The preset definition -->
+   <Preset enabled="true">
+    <Explanation>
+     This is free text explaining how to create a preset.
+    </Explanation>
+
+   
+    <Sample title="Some other xml">
+     <![CDATA[<some><other/><xml/></some>]]>
+    </Sample>
+    <Sample>
+     <![CDATA[<sample><without/><a/></title>]]>
+    </Sample>
+
+   </Preset>
+  </App>
+</Apps>

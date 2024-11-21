@@ -1,0 +1,94 @@
+﻿<!DOCTYPE html>
+<html dir="rtl">
+
+<head>
+  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+  <meta charset="UTF-8" />
+  <title>Texit</title>
+  <script src="js/textit.js" type="text/javascript"></script>
+  <link href="css/style.css" rel="stylesheet" type="text/css" />
+  <link href="css/book-skin.css" rel="stylesheet" type="text/css" />
+</head>
+<body class="textit--book-skin">
+  <div class="container" id="textitcontainer">
+
+  </div>
+  <style>
+    hr, body, body.textit--book-skin:before, body.textit--book-skin:after{
+      background: #DBE4E1 !important;
+    }
+    .textit-container{
+      box-shadow: 1px 0px 5px rgba(0,0,0,0.3);
+    }
+    article .image--paralax img {
+      width: 15em;
+    }
+
+    hr {
+      clear: both;
+    }
+    .textit-container .menu{
+      margin-right: -13px;
+    }
+    .textit-container .drawer{
+      margin-right: 13px;
+    }
+  </style>
+  <div class="help"></div>
+  <div class="page-margin--bottom"></div>
+  <script>
+    var xml = "<article ><headline importance=\"2\">שבטים מצפון אירופה מתיישבים ביוון </headline><p>סיפורה של יוון העתיקה מתחיל לפני אלפי שנים. כבר לפני כ-500,‏3 שנים חיו ביוון אנשים שנהנו מתרבות מפותחת למדי. תרבות זו מכונה \"התרבות המילונית\", ושרידיה התגלו בעיר הקדומה מיקנה  בדרום יוון (ראו במפה בעמוד ‏14). החברה המילונית התפרסמה במיוחד בעושרה הרב, במבני הארמונות המרשימים שלה ובצבאה החזק. הסיבות להתמוטטותה אינן ברורות לגמרי. לאחר נפילת המיקנים, החלו לפלוש ליוון שבטים שונים מצפון אירופה שחיפשו מקום חדש לגור בו ומקורות מחיה חדשים. \n\n</p><p>השבט המרכזי בשבטים אלה היה שבט ה''איונים\". לאחר שהתיישבו האיונים ביוון הם שגשגו מבחינה כלכלית וקשרו קשרים עם שכניהם בארצות הים התיכון. בני כל השבטים שהתיישבו ביוון כונו על ידי שכניהם - יוונים (=איונים).המתיישבים ביוון שמו של אב קדמון בשם כינו את עצמם \"הלנים\", על שמו של אב קדמון בשמם הלנוס, ואת ארצם הם כינו \"הלאוס\".\n\n\n</p><image src=\"img/liongate.jpg\" description=\"שער האריות במיקנה (שרידים מהמאה ה-14 לפני הספירה)\">null</image><p>שימו לב לאבנים הגדולות ששימשו לבנייה באותה תקופה. \nמצאו את האריות שעל שמם נקרא העיר. \n\n</p><pagebreak>null</pagebreak><headline importance=\"2\"> תנאי הטבע השפיעו על חיי התושבים </headline><p>המיקום הגאוגרפי של כל מדינה, מזג האוויר השורר בה, תנאי השטח וגורמים נוספים יכולים להשפיע על צורת ההתיישבות, על עיסוקי המתיישבים, על המשטר הפוליטי ואפילו על אופי התושבים. מיקומה של יוון והתנאים הגאוגרפיים שלה קבעו במידה רבה את אורח החיים של תושביה הקדומים. \n\n</p><headline importance=\"2\"> הפוליס - הארגון המדיני של תושבי יוון </headline><p>יש חוקרים הטוענים כי התנאים הגאוגרפיים השפיעו לא רק על אזורי ההתיישבות של תושבי יוון ועל העיסוקים שלהם, אלא גם על המבנה המדיני שלה. רכסי ההרים הגבוהים, הקשים למעבר, גרמו לפיצולה המדיני של יוון העתיקה. רוב התושבים התיישבו בעמקים שבין ההרים, וחלקם הקימו ושבות חדשות לאורך חופי הים התיכון. התנאים הגאוגרפיים הקשו על הקשר בין התושבים ולכן לא הייתה יוון מדינה מאוחדת, אלא מפוצלת לערי-מדינה רבות, כלומר ליחידות מדיניות קטנות ועצמאיות. כל עיר-מדינה שאפה להיות עצמאית ולנהל את ענייניה בכל התחומים: כלכלה, חברה, דת וענייני חוץ. עיר-המדינה נקראה ביוונית \"פוליס\". הפוליס הייתה בנויה סביב האקרופוליס, שהוא מקום גבוה ומבוצר (\"אקרו\" ביוונית פירושו גבוה).באקרופוליס היו מצודה ומקדשים שבהם התקיימו טקסי הדת. אנשי הפוליס חיו סביב האקרופוליס ועסקו בעיקר בחקלאות. בכל פוליס הייתה אגורה, היא כיכר שוק. בתחילה הייתה האגורה מקום הכינוס של האזרחים. מאוחר יותר היא נעשתה המרכז המסחרי של הפוליס, ולשם באו התושבים למכור ולקנות סחורה. \n\n</p><image src=\"img/greekcoastline.jpg\" description=\"שער האריות במיקנה (שרידים מהמאה ה-14 לפני הספירה)\">null</image></article>";
+
+    window.addEventListener('load', function () {
+      var textit = window.createTextit({
+        xml: xml,
+        embed: false,
+        container: document.getElementById('textitcontainer')
+      });
+
+      var article = textit.article;
+      article.setFont('normal 16px/200% Segoe UI');
+      textit.container.style.width = '690px';
+      textit.container.style.position = 'relative';
+      textit.container.style.left = '42px';
+
+      for (var i = 2, len = article.dom.childNodes.length - 1; i < len; i++) {
+        if (i < 4 || (i > 7 && i < 10)) {
+          article.dom.childNodes[i].style.float = 'right';
+          article.dom.childNodes[i].style.width = '30%';
+        }
+        //if(article.dom.childNodes[i])
+      }
+      article.dom.childNodes[len - 1].querySelector('img').style.width = '55em';
+      article.dom.childNodes[6].style.backgroundColor = '#b8e2ba';
+      article.dom.childNodes[8].style.backgroundColor = '#ffca00';
+
+      
+    })
+
+    window.addEventListener('message', function (event) {
+      if ('get' in event.data && event.data.get == 'scrollTop')
+        event.source.postMessage({ scrollTop: window.scrollY }, '*')
+      else if ('scrollTop' in event.data) {
+        window.scrollTo(0, event.data.scrollTop);
+      }
+    }, false)
+
+    /*setTimeout(function () {
+  window.scrollBy(0, 1000);
+}, 1000)*/
+
+  </script>
+
+  <div id="preloaded-images">
+    <img src="icons/candy_in_text1.png" width="1" height="1" />
+    <img src="cursors/mark-red.png" width="1" height="1" />
+    <img src="cursors/mark-green.png" width="1" height="1" />
+    <img src="cursors/mark-blue.png" width="1" height="1" />
+    <img src="cursors/mark-purple.png" width="1" height="1" />
+  </div>
+
+  <div class="alert-non-fullscreen"></div>
+  <div class="alert-no-mouse"></div>
+</body>
+</html>

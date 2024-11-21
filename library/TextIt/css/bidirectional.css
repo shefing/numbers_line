@@ -1,0 +1,38 @@
+﻿article[dir="ltr"]{
+  direction:ltr;
+}
+
+article[dir=ltr] .question--cloze__options-container:before{
+    margin-left: 0;
+    margin-right: 1em;
+}
+
+article[dir=ltr] .word-card__notes{
+  float:right;
+  padding-right:0;
+  padding-left:5%;
+  margin-left:5%;
+  border-right:none;
+  border-left: 1px solid black;
+}
+article[dir=ltr] .dropped-answer:before{
+  margin-right:0;
+  margin-left:-1.25em;
+  right:auto;
+  left: -0.3em;
+}
+
+article[dir=ltr] .question--multiple-choice li span{
+  padding-right:0;
+  padding-left:2em;
+}
+
+article[dir=ltr] .question--multiple-choice li span:before{
+  right:auto;
+  left: 0;
+}
+
+article[dir=ltr] .embed mark .word .del-btn, article[dir=ltr] .dropped-answer .del-btn{
+  right:auto;
+  left: -.75em;
+}

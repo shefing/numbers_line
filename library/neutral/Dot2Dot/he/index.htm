@@ -1,0 +1,88 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <title>Dot2Dot template</title>
+
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width" />
+  <meta charset="utf-8">
+  <script src="../../../lib/fonts/Alef-Webfont-v2/alef-webfont.css.js" rel="stylesheet"></script>
+  <!--<link href="../../../lib/fonts/Lateef-Webfont/stylesheet.css" rel="stylesheet" />-->
+
+  <link src="//cdn.cet.ac.il/fonts/Abraham/stylesheet.css" rel="stylesheet" type="text/css" />
+
+  <link href='//fonts.googleapis.com/css?family=Arimo:400,400italic,700,700italic&subset=latin,hebrew' rel='stylesheet' type='text/css'>
+  <link href='//fonts.googleapis.com/css?family=Lateef' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="../content/template.css" type="text/css" />
+  <link rel="stylesheet" href="../content/skin1/skin.css" type="text/css" />
+
+  <script type="text/javascript" src="../../../lib/js/external/plugins/modernizr.min.js"></script>
+  <script type="text/javascript" src="../../../lib/js/external/jquery/2.0.3/jquery-2.0.3.min.js" charset="utf-8"></script>
+  <script type="text/javascript" src="../../../lib/js/external/soundmanager/soundmanager2.js"></script>
+
+  <script type="text/javascript" src="../js/raphael-min.js"></script>
+  <script type="text/javascript" src="../js/jquery.textfill.min.js"></script>
+  <script src="localization.js"></script>
+
+  <script>
+    var env = "cet.ac.il";
+    if (/dev\.cet\.ac\.il/.test(window.location.hostname)) env = 'dev.' + env;
+    if (/testing\.cet\.ac\.il/.test(window.location.hostname)) env = 'testing.' + env;
+    document.write('<script src="//cdn.' + env + '/libs/cet.content/1/client.min.js"><' + '/script>');
+    document.write('<script src="//cdn.' + env + '/libs/cet.content.lms/1/client.min.js"><' + '/script>');
+  </script>
+
+  <script type="text/javascript" src="../../../lib/js/internal/plugins/cet.math.helpers.js"></script>
+
+  <script type="text/javascript"  src="../dist/template.js"></script>
+
+</head>
+<body class="cet-dot2dot">
+
+  <div class="template-wrapper" style="display:none;">
+
+    <div class="final-feedback-wrapper">
+      <div class="final-feedback-wrapper-bg"></div>
+      <div class="final-feedback">
+        <div class="close">&times;</div>
+        <div class="caption"></div>
+        <div class="message"></div>
+        <div class="buttons"></div>
+      </div>
+    </div>
+
+    <div id="svg"></div>
+
+    <div id="boxes">
+    </div>
+
+    <div class="template-background"></div>
+  </div>
+
+
+  <script>
+    soundManager.setup({
+      preferFlash: false,
+      debugMode: false,
+      onready: function () {
+
+      }
+    })
+
+    var init = function () {
+
+      var dtd = new dotToDotTemplate();
+      dtd.init();
+      dtd.registerEvents();
+    };
+
+    if (cet.content.UI.clientReady()) {
+      init();
+    }
+    else {
+      cet.content.UI.bind('clientready', function () { init() });
+    }
+  </script>
+
+</body>
+
+</html>

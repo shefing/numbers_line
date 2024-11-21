@@ -1,0 +1,121 @@
+﻿<!DOCTYPE html>
+<html dir="rtl">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Texit</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css">
+  <script src="js/clipper/clipper.js"></script>
+  <script src="js/Tween.js"></script>
+  <script src="js/TweenMax/TweenLite.min.js"></script>
+  <script src="js/MorphSVG/MorphSVGPlugin.min.js"></script>
+  <script src="js/domExtensions.js"></script>
+  <script src="js/TRanges.js"></script>
+  <script src="js/util.js"></script>
+
+  <script src="js/textit.mouse.js"></script>
+  <script src="js/textit.menu.js"></script>
+  <script src="js/textit.draggedMarkedText.js"></script>
+  <script src="js/textit.draggables.js"></script>
+  <script src="js/textit.dragDropManager.js"></script>
+  <script src="js/textit.graphicMarker.js"></script>
+  <script src="js/textit.articleMarker.js"></script>
+  <script src="js/textit.narrator.js"></script>
+  <script src="js/textit.article.js"></script>
+  <script src="js/textit.questions.js"></script>
+  <script src="js/textit.components.js"></script>
+  <script src="js/textit.elements.js"></script>
+
+
+  <script src="js/textit.external.js"></script>
+  <script type="text/javascript"> /* Fake extenral Questions */
+    /*Textit.externalQuestions.data = [
+      null, {type: 'drag', stem:'test drag'}
+    ]*/
+  </script>
+</head>
+<body data-origin="false">
+  
+  <aside class="menu">
+    <a href="#" class="menu-item" data-pos="selected" data-menu-action="close" title=""></a>
+    <a href="#" class="menu-item" data-pos="1" data-menu-action="narrator" title="הקראה"></a>
+    <a href="#" class="menu-item" data-pos="2" data-menu-action="view" title="תצוגה"></a>
+    <a href="#" class="menu-item" data-pos="3" data-menu-action="origin" title="עזרה"></a>
+    <a href="#" class="menu-item" data-pos="4" data-menu-action="help"></a>
+    <a href="#" class="menu-item" data-pos="5" data-menu-action="drop"></a>
+  </aside>
+
+  <aside class="drawer">
+    <div class="drawer__bg"></div>
+    <button class="drawer__btn-close">&#x2715;</button>
+    <section class="drawer__drops-areas" data-menu-name="drop-areas">
+      <ul class="drawer__actions">
+        <li class="drawer__action" data-action="like"></li>
+        <li class="drawer__action" data-action="trash"></li>
+      </ul>
+    </section>
+
+    <section class="drawer__view-options" data-menu-name="view-options">
+      <ul>
+        <li data-view-style="0"></li>
+        <li data-view-style="1"></li>
+        <li data-view-style="2"></li>
+        <li data-view-style="3"></li>
+        <li data-view-style="4"></li>
+      </ul>
+    </section>
+
+    <section class="drawer__narration-options" data-menu-name="narration-options">
+      <ul>
+        <li>
+          <div class="dial" data-interactive="false" data-dial-action="time"><span class="dial__content"><button class="icon icon--pause"></button><span class="dial__time"></span></span></div>
+          <div class="dial" data-interactive="true" data-dial-action="volume"><span class="dial__content"><i class="icon icon--volume"></i></span></div>
+          <div class="dial" data-interactive="true" data-dial-action="speed"><span class="dial__content"><i class="icon icon--rabbit"></i></span></div>
+        </li>
+      </ul>
+    </section>
+
+  </aside>
+
+  <div class="help"></div>
+  <script>
+
+    // http://mybag.ebag.cet.ac.il/dashboard/studio/editor.aspx?itemid=d4ce13ed-92cb-42a2-ae6e-72df7b433fe2&lng=Hebrew
+    var xml = "<article audio=\"http://storage.cet.ac.il/TextIT_Storage/haftaa/audio\"><headline importance=\"1\"> הפתעה </headline><headline importance=\"4\"> כתבה </headline><image src=\"http://storage.cet.ac.il/assets.api/uploads/201701/2cfd422f367b458cacbbd1c411ad2ed1/הפתעה.png\" description=\" \"></image><p>בכל שנה יש יום אחד מיוחד – יום ההולדת. לפעמים החברים רוצים לעשׂות <hotword translation=\"surprise party\">מְסִיבַּת הַפְתָעָה</hotword>, ואז <hotword translation=\"no one, nobody\">אַף אֶחָד</hotword> לא מדבר על יום ההולדת. אף אחד לא בא, אף אחד לא כותב מסרון, ואף אחד לא אומר \"מזל טוב\". ואנחנו מתחילים לחשוב: \"איפה כל החברים? אולי הם לא <hotword translation=\"remember\">זוֹכְרִים</hotword>? אולי הם ‏לא רוצים לעשות מסיבה? אולי הם לא חושבים על יום ההולדת שלי\"? \nואז... </p><question index=\"1\" type=\"multiplechoice\"><stem>רוצים לעשות מסיבת הפתעה. מה עושים?</stem><option correct=\"false\">מספרים לכולם.</option><option correct=\"true\">שומרים בסוד.</option><option correct=\"false\">אומרים לילד/ה יום ההולדת מתי המסיבה.</option><option correct=\"false\">כותבים על הלוח בכיתה.</option></question><question index=\"2\" type=\"drag\"><stem><strong>גררו</strong> - למה אף אחד לא אומר לנו \"מזל טוב\" ביום ההולדת?</stem><answer><value>החברים רוצים לעשׂות מסיבת הפתעה</value><value>לפעמים החברים רוצים לעשׂות מסיבת הפתעה</value><value>רוצים לעשׂות מסיבת הפתעה</value></answer></question><question index=\"3\" type=\"multiplechoice\"><stem>למה הילדים של יום ההולדת שואלים: \"איפה כל החברים\"?</stem><clue>הם רואים את החברים שלהם בבית ספר</clue><option correct=\"false\">הם לא רואים את החברים שלהם.</option><option correct=\"false\">כי אין אף אחד בכיתה.</option><option correct=\"false\">כי הם לא רוצים להיות לבד.</option><option correct=\"true\">כי אף אחד לא אומר להם \"יום הולדת שמח\".</option></question><question index=\"4\" type=\"open\"><stem>\"ואז...\". איפה אתם חושבים נמצאים כל החברים? </stem></question><p>... הפתעה בדלת: כולם באים! יש עוגה ויש <hotword translation=\"candles\">נֵרוֹת</hotword>, יש שירים, יש משׂחקים ויש <hotword translation=\"food\">אוֹכֶל</hotword> טוב. ואנחנו <hotword translation=\"be excited\">מִתְרַגְשִים</hotword> ולא זוכרים מה קרה <hotword translation=\"before\">לִפְנֵי</hotword> כמה שעות.\nו<hotword translation=\"after\">אַחֲרֵי</hotword> שנה – שוב:</p><question index=\"5\" type=\"cloze\"><stem>השלימו את הקטע</stem><cloze source=\"נֵרוֹת\">נֵרוֹת</cloze><cloze source=\"אוֹכֶל\">אוֹכֶל</cloze><cloze source=\"מִתְרַגְשִים\">מִתְרַגְשִים</cloze></question><question index=\"6\" type=\"multiplechoice\"><stem>\"אנחנו מתרגשים\" – מי זה אנחנו?</stem><option correct=\"false\">אבא ואימא</option><option correct=\"false\">החברים שעושים מסיבת הפתעה</option><option correct=\"true\">מי שיש לו יום הולדת</option><option correct=\"false\">השכנים</option></question><question index=\"7\" type=\"multiplechoice\"><stem>\"ולא זוכרים מה קרה לפני כמה שעות\" – מה קרה לפני כמה שעות?</stem><option correct=\"false\">אמרו לנו מזל טוב.</option><option correct=\"true\">חשבנו שהחברים לא זכרו את יום ההולדת שלנו.</option><option correct=\"false\">מסיבת הפתעה.</option><option correct=\"false\">אכלנו פיצה קרה ולא טעימה.</option></question><question index=\"8\" type=\"open\"><stem>\"לאחר שנה שוב...\". מה קורה שוב?  </stem></question><p>היום מתחיל כמו כל הימים ושום דבר לא קורה. אנחנו כבר מתחילים לחשוב למה אף אחד לא בא ולא אומר \"מזל טוב\", אבל אחרי כמה שעות – הפתעה! החברים באים עם עוגה, נרות ומתנות...</p><question index=\"9\" type=\"mark\"><stem>\"שום דבר לא קורה...\" סמנו באדום /red  מה לא קורה ובירוק /green  מה קורה. </stem><answer color=\"red\"><value>אף אחד לא בא ולא אומר \"מזל טוב\"</value></answer><answer color=\"green\"><value>הפתעה! החברים באים עם עוגה, נרות ומתנות...</value><value>החברים באים עם עוגה, נרות ומתנות...</value><value>החברים באים</value></answer></question><p>אבל אם בכל שנה יש מסיבת הפתעה, ואנחנו יודעים מה קורה ביום ההולדת, איפה ההפתעה???</p><pagebreak>null</pagebreak><question index=\"10\" type=\"open\"><stem>האם אפשר לעשות מסיבת הפתעה כל שנה והיא תמיד תהייה הפתעה? </stem></question><question index=\"11\" type=\"open\"><stem>איך אפשר לשמור על הפתעה גם כשעושים מסיבת הפתעה כל שנה? </stem></question><question index=\"12\" type=\"open\"><stem>למה אנחנו אוהבים לעשות מסיבות הפתעה? </stem></question><p></p></article>";
+    var xmlDoc = (new window.DOMParser()).parseFromString(xml, "text/xml");
+    var article = new Textit.Article();
+    article.loadFromXML(xmlDoc.documentElement);
+
+    document.body.appendChild(article.dom);
+
+    function animationUpdateLoop() {
+      requestAnimationFrame(animationUpdateLoop);
+      TWEEN.update();
+    }
+    animationUpdateLoop();
+
+    var F2_keyCode = 113;
+    document.body.addEventListener('keydown', function (e) {
+      if (e.keyCode == F2_keyCode) {
+        location = location; // funny way to refresh
+        window.addEventListener('unload', function () {
+          sessionStorage.removeItem('state');
+        });
+      }
+    })
+
+    window.addEventListener('load', function () {
+      article.deserializeState(sessionStorage.getItem('state'));
+      article.setOrigin(false);
+    })
+
+    window.addEventListener('unload', function () {
+      sessionStorage.setItem('state',
+        JSON.stringify(article.serializeState())
+        );
+    })
+
+    </script>
+  </body>
+
+</html>

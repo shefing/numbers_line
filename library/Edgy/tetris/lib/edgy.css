@@ -1,0 +1,37 @@
+﻿body {
+    background-color: none;
+}
+
+#Stage {
+    position:absolute;
+    top:0;
+    /*bottom:0;*/
+    left:0;
+    right:0;
+    margin:auto;
+
+    width: 700px;
+    height: 418px;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    
+    /*font-family: Alef-Bold;*/
+    line-height:14px;
+    direction:rtl;
+    
+    
+}::selection {background:transparent}
+
+.option {
+    -ms-touch-action: none;
+}
+.option .text{
+ -webkit-transform: translateZ(0px) ;
+}
+
+.ltr{
+	direction:ltr;
+}
+

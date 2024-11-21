@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<App title="Ordering template" optimalWidth="810" optimalHeight="500" status="dev" tech="outsource" urlRouteId="orderingtemplate">
+  <Description>
+  </Description>
+  <!-- The preset definition -->
+  <Preset enabled="true">
+    <Explanation>
+      This is free text explaining how to create a preset.
+    </Explanation>
+    <!--  if there are more than one samples, the first one in the list is the default sample  -->
+    <!--  the title is optional. If no title is given , it will be autocreated -->
+    <Sample title="horizontal 1">
+      <![CDATA[<OrderingTemplate>
+        <Common shuffle='true' layout='Horizontal' transparency='true' direction='rtl' showSolution='true' width='constant' feedback='true' />
+        <Elements>
+          <Element order='0'><img src="http://mybag.ofek.testing2.cet.ac.il/CETHandler.ashx?n=CetEntities.FileViewer&amp;i=7b6c26a9-ffd0-426d-b508-19d6c9d151f1&amp;id=206575" alt="" width="120" height="53" data-mce-src="/CETHandler.ashx?n=CetEntities.FileViewer&amp;i=7b6c26a9-ffd0-426d-b508-19d6c9d151f1&amp;id=206575" data-mce-selected="1" style="border: 0px; cursor: default; outline: black solid 1px; color: rgb(51, 51, 51); font-family: arial, helvetica, sans-serif; font-size: 16px; line-height: 24px;"></Element>
+          <Element order='1'>הכה</Element>
+          <Element order='2'>בתריסים</Element>
+          <Element order='3'>והיה</Element>
+          <Element order='4'>רעש</Element>
+        </Elements>
+      </OrderingTemplate>]]>
+    </Sample>
+    <Sample title="example 1">
+      <![CDATA[<OrderingTemplate>
+  <Common shuffle="true" layout="vertical" transparency="true" showSolution="true" direction="rtl"/>
+  <Elements>
+    <Element order="0">
+      <div style="direction:rtl; width:100%; font-family:Arial; font-size:1.3em; text-align:right; color:black;">- אתה בא לפגישה?</div>
+    </Element>
+    <Element order="1">
+      <div style="direction:rtl; width:100%; font-family:Arial; font-size:1.3em; text-align:right; color:black;">- אני עוד לא יודע. על מה מדברים?</div>
+    </Element>
+    <Element order="2">
+      <div style="direction:rtl; width:100%; font-family:Arial; font-size:1.3em; text-align:right; color:black;">- יש תוכנית לבנות בתים בצד הדרומי של העיר, ואנחנו רוצים לכתוב מכתב נגד התוכנית.</div>
+    </Element>
+    <Element order="3">
+      <div style="direction:rtl; width:100%; font-family:Arial; font-size:1.3em; text-align:right; color:blue;">- למה זה כל כך חשוב?</div>
+    </Element>
+    <Element order="4">
+      <div style="direction:rtl; width:100%; font-family:Arial; font-size:1.3em; text-align:right; color:black;">- יש שם בריכת חורף ואנחנו צריכים לשמור על בעלי החיים והפרחים שם.</div>
+    </Element>
+    <Element order="5">
+      <div style="direction:rtl; width:100%; font-family:Arial; font-size:1.3em; text-align:right; color:green;">- ואם לא נדאג להם?</div>
+    </Element>
+    <Element order="6">
+      <div style="direction:rtl; width:100%; font-family:Arial; font-size:1.3em; text-align:right; color:black;">- אז בעוד כמה שנים הם ייעלמו.</div>
+    </Element>
+    <Element order="7">
+      <div style="direction:rtl; width:100%; font-family:Arial; font-size:1.3em; text-align:right; color:black;">- טוב, טוב, אני בא.</div>
+    </Element>
+  </Elements>
+</OrderingTemplate>]]></Sample>
+    <Sample title="example 2">
+      <![CDATA[<OrderingTemplate>
+  <Common shuffle="true" layout="vertical" transparency="true" showSolution="true" direction="rtl"/>
+  <Elements>
+    <Element order="2">
+      <div style="direction:rtl; width:100%; font-family:Arial; font-size:1.3em; text-align:right; color:blue;">לדוגמא, כאשר צעדנו ב"צעדת האביב" , לא הרשו לנו להביא פלאפונים ,וכולם הלכו ביחד, שוחחו זה עם זה , שרו שירים ונוצרה הרגשה של גיבוש.</div>
+    </Element>
+    <Element order="3">
+      <div style="direction:rtl; width:100%; font-family:Arial; font-size:1.3em; text-align:right; color:green;">לכן, אני טוענת ששימוש בפלאפונים , עלול לפגוע בקשרים החברתיים בין תלמידי הכתה.</div>
+    </Element>
+    <Element order="1">
+      <div style="direction:rtl; width:100%; font-family:Arial; font-size:1.3em; text-align:right; color:black;">אם כל תלמיד יביא פלאפון לא ייווצרו קשרים חברתיים בכתה. בהפסקות כל תלמיד ישתמש בפלאפון שלו, הוא לא ישוחח עם חבריו, לא ישחק איתם וכך לא ייווצר גיבוש כיתתי.</div>
+    </Element>
+    <Element order="0">
+      <div style="direction:rtl; width:100%; font-family:Arial; font-size:1.3em; text-align:right; color:black;">אני חושבת שאין לאפשר לתלמידים להביא  פלאפון לבית הספר.</div>
+    </Element>
+  </Elements>
+</OrderingTemplate>]]>
+    </Sample>
+    <Sample title="example 3">
+      <![CDATA[<OrderingTemplate>
+  <Common shuffle="true" layout="vertical" transparency="true" showSolution="true" direction="rtl"/>
+  <Elements>
+    <Element order="1">
+      <div style="direction:rtl; width:100%; font-family:Arial; font-size:1.3em; text-align:right; color:black;">יהודה המכבי נכנס לירושלים</div>
+    </Element>
+    <Element order="4">
+      <div style="direction:rtl; width:100%; font-family:Arial; font-size:1.3em; text-align:right; color:black;">מטהרים את בית המקדש ומחדשים את עבודת הקורבנות</div>
+    </Element>
+    <Element order="2">
+      <div style="direction:rtl; width:100%; font-family:Arial; font-size:1.3em; text-align:right; color:black;">ארץ ישראל הופכת לחלק מהממלכה ההלניסטית</div>
+    </Element>
+    <Element order="3">
+      <div style="direction:rtl; width:100%; font-family:Arial; font-size:1.3em; text-align:right; color:black;">המורדים מביסים את צבא אנטיוכוס</div>
+    </Element>
+     <Element order="0">
+      <div style="direction:rtl; width:100%; font-family:Arial; font-size:1.3em; text-align:right; color:black;">מתתיהו קורא למרד</div>
+    </Element>
+    <Element order="5">
+      <div style="direction:rtl; width:100%; font-family:Arial; font-size:1.3em; text-align:right; color:black;">אנטיוכוס הרביעי מטיל גזרות על היהודים</div>
+    </Element>
+  </Elements>
+</OrderingTemplate>]]>
+    </Sample>
+    <Sample title="horizontal 1">
+      <![CDATA[<OrderingTemplate>
+        <Common shuffle='true' layout='Horizontal' transparency='true' direction='rtl' showSolution='true' width='variable' feedback='false' />
+        <Elements>
+          <Element order='0'>הברד</Element>
+          <Element order='1'>הכה</Element>
+          <Element order='2'>בתריסים</Element>
+          <Element order='3'>והיה</Element>
+          <Element order='4'>רעש</Element>
+        </Elements>
+      </OrderingTemplate>]]>
+    </Sample>
+  </Preset>
+</App>

@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <title>yesno template</title>
+
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width" />
+  <meta charset="utf-8">
+
+  <link rel="prefetch" type="application/l10n" href="localization/locales.ini" />
+
+  <link href="../content/fonts.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="../content/yesno.css" type="text/css" />
+  <link rel="stylesheet" href="../content/wizard.css" type="text/css" />
+  <link href="../swiper/swiper.css" rel="stylesheet" />
+
+
+  <script type="text/javascript" src="../../../lib/js/external/jquery/2.0.3/jquery-2.0.3.min.js" charset="utf-8"></script>
+  <script src="../../../lib/js/external/jquery/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script type="text/javascript" src="../../../lib/js/external/jquery/jquery.ui.touch-punch.min.js"></script>
+
+  <script src="//cdn.cet.ac.il/libs/cet.content/1/client.min.js"></script>
+  <script src="//cdn.cet.ac.il/libs/cet.content.designtime/1/client.min.js"></script>
+  <script type="text/javascript" src="../../../lib/js/internal/plugins/cet.math.helpers.js"></script>
+
+  <script type="text/javascript" src="../../../lib/js/external/webL10n/l10n.js"></script>
+  
+  <script src="../swiper/swiper.min.js"></script>
+  <script src="../js/jscolor.js"></script>
+  <script src="../js/tinyEditor/tinymce.js"></script>
+  <script src="../dist/yesno.js"></script>
+  <script src="../js/wizard.js"></script>
+  
+</head>
+<body>
+    <div class="wizard-wrapper"></div>
+    <script>
+        $('body').hide();
+        window.addEventListener('localized', function () {
+          $('body').show();
+        }, false);
+
+        var init = function () {
+          var language = cet.content.DesignTime.language;
+          document.webL10n = initWebL10n(window, document, undefined, language);
+          document.webL10n.ready(function () {
+            $('html').attr('lang', language);
+            $('body').attr('data-dir', document.webL10n.getDirection());
+            var ynw = new yesnoWizard();
+            ynw.init();
+            ynw.registerEvents();
+          });
+        };
+        if (cet.content.UI.clientReady()) {
+          init();
+        } else {
+          cet.content.on('clientready', init);
+        }
+    </script>
+</body>
+</html>

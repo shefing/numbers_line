@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 18.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="288px" height="17.999px" viewBox="0 0 288 17.999" enable-background="new 0 0 288 17.999" xml:space="preserve">
+<g id="eror">
+</g>
+<g id="correct">
+</g>
+<g id="Layer_5">
+</g>
+<g>
+	<defs>
+		<rect id="SVGID_5_" x="-988.635" y="175.941" width="820.125" height="379.535"/>
+	</defs>
+	<clipPath id="SVGID_1_">
+		<use xlink:href="#SVGID_5_"  overflow="visible"/>
+	</clipPath>
+	
+		<radialGradient id="SVGID_2_" cx="-74.7147" cy="-1134.3182" r="426.0941" gradientTransform="matrix(1.3479 0.0787 -0.0582 0.9975 -503.192 1472.1438)" gradientUnits="userSpaceOnUse">
+		<stop  offset="0.4819" style="stop-color:#FFFFFF"/>
+		<stop  offset="1" style="stop-color:#F2F2EA;stop-opacity:0"/>
+	</radialGradient>
+	<polygon opacity="0.03" clip-path="url(#SVGID_1_)" fill="url(#SVGID_2_)" points="-552.017,423.755 74.022,592.811 88.621,428.22 
+		-565.411,412.555 115.53,371.577 76.076,283.896 -567.496,393.788 31.961,186.239 -71.336,114.233 -569.093,376.23 
+		-176.347,26.603 -386.654,-8.963 -581.249,359.999 -535.26,-23.462 -726.134,-32.667 -606.703,346.869 -866.093,-15.614 
+		-993.435,54.565 -620.674,361.577 -1095.308,137.878 -1122.535,244.953 -624.195,376.895 -1193.176,332.026 -1195.978,448.25 
+		-615.442,401.25 -1136.989,492.483 -912.573,600.667 -599.036,411.263 -806.978,672.25 -673.481,685.25 -584.683,416.25 
+		-570.017,691.25 -454.062,674.405 -570.017,430.25 -247.889,667.25 -87.382,632.822 	"/>
+</g>
+<g>
+	<path fill="#4D6878" d="M186.53,5.333v-1h6v0.704c0,0.63-1.052,1.468-1.634,2.514s-0.967,2.12-1.285,3.225
+		c-0.229,0.779-0.311,1.631-0.374,2.558h-1.175c0.013-0.732,0.156-1.617,0.432-2.653s0.67-1.993,1.184-2.956
+		c0.515-0.963,1.062-1.391,1.642-2.391H186.53z"/>
+</g>
+</svg>

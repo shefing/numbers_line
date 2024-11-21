@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+  <title>Stage</title>
+  <link href="/library/edgy/dragndrop/wizard/he/css/bundle/dragndrop.runtime.css" rel="stylesheet" />
+  <meta id="viewport" name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+</head>
+<body class="cet-dragndrop">
+  <div id="stage"></div>
+  <script>
+    var env = "cet.ac.il";
+    if (/dev\.cet\.ac\.il/.test(window.location.hostname)) env = 'dev.' + env;
+    if (/testing\.cet\.ac\.il/.test(window.location.hostname)) env = 'testing.' + env;
+    //document.write('<script src="//cdn.' + env + '/libs/cet.content/1/client.min.js"><' + '/script>');
+    document.write('<script src="//cdn.' + env + '/libs/cet.content/client-new.js"><' + '/script>');
+    document.write('<script src="//cdn.' + env + '/libs/cet.content.lms/1/client.min.js"><' + '/script>');
+  </script>
+  <script> cet = window.cet; cet = cet || {}; cet.content = cet.content || {}; cet.content.manualClientLoadedTrigger = true;</script>
+  <script src="//code.jquery.com/jquery-2.0.3.min.js"></script>
+  <script src="../../dist/edgy.dragndrop.js?nocache1"></script>
+</body>
+
+</html>

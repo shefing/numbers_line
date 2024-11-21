@@ -1,0 +1,43 @@
+﻿.group {
+ border: 2px solid #96e7fc;
+ position: absolute;
+ pointer-events: none;
+
+ &.hover {
+  /*border-width:6px;*/
+  opacity: 0.5 !important;
+ }
+
+
+ .feedback-error, .feedback-correct {
+  background-image: url('../images/feedback__x.svg');
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  display: none;
+  background-size: contain;
+ }
+
+ .feedback-correct {
+  background-image: url('../images/feedback__v.svg');
+ }
+
+
+
+ .background-color {
+  width: calc(~"100% - 2px");
+  height: calc(~"100% - 2px");
+  position: absolute;
+  top: 1px;
+  left: 1px;
+ }
+}
+
+.media {
+ border: 2px solid black;
+ position: absolute;
+ pointer-events: none;
+ background-repeat: no-repeat;
+}

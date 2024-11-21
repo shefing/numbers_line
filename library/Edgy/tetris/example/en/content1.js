@@ -1,0 +1,275 @@
+﻿{
+ "lifes": 3, 
+ "welcomeSound": "",
+ "droppingDuration": 10000,
+ "random": {
+  "options":true,
+  "optionsInBasket":5,
+  "numberOfBaskets":3
+ },
+
+ "font" : {
+  "size": "medium",
+  "family": "hebrew"
+
+ },
+
+ "feedback":{
+  "successText": "כל הכבוד",
+  "failureText": "נסו שוב",
+  "showFinalFeedback": true,
+  "errorsRemoval":"automaticaly"
+
+ },
+ "options" : [
+  {
+   "text":"בִּיקַשְתִי",
+   "id":"option1",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket1"]
+  },
+  {
+   "text":"דִיבַּרְתָ",
+   "id":"option2",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket1"]
+  },
+  {
+   "text":"נִיגְנָה",
+   "id":"option3",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket1"]
+  },
+  {
+   "text":"סִיפַּרְנוּ",
+   "id":"option4",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket1"]
+  },
+  {
+   "text":"חִילַקְתְ",
+   "id":"option5",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket1"]
+  },
+  {
+   "text":"נִישַקְתֶן",
+   "id":"option6",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket1"]
+  },
+  {
+   "text":"בִּיטֵל",
+   "id":"option7",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket1"]
+  },
+  {
+   "text":"סִיכְּמוּ",
+   "id":"option8",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket1"]
+  },
+  {
+   "text":"פִּיסֵל",
+   "id":"option9",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket1"]
+  },
+  {
+   "text":"בִּישַלְנוּ",
+   "id":"option10",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket1"]
+  },
+  {
+   "text":"חָלַמְתָ",
+   "id":"option11",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket1"]
+  },
+  {
+   "text":"לָבַשְתְ",
+   "id":"option12",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket1"]
+  },
+  {
+   "text":"כְּתַבְתֶן",
+   "id":"option13",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket1"]
+  },
+  {
+   "text":"שְלַחְתֶם",
+   "id":"option14",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket1"]
+  },
+
+  {
+   "text":"מְקַבְּלִים",
+   "id":"option15",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket2"]
+  },
+  {
+   "text":"מְצַלְמוֹת",
+   "id":"option16",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket2"]
+  },
+  {
+   "text":"מְסַדֶרֶת",
+   "id":"option17",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket2"]
+  },
+  {
+   "text":"מְוַותֵר",
+   "id":"option18",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket2"]
+  },
+  {
+   "text":"מְשַקֵר",
+   "id":"option19",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket2"]
+  },
+  {
+   "text":"מְתַקֶנֶת",
+   "id":"option20",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket2"]
+  },
+  {
+    "text":"מְקַנְאִים",
+    "id":"option21",
+    "sound": "", 
+    "image": "",
+    "baskets": ["basket2"]
+   },
+  {
+     "text":"מְחַפְּשׂוֹת",
+     "id":"option22",
+     "sound": "", 
+     "image": "",
+     "baskets": ["basket2"]
+    },
+  {
+   "text":"מְמַיְינִים",
+   "id":"option23",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket2"]
+  },
+  {
+   "text":"מְשַלֵם",
+   "id":"option24",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket2"]
+  },
+  {
+   "text":"בּוֹדֵק",
+   "id":"option25",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket2"]
+  },
+  {
+   "text":"זוֹכֶרֶת",
+   "id":"option26",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket2"]
+  },
+  {
+   "text":"חוֹשְבוֹת",
+   "id":"option27",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket2"]
+  },
+  {
+   "text":"לוֹבְשִים",
+   "id":"option28",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket2"]
+  },
+
+  {
+   "text":"תְאַחֵר",
+   "id":"option29",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket3"]
+  },
+  {
+   "text":"תְלַמְדִי",
+   "id":"option30",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket3"]
+  },
+  {
+   "text":"תְתַקְנוּ",
+   "id":"option31",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket3"]
+  },
+  {
+   "text":"יְקַבְּלוּ",
+   "id":"option32",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket3"]
+  },
+  {
+   "text":"אֲטַיֵיל",
+   "id":"option33",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket3"]
+  },
+  {
+   "text":"יְבָרֵך",
+   "id":"option34",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket3"]
+  },
+  {
+   "text":"נְבַקֵר",
+   "id":"option35",
+   "sound": "", 
+   "image": "",
+   "baskets": ["basket3"]
+  }
+
+ ],
+ "baskets":[{"id": "basket1", "name": "עבר"},{"id": "basket2", "name": "הווה"},{"id": "basket3", "name": "עתיד"}]
+}

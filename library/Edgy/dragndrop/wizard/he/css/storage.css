@@ -1,0 +1,73 @@
+﻿.storage {
+  position: absolute;
+  margin: 0px;
+  background-color: #4a4d52;
+  overflow: hidden;
+}
+.storage .animate-transition {
+  -webkit-transition: left 500ms;
+  -moz-transition: left 500ms;
+  -o-transition: left 500ms;
+  transition: left 500ms;
+}
+.storage .animation-stopped .animate-transition {
+  -webkit-transition: none;
+  -moz-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+.storage .animation-stopped .options-window {
+  overflow: hidden !important;
+}
+.options {
+  position: absolute;
+  height: 100%;
+}
+.button-navigation-left,
+.button-navigation-right {
+  position: absolute;
+  top: 75.5%;
+  left: 2%;
+  width: 2.3%;
+  height: 4.4%;
+  font-size: 5em !important;
+  font-weight: bold;
+  background: url('../images/icon_arrowLeft.svg') no-repeat right top;
+  -moz-background-size: 77%;
+  -o-background-size: 77%;
+  background-size: 77%;
+  z-index: 1000 !important;
+}
+.button-navigation-left.hover:hover,
+.button-navigation-right.hover:hover {
+  cursor: pointer;
+  background-image: url('../images/icon_arrowLeftHover.svg');
+}
+.button-navigation-left.disable,
+.button-navigation-right.disable {
+  cursor: not-allowed;
+  opacity: 0.3;
+}
+.button-navigation-right {
+  left: auto;
+  right: 3%;
+  background-image: url('../images/icon_arrowRight.svg');
+}
+.button-navigation-right.hover:hover {
+  background-image: url('../images/icon_arrowRightHover.svg');
+}
+.storage-background-left,
+.storage-background-right {
+  background-color: #4a4d52;
+  top: 67%;
+  left: 1%;
+  height: 21.5%;
+  position: absolute;
+  z-index: 90;
+  width: 5%;
+}
+.storage-background-right {
+  left: auto;
+  right: 1%;
+}
+/*# sourceMappingURL=storage.css.map */

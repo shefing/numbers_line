@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<html  lang="he">
+<head>
+ <title>Ordering template</title>
+
+ <link rel="prefetch" type="application/l10n" href="localization/locales.ini" />
+
+ <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width" />
+ <meta charset="utf-8">
+
+ <link rel="stylesheet" href="../content/wizard.css?sdsd23" type="text/css" />
+
+ <script type="text/javascript" src="../../../../lib/js/external/jquery/2.0.3/jquery-2.0.3.min.js" charset="utf-8"></script>
+ <script type="text/javascript" src="../../../../lib/js/external/jquery/jqueryui/1.10.3/jquery-ui-1.10.3.custom.min.js"></script>
+ <script type="text/javascript" src="../../../../lib/js/external/jquery/jquery.ui.touch-punch.min.js"></script>
+
+ <script src="//cdn.cet.ac.il/libs/cet.content/1/client.min.js"></script>
+ <script src="//cdn.cet.ac.il/libs/cet.content.designtime/1/client.min.js"></script>
+ <script type="text/javascript" src="../../../../lib/js/internal/plugins/cet.math.helpers.js"></script>
+
+ <script type="text/javascript" src="../../../../lib/js/external/webL10n/l10n.js"></script>
+
+ <script src="../js/wizard.js"></script>
+
+
+
+</head>
+<body>
+ <div class="wizard-wrapper">
+  <ul class="fields nostyle">
+   <!--<li class="field">
+    <div class="field-key">
+        <label data-l10n-id="language:">שפה:</label>
+    </div>
+    <div>
+     <div>
+      <input type="radio" name="language" id="languageHebrew" value="hebrew" checked="checked" />
+         <label for="languageHebrew" data-l10n-id="hebrew">עברית</label>
+      <input type="radio" name="language" id="languageArabic" value="arabic" />
+         <label for="languageArabic" data-l10n-id="arabic">ערבית</label>
+     </div>
+    </div>
+   </li>-->
+   <li class="field">
+    <div class="field-key">
+        <label data-l10n-id="fontSize:">גודל פונט:</label>
+    </div>
+    <div>
+     <input type="radio" name="font" id="fontSmall" value="small" />
+        <label for="fontSmall" data-l10n-id="small">קטן</label>
+     <input type="radio" name="font" id="fontMedium" value="medium" checked="checked" />
+        <label for="fontMedium" data-l10n-id="medium">בינוני</label>
+     <input type="radio" name="font" id="fontLarge" value="large" />
+        <label for="fontLarge" data-l10n-id="large">גדול</label>
+    </div>
+   </li>
+   <li class="field">
+    <div class="field-key">
+        <label data-l10n-id="numberOfStrikes:">מספר הפסילות:</label>
+    </div>
+    <div>
+
+     <select id="select-lifes">
+      <option>3</option>
+      <option selected>5</option>
+      <option>8</option>
+         <option value="eternal" data-l10n-id="noStrikes">ללא פסילות</option>
+     </select>
+
+    </div>
+   </li>
+   <li class="field">
+    <div class="field-key">
+        <label data-l10n-id="numberOfWordsInBasket:">מספר מילים בכל סל:</label>
+    </div>
+    <div>
+     <select id="select-options-in-basket">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+      <option>4</option>
+      <option selected>5</option>
+      <option>6</option>
+      <option>7</option>
+     </select>
+
+    </div>
+   </li>
+   <li class="field">
+    <div class="field-key">
+        <label data-l10n-id="numberOfWordsAtSameTime:">מספר מילים נופלות בו זמנית:</label>
+    </div>
+    <div style="vertical-align:top">
+
+     <select id="select-multiple-dropping-options-number">
+      <option>1</option>
+      <option>2</option>
+      <option>3</option>
+     </select>
+
+    </div>
+   </li>
+   <li class="field">
+    <div class="field-key baskets-key">
+        <label data-l10n-id="baskets:">סלים:</label>
+    </div>
+    <div class="field-value baskets-value">
+     <div id="baskets">
+     </div><button id="button-add-busket" class="button">
+        <span class="plus-icon"></span>
+               <span class="button-text" data-l10n-id="addBasket">הוספת סל</span>
+     </button>
+    </div>
+   </li>
+  </ul>
+
+  <div id="templates">
+   <div class="basket">
+    <div class="basket-header">
+        <h3 data-l10n-id="basket">סל</h3>
+     <span class="basket-title"></span>
+
+        <button class="button-remove-basket button" data-l10n-id="deleteBtn" title="מחיקה">
+            <span class="delete-icon"></span>
+        </button>
+    </div>
+    <div class="basket-body">
+        <div class="instructions" data-l10n-id="basketTitle">כותרת הסל</div>
+     <!--<div class="basket-title-input contenteditable" contenteditable="true"></div>-->
+     <input type="text" class="basket-title-input contenteditable" />
+     <div class="options">
+         <div class="instructions" data-l10n-id="basketInstruction">יש להזין תכולה לפחות כמספר המילים הנופלות שהוגדרו.</div>
+      <ul class="nostyle">
+       <li>
+        <!--<div class="option-text contenteditable" contenteditable="true"></div>-->
+        <input type="text" class="option-text contenteditable" />
+           <button class="button-remove-option button" data-l10n-id="deleteBtn" title="מחיקה">
+               <span class="delete-icon"></span>
+           </button>
+       </li>
+       <li>
+        <!--<div class="option-text contenteditable" contenteditable="true"></div>-->
+        <input type="text" class="option-text contenteditable" />
+           <button class="button-remove-option button" data-l10n-id="deleteBtn" title="מחיקה">
+               <span class="delete-icon"></span>
+           </button>
+       </li>
+       <li>
+        <!--<div class="option-text contenteditable" contenteditable="true"></div>-->
+        <input type="text" class="option-text contenteditable" />
+           <button class="button-remove-option button" data-l10n-id="deleteBtn" title="מחיקה">
+               <span class="delete-icon"></span>
+           </button>
+       </li>
+       <li>
+        <!--<div class="option-text contenteditable" contenteditable="true"></div>-->
+        <input type="text" class="option-text contenteditable" />
+           <button class="button-remove-option button" data-l10n-id="deleteBtn" title="מחיקה">
+               <span class="delete-icon"></span>
+           </button>
+       </li>
+      </ul>
+      <button class="button-add-option button">
+        <span class="plus-icon"></span>
+          <span class="button-text" data-l10n-id="addWord">הוספת מילה</span>
+     </button>
+     </div>
+    </div>
+   </div>
+  </div>
+ </div>
+</body>
+</html>

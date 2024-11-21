@@ -1,0 +1,152 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+  <meta charset="utf-8" />
+  <script src="js/matter/matter.js"></script>
+  <style>
+    body {
+      overflow:hidden;
+      padding:0;
+      margin:0;
+    }
+    svg {
+      background-color:yellow;
+    }
+  </style>
+</head>
+<body>
+  <svg width="100%" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="400" cy="400" r="3" stroke="black" stroke-width="1" fill="red" />
+  </svg>
+  <script>
+    var svg = document.querySelector("svg");
+    svg.setAttribute('height',window.innerHeight);
+    svg.addEventListener("mousemove", function (e) {
+      var mouseX = e.clientX;
+      var mouseY = e.clientY;
+      var diffX = mouseX - centerX;
+      var diffY = mouseY - centerY;
+      var distance = Math.sqrt(diffX * diffX + diffY * diffY);
+      var steps = Math.min(30, Math.floor(distance / (2 * radius)));
+      if (particles.length < steps) {
+        if (particles.length > 1) {
+          particles[particles.length - 1].setNotFixed();
+        }
+        for (var i = particles.length; i < steps; i++) {
+          var prev = particles[i - 1];
+          var fixed = (i == steps - 1);
+          var particle = new Particle(mouseX, mouseY, fixed, prev);
+          particles.push(particle);
+        }
+      }
+      if (particles.length > 1) {
+        particles[particles.length - 1].setBodyPos(mouseX, mouseY);
+      }
+
+      updatePositions();
+    })
+    //----------------------------------------------
+    var centerX = 400;
+    var centerY = 400;
+    var radius = 2;
+
+    //----------------------------------------------
+    function createConstraint(body, prevBody) {
+      var options = {
+        bodyA: body,
+        bodyB: prevBody,
+        length: 2*radius-1,
+        stiffness: 0.95
+      }
+      var constraint = Constraint.create(options);
+      World.add(world, constraint);
+      return constraint;
+    }
+    //----------------------------------------------
+    function createBody(x, y, fixed) {
+      var options = {
+        friction: 0,
+        restitution: 0.95,
+        isStatic: fixed
+      }
+      var body = Bodies.circle(x, y, radius / 2, options);
+      World.add(world, body);
+      return body;
+    }
+    //----------------------------------------------
+    function Particle(x, y, fixed, linkedParticle) {
+      this.body = createBody(x, y, fixed);
+      if (linkedParticle) {
+        this.linkedParticle = linkedParticle;
+        this.constraint = createConstraint(this.body, linkedParticle.body);
+      }
+
+      var svgCircle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+      svgCircle.setAttribute("cx", x);
+      svgCircle.setAttribute("cy", y);
+      svgCircle.setAttribute("r", radius);
+      svgCircle.setAttribute("stroke", "black");
+      svgCircle.setAttribute("stroke-width", 1);
+      svgCircle.setAttribute("fill", "white");
+      svg.appendChild(svgCircle);
+      this.svgCircle = svgCircle;
+
+      this.removeFromWorld = function () {
+        World.remove(world, this.body);
+      }
+
+      this.setNotFixed = function () {
+        //Matter.Body.setStatic(this.body, fixed);
+        var pos = this.body.position;
+        World.remove(world, this.constraint);
+        World.remove(world, this.body);
+        this.body = createBody(pos.x, pos.y, false);
+        this.constraint = createConstraint(this.body, this.linkedParticle.body);
+      }
+
+      this.setBodyPos = function (x, y) {
+        this.body.position.x = x;
+        this.body.position.y = y;
+      }
+
+      this.updatePos = function () {
+        var pos = this.body.position;
+        var angle = this.body.angle;
+        if (isNaN(pos.x))
+          debugger;
+        this.svgCircle.setAttribute("cx", pos.x);
+        this.svgCircle.setAttribute("cy", pos.y);
+      }
+    }
+    //----------------------------------------------
+    var Engine = Matter.Engine;
+    var World = Matter.World;
+    var Bodies = Matter.Bodies;
+    var Constraint = Matter.Constraint;
+
+    var engine;
+    var world;
+    var particles = [];
+    engine = Engine.create();
+    world = engine.world;
+    engine.world.gravity.y = 0.5;
+    var particle = new Particle(centerX, centerY, true);
+    particles.push(particle);
+    update();
+    //----------------------------------------------
+    function updatePositions() {
+      Engine.update(engine);
+      for (var i = 0; i < particles.length; i++) {
+        particles[i].updatePos();
+      }
+    }
+    //----------------------------------------------
+    function update() {
+      updatePositions();
+      requestAnimationFrame(update);
+    }
+    //----------------------------------------------
+  </script>
+</body>
+</html>

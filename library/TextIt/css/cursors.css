@@ -1,0 +1,102 @@
+﻿body[data-cursor="none"] article, body[data-cursor="none"] article * {
+  cursor: none !important;
+}
+
+body{
+  cursor: url('../cursors/cursor-basic.cur'), default;
+}
+
+/*
+  All clickables have a pointer cursor
+*/
+body .drawer__view-options li label,
+.menu-item,
+.likeIconInText,
+.help:after,
+.question .question__stem,
+.question .question__feedback,
+.question .question__clue,
+.question .question__clue:before,
+.question--multiple-choice li label,
+.question--mark__tool,
+.hotword,
+button,
+.question__clue-opener,
+.embed mark .del-btn,
+.dropped-answer .del-btn,
+.blank
+ {
+  cursor: url('../cursors/cursor-pointer.cur'), pointer;
+}
+
+/* all draggables */
+.draggable-cloze-option, 
+.dragged-cloze-option, 
+article:not(.embed) .dropped-answer, 
+article:not(.embed) article[data-origin="false"] mark{
+  cursor: url('../cursors/cursor-grab.cur'), default;
+}
+body.grabbing *{
+  cursor: url('../cursors/cursor-grabbing.cur'), default !important;
+}
+
+article[data-origin="false"] > p,
+article[data-origin="false"] > h1,
+article[data-origin="false"] > h2,
+article[data-origin="false"] > h3,
+article[data-origin="false"] > h4,
+article[data-origin="false"] > h5{
+  cursor: url('../cursors/mark-cursor.cur'), text;
+}
+
+/* markers */
+body article[data-cursor="mark-blue"], body article[data-cursor="mark-blue"] > *, 
+body article[data-cursor="mark-blue"] .question--mark__tool{   
+  cursor: url('../cursors/mark-blue.cur'), text;
+}
+body article[data-cursor="mark-red"], body article[data-cursor="mark-red"] > *, 
+body article[data-cursor="mark-red"] .question--mark__tool{
+  cursor: url('../cursors/mark-red.cur'), text;
+}
+body article[data-cursor="mark-green"], body article[data-cursor="mark-green"] > *, 
+body article[data-cursor="mark-green"] .question--mark__tool{
+  cursor: url('../cursors/mark-green.cur'), text;
+}
+body article[data-cursor="mark-purple"], body article[data-cursor="mark-purple"] > *, 
+body article[data-cursor="mark-purple"] .question--mark__tool{
+  cursor: url('../cursors/mark-purple.cur'), text;
+}                              
+article [data-cursor="none"], article[data-cursor="none"] * {
+  cursor: none !important;
+}
+
+body article[data-cursor="lasso"], 
+body article[data-cursor="lasso"] p,
+body article[data-cursor="lasso"] p > .hotword,
+body article[data-cursor="lasso"] h1,
+body article[data-cursor="lasso"] h2,
+body article[data-cursor="lasso"] h3,
+body article[data-cursor="lasso"] h4,
+body article[data-cursor="lasso"] h5,
+body article[data-cursor="lasso"] .question--lasso__tool{
+  cursor: url('../cursors/cursor-lasso.cur'), text;
+}
+
+body article[data-narration="on"], body article[data-narration="on"] * {
+  cursor: url('../cursors/cursor-narration.cur'), text;
+}
+
+body article .word-card .note, 
+.article__note-container {
+  cursor: url('../cursors/cursor-note.cur'), text;
+}
+
+body mark:before, body mark:after{
+  cursor: url('../cursors/cursor-resize.cur'), ew-resize;
+}
+
+article[data-narration="on"] .question,
+article[data-narration="on"] .blank,
+article[data-narration="on"] mark {
+  pointer-events:none;
+}

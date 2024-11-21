@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html dir="rtl">
+<head>
+  <title></title>
+  <meta charset="utf-8" />
+
+  <link src="//cdn.cet.ac.il/fonts/Abraham/stylesheet.css" rel="stylesheet" type="text/css" />
+
+  <link rel="stylesheet" type="text/css" href="designer.css">
+  <script type="text/javascript" src="http://apps.assets.cet.ac.il/library/lib/js/external/jquery/2.0.3/jquery-2.0.3.min.js" charset="utf-8"></script>
+  <script src="http://cdn.cet.ac.il/libs/cet.content/1/client.min.js"></script>
+  <script src="http://cdn.cet.ac.il/libs/cet.content.designtime/1/client.min.js"></script>
+
+  <script src="js/textit.xmlbuilder.js"></script>
+  <script src="js/wizard.js"></script>
+  <style>
+    .edit-panel {
+      position: absolute;
+      top: 30px;
+      height: calc(100% - 80px);
+      left: 0;
+      width: 100%;
+    }
+
+    .properties-panel {
+      background: #f2f2f2;
+      padding: 5px;
+      height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="properties-panel">
+    <input type="checkbox" id="chk_coupled" />
+    צימוד למעבדות עם  תוכן זהה
+  </div>
+  <div class="edit-panel">
+    <section class="editor">
+      <h1>קוד עריכה<a href="documentation.html" style="float:left;text-decoration:none;" target="_blank">עזרה</a></h1>
+      <textarea id="text" placeholder="טקסט המארק-אפ"></textarea>
+    </section>
+    <section class="preview">
+      <h1>תצוגה מקדימה</h1>
+      <div id="preview-text"></div>
+    </section>
+  </div>
+  <script type="text/javascript">
+    var init = function () {
+      Textit.wizard.init();
+      Textit.wizard.setPreviewArea(document.getElementById('preview-text'));
+      Textit.wizard.setMarkupInput(document.getElementById('text'));
+      Textit.wizard.setCoupledCheckbox(document.getElementById('chk_coupled'));
+      document.getElementById('chk_coupled').addEventListener('click', function () {
+        Textit.wizard.setCoupled(this.checked);
+      });
+    }
+    if (cet.content.UI.clientReady())
+      init();
+    else
+      cet.content.on('clientready', init);
+
+    //temp
+    if(window.top == window.self)
+      init();
+  </script>
+</body>
+</html>

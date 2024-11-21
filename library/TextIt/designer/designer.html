@@ -1,0 +1,137 @@
+﻿<html dir="rtl">
+<head>
+  <link src="//cdn.cet.ac.il/fonts/Abraham/stylesheet.css" rel="stylesheet" type="text/css" />
+
+  <script src="js/textit.xmlbuilder.js"></script>
+  <link rel="stylesheet" type="text/css" href="designer.css">
+  <script>
+    var parser = new Textit.XML.XMLParser();
+    var previewer = new Textit.XML.XMLPreviewer();
+    function parse() {
+      sessionStorage.setItem('textit-markup', document.getElementById('text').value);
+                       //Txtit.XmlParser
+      var result_xml = parser.parse(document.getElementById('text').value);
+      sessionStorage.setItem('textit-xml', result_xml);
+      document.getElementById('embed-code').value = generateEmbedCode(result_xml);
+      document.getElementById('preview-text').innerHTML = previewer.previewHtml(result_xml);
+      document.getElementById('preview-text').setAttribute("dir", parser.attributes.direction || "rtl");
+      document.getElementById('text').setAttribute("dir", parser.attributes.direction || "rtl");
+    }
+
+    function load() {
+      if (sessionStorage.getItem('textit-markup'))
+        document.getElementById('text').value = sessionStorage.getItem('textit-markup');
+      parse();
+
+      modal(document.querySelector('.modal-embed-code'), document.getElementById('btn-open-embed-code'));
+    }
+
+    function generateEmbedCode(embedxml) {
+      return '<sc' + 'ript src="//cdn.testing.cet.ac.il/libs/cet.content/1/host.min.js"><' + '/script>' +
+        '<iframe src="http://apps.assets.testing.cet.ac.il/library/textitapp/asset.html" style="width:100%;height:800px;border:0;" height="800" frameborder="0" data-autoinit="true" allowfullscreen="" mozallowfullscreen="" webkitallowfullscreen="" msallowfullscreen="">' +
+          '<scr' + 'ipt type="text/html" class="options">' +
+            '{ preset: ' + decodeURIComponent("{xml: " + embedxml + "}")  + '}' +
+            '</sc' + 'ript>' +
+        '</iframe>';
+    }
+
+    function modal(modal, opener) {
+      opener.addEventListener('click', function () {
+        modal.style.display = 'block';
+      })
+      modal.addEventListener('click', function (event) {
+        if (event.target == modal)
+          modal.style.display = 'none';
+      })
+    }
+  </script>
+</head>
+<body onload="load();">
+  <div class="modal-embed-code">
+    <div>
+      <h2>קוד הטמעה</h2>
+      <textarea id="embed-code"></textarea>
+    </div>
+  </div>
+  <section class="editor">
+    <h1>קוד עריכה &nbsp; &nbsp; <button id="btn-open-embed-code">הצג קוד הטמעה</button></h1>
+    <textarea id="text" onkeyup="parse();"> {{audio=http://storage.cet.ac.il/TextIT_Storage/zavtush/adults}}
+
+= המִפלֶצֶת בָּאֲגַם =
+
+==== מְעוּבָּד לְפִי הסיפּוּר "יֵש מִפלֶצֶת בָּאֲגַם", מאת שְלֹמֹה אַבַּס ====
+
+~ http://storage.cet.ac.il/TextIT_Storage/zavtush/img/lakeMonster.txt | ~
+
+הצָב צַבטוּש גָר בְּמָקוֹם נוֹחַ בֵּין השִׂיחים, אֲבָל הוּא לֹא הָיָה [מְרוּצֶה|satisfied]. נִמאַס לוֹ לִהְיוֹת החַיָה האִטית בְּיוֹתֵר בַּיַעַר. בַּקַיִץ, כַּאֲשֶר כָּל החַיוֹת הָיוּ [הוֹלכוֹת|walking] לִרחוֹץ בָּאֲגַם, צַבטוּש הָיָה מַגיעַ תָמיד אַחֲרוֹן. כָּל החַיוֹת הָיוּ צוֹחֲקוֹת וְקוֹראוֹת לוֹ: "זַחלָן!" "גַב עָקוּם!" וְצַבטוּש הָיָה מִתבַּיֵיש, מַכניס אֶת רֹאשוֹ לְתוֹך השִריוֹן וְחוֹזֵר בְּלי לְהַרטיב אֲפילוּ אֶת כַּפּוֹת רַגלָיו.
+
+[? 1 (גרירה) גררו - מדוע צבטוש לא היה מרוצה?
+נִמאַס לוֹ לִהְיוֹת החַיָה האִטית | נִמאַס לוֹ לִהְיוֹת החַיָה האִטית בְּיוֹתֵר | החַיָה האִטית בְּיוֹתֵר | נִמאַס לוֹ לִהְיוֹת החַיָה האִטית בְּיוֹתֵר בַּיַעַר | החַיָה האִטית בְּיוֹתֵר בַּיַעַר
+צַבטוּש הָיָה מַגיעַ תָמיד אַחֲרוֹן | מַגיעַ תָמיד אַחֲרוֹן | תָמיד אַחֲרוֹן ?]
+
+יוֹם אֶחָד רָאָה צַבטוּש אֶת [הקַרנַף|rhinoceros] וְחָשַב לְעַצמוֹ: אֵיזוֹ [קֶרֶן|horn] גְדוֹלָה! אילוּ הָיְיתָה לי קֶרֶן כָּזֹאת, אַף אֶחָד לֹא הָיָה צוֹחֵק עָלַיי.
+
+[? 2 (סימון) סמנו בכחול את שמות התואר בפסקה, ובסגול את הפעלים
+כחול - גְדוֹלָה
+סגול - רָאָה
+סגול - צוֹחֵק
+סגול - וְחָשַב
+?]
+
+צַבטוּש מָצָא חֲתיכַת עֵץ וְחיבֵּר אוֹתָה לְמִצחוֹ. עַד הצָהֳרַיִים מָצָא צַבטוּש גַּם צינוֹר גוּמי וְעָשָׂה לְעַצמוֹ חֵדֶק כְּמוֹ שֶל פִּיל, וּמִמְניפָה צִבעוֹנית עָשָׂה לְעַצמוֹ זָנָב כְּמוֹ שֶל טַוָוס. לְאַחַר שֶסייֵם הֶחליט לָלֶכֶת [לָאֲגַם|lake].
+
+[? 2 (רב ברירה) לָמָה הֶחליט צַבטוּש לְהִתחַפֵּשׂ?
+כְּדֵי שֶיִהְיֶה גָדוֹל יוֹתֵר
+* כְּדֵי שֶהחַיוֹת לֹא יִצחֲקוּ עָלָיו
+כְּדֵי שֶיִהְיֶה מָהיר יוֹתֵר
+כְּדֵי שֶהחַיוֹת יִפחֲדוּ מִמֶנוּ
+רמז: חשבו - מה הפריע ל צבטוש?
+?]
+
+-
+
+בַּדֶרֶך פָּגַש צַבטוּש אֶת הג'ירָף. הג'ירָף הִבִּיט בּוֹ, נִבְהַל וּמִיָד בָּרַח. צַבטוּש הִמשיך לָלֶכֶת וְרָאָה אֶת האַריֵה. "הֵי!" [נוֹפֵף|wave] לוֹ צַבטוּש, אֲבָל האַריֵה הִסתַכֵּל בּוֹ בְּמַבָּט מְבוֹהָל וְנֶעֱלַם בֵּין השִׂיחים. *מוּזָר מְאוֹד! חָשַב צַבטוּש* וְהִמשיך לָלֶכֶת לְאִטוֹ.
+
+[? 3 (פתוחה) מהמשפט המודגש אֶפשָר לְהָבין שֶצַבטוּש לֹא יָדַע שֶ: (השלימו) ?]
+
+כְּשֶהִגיעַ לָאֲגַם הִתפַּלֵא שֶאֵין בּוֹ שוּם חַיָה. הוּא נִכנַס לַמַיִם, צָלַל וְנֶעֱלַם בְּתוֹכָם.
+מִיָד יָצאוּ החַיוֹת מִבֵּין השִׂיחים וְעָמדוּ עַל שְׂפַת הָאֲגַם.
+"רְאיתֶם?" לָחַש בְּפַחַד הג'ירָף, "בָּאֲגַם יֵש [מִפלֶצֶת|monster] מְסוּכֶּנֶת בְּיוֹתֵר!"
+"צָרִיך לְהיזָהֵר מְאוֹד", מִלמֵל הָאַריֵה.
+כָּל אוֹתוֹ הזְמַן שָׂחָה לוֹ צַבטוּש מִתַחַת לַמַיִם. הוּא כָּל כָּך נֶהֱנָה, עַד שֶלֹא שָׂם לֵב כְּלָל שֶהקֶרֶן נָשרָה מִמֶנוּ וְאִתָה גַם החֵדֶק וְהמְניפָה. כְּשֶעָלָה אֶל פְּנֵי המַיִם, שָמַע צַבטוּש קוֹל רַעַש וַהֲמוּלָה, *זָקַף אֶת רֹאשוֹ* וְשָמַע אֶת החַיוֹת צוֹעֲקוֹת לְעֶברוֹ: "צֵא הַחוּצָה, צַבטוּש! מַהֵר!"
+
+[? 4 (קלוז) השלימו את הקטע
+נֶהֱנָה = נֶהֱנָה
+נָשרָה = נָשרָה
+שָׂם לֵב = שָׂם לֵב
+?]
+
+[? 4 (רב ברירה) לְמָה הכַּוָונָה בַּמילים ה*מודגשות* בפסקה?
+סוֹבֵב אֶת רֹאשוֹ.
+* הֵרים אֶת רֹאשוֹ.
+הִכניס אֶת רֹאשוֹ.
+הֵניעַ אֶת רֹאשוֹ מִצַד לְצַד. ?]
+
+-
+
+"מָה קָרָה?" שָאַל צַבטוּש.
+"יֵש מִפלֶצֶת בַּמַיִם עִם קֶרֶן וְזָנָב!" צָעַק הג'ירָף.
+"מֵהיוֹם וָהָלאָה אֵין לְהִתרַחֵץ בָּאֲגַם!" אָמַר האַריֵה.
+כּוּלָם הָיוּ רְצינייִם מְאוֹד, וְרַק צַבטוּש חִייֵך [חיוּך|:)] קָטָן.
+
+[? 5 (פתוחה) מַדוּעַ לְדַעְתְכֶם חִייֵך צַבטוּש? ?]
+
+מֵאוֹתוֹ היוֹם לֹא הֵעֵזוּ החַיוֹת לִשְׂחוֹת בָּאֲגַם אֲבָל הָיָה מישֶהוּ שֶהִמשיך לְהיכָּנֵס לָאֲגַם וְלִשְׂחוֹת בּוֹ. אַתֶם כְּבָר יוֹדעים מי...
+
+
+</textarea>
+  </section>
+  <section class="preview">
+    <h1>תצוגה מקדימה</h1>
+    <div id="preview-text"></div>
+  </section>
+  <footer class="dev-nav">
+    <a href="./index.html">Designer</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="../index.html">Viewer</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="./documentation.html">Documentation</a>
+  </footer>
+</body>
+</html>

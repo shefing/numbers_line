@@ -1,0 +1,250 @@
+﻿<!DOCTYPE html>
+<html lang="he">
+
+<head>
+  <title>Hotspots template</title>
+
+  <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, width=device-width" />
+  <meta charset="utf-8">
+
+  <link rel="prefetch" type="application/l10n" href="localization/locales.ini" />
+  <link href="../content/smoothness/jquery-ui.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../content/wizard.css" type="text/css" />
+  <link href="../content/colorbox.css" rel="stylesheet" />
+
+  <script type="text/javascript" src="../../../lib/js/external/jquery/2.0.3/jquery-2.0.3.min.js"
+    charset="utf-8"></script>
+
+  <script type="text/javascript"
+    src="../../../lib/js/external/jquery/jqueryui/1.10.3/jquery-ui-1.10.3.custom.min.js"></script>
+  <script type="text/javascript" src="../../../lib/js/external/jquery/jquery.ui.touch-punch.min.js"></script>
+
+  <script src="//cdn.cet.ac.il/libs/cet.content/1/client.min.js"></script>
+  <script src="//cdn.cet.ac.il/libs/cet.content.designtime/1/client.min.js"></script>
+  <script type="text/javascript" src="../../../lib/js/internal/plugins/cet.math.helpers.js"></script>
+
+  <script src="../js/jquery.colorbox-min.js"></script>
+
+  <script type="text/javascript" src="../../../lib/js/external/webL10n/l10n.js"></script>
+
+  <script src="../js/wizard.js"></script>
+
+  <script src="../dist/template.js"></script>
+
+</head>
+
+<body>
+  <div class="wizard-wrapper">
+    <!--<fieldset>
+      <legend data-l10n-id="general">כללי&nbsp;</legend>-->
+    <ol class="fields">
+      <!--<li class="field">
+        <div class="field-key">
+          <label data-l10n-id="contentDirection:">כיוון התוכן:</label>
+        </div>
+        <div class="field-value">
+          <div class="direction-wrapper">
+            <input type="radio" name="radDirection" id="directionRTL" value="rtl" />
+            <label for="directionRTL" data-l10n-id="rightToLeft">מימין לשמאל</label>
+            <input type="radio" name="radDirection" id="directionLTR" value="ltr" />
+            <label for="directionLTR" data-l10n-id="leftToRight">משמאל לימין</label>
+          </div>
+        </div>
+      </li>-->
+
+      <li class="field">
+        <div class="field-key">
+          <label data-l10n-id="hotspotView:">תצוגת תשובה:</label>
+        </div>
+        <div class="field-value">
+          <select id="choose-hotspot-type" name="choose-hotspot-type">
+            <option value="0" data-l10n-id="withNumber">עם מספר</option>
+            <option value="1" data-l10n-id="emptySquare">ללא מספר</option>
+          </select>
+        </div>
+      </li>
+    </ol>
+    <!--</fieldset>-->
+    <!--<fieldset>
+      <legend data-l10n-id="workSurface">משטח העבודה&nbsp;</legend>-->
+    <ol class="fields">
+      <li class="field">
+        <div class="field-key">
+          <label data-l10n-id="backgroundImage:">תמונת רקע:</label>
+        </div>
+        <div class="field-value">
+          <div id="add-picture">
+            <form id="fileUploadForm" enctype="multipart/form-data" method="post"
+              action="//api.assets.cet.ac.il/filesUpload.ashx?maxfilesize=1048576" target="iFrame_fileUpload">
+              <div class="hw-add-picture" data-l10n-id="uploadImage">
+                <input name="file" type="file" />
+                העלו תמונה
+              </div>
+              <div class="loading" style="visibility: hidden;">
+                <img src="../content/img/loading.gif" />
+              </div>
+              <!-- <div class='ht-info-content hw-direction-rtl' contenteditable='true'></div> -->
+
+              <!-------------------------------------------------------------------------->
+              <div>
+                <label data-l10n-id="backgroundDescription:">הוסף תיאור לתמונה:</label>
+                <input type="text" id="backgroundDescription" name="backgroundDescription" required />
+              </div>
+              <!-------------------------------------------------------------------------->
+            </form>
+            <iframe name="iFrame_fileUpload"></iframe>
+          </div>
+        </div>
+      </li>
+
+      <li class="field">
+        <div id="mode-choice">
+          <input type="radio" name="modeChoice" id="modeHotspots" value="hotspots" />
+          <label for="modeHotspots" data-l10n-id="modeHotspots">תשובות</label>
+          <input type="radio" name="modeChoice" id="modeVieport" value="viewport" />
+          <label for="modeVieport" data-l10n-id="modeVieport">חלונית מיקוד</label>
+        </div>
+      </li>
+
+      <li class="field">
+        <div class="picture-wrapper">
+          <div class="picture-container">
+
+            <div class="draggables-container">
+              <div class="picture-self">
+              </div>
+              <div class="draggables">
+              </div>
+              <div class="viewports">
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </li>
+
+      <li class="field">
+        <div id="hotspot-parameters" class="ht-noparams">
+          <fieldset>
+            <legend data-l10n-id="parameters">מאפיינים</legend>
+            <div class="ht-current-parameters">
+              <ol class="fields">
+                <li class="choice">
+                  <input type="radio" name="radHotspotType" id="ht1" value="correct" />
+                  <label for="ht1" style="position: relative; top: -2px;" data-l10n-id="correctAnswer">תשובה
+                    נכונה</label>
+                </li>
+                <li class="choice">
+                  <input type="radio" name="radHotspotType" id="ht2" value="false" />
+                  <label for="ht2" style="position: relative; top: -2px;" data-l10n-id="wrongAnswer">תשובה שגויה</label>
+                </li>
+                <li class="choice" style="margin-bottom: 20px;">
+                  <input type="checkbox" name="htFeedback" id="htFeedback">
+                  <label for="htFeedback" style="position: relative; top: -2px;" data-l10n-id="feedback">חיווי</label>
+                  <div class='ht-feedback-content hw-direction-rtl' contenteditable='true'></div>
+                  <br />
+                </li>
+
+                <li class="choice" style="height: 20px;">
+                  <input type="radio" name="radHotspotType" id="ht3" value="info" style="vertical-align: top;" />
+                  <label for="ht3" style="vertical-align: top; position: relative; top: 2px;"
+                    data-l10n-id="info">מידע</label>
+                  <div class='ht-info-content hw-direction-rtl' contenteditable='true'></div>
+                </li>
+
+                <li class="choice" style="margin-bottom: 20px;">
+                  <input type="radio" name="radHotspotType" id="ht4" value="link" style="vertical-align: top;" />
+                  <label for="ht4" style="vertical-align: top; position: relative; top: 2px;"
+                    data-l10n-id="link">קישור</label>
+                  <div class="link-wrapper">
+                    <div class='ht-link-content hw-direction-ltr' contenteditable='true' style="margin-bottom: 5px;">
+                    </div>
+                    <!-------------------------------------------------------------------------->
+                    <div>
+                      <label id="ht4" style="vertical-align: top;" data-l10n-id="linkDescription">הוסף תיאור לקישור: </label>
+                      <input type="text" id="linkDescription" name="linkDescription" required/>
+                    </div>
+                    <!-------------------------------------------------------------------------->
+                    <br />
+                    <label style="vertical-align: top; position: relative; top: 2px;margin-right: 35px;"
+                      data-l10n-id="size">גודל חלונית:</label>
+                    <label id="linkWlabel" for="linkW" style="vertical-align: top; position: relative; top: 2px;"
+                      data-l10n-id="width">רוחב</label>
+                    <input id="linkW" type="text" />&nbsp;%
+                    <label id="linkHlabel" for="linkH" style="vertical-align: top; position: relative; top: 2px;"
+                      data-l10n-id="height">גובה</label>
+                    <input id="linkH" type="text" />&nbsp;%
+
+                  </div>
+
+                </li>
+
+                <li class="choice">
+                  <div class="ht-delete" data-l10n-id="deleteHotspot">מחיקת תשובה</div>
+                </li>
+              </ol>
+            </div>
+            <div class="ht-current-message" data-l10n-id="createNewHotspotMessage">
+              לחצו בכל איזור בתמונה כדי ליצור תשובה חדש. לחצו על התשובה שנוצר כדי לשנות את המאפיינים שלו.
+            </div>
+          </fieldset>
+
+        </div>
+        <div id="viewport-parameters">
+          <fieldset>
+            <legend data-l10n-id="parameters">מאפיינים</legend>
+            <div class="vp-message" data-l10n-id="createNewViewportMessage">
+              לחצו בכל איזור בתמונה כדי ליצור חלונית מיקוד חדשה.
+            </div>
+            <div class="vp-delete" data-l10n-id="deleteViewport">מחיקת חלונית המיקוד</div>
+          </fieldset>
+        </div>
+      </li>
+    </ol>
+    <!-- </fieldset>-->
+  </div>
+
+  <div style='display: none'>
+    <div id="alert-dialog" class="dialog">
+      <div class="body">
+      </div>
+      <div class="actions">
+        <div class="main">
+          <div class="ht-ok" data-l10n-id="ok">אישור</div>
+          <div class="ht-cancel" style="display: none;" data-l10n-id="cancel">ביטול</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+
+    $('body').hide();
+    window.addEventListener('localized', function () {
+      $('body').show();
+    }, false);
+
+    var init = function () {
+      var language = cet.content.DesignTime.language;
+      document.webL10n = initWebL10n(window, document, undefined, language);
+      document.webL10n.ready(function () {
+        $('html').attr('lang', language);
+        $('body').attr('data-dir', document.webL10n.getDirection());
+
+        var hw = new hotspotsWizard();
+        hw.init();
+        hw.registerEvents();
+      });
+    };
+
+    if (cet.content.UI.clientReady()) {
+      init();
+    }
+    else {
+      cet.content.on('clientready', init);
+    }
+  </script>
+</body>
+
+</html>

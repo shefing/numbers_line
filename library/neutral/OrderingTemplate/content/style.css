@@ -1,0 +1,292 @@
+﻿@import url("https://cdn.cet.ac.il/fonts/Abraham/stylesheet.css");
+:root {
+    --font-family: "Alef";
+    /*--font-size: "1em";*/
+}
+body {
+  margin: 0;
+  overflow: hidden;
+  margin-top: -5px;
+  background-color: #999999;
+  font-family: Alef;
+  font-size: 20px;
+  font-weight: normal;
+}
+[lang="ar"] body {
+    font-family: 'Abraham';
+}
+#sortable {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  cursor: pointer;
+}
+
+.layout-horizontal.dir-rtl #sortable {
+  direction: rtl;
+}
+
+.layout-horizontal.dir-ltr #sortable {
+  direction: ltr;
+}
+
+#sortable-container {
+  background-color: #999999;
+}
+
+.sortable-wrapper {
+  position: relative;
+  top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.ot-default {
+    background: #ffffff;
+    margin: 5px 0px 0px 0px;
+    position: relative;
+}
+
+.layout-horizontal .ot-default {
+  display: inline-block;
+  vertical-align: top;
+  margin: 5px 2px 0px 0px;
+}
+
+.button-wrapper {
+  display: table;
+  margin: auto;
+}
+
+#Restart-button,
+#Check-button,
+#Solution-button {
+  display: inline;
+}
+
+.ui-sprite {
+  background-image: url(img/csg-5252b0abe3e67.png);
+  background-repeat: no-repeat;
+}
+
+.sprite-ot-correct {
+  background-position: -17px 0;
+  width: 11px;
+  height: 11px;
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  margin-top: -5px;
+}
+
+.layout-horizontal .sprite-ot-correct,
+.layout-horizontal .sprite-ot-wrong {
+  left: 2px;
+}
+
+.ot-correct .sprite-ot-correct,
+.ot-wrong .sprite-ot-wrong {
+  display: block;
+}
+
+.sprite-ot-dots {
+  background-position: -33px 0;
+  width: 11px;
+  height: 11px;
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  margin-top: -5px;
+}
+
+.layout-horizontal .sprite-ot-dots {
+  right: 5px;
+  left: auto;
+}
+
+.sprite-ot-wrong {
+  background-position: -49px 0;
+  width: 11px;
+  height: 11px;
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 2px;
+  margin-top: -5px;
+}
+
+.sprite-ot-close {
+  background-position: 0 0;
+  width: 12px;
+  height: 12px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+
+.ot-feedback {
+  width: 15px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 100;
+}
+
+.layout-horizontal .ot-feedback {
+  width: auto;
+  height: 19px;
+  top: 0;
+  left: 0;
+  bottom: auto;
+}
+
+.layout-vertical.dir-ltr .ot-feedback {
+  top: 0;
+  left: auto;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+}
+
+.ot-correct .ot-feedback {
+  background-color: #8bad05;
+  width: 15px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.ot-wrong .ot-feedback {
+  background-color: #cc3333;
+  width: 15px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+}
+
+.ot-content {
+    width: auto;
+    margin: 0 15px;
+    padding: 2px 5px 2px 5px;
+    position: relative;
+    font-family: var(--font-family);
+    /*font-size: var(--font-size);*/
+}
+
+.layout-horizontal .ot-content {
+  margin: 0 3px;
+}
+
+.ot-handle {
+  width: 15px;
+  background-color: #f5f5f5;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: auto;
+  bottom: 0;
+}
+
+.layout-vertical.dir-ltr .ot-handle {
+  top: 0;
+  left: 0;
+  right: auto;
+  bottom: 0;
+}
+
+.layout-horizontal .ot-handle {
+  width: auto;
+  height: 19px;
+  background-color: #f5f5f5;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: auto;
+}
+
+.ot-correct .ot-handle {
+  background-color: #8bad05;
+}
+
+.ot-solution .ot-handle {
+  background-color: #8bad05;
+}
+
+.ot-wrong .ot-handle {
+  background-color: #cc3333;
+}
+
+.ui-state-highlight {
+  /*background-color: rgba(255, 255, 255, .3);*/
+  background-color: rgba(0, 255, 0, .5);
+  border: 1px dotted rgba(0, 0, 0, 0.30);
+  margin: 5px 0px 0px 0px;
+}
+
+#hint-wrapper {
+  direction: rtl;
+  background-color: #cc3333;
+  color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-family: Arial;
+  font-size: 14px;
+  font-weight: bold;
+  display: none;
+  height: 30px;
+  padding-top: 5px;
+}
+
+#final-feedback {
+  display: none;
+}
+
+.feedback-overlay {
+  background-color: rgba(255,255,255,0.5);
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1000;
+}
+
+.feedback-back {
+  background-color: #8bad05;
+  width: 340px;
+  height: 37%;
+  min-height: 80px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  z-index: 1500;
+}
+
+.feedback-caption {
+  text-align: center;
+  color: #fff;
+  font-size: 52px;
+  line-height: 1;
+  height: 52px;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  direction: rtl;
+  font-family: Arial;
+}
+
+html[lang=en] .feedback-caption {
+  direction: ltr;
+}

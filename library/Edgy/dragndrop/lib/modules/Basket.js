@@ -1,0 +1,345 @@
+﻿window.cet = window.cet || {};
+
+(function () {
+
+  var option;
+  var Baskets;
+  var Content;
+  var Stage;
+  var Utils;
+
+  var basket = function (elem) {
+    option = cet.option;
+    Baskets = cet.Baskets;
+    Content = cet.Content;
+    Stage = cet.Stage;
+    Utils = cet.Utils;
+
+    this.jqElement = $(elem);
+    this.symbol = Stage.getSymbol(this.jqElement);
+    this.dropBox = this.getDropBox();
+    this.normalLabelPosition = this.symbol.getLabelPosition('normal')
+    this.hoverLabelPosition = this.symbol.getLabelPosition('hover')
+    this._isValid = null;
+  }
+
+  basket.prototype.updateDropBox = function () {
+    this.dropBox = this.getDropBox();
+  }
+  basket.prototype.initDropPositions = function () {
+    var self = this;
+    self.dropPositions = {};
+    var dropPositions = self.jqElement.find('.drop-position');
+    $.each(dropPositions, function (index, value) {
+      var symbol = Stage.getSymbol('#' + value.attributes['id'].value);
+      self.dropPositions[symbol.getSymbolTypeName()] = new dropPosition(symbol);
+    });
+  }
+  basket.prototype.getNextDropPosition = function () {
+    var self = this;
+    //var idTemplate = this.jqElement.attr('id');
+    for (var i = 1; i < 6; i++) {
+      var dropPosition = self.dropPositions['drop-position_' + i];
+      if (!dropPosition)
+        return null;
+      if (!dropPosition.isPopulated())
+        return dropPosition;
+    }
+  }
+  basket.prototype.eliminateSpaces = function () {
+    var self = this;
+    //var idTemplate = this.jqElement.attr('id');
+    for (var i = 1; i < 5; i++) {
+      var strongDropPosition = self.dropPositions['drop-position_' + i];
+      var weakDropPosition = self.dropPositions['drop-position_' + (i + 1)];
+      if (!strongDropPosition || !weakDropPosition)
+        return;
+      if (!strongDropPosition.isPopulated() && weakDropPosition.isPopulated()) {
+        strongDropPosition.populate(weakDropPosition.getOption());
+        if (weakDropPosition.feedbackExists())
+          strongDropPosition.showFeedback();
+        else
+          strongDropPosition.removeFeedback();
+        weakDropPosition.unpopulate();
+      }
+    }
+  }
+  basket.prototype.getOption = function () {
+    return this.option;
+  }
+  basket.prototype.unpopulate = function (completeMethod) {
+
+    this._isValid = null;
+
+    if (!this.isPopulated()) {
+      if (completeMethod)
+        completeMethod();
+      return;
+    }
+
+    this.option.animateBackToStorage(completeMethod);
+    this.removeOption();
+
+  }
+  basket.prototype.isPopulated = function () {
+    //return this.jqElement.find('.option1, .option2, .option3, .option4, .option5, .option6, .option7, .option8').length > 0;
+    return this.option != null;
+  }
+  basket.prototype.addOptionWithoutAnimation = function (option) {
+    this.addOption(option, false)
+  }
+  basket.prototype.addOption = function (option, softAnimation) {
+
+    var self = this;
+    option.disable();
+    option.fadeTo(1);
+    self.option = option;
+    self.removeFeedback();
+    var targetPos = Utils.getDistanceFromStage(self.jqElement);
+
+    var posInBasket = {
+      left: self.width() / 2 - option.pixelWidth() / 2,
+      top: self.height() / 2 - option.pixelHeight() / 2
+    }
+    targetPos.top += posInBasket.top;
+    targetPos.left += posInBasket.left;
+
+    var animationCompleteMethod = function () {
+      self.jqElement.append(option.jqElement);
+      option.jqElement.css({ top: 0, left: 0 });
+      option.jqElement.css(posInBasket);
+
+      if (cet.App.isPercentageHtml()) {
+        var targetCss = {
+          width: '100%',
+          height: '100%',
+          top: 0, left: 0
+        }
+      }
+      option.jqElement.animate(targetCss);
+      //option.jqElement.css({ top: 0, left: 0, display: 'block' });
+      option.enable();
+
+
+      option.showAsInTarget();
+
+      self.showOccupied();
+
+
+    }
+    if (typeof softAnimation != 'undefined' && !softAnimation) {
+      animationCompleteMethod();
+      return;
+    }
+
+    option.animate(targetPos, 150, animationCompleteMethod);
+  }
+  basket.prototype.showOccupied = function () {
+
+    var self = this;
+    if (!isNaN(self.symbol.getLabelPosition('occupied')))
+      self.symbol.stop('occupied');
+  }
+  basket.prototype.removeOption = function (option) {
+    this._isValid = null;
+    this.removeFeedback();
+    this.option = null;
+    this.symbol.stop('normal');
+  }
+  basket.prototype.setZindex = function (val) {
+    this.jqElement.css('z-index', val);
+  }
+  basket.prototype.getSymbolTypeName = function () {
+    return this.symbol.getSymbolTypeName();
+  }
+  basket.prototype.getId = function () {
+    //var val = this.jqElement.attr('class').split(' ')[2];
+    //if (!val)
+    //  val = this.jqElement.attr('class').split(' ')[1];
+    //return val;
+
+    var classes = this.jqElement.attr('class').split(' ')
+    for (var i = 0; i < classes.length; i++) {
+      if (classes[i].indexOf('basket-') != -1)
+        return classes[i];
+      if (classes[i].indexOf('basket') == 0 && classes[i].length > 'basket'.length)
+        return classes[i];
+    }
+  }
+  basket.prototype.isValid = function (val) {
+
+    var self = this;
+
+    if (typeof val != 'undefined')
+      self._isValid = val;
+
+    if (self._isValid != null)
+      return self._isValid;
+
+    if (!self.isPopulated())
+      return false;
+
+    var option = self.getOption();
+    var basketId = self.getId();
+    for (var i = 0; i < option.baskets.length; i++) {
+      if (option.baskets[i] == basketId)
+        return true;
+    }
+    return false;
+
+  }
+  basket.prototype.showFeedback = function () {
+
+    var self = this;
+    self.jqElement.find('.feedback-correct, .feedback-error').hide();
+    self.jqElement.addClass('feedback-visible');
+
+    var feedbackIconSelector = '.feedback-';
+    feedbackIconSelector += self.isValid() ? 'correct' : 'error';
+
+    self.jqElement.find(feedbackIconSelector).css({ 'z-index': 1000, display: 'block' }).show();
+
+  }
+  basket.prototype.removeFeedback = function () {
+    this.jqElement.removeClass('feedback-visible');
+    this.jqElement.find('.feedback-correct, .feedback-error').hide();
+  }
+  basket.prototype.feedbackExists = function () {
+    return this.jqElement.find('.feedback-correct, .feedback-error').is(':visible');
+  }
+  basket.prototype.getDropBox = function () {
+    var self = this;
+    var offset = self.jqElement.offset();
+    var factor = 8;
+    //self.jqElement.text(
+    //  'top: '+ (offset.top - factor ) +
+    //  ', left: ' + (offset.left - factor)
+    //  )
+    //self.jqElement.css('font-size', '14px')
+    var box = {
+      top: offset.top - factor,
+      left: offset.left - factor,
+      right: offset.left + (self.width() * cet.Stage.scale()) + factor,
+      bottom: offset.top + (self.height() * cet.Stage.scale()) + factor
+    }
+
+    //box.top = box.top * cet.Stage.scale();
+    //box.left = box.left * cet.Stage.scale();
+    //box.right = box.right * cet.Stage.scale();
+    //box.bottom = box.bottom * cet.Stage.scale();
+
+    return box;
+  }
+  basket.prototype.width = function () {
+    return this.jqElement.width();
+  }
+  basket.prototype.height = function () {
+    return this.jqElement.height();
+  }
+  basket.prototype.isBoxOverlaping = function (box) {
+    var self = this;
+    if (box.right < self.dropBox.left) {
+      return false;
+    }
+
+    if (box.left > self.dropBox.right) {
+      return false;
+    }
+    if (box.top > self.dropBox.bottom) {
+      return false;
+    }
+    if (box.bottom < self.dropBox.top) {
+      return false;
+    }
+    return true;
+
+  }
+  basket.prototype.getOverlappingSize = function (box) {
+    var self = this;
+    var x = 0;
+    if (self.dropBox.left <= box.right && box.right <= self.dropBox.right)
+      x = box.right - self.dropBox.left;
+    else
+      x = self.dropBox.right - box.left;
+
+    var y = 0;
+    if (self.dropBox.bottom >= box.top && box.top >= self.dropBox.top)
+      y = self.dropBox.bottom - box.top;
+    else
+      y = box.bottom - self.dropBox.top;
+
+
+    return x + y;
+
+  }
+  basket.prototype.isPointContained = function (pointer) {
+    var self = this;
+    if (!pointer)
+      return false;
+    if (pointer.pageX < self.dropBox.left || pointer.pageX > self.dropBox.right || pointer.pageY > self.dropBox.bottom || pointer.pageY < self.dropBox.top) {
+
+      return false;
+    }
+    //$('.console').text(self.getId() +  ' hoverred ' + $('.console').text());
+    return true;
+
+  }
+  basket.prototype.getContainmentSize = function (pointer) {
+    var self = this;
+    var x = 0;
+    var boxMiddleX = self.dropBox.left + ((self.dropBox.right - self.dropBox.left) / 2)
+
+    if (pointer.pageX >= boxMiddleX)
+      x = self.dropBox.right - pointer.pageX;
+    else
+      x = pointer.pageX - self.dropBox.left;
+
+    
+
+    var boxMiddleY = self.dropBox.top + ((self.dropBox.bottom - self.dropBox.top) / 2)
+    if (pointer.pageY >= boxMiddleY)
+      y = self.dropBox.bottom - pointer.pageY;
+    else
+      y = pointer.pageY - self.dropBox.top;
+
+    return x + y;
+
+  }
+  basket.prototype.showHover = function () {
+
+    if (this.isPopulated())
+      return;
+    if (this.symbol.getPosition() == this.hoverLabelPosition)
+      return;
+    this.symbol.stop('hover');
+  }
+  basket.prototype.hideHover = function () {
+
+    if (this.isPopulated()) {
+      return;
+    }
+    if (this.symbol.getPosition() == this.normalLabelPosition)
+      return;
+    this.symbol.stop('normal');
+  }
+  basket.prototype.contains = function () {
+    return (this.option && this.option.getId() == option.getId());
+  }
+  basket.prototype.resizeHandler = function ()
+  {
+    this.updateDropBox();
+    if (this.isPopulated())
+      this.getOption().resizeHandler();
+  }
+  //basket.prototype.showError = function () {
+
+
+
+  //  this.jqElement.find('.feedback-correct').hide();
+  //  this.jqElement.find('.feedback-error').css({ 'z-index': 1000, display: 'block' }).show();
+
+  //}
+
+  cet.basket = basket;
+
+})();
